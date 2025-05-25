@@ -6,23 +6,25 @@ using UnityEngine;
 /// </summary>
 namespace BaseModels
 {
-	public class DayModel
-	{
+    public class DayModel
+    {
 
-		private int DayNum
+        private int DayNum;
 
-	   public CommonQuestModel CommonQModel;
+        public CommonQuestModel CommonQModel;
+
+        public int  DiffcultLevel{get { return DayNum; } }
 
 
 
-		public void SwitchDay()
-		{
+			public void SwitchDay()
+        {
 
-			DayNum++;
-			QModel.DiffcultLevel = DayNum
+            DayNum++;
+            CommonQModel.DiffcultLevel = DayNum;
 
-		}
-	}
+        }
+    }
 
 
 }

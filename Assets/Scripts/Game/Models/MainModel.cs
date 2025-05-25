@@ -9,8 +9,14 @@ namespace BaseModels
     public class MainModel
     {
 
+        public PlayerModel CurrentPlayerModel { get; set; }
+        public MainModel(PlayerModel playerModel)
+        {
+            CurrentPlayerModel = playerModel;
+        }
+
         // BaseSettings....
-        public PlayerModel PlayerModel { get; set; }
+
 
     }
 

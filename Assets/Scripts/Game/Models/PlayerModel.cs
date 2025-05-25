@@ -27,7 +27,7 @@ namespace BaseModels
             mood = 100;
         }
 
-        public UpdateOptions()
+        public void UpdateOptions()
         {
             switch (DayModel.DiffcultLevel)
             {
