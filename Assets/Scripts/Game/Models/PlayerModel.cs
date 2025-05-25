@@ -27,6 +27,56 @@ namespace BaseModels
             mood = 100;
         }
 
+        public UpdateOptions()
+        {
+            switch (DayModel.DiffcultLevel)
+            {
+                case 1:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+                case 2:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+                case 3:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+                case 4:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+                case 5:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+                case 6:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+                case 7:
+                    stamina = 100;
+                    score = 0;
+                    speed = 5;
+                    mood = 100;
+                    break;
+            }    
+
+        }
+
     }
 
 

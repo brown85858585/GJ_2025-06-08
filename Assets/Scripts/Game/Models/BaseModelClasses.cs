@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using BaseModels;
 
 /// <summary>
 /// Summary description for Class1
