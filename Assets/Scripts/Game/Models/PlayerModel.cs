@@ -1,77 +1,80 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-namespace BaseModels
+namespace Game.Models
 {
     public class PlayerModel
     {
-
-        int stamina;
-        int score;
-        int speed;
-        int mood;
+        private int _stamina;
+        private int _score;
+        private int _speed;
+        private int _mood;
+        
+        public int Stamina
+        {
+            get => _stamina;
+            set => _stamina = Mathf.Clamp(value, 0, 100);
+        }
+        
         // Наборы внутренних состояний
         public CommonQuestModel CommonQModel { get; private set; }
         public DayModel DayModel { get; private set; }
+        public Vector3 MoveDirection { get; set; }
 
         public PlayerModel(CommonQuestModel commonQModel, DayModel dayModel)
         {
             CommonQModel = commonQModel;
             DayModel = dayModel;
-            stamina = 100;
-            score = 0;
-            speed = 5;
-            mood = 100;
+            _stamina = 100;
+            _score = 0;
+            _speed = 5;
+            _mood = 100;
         }
 
         public void UpdateOptions()
         {
-            switch (DayModel.DiffcultLevel)
+            switch (DayModel.DifficultLevel)
             {
                 case 1:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
                 case 2:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
                 case 3:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
                 case 4:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
                 case 5:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
                 case 6:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
                 case 7:
-                    stamina = 100;
-                    score = 0;
-                    speed = 5;
-                    mood = 100;
+                    _stamina = 100;
+                    _score = 0;
+                    _speed = 5;
+                    _mood = 100;
                     break;
             }    
 

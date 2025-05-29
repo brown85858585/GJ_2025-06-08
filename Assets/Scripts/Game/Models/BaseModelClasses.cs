@@ -1,32 +1,11 @@
-﻿using System;
-using UnityEngine;
-using BaseModels;
-
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-namespace BaseModels
+﻿namespace Game.Models
 {
-
-    public class PlayerController
-    {
-        Transform Player;
-        /*
-        void PlayerMove(MonoBehavier monoBehavier)
-        {
-            //Player
-        }
-        */
-    }
-
-
     public class BaseBusController
     {
-
-        DayModel DModel = new DayModel();
-        CommonQuestModel QuestModel;
-        PlayerModel playerModel;
-        MainModel Model;
+        private DayModel DModel = new DayModel();
+        private CommonQuestModel QuestModel;
+        private PlayerModel playerModel;
+        private MainModel Model;
 
         BaseBusController()
         {

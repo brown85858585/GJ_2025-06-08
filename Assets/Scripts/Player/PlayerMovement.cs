@@ -1,47 +1,44 @@
-
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+namespace Player
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private InputActionAsset inputActions;
-    private Rigidbody rb;
-    private InputAction moveAction;
-    private Vector3 moveDirection;
-
-    private void Awake()
+    public class PlayerMovement : MonoBehaviour, IPlayerView
     {
-        rb = GetComponent<Rigidbody>();
+        [Header("Movement Settings")]
+        [SerializeField] private float moveSpeed = 5f;
         
-        // Находим Action Map и Action
-        InputActionMap playerMap = inputActions.FindActionMap("Player");
-        moveAction = playerMap.FindAction("Move");
-    }
+        public Transform TransformPlayer { get;  set; }
+        public event Action OnCollision;
 
-    private void OnEnable() => moveAction?.Enable();
-    private void OnDisable() => moveAction?.Disable();
+        
+        private Rigidbody _rb;
+        private PlayerController _controller;
     
-    private void Update()
-    {
-        MoveActionRead();
-    }
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+            TransformPlayer = transform;
+        }
 
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-    
-    private void MoveActionRead() 
-    {
-        Vector2 move = moveAction.ReadValue<Vector2>();
-        moveDirection = new Vector3(move.x, 0f, move.y).normalized;
-    }
-    
-    private void MovePlayer()
-    {
-        Vector3 movement = moveDirection * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
+        private void FixedUpdate()
+        {
+            _controller.Update();
+        }
+        public void Initialize(PlayerController controller)
+        {
+            _controller = controller;
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            OnCollision?.Invoke();
+        }
+
+        public void Move(Vector3 delta)
+        {
+            Vector3 movement = delta * moveSpeed * Time.fixedDeltaTime;
+            _rb.MovePosition(_rb.position + movement);
+        }
     }
 }

@@ -1,10 +1,4 @@
-using System;
-using UnityEngine;
-
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-namespace BaseModels
+namespace Game.Models
 {
 	public class CommonQuestModel
 	{

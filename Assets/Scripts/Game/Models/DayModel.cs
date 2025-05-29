@@ -1,10 +1,4 @@
-using System;
-using UnityEngine;
-
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-namespace BaseModels
+namespace Game.Models
 {
     public class DayModel
     {
@@ -13,7 +7,7 @@ namespace BaseModels
 
         public CommonQuestModel CommonQModel;
 
-        public int  DiffcultLevel{get { return DayNum; } }
+        public int  DifficultLevel{get { return DayNum; } }
 
 
 
