@@ -116,7 +116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2798091433784683588}
   - component: {fileID: 4981820829016224602}
-  - component: {fileID: 3528942433988863653}
   m_Layer: 0
   m_Name: RoomCamera
   m_TagString: Untagged
@@ -179,19 +178,3 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 8196251848924409725}
---- !u!114 &3528942433988863653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9040953646878404776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98422a7c1094e3b4aab5cdf460b587a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minYaw: 10
-  maxYaw: 30
-  minPitch: 20
-  maxPitch: 40

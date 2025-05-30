@@ -1,3 +1,4 @@
+using CameraField;
 using Cinemachine;
 using Game.Models;
 using Player;
@@ -15,6 +16,7 @@ namespace Game
         private PlayerModel _playerModel;
         private PlayerController _playerController;
         private PlayerMovementView _playerMovementView;
+        private InputAdapter _inputAdapter;
 
         private void Awake()
         {
@@ -24,8 +26,8 @@ namespace Game
         private void Install()
         {
             _playerModel = new PlayerModel(new CommonQuestModel(), new DayModel());
-            var inputAdapter = new InputAdapter(playerInput);
-            _playerController = new PlayerController(_playerModel, inputAdapter);
+            _inputAdapter = new InputAdapter(playerInput);
+            _playerController = new PlayerController(_playerModel, _inputAdapter);
 
             _playerController.OnDied += SecondLevel;
         }
@@ -60,6 +62,8 @@ namespace Game
         {
             virtualCamera.Follow = _playerMovementView.TransformPlayer;
             virtualCamera.LookAt = _playerMovementView.TransformPlayer;
+            var cameraRotation = virtualCamera.gameObject.AddComponent<CameraRotation>();
+            cameraRotation.Initialization(_inputAdapter, virtualCamera.transform);
         }
     }
 }
