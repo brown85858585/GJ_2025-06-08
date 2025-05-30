@@ -1,3 +1,4 @@
+using Cinemachine;
 using Game.Models;
 using Player;
 using UnityEngine;
@@ -7,11 +8,13 @@ namespace Game
     public class LevelRoomInstaller :  MonoBehaviour
     {
         [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GameObject secondLevelPrefab;
 
         private PlayerModel _playerModel;
         private PlayerController _playerController;
+        private PlayerMovementView _playerMovementView;
 
         private void Awake()
         {
@@ -38,13 +41,25 @@ namespace Game
 
         void Start()
         {
-            var go = Instantiate(playerPrefab);
-            var view = go.GetComponent<PlayerMovement>();
-            
-            _playerController.Initialize(view);
-            
-            view.Initialize(_playerController);
+            PlayerInit();
+
+            CameraInit();
         }
 
+        private void PlayerInit()
+        {
+            var go = Instantiate(playerPrefab);
+            _playerMovementView = go.GetComponent<PlayerMovementView>();
+            
+            _playerController.Initialize(_playerMovementView);
+            _playerMovementView.Initialize(_playerController);
+            
+        }
+
+        private void CameraInit()
+        {
+            virtualCamera.Follow = _playerMovementView.TransformPlayer;
+            virtualCamera.LookAt = _playerMovementView.TransformPlayer;
+        }
     }
 }

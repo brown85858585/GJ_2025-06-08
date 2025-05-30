@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerMovement : MonoBehaviour, IPlayerView
+    public class PlayerMovementView : MonoBehaviour, IPlayerView
     {
         [Header("Movement Settings")]
         [SerializeField] private float moveSpeed = 5f;
