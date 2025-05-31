@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
@@ -21,6 +22,8 @@ namespace Player
         {
             _model = model;
             _input = input;
+
+
         }
 
         public void SetPosition(Vector3 position)
@@ -50,6 +53,8 @@ namespace Player
             _model.MoveDirection = dir;
             _view.Move(dir);
         }
+
+
     }
 
     public interface IPlayerView

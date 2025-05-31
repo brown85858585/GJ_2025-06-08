@@ -62,6 +62,7 @@ namespace Game
         {
             virtualCamera.Follow = _playerMovementView.TransformPlayer;
             virtualCamera.LookAt = _playerMovementView.TransformPlayer;
+
             var cameraRotation = virtualCamera.gameObject.AddComponent<CameraRotation>();
             cameraRotation.Initialization(_inputAdapter, virtualCamera.transform);
         }
