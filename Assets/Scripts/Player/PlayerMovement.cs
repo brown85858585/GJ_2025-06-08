@@ -17,7 +17,7 @@ namespace Player
         {
             _rb = GetComponent<Rigidbody>();
            
-            CacheCamera();
+            TruCacheCameraMain();
         }
 
         private void FixedUpdate()
@@ -61,7 +61,7 @@ namespace Player
                 offsetDirection = (camForward * offsetDirection.z + camRight * offsetDirection.x).normalized;
             }else
             {
-                CacheCamera();
+                TruCacheCameraMain();
             }
 
             _direction = offsetDirection;
@@ -69,13 +69,13 @@ namespace Player
             _rb.MovePosition(_rb.position + movement);
         }
         
-        private void CacheCamera()
+        private void TruCacheCameraMain()
         {
             Camera cam = Camera.main; // найдёт объект с тегом "MainCamera"
             if (cam != null)
                 _camTransform = cam.transform;
             else
-                Debug.LogWarning("MainCamera не найдена! Проверьте тег.");
+                Debug.LogWarning("MainCamera not found");
         }
     }
 }
