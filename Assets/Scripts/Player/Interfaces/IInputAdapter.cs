@@ -9,5 +9,6 @@ namespace Player.Interfaces
         Vector3 Direction { get; }
         Vector3 Look { get; }
         bool IsAccelerating { get; }
+        event Action<bool> OnTest;
     }
 }

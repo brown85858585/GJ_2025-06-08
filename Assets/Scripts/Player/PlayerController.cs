@@ -17,14 +17,13 @@ namespace Player
         private IInputAdapter _input;
         InputAction _moveAction;
         Vector2 _moveInput;
-        
-       
+        private bool _testClicked;
+
+
         public PlayerController(PlayerModel model, IInputAdapter input)
         {
             _model = model;
             _input = input;
-
-
         }
 
         public void SetPosition(Vector3 position)
@@ -35,8 +34,25 @@ namespace Player
         public void Initialize(IPlayerView view)
         {
             _view = view;
-            _movement = view as IPlayerMovement;
+            _movement = view.Movement;
             _view.OnCollision += DecreaseHealth;
+
+            _input.OnTest += Testing;
+        }
+
+        private void Testing(bool obj)
+        {
+            _testClicked = !_testClicked;
+            if (_testClicked)
+            {
+                _view.SetRotateMovement();
+                _movement = _view.Movement;
+            }
+            else
+            {
+                _view.SetNormalMovement();
+                _movement = _view.Movement;
+            }
         }
 
         private void DecreaseHealth()
@@ -59,12 +75,10 @@ namespace Player
 
     public interface IPlayerView
     {
+        IPlayerMovement Movement { get; set; }
         Transform TransformPlayer { get; set; }
         public event Action OnCollision;
+        void SetNormalMovement();
+        void SetRotateMovement();
     }
-    public interface IPlayerMovement
-    {
-        void Move(Vector3 direction);
-    }
-
 }

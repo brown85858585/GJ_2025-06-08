@@ -12,9 +12,12 @@ namespace Player
         public Vector3 Look { get; private set; }
         public bool IsAccelerating => _accelerateAction.IsPressed();
 
+        public event Action<bool> OnTest;
+        
         private readonly InputAction _accelerateAction;
         private readonly InputAction _rotateAction;
         private readonly InputAction _lookAction;
+        private readonly InputAction _testAction;
 
         public InputAdapter(PlayerInput playerInput)
         {
@@ -23,15 +26,26 @@ namespace Player
             _accelerateAction = playerInput.actions.FindAction("Sprint", true);
             _rotateAction     = playerInput.actions.FindAction("Move",     true);
             _lookAction     = playerInput.actions.FindAction("Look",     true);
+            _testAction     = playerInput.actions.FindAction("Test",     true);
 
             _accelerateAction.Enable();
             _rotateAction.Enable();
             _lookAction.Enable();
+            _testAction.Enable();
 
             _rotateAction.performed += OnMoveInput;
             _rotateAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
+            
+            _testAction.started += OnTestInput;
         }
+
+        private void OnTestInput(InputAction.CallbackContext obj)
+        {
+            var readValue = obj.ReadValue<float>();
+            OnTest?.Invoke(readValue != 0);
+        }
+
 
         private void OnLook(InputAction.CallbackContext obj)
         {

@@ -15,7 +15,7 @@ namespace Game
 
         private PlayerModel _playerModel;
         private PlayerController _playerController;
-        private PlayerMovementView _playerMovementView;
+        private PlayerView _playerView;
         private InputAdapter _inputAdapter;
 
         private void Awake()
@@ -51,17 +51,17 @@ namespace Game
         private void PlayerInit()
         {
             var go = Instantiate(playerPrefab);
-            _playerMovementView = go.GetComponent<PlayerMovementView>();
+            _playerView = go.GetComponent<PlayerView>();
             
-            _playerController.Initialize(_playerMovementView);
-            _playerMovementView.Initialize(_playerController);
+            _playerController.Initialize(_playerView);
+            _playerView.Initialize(_playerController);
             
         }
 
         private void CameraInit()
         {
-            virtualCamera.Follow = _playerMovementView.TransformPlayer;
-            virtualCamera.LookAt = _playerMovementView.TransformPlayer;
+            virtualCamera.Follow = _playerView.TransformPlayer;
+            virtualCamera.LookAt = _playerView.TransformPlayer;
 
             var cameraRotation = virtualCamera.gameObject.AddComponent<CameraRotation>();
             cameraRotation.Initialization(_inputAdapter, virtualCamera.transform);
