@@ -66,7 +66,7 @@ namespace Player
             }
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             var dir = _input.Direction;
             _model.MoveDirection = dir;

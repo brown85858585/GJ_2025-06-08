@@ -21,7 +21,7 @@ namespace Player
         
         private void FixedUpdate()
         {
-            _controller.Update();
+            _controller.FixedUpdate();
         }
 
         public void SetNormalMovement()

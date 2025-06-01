@@ -20,7 +20,7 @@ namespace Player
             CacheCamera();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (_direction.sqrMagnitude > 0.001f)
             {
