@@ -27,7 +27,7 @@ namespace Game
         {
             _playerModel = new PlayerModel(new CommonQuestModel(), new DayModel());
             _inputAdapter = new InputAdapter(playerInput);
-            _playerController = new PlayerController(_playerModel, _inputAdapter);
+            _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
 
             _playerController.OnDied += SecondLevel;
         }

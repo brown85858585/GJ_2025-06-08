@@ -10,14 +10,13 @@ namespace Player
         [Header("Rotation Settings")]
         [SerializeField] private float turnSmooth   = 5f;
         
+        public Transform CameraTransform { get; set; }
+        
         private Rigidbody _rb;
         private Vector3 _direction;
-        private Transform _camTransform;
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-           
-            TruCacheCameraMain();
         }
 
         private void FixedUpdate()
@@ -45,11 +44,11 @@ namespace Player
         public void Move(Vector3 direction)
         {
             Vector3 offsetDirection = direction.normalized;
-            if (_camTransform)
+            if (CameraTransform)
             {
                 // Базовые оси камеры
-                Vector3 camForward = _camTransform.forward;
-                Vector3 camRight = _camTransform.right;
+                Vector3 camForward = CameraTransform.forward;
+                Vector3 camRight = CameraTransform.right;
 
                 // Проецируем на плоскость, чтобы исключить наклон камеры
                 camForward.y = 0f;
@@ -59,9 +58,6 @@ namespace Player
 
                 // Считаем направление движения в локальных осях камеры
                 offsetDirection = (camForward * offsetDirection.z + camRight * offsetDirection.x).normalized;
-            }else
-            {
-                TruCacheCameraMain();
             }
 
             _direction = offsetDirection;
@@ -69,13 +65,5 @@ namespace Player
             _rb.MovePosition(_rb.position + movement);
         }
         
-        private void TruCacheCameraMain()
-        {
-            Camera cam = Camera.main; // найдёт объект с тегом "MainCamera"
-            if (cam != null)
-                _camTransform = cam.transform;
-            else
-                Debug.LogWarning("MainCamera not found");
-        }
     }
 }

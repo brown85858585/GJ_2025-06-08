@@ -12,6 +12,8 @@ namespace Player
         
         private Rigidbody _rb;
 
+        public Transform CameraTransform { get; set; }
+
         public void Move(Vector3 direction)
         {
             UpdRotete(direction);

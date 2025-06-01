@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
@@ -18,12 +19,14 @@ namespace Player
         Vector2 _moveInput;
         private bool _testClicked;
         private Vector3 _direction;
+        private readonly Transform _virtualCamera;
 
 
-        public PlayerController(PlayerModel model, IInputAdapter input)
+        public PlayerController(PlayerModel model, IInputAdapter input, Transform camTransform)
         {
             _model = model;
             _input = input;
+            _virtualCamera = camTransform;
         }
 
         public void SetPosition(Vector3 position)
@@ -39,6 +42,9 @@ namespace Player
             _view.OnCollision += DecreaseHealth;
 
             _input.OnTest += Testing;
+
+
+            _movement.CameraTransform = _virtualCamera;
         }
 
         private void Testing(bool obj)
