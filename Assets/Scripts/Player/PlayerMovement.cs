@@ -12,9 +12,12 @@ namespace Player
         
         private Rigidbody _rb;
         private Vector3 _direction;
+        private Transform _camTransform;
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+           
+            CacheCamera();
         }
 
         private void LateUpdate()
@@ -42,11 +45,11 @@ namespace Player
         public void Move(Vector3 direction)
         {
             Vector3 offsetDirection = direction.normalized;
-            if (Camera.main)
+            if (_camTransform)
             {
                 // Базовые оси камеры
-                Vector3 camForward = Camera.main.transform.forward;
-                Vector3 camRight = Camera.main.transform.right;
+                Vector3 camForward = _camTransform.forward;
+                Vector3 camRight = _camTransform.right;
 
                 // Проецируем на плоскость, чтобы исключить наклон камеры
                 camForward.y = 0f;
@@ -56,11 +59,23 @@ namespace Player
 
                 // Считаем направление движения в локальных осях камеры
                 offsetDirection = (camForward * offsetDirection.z + camRight * offsetDirection.x).normalized;
+            }else
+            {
+                CacheCamera();
             }
 
             _direction = offsetDirection;
             Vector3 movement = _direction * moveSpeed * Time.fixedDeltaTime;
             _rb.MovePosition(_rb.position + movement);
+        }
+        
+        private void CacheCamera()
+        {
+            Camera cam = Camera.main; // найдёт объект с тегом "MainCamera"
+            if (cam != null)
+                _camTransform = cam.transform;
+            else
+                Debug.LogWarning("MainCamera не найдена! Проверьте тег.");
         }
     }
 }
