@@ -48,12 +48,4 @@ namespace Player
             OnCollision?.Invoke();
         }
     }
-
-    public class PlayerMovement : MonoBehaviour, IPlayerMovement
-    {
-        public void Move(Vector3 direction)
-        {
-            Debug.Log(direction);
-        }
-    }
 }

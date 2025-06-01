@@ -16,7 +16,7 @@ namespace Player
         public void Move(Vector3 direction)
         {
             UpdRotete(direction);
-            FixedMove(direction);
+            UpdMove(direction);
         }
 
         private void Awake()
@@ -31,7 +31,7 @@ namespace Player
             transform.Rotate(0, rotation, 0);
         }
 
-        private void FixedMove(Vector3 direction)
+        private void UpdMove(Vector3 direction)
         {
             Vector3 movement = transform.forward * direction.z;
 

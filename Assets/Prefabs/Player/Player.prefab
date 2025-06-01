@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 6113348681444337389}
   - component: {fileID: 8518546340016816487}
   - component: {fileID: 3786426316462517790}
-  - component: {fileID: 4270347961590103335}
+  - component: {fileID: 8827756126029776017}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -255,7 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4b73061a6cd4a49b28242fa00b67b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4270347961590103335
+  playerRotateMovement: {fileID: 0}
+  playerMovement: {fileID: 0}
+--- !u!114 &8827756126029776017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,8 +266,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8902517036189002289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 761f3f3017424cd0b69cc6f6f7ac7071, type: 3}
+  m_Script: {fileID: 11500000, guid: 03ba11b3d3d54e7d9733201bef01d786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 120
+  moveSpeed: 1.79
+  turnSmooth: 5
