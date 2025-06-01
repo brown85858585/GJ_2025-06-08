@@ -1,5 +1,4 @@
 using System;
-using Cinemachine;
 using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
@@ -71,14 +70,5 @@ namespace Player
             _model.MoveDirection = dir;
             _movement.Move(dir);
         }
-    }
-
-    public interface IPlayerView
-    {
-        IPlayerMovement Movement { get; set; }
-        Transform TransformPlayer { get; set; }
-        public event Action OnCollision;
-        void SetNormalMovement();
-        void SetRotateMovement();
     }
 }

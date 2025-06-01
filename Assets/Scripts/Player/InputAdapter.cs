@@ -7,7 +7,6 @@ namespace Player
 {
     public sealed class InputAdapter : IDisposable, IInputAdapter
     {
-        public event Action<Vector3> OnMove;
         public Vector3 Direction { get; private set; }
         public Vector3 Look { get; private set; }
         public bool IsAccelerating => _accelerateAction.IsPressed();
@@ -15,7 +14,7 @@ namespace Player
         public event Action<bool> OnTest;
         
         private readonly InputAction _accelerateAction;
-        private readonly InputAction _rotateAction;
+        private readonly InputAction _moveAction;
         private readonly InputAction _lookAction;
         private readonly InputAction _testAction;
 
@@ -24,17 +23,17 @@ namespace Player
             if (playerInput == null) throw new ArgumentNullException(nameof(playerInput));
 
             _accelerateAction = playerInput.actions.FindAction("Sprint", true);
-            _rotateAction     = playerInput.actions.FindAction("Move",     true);
+            _moveAction     = playerInput.actions.FindAction("Move",     true);
             _lookAction     = playerInput.actions.FindAction("Look",     true);
             _testAction     = playerInput.actions.FindAction("Test",     true);
 
             _accelerateAction.Enable();
-            _rotateAction.Enable();
+            _moveAction.Enable();
             _lookAction.Enable();
             _testAction.Enable();
 
-            _rotateAction.performed += OnMoveInput;
-            _rotateAction.canceled  += OnMoveInput;
+            _moveAction.performed += OnMoveInput;
+            _moveAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
             
             _testAction.started += OnTestInput;
@@ -59,21 +58,18 @@ namespace Player
             var readValue = callbackContext.ReadValue<Vector2>();
             Direction = new Vector3(readValue.x, 0f, readValue.y);
             if (callbackContext.canceled) Direction = Vector2.zero;
-            
-            OnMove?.Invoke(Direction);
-            Debug.Log(Direction);
         }
 
         public void Dispose()
         {
-            _rotateAction.performed -= OnMoveInput;
-            _rotateAction.canceled  -= OnMoveInput;
+            _moveAction.performed -= OnMoveInput;
+            _moveAction.canceled  -= OnMoveInput;
             
             _lookAction.performed -= OnLook;
             _lookAction.canceled -= OnLook;
             
             _accelerateAction.Disable();
-            _rotateAction.Disable();
+            _moveAction.Disable();
             _lookAction.Disable();
         }
     }

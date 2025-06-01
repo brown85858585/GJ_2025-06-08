@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Player
@@ -6,10 +5,10 @@ namespace Player
     public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float moveSpeed = 2f;
 
         [Header("Rotation Settings")]
-        [SerializeField] private float turnSmooth   = 10f;
+        [SerializeField] private float turnSmooth   = 5f;
         
         private Rigidbody _rb;
         private Vector3 _direction;
