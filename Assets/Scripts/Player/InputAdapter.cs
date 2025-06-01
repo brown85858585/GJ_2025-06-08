@@ -35,6 +35,7 @@ namespace Player
             _moveAction.performed += OnMoveInput;
             _moveAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
+            _lookAction.canceled += OnLook;
             
             _testAction.started += OnTestInput;
         }
