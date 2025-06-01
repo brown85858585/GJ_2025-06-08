@@ -9,7 +9,7 @@ namespace Player
     public class PlayerController
     {
         public event Action OnDied;
-        
+
         private PlayerModel _model;
         private IPlayerView _view;
         private IPlayerMovement _movement;
@@ -17,6 +17,7 @@ namespace Player
         InputAction _moveAction;
         Vector2 _moveInput;
         private bool _testClicked;
+        private Vector3 _direction;
 
 
         public PlayerController(PlayerModel model, IInputAdapter input)
@@ -29,6 +30,7 @@ namespace Player
         {
             _view.TransformPlayer.position = position;
         }
+
         // Явная привязка View
         public void Initialize(IPlayerView view)
         {
@@ -68,7 +70,8 @@ namespace Player
         {
             var dir = _input.Direction;
             _model.MoveDirection = dir;
-            _movement.Move(dir);
+            
+            _movement.Move(_model.MoveDirection);
         }
     }
 }

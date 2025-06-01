@@ -34,7 +34,7 @@ namespace Player
         {
             Vector3 movement = transform.forward * direction.z;
 
-            _rb.MovePosition(_rb.position + movement * moveSpeed * Time.deltaTime);
+            _rb.MovePosition(_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
     }
 }
