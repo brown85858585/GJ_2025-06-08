@@ -19,9 +19,9 @@ namespace Player
             TransformPlayer = transform;
         }
         
-        private void LateUpdate()
+        private void FixedUpdate()
         {
-            _controller.Update();
+            _controller.FixedUpdate();
         }
 
         public void SetNormalMovement()

@@ -5,10 +5,12 @@ namespace Player
     public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 2f;
+        [SerializeField] private float moveSpeed = 5f;
 
         [Header("Rotation Settings")]
         [SerializeField] private float turnSmooth   = 5f;
+        
+        public Transform CameraTransform { get; set; }
         
         private Rigidbody _rb;
         private Vector3 _direction;
@@ -17,7 +19,7 @@ namespace Player
             _rb = GetComponent<Rigidbody>();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (_direction.sqrMagnitude > 0.001f)
             {
@@ -41,9 +43,27 @@ namespace Player
 
         public void Move(Vector3 direction)
         {
-            _direction = direction.normalized;
-            Vector3 movement = direction * moveSpeed * Time.fixedDeltaTime;
+            Vector3 offsetDirection = direction.normalized;
+            if (CameraTransform)
+            {
+                // Базовые оси камеры
+                Vector3 camForward = CameraTransform.forward;
+                Vector3 camRight = CameraTransform.right;
+
+                // Проецируем на плоскость, чтобы исключить наклон камеры
+                camForward.y = 0f;
+                camRight.y = 0f;
+                camForward.Normalize();
+                camRight.Normalize();
+
+                // Считаем направление движения в локальных осях камеры
+                offsetDirection = (camForward * offsetDirection.z + camRight * offsetDirection.x).normalized;
+            }
+
+            _direction = offsetDirection;
+            Vector3 movement = _direction * moveSpeed * Time.fixedDeltaTime;
             _rb.MovePosition(_rb.position + movement);
         }
+        
     }
 }

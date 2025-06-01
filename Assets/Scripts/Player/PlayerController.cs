@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Player
     public class PlayerController
     {
         public event Action OnDied;
-        
+
         private PlayerModel _model;
         private IPlayerView _view;
         private IPlayerMovement _movement;
@@ -17,18 +18,22 @@ namespace Player
         InputAction _moveAction;
         Vector2 _moveInput;
         private bool _testClicked;
+        private Vector3 _direction;
+        private readonly Transform _virtualCamera;
 
 
-        public PlayerController(PlayerModel model, IInputAdapter input)
+        public PlayerController(PlayerModel model, IInputAdapter input, Transform camTransform)
         {
             _model = model;
             _input = input;
+            _virtualCamera = camTransform;
         }
 
         public void SetPosition(Vector3 position)
         {
             _view.TransformPlayer.position = position;
         }
+
         // Явная привязка View
         public void Initialize(IPlayerView view)
         {
@@ -37,6 +42,9 @@ namespace Player
             _view.OnCollision += DecreaseHealth;
 
             _input.OnTest += Testing;
+
+
+            _movement.CameraTransform = _virtualCamera;
         }
 
         private void Testing(bool obj)
@@ -64,11 +72,12 @@ namespace Player
             }
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             var dir = _input.Direction;
             _model.MoveDirection = dir;
-            _movement.Move(dir);
+            
+            _movement.Move(_model.MoveDirection);
         }
     }
 }

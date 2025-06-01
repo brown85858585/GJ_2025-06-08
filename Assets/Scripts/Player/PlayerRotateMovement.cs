@@ -12,6 +12,8 @@ namespace Player
         
         private Rigidbody _rb;
 
+        public Transform CameraTransform { get; set; }
+
         public void Move(Vector3 direction)
         {
             UpdRotete(direction);
@@ -34,7 +36,7 @@ namespace Player
         {
             Vector3 movement = transform.forward * direction.z;
 
-            _rb.MovePosition(_rb.position + movement * moveSpeed * Time.deltaTime);
+            _rb.MovePosition(_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
     }
 }
