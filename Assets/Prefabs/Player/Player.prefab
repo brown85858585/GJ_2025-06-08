@@ -200,7 +200,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8902517036189002289}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 88c659dc1fda53d43be05801c095e7b4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -225,7 +225,7 @@ Rigidbody:
   m_GameObject: {fileID: 8902517036189002289}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -242,7 +242,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &3786426316462517790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,5 +267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ba11b3d3d54e7d9733201bef01d786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 50
+  groundDrag: 10
   turnSmooth: 5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8

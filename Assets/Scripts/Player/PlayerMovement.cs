@@ -1,26 +1,47 @@
+using System;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
-        [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 5f;
+        [Header("Movement Settings")] [SerializeField]
+        private float moveSpeed = 5f;
 
-        [Header("Rotation Settings")]
-        [SerializeField] private float turnSmooth   = 5f;
-        
+        [SerializeField] private float groundDrag = 7f;
+
+        [Header("Rotation Settings")] [SerializeField]
+        private float turnSmooth = 5f;
+
+        [SerializeField] LayerMask whatIsGround;
+
         public Transform CameraTransform { get; set; }
-        
+
         private Rigidbody _rb;
         private Vector3 _direction;
+        private bool _grounded;
+        private CapsuleCollider _capsuleCollider;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            _capsuleCollider = GetComponent<CapsuleCollider>();
         }
-
+        
         private void FixedUpdate()
         {
+            _grounded = Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height * 0.5f + 0.2f,
+                whatIsGround);
+
+            if (_grounded)
+            {
+                _rb.drag = groundDrag;
+            }
+            else
+            {
+                _rb.drag = 0;
+            }
+
             if (_direction.sqrMagnitude > 0.001f)
             {
                 RotateToForward();
@@ -33,8 +54,8 @@ namespace Player
             float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
             // b) Плавно интерполируем текущий угол к целевому
             float smoothAngle = Mathf.LerpAngle(
-                transform.eulerAngles.y, 
-                targetAngle, 
+                transform.eulerAngles.y,
+                targetAngle,
                 Time.deltaTime * turnSmooth
             );
             // c) Применяем итоговый поворот по оси Y
@@ -61,9 +82,9 @@ namespace Player
             }
 
             _direction = offsetDirection;
-            Vector3 movement = _direction * moveSpeed * Time.fixedDeltaTime;
-            _rb.MovePosition(_rb.position + movement);
+            Vector3 movement = _direction * moveSpeed;
+            if(_grounded)
+                _rb.AddForce(movement, ForceMode.Force);
         }
-        
     }
 }
