@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerMovementView : MonoBehaviour, IPlayerView
+    public class PlayerMovementView : MonoBehaviour, IPlayerView, IPlayerMovement
     {
         [Header("Movement Settings")]
         [SerializeField] private float moveSpeed = 5f;
@@ -33,7 +33,7 @@ namespace Player
             TransformPlayer = transform;
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             _controller.Update();
         }
@@ -47,28 +47,23 @@ namespace Player
             OnCollision?.Invoke();
         }
 
-        public void Move(Vector3 delta)
+        public void Move(Vector3 direction)
         {
-            UpdRotete();
-            FixedMove();
-
+            UpdRotete(direction);
+            FixedMove(direction);
         }
 
-        void UpdRotete()
+        public void UpdRotete(Vector3 direction)
         {
-            // Поворот делаем в Update
-            float horizontal = Input.GetAxis("Horizontal");
-            float rotation = horizontal * rotationSpeed * Time.deltaTime;
+            float rotation = direction.x * rotationSpeed * Time.deltaTime;
             transform.Rotate(0, rotation, 0);
         }
 
-        void FixedMove()
+        public void FixedMove(Vector3 direction)
         {
-            // Движение в FixedUpdate
-            float vertical = Input.GetAxis("Vertical");
-            Vector3 movement = transform.forward * vertical;
+            Vector3 movement = transform.forward * direction.z;
 
-            _rb.MovePosition(_rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + movement * moveSpeed * Time.deltaTime);
         }
     }
 }

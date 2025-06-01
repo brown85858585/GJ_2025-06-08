@@ -13,6 +13,7 @@ namespace Player
         
         private PlayerModel _model;
         private IPlayerView _view;
+        private IPlayerMovement _movement;
         private IInputAdapter _input;
         InputAction _moveAction;
         Vector2 _moveInput;
@@ -34,6 +35,7 @@ namespace Player
         public void Initialize(IPlayerView view)
         {
             _view = view;
+            _movement = view as IPlayerMovement;
             _view.OnCollision += DecreaseHealth;
         }
 
@@ -51,16 +53,17 @@ namespace Player
         {
             var dir = _input.Direction;
             _model.MoveDirection = dir;
-            _view.Move(dir);
+            _movement.Move(dir);
         }
-
-
     }
 
     public interface IPlayerView
     {
         Transform TransformPlayer { get; set; }
         public event Action OnCollision;
+    }
+    public interface IPlayerMovement
+    {
         void Move(Vector3 direction);
     }
 

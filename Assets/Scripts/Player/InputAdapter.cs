@@ -7,6 +7,7 @@ namespace Player
 {
     public sealed class InputAdapter : IDisposable, IInputAdapter
     {
+        public event Action<Vector3> OnMove;
         public Vector3 Direction { get; private set; }
         public Vector3 Look { get; private set; }
         public bool IsAccelerating => _accelerateAction.IsPressed();
@@ -27,8 +28,8 @@ namespace Player
             _rotateAction.Enable();
             _lookAction.Enable();
 
-            _rotateAction.performed += OnMove;
-            _rotateAction.canceled  += OnMove;
+            _rotateAction.performed += OnMoveInput;
+            _rotateAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
         }
 
@@ -39,17 +40,20 @@ namespace Player
             if (obj.canceled) Look = Vector2.zero;
         }
 
-        private void OnMove(InputAction.CallbackContext callbackContext)
+        private void OnMoveInput(InputAction.CallbackContext callbackContext)
         {
             var readValue = callbackContext.ReadValue<Vector2>();
             Direction = new Vector3(readValue.x, 0f, readValue.y);
             if (callbackContext.canceled) Direction = Vector2.zero;
+            
+            OnMove?.Invoke(Direction);
+            Debug.Log(Direction);
         }
 
         public void Dispose()
         {
-            _rotateAction.performed -= OnMove;
-            _rotateAction.canceled  -= OnMove;
+            _rotateAction.performed -= OnMoveInput;
+            _rotateAction.canceled  -= OnMoveInput;
             
             _lookAction.performed -= OnLook;
             _lookAction.canceled -= OnLook;
