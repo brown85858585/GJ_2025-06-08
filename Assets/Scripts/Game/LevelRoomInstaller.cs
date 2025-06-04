@@ -1,5 +1,6 @@
 using CameraField;
 using Cinemachine;
+using Game.Interactions;
 using Game.Models;
 using Player;
 using UnityEngine;
@@ -11,13 +12,13 @@ namespace Game
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private GameObject firstLevelPrefab;
         [SerializeField] private GameObject secondLevelPrefab;
 
         private PlayerModel _playerModel;
         private PlayerController _playerController;
-        private PlayerView _playerView;
         private InputAdapter _inputAdapter;
-
+        private InteractionSystem _interactionSystem;
         private void Awake()
         {
             Install();
@@ -28,7 +29,7 @@ namespace Game
             _playerModel = new PlayerModel(new CommonQuestModel(), new DayModel());
             _inputAdapter = new InputAdapter(playerInput);
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
-
+            
             _playerController.OnDied += SecondLevel;
         }
 
@@ -46,22 +47,25 @@ namespace Game
             PlayerInit();
 
             CameraInit();
+            
+            var firstLevel =Instantiate(firstLevelPrefab, transform);
+            var interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
+            _interactionSystem = new InteractionSystem(interactibles, _inputAdapter);
         }
 
         private void PlayerInit()
         {
             var go = Instantiate(playerPrefab);
-            _playerView = go.GetComponent<PlayerView>();
+            _playerModel.PlayerTransform = go.transform;
             
-            _playerController.Initialize(_playerView);
-            _playerView.Initialize(_playerController);
-            
+            var component = go.GetComponent<PlayerView>();
+            _playerController.InitView(component);
         }
 
         private void CameraInit()
         {
-            virtualCamera.Follow = _playerView.TransformPlayer;
-            virtualCamera.LookAt = _playerView.TransformPlayer;
+            virtualCamera.Follow = _playerModel.PlayerTransform;
+            virtualCamera.LookAt = _playerModel.PlayerTransform;
 
             var cameraRotation = virtualCamera.gameObject.AddComponent<CameraRotation>();
             cameraRotation.Initialization(_inputAdapter, virtualCamera.transform);

@@ -1,50 +1,79 @@
 using System;
-using Cinemachine;
 using Game.Models;
 using Player.Interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerController
+    public class PlayerController : IPlayerController
     {
         public event Action OnDied;
 
         private PlayerModel _model;
-        private IPlayerView _view;
-        private IPlayerMovement _movement;
         private IInputAdapter _input;
-        InputAction _moveAction;
+        private PlayerView _view;
         Vector2 _moveInput;
         private bool _testClicked;
-        private Vector3 _direction;
-        private readonly Transform _virtualCamera;
 
+        private PlayerMovement _movement;
+        private PlayerRunMovement _runMovement;
+        private IPlayerMovement _currentMovement;
+        public IPlayerMovement Movement => _currentMovement;
+        public PlayerModel Model => _model;
 
         public PlayerController(PlayerModel model, IInputAdapter input, Transform camTransform)
         {
             _model = model;
             _input = input;
-            _virtualCamera = camTransform;
-        }
 
-        public void SetPosition(Vector3 position)
-        {
-            _view.TransformPlayer.position = position;
-        }
-
-        // Явная привязка View
-        public void Initialize(IPlayerView view)
-        {
-            _view = view;
-            _movement = view.Movement;
-            _view.OnCollision += DecreaseHealth;
-
+            _runMovement = new PlayerRunMovement(_input);
+            _movement = new PlayerMovement(_input, model, camTransform);
+            _currentMovement = _movement;
+            
             _input.OnTest += Testing;
+        }
+        
+        public void InitView(PlayerView playerView)
+        {
+            _view = playerView;
+            _view.OnButtonClick += OnButtonClick;
+            _view.OnCollision += OnCollision;
+            _view.OnUpdate += Update;
+        }
 
+        private void OnButtonClick()
+        {
+            SetPosition(_view.transform, Vector3.zero);
+        }
 
-            _movement.CameraTransform = _virtualCamera;
+        private void Update()
+        {
+            //todo deltaTimeFixedUpdate
+            FixedUpdateMove();
+        }
+
+        private void OnCollision()
+        {
+            _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
+            DecreaseHealth();
+        }
+
+        public void FixedUpdateMove()
+        {
+            Model.CheckGrounded(_view.transform, _view.CapsuleCollider,  _view.WhatIsGround);
+            Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
+
+            var move = Movement.Move(_view.MoveSpeed, _view.transform);
+            _view.Rigidbody.AddForce(move, ForceMode.Force);
+            
+            var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
+            _view.transform.rotation = newRotation;
+        }
+
+        public void SetPosition(Transform player, Vector3 position)
+        {
+            player.position = position;
         }
 
         private void Testing(bool obj)
@@ -52,13 +81,11 @@ namespace Player
             _testClicked = !_testClicked;
             if (_testClicked)
             {
-                _view.SetRotateMovement();
-                _movement = _view.Movement;
+                _currentMovement = _runMovement;
             }
             else
             {
-                _view.SetNormalMovement();
-                _movement = _view.Movement;
+                _currentMovement = _movement;
             }
         }
 
@@ -71,13 +98,11 @@ namespace Player
                 OnDied?.Invoke();
             }
         }
+    }
 
-        public void FixedUpdate()
-        {
-            var dir = _input.Direction;
-            _model.MoveDirection = dir;
-            
-            _movement.Move(_model.MoveDirection);
-        }
+    public interface IPlayerController
+    {
+        public void SetPosition(Transform player, Vector3 position);
+        public void FixedUpdateMove();
     }
 }

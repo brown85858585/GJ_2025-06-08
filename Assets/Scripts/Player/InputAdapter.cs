@@ -10,13 +10,14 @@ namespace Player
         public Vector3 Direction { get; private set; }
         public Vector3 Look { get; private set; }
         public bool IsAccelerating => _accelerateAction.IsPressed();
-
+        public event Action<bool> OnInteract;
         public event Action<bool> OnTest;
         
         private readonly InputAction _accelerateAction;
         private readonly InputAction _moveAction;
         private readonly InputAction _lookAction;
         private readonly InputAction _testAction;
+        private readonly InputAction _interactAction;
 
         public InputAdapter(PlayerInput playerInput)
         {
@@ -26,18 +27,28 @@ namespace Player
             _moveAction     = playerInput.actions.FindAction("Move",     true);
             _lookAction     = playerInput.actions.FindAction("Look",     true);
             _testAction     = playerInput.actions.FindAction("Test",     true);
+            _interactAction = playerInput.actions.FindAction("Interact", true);
 
             _accelerateAction.Enable();
             _moveAction.Enable();
             _lookAction.Enable();
             _testAction.Enable();
+            _interactAction.Enable();
 
             _moveAction.performed += OnMoveInput;
             _moveAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
             _lookAction.canceled += OnLook;
-            
+
+            _interactAction.started += OnInteractInput;
             _testAction.started += OnTestInput;
+        }
+
+        private void OnInteractInput(InputAction.CallbackContext obj)
+        {
+            var readValue = obj.ReadValue<float>();
+            OnInteract?.Invoke(readValue != 0);
+            if (obj.canceled) OnInteract?.Invoke(false);
         }
 
         private void OnTestInput(InputAction.CallbackContext obj)
@@ -68,10 +79,14 @@ namespace Player
             
             _lookAction.performed -= OnLook;
             _lookAction.canceled -= OnLook;
+            _interactAction.started -= OnInteractInput;
+            _testAction.started -= OnTestInput;
             
             _accelerateAction.Disable();
             _moveAction.Disable();
             _lookAction.Disable();
+            _interactAction.Disable();
+            _testAction.Disable();
         }
     }
 }

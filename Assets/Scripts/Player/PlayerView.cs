@@ -1,49 +1,58 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
-    public class PlayerView : MonoBehaviour, IPlayerView
+    public class PlayerView : MonoBehaviour
     {
-        public Transform TransformPlayer { get;  set; }
+        [Header("Movement Settings")]
+        [SerializeField]
+        private float moveSpeed = 5f;
+        [SerializeField]
+        private Button moveForwardButton;
+        [SerializeField]
+        private float groundDrag = 7f;
+        
+        [Header("Rotation Settings")]
+        [SerializeField]
+        private float turnSmooth = 5f;
+        [SerializeField]
+        private LayerMask whatIsGround;
+        
+        public float MoveSpeed => moveSpeed;
+        public float GroundDrag => groundDrag;
+        public float TurnSmooth => turnSmooth;
+        public LayerMask WhatIsGround => whatIsGround;
+
+        public Rigidbody Rigidbody { get; private set; }
+        public CapsuleCollider CapsuleCollider { get; private set; }
+        
         public event Action OnCollision;
-        
-        public IPlayerMovement Movement { get; set; }
-        
-        private PlayerController _controller;
-        
+        public event Action OnUpdate;
+        public event Action OnButtonClick;
+
         private void Awake()
         {
-            Movement = GetComponent<IPlayerMovement>();
-            TransformPlayer = transform;
+            Rigidbody = GetComponent<Rigidbody>();
+            CapsuleCollider = GetComponent<CapsuleCollider>();
+            
+            moveForwardButton.onClick.AddListener(() => OnButtonClick?.Invoke());
         }
-        
+
         private void FixedUpdate()
         {
-            _controller.FixedUpdate();
+            OnUpdate?.Invoke();
         }
 
-        public void SetNormalMovement()
-        {
-            Destroy(Movement  as Component);
-            Movement = transform.AddComponent<PlayerMovement>();
-        }
-
-        public void SetRotateMovement()
-        {
-            Destroy(Movement  as Component);
-            Movement = transform.AddComponent<PlayerRotateMovement>();
-        }
-        
-        public void Initialize(PlayerController controller)
-        {
-            _controller = controller;
-        }
-        
         private void OnCollisionEnter(Collision other)
         {
             OnCollision?.Invoke();
+        }
+
+        private void OnDestroy()
+        { 
+            moveForwardButton.onClick.RemoveAllListeners();
         }
     }
 }

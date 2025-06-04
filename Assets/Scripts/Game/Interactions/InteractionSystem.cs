@@ -1,0 +1,52 @@
+using System;
+using Player.Interfaces;
+using UnityEngine;
+
+namespace Game.Interactions
+{
+    public class InteractionSystem : IDisposable
+    {
+        private readonly InteractionItemCollection _interactionItemCollection;
+        private readonly IInputAdapter _inputAdapter;
+
+        public InteractionSystem(InteractionItemCollection itemCollection, IInputAdapter inputAdapter)
+        {
+            _interactionItemCollection = itemCollection;
+            foreach (var item in _interactionItemCollection.ObjectsToInteract)
+            {
+                item.OnEnter += SetItemInteractable;
+                item.OnExit += RemoveItemInteractable;
+            }
+            
+            _inputAdapter = inputAdapter;
+            _inputAdapter.OnInteract += HandleInteract;
+        }
+
+        private void RemoveItemInteractable(ItemInteractable item)
+        {
+            if (_interactionItemCollection.CurrentInteractable == item)
+            {
+                _interactionItemCollection.CurrentInteractable = null;
+            }
+        }
+
+        private void SetItemInteractable(ItemInteractable item)
+        {
+            _interactionItemCollection.CurrentInteractable = item;
+        }
+
+        private void HandleInteract(bool interact)
+        {
+            if (interact && _interactionItemCollection.CurrentInteractable != null)
+            {
+                _interactionItemCollection.CurrentInteractable.Interact();
+            }
+        }
+
+        public void Dispose()
+        {
+            _inputAdapter.OnInteract -= HandleInteract;
+            
+        }
+    }
+}

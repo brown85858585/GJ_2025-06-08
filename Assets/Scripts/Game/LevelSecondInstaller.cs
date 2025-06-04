@@ -8,7 +8,7 @@ namespace Game
     {
         public void Initialize( PlayerController playerController, PlayerModel playerModel)
         {
-            playerController.SetPosition(this.transform.position + Vector3.up * 4f);
+            playerController.SetPosition(playerModel.PlayerTransform, this.transform.position + Vector3.up * 4f);
         }
     }
 }

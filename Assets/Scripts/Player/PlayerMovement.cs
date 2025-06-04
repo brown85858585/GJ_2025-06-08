@@ -1,75 +1,33 @@
-using System;
+using Game.Models;
+using Player.Interfaces;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerMovement : MonoBehaviour, IPlayerMovement
+    public class PlayerMovement : IPlayerMovement
     {
-        [Header("Movement Settings")] [SerializeField]
-        private float moveSpeed = 5f;
-
-        [SerializeField] private float groundDrag = 7f;
-
-        [Header("Rotation Settings")] [SerializeField]
-        private float turnSmooth = 5f;
-
-        [SerializeField] LayerMask whatIsGround;
-
-        public Transform CameraTransform { get; set; }
-
-        private Rigidbody _rb;
-        private Vector3 _direction;
-        private bool _grounded;
-        private CapsuleCollider _capsuleCollider;
-
-        private void Awake()
-        {
-            _rb = GetComponent<Rigidbody>();
-            _capsuleCollider = GetComponent<CapsuleCollider>();
-        }
+        private readonly IInputAdapter _input;
         
-        private void FixedUpdate()
+        private readonly PlayerModel _model;
+        private Vector3 _direction;
+        private readonly Transform _virtualCamera;
+        
+        public PlayerMovement(IInputAdapter input, PlayerModel model, Transform virtualCamera)
         {
-            _grounded = Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height * 0.5f + 0.2f,
-                whatIsGround);
-
-            if (_grounded)
-            {
-                _rb.drag = groundDrag;
-            }
-            else
-            {
-                _rb.drag = 0;
-            }
-
-            if (_direction.sqrMagnitude > 0.001f)
-            {
-                RotateToForward();
-            }
+            _input = input;
+            _model = model;
+            _virtualCamera = virtualCamera;
+            
         }
-
-        private void RotateToForward()
+        public Vector3 Move(float moveSpeed, Transform playerTransform)
         {
-            // a) Получаем нужный угол поворота (в градусах) с учётом мировой системы координат
-            float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
-            // b) Плавно интерполируем текущий угол к целевому
-            float smoothAngle = Mathf.LerpAngle(
-                transform.eulerAngles.y,
-                targetAngle,
-                Time.deltaTime * turnSmooth
-            );
-            // c) Применяем итоговый поворот по оси Y
-            transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
-        }
-
-        public void Move(Vector3 direction)
-        {
-            Vector3 offsetDirection = direction.normalized;
-            if (CameraTransform)
+            var offsetDirection = _input.Direction.normalized;
+            
+            if (_virtualCamera)
             {
                 // Базовые оси камеры
-                Vector3 camForward = CameraTransform.forward;
-                Vector3 camRight = CameraTransform.right;
+                var camForward = _virtualCamera.forward;
+                var camRight = _virtualCamera.right;
 
                 // Проецируем на плоскость, чтобы исключить наклон камеры
                 camForward.y = 0f;
@@ -80,11 +38,37 @@ namespace Player
                 // Считаем направление движения в локальных осях камеры
                 offsetDirection = (camForward * offsetDirection.z + camRight * offsetDirection.x).normalized;
             }
+            else
+            {
+               Debug.LogWarning("Virtual camera is not set. Using input direction directly.");
+            }
 
             _direction = offsetDirection;
             Vector3 movement = _direction * moveSpeed;
-            if(_grounded)
-                _rb.AddForce(movement, ForceMode.Force);
+
+            return _model.Grounded ? movement : Vector3.zero;
+        }
+
+        public Quaternion Rotation(Transform transform, float rotationSpeed)
+        {
+            if (_input.Direction.sqrMagnitude > 0.001f)
+            {
+                // a) Получаем нужный угол поворота (в градусах) с учётом мировой системы координат
+                float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
+                // b) Плавно интерполируем текущий угол к целевому
+                float smoothAngle = Mathf.LerpAngle(
+                    transform.eulerAngles.y,
+                    targetAngle,
+                    Time.deltaTime * rotationSpeed
+                );
+                // c) Применяем итоговый поворот по оси Y
+                return Quaternion.Euler(0f, smoothAngle, 0f);
+            }        
+            return transform.rotation;
+        }
+
+        public void SpeedDrop(Rigidbody rb, Transform transform)
+        {
         }
     }
 }

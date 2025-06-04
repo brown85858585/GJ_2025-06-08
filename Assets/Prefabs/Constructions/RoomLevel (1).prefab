@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1939357376639931510}
+  - component: {fileID: 8051651507191930110}
   m_Layer: 3
   m_Name: RoomLevel (1)
   m_TagString: Untagged
@@ -43,6 +44,20 @@ Transform:
   - {fileID: 8248501809418173522}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8051651507191930110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629543909847731020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcff20e8ec340139df885b152fda919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToInteract:
+  - {fileID: 8616032519472084095}
 --- !u!1 &1278296117010332401
 GameObject:
   m_ObjectHideFlags: 0
@@ -9917,6 +9932,8 @@ GameObject:
   - component: {fileID: 7250012388341290134}
   - component: {fileID: 5023688465661601720}
   - component: {fileID: 8417927791962071442}
+  - component: {fileID: 5998318001841710434}
+  - component: {fileID: 8616032519472084095}
   m_Layer: 3
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -10256,6 +10273,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!135 &5998318001841710434
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942357008241264714}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5168021
+  m_Center: {x: -0.0000003576279, y: -0.0000018775464, z: -0.0000010132791}
+--- !u!114 &8616032519472084095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942357008241264714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bb11cd6664c40827deaa330f5b1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &6658956752583877604
 GameObject:
   m_ObjectHideFlags: 0

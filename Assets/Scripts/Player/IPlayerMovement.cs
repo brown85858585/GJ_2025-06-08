@@ -4,7 +4,8 @@ namespace Player
 {
     public interface IPlayerMovement
     {
-        Transform CameraTransform { get; set; }
-        void Move(Vector3 direction);
+        Vector3 Move(float moveSpeed, Transform playerTransform);
+        Quaternion Rotation(Transform transform, float rotationSpeed);
+        void SpeedDrop(Rigidbody rb, Transform transform);
     }
 }
