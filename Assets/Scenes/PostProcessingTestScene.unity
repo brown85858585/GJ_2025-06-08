@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _volume: {fileID: 832575518}
-  _fadeDuration: 5
+  _fadeDuration: 10
   _minValue: -8
   _maxValue: 0
 --- !u!1 &451060081
