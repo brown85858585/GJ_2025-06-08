@@ -1,22 +1,28 @@
 using System;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Game.Interactions
 {
-    [RequireComponent(typeof(SphereCollider))]
+    [RequireComponent(typeof(Collider))]
     public class ItemInteractable : MonoBehaviour, IInteractable
     {
+        [SerializeField] private GameObject popup;
         [SerializeField] private LayerMask targetMask;
+        [SerializeField] private string id;  
+        [SerializeField] private ItemCategory category;
+        public string  Guid => id;        
+        public ItemCategory  Category  => category;
         
         public event Action<ItemInteractable> OnEnter;
         public event Action<ItemInteractable> OnExit;
         
-        private SphereCollider sphereCollider;
         
         private void Awake()
         {
-            sphereCollider = GetComponent<SphereCollider>();
-            sphereCollider.isTrigger = true;
             targetMask = LayerMask.GetMask("Player");
         }
         
@@ -25,6 +31,11 @@ namespace Game.Interactions
             if (CheckLayerMask(other.gameObject, targetMask))
             {
                 OnEnter?.Invoke(this);
+                
+                if (popup != null)
+                {
+                    popup.SetActive(true);
+                }
             }
         }
         private void OnTriggerExit(Collider other)
@@ -32,12 +43,21 @@ namespace Game.Interactions
             if (CheckLayerMask(other.gameObject, targetMask))
             {
                 OnExit?.Invoke(this);
+                
+                if (popup != null)
+                {
+                    popup.SetActive(false);
+                }
             }
         }
 
         public void Interact()
-        {
-            Debug.Log("Interact with item: " + gameObject.name);
+        { 
+            Debug.Log("Interact with item: " + Category + " with ID: " + Guid);
+            if (popup != null)
+            {
+                popup.SetActive(false);
+            }
         }
 
         private bool CheckLayerMask(GameObject obj, LayerMask layers)
@@ -49,5 +69,15 @@ namespace Game.Interactions
 
             return false;
         }
+#if UNITY_EDITOR
+        // генерация GUID при первом создании
+        private void OnValidate()
+        {
+            if (string.IsNullOrEmpty(id))
+                id = GUID.Generate().ToString();
+        }
+#endif
+        
     }
+
 }

@@ -7,7 +7,8 @@ namespace Player
     public class PlayerView : MonoBehaviour
     {
         private static readonly int Move = Animator.StringToHash("Move");
-        
+        private static readonly int IsDancing = Animator.StringToHash("IsDancing");
+
         [SerializeField] private Animator animator;
         [Range(0f,3f)]
         [SerializeField] private float animatorOffset = 1f;
@@ -63,8 +64,17 @@ namespace Player
 
         public void SetWalkAnimation(float walking)
         {
-            animator.SetFloat(Move, walking/(MoveSpeed * animatorOffset));
-            
+            var speed = walking / (MoveSpeed * animatorOffset);
+            animator.SetFloat(Move, speed);
+            if (speed > 0.1f)
+            {
+                animator.SetBool(IsDancing, false);
+            }
+        }
+
+        public void StartDanceAnimation()
+        {
+            animator.SetBool(IsDancing, true);
         }
     }
 }

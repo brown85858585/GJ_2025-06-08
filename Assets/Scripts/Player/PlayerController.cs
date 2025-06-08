@@ -1,7 +1,7 @@
 using System;
+using Game;
 using Game.Models;
 using Player.Interfaces;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Player
@@ -98,6 +98,12 @@ namespace Player
             {
                 OnDied?.Invoke();
             }
+        }
+
+        public void HandleInteraction(ItemCategory obj)
+        {
+            Debug.Log(obj);
+            _view.StartDanceAnimation();
         }
     }
 

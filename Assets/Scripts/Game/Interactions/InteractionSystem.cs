@@ -6,6 +6,8 @@ namespace Game.Interactions
 {
     public class InteractionSystem : IDisposable
     {
+        public event Action<ItemCategory> OnInteraction;
+        
         private readonly InteractionItemCollection _interactionItemCollection;
         private readonly IInputAdapter _inputAdapter;
 
@@ -22,6 +24,16 @@ namespace Game.Interactions
             _inputAdapter.OnInteract += HandleInteract;
         }
 
+        public void Dispose()
+        {
+            foreach (var item in _interactionItemCollection.ObjectsToInteract)
+            {
+                item.OnEnter -= SetItemInteractable;
+                item.OnExit -= RemoveItemInteractable;
+            }
+            _inputAdapter.OnInteract -= HandleInteract;
+        }
+
         private void RemoveItemInteractable(ItemInteractable item)
         {
             if (_interactionItemCollection.CurrentInteractable == item)
@@ -34,19 +46,14 @@ namespace Game.Interactions
         {
             _interactionItemCollection.CurrentInteractable = item;
         }
-
+        
         private void HandleInteract(bool interact)
         {
             if (interact && _interactionItemCollection.CurrentInteractable != null)
             {
                 _interactionItemCollection.CurrentInteractable.Interact();
+                OnInteraction?.Invoke(_interactionItemCollection.CurrentInteractable.Category);
             }
-        }
-
-        public void Dispose()
-        {
-            _inputAdapter.OnInteract -= HandleInteract;
-            
         }
     }
 }

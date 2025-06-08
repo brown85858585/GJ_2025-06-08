@@ -49,8 +49,10 @@ namespace Game
             CameraInit();
             
             var firstLevel =Instantiate(firstLevelPrefab, transform);
+            
             var interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
             _interactionSystem = new InteractionSystem(interactibles, _inputAdapter);
+            _interactionSystem.OnInteraction += _playerController.HandleInteraction;
         }
 
         private void PlayerInit()
