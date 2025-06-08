@@ -6,6 +6,12 @@ namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
+        private static readonly int Move = Animator.StringToHash("Move");
+        
+        [SerializeField] private Animator animator;
+        [Range(0f,3f)]
+        [SerializeField] private float animatorOffset = 1f;
+        
         [Header("Movement Settings")]
         [SerializeField]
         private float moveSpeed = 5f;
@@ -53,6 +59,12 @@ namespace Player
         private void OnDestroy()
         { 
             moveForwardButton.onClick.RemoveAllListeners();
+        }
+
+        public void SetWalkAnimation(float walking)
+        {
+            animator.SetFloat(Move, walking/(MoveSpeed * animatorOffset));
+            
         }
     }
 }
