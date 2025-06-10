@@ -1,7 +1,7 @@
-using System;
 using CameraField;
 using Cinemachine;
 using Game.Interactions;
+using Game.MiniGames;
 using Game.Models;
 using Player;
 using UnityEngine;
@@ -56,6 +56,8 @@ namespace Game
             _interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
             _interactionSystem = new InteractionSystem(_interactibles, _inputAdapter);
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
+
+            var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
         }
 
         private void HandlePlayerInteraction(ItemCategory item)

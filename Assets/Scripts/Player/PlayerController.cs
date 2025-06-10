@@ -106,14 +106,14 @@ namespace Player
             Debug.Log(item);
             if (item != ItemCategory.WateringCan) return;
             
-            _model.ItemCategory = ItemCategory.WateringCan;
+            _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
             _view.StartDanceAnimation();
         }
 
         private void PutTheItemDown(bool b)
         {
-            _model.ItemCategory = ItemCategory.None;
+            _model.ItemInHand = ItemCategory.None;
             _view.PutTheItemDown();
         }
     }

@@ -13,7 +13,7 @@ namespace Game.Models
         public bool Grounded;
         public Transform PlayerTransform;
         
-        public ItemCategory ItemCategory { get; set; }
+        public ItemCategory ItemInHand { get; set; }
         
         public int Stamina
         {
