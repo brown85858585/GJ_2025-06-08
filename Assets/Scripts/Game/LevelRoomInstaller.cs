@@ -3,6 +3,7 @@ using Cinemachine;
 using Game.Interactions;
 using Game.MiniGames;
 using Game.Models;
+using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,12 +16,15 @@ namespace Game
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GameObject firstLevelPrefab;
         [SerializeField] private GameObject secondLevelPrefab;
+        [SerializeField] private QuestLogView questLogPrefab;
 
         private PlayerModel _playerModel;
         private PlayerController _playerController;
         private InputAdapter _inputAdapter;
         private InteractionSystem _interactionSystem;
         private InteractionItemCollection _interactibles;
+        private QuestsModel _questsModel;
+        private QuestLog _questLog;
 
         private void Awake()
         {
@@ -29,7 +33,8 @@ namespace Game
 
         private void Install()
         {
-            _playerModel = new PlayerModel(new CommonQuestModel(), new DayModel());
+            _questsModel = new QuestsModel();
+            _playerModel = new PlayerModel(new DayModel());
             _inputAdapter = new InputAdapter(playerInput);
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
@@ -58,6 +63,17 @@ namespace Game
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
             var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
+
+            QuestInit();
+        }
+
+        private void QuestInit()
+        {
+            var questsView = Instantiate(questLogPrefab, transform);
+            _questLog = new QuestLog(questsView);
+            
+            var questList = _questsModel.GetQuests();
+            _questLog.AddQuests(questList);
         }
 
         private void HandlePlayerInteraction(ItemCategory item)

@@ -160,6 +160,8 @@ MonoBehaviour:
     type: 3}
   secondLevelPrefab: {fileID: 1938920538639202873, guid: 51b97aae8d537284ea98f26f06470e18,
     type: 3}
+  questLogPrefab: {fileID: 4057901227796837038, guid: a3ead9f2289c6ee44b093d0b9f3db114,
+    type: 3}
 --- !u!4 &23532009
 Transform:
   m_ObjectHideFlags: 0
