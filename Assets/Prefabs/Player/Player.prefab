@@ -429,7 +429,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &8518546340016816487
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -471,6 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 223565502588791450}
   animatorOffset: 1
+  rightHand: {fileID: 79180780493180514}
   moveSpeed: 25
   moveForwardButton: {fileID: 2322026210460220485}
   groundDrag: 10
@@ -499,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 6036387662141092913, guid: 29e8869e95f519c44a64588421125947,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6036387662141092913, guid: 29e8869e95f519c44a64588421125947,
         type: 3}
@@ -551,6 +552,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e8869e95f519c44a64588421125947, type: 3}
+--- !u!4 &79180780493180514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 515292102792710835, guid: 29e8869e95f519c44a64588421125947,
+    type: 3}
+  m_PrefabInstance: {fileID: 450326908145730769}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &223565502588791450 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 370880992652930635, guid: 29e8869e95f519c44a64588421125947,

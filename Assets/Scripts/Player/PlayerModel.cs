@@ -36,10 +36,15 @@ namespace Game.Models
         }
         
          
-        public void CheckGrounded(Transform position, CapsuleCollider _capsuleCollider, LayerMask whatIsGround)
+        public void CheckGrounded(Transform position, LayerMask whatIsGround)
         {
-            Grounded = Physics.Raycast(position.position, Vector3.down, _capsuleCollider.height * 0.5f + 0.2f,
+            var ray1 = Physics.Raycast(position.position + Vector3.forward* 0.2f+ Vector3.up * 0.2f, Vector3.down,0.4f,
                 whatIsGround);
+            var ray2 = Physics.Raycast(position.position + Vector3.right* 0.2f+ Vector3.up* 0.2f, Vector3.down,0.4f,
+                whatIsGround);
+            var ray3 = Physics.Raycast(position.position + Vector3.up * 0.2f, Vector3.down,  0.4f,
+                whatIsGround);
+            Grounded = ray1 || ray2 || ray3;
         }
         
         

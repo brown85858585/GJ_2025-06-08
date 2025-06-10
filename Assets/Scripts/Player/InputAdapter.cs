@@ -11,6 +11,7 @@ namespace Player
         public Vector3 Look { get; private set; }
         public bool IsAccelerating => _accelerateAction.IsPressed();
         public event Action<bool> OnInteract;
+        public event Action OnPutItemDown;
         public event Action<bool> OnTest;
         
         private readonly InputAction _accelerateAction;
@@ -18,6 +19,7 @@ namespace Player
         private readonly InputAction _lookAction;
         private readonly InputAction _testAction;
         private readonly InputAction _interactAction;
+        private readonly InputAction _crouchAction;
 
         public InputAdapter(PlayerInput playerInput)
         {
@@ -28,12 +30,15 @@ namespace Player
             _lookAction     = playerInput.actions.FindAction("Look",     true);
             _testAction     = playerInput.actions.FindAction("Test",     true);
             _interactAction = playerInput.actions.FindAction("Interact", true);
+            _crouchAction = playerInput.actions.FindAction("Crouch", true);
 
             _accelerateAction.Enable();
             _moveAction.Enable();
             _lookAction.Enable();
+            
             _testAction.Enable();
             _interactAction.Enable();
+            _crouchAction.Enable();
 
             _moveAction.performed += OnMoveInput;
             _moveAction.canceled  += OnMoveInput;
@@ -42,6 +47,12 @@ namespace Player
 
             _interactAction.started += OnInteractInput;
             _testAction.started += OnTestInput;
+            _crouchAction.started += OnPutItemDownInput;
+        }
+
+        private void OnPutItemDownInput(InputAction.CallbackContext obj)
+        {
+            OnPutItemDown?.Invoke();
         }
 
         private void OnInteractInput(InputAction.CallbackContext obj)

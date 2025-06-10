@@ -31,8 +31,8 @@ namespace Player
             _movement = new PlayerMovement(_input, model, camTransform);
             _currentMovement = _movement;
             
-            _input.OnTest += PutTheItemDown;
-            // _input.OnTest += Testing;
+            _input.OnPutItemDown += PutTheItemDown;
+            _input.OnTest += Testing;
         }
 
         public void InitView(PlayerView playerView)
@@ -62,7 +62,7 @@ namespace Player
 
         public void FixedUpdateMove()
         {
-            Model.CheckGrounded(_view.transform, _view.CapsuleCollider,  _view.WhatIsGround);
+            Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             var move = Movement.Move(_view.MoveSpeed, _view.transform);
@@ -111,7 +111,7 @@ namespace Player
             _view.StartDanceAnimation();
         }
 
-        private void PutTheItemDown(bool b)
+        private void PutTheItemDown()
         {
             _model.ItemInHand = ItemCategory.None;
             _view.PutTheItemDown();
