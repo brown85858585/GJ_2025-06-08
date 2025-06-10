@@ -1,3 +1,4 @@
+using System;
 using CameraField;
 using Cinemachine;
 using Game.Interactions;
@@ -19,6 +20,8 @@ namespace Game
         private PlayerController _playerController;
         private InputAdapter _inputAdapter;
         private InteractionSystem _interactionSystem;
+        private InteractionItemCollection _interactibles;
+
         private void Awake()
         {
             Install();
@@ -50,9 +53,14 @@ namespace Game
             
             var firstLevel =Instantiate(firstLevelPrefab, transform);
             
-            var interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem = new InteractionSystem(interactibles, _inputAdapter);
-            _interactionSystem.OnInteraction += _playerController.HandleInteraction;
+            _interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
+            _interactionSystem = new InteractionSystem(_interactibles, _inputAdapter);
+            _interactionSystem.OnInteraction += HandlePlayerInteraction;
+        }
+
+        private void HandlePlayerInteraction(ItemCategory item)
+        {
+            _playerController.HandleInteraction(item, _interactibles.CurrentInteractable.transform);
         }
 
         private void PlayerInit()

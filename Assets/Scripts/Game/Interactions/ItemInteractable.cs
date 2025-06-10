@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -12,51 +14,68 @@ namespace Game.Interactions
     {
         [SerializeField] private GameObject popup;
         [SerializeField] private LayerMask targetMask;
-        [SerializeField] private string id;  
+        [SerializeField] private string id;
         [SerializeField] private ItemCategory category;
-        public string  Guid => id;        
-        public ItemCategory  Category  => category;
         
+        public bool CheckStayCollider{ get; set; }
+
+        public string Guid => id;
+        public ItemCategory Category => category;
+
         public event Action<ItemInteractable> OnEnter;
         public event Action<ItemInteractable> OnExit;
-        
-        
+
         private void Awake()
         {
             targetMask = LayerMask.GetMask("Player");
         }
-        
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (!CheckStayCollider) return;
+            
+            if (CheckLayerMask(other.gameObject, targetMask))
+            {
+                OnEnter?.Invoke(this);
+            
+                TurnPopup();
+            }
+
+            CheckStayCollider = false;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (CheckLayerMask(other.gameObject, targetMask))
             {
                 OnEnter?.Invoke(this);
-                
-                if (popup != null)
-                {
-                    popup.SetActive(true);
-                }
+
+                TurnPopup();
             }
         }
+
         private void OnTriggerExit(Collider other)
         {
             if (CheckLayerMask(other.gameObject, targetMask))
             {
                 OnExit?.Invoke(this);
-                
-                if (popup != null)
-                {
-                    popup.SetActive(false);
-                }
+
+                TurnPopup(false);
             }
         }
 
         public void Interact()
-        { 
+        {
             Debug.Log("Interact with item: " + Category + " with ID: " + Guid);
+
+            TurnPopup(false);
+        }
+
+        public void TurnPopup(bool turn = true)
+        {
             if (popup != null)
             {
-                popup.SetActive(false);
+                popup.SetActive(turn);
             }
         }
 
@@ -77,7 +96,5 @@ namespace Game.Interactions
                 id = GUID.Generate().ToString();
         }
 #endif
-        
     }
-
 }

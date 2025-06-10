@@ -26,7 +26,10 @@ namespace Player
         private float turnSmooth = 5f;
         [SerializeField]
         private LayerMask whatIsGround;
-        
+
+        private Transform _saveCurrentObj;
+        private Transform _saveLastParentObj;
+
         public float MoveSpeed => moveSpeed;
         public float GroundDrag => groundDrag;
         public float TurnSmooth => turnSmooth;
@@ -75,6 +78,20 @@ namespace Player
         public void StartDanceAnimation()
         {
             animator.SetBool(IsDancing, true);
+        }
+
+        public void TakeObject(Transform obj)
+        {
+            _saveCurrentObj = obj;
+            _saveLastParentObj = obj.parent;
+            obj.SetParent(this.transform);
+        }
+
+        public void PutTheItemDown()
+        {
+            _saveCurrentObj.SetParent(_saveLastParentObj);
+            _saveLastParentObj = null;
+            _saveCurrentObj = null;
         }
     }
 }

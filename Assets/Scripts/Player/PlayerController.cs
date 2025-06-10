@@ -31,9 +31,10 @@ namespace Player
             _movement = new PlayerMovement(_input, model, camTransform);
             _currentMovement = _movement;
             
-            _input.OnTest += Testing;
+            _input.OnTest += PutTheItemDown;
+            // _input.OnTest += Testing;
         }
-        
+
         public void InitView(PlayerView playerView)
         {
             _view = playerView;
@@ -100,10 +101,20 @@ namespace Player
             }
         }
 
-        public void HandleInteraction(ItemCategory obj)
+        public void HandleInteraction(ItemCategory item, Transform obj)
         {
-            Debug.Log(obj);
+            Debug.Log(item);
+            if (item != ItemCategory.WateringCan) return;
+            
+            _model.ItemCategory = ItemCategory.WateringCan;
+            _view.TakeObject(obj);
             _view.StartDanceAnimation();
+        }
+
+        private void PutTheItemDown(bool b)
+        {
+            _model.ItemCategory = ItemCategory.None;
+            _view.PutTheItemDown();
         }
     }
 

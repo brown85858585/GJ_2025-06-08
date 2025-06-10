@@ -39,11 +39,17 @@ namespace Game.Interactions
             if (_interactionItemCollection.CurrentInteractable == item)
             {
                 _interactionItemCollection.CurrentInteractable = null;
+
+                foreach (var itemInCollection in _interactionItemCollection.ObjectsToInteract)
+                {
+                    itemInCollection.CheckStayCollider = true;
+                }
             }
         }
 
         private void SetItemInteractable(ItemInteractable item)
         {
+            _interactionItemCollection.CurrentInteractable?.TurnPopup(false);
             _interactionItemCollection.CurrentInteractable = item;
         }
         
@@ -53,6 +59,7 @@ namespace Game.Interactions
             {
                 _interactionItemCollection.CurrentInteractable.Interact();
                 OnInteraction?.Invoke(_interactionItemCollection.CurrentInteractable.Category);
+                _interactionItemCollection.CurrentInteractable = null;
             }
         }
     }
