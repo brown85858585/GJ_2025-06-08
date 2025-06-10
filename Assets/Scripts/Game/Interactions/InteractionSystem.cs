@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Interactions
 {
-    public class InteractionSystem : IDisposable
+    public class InteractionSystem : IInteractionSystem, IDisposable
     {
         public event Action<ItemCategory> OnInteraction;
         

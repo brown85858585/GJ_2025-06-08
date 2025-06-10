@@ -6,6 +6,7 @@ namespace Game
         Bed,
         Door,
         Flower,
-        Kitchen
+        Kitchen,
+        WateringCan,
     }
 }
