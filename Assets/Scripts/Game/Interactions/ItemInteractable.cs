@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utilities;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -76,6 +78,15 @@ namespace Game.Interactions
             if (popup != null)
             {
                 popup.SetActive(turn);
+
+                if (turn)
+                {
+                    popup.gameObject.GetComponent<UIElementTweener>()?.Show();
+                }
+                else
+                {
+                    popup.gameObject.GetComponent<UIElementTweener>()?.Hide();
+                }
             }
         }
 

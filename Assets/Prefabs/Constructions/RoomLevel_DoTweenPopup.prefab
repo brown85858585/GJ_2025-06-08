@@ -7480,7 +7480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610bb11cd6664c40827deaa330f5b1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popup: {fileID: 0}
+  popup: {fileID: 2511349053073935439}
   targetMask:
     serializedVersion: 2
     m_Bits: 0
@@ -10427,7 +10427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610bb11cd6664c40827deaa330f5b1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popup: {fileID: 0}
+  popup: {fileID: 4830129894918911681}
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -11937,17 +11937,17 @@ PrefabInstance:
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
@@ -12012,7 +12012,7 @@ PrefabInstance:
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_Name
-      value: DoTweenPopupE
+      value: PopupE
       objectReference: {fileID: 0}
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
@@ -12027,6 +12027,12 @@ PrefabInstance:
 --- !u!224 &424493283980971331 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
+    type: 3}
+  m_PrefabInstance: {fileID: 541639688687109344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4830129894918911681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
     type: 3}
   m_PrefabInstance: {fileID: 541639688687109344}
   m_PrefabAsset: {fileID: 0}
@@ -12141,12 +12147,7 @@ PrefabInstance:
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_Name
-      value: DoTweenPopupE
-      objectReference: {fileID: 0}
-    - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: PopupE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12216,17 +12217,17 @@ PrefabInstance:
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
@@ -12291,7 +12292,7 @@ PrefabInstance:
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_Name
-      value: DoTweenPopupE
+      value: PopupE
       objectReference: {fileID: 0}
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
@@ -12303,6 +12304,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa09315a9fe24774e8ee97d72ec78928, type: 3}
+--- !u!1 &2511349053073935439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
+    type: 3}
+  m_PrefabInstance: {fileID: 7374153223578091118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7220978021860587469 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
@@ -12360,17 +12367,17 @@ PrefabInstance:
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6129032
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.612903
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.6129034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
@@ -12435,7 +12442,7 @@ PrefabInstance:
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
       propertyPath: m_Name
-      value: DoTweenPopupE
+      value: PopupE
       objectReference: {fileID: 0}
     - target: {fileID: 4939423913341891105, guid: aa09315a9fe24774e8ee97d72ec78928,
         type: 3}
