@@ -70,10 +70,17 @@ namespace Game
         private void QuestInit()
         {
             var questsView = Instantiate(questLogPrefab, transform);
-            _questLog = new QuestLog(questsView);
+            _questLog = new QuestLog(questsView, _inputAdapter);
             
             var questList = _questsModel.GetQuests();
             _questLog.AddQuests(questList);
+            
+            _interactionSystem.OnInteraction += HandleQuestInteraction;
+        }
+
+        private void HandleQuestInteraction(ItemCategory obj)
+        {
+            _questLog.CompleteQuest(obj);
         }
 
         private void HandlePlayerInteraction(ItemCategory item)
