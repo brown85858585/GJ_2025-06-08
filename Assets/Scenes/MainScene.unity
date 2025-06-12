@@ -158,7 +158,7 @@ MonoBehaviour:
     type: 3}
   firstLevelPrefab: {fileID: 629543909847731020, guid: 8c9d7abd2424f7f4fb1eb0d9ca50fa2e,
     type: 3}
-  secondLevelPrefab: {fileID: 1938920538639202873, guid: 51b97aae8d537284ea98f26f06470e18,
+  secondLevelPrefab: {fileID: 629543909847731020, guid: 114b3bb5ba191c746a6b9af952056ac7,
     type: 3}
   questLogPrefab: {fileID: 4057901227796837038, guid: a3ead9f2289c6ee44b093d0b9f3db114,
     type: 3}

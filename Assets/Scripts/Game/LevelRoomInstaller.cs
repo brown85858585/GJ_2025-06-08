@@ -22,9 +22,10 @@ namespace Game
         private PlayerController _playerController;
         private InputAdapter _inputAdapter;
         private InteractionSystem _interactionSystem;
-        private InteractionItemCollection _interactibles;
         private QuestsModel _questsModel;
         private QuestLog _questLog;
+        private InteractionItemCollection _interactibles;
+        private GameObject _firstLevel;
 
         private void Awake()
         {
@@ -38,6 +39,8 @@ namespace Game
             _inputAdapter = new InputAdapter(playerInput);
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
+            _interactionSystem = new InteractionSystem(_inputAdapter);
+            
             _playerController.OnDied += SecondLevel;
         }
 
@@ -48,6 +51,10 @@ namespace Game
                
             var secondInstaller = go.GetComponent<LevelSecondInstaller>();
             secondInstaller.Initialize(_playerController, _playerModel);
+            
+            Destroy(_firstLevel);
+            _interactibles = go.GetComponentInChildren<InteractionItemCollection>();
+            _interactionSystem.AddNewInteractionCollection(_interactibles);
         }
 
         void Start()
@@ -56,10 +63,11 @@ namespace Game
 
             CameraInit();
             
-            var firstLevel =Instantiate(firstLevelPrefab, transform);
+            _firstLevel =Instantiate(firstLevelPrefab, transform);
             
-            _interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem = new InteractionSystem(_interactibles, _inputAdapter);
+            _interactibles = _firstLevel.GetComponentInChildren<InteractionItemCollection>();
+            _interactionSystem.AddNewInteractionCollection(_interactibles);
+            
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
             var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
@@ -85,7 +93,7 @@ namespace Game
 
         private void HandlePlayerInteraction(ItemCategory item)
         {
-            _playerController.HandleInteraction(item, _interactibles.CurrentInteractable.transform);
+            _playerController.HandleInteraction(item, _interactionSystem.CurrentInteractable.transform);
         }
 
         private void PlayerInit()
