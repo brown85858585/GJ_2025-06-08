@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,23 +10,23 @@ public class MiniGameController : MonoBehaviour
 
     [Header("UI Elements")]
     private RectTransform indicator;
-    private RectTransform greenZone;
     private RectTransform trackBackground;
     private Button actionButton;
     private Button exitButton;
     private Text instructionText;
 
     [Header("Game Settings")]
-    public float indicatorSpeed = 300f;
-    public float trackHeight = 400f;
+    public float indicatorSpeed = 200f;
+    public float trackHeight = 300f; // РЈРјРµРЅСЊС€РёР»Рё РґР»СЏ РїРѕРјРµС‰РµРЅРёСЏ РЅР° СЌРєСЂР°РЅ
     public float trackWidth = 60f;
-    public float greenZoneHeight = 80f;
+    public float zoneHeight = 75f; // Р’С‹СЃРѕС‚Р° РєР°Р¶РґРѕР№ Р·РѕРЅС‹
     public int maxAttempts = 3;
 
     [Header("Colors")]
-    public Color redZoneColor = Color.red;
-    public Color greenZoneColor = Color.green;
+    public Color darkRedColor = new Color(0.6f, 0f, 0f); // РўРµРјРЅРѕ-РєСЂР°СЃРЅС‹Р№
     public Color yellowZoneColor = Color.yellow;
+    public Color greenZoneColor = Color.green;
+    public Color brightRedColor = Color.red; // РЇСЂРєРѕ-РєСЂР°СЃРЅС‹Р№
     public Color indicatorColor = Color.black;
 
     private bool isGameActive = false;
@@ -35,19 +35,38 @@ public class MiniGameController : MonoBehaviour
     private float indicatorPosition = 0f;
     private float trackTop, trackBottom;
 
-    // События
+    // Р—РѕРЅС‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё
+    private RectTransform darkRedZone;
+    private RectTransform yellowZone;
+    private RectTransform greenZone;
+    private RectTransform brightRedZone;
+
+    // РЎРѕР±С‹С‚РёСЏ
     public System.Action OnMiniGameComplete;
     public System.Action<bool> OnWateringAttempt;
 
     void Start()
     {
         FindSceneComponents();
+
+        // РЈР±РµРґРёС‚СЊСЃСЏ С‡С‚Рѕ РїР°РЅРµР»СЊ РІС‹РєР»СЋС‡РµРЅР° РїСЂРё СЃС‚Р°СЂС‚Рµ
         if (miniGamePanel != null)
         {
             miniGamePanel.SetActive(false);
-            Debug.Log("MiniGamePanel выключена при инициализации");
+            Debug.Log("MiniGamePanel РІС‹РєР»СЋС‡РµРЅР° РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё");
         }
+
         CreateMiniGameUI();
+    }
+
+    void Update()
+    {
+        // РћР±СЂР°Р±РѕС‚РєР° РєР»Р°РІРёС€Рё E РІРѕ РІСЂРµРјСЏ Р°РєС‚РёРІРЅРѕР№ РёРіСЂС‹
+        if (isGameActive && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E РЅР°Р¶Р°С‚Р° РІ MiniGameController!");
+            OnActionButtonClick();
+        }
     }
 
     private void FindSceneComponents()
@@ -55,51 +74,52 @@ public class MiniGameController : MonoBehaviour
         mainCanvas = FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {
-            Debug.LogError("Canvas не найден в сцене!");
+            Debug.LogError("Canvas РЅРµ РЅР°Р№РґРµРЅ РІ СЃС†РµРЅРµ!");
             return;
         }
 
         miniGamePanel = GameObject.Find("MiniGamePanel");
         if (miniGamePanel == null)
         {
-            Debug.LogError("MiniGamePanel не найдена в Canvas!");
+            Debug.LogError("MiniGamePanel РЅРµ РЅР°Р№РґРµРЅР° РІ Canvas!");
             return;
         }
 
-        Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
+        Debug.Log($"РљРѕРјРїРѕРЅРµРЅС‚С‹ РЅР°Р№РґРµРЅС‹: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
     }
 
     private void CreateMiniGameUI()
     {
         if (miniGamePanel == null) return;
 
+        // РЈР‘Р•Р”РРўР¬РЎРЇ С‡С‚Рѕ РїР°РЅРµР»СЊ РІС‹РєР»СЋС‡РµРЅР° РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
         miniGamePanel.SetActive(false);
 
-        // Очистить существующие элементы (если есть)
+        // РћС‡РёСЃС‚РёС‚СЊ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ СЌР»РµРјРµРЅС‚С‹ (РµСЃР»Рё РµСЃС‚СЊ)
         ClearExistingElements();
 
-        // Создать вертикальный трек
+        // РЎРѕР·РґР°С‚СЊ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ С‚СЂРµРє
         CreateVerticalTrack();
 
-        // Создать зоны (красные, зеленая, желтая)
+        // РЎРѕР·РґР°С‚СЊ Р·РѕРЅС‹ (РєСЂР°СЃРЅС‹Рµ, Р·РµР»РµРЅР°СЏ, Р¶РµР»С‚Р°СЏ)
         CreateColorZones();
 
-        // Создать индикатор
+        // РЎРѕР·РґР°С‚СЊ РёРЅРґРёРєР°С‚РѕСЂ
         CreateVerticalIndicator();
 
-        // Создать кнопки и текст
+        // РЎРѕР·РґР°С‚СЊ РєРЅРѕРїРєРё Рё С‚РµРєСЃС‚
         CreateButtons();
         CreateInstructionText();
 
-        // Вычислить границы трека
+        // Р’С‹С‡РёСЃР»РёС‚СЊ РіСЂР°РЅРёС†С‹ С‚СЂРµРєР°
         CalculateTrackBounds();
 
-        Debug.Log("Вертикальная мини-игра готова!");
+        Debug.Log("Р’РµСЂС‚РёРєР°Р»СЊРЅР°СЏ РјРёРЅРё-РёРіСЂР° РіРѕС‚РѕРІР°!");
     }
 
     private void ClearExistingElements()
     {
-        // Удалить старые элементы если они есть
+        // РЈРґР°Р»РёС‚СЊ СЃС‚Р°СЂС‹Рµ СЌР»РµРјРµРЅС‚С‹ РµСЃР»Рё РѕРЅРё РµСЃС‚СЊ
         Transform[] children = miniGamePanel.GetComponentsInChildren<Transform>();
         for (int i = children.Length - 1; i >= 0; i--)
         {
@@ -116,7 +136,7 @@ public class MiniGameController : MonoBehaviour
         trackObj.transform.SetParent(miniGamePanel.transform, false);
 
         Image trackImage = trackObj.AddComponent<Image>();
-        trackImage.color = Color.white;
+        trackImage.color = Color.clear; // в†ђ РЈР‘РР РђР•Рњ Р‘Р•Р›Р«Р™ Р¤РћРќ! Р”РµР»Р°РµРј РїСЂРѕР·СЂР°С‡РЅС‹Рј
 
         trackBackground = trackObj.GetComponent<RectTransform>();
         trackBackground.sizeDelta = new Vector2(trackWidth, trackHeight);
@@ -125,19 +145,20 @@ public class MiniGameController : MonoBehaviour
 
     private void CreateColorZones()
     {
-        float zoneHeight = trackHeight / 4f; // 4 зоны: красная, желтая, зеленая, красная
+        // 4 Р·РѕРЅС‹ СЃРІРµСЂС…Сѓ РІРЅРёР·: С‚РµРјРЅРѕ-РєСЂР°СЃРЅР°СЏ, Р¶РµР»С‚Р°СЏ, Р·РµР»РµРЅР°СЏ, СЏСЂРєРѕ-РєСЂР°СЃРЅР°СЏ
+        float startY = trackHeight / 2f - zoneHeight / 2f;
 
-        // Верхняя красная зона
-        CreateZone("RedZoneTop", redZoneColor, new Vector2(0, trackHeight / 4f), new Vector2(trackWidth, zoneHeight));
+        // РўРµРјРЅРѕ-РєСЂР°СЃРЅР°СЏ Р·РѕРЅР° (СЃРІРµСЂС…Сѓ)
+        darkRedZone = CreateZone("DarkRedZone", darkRedColor, new Vector2(0, startY), new Vector2(trackWidth, zoneHeight));
 
-        // Желтая зона
-        CreateZone("YellowZone", yellowZoneColor, new Vector2(0, 0), new Vector2(trackWidth, zoneHeight));
+        // Р–РµР»С‚Р°СЏ Р·РѕРЅР°
+        yellowZone = CreateZone("YellowZone", yellowZoneColor, new Vector2(0, startY - zoneHeight), new Vector2(trackWidth, zoneHeight));
 
-        // Зеленая зона (целевая)
-        greenZone = CreateZone("GreenZone", greenZoneColor, new Vector2(0, -trackHeight / 4f), new Vector2(trackWidth, greenZoneHeight));
+        // Р—РµР»РµРЅР°СЏ Р·РѕРЅР°
+        greenZone = CreateZone("GreenZone", greenZoneColor, new Vector2(0, startY - zoneHeight * 2), new Vector2(trackWidth, zoneHeight));
 
-        // Нижняя красная зона
-        CreateZone("RedZoneBottom", redZoneColor, new Vector2(0, -trackHeight / 2f + zoneHeight / 2f), new Vector2(trackWidth, zoneHeight));
+        // РЇСЂРєРѕ-РєСЂР°СЃРЅР°СЏ Р·РѕРЅР° (СЃРЅРёР·Сѓ)
+        brightRedZone = CreateZone("BrightRedZone", brightRedColor, new Vector2(0, startY - zoneHeight * 3), new Vector2(trackWidth, zoneHeight));
     }
 
     private RectTransform CreateZone(string name, Color color, Vector2 position, Vector2 size)
@@ -146,7 +167,7 @@ public class MiniGameController : MonoBehaviour
         zoneObj.transform.SetParent(miniGamePanel.transform, false);
 
         Image zoneImage = zoneObj.AddComponent<Image>();
-        zoneImage.color = new Color(color.r, color.g, color.b, 0.7f); // Полупрозрачность
+        zoneImage.color = new Color(color.r, color.g, color.b, 0.7f); // РџРѕР»СѓРїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ
 
         RectTransform zoneRect = zoneObj.GetComponent<RectTransform>();
         zoneRect.sizeDelta = size;
@@ -164,10 +185,10 @@ public class MiniGameController : MonoBehaviour
         indicatorImage.color = indicatorColor;
 
         indicator = indicatorObj.GetComponent<RectTransform>();
-        indicator.sizeDelta = new Vector2(trackWidth + 10, 15); // Немного шире трека
+        indicator.sizeDelta = new Vector2(trackWidth + 10, 15); // РќРµРјРЅРѕРіРѕ С€РёСЂРµ С‚СЂРµРєР°
         indicator.anchoredPosition = new Vector2(0, -trackHeight / 2f);
 
-        // Добавить стрелку (треугольник справа)
+        // Р”РѕР±Р°РІРёС‚СЊ СЃС‚СЂРµР»РєСѓ (С‚СЂРµСѓРіРѕР»СЊРЅРёРє СЃРїСЂР°РІР°)
         CreateArrow();
     }
 
@@ -183,17 +204,17 @@ public class MiniGameController : MonoBehaviour
         arrowRect.sizeDelta = new Vector2(20, 20);
         arrowRect.anchoredPosition = new Vector2(trackWidth / 2f + 15, 0);
 
-        // Можно добавить спрайт треугольника или использовать простой квадрат
+        // РњРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ СЃРїСЂР°Р№С‚ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РёР»Рё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїСЂРѕСЃС‚РѕР№ РєРІР°РґСЂР°С‚
     }
 
     private void CreateButtons()
     {
-        // Кнопка действия (полить)
-        actionButton = CreateButton("ActionButton", "Полить", new Vector2(-100, -trackHeight / 2f - 50), Color.blue);
+        // РљРЅРѕРїРєР° РґРµР№СЃС‚РІРёСЏ (РЅР°Р¶РјРё E)
+        actionButton = CreateButton("ActionButton", "РќР°Р¶РјРё E", new Vector2(-100, -trackHeight / 2f - 50), new Color(0.2f, 0.6f, 1f));
         actionButton.onClick.AddListener(OnActionButtonClick);
 
-        // Кнопка выхода
-        exitButton = CreateButton("ExitButton", "Выход", new Vector2(100, -trackHeight / 2f - 50), Color.gray);
+        // РљРЅРѕРїРєР° РІС‹С…РѕРґР°
+        exitButton = CreateButton("ExitButton", "Р’С‹С…РѕРґ", new Vector2(100, -trackHeight / 2f - 50), Color.gray);
         exitButton.onClick.AddListener(OnExitButtonClick);
     }
 
@@ -211,7 +232,7 @@ public class MiniGameController : MonoBehaviour
         buttonRect.sizeDelta = new Vector2(80, 40);
         buttonRect.anchoredPosition = position;
 
-        // Текст на кнопке
+        // РўРµРєСЃС‚ РЅР° РєРЅРѕРїРєРµ
         GameObject textObj = new GameObject("Text");
         textObj.transform.SetParent(buttonObj.transform, false);
 
@@ -237,15 +258,15 @@ public class MiniGameController : MonoBehaviour
         textObj.transform.SetParent(miniGamePanel.transform, false);
 
         instructionText = textObj.AddComponent<Text>();
-        instructionText.text = "Индикатор движется снизу вверх до конца. Вниз не опускается.";
+        instructionText.text = "РќР°Р¶РјРё E РІ РЅСѓР¶РЅС‹Р№ РјРѕРјРµРЅС‚!";
         instructionText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         instructionText.alignment = TextAnchor.MiddleCenter;
         instructionText.color = Color.black;
-        instructionText.fontSize = 14;
+        instructionText.fontSize = 16;
 
         RectTransform textRect = textObj.GetComponent<RectTransform>();
-        textRect.sizeDelta = new Vector2(300, 60);
-        textRect.anchoredPosition = new Vector2(trackWidth + 150, 0);
+        textRect.sizeDelta = new Vector2(250, 40);
+        textRect.anchoredPosition = new Vector2(trackWidth + 130, trackHeight / 2f);
     }
 
     private void CalculateTrackBounds()
@@ -254,19 +275,22 @@ public class MiniGameController : MonoBehaviour
         trackTop = trackHeight / 2f;
     }
 
-    // ПУБЛИЧНЫЕ МЕТОДЫ
+    // РџРЈР‘Р›РР§РќР«Р• РњР•РўРћР”Р«
 
     public void StartMiniGame()
     {
         if (miniGamePanel == null)
         {
-            Debug.LogError("Мини-игра не инициализирована!");
+            Debug.LogError("РњРёРЅРё-РёРіСЂР° РЅРµ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅР°!");
             return;
         }
 
-        Debug.Log("Запуск вертикальной мини-игры");
+        Debug.Log("рџЋ® Р—Р°РїСѓСЃРє РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РјРёРЅРё-РёРіСЂС‹");
 
+        // Р’РљР›Р®Р§РРўР¬ РїР°РЅРµР»СЊ РїСЂРё Р·Р°РїСѓСЃРєРµ РјРёРЅРё-РёРіСЂС‹
         miniGamePanel.SetActive(true);
+        Debug.Log("MiniGamePanel РІРєР»СЋС‡РµРЅР°!");
+
         currentAttempts = 0;
         isGameActive = true;
 
@@ -276,19 +300,21 @@ public class MiniGameController : MonoBehaviour
 
     public void EndMiniGame()
     {
-        Debug.Log("Завершение мини-игры");
+        Debug.Log("рџЋ® Р—Р°РІРµСЂС€РµРЅРёРµ РјРёРЅРё-РёРіСЂС‹");
 
         isGameActive = false;
 
+        // Р’Р«РљР›Р®Р§РРўР¬ РїР°РЅРµР»СЊ РїСЂРё Р·Р°РІРµСЂС€РµРЅРёРё
         if (miniGamePanel != null)
         {
             miniGamePanel.SetActive(false);
+            Debug.Log("MiniGamePanel РІС‹РєР»СЋС‡РµРЅР°!");
         }
 
         OnMiniGameComplete?.Invoke();
     }
 
-    // ЛОГИКА ИГРЫ
+    // Р›РћР“РРљРђ РР“Р Р«
 
     private void ResetIndicator()
     {
@@ -297,6 +323,7 @@ public class MiniGameController : MonoBehaviour
             indicatorPosition = trackBottom;
             indicator.anchoredPosition = new Vector2(0, indicatorPosition);
             isMovingUp = true;
+            isGameActive = true; // Р’РєР»СЋС‡РёС‚СЊ РґРІРёР¶РµРЅРёРµ
         }
     }
 
@@ -306,22 +333,22 @@ public class MiniGameController : MonoBehaviour
         {
             if (indicator != null)
             {
-                // Движение вверх
+                // Р”РІРёР¶РµРЅРёРµ РІРІРµСЂС…
                 indicatorPosition += indicatorSpeed * Time.deltaTime;
 
-                // Проверка достижения верха
+                // РџСЂРѕРІРµСЂРєР° РґРѕСЃС‚РёР¶РµРЅРёСЏ РІРµСЂС…Р°
                 if (indicatorPosition >= trackTop)
                 {
                     indicatorPosition = trackTop;
                     isMovingUp = false;
 
-                    // Автоматически завершить игру если достиг верха
+                    // РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё Р·Р°РІРµСЂС€РёС‚СЊ РёРіСЂСѓ РµСЃР»Рё РґРѕСЃС‚РёРі РІРµСЂС…Р°
                     yield return new WaitForSeconds(0.5f);
-                    Debug.Log("Индикатор достиг верха!");
-                    OnActionButtonClick(); // Автоматический "промах"
+                    Debug.Log("РРЅРґРёРєР°С‚РѕСЂ РґРѕСЃС‚РёРі РІРµСЂС…Р°!");
+                    OnActionButtonClick(); // РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ "РїСЂРѕРјР°С…"
                 }
 
-                // Обновить позицию
+                // РћР±РЅРѕРІРёС‚СЊ РїРѕР·РёС†РёСЋ
                 indicator.anchoredPosition = new Vector2(0, indicatorPosition);
             }
 
@@ -331,54 +358,127 @@ public class MiniGameController : MonoBehaviour
 
     private void OnActionButtonClick()
     {
-        if (!isGameActive) return;
-
-        Debug.Log("Попытка полива!");
-
-        bool isInGreenZone = CheckIfInGreenZone();
-
-        if (isInGreenZone)
+        if (!isGameActive)
         {
-            Debug.Log("Успех! Попал в зеленую зону!");
+            Debug.Log("РРіСЂР° РЅРµР°РєС‚РёРІРЅР°, РёРіРЅРѕСЂРёСЂСѓРµРј РЅР°Р¶Р°С‚РёРµ E");
+            return;
+        }
+
+        Debug.Log("вњ… E РѕР±СЂР°Р±РѕС‚Р°РЅР°! РћСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёРЅРґРёРєР°С‚РѕСЂ...");
+
+        // РћРЎРўРђРќРћР’РРўР¬ РґРІРёР¶РµРЅРёРµ РёРЅРґРёРєР°С‚РѕСЂР°
+        isGameActive = false;
+        isMovingUp = false;
+
+        // РћРїСЂРµРґРµР»РёС‚СЊ РІ РєР°РєРѕР№ Р·РѕРЅРµ РЅР°С…РѕРґРёС‚СЃСЏ РёРЅРґРёРєР°С‚РѕСЂ
+        string result = CheckIndicatorZone();
+
+        if (result == "success")
+        {
+            Debug.Log("вњ… Р¦РІРµС‚РѕРє РїРѕР»РёС‚!");
             OnWateringAttempt?.Invoke(true);
-            EndMiniGame();
+
+            // РџРѕРєР°Р·Р°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚ РЅР° 1 СЃРµРєСѓРЅРґСѓ, Р·Р°С‚РµРј Р·Р°РєСЂС‹С‚СЊ
+            StartCoroutine(ShowResultAndEnd(1f));
+        }
+        else if (result == "warning")
+        {
+            Debug.Log("вљ пёЏ Р¦РІРµС‚РѕРє РїРѕР»РёС‚, РЅРѕ РЅРµ РёРґРµР°Р»СЊРЅРѕ!");
+            OnWateringAttempt?.Invoke(true);
+
+            // РџРѕРєР°Р·Р°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚ РЅР° 1 СЃРµРєСѓРЅРґСѓ, Р·Р°С‚РµРј Р·Р°РєСЂС‹С‚СЊ
+            StartCoroutine(ShowResultAndEnd(1f));
         }
         else
         {
             currentAttempts++;
-            Debug.Log($"Промах! Попытка {currentAttempts}/{maxAttempts}");
+            Debug.Log($"вќЊ РЎРµР№С‡Р°СЃ Р·Р°РІСЏРЅРµС‚! РџРѕРїС‹С‚РєР° {currentAttempts}/{maxAttempts}");
             OnWateringAttempt?.Invoke(false);
 
             if (currentAttempts >= maxAttempts)
             {
-                Debug.Log("Попытки закончились!");
-                EndMiniGame();
+                Debug.Log("РџРѕРїС‹С‚РєРё Р·Р°РєРѕРЅС‡РёР»РёСЃСЊ!");
+                StartCoroutine(ShowResultAndEnd(1.5f));
             }
             else
             {
-                ResetIndicator();
-                StartCoroutine(MoveIndicatorVertically());
+                // РџРѕРєР°Р·Р°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚ РЅР° 1 СЃРµРєСѓРЅРґСѓ, Р·Р°С‚РµРј РїРµСЂРµР·Р°РїСѓСЃС‚РёС‚СЊ
+                StartCoroutine(ShowResultAndRestart(1f));
             }
+        }
+    }
+
+    private IEnumerator ShowResultAndEnd(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        EndMiniGame();
+    }
+
+    private IEnumerator ShowResultAndRestart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // РЎР±СЂРѕСЃРёС‚СЊ С‚РµРєСЃС‚ РёРЅСЃС‚СЂСѓРєС†РёРё
+        UpdateInstructionText("РќР°Р¶РјРё E РІ РЅСѓР¶РЅС‹Р№ РјРѕРјРµРЅС‚!");
+
+        // РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚СЊ РґРІРёР¶РµРЅРёРµ
+        ResetIndicator();
+        StartCoroutine(MoveIndicatorVertically());
+    }
+
+    private string CheckIndicatorZone()
+    {
+        if (indicator == null) return "fail";
+
+        float indicatorY = indicator.anchoredPosition.y;
+
+        // РџСЂРѕРІРµСЂРёС‚СЊ Р·РµР»РµРЅСѓСЋ Р·РѕРЅСѓ (Р»СѓС‡С€РёР№ СЂРµР·СѓР»СЊС‚Р°С‚)
+        if (IsInZone(indicatorY, greenZone))
+        {
+            UpdateInstructionText("рџЊё Р¦РІРµС‚РѕРє РїРѕР»РёС‚!");
+            return "success";
+        }
+
+        // РџСЂРѕРІРµСЂРёС‚СЊ Р¶РµР»С‚СѓСЋ Р·РѕРЅСѓ (С…РѕСЂРѕС€РёР№ СЂРµР·СѓР»СЊС‚Р°С‚)
+        if (IsInZone(indicatorY, yellowZone))
+        {
+            UpdateInstructionText("рџЊј Р¦РІРµС‚РѕРє РїРѕР»РёС‚!");
+            return "warning";
+        }
+
+        // РџСЂРѕРІРµСЂРёС‚СЊ РєСЂР°СЃРЅС‹Рµ Р·РѕРЅС‹ (РїР»РѕС…РѕР№ СЂРµР·СѓР»СЊС‚Р°С‚)
+        if (IsInZone(indicatorY, darkRedZone) || IsInZone(indicatorY, brightRedZone))
+        {
+            UpdateInstructionText("рџ’Ђ РЎРµР№С‡Р°СЃ Р·Р°РІСЏРЅРµС‚!");
+            return "fail";
+        }
+
+        return "fail";
+    }
+
+    private bool IsInZone(float indicatorY, RectTransform zone)
+    {
+        if (zone == null) return false;
+
+        float zoneBottom = zone.anchoredPosition.y - zoneHeight / 2f;
+        float zoneTop = zone.anchoredPosition.y + zoneHeight / 2f;
+
+        return indicatorY >= zoneBottom && indicatorY <= zoneTop;
+    }
+
+    private void UpdateInstructionText(string message)
+    {
+        if (instructionText != null)
+        {
+            instructionText.text = message;
         }
     }
 
     private void OnExitButtonClick()
     {
-        Debug.Log("Выход из мини-игры");
+        Debug.Log("Р’С‹С…РѕРґ РёР· РјРёРЅРё-РёРіСЂС‹");
         EndMiniGame();
     }
 
-    private bool CheckIfInGreenZone()
-    {
-        if (indicator == null || greenZone == null) return false;
-
-        float indicatorY = indicator.anchoredPosition.y;
-        float greenZoneBottom = greenZone.anchoredPosition.y - greenZoneHeight / 2f;
-        float greenZoneTop = greenZone.anchoredPosition.y + greenZoneHeight / 2f;
-
-        bool inZone = indicatorY >= greenZoneBottom && indicatorY <= greenZoneTop;
-        Debug.Log($"Индикатор Y: {indicatorY}, Зеленая зона: {greenZoneBottom} - {greenZoneTop}, В зоне: {inZone}");
-
-        return inZone;
-    }
+    // РЈРґР°Р»РёС‚СЊ СЃС‚Р°СЂС‹Р№ РјРµС‚РѕРґ CheckIfInGreenZone - Р·Р°РјРµРЅРµРЅ РЅР° CheckIndicatorZone
 }
