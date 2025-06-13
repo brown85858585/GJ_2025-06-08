@@ -21,6 +21,7 @@ namespace Game
         private InputAdapter _inputAdapter;
         private InteractionSystem _interactionSystem;
         private InteractionItemCollection _interactibles;
+        private GameObject miniGameCanvas;
 
         private void Awake()
         {
@@ -52,7 +53,11 @@ namespace Game
             CameraInit();
             
             var firstLevel =Instantiate(firstLevelPrefab, transform);
-            
+
+            miniGameCanvas = GameObject.Find("Canvas");
+
+
+
             _interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
             _interactionSystem = new InteractionSystem(_interactibles, _inputAdapter);
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
