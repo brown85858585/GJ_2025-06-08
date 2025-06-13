@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Quests;
 using UnityEngine;
 
 namespace Game.Models
@@ -20,14 +21,10 @@ namespace Game.Models
             get => _stamina;
             set => _stamina = Mathf.Clamp(value, 0, 100);
         }
-        
-        // Наборы внутренних состояний
-        public CommonQuestModel CommonQModel { get; private set; }
         public DayModel DayModel { get; private set; }
 
-        public PlayerModel(CommonQuestModel commonQModel, DayModel dayModel)
+        public PlayerModel(DayModel dayModel)
         {
-            CommonQModel = commonQModel;
             DayModel = dayModel;
             _stamina = 100;
             _score = 0;

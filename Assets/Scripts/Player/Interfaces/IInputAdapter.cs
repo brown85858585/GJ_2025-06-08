@@ -11,5 +11,6 @@ namespace Player.Interfaces
         event Action<bool> OnInteract;
         event Action OnPutItemDown; 
         event Action<bool> OnTest;
+        event Action<bool> OnQuests;
     }
 }

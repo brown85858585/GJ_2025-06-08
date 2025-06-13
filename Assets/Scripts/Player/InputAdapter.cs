@@ -13,6 +13,7 @@ namespace Player
         public event Action<bool> OnInteract;
         public event Action OnPutItemDown;
         public event Action<bool> OnTest;
+        public event Action<bool> OnQuests;
         
         private readonly InputAction _accelerateAction;
         private readonly InputAction _moveAction;
@@ -20,6 +21,7 @@ namespace Player
         private readonly InputAction _testAction;
         private readonly InputAction _interactAction;
         private readonly InputAction _crouchAction;
+        private readonly InputAction _questsAction;
 
         public InputAdapter(PlayerInput playerInput)
         {
@@ -31,6 +33,7 @@ namespace Player
             _testAction     = playerInput.actions.FindAction("Test",     true);
             _interactAction = playerInput.actions.FindAction("Interact", true);
             _crouchAction = playerInput.actions.FindAction("Crouch", true);
+            _questsAction = playerInput.actions.FindAction("Quests", true);
 
             _accelerateAction.Enable();
             _moveAction.Enable();
@@ -45,8 +48,13 @@ namespace Player
             _lookAction.performed += OnLook;
             _lookAction.canceled += OnLook;
 
-            _interactAction.started += OnInteractInput;
             _testAction.started += OnTestInput;
+            _testAction.canceled += OnTestInput;
+            
+            _questsAction.started += OnQuestsInput;
+            _questsAction.canceled += OnQuestsInput;
+            
+            _interactAction.started += OnInteractInput;
             _crouchAction.started += OnPutItemDownInput;
         }
 
@@ -66,6 +74,12 @@ namespace Player
         {
             var readValue = obj.ReadValue<float>();
             OnTest?.Invoke(readValue != 0);
+        }
+        
+        private void OnQuestsInput(InputAction.CallbackContext obj)
+        {
+            var readValue = obj.ReadValue<float>();
+            OnQuests?.Invoke(readValue != 0);
         }
 
 
