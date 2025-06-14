@@ -7,7 +7,6 @@ public abstract class WeatherEffects : MonoBehaviour
 
     private void OnEnable()
     {
-        // Добавляем проверку на null
         if (WeatherSystem.Instance != null)
         {
             WeatherSystem.Instance.RegisterEffects(this);
@@ -15,7 +14,6 @@ public abstract class WeatherEffects : MonoBehaviour
         else
         {
             Debug.LogWarning("WeatherSystem instance is not available. Weather effects will not be registered.");
-            // Можно добавить отложенную регистрацию
             StartCoroutine(RegisterWhenSystemIsReady());
         }
     }
@@ -34,7 +32,7 @@ public abstract class WeatherEffects : MonoBehaviour
     {
         while (WeatherSystem.Instance == null)
         {
-            yield return null; // Ждём следующий кадр
+            yield return null;
         }
         WeatherSystem.Instance.RegisterEffects(this);
     }
