@@ -43,7 +43,7 @@ namespace Player
             _movement = new PlayerMovement(_input, model, camTransform);
             _currentMovement = _movement;
 
-            _input.OnTest += PutTheItemDown;
+           // _input.OnTest += PutTheItemDown;
 
             FlowerMiniGame = new FlowerMiniGame();
             // _flowerWateringGame = GameObject.FindObjectOfType<FlowerWateringGame>();
@@ -121,7 +121,7 @@ namespace Player
             Debug.Log(item);
             if (item != ItemCategory.WateringCan) return;
 
-            _model.ItemCategory = ItemCategory.WateringCan;
+            _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
             _view.StartDanceAnimation();
         }

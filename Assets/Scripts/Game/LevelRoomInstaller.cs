@@ -25,7 +25,7 @@ namespace Game
         private QuestsModel _questsModel;
         private QuestLog _questLog;
         private InteractionItemCollection _interactibles;
-        private GameObject miniGameCanvas;
+
         private GameObject _firstLevel;
 
         private void Awake()
@@ -69,16 +69,8 @@ namespace Game
             _interactibles = _firstLevel.GetComponentInChildren<InteractionItemCollection>();
             _interactionSystem.AddNewInteractionCollection(_interactibles);
             
-            var firstLevel =Instantiate(firstLevelPrefab, transform);
-
-            miniGameCanvas = GameObject.Find("Canvas");
-
-
-
-            _interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem = new InteractionSystem(_interactibles, _inputAdapter);
+            var firstLevel = Instantiate(firstLevelPrefab, transform);
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
-
             var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
 
             QuestInit();
