@@ -124,9 +124,5 @@ namespace Player
         }
     }
 
-    public interface IPlayerController
-    {
-        public void SetPosition(Transform player, Vector3 position);
-        public void FixedUpdateMove();
-    }
+
 }
