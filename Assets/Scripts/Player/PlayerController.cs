@@ -29,8 +29,6 @@ namespace Player
         public IPlayerMovement Movement => _currentMovement;
         public PlayerModel Model => _model;
 
-        [Header("Mini Game")]
-        private FlowerMiniGame FlowerMiniGame;
 
 
 
@@ -45,7 +43,6 @@ namespace Player
 
             _input.OnTest += PutTheItemDown;
 
-            FlowerMiniGame = new FlowerMiniGame();
             // _flowerWateringGame = GameObject.FindObjectOfType<FlowerWateringGame>();
             // _input.OnTest += Testing;
         }
@@ -117,7 +114,7 @@ namespace Player
 
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
-            FlowerMiniGame.StartGame();
+ 
             Debug.Log(item);
             if (item != ItemCategory.WateringCan) return;
 
