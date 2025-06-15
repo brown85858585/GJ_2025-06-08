@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MiniGameController : MonoBehaviour
+public class FolwerMiniGameManager : MonoBehaviour
 {
     [Header("Scene References")]
     private Canvas mainCanvas;

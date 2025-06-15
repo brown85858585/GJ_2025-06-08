@@ -5,14 +5,14 @@ namespace Game.MiniGames
     public class FlowerMiniGame : IMiniGame
     {
         [Header("Mini Game")]
-        private MiniGameController _miniGameController;
+        private FolwerMiniGameManager _miniGameController;
 
         public FlowerMiniGame()
         {
             GameObject miniGameObj = GameObject.Find("MiniGameManager");
             if (miniGameObj != null)
             {
-                _miniGameController = miniGameObj.GetComponent<MiniGameController>();
+                _miniGameController = miniGameObj.GetComponent<FolwerMiniGameManager>();
             }
         }
 
@@ -24,7 +24,7 @@ namespace Game.MiniGames
                 GameObject miniGameObj = GameObject.Find("MiniGameManager");
                 if (miniGameObj != null)
                 {
-                    _miniGameController = miniGameObj.GetComponent<MiniGameController>();
+                    _miniGameController = miniGameObj.GetComponent<FolwerMiniGameManager>();
                     //_miniGameController = FindObjectOfType<MiniGameController>();
                 }
             }
