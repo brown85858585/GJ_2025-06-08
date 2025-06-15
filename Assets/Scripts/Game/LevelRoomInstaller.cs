@@ -1,8 +1,9 @@
-using System;
 using CameraField;
 using Cinemachine;
 using Game.Interactions;
+using Game.MiniGames;
 using Game.Models;
+using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,13 +16,17 @@ namespace Game
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GameObject firstLevelPrefab;
         [SerializeField] private GameObject secondLevelPrefab;
+        [SerializeField] private QuestLogView questLogPrefab;
 
         private PlayerModel _playerModel;
         private PlayerController _playerController;
         private InputAdapter _inputAdapter;
         private InteractionSystem _interactionSystem;
+        private QuestsModel _questsModel;
+        private QuestLog _questLog;
         private InteractionItemCollection _interactibles;
         private GameObject miniGameCanvas;
+        private GameObject _firstLevel;
 
         private void Awake()
         {
@@ -30,9 +35,12 @@ namespace Game
 
         private void Install()
         {
-            _playerModel = new PlayerModel(new CommonQuestModel(), new DayModel());
+            _questsModel = new QuestsModel();
+            _playerModel = new PlayerModel(new DayModel());
             _inputAdapter = new InputAdapter(playerInput);
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
+            
+            _interactionSystem = new InteractionSystem(_inputAdapter);
             
             _playerController.OnDied += SecondLevel;
         }
@@ -44,6 +52,10 @@ namespace Game
                
             var secondInstaller = go.GetComponent<LevelSecondInstaller>();
             secondInstaller.Initialize(_playerController, _playerModel);
+            
+            Destroy(_firstLevel);
+            _interactibles = go.GetComponentInChildren<InteractionItemCollection>();
+            _interactionSystem.AddNewInteractionCollection(_interactibles);
         }
 
         void Start()
@@ -51,6 +63,11 @@ namespace Game
             PlayerInit();
 
             CameraInit();
+            
+            _firstLevel =Instantiate(firstLevelPrefab, transform);
+            
+            _interactibles = _firstLevel.GetComponentInChildren<InteractionItemCollection>();
+            _interactionSystem.AddNewInteractionCollection(_interactibles);
             
             var firstLevel =Instantiate(firstLevelPrefab, transform);
 
@@ -61,11 +78,31 @@ namespace Game
             _interactibles = firstLevel.GetComponentInChildren<InteractionItemCollection>();
             _interactionSystem = new InteractionSystem(_interactibles, _inputAdapter);
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
+
+            var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
+
+            QuestInit();
+        }
+
+        private void QuestInit()
+        {
+            var questsView = Instantiate(questLogPrefab, transform);
+            _questLog = new QuestLog(questsView, _inputAdapter);
+            
+            var questList = _questsModel.GetQuests();
+            _questLog.AddQuests(questList);
+            
+            _interactionSystem.OnInteraction += HandleQuestInteraction;
+        }
+
+        private void HandleQuestInteraction(ItemCategory obj)
+        {
+            _questLog.CompleteQuest(obj);
         }
 
         private void HandlePlayerInteraction(ItemCategory item)
         {
-            _playerController.HandleInteraction(item, _interactibles.CurrentInteractable.transform);
+            _playerController.HandleInteraction(item, _interactionSystem.CurrentInteractable.transform);
         }
 
         private void PlayerInit()

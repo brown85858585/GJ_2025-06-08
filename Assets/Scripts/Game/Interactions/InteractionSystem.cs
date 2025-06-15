@@ -1,6 +1,5 @@
 using System;
 using Player.Interfaces;
-using UnityEngine;
 
 namespace Game.Interactions
 {
@@ -8,18 +7,11 @@ namespace Game.Interactions
     {
         public event Action<ItemCategory> OnInteraction;
         
-        private readonly InteractionItemCollection _interactionItemCollection;
+        private InteractionItemCollection _interactionItemCollection = new ();
         private readonly IInputAdapter _inputAdapter;
-
-        public InteractionSystem(InteractionItemCollection itemCollection, IInputAdapter inputAdapter)
+        public ItemInteractable CurrentInteractable { get; private set; }
+        public InteractionSystem(IInputAdapter inputAdapter)
         {
-            _interactionItemCollection = itemCollection;
-            foreach (var item in _interactionItemCollection.ObjectsToInteract)
-            {
-                item.OnEnter += SetItemInteractable;
-                item.OnExit += RemoveItemInteractable;
-            }
-            
             _inputAdapter = inputAdapter;
             _inputAdapter.OnInteract += HandleInteract;
         }
@@ -34,11 +26,33 @@ namespace Game.Interactions
             _inputAdapter.OnInteract -= HandleInteract;
         }
 
+        public void AddNewInteractionCollection(InteractionItemCollection itemCollection)
+        {
+            if (_interactionItemCollection.ObjectsToInteract != null)
+            {
+                foreach (var item in _interactionItemCollection.ObjectsToInteract)
+                {
+                    item.OnEnter -= SetItemInteractable;
+                    item.OnExit -= RemoveItemInteractable;
+                }
+                _interactionItemCollection.ObjectsToInteract.Clear();
+                
+            }
+            _interactionItemCollection = itemCollection;
+           
+            foreach (var item in _interactionItemCollection.ObjectsToInteract)
+            {
+                item.OnEnter += SetItemInteractable;
+                item.OnExit += RemoveItemInteractable;
+            }
+            
+        }
+        
         private void RemoveItemInteractable(ItemInteractable item)
         {
-            if (_interactionItemCollection.CurrentInteractable == item)
+            if (CurrentInteractable == item)
             {
-                _interactionItemCollection.CurrentInteractable = null;
+                CurrentInteractable = null;
 
                 foreach (var itemInCollection in _interactionItemCollection.ObjectsToInteract)
                 {
@@ -49,17 +63,17 @@ namespace Game.Interactions
 
         private void SetItemInteractable(ItemInteractable item)
         {
-            _interactionItemCollection.CurrentInteractable?.TurnPopup(false);
-            _interactionItemCollection.CurrentInteractable = item;
+            CurrentInteractable?.TurnPopup(false);
+            CurrentInteractable = item;
         }
-        
+
         private void HandleInteract(bool interact)
         {
-            if (interact && _interactionItemCollection.CurrentInteractable != null)
+            if (interact && CurrentInteractable != null)
             {
-                _interactionItemCollection.CurrentInteractable.Interact();
-                OnInteraction?.Invoke(_interactionItemCollection.CurrentInteractable.Category);
-                _interactionItemCollection.CurrentInteractable = null;
+                CurrentInteractable.Interact();
+                OnInteraction?.Invoke(CurrentInteractable.Category);
+                CurrentInteractable = null;
             }
         }
     }

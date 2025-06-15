@@ -1,3 +1,5 @@
+using Game.Quests;
+
 namespace Game.Models
 {
     public class DayModel
@@ -5,7 +7,7 @@ namespace Game.Models
 
         private int DayNum;
 
-        public CommonQuestModel CommonQModel;
+        public QuestsModel CommonQModel;
 
         public int  DifficultLevel{get { return DayNum; } }
 
@@ -15,7 +17,7 @@ namespace Game.Models
         {
 
             DayNum++;
-            CommonQModel.DiffcultLevel = DayNum;
+            CommonQModel.DifficultyLevel = DayNum;
 
         }
     }

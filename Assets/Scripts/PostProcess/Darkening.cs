@@ -26,6 +26,8 @@ namespace PostProcess
         // Fade In
         public void FadeIn()
         {
+            Debug.Log("FadeIn");
+
             if(_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
             _fadeCoroutine = StartCoroutine(AnimateExposure(_minValue));
         }
@@ -33,6 +35,8 @@ namespace PostProcess
         // Fade Out
         public void FadeOut()
         {
+            Debug.Log("FadeOut");
+
             if(_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
             _fadeCoroutine = StartCoroutine(AnimateExposure(_maxValue));
         }

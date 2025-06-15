@@ -1,23 +1,25 @@
-﻿namespace Game.Models
+﻿using Game.Quests;
+
+namespace Game.Models
 {
     public class BaseBusController
     {
         private DayModel DModel = new DayModel();
-        private CommonQuestModel QuestModel;
-        private PlayerModel playerModel;
+        private QuestsModel QuestModel;
+        private PlayerModel _playerModel;
         private MainModel Model;
 
-        BaseBusController()
+        BaseBusController(PlayerModel playerModel)
         {
-             QuestModel = new CommonQuestModel();
-             playerModel = new PlayerModel(QuestModel, DModel);
+             QuestModel = new QuestsModel();
+             _playerModel = playerModel;
              Model = new MainModel(playerModel);
         }
 
         public void SwitchDay()
         {
             DModel.SwitchDay();
-            playerModel.UpdateOptions();
+            _playerModel.UpdateOptions();
         }
     }
 

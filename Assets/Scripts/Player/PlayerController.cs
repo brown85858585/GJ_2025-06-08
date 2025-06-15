@@ -76,13 +76,13 @@ namespace Player
 
         public void FixedUpdateMove()
         {
-            Model.CheckGrounded(_view.transform, _view.CapsuleCollider, _view.WhatIsGround);
+            Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             var move = Movement.Move(_view.MoveSpeed, _view.transform);
             _view.SetWalkAnimation(move.magnitude);
             _view.Rigidbody.AddForce(move, ForceMode.Force);
-
+            
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
             _view.transform.rotation = newRotation;
         }
@@ -126,9 +126,9 @@ namespace Player
             _view.StartDanceAnimation();
         }
 
-        private void PutTheItemDown(bool b)
+        private void PutTheItemDown()
         {
-            _model.ItemCategory = ItemCategory.None;
+            _model.ItemInHand = ItemCategory.None;
             _view.PutTheItemDown();
         }
     

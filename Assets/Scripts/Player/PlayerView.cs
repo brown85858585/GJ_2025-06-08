@@ -12,6 +12,7 @@ namespace Player
         [SerializeField] private Animator animator;
         [Range(0f,3f)]
         [SerializeField] private float animatorOffset = 1f;
+        [SerializeField] private Transform rightHand;
         
         [Header("Movement Settings")]
         [SerializeField]
@@ -84,12 +85,14 @@ namespace Player
         {
             _saveCurrentObj = obj;
             _saveLastParentObj = obj.parent;
-            obj.SetParent(this.transform);
+            obj.SetParent(rightHand.transform);
+            obj.position = rightHand.position;
         }
 
         public void PutTheItemDown()
         {
             _saveCurrentObj.SetParent(_saveLastParentObj);
+            _saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
             _saveLastParentObj = null;
             _saveCurrentObj = null;
         }
