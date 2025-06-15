@@ -9,6 +9,8 @@ namespace Player.Interfaces
         Vector3 Look { get; }
         bool IsAccelerating { get; }
         event Action<bool> OnInteract;
+        event Action OnPutItemDown; 
         event Action<bool> OnTest;
+        event Action<bool> OnQuests;
     }
 }

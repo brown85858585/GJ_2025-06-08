@@ -29,9 +29,6 @@ namespace Player
         public IPlayerMovement Movement => _currentMovement;
         public PlayerModel Model => _model;
 
-
-
-
         public PlayerController(PlayerModel model, IInputAdapter input, Transform camTransform)
         {
             _model = model;
@@ -40,11 +37,9 @@ namespace Player
             _runMovement = new PlayerRunMovement(_input);
             _movement = new PlayerMovement(_input, model, camTransform);
             _currentMovement = _movement;
-
-            _input.OnTest += PutTheItemDown;
-
-            // _flowerWateringGame = GameObject.FindObjectOfType<FlowerWateringGame>();
-            // _input.OnTest += Testing;
+            
+            _input.OnPutItemDown += PutTheItemDown;
+            _input.OnTest += Testing;
         }
 
         public void InitView(PlayerView playerView)
@@ -73,13 +68,13 @@ namespace Player
 
         public void FixedUpdateMove()
         {
-            Model.CheckGrounded(_view.transform, _view.CapsuleCollider, _view.WhatIsGround);
+            Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             var move = Movement.Move(_view.MoveSpeed, _view.transform);
             _view.SetWalkAnimation(move.magnitude);
             _view.Rigidbody.AddForce(move, ForceMode.Force);
-
+            
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
             _view.transform.rotation = newRotation;
         }
@@ -114,20 +109,24 @@ namespace Player
 
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
- 
             Debug.Log(item);
             if (item != ItemCategory.WateringCan) return;
-
-            _model.ItemCategory = ItemCategory.WateringCan;
+            
+            _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
             _view.StartDanceAnimation();
         }
 
-        private void PutTheItemDown(bool b)
+        private void PutTheItemDown()
         {
-            _model.ItemCategory = ItemCategory.None;
+            _model.ItemInHand = ItemCategory.None;
             _view.PutTheItemDown();
         }
-    
-     }
+    }
+
+    public interface IPlayerController
+    {
+        public void SetPosition(Transform player, Vector3 position);
+        public void FixedUpdateMove();
+    }
 }

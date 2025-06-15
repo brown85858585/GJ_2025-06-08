@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ namespace Game.Interactions
         [SerializeField] private List<ItemInteractable> objectsToInteract;
 
         public List<ItemInteractable> ObjectsToInteract => objectsToInteract;
-        public ItemInteractable CurrentInteractable { get; set; }
 
+        private void OnDestroy()
+        {
+            objectsToInteract.Clear();
+        }
     }
-    
 }
