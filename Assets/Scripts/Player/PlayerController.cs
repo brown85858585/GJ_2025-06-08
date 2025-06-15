@@ -71,7 +71,6 @@ namespace Player
                 if (miniGameObj != null)
                 {
                     _miniGameController = miniGameObj.GetComponent<MiniGameController>();
-                    //_miniGameController = FindObjectOfType<MiniGameController>();
                 }
             }
 
