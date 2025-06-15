@@ -1,11 +1,18 @@
-using System;
+﻿using System;
 using Game;
+using Game.MiniGames;
 using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
 
 namespace Player
 {
+    public interface IPlayerController
+    {
+        public void SetPosition(Transform player, Vector3 position);
+        public void FixedUpdateMove();
+    }
+
     public class PlayerController : IPlayerController
     {
         public event Action OnDied;
@@ -50,7 +57,6 @@ namespace Player
 
         private void Update()
         {
-            //todo deltaTimeFixedUpdate
             FixedUpdateMove();
         }
 
@@ -118,9 +124,5 @@ namespace Player
         }
     }
 
-    public interface IPlayerController
-    {
-        public void SetPosition(Transform player, Vector3 position);
-        public void FixedUpdateMove();
-    }
+
 }
