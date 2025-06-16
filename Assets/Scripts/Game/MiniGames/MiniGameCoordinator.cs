@@ -27,11 +27,12 @@ namespace Game.MiniGames
             _interactionSystem = interactionSystem;
             _playerModel = playerModel;
             _playerController = playerController;
-            _interactionSystem.OnInteraction += HandleInteraction;
         }
 
         public void RegisterGames(Transform firstLevel)
         {
+            _interactionSystem.OnInteraction += HandleInteraction;
+         
             _firstLevel = firstLevel;
 
             _factories[ItemCategory.Flower] = new FlowerMiniGame();

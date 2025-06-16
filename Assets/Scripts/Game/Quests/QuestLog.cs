@@ -113,5 +113,14 @@ namespace Game.Quests
         {
             Quests.Clear();
         }
+
+        public void ResetQuests()
+        {
+            foreach (var quest in Quests)
+            {
+                quest.IsCompleted = false;
+            }
+            _view?.UpdateQuestList(Quests);
+        }
     }
 }
