@@ -7,7 +7,7 @@ namespace Game.Interactions
     {
         public event Action<ItemCategory> OnInteraction;
         
-        private InteractionItemCollection _interactionItemCollection = new ();
+        private RoomView _roomView = new ();
         private readonly IInputAdapter _inputAdapter;
         public ItemInteractable CurrentInteractable { get; private set; }
         public InteractionSystem(IInputAdapter inputAdapter)
@@ -18,7 +18,7 @@ namespace Game.Interactions
 
         public void Dispose()
         {
-            foreach (var item in _interactionItemCollection.ObjectsToInteract)
+            foreach (var item in _roomView.ObjectsToInteract)
             {
                 item.OnEnter -= SetItemInteractable;
                 item.OnExit -= RemoveItemInteractable;
@@ -26,21 +26,21 @@ namespace Game.Interactions
             _inputAdapter.OnInteract -= HandleInteract;
         }
 
-        public void AddNewInteractionCollection(InteractionItemCollection itemCollection)
+        public void AddNewInteractionCollection(RoomView itemCollection)
         {
-            if (_interactionItemCollection.ObjectsToInteract != null)
+            if (_roomView.ObjectsToInteract != null)
             {
-                foreach (var item in _interactionItemCollection.ObjectsToInteract)
+                foreach (var item in _roomView.ObjectsToInteract)
                 {
                     item.OnEnter -= SetItemInteractable;
                     item.OnExit -= RemoveItemInteractable;
                 }
-                _interactionItemCollection.ObjectsToInteract.Clear();
+                _roomView.ObjectsToInteract.Clear();
                 
             }
-            _interactionItemCollection = itemCollection;
+            _roomView = itemCollection;
            
-            foreach (var item in _interactionItemCollection.ObjectsToInteract)
+            foreach (var item in _roomView.ObjectsToInteract)
             {
                 item.OnEnter += SetItemInteractable;
                 item.OnExit += RemoveItemInteractable;
@@ -54,7 +54,7 @@ namespace Game.Interactions
             {
                 CurrentInteractable = null;
 
-                foreach (var itemInCollection in _interactionItemCollection.ObjectsToInteract)
+                foreach (var itemInCollection in _roomView.ObjectsToInteract)
                 {
                     itemInCollection.CheckStayCollider = true;
                 }

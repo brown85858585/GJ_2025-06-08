@@ -390,6 +390,7 @@ Transform:
   - {fileID: 5393559963500896288}
   - {fileID: 364752064600240802}
   - {fileID: 268845344376574462}
+  - {fileID: 5992602782945995136}
   - {fileID: 5496024571137805666}
   - {fileID: 1525516055713798513}
   - {fileID: 4831532182916757627}
@@ -408,7 +409,6 @@ Transform:
   - {fileID: 387882259297923561}
   - {fileID: 956298852595710767}
   - {fileID: 6008531810579036123}
-  - {fileID: 1187539187426256890}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1749064961907316448
@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcff20e8ec340139df885b152fda919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoint: {fileID: 5992602782945995136}
   objectsToInteract:
   - {fileID: 2430413098872192383}
   - {fileID: 5597421444819364165}
@@ -9568,60 +9569,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!1 &4958060250675047486
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1187539187426256890}
-  - component: {fileID: 5493195932552499382}
-  m_Layer: 0
-  m_Name: MiniGameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1187539187426256890
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4958060250675047486}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -12.441491, y: -29.753708, z: -29.71448}
-  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1.6666665}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5815613391717670261}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5493195932552499382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4958060250675047486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab733f89bcaa10e4185a824fb40fd294, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicatorSpeed: 200
-  trackHeight: 300
-  trackWidth: 60
-  zoneHeight: 75
-  maxAttempts: 3
-  darkRedColor: {r: 0.6, g: 0, b: 0, a: 1}
-  yellowZoneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  greenZoneColor: {r: 0, g: 1, b: 0, a: 1}
-  brightRedColor: {r: 1, g: 0, b: 0, a: 1}
-  indicatorColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &4973755772710708663
 GameObject:
   m_ObjectHideFlags: 0
@@ -13597,6 +13544,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &7962214768955852343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5992602782945995136}
+  m_Layer: 3
+  m_Name: StartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5992602782945995136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962214768955852343}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.25, y: 0.57, z: 9.26}
+  m_LocalScale: {x: 1, y: 1.088, z: 1.2941996}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5815613391717670261}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8108104942017755272
 GameObject:
   m_ObjectHideFlags: 0

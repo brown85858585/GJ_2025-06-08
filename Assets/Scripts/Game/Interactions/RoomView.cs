@@ -4,10 +4,12 @@ using UnityEngine;
 
 namespace Game.Interactions
 {
-    public class InteractionItemCollection : MonoBehaviour
+    public class RoomView : MonoBehaviour
     {
+        [SerializeField] private Transform startPoint;
         [SerializeField] private List<ItemInteractable> objectsToInteract;
 
+        public Transform StartPoint => startPoint;
         public List<ItemInteractable> ObjectsToInteract => objectsToInteract;
 
         private void OnDestroy()

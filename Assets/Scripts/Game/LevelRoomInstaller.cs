@@ -8,12 +8,14 @@ using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+
 namespace Game
 {
     public class LevelRoomInstaller :  MonoBehaviour
     {
         [SerializeField] private GameObject playerPrefab;
-        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private GameObject virtualCameraObj;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GameObject firstLevelPrefab;
         [SerializeField] private GameObject secondLevelPrefab;
@@ -25,7 +27,7 @@ namespace Game
         private InteractionSystem _interactionSystem;
         private QuestsModel _questsModel;
         private QuestLog _questLog;
-        private InteractionItemCollection _interactibles;
+        private RoomView _roomView;
         private GameObject _firstLevel;
         private MiniGameCoordinator _miniGameCoordinator;
         private bool _allQuestCompleted;
@@ -39,10 +41,12 @@ namespace Game
         {
             _questsModel = new QuestsModel();
             _playerModel = new PlayerModel(new DayModel());
-            _inputAdapter = new InputAdapter(playerInput);
-            _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
+            _inputAdapter = new InputAdapter(playerInput);
             _interactionSystem = new InteractionSystem(_inputAdapter);
+            
+            _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCameraObj.transform);
+            _miniGameCoordinator = new MiniGameCoordinator(_interactionSystem, _playerModel, _playerController);
         }
 
         private void SecondLevel()
@@ -53,28 +57,24 @@ namespace Game
             secondInstaller.Initialize(_playerController, _playerModel);
             
             Destroy(_firstLevel);
-            _interactibles = go.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem.AddNewInteractionCollection(_interactibles);
+            _roomView = go.GetComponentInChildren<RoomView>();
+            _interactionSystem.AddNewInteractionCollection(_roomView);
         }
 
         void Start()
         {
+            _firstLevel =Instantiate(firstLevelPrefab, transform);
+            _roomView = _firstLevel.GetComponentInChildren<RoomView>();
+            
             PlayerInit();
 
             CameraInit();
             
-            _firstLevel =Instantiate(firstLevelPrefab, transform);
-            
-            _interactibles = _firstLevel.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem.AddNewInteractionCollection(_interactibles);
+            _interactionSystem.AddNewInteractionCollection(_roomView);
             
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
-            _miniGameCoordinator = new MiniGameCoordinator(
-                _interactionSystem,
-                _playerModel,
-                _playerController,
-                _firstLevel);
+            _miniGameCoordinator.RegisterGames(_firstLevel);
             
             QuestInit();
         }
@@ -117,10 +117,13 @@ namespace Game
             
             var component = go.GetComponent<PlayerView>();
             _playerController.InitView(component);
+            _playerController.SetPosition(_roomView.StartPoint.position);
         }
 
         private void CameraInit()
         {
+            var virtualCamera = Instantiate(virtualCameraObj, transform.parent).GetComponent<CinemachineVirtualCamera>();
+            
             virtualCamera.Follow = _playerModel.PlayerTransform;
             virtualCamera.LookAt = _playerModel.PlayerTransform;
 

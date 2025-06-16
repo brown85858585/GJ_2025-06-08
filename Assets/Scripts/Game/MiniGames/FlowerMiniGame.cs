@@ -1,21 +1,23 @@
 ﻿using System;
 using Game.Quests;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.MiniGames
 {
     public class FlowerMiniGame : IMiniGame
     {
-        private FolwerMiniGameManager _miniGameController;
+        private FlowerMiniGameManager _miniGameController;
+        private readonly GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Flower;
         public event Action<QuestType> OnMiniGameComplete;
 
         public FlowerMiniGame()
         {
-            GameObject miniGameObj = GameObject.Find("MiniGameManager");
-            if (miniGameObj != null)
+            _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/MiniGameManager"));
+            if (_miniGameObj != null)
             {
-                _miniGameController = miniGameObj.GetComponent<FolwerMiniGameManager>();
+                _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
             }
         }
 
@@ -24,10 +26,9 @@ namespace Game.MiniGames
             // Найти контроллер мини-игры в текущей сцене
             if (_miniGameController == null)
             {
-                GameObject miniGameObj = GameObject.Find("MiniGameManager");
-                if (miniGameObj != null)
+                if (_miniGameObj != null)
                 {
-                    _miniGameController = miniGameObj.GetComponent<FolwerMiniGameManager>();
+                    _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
                     //_miniGameController = FindObjectOfType<MiniGameController>();
                 }
             }
@@ -37,7 +38,7 @@ namespace Game.MiniGames
                 Debug.Log("✅ MiniGameController найден! Запуск мини-игры...");
 
                 // Дополнительно убедиться что панель выключена перед запуском
-                GameObject panel = GameObject.Find("MiniGamePanel");
+                var panel = _miniGameController.Panel;
                 if (panel != null && panel.activeInHierarchy)
                 {
                     Debug.Log("⚠️ Панель была включена, выключаем её перед запуском");

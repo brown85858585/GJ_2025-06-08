@@ -1,11 +1,16 @@
 ﻿using System.Collections;
+using Game.MiniGames;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FolwerMiniGameManager : MonoBehaviour
+public class FlowerMiniGameManager : MonoBehaviour
 {
     [Header("Scene References")]
-    private Canvas mainCanvas;
+    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private GameObject panel;
+    
+    public GameObject Panel => panel;
+    
     private GameObject miniGamePanel;
 
     [Header("UI Elements")]
@@ -71,7 +76,6 @@ public class FolwerMiniGameManager : MonoBehaviour
 
     private void FindSceneComponents()
     {
-        mainCanvas = FindObjectOfType<Canvas>();
         if (mainCanvas == null)
         {
             Debug.LogError("Canvas не найден в сцене!");

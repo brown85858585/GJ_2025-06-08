@@ -16,23 +16,23 @@ namespace Game.MiniGames
         
         private readonly Dictionary<ItemCategory, IMiniGame> _factories = new();
         private readonly IPlayerController _playerController;
-        private readonly GameObject _firstLevel;
+        private GameObject _firstLevel;
 
         public List<IMiniGame> Games => _factories.Values.ToList();
         
         public MiniGameCoordinator(IInteractionSystem interactionSystem, PlayerModel playerModel,
-            IPlayerController playerController, GameObject firstLevel)
+            IPlayerController playerController)
         {
             _interactionSystem = interactionSystem;
             _playerModel = playerModel;
             _playerController = playerController;
-            _firstLevel = firstLevel;
-            RegisterGames();
             _interactionSystem.OnInteraction += HandleInteraction;
         }
         
-        private void RegisterGames()
+        public void RegisterGames(GameObject firstLevel)
         {
+            _firstLevel = firstLevel;
+            
             _factories[ItemCategory.Flower] = new FlowerMiniGame();
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame();
             _factories[ItemCategory.Computer] = new WorkMiniGame();
