@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Interactions;
 using Game.Models;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Game.MiniGames
         private readonly PlayerModel _playerModel;
         
         private readonly Dictionary<ItemCategory, IMiniGame> _factories = new();
+
+        public List<IMiniGame> Games => _factories.Values.ToList();
         
         public MiniGameCoordinator(IInteractionSystem interactionSystem, PlayerModel playerModel)
         {

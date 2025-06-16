@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using Game.Quests;
+using UnityEngine;
 
 namespace Game.MiniGames
 {
     public class FlowerMiniGame : IMiniGame
     {
-        [Header("Mini Game")]
         private FolwerMiniGameManager _miniGameController;
+        public QuestType QType { get; } = QuestType.Flower;
+        public event Action<QuestType> OnMiniGameComplete;
 
         public FlowerMiniGame()
         {
@@ -53,8 +56,7 @@ namespace Game.MiniGames
                 Debug.LogError("❌ MiniGameController не найден! Проверь что скрипт добавлен на MiniGameManager в префабе комнаты.");
             }
         }
-
-
+        
         public void StartGame()
         {
             StartFlowerMiniGame();
@@ -65,6 +67,8 @@ namespace Game.MiniGames
         {
             Debug.Log("Мини-игра завершена!");
 
+            OnMiniGameComplete?.Invoke(QType);
+            
             // Отписаться от событий чтобы избежать утечек памяти
             if (_miniGameController != null)
             {
@@ -119,7 +123,5 @@ namespace Game.MiniGames
         {
             StartFlowerMiniGame();
         }
-
-
     }
 }

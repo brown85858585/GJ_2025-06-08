@@ -1,3 +1,4 @@
+using System;
 using CameraField;
 using Cinemachine;
 using Game.Interactions;
@@ -26,6 +27,7 @@ namespace Game
         private QuestLog _questLog;
         private InteractionItemCollection _interactibles;
         private GameObject _firstLevel;
+        private MiniGameCoordinator _miniGameCoordinator;
 
         private void Awake()
         {
@@ -70,25 +72,45 @@ namespace Game
             
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
-            var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
-
+            _miniGameCoordinator = new MiniGameCoordinator(_interactionSystem, _playerModel);
+            
             QuestInit();
         }
 
         private void QuestInit()
         {
             var questsView = Instantiate(questLogPrefab, transform);
-            _questLog = new QuestLog(questsView, _inputAdapter);
-            
-            var questList = _questsModel.GetQuests();
-            _questLog.AddQuests(questList);
+            _questLog = new QuestLog(questsView, _inputAdapter, _questsModel);
             
             _interactionSystem.OnInteraction += HandleQuestInteraction;
+            
+            foreach (var game in _miniGameCoordinator.Games)
+            {
+                game.OnMiniGameComplete += _questLog.CompleteQuest;
+            }
         }
 
         private void HandleQuestInteraction(ItemCategory obj)
         {
-            _questLog.CompleteQuest(obj);
+            switch (obj)
+            {
+                case ItemCategory.None:
+                    break;
+                case ItemCategory.Bed:
+                    _questLog.CompleteQuest(QuestType.Work);
+                    break;
+                case ItemCategory.Door:
+                    _questLog.CompleteQuest(QuestType.Sprint);
+                    break;
+                case ItemCategory.Kitchen:
+                    _questLog.CompleteQuest(QuestType.Kitchen);
+                    break;
+                case ItemCategory.Flower:
+                case ItemCategory.WateringCan:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(obj), obj, null);
+            }
         }
 
         private void HandlePlayerInteraction(ItemCategory item)
