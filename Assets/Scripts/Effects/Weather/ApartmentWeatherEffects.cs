@@ -1,11 +1,59 @@
 using System.Collections;
 using UnityEngine;
 
-public class ApartmentWeatherEffects : WeatherEffects
+public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 {
-    public override LocationType Location => LocationType.Apartment;
+    public LocationType Location => LocationType.Apartment;
 
-    public override void ApplyWeather(WeatherType weatherType)
+    [Header("Window Views")]
+    [SerializeField] private Renderer _windowRenderer;
+    
+    [Header("Light Effects")]
+    // Sun rays through the window
+    [SerializeField] private Light _sunLight;
+    // Flashes of lightning
+    [SerializeField] private Light _lightning;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource _weatherAudio;
+
+    [Header("Clear Noon")]
+    [SerializeField] private Material _w1_WindowViewMaterial;
+    [SerializeField] private float _w1_SunLightIntencity = 1.0f;
+    [SerializeField] private Color _w1_SunLightColor = Color.white;
+
+    [Header("Foggy Morning")]
+    [SerializeField] private Material _w2_WindowViewMaterial;
+    [SerializeField] private float _w2_SunLightIntencity = 0.7f;
+    [SerializeField] private Color _w2_SunLightColor = new Color(0.9f, 0.9f, 0.8f);
+
+    [Header("Cloudy")]
+    [SerializeField] private Material _w3_WindowViewMaterial;
+
+    [Header("Overcast")]
+    [SerializeField] private Material _w4_WindowViewMaterial;
+
+    [Header("HeavyRain")]
+    [SerializeField] private Material _w5_WindowViewMaterial;
+    [SerializeField] private ParticleSystem _rainWindowParticles;
+    [SerializeField] private AudioClip _heavyRainWindowSound;
+
+    [Header("Thunderstorm")]
+    [SerializeField] private Material _w6_WindowViewMaterial;
+    [SerializeField] private AudioClip _rainWindowSound;
+    [SerializeField] private AudioClip _thunderSound;
+
+    [Header("ClearMorning")]
+    [SerializeField] private Material _w7_WindowViewMaterial;
+    [SerializeField] private float _w7_SunLightIntencity = 0.8f;
+    [SerializeField] private Color _w7_SunLightColor = new Color(1.0f, 0.95f, 0.9f);
+
+    private void OnDestroy()
+    {
+        ResetAllEffects();
+    }
+
+    public void ApplyWeather(WeatherType weatherType)
     {
         ResetAllEffects();
 
@@ -23,12 +71,6 @@ public class ApartmentWeatherEffects : WeatherEffects
             case WeatherType.Overcast:
                 ApplyOvercast();
                 break;
-            case WeatherType.Drizzle:
-                ApplyDrizzle();
-                break;
-            case WeatherType.Rain:
-                ApplyRain();
-                break;
             case WeatherType.HeavyRain:
                 ApplyHeavyRain();
                 break;
@@ -43,50 +85,172 @@ public class ApartmentWeatherEffects : WeatherEffects
 
     private void ApplyClearNoon()
     {
-        Debug.Log("Apply Clear Noon");
+        Debug.Log("Apartrment: Apply Clear Noon");
+
+        Debug.Log(_lightning);
+
+        if (_windowRenderer != null && _w1_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w1_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(true);
+            _sunLight.intensity = _w1_SunLightIntencity;
+            _sunLight.color = _w1_SunLightColor;
+        }
     }
 
     private void ApplyFoggyMorning()
     {
-        Debug.Log("Apply Foggy Morning");
+        Debug.Log("Apartrment: Apply Foggy Morning");
+
+        Debug.Log(_lightning);
+
+        if (_windowRenderer != null && _w2_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w2_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(true);
+            _sunLight.intensity = _w2_SunLightIntencity;
+            _sunLight.color = _w2_SunLightColor;
+        }
     }
 
     private void ApplyCloudy()
     {
-        Debug.Log("Apply Cloudy");
+        Debug.Log("Apartrment: Apply Cloudy");
+
+        Debug.Log(_lightning);
+
+        if (_windowRenderer != null && _w3_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w3_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(false);
+        }
     }
 
     private void ApplyOvercast()
     {
-        Debug.Log("Apply Overcast");
-    }
+        Debug.Log("Apartrment: Apply Overcast");
 
-    private void ApplyDrizzle()
-    {
-        Debug.Log("Apply Drizzle");
-    }
+        Debug.Log(_lightning);
 
-    private void ApplyRain()
-    {
-        Debug.Log("Apply Rain");
+        if (_windowRenderer != null && _w4_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w4_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(false);
+        }
     }
 
     private void ApplyHeavyRain()
     {
-        Debug.Log("Apply HeavyRain");
+        Debug.Log("Apartrment: Apply HeavyRain");
+
+        Debug.Log(_lightning);
+
+        if (_windowRenderer != null && _w5_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w5_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(false);
+        }
+
+        if (_rainWindowParticles != null)
+        {
+            _rainWindowParticles.Play();
+        }
+
+        if (_weatherAudio != null && _heavyRainWindowSound != null)
+        {
+            _weatherAudio.clip = _heavyRainWindowSound;
+            _weatherAudio.Play();
+        }
     }
 
     private void ApplyThunderstorm()
     {
-        Debug.Log("Apply Thunderstorm");
+        Debug.Log("Apartrment: Apply Thunderstorm");
+
+        Debug.Log(_lightning);
+
+        if (_windowRenderer != null && _w6_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w6_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(false);
+        }
+
+        if (_weatherAudio != null && _rainWindowSound != null)
+        {
+            _weatherAudio.clip = _rainWindowSound;
+            _weatherAudio.Play();
+        }
+
+        if (_lightning != null)
+        {
+            float minInterval = 5.0f;
+            float maxInterval = 15.0f;
+            //Lightning.Instance.StartApartmentLightning(_lightning, minInterval, maxInterval);
+        }
+        else
+        {
+            Debug.Log("_lightning is null!");
+        }
     }
 
     private void ApplyClearMorning()
     {
-        Debug.Log("Apply Clear Morning");
+        Debug.Log("Apartrment: Apply Clear Morning");
+
+        if (_windowRenderer != null && _w7_WindowViewMaterial != null)
+        {
+            _windowRenderer.material = _w7_WindowViewMaterial;
+        }
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(true);
+            _sunLight.intensity = _w7_SunLightIntencity;
+            _sunLight.color = _w7_SunLightColor;
+        }
     }
+
     private void ResetAllEffects()
     {
-        
+        //Lightning.Instance.StopApartmentLightning();
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(false);
+        }
+
+        if (_lightning != null)
+        {
+            _lightning.gameObject.SetActive(false);
+        }
+
+        if (_weatherAudio != null)
+        {
+            _weatherAudio.Stop();
+        }
     }
 }

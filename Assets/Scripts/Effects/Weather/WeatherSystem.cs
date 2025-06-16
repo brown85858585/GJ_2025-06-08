@@ -18,23 +18,53 @@ public enum WeatherType
 public class WeatherSystem : MonoBehaviour
 {
     public static WeatherSystem Instance { get; private set; }
-
     public LocationType CurrentLocation { get; private set; }
     public int CurrentCycle { get; private set; } = 1;
 
-    private WeatherEffects _currentEffects;
+    [SerializeField] private int _maxCycle = 7;
+
+    ApartmentWeatherEffects _apartmentWeatherEffects;
+    ParkWeatherEffects _parkWeatherEffects;
+    private IWeatherEffects[] _weatherEffectsArray;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
+
+            _apartmentWeatherEffects = FindObjectOfType<ApartmentWeatherEffects>();
+            _parkWeatherEffects = FindObjectOfType<ParkWeatherEffects>();
+
+            _weatherEffectsArray = new IWeatherEffects[2];
+            _weatherEffectsArray[(int)LocationType.Apartment] = _apartmentWeatherEffects;
+            _weatherEffectsArray[(int)LocationType.Park] = _parkWeatherEffects;
+
+            CurrentLocation = LocationType.Apartment;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetWeather(LocationType location, int cycle)
+    {
+        CurrentLocation = location;
+
+        if (cycle < 1)
+        {
+            cycle = 1;
+        }
+        else if (cycle > _maxCycle)
+        {
+            cycle = _maxCycle;
+        }
+
+        CurrentCycle = cycle;
+
+        ApplyWeatherForCurrentCycle();
     }
 
     public void SetLocation(LocationType location)
@@ -43,11 +73,29 @@ public class WeatherSystem : MonoBehaviour
         ApplyWeatherForCurrentCycle();
     }
 
+    public void SetSycle(int cycle)
+    {
+        if (cycle < 1)
+        {
+            cycle = 1;
+        }
+        else if (cycle > _maxCycle)
+        {
+            cycle = _maxCycle;
+        }
+
+        CurrentCycle = cycle;
+
+        Debug.Log("Current Cycle: " + CurrentCycle);
+
+        ApplyWeatherForCurrentCycle();
+    }
+
     public void NextCycle()
     {
         CurrentCycle++;
 
-        if (CurrentCycle > 11)
+        if (CurrentCycle > _maxCycle)
         {
             CurrentCycle = 1;
         }
@@ -59,13 +107,15 @@ public class WeatherSystem : MonoBehaviour
 
     private void ApplyWeatherForCurrentCycle()
     {
-        // Определяем тип погоды для текущего цикла
         WeatherType weatherType = GetWeatherTypeForCycle(CurrentCycle);
 
-        // Применяем эффекты для текущей локации
-        if (_currentEffects != null)
+        if (_weatherEffectsArray[(int)CurrentLocation] != null)
         {
-            _currentEffects.ApplyWeather(weatherType);
+            _weatherEffectsArray[(int)CurrentLocation].ApplyWeather(weatherType);
+        }
+        else
+        {
+            Debug.Log("WeatherSystem: _currentEffects is null!");
         }
     }
 
@@ -77,31 +127,10 @@ public class WeatherSystem : MonoBehaviour
             case 2: return WeatherType.FoggyMorning;
             case 3: return WeatherType.Cloudy;
             case 4: return WeatherType.Overcast;
-            case 5: return WeatherType.Drizzle;
-            case 6: return WeatherType.Rain;
-            case 7: return WeatherType.HeavyRain;
-            case 8:
-            case 9:
-            case 10: return WeatherType.Thunderstorm;
-            case 11: return WeatherType.ClearMorning;
+            case 5: return WeatherType.HeavyRain;
+            case 6: return WeatherType.Thunderstorm;
+            case 7: return WeatherType.ClearMorning;
             default: return WeatherType.ClearNoon;
-        }
-    }
-
-    public void RegisterEffects(WeatherEffects effects)
-    {
-        if (effects.Location == CurrentLocation)
-        {
-            _currentEffects = effects;
-            ApplyWeatherForCurrentCycle();
-        }
-    }
-
-    public void UnregisterEffects(WeatherEffects effects)
-    {
-        if (_currentEffects == effects)
-        {
-            _currentEffects = null;
         }
     }
 }
