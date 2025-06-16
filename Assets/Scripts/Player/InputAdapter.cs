@@ -22,8 +22,6 @@ namespace Player
         private readonly InputAction _interactAction;
         private readonly InputAction _crouchAction;
         private readonly InputAction _questsAction;
-        
-        private readonly InputAction _NavigateAction;
 
         public InputAdapter(PlayerInput playerInput)
         {
@@ -36,8 +34,6 @@ namespace Player
             _interactAction = playerInput.actions.FindAction("Interact", true);
             _crouchAction = playerInput.actions.FindAction("Crouch", true);
             _questsAction = playerInput.actions.FindAction("Quests", true);
-            _NavigateAction = playerInput.actions.FindAction("Navigate", true);
-        
             
             _accelerateAction.Enable();
             _moveAction.Enable();
@@ -46,11 +42,7 @@ namespace Player
             _testAction.Enable();
             _interactAction.Enable();
             _crouchAction.Enable();
-            _NavigateAction.Enable();
-            _NavigateAction.performed += context =>
-            {
-               Debug.Log("Navigate " + context.action.name);
-            };
+            
             _moveAction.performed += OnMoveInput;
             _moveAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
@@ -64,20 +56,12 @@ namespace Player
             
             _interactAction.started += OnInteractInput;
             _crouchAction.started += OnPutItemDownInput;
-          
-            playerInput.actions.FindActionMap("UI", true).Disable();
-
-            
         }
 
         public void SwitchAdapterToMiniGameMode()
         {
             _accelerateAction.Disable();
             _moveAction.Disable();
-  //          _lookAction.Disable();
-
- //           _testAction.Disable();
-//            _interactAction.Disable();
             _crouchAction.Disable();
         }
 
@@ -91,7 +75,6 @@ namespace Player
             _interactAction.Enable();
             _crouchAction.Enable();
         }
-
 
         private void OnPutItemDownInput(InputAction.CallbackContext obj)
         {
@@ -116,8 +99,7 @@ namespace Player
             var readValue = obj.ReadValue<float>();
             OnQuests?.Invoke(readValue != 0);
         }
-
-
+        
         private void OnLook(InputAction.CallbackContext obj)
         {
             var readValue = obj.ReadValue<Vector2>();

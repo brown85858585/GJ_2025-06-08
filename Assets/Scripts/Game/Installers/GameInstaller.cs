@@ -38,6 +38,8 @@ namespace Game.Installers
 
         private void Start()
         {
+            Instantiate(playerInput);
+            
             InitLevelOne();
             InitPlayer();
             InitCamera();
