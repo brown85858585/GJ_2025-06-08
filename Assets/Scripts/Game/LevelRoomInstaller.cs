@@ -8,12 +8,14 @@ using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+
 namespace Game
 {
     public class LevelRoomInstaller :  MonoBehaviour
     {
         [SerializeField] private GameObject playerPrefab;
-        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private GameObject virtualCameraObj;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GameObject firstLevelPrefab;
         [SerializeField] private GameObject secondLevelPrefab;
@@ -39,10 +41,12 @@ namespace Game
         {
             _questsModel = new QuestsModel();
             _playerModel = new PlayerModel(new DayModel());
-            _inputAdapter = new InputAdapter(playerInput);
-            _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
+            _inputAdapter = new InputAdapter(playerInput);
             _interactionSystem = new InteractionSystem(_inputAdapter);
+            
+            _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCameraObj.transform);
+            _miniGameCoordinator = new MiniGameCoordinator(_interactionSystem, _playerModel, _playerController);
         }
 
         private void SecondLevel()
@@ -59,7 +63,6 @@ namespace Game
 
         void Start()
         {
-            
             _firstLevel =Instantiate(firstLevelPrefab, transform);
             _roomView = _firstLevel.GetComponentInChildren<RoomView>();
             
@@ -71,11 +74,7 @@ namespace Game
             
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
-            _miniGameCoordinator = new MiniGameCoordinator(
-                _interactionSystem,
-                _playerModel,
-                _playerController,
-                _firstLevel);
+            _miniGameCoordinator.RegisterGames(_firstLevel);
             
             QuestInit();
         }
@@ -123,6 +122,8 @@ namespace Game
 
         private void CameraInit()
         {
+            var virtualCamera = Instantiate(virtualCameraObj, transform.parent).GetComponent<CinemachineVirtualCamera>();
+            
             virtualCamera.Follow = _playerModel.PlayerTransform;
             virtualCamera.LookAt = _playerModel.PlayerTransform;
 
