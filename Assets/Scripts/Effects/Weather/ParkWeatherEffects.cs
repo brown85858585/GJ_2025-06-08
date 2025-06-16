@@ -8,10 +8,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [Header("Lighting")]
     [SerializeField] private Light _directionalLight;
 
-    [Header("Rain Effects")]
-    [SerializeField] private ParticleSystem _heavyRainParticles;
-    [SerializeField] private ParticleSystem _thunderRainParticles;
-
     [Header("Environment")]
     [SerializeField] private AudioSource _ambientAudioSource;
 
@@ -40,7 +36,7 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private Material _w5_SkyboxMaterial;
     [SerializeField] private float _w5_LightIntensity;
     [SerializeField] private Color _w5_LightColor;
-    [SerializeField] private ParticleSystem _HeavyRainParticles;
+    [SerializeField] private ParticleSystem _heavyRainParticles;
 
     [Header("Thunderstorm")]
     [SerializeField] private Material _w6_SkyboxMaterial;
@@ -48,6 +44,7 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private AudioClip _thunderSound;
     [SerializeField] private float _w6_LightIntensity = 0.3f;
     [SerializeField] private Color _w6_LightColor;
+    [SerializeField] private ParticleSystem _thunderRainParticles;
 
     [Header("ClearMorning")]
     [SerializeField] private Material _w7_SkyboxMaterial;
@@ -181,6 +178,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         }
 
         RenderSettings.fog = false;
+
+        if (_heavyRainParticles != null)
+        {
+            _heavyRainParticles.Play();
+        }
     }
 
     private void ApplyThunderstorm()
