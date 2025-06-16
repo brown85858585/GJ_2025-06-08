@@ -17,7 +17,7 @@ namespace Game.MiniGames
 
         public void StartGame()
         {
-            Debug.Log("Kitchen Mini Game Started");
+            Debug.Log("Work Mini Game Started");
             OnMiniGameComplete?.Invoke(QType);
         }
     }

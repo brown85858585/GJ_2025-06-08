@@ -22,6 +22,7 @@ namespace Game.Installers
         private bool _allQuestsCompleted;
         
         private LevelManager _levelManager;
+        private QuestLogView _questsView;
 
         private void Awake()
         {
@@ -73,8 +74,8 @@ namespace Game.Installers
 
         private void InitQuestLog()
         {
-            var questsView = Instantiate(questLogPrefab, transform);
-            _logic.QuestLog.Initialization(questsView, _logic.MiniGameCoordinator);
+            _questsView = Instantiate(questLogPrefab, transform);
+            _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
             _logic.QuestLog.AllQuestsCompleted += () => _allQuestsCompleted = true;
             _core.InteractionSystem.OnInteraction += HandleLevelCompletion;
         }
@@ -94,8 +95,10 @@ namespace Game.Installers
         private void LoadNextLevel()
         {
             _levelManager.LoadNextLevel(transform.parent);
+            
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
             _logic.QuestLog.ResetQuests();
+            _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
             _allQuestsCompleted = false;
         }
 
