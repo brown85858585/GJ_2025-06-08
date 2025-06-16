@@ -49,7 +49,7 @@ public class WeatherSystem : MonoBehaviour
         }
     }
 
-    public void SetWeather(LocationType location, int cycle)
+    public void SetWeather(LocationType location, int cycle, Transform transformParam = null)
     {
         CurrentLocation = location;
 
@@ -64,11 +64,12 @@ public class WeatherSystem : MonoBehaviour
 
         CurrentCycle = cycle;
 
-        ApplyWeatherForCurrentCycle();
+        ApplyWeatherForCurrentCycle(transformParam);
     }
 
     public void SetLocation(LocationType location)
     {
+        _weatherEffectsArray[(int)CurrentLocation].ResetAllEffects();
         CurrentLocation = location;
         ApplyWeatherForCurrentCycle();
     }
@@ -105,13 +106,13 @@ public class WeatherSystem : MonoBehaviour
         ApplyWeatherForCurrentCycle();
     }
 
-    private void ApplyWeatherForCurrentCycle()
+    private void ApplyWeatherForCurrentCycle(Transform transformParam = null)
     {
         WeatherType weatherType = GetWeatherTypeForCycle(CurrentCycle);
 
         if (_weatherEffectsArray[(int)CurrentLocation] != null)
         {
-            _weatherEffectsArray[(int)CurrentLocation].ApplyWeather(weatherType);
+            _weatherEffectsArray[(int)CurrentLocation].ApplyWeather(weatherType, transformParam);
         }
         else
         {

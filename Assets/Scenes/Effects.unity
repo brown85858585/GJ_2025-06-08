@@ -1188,11 +1188,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weather
       objectReference: {fileID: 0}
-    - target: {fileID: 3257277517891824036, guid: f1617134343c36b429195b023169e855,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 3496949392998188941, guid: f1617134343c36b429195b023169e855,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1248,21 +1243,11 @@ PrefabInstance:
       propertyPath: _directionalLight
       value: 
       objectReference: {fileID: 410087040}
-    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
-        type: 3}
-      propertyPath: _thunderRainParticles
-      value: 
-      objectReference: {fileID: 1688899706}
     - target: {fileID: 5669002638928743652, guid: f1617134343c36b429195b023169e855,
         type: 3}
       propertyPath: _sunLight
       value: 
       objectReference: {fileID: 410087040}
-    - target: {fileID: 7419790230283866355, guid: f1617134343c36b429195b023169e855,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1491,12 +1476,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505912137}
   m_CullTransparentMesh: 1
---- !u!198 &1688899706 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7419790230283866355, guid: f1617134343c36b429195b023169e855,
-    type: 3}
-  m_PrefabInstance: {fileID: 1461386303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

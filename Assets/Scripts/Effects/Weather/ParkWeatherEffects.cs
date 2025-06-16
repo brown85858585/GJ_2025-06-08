@@ -59,9 +59,16 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         ResetAllEffects();
     }
 
-    public void ApplyWeather(WeatherType weatherType)
+    public void ApplyWeather(WeatherType weatherType, Transform transformParam = null)
     {
         ResetAllEffects();
+
+        if (transformParam != null)
+        {
+            transform.position = transformParam.position;
+            transform.rotation = transformParam.rotation;
+            transform.localScale = transformParam.localScale;
+        }
 
         switch (weatherType)
         {
@@ -86,6 +93,45 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             case WeatherType.ClearMorning:
                 ApplyClearMorning();
                 break;
+        }
+    }
+
+    public void ResetAllEffects()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.localScale = new Vector3(1, 1, 1);
+
+        if (_lightningRoutine != null)
+        {
+            StopCoroutine(_lightningRoutine);
+        }
+
+        if (_lightningFlashRoutine != null)
+        {
+            StopCoroutine(_lightningFlashRoutine);
+        }
+
+        RenderSettings.fog = false;
+
+        if (_directionalLight != null)
+        {
+            _directionalLight.intensity = 1.0f;
+        }
+
+        if (_heavyRainParticles != null)
+        {
+            _heavyRainParticles.Stop();
+        }
+
+        if (_thunderRainParticles != null)
+        {
+            _thunderRainParticles.Stop();
+        }
+
+        if (_ambientAudioSource != null)
+        {
+            _ambientAudioSource.Stop();
         }
     }
 
@@ -265,40 +311,5 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         _directionalLight.intensity = 1.5f;
         yield return new WaitForSeconds(0.1f);
         _directionalLight.intensity = 0.3f;
-    }
-
-    private void ResetAllEffects()
-    {
-        if (_lightningRoutine != null)
-        {
-            StopCoroutine(_lightningRoutine);
-        }
-
-        if (_lightningFlashRoutine != null)
-        {
-            StopCoroutine(_lightningFlashRoutine);
-        }
-
-        RenderSettings.fog = false;
-
-        if (_directionalLight != null)
-        {
-            _directionalLight.intensity = 1.0f;
-        }
-
-        if (_heavyRainParticles != null)
-        {
-            _heavyRainParticles.Stop();
-        }
-
-        if (_thunderRainParticles != null)
-        {
-            _thunderRainParticles.Stop();
-        }
-
-        if (_ambientAudioSource != null)
-        {
-            _ambientAudioSource.Stop();
-        }
     }
 }

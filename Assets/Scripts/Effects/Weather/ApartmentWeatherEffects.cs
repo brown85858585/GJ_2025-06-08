@@ -53,9 +53,16 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
         ResetAllEffects();
     }
 
-    public void ApplyWeather(WeatherType weatherType)
+    public void ApplyWeather(WeatherType weatherType, Transform transformParam = null)
     {
         ResetAllEffects();
+
+        if (transformParam != null)
+        {
+            transform.position = transformParam.position;
+            transform.rotation = transformParam.rotation;
+            transform.localScale = transformParam.localScale;
+        }
 
         switch (weatherType)
         {
@@ -80,6 +87,30 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
             case WeatherType.ClearMorning:
                 ApplyClearMorning();
                 break;
+        }
+    }
+
+    public void ResetAllEffects()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.localScale = new Vector3(1, 1, 1);
+
+        //Lightning.Instance.StopApartmentLightning();
+
+        if (_sunLight != null)
+        {
+            _sunLight.gameObject.SetActive(false);
+        }
+
+        if (_lightning != null)
+        {
+            _lightning.gameObject.SetActive(false);
+        }
+
+        if (_weatherAudio != null)
+        {
+            _weatherAudio.Stop();
         }
     }
 
@@ -231,26 +262,6 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
             _sunLight.gameObject.SetActive(true);
             _sunLight.intensity = _w7_SunLightIntencity;
             _sunLight.color = _w7_SunLightColor;
-        }
-    }
-
-    private void ResetAllEffects()
-    {
-        //Lightning.Instance.StopApartmentLightning();
-
-        if (_sunLight != null)
-        {
-            _sunLight.gameObject.SetActive(false);
-        }
-
-        if (_lightning != null)
-        {
-            _lightning.gameObject.SetActive(false);
-        }
-
-        if (_weatherAudio != null)
-        {
-            _weatherAudio.Stop();
         }
     }
 }
