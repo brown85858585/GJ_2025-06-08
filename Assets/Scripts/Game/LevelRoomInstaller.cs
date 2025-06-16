@@ -39,7 +39,8 @@ namespace Game
         {
             _questsModel = new QuestsModel();
             _playerModel = new PlayerModel(new DayModel());
-            _inputAdapter = new InputAdapter(playerInput);
+            var inputP = Instantiate(playerInput);
+            _inputAdapter = new InputAdapter(inputP);
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
             _interactionSystem = new InteractionSystem(_inputAdapter);
