@@ -217,18 +217,6 @@ MonoBehaviour:
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!114 &270274878 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4981820829016224602, guid: 76f98f25aea1fea4ea954ab09bbc3465,
-    type: 3}
-  m_PrefabInstance: {fileID: 270274875}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8902517036189002289, guid: 6bee1aed920c9904fbf4de5a9c1e64fe,
     type: 3}
-  virtualCamera: {fileID: 270274878}
+  virtualCameraObj: {fileID: 0}
   playerInput: {fileID: 5613807469492303565, guid: e206649806dfc924aa28f21855ac4ebe,
     type: 3}
   firstLevelPrefab: {fileID: 629543909847731020, guid: 8c9d7abd2424f7f4fb1eb0d9ca50fa2e,
