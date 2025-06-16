@@ -84,7 +84,7 @@ namespace Game
             var questsView = Instantiate(questLogPrefab, transform);
             _questLog = new QuestLog(questsView, _inputAdapter, _questsModel);
             
-            _interactionSystem.OnInteraction += HandleQuestInteraction;
+            _interactionSystem.OnInteraction += HandleCompleteLevelInteraction;
             
             foreach (var game in _miniGameCoordinator.Games)
             {
@@ -97,29 +97,11 @@ namespace Game
             };
         }
 
-        private void HandleQuestInteraction(ItemCategory obj)
+        private void HandleCompleteLevelInteraction(ItemCategory obj)
         {
-            switch (obj)
+            if(obj == ItemCategory.Bed && _allQuestCompleted)
             {
-                case ItemCategory.Bed:
-                    if (_allQuestCompleted)
-                    {
-                        SecondLevel();
-                    }
-                    break;
-                case ItemCategory.Computer:
-                    _questLog.CompleteQuest(QuestType.Work);
-                    break;
-                case ItemCategory.Kitchen:
-                    _questLog.CompleteQuest(QuestType.Kitchen);
-                    break;
-                case ItemCategory.None:
-                case ItemCategory.Door:
-                case ItemCategory.Flower:
-                case ItemCategory.WateringCan:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(obj), obj, null);
+                SecondLevel();
             }
         }
 
