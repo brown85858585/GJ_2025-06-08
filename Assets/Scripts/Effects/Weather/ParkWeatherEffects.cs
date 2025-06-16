@@ -286,7 +286,7 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _directionalLight.intensity = 1.0f;
         }
 
-        if (_heavyRainParticles)
+        if (_heavyRainParticles != null)
         {
             _heavyRainParticles.Stop();
         }

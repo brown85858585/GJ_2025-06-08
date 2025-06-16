@@ -261,7 +261,7 @@ MonoBehaviour:
   _thunderSound: {fileID: 0}
   _w6_LightIntensity: 0.3
   _w6_LightColor: {r: 0, g: 0, b: 0, a: 0}
-  _thunderRainParticles: {fileID: 0}
+  _thunderRainParticles: {fileID: 7419790230283866355}
   _w7_SkyboxMaterial: {fileID: 2100000, guid: 73324b55f67f54c7bbf43204788b8bbe, type: 2}
   _w7_LightIntensity: 1
   _w7_LightColor: {r: 0, g: 0, b: 0, a: 0}
@@ -651,6 +651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2607569866911605212, guid: 5b06a1864bda6964fa0c1b145b0b7e4e,
         type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2607569866911605212, guid: 5b06a1864bda6964fa0c1b145b0b7e4e,
+        type: 3}
       propertyPath: ShapeModule.m_Scale.y
       value: 50
       objectReference: {fileID: 0}
@@ -687,7 +692,7 @@ PrefabInstance:
     - target: {fileID: 8062496357630498955, guid: 5b06a1864bda6964fa0c1b145b0b7e4e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8062496357630498955, guid: 5b06a1864bda6964fa0c1b145b0b7e4e,
         type: 3}
@@ -737,6 +742,12 @@ PrefabInstance:
 --- !u!4 &3257277517891824036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8062496357630498955, guid: 5b06a1864bda6964fa0c1b145b0b7e4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4816477882043642159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7419790230283866355 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2607569866911605212, guid: 5b06a1864bda6964fa0c1b145b0b7e4e,
     type: 3}
   m_PrefabInstance: {fileID: 4816477882043642159}
   m_PrefabAsset: {fileID: 0}
