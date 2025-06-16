@@ -91,6 +91,8 @@ namespace Player
 
         public void PutTheItemDown()
         {
+            if (_saveCurrentObj == null) return;
+            
             _saveCurrentObj.SetParent(_saveLastParentObj);
             _saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
             _saveLastParentObj = null;

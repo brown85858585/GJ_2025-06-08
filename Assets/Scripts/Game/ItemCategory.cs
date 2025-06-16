@@ -8,5 +8,6 @@ namespace Game
         Flower,
         Kitchen,
         WateringCan,
+        Computer,
     }
 }

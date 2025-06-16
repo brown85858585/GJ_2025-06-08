@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Player.Interfaces;
 
 namespace Game.Quests
@@ -10,19 +11,23 @@ namespace Game.Quests
         
         private QuestLogView _view;
         private IInputAdapter _inputAdapter;
+        private readonly QuestsModel _model;
+        public event Action AllQuestsCompleted;
 
-        public QuestLog(QuestLogView view, IInputAdapter inputAdapter)
+        public QuestLog(QuestLogView view, IInputAdapter inputAdapter, QuestsModel questsModel)
         {
             Quests = new List<Quest>();
             _inputAdapter = inputAdapter;
             _view = view;
+            _model = questsModel;
+            AddQuests(_model.GetQuests());
             
             _inputAdapter.OnQuests += HandleOpenQuestLog;
         }
 
-        private void HandleOpenQuestLog(bool obj)
+        private void HandleOpenQuestLog(bool press)
         {
-            if (obj)
+            if (press)
             {
                 _view?.OpenQuestLog();
             }
@@ -32,7 +37,7 @@ namespace Game.Quests
             }
         }
 
-        public void AddQuest(Quest quest)
+        private void AddQuest(Quest quest)
         {
             if (quest != null && !Quests.Contains(quest))
             {
@@ -52,29 +57,21 @@ namespace Game.Quests
             }
         }
 
-        public void CompleteQuest(ItemCategory questCategory)
+        public void CompleteQuest(QuestType questCategory)
         {
-            switch (questCategory)
-            {
-                case ItemCategory.None:
-                    break;
-                case ItemCategory.Bed:
-                    _view.CompleteQuest(QuestType.Work);
-                    break;
-                case ItemCategory.Door:
-                    _view.CompleteQuest(QuestType.Sprint);
-                    break;
-                case ItemCategory.Flower:
-                    _view.CompleteQuest(QuestType.Flower);
-                    break;
-                case ItemCategory.Kitchen:
-                    _view.CompleteQuest(QuestType.Kitchen);
-                    break;
-                case ItemCategory.WateringCan:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(questCategory), questCategory, null);
-            }
+            var quest = Quests.FirstOrDefault(q => q.Type == questCategory);
+            if (quest == null || quest.IsCompleted)
+                return;
+
+            quest.IsCompleted = true;
+
+            _view.CompleteQuest(questCategory);
+
+            // Check if all quests are completed
+            if (Quests.Any(q => !q.IsCompleted))
+                return;
+
+            AllQuestsCompleted?.Invoke();
         }
         
 

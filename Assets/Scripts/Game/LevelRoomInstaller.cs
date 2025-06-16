@@ -1,3 +1,4 @@
+using System;
 using CameraField;
 using Cinemachine;
 using Game.Interactions;
@@ -26,6 +27,8 @@ namespace Game
         private QuestLog _questLog;
         private InteractionItemCollection _interactibles;
         private GameObject _firstLevel;
+        private MiniGameCoordinator _miniGameCoordinator;
+        private bool _allQuestCompleted;
 
         private void Awake()
         {
@@ -40,13 +43,10 @@ namespace Game
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
             _interactionSystem = new InteractionSystem(_inputAdapter);
-            
-            _playerController.OnDied += SecondLevel;
         }
 
         private void SecondLevel()
         {
-            _playerController.OnDied -= SecondLevel;
             var go = Instantiate(secondLevelPrefab, transform);
                
             var secondInstaller = go.GetComponent<LevelSecondInstaller>();
@@ -70,25 +70,39 @@ namespace Game
             
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
-            var miniGameController = new MiniGameCoordinator(_interactionSystem, _playerModel);
-
+            _miniGameCoordinator = new MiniGameCoordinator(
+                _interactionSystem,
+                _playerModel,
+                _playerController,
+                _firstLevel);
+            
             QuestInit();
         }
 
         private void QuestInit()
         {
             var questsView = Instantiate(questLogPrefab, transform);
-            _questLog = new QuestLog(questsView, _inputAdapter);
+            _questLog = new QuestLog(questsView, _inputAdapter, _questsModel);
             
-            var questList = _questsModel.GetQuests();
-            _questLog.AddQuests(questList);
+            _interactionSystem.OnInteraction += HandleCompleteLevelInteraction;
             
-            _interactionSystem.OnInteraction += HandleQuestInteraction;
+            foreach (var game in _miniGameCoordinator.Games)
+            {
+                game.OnMiniGameComplete += _questLog.CompleteQuest;
+            }
+            
+            _questLog.AllQuestsCompleted += () =>
+            {
+                _allQuestCompleted = true;
+            };
         }
 
-        private void HandleQuestInteraction(ItemCategory obj)
+        private void HandleCompleteLevelInteraction(ItemCategory obj)
         {
-            _questLog.CompleteQuest(obj);
+            if(obj == ItemCategory.Bed && _allQuestCompleted)
+            {
+                SecondLevel();
+            }
         }
 
         private void HandlePlayerInteraction(ItemCategory item)
