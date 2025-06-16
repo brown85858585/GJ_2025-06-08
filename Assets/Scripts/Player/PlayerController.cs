@@ -9,7 +9,7 @@ namespace Player
     public class PlayerController : IPlayerController
     {
         public event Action OnDied;
-
+        public IInputAdapter InputAdaptep => _input;
         private PlayerModel _model;
         private IInputAdapter _input;
         private PlayerView _view;

@@ -12,5 +12,7 @@ namespace Player.Interfaces
         event Action OnPutItemDown; 
         event Action<bool> OnTest;
         event Action<bool> OnQuests;
+       void  SwitchAdapterToMiniGameMode();
+       void SwitchAdapterToGlobalMode();
     }
 }

@@ -8,6 +8,12 @@ namespace Game.MiniGames
     {
         public QuestType QType { get; } = QuestType.Kitchen;
         public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType> OnMiniGameStart;
+
+        public void OnActionButtonClick()
+        {
+            throw new NotImplementedException();
+        }
 
         public void StartGame()
         {
