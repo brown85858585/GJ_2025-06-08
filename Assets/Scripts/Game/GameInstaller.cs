@@ -1,18 +1,15 @@
-using System;
 using CameraField;
 using Cinemachine;
 using Game.Interactions;
 using Game.MiniGames;
-using Game.Models;
 using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Game
 {
-    public class LevelRoomInstaller :  MonoBehaviour
+    public class GameInstaller :  MonoBehaviour
     {
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private GameObject virtualCameraObj;
@@ -25,7 +22,7 @@ namespace Game
         private PlayerController _playerController;
         private InputAdapter _inputAdapter;
         private InteractionSystem _interactionSystem;
-        private QuestsModel _questsModel;
+        private QuestsData _questsData;
         private QuestLog _questLog;
         private RoomView _roomView;
         private GameObject _firstLevel;
@@ -39,26 +36,16 @@ namespace Game
 
         private void Install()
         {
-            _questsModel = new QuestsModel();
-            _playerModel = new PlayerModel(new DayModel());
+            _questsData = new QuestsData();
+            _playerModel = new PlayerModel();
             
             _inputAdapter = new InputAdapter(playerInput);
             _interactionSystem = new InteractionSystem(_inputAdapter);
             
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCameraObj.transform);
             _miniGameCoordinator = new MiniGameCoordinator(_interactionSystem, _playerModel, _playerController);
-        }
-
-        private void SecondLevel()
-        {
-            var go = Instantiate(secondLevelPrefab, transform);
-               
-            var secondInstaller = go.GetComponent<LevelSecondInstaller>();
-            secondInstaller.Initialize(_playerController, _playerModel);
             
-            Destroy(_firstLevel);
-            _roomView = go.GetComponentInChildren<RoomView>();
-            _interactionSystem.AddNewInteractionCollection(_roomView);
+            _questLog = new QuestLog( _inputAdapter, _questsData);
         }
 
         void Start()
@@ -79,22 +66,28 @@ namespace Game
             QuestInit();
         }
 
+        private void SecondLevel()
+        {
+            var go = Instantiate(secondLevelPrefab, transform);
+               
+            var secondInstaller = go.GetComponent<LevelSecondInstaller>();
+            secondInstaller.Initialize(_playerController, _playerModel);
+            
+            Destroy(_firstLevel);
+            _roomView = go.GetComponentInChildren<RoomView>();
+            _interactionSystem.AddNewInteractionCollection(_roomView);
+        }
+
         private void QuestInit()
         {
             var questsView = Instantiate(questLogPrefab, transform);
-            _questLog = new QuestLog(questsView, _inputAdapter, _questsModel);
-            
-            _interactionSystem.OnInteraction += HandleCompleteLevelInteraction;
-            
-            foreach (var game in _miniGameCoordinator.Games)
-            {
-                game.OnMiniGameComplete += _questLog.CompleteQuest;
-            }
-            
+            _questLog.Initialization(questsView, _miniGameCoordinator);
+
             _questLog.AllQuestsCompleted += () =>
             {
                 _allQuestCompleted = true;
             };
+            _interactionSystem.OnInteraction += HandleCompleteLevelInteraction;
         }
 
         private void HandleCompleteLevelInteraction(ItemCategory obj)
@@ -129,6 +122,18 @@ namespace Game
 
             var cameraRotation = virtualCamera.gameObject.AddComponent<CameraRotation>();
             cameraRotation.Initialization(_inputAdapter, virtualCamera.transform);
+        }
+        
+        private void OnDestroy()
+        {
+            if (_interactionSystem != null)
+            {
+                _interactionSystem.OnInteraction -= HandlePlayerInteraction;
+                _interactionSystem.OnInteraction -= HandleCompleteLevelInteraction;
+            }
+
+            _interactionSystem?.Dispose();
+            _inputAdapter?.Dispose();
         }
     }
 }

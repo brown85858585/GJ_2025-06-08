@@ -1,30 +1,55 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.MiniGames;
 using Player.Interfaces;
+using UnityEngine.PlayerLoop;
 
 namespace Game.Quests
 {
-    public class QuestLog
+    public class QuestLog : IDisposable
     {
         public List<Quest> Quests { get; private set; }
         
         private QuestLogView _view;
         private IInputAdapter _inputAdapter;
-        private readonly QuestsModel _model;
+        private readonly QuestsData _data;
+        private MiniGameCoordinator _coordinator;
         public event Action AllQuestsCompleted;
 
-        public QuestLog(QuestLogView view, IInputAdapter inputAdapter, QuestsModel questsModel)
+        public QuestLog(IInputAdapter inputAdapter, QuestsData questsData)
         {
             Quests = new List<Quest>();
-            _inputAdapter = inputAdapter;
-            _view = view;
-            _model = questsModel;
-            AddQuests(_model.GetQuests());
             
-            _inputAdapter.OnQuests += HandleOpenQuestLog;
+            _inputAdapter = inputAdapter;
+            _data = questsData;
         }
 
+        public void Initialization(QuestLogView view, MiniGameCoordinator coordinator)
+        {
+            _view = view;
+            AddQuests(_data.GetQuests());
+            _inputAdapter.OnQuests += HandleOpenQuestLog;
+            
+            _coordinator = coordinator;
+            foreach (var game in coordinator.Games)
+            {
+                game.OnMiniGameComplete += CompleteQuest;
+            }
+        }
+        
+        public void Dispose()
+        {
+            _inputAdapter.OnQuests -= HandleOpenQuestLog;
+            _view = null;
+            _inputAdapter = null;
+            
+            foreach (var game in _coordinator.Games)
+            {
+                game.OnMiniGameComplete -= CompleteQuest;
+            }
+            _coordinator = null;
+        }
         private void HandleOpenQuestLog(bool press)
         {
             if (press)

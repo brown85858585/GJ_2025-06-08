@@ -1,7 +1,6 @@
 ﻿using System;
 using Game;
 using Game.MiniGames;
-using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
 
@@ -94,7 +93,7 @@ namespace Player
         private void DecreaseHealth()
         {
             _model.Stamina -= 20;
-            // Debug.Log(_model.Stamina);
+            // Debug.Log(_data.Stamina);
             if (_model.Stamina <= 0)
             {
                 OnDied?.Invoke();
