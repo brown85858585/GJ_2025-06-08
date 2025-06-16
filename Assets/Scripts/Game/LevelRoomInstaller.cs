@@ -42,13 +42,10 @@ namespace Game
             _playerController = new PlayerController(_playerModel, _inputAdapter, virtualCamera.transform);
             
             _interactionSystem = new InteractionSystem(_inputAdapter);
-            
-            _playerController.OnDied += SecondLevel;
         }
 
         private void SecondLevel()
         {
-            _playerController.OnDied -= SecondLevel;
             var go = Instantiate(secondLevelPrefab, transform);
                
             var secondInstaller = go.GetComponent<LevelSecondInstaller>();
@@ -72,7 +69,11 @@ namespace Game
             
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
-            _miniGameCoordinator = new MiniGameCoordinator(_interactionSystem, _playerModel);
+            _miniGameCoordinator = new MiniGameCoordinator(
+                _interactionSystem,
+                _playerModel,
+                _playerController,
+                _firstLevel);
             
             QuestInit();
         }

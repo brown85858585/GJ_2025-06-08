@@ -7,12 +7,6 @@ using UnityEngine;
 
 namespace Player
 {
-    public interface IPlayerController
-    {
-        public void SetPosition(Transform player, Vector3 position);
-        public void FixedUpdateMove();
-    }
-
     public class PlayerController : IPlayerController
     {
         public event Action OnDied;
@@ -21,7 +15,7 @@ namespace Player
         private IInputAdapter _input;
         private PlayerView _view;
         Vector2 _moveInput;
-        private bool _testClicked;
+        private bool _isRunMovement;
 
         private PlayerMovement _movement;
         private PlayerRunMovement _runMovement;
@@ -39,7 +33,7 @@ namespace Player
             _currentMovement = _movement;
             
             _input.OnPutItemDown += PutTheItemDown;
-            _input.OnTest += Testing;
+            // _input.OnTest += ToggleMovement;
         }
 
         public void InitView(PlayerView playerView)
@@ -52,7 +46,7 @@ namespace Player
 
         private void OnButtonClick()
         {
-            SetPosition(_view.transform, Vector3.zero);
+            SetPosition(Vector3.zero);
         }
 
         private void Update()
@@ -79,15 +73,15 @@ namespace Player
             _view.transform.rotation = newRotation;
         }
 
-        public void SetPosition(Transform player, Vector3 position)
+        public void SetPosition( Vector3 position)
         {
-            player.position = position;
+            _model.PlayerTransform.position = position;
         }
 
-        private void Testing(bool obj)
+        public void ToggleMovement()
         {
-            _testClicked = !_testClicked;
-            if (_testClicked)
+            _isRunMovement = !_isRunMovement;
+            if (_isRunMovement)
             {
                 _currentMovement = _runMovement;
             }
@@ -100,7 +94,7 @@ namespace Player
         private void DecreaseHealth()
         {
             _model.Stamina -= 20;
-            Debug.Log(_model.Stamina);
+            // Debug.Log(_model.Stamina);
             if (_model.Stamina <= 0)
             {
                 OnDied?.Invoke();
