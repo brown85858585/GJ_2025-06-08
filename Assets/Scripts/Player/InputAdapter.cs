@@ -70,6 +70,29 @@ namespace Player
             
         }
 
+        public void SwitchAdapterToMiniGameMode()
+        {
+            _accelerateAction.Disable();
+            _moveAction.Disable();
+  //          _lookAction.Disable();
+
+ //           _testAction.Disable();
+//            _interactAction.Disable();
+            _crouchAction.Disable();
+        }
+
+        public void SwitchAdapterToGlobalMode()
+        {
+            _accelerateAction.Enable();
+            _moveAction.Enable();
+            _lookAction.Enable();
+
+            _testAction.Enable();
+            _interactAction.Enable();
+            _crouchAction.Enable();
+        }
+
+
         private void OnPutItemDownInput(InputAction.CallbackContext obj)
         {
             OnPutItemDown?.Invoke();

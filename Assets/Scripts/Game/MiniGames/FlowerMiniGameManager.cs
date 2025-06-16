@@ -64,15 +64,15 @@ public class FlowerMiniGameManager : MonoBehaviour
         CreateMiniGameUI();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        // Обработка клавиши E во время активной игры
         if (isGameActive && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E нажата в MiniGameController!");
             OnActionButtonClick();
         }
     }
+
 
     private void FindSceneComponents()
     {
@@ -360,7 +360,7 @@ public class FlowerMiniGameManager : MonoBehaviour
         }
     }
 
-    private void OnActionButtonClick()
+    public void OnActionButtonClick()
     {
         if (!isGameActive)
         {
@@ -395,20 +395,21 @@ public class FlowerMiniGameManager : MonoBehaviour
         }
         else
         {
-            currentAttempts++;
+            //currentAttempts++;
             Debug.Log($"❌ Сейчас завянет! Попытка {currentAttempts}/{maxAttempts}");
             OnWateringAttempt?.Invoke(false);
 
-            if (currentAttempts >= maxAttempts)
-            {
+            //if (currentAttempts >= maxAttempts)
+            //{
                 Debug.Log("Попытки закончились!");
                 StartCoroutine(ShowResultAndEnd(1.5f));
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 // Показать результат на 1 секунду, затем перезапустить
-                StartCoroutine(ShowResultAndRestart(1f));
-            }
+                 //StartCoroutine(ShowResultAndEnd(1.5f));
+             //   StartCoroutine(ShowResultAndRestart(1f));
+           // }
         }
     }
 

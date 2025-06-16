@@ -4,22 +4,33 @@ using System.Linq;
 using Game.Interactions;
 using Game.Models;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Game.MiniGames
 {
+
+    // Пошаговый план:
+    // 1. Для отписки от событий нужно сохранять делегаты, которые были подписаны.
+    // 2. Для этого создайте словари для хранения делегатов для каждого мини-игры.
+    // 3. При подписке сохраняйте делегаты, при отписке используйте их.
+
     public class MiniGameCoordinator
     {
         private readonly IInteractionSystem _interactionSystem;
         private readonly PlayerModel _playerModel;
-        
         private readonly Dictionary<ItemCategory, IMiniGame> _factories = new();
         private readonly IPlayerController _playerController;
         private readonly GameObject _firstLevel;
 
+        // Словари для хранения делегатов
+        private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
+        private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _completeHandlers = new();
+        IMiniGame currentMiniGame;
+
         public List<IMiniGame> Games => _factories.Values.ToList();
-        
+
         public MiniGameCoordinator(IInteractionSystem interactionSystem, PlayerModel playerModel,
             IPlayerController playerController, GameObject firstLevel)
         {
@@ -29,21 +40,47 @@ namespace Game.MiniGames
             _firstLevel = firstLevel;
             RegisterGames();
             _interactionSystem.OnInteraction += HandleInteraction;
+            
         }
-        
+
         private void RegisterGames()
         {
             _factories[ItemCategory.Flower] = new FlowerMiniGame();
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame();
             _factories[ItemCategory.Computer] = new WorkMiniGame();
-            
+
             var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);
             (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel);
         }
 
+        private void SwitchOnInputSystem(Quests.QuestType questType)
+        {
+            if (questType != Quests.QuestType.Sprint)
+            {
+                var playerController = (_playerController as PlayerController);
+                playerController.InputAdaptep.SwitchAdapterToMiniGameMode();
+              
+            }
+            //Unsubscribe(currentGame);
+            
+        }
+
+        private void SwitchOffInputSystem(Quests.QuestType questType)
+        {
+            if (questType != Quests.QuestType.Sprint)
+            {
+                var playerController = (_playerController as PlayerController);
+                playerController.InputAdaptep.SwitchAdapterToGlobalMode();
+            }
+            Unsubscribe(currentMiniGame);
+            currentMiniGame = null; // Сбрасываем текущую игру после переключения
+        }
+
         private void HandleInteraction(ItemCategory category)
         {
+
+
             if (!_factories.TryGetValue(category, out var game)) return;
 
             if (category == ItemCategory.Flower && _playerModel.ItemInHand != ItemCategory.WateringCan)
@@ -52,18 +89,53 @@ namespace Game.MiniGames
                 return;
             }
 
+            if (currentMiniGame != null)
+            {
+                game.OnActionButtonClick();
+                return;
+            }
+
+            // Создаём делегаты и сохраняем их для последующей отписки
+            Action<Quests.QuestType> startHandler = SwitchOnInputSystem;
+            Action<Quests.QuestType> completeHandler = SwitchOffInputSystem;
+
+            // Сохраняем делегаты
+            _startHandlers[game] = startHandler;
+            _completeHandlers[game] = completeHandler;
+
+            // _interactionSystem.OnInteraction += game.OnActionButtonClick;
+            // Подписываемся на события
+
+
+            game.OnMiniGameStart += startHandler;
+            game.OnMiniGameComplete += completeHandler;
+            currentMiniGame = game;
+            
+
             if (category == ItemCategory.Door)
             {
                 _firstLevel.SetActive(false);
-                game.OnMiniGameComplete += _ =>
+                Action<Quests.QuestType> doorCompleteHandler = _ =>
                 {
-                    //todo утечка
                     _firstLevel.SetActive(true);
                     _playerController.SetPosition(Vector3.zero * 6);
                 };
+                game.OnMiniGameComplete += doorCompleteHandler;
+                // Можно также сохранить doorCompleteHandler, если потребуется отписка
             }
-            
+
             game.StartGame();
+        }
+
+        // Метод для отписки, если потребуется
+        private void Unsubscribe(IMiniGame game)
+        {
+            if (_startHandlers.TryGetValue(game, out var startHandler))
+                game.OnMiniGameStart -= startHandler;
+            if (_completeHandlers.TryGetValue(game, out var completeHandler))
+                game.OnMiniGameComplete -= completeHandler;
+            _startHandlers.Remove(game);
+            _completeHandlers.Remove(game);
         }
     }
 }
