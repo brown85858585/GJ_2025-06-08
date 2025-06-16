@@ -13362,7 +13362,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   id: 6363030e1298d014590fac684d2da3e4
-  category: 0
+  category: 6
 --- !u!1 &6695645509803983226
 GameObject:
   m_ObjectHideFlags: 0

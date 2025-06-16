@@ -28,6 +28,7 @@ namespace Game
         private InteractionItemCollection _interactibles;
         private GameObject _firstLevel;
         private MiniGameCoordinator _miniGameCoordinator;
+        private bool _allQuestCompleted;
 
         private void Awake()
         {
@@ -89,23 +90,31 @@ namespace Game
             {
                 game.OnMiniGameComplete += _questLog.CompleteQuest;
             }
+            
+            _questLog.AllQuestsCompleted += () =>
+            {
+                _allQuestCompleted = true;
+            };
         }
 
         private void HandleQuestInteraction(ItemCategory obj)
         {
             switch (obj)
             {
-                case ItemCategory.None:
-                    break;
                 case ItemCategory.Bed:
-                    _questLog.CompleteQuest(QuestType.Work);
+                    if (_allQuestCompleted)
+                    {
+                        SecondLevel();
+                    }
                     break;
-                case ItemCategory.Door:
-                    _questLog.CompleteQuest(QuestType.Sprint);
+                case ItemCategory.Computer:
+                    _questLog.CompleteQuest(QuestType.Work);
                     break;
                 case ItemCategory.Kitchen:
                     _questLog.CompleteQuest(QuestType.Kitchen);
                     break;
+                case ItemCategory.None:
+                case ItemCategory.Door:
                 case ItemCategory.Flower:
                 case ItemCategory.WateringCan:
                     break;

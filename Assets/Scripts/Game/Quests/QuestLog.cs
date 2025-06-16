@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Player.Interfaces;
 
 namespace Game.Quests
@@ -10,6 +12,7 @@ namespace Game.Quests
         private QuestLogView _view;
         private IInputAdapter _inputAdapter;
         private readonly QuestsModel _model;
+        public event Action AllQuestsCompleted;
 
         public QuestLog(QuestLogView view, IInputAdapter inputAdapter, QuestsModel questsModel)
         {
@@ -22,9 +25,9 @@ namespace Game.Quests
             _inputAdapter.OnQuests += HandleOpenQuestLog;
         }
 
-        private void HandleOpenQuestLog(bool obj)
+        private void HandleOpenQuestLog(bool press)
         {
-            if (obj)
+            if (press)
             {
                 _view?.OpenQuestLog();
             }
@@ -56,7 +59,19 @@ namespace Game.Quests
 
         public void CompleteQuest(QuestType questCategory)
         {
+            var quest = Quests.FirstOrDefault(q => q.Type == questCategory);
+            if (quest == null || quest.IsCompleted)
+                return;
+
+            quest.IsCompleted = true;
+
             _view.CompleteQuest(questCategory);
+
+            // Check if all quests are completed
+            if (Quests.Any(q => !q.IsCompleted))
+                return;
+
+            AllQuestsCompleted?.Invoke();
         }
         
 
