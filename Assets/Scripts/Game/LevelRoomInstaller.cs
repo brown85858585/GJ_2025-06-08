@@ -25,7 +25,7 @@ namespace Game
         private InteractionSystem _interactionSystem;
         private QuestsModel _questsModel;
         private QuestLog _questLog;
-        private InteractionItemCollection _interactibles;
+        private RoomView _roomView;
         private GameObject _firstLevel;
         private MiniGameCoordinator _miniGameCoordinator;
         private bool _allQuestCompleted;
@@ -53,20 +53,21 @@ namespace Game
             secondInstaller.Initialize(_playerController, _playerModel);
             
             Destroy(_firstLevel);
-            _interactibles = go.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem.AddNewInteractionCollection(_interactibles);
+            _roomView = go.GetComponentInChildren<RoomView>();
+            _interactionSystem.AddNewInteractionCollection(_roomView);
         }
 
         void Start()
         {
+            
+            _firstLevel =Instantiate(firstLevelPrefab, transform);
+            _roomView = _firstLevel.GetComponentInChildren<RoomView>();
+            
             PlayerInit();
 
             CameraInit();
             
-            _firstLevel =Instantiate(firstLevelPrefab, transform);
-            
-            _interactibles = _firstLevel.GetComponentInChildren<InteractionItemCollection>();
-            _interactionSystem.AddNewInteractionCollection(_interactibles);
+            _interactionSystem.AddNewInteractionCollection(_roomView);
             
             _interactionSystem.OnInteraction += HandlePlayerInteraction;
 
@@ -117,6 +118,7 @@ namespace Game
             
             var component = go.GetComponent<PlayerView>();
             _playerController.InitView(component);
+            _playerController.SetPosition(_roomView.StartPoint.position);
         }
 
         private void CameraInit()
