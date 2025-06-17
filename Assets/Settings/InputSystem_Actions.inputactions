@@ -1052,6 +1052,15 @@
                     "id": "1e7b0904-1e45-42b3-8660-5811b4c141eb",
                     "expectedControlType": "",
                     "processors": "",
+                    "interactions": "Hold,Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StartMiniGame",
+                    "type": "PassThrough",
+                    "id": "d1a7dd66-71f5-4fbe-a5e4-1d46cb065608",
+                    "expectedControlType": "",
+                    "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
                 }
@@ -1061,10 +1070,43 @@
                     "name": "",
                     "id": "c737374e-a867-4cf0-8331-57628bfc5800",
                     "path": "<Keyboard>/e",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "GameInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "adcba995-0b1d-4c54-bb3e-9b30c774561c",
+                    "path": "<Mouse>/clickCount",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "GameInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f74171e-70aa-4a99-9984-13b2c0c0e21e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "StartMiniGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1bae94b-16d7-43a1-8bde-5762c3779e14",
+                    "path": "<Mouse>/clickCount",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "StartMiniGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

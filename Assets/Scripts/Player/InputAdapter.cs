@@ -26,6 +26,7 @@ namespace Player
         
         private readonly InputAction _NavigateAction;
         private readonly InputAction _GameInteractAction;
+        private readonly InputAction _GameStartAction;
 
         private PlayerInput BasePlayerInput;
 
@@ -44,6 +45,7 @@ namespace Player
             _questsAction = playerInput.actions.FindAction("Quests", true);
             _NavigateAction = playerInput.actions.FindAction("Navigate", true);
             _GameInteractAction = playerInput.actions.FindAction("GameInteract", true);
+            _GameStartAction = playerInput.actions.FindAction("StartMiniGame", true);
 
 
 
@@ -69,7 +71,7 @@ namespace Player
             _testAction.started += OnTestInput;
             _testAction.canceled += OnTestInput;
             _GameInteractAction.started += OnGameInteractInput;
-            
+            _GameStartAction.started += OnGameStartInput;
 
 
 
@@ -79,11 +81,13 @@ namespace Player
             _interactAction.started += OnInteractInput;
             _crouchAction.started += OnPutItemDownInput;
 
-          
+  
             playerInput.actions.FindActionMap("UI", true).Disable();
             playerInput.actions.FindActionMap("GInteractive", true).Disable();
 
         }
+
+
 
         public void SwitchAdapterToMiniGameMode()
         {
@@ -107,6 +111,13 @@ namespace Player
             var readValue = obj.ReadValue<float>();
             OnGameInteract?.Invoke(readValue != 0);
             if (obj.canceled) OnGameInteract?.Invoke(false);
+        }
+
+        private void OnGameStartInput(InputAction.CallbackContext obj)
+        {
+           // var readValue = obj.ReadValue<float>();
+           // OnGameInteract?.Invoke(readValue != 0);
+           // if (obj.canceled) OnGameInteract?.Invoke(false);
         }
 
         private void OnPutItemDownInput(InputAction.CallbackContext obj)

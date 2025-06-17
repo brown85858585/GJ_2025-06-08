@@ -129,7 +129,7 @@ namespace Game.MiniGames
 
         public void OnActionButtonClick()
         {
-            _miniGameController.OnActionButtonClick();
+            //_miniGameController.OnActionButtonClick();
         }
     }
 }
