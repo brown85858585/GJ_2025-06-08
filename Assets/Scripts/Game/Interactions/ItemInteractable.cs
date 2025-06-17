@@ -14,7 +14,7 @@ namespace Game.Interactions
     [RequireComponent(typeof(Collider))]
     public class ItemInteractable : MonoBehaviour, IInteractable
     {
-        [SerializeField] private LayerMask targetMask;
+        [SerializeField] private LayerMask targetMask = 1 << 6;
         [SerializeField] private string id;
         [SerializeField] private ItemCategory category;
         
