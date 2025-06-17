@@ -76,5 +76,19 @@ namespace Game.Interactions
                 CurrentInteractable = null;
             }
         }
+
+        public void ClearAll()
+        {
+            if (_roomView.ObjectsToInteract != null)
+            {
+                foreach (var item in _roomView.ObjectsToInteract)
+                {
+                    item.OnEnter -= SetItemInteractable;
+                    item.OnExit -= RemoveItemInteractable;
+                }
+                _roomView.ObjectsToInteract.Clear();
+            }
+            CurrentInteractable = null;
+        }
     }
 }

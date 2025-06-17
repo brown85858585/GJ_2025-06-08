@@ -43,7 +43,7 @@ namespace Player
             _interactAction = playerInput.actions.FindAction("Interact", true);
             _crouchAction = playerInput.actions.FindAction("Crouch", true);
             _questsAction = playerInput.actions.FindAction("Quests", true);
-            _NavigateAction = playerInput.actions.FindAction("Navigate", true);
+
             _GameInteractAction = playerInput.actions.FindAction("GameInteract", true);
             _GameStartAction = playerInput.actions.FindAction("StartMiniGame", true);
 
@@ -57,12 +57,9 @@ namespace Player
             _testAction.Enable();
             _interactAction.Enable();
             _crouchAction.Enable();
-            _NavigateAction.Enable();
+
             _GameInteractAction.Enable();
-            _NavigateAction.performed += context =>
-            {
-               Debug.Log("Navigate " + context.action.name);
-            };
+
             _moveAction.performed += OnMoveInput;
             _moveAction.canceled  += OnMoveInput;
             _lookAction.performed += OnLook;
@@ -143,8 +140,7 @@ namespace Player
             var readValue = obj.ReadValue<float>();
             OnQuests?.Invoke(readValue != 0);
         }
-
-
+        
         private void OnLook(InputAction.CallbackContext obj)
         {
             var readValue = obj.ReadValue<Vector2>();

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Game.Quests
 {
-	public class QuestsModel
+	public class QuestsData
 	{
-		public KitchenQuest KitchenQuest { get; private set; } = new();
-		public SprintQuest SprintQuest { get; private set; } = new();
-		public FlowerQuest FlowerQuest { get; private set; } = new();
-		public WorkQuest WorkQuest { get; private set; } = new();
+		private KitchenQuest KitchenQuest { get; } = new();
+		private SprintQuest SprintQuest { get; } = new();
+		private FlowerQuest FlowerQuest { get; } = new();
+		private WorkQuest WorkQuest { get; } = new();
 
-		public int DifficultyLevel { get; set; } = 1;
+		// public int DifficultyLevel { get; set; } = 1;
 
 		public IEnumerable<Quest> GetQuests()
 		{
@@ -24,6 +24,13 @@ namespace Game.Quests
 
 			return quests;
 		}
+	}
+
+	public class Quest
+	{
+		public QuestType Type { get; protected set; }
+		public string Description { get; protected set; }	
+		public bool IsCompleted { get; set; }
 	}
 
 	public class KitchenQuest : Quest
@@ -64,13 +71,6 @@ namespace Game.Quests
 			Description = "Complete your work tasks.";
 			IsCompleted = false;
 		}
-	}
-
-	public class Quest
-	{
-		public QuestType Type { get; protected set; }
-		public string Description { get; protected set; }	
-		public bool IsCompleted { get; set; }
 	}
 
 	public enum QuestType

@@ -84,6 +84,10 @@ namespace Player
         public void TakeObject(Transform obj)
         {
             _saveCurrentObj = obj;
+
+            var rb = _saveCurrentObj.gameObject.GetComponent<Rigidbody>();
+            Destroy(rb);       
+            
             _saveLastParentObj = obj.parent;
             obj.SetParent(rightHand.transform);
             obj.position = rightHand.position;
@@ -93,6 +97,8 @@ namespace Player
         {
             if (_saveCurrentObj == null) return;
             
+            _saveCurrentObj.gameObject.AddComponent<Rigidbody>().mass = 0.2f;
+
             _saveCurrentObj.SetParent(_saveLastParentObj);
             _saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
             _saveLastParentObj = null;

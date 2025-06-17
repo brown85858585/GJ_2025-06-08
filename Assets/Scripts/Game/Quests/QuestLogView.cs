@@ -21,7 +21,11 @@ namespace Game.Quests
         {
             foreach (var quest in quests)
             {
-                if (_quests.ContainsKey(quest.Type)) continue;
+                if (_quests.ContainsKey(quest.Type))
+                {
+                    _quests[quest.Type].Initialize($"{quest.Type}: {quest.Description}", quest.IsCompleted);
+                    continue;
+                }
         
                 var questItem = Instantiate(_questViewPrefab, questListContainer);
                 questItem.name = quest.Type + "Quest";
