@@ -14,7 +14,8 @@ namespace Game.MiniGames
 
         public QuestType QType { get; } = QuestType.Sprint;
         public event Action<QuestType> OnMiniGameComplete;
-        
+        public event Action<QuestType> OnMiniGameStart;
+
         public ParkMiniGame(IPlayerController playerController)
         {
             _playerController = playerController;
@@ -45,6 +46,11 @@ namespace Game.MiniGames
             _playerController.ToggleMovement();
             Debug.Log("Park Mini Game Completed");
             OnMiniGameComplete?.Invoke(QType);
+        }
+
+        public void OnActionButtonClick()
+        {
+            throw new NotImplementedException();
         }
     }
 }

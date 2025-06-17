@@ -1,7 +1,5 @@
 ﻿using System;
 using Game;
-using Game.MiniGames;
-using Game.Models;
 using Player.Interfaces;
 using UnityEngine;
 
@@ -9,8 +7,13 @@ namespace Player
 {
     public class PlayerController : IPlayerController
     {
-        public event Action OnDied;
+        public Transform CamTransform
+        {
+            set => _movement.VirtualCamera = value;
+        }
 
+        public event Action OnDied;
+        public IInputAdapter InputAdaptep => _input;
         private PlayerModel _model;
         private IInputAdapter _input;
         private PlayerView _view;
@@ -23,13 +26,13 @@ namespace Player
         public IPlayerMovement Movement => _currentMovement;
         public PlayerModel Model => _model;
 
-        public PlayerController(PlayerModel model, IInputAdapter input, Transform camTransform)
+        public PlayerController(PlayerModel model, IInputAdapter input)
         {
             _model = model;
             _input = input;
 
             _runMovement = new PlayerRunMovement(_input);
-            _movement = new PlayerMovement(_input, model, camTransform);
+            _movement = new PlayerMovement(_input, model);
             _currentMovement = _movement;
             
             _input.OnPutItemDown += PutTheItemDown;
@@ -94,7 +97,7 @@ namespace Player
         private void DecreaseHealth()
         {
             _model.Stamina -= 20;
-            // Debug.Log(_model.Stamina);
+            // Debug.Log(_data.Stamina);
             if (_model.Stamina <= 0)
             {
                 OnDied?.Invoke();
@@ -104,7 +107,16 @@ namespace Player
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
             Debug.Log(item);
-            if (item != ItemCategory.WateringCan) return;
+            if (item != ItemCategory.WateringCan)
+            {
+                if (item == ItemCategory.Flower)
+                {
+                    return;
+                }
+
+                PutTheItemDown();
+                return;
+            }
             
             _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);

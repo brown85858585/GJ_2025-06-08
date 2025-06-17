@@ -11,6 +11,7 @@ namespace Game.MiniGames
         private readonly GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Flower;
         public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType> OnMiniGameStart;
 
         public FlowerMiniGame()
         {
@@ -60,6 +61,7 @@ namespace Game.MiniGames
         
         public void StartGame()
         {
+            OnMiniGameStart?.Invoke(QType);
             StartFlowerMiniGame();
         }
 
@@ -123,6 +125,11 @@ namespace Game.MiniGames
         public void TestMiniGame()
         {
             StartFlowerMiniGame();
+        }
+
+        public void OnActionButtonClick()
+        {
+            //_miniGameController.OnActionButtonClick();
         }
     }
 }

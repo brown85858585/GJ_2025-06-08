@@ -7,6 +7,8 @@ namespace Game.MiniGames
     {
         public QuestType QType { get; }
         public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType> OnMiniGameStart;
+        void OnActionButtonClick();
         void StartGame();
     }
 }

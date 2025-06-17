@@ -8,10 +8,16 @@ namespace Game.MiniGames
     {
         public QuestType QType { get; } = QuestType.Work;
         public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType> OnMiniGameStart;
+
+        public void OnActionButtonClick()
+        {
+            throw new NotImplementedException();
+        }
 
         public void StartGame()
         {
-            Debug.Log("Kitchen Mini Game Started");
+            Debug.Log("Work Mini Game Started");
             OnMiniGameComplete?.Invoke(QType);
         }
     }

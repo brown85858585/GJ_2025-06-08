@@ -5,9 +5,8 @@ namespace CameraField
 {
     public class CameraRotation : MonoBehaviour
     {
-        private  IInputAdapter _inputAdapter;
+        private IInputAdapter _inputAdapter;
         private Transform _camera;
-
 
         [Header("Настройки")]  
         public float sensX = 2f;    

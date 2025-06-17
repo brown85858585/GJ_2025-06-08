@@ -44,6 +44,8 @@ namespace Utilities
         private Tweener _overshootTweener;
         private Tweener _settleTweener;
         private Tweener _hideTweener;
+        
+        public float scaleFactor = 1;
 
 
         public bool IsVisible { get; private set; }
@@ -52,16 +54,16 @@ namespace Utilities
         {
             Debug.Log($"Show {gameObject.name}");
             KillTweens();
-            transform.localScale = startScale;
+            transform.localScale = startScale * scaleFactor;
             IsVisible = true;
 
             _overshootTweener = transform
-                .DOScale(overshootScale, showDuration * overshootRatio)
+                .DOScale(overshootScale * scaleFactor, showDuration * overshootRatio)
                 .SetEase(showEase)
                 .OnComplete(() => OnShowPeak?.Invoke());
 
             _settleTweener = transform
-                .DOScale(endScale, showDuration * settleRatio)
+                .DOScale(endScale * scaleFactor, showDuration * settleRatio)
                 .SetEase(showEase)
                 .OnComplete(() =>
                     OnShowComplete?.Invoke());

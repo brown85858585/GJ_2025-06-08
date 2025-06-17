@@ -2,15 +2,17 @@
 using Game.MiniGames;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks.Triggers;
 
 public class FlowerMiniGameManager : MonoBehaviour
 {
     [Header("Scene References")]
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private GameObject panel;
-    
+
     public GameObject Panel => panel;
-    
+
     private GameObject miniGamePanel;
 
     [Header("UI Elements")]
@@ -18,20 +20,24 @@ public class FlowerMiniGameManager : MonoBehaviour
     private RectTransform trackBackground;
     private Button actionButton;
     private Button exitButton;
+    private Button startButton; // Новая кнопка старта
+    private Button startExitButton;
     private Text instructionText;
+    private GameObject startScreen; // Стартовый экран
+    private GameObject gameScreen;  // Игровой экран
 
     [Header("Game Settings")]
-    public float indicatorSpeed = 200f;
-    public float trackHeight = 300f; // Уменьшили для помещения на экран
+    public float indicatorSpeed = 100f; // Уменьшена скорость
+    public float trackHeight = 300f;
     public float trackWidth = 60f;
-    public float zoneHeight = 75f; // Высота каждой зоны
+    public float zoneHeight = 75f;
     public int maxAttempts = 3;
 
     [Header("Colors")]
-    public Color darkRedColor = new Color(0.6f, 0f, 0f); // Темно-красный
+    public Color darkRedColor = new Color(0.6f, 0f, 0f);
     public Color yellowZoneColor = Color.yellow;
     public Color greenZoneColor = Color.green;
-    public Color brightRedColor = Color.red; // Ярко-красный
+    public Color brightRedColor = Color.red;
     public Color indicatorColor = Color.black;
 
     private bool isGameActive = false;
@@ -39,6 +45,7 @@ public class FlowerMiniGameManager : MonoBehaviour
     private int currentAttempts = 0;
     private float indicatorPosition = 0f;
     private float trackTop, trackBottom;
+    private bool gameStarted = false; // Флаг для отслеживания состояния
 
     // Зоны для проверки
     private RectTransform darkRedZone;
@@ -46,13 +53,22 @@ public class FlowerMiniGameManager : MonoBehaviour
     private RectTransform greenZone;
     private RectTransform brightRedZone;
 
+    [Header("Input")]
+    [SerializeField] private InputActionReference actionInputAction; // E клавиша
+    [SerializeField] private InputActionReference startInputAction;  // Пробел для старта
+
+    // Если InputActionReference не назначены, используем коды клавиш
+    private bool useDirectInput = false;
+
     // События
     public System.Action OnMiniGameComplete;
     public System.Action<bool> OnWateringAttempt;
 
     void Start()
     {
+      
         FindSceneComponents();
+        SetupInput();
 
         // Убедиться что панель выключена при старте
         if (miniGamePanel != null)
@@ -64,14 +80,71 @@ public class FlowerMiniGameManager : MonoBehaviour
         CreateMiniGameUI();
     }
 
-    void Update()
+    private void SetupInput()
     {
-        // Обработка клавиши E во время активной игры
-        if (isGameActive && Input.GetKeyDown(KeyCode.E))
+        // Проверить есть ли назначенные InputActionReference
+        if (actionInputAction == null || startInputAction == null)
         {
-            Debug.Log("E нажата в MiniGameController!");
+            useDirectInput = true;
+            Debug.Log("InputActionReference не назначены, используем прямой ввод клавиш");
+            return;
+        }
+
+        // Подписаться на события Input System
+        actionInputAction.action.performed += OnActionInput;
+        startInputAction.action.performed += OnStartInput;
+
+        Debug.Log("Input System настроена для мини-игры");
+    }
+
+    private void OnDestroy()
+    {
+        // Отписаться от событий при уничтожении объекта
+        if (actionInputAction != null)
+            actionInputAction.action.performed -= OnActionInput;
+
+        if (startInputAction != null)
+            startInputAction.action.performed -= OnStartInput;
+    }
+
+    private void OnActionInput(InputAction.CallbackContext context)
+    {
+        // Обработка клавиши действия (E) через Input System
+        if (gameStarted && isGameActive)
+        {
+            Debug.Log("E нажата через Input System!");
             OnActionButtonClick();
         }
+    }
+
+    private void OnStartInput(InputAction.CallbackContext context)
+    {
+        // Обработка клавиши старта (Пробел) через Input System
+        if (!gameStarted)
+        {
+            Debug.Log("Пробел нажат через Input System - запуск игры!");
+            StartGame();
+        }
+    }
+
+    void Update()
+    {
+        // Использовать прямой ввод только если Input System не настроена
+        if (!useDirectInput) return;
+        /*
+        // Fallback на старую Input System если InputActionReference не назначены
+        if (gameStarted && isGameActive && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E нажата через старую Input System!");
+            OnActionButtonClick();
+        }
+
+        if (!gameStarted && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Пробел нажат через старую Input System - запуск игры!");
+            StartGame();
+        }
+        */
     }
 
     private void FindSceneComponents()
@@ -102,45 +175,96 @@ public class FlowerMiniGameManager : MonoBehaviour
         // Очистить существующие элементы (если есть)
         ClearExistingElements();
 
-        // Создать вертикальный трек
-        CreateVerticalTrack();
+        // Создать стартовый экран
+        CreateStartScreen();
 
-        // Создать зоны (красные, зеленая, желтая)
-        CreateColorZones();
+        // Создать игровой экран (но скрыть его)
+        CreateGameScreen();
 
-        // Создать индикатор
-        CreateVerticalIndicator();
-
-        // Создать кнопки и текст
-        CreateButtons();
-        CreateInstructionText();
-
-        // Вычислить границы трека
-        CalculateTrackBounds();
-
-        Debug.Log("Вертикальная мини-игра готова!");
+        Debug.Log("Мини-игра с стартовым экраном готова!");
     }
 
-    private void ClearExistingElements()
+    private void CreateStartScreen()
     {
-        // Удалить старые элементы если они есть
-        Transform[] children = miniGamePanel.GetComponentsInChildren<Transform>();
-        for (int i = children.Length - 1; i >= 0; i--)
-        {
-            if (children[i] != miniGamePanel.transform)
-            {
-                DestroyImmediate(children[i].gameObject);
-            }
-        }
+        // Контейнер для стартового экрана
+        startScreen = new GameObject("StartScreen");
+        startScreen.transform.SetParent(miniGamePanel.transform, false);
+
+        RectTransform startRect = startScreen.AddComponent<RectTransform>();
+        startRect.anchorMin = Vector2.zero;
+        startRect.anchorMax = Vector2.one;
+        startRect.offsetMin = Vector2.zero;
+        startRect.offsetMax = Vector2.zero;
+
+        // Фон стартового экрана
+        Image startBg = startScreen.AddComponent<Image>();
+        startBg.color = new Color(0, 0, 0, 0.7f); // Полупрозрачный черный
+
+        // Заголовок
+        CreateStartText("Мини-игра: Полив цветка", new Vector2(0, 80), 24, Color.white);
+
+        // Инструкции
+        CreateStartText("Остановите индикатор в зеленой или желтой зоне", new Vector2(0, 40), 16, Color.yellow);
+        CreateStartText("🟢 Зеленая зона = отлично", new Vector2(0, 10), 14, Color.green);
+        CreateStartText("🟡 Желтая зона = хорошо", new Vector2(0, -10), 14, Color.yellow);
+        CreateStartText("🔴 Красная зона = плохо", new Vector2(0, -30), 14, Color.red);
+
+        // Кнопка старта
+        startButton = CreateStartButton("StartButton", "Начать игру (Пробел)", new Vector2(0, -80), new Color(0.2f, 0.8f, 0.2f), new Vector2(200, 50));
+        startButton.onClick.AddListener(StartGame);
+
+        // Кнопка выхода на стартовом экране
+        startExitButton = CreateStartButton("StartExitButton", "Выход", new Vector2(0, -140), Color.gray, new Vector2(120, 40));
+        startExitButton.onClick.AddListener(ExitMiniGame);
+    }
+
+    private void CreateStartText(string text, Vector2 position, int fontSize, Color color)
+    {
+        GameObject textObj = new GameObject("StartText");
+        textObj.transform.SetParent(startScreen.transform, false);
+
+        Text startText = textObj.AddComponent<Text>();
+        startText.text = text;
+        startText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        startText.alignment = TextAnchor.MiddleCenter;
+        startText.color = color;
+        startText.fontSize = fontSize;
+
+        RectTransform textRect = textObj.GetComponent<RectTransform>();
+        textRect.sizeDelta = new Vector2(400, 30);
+        textRect.anchoredPosition = position;
+    }
+
+    private void CreateGameScreen()
+    {
+
+        // Контейнер для игрового экрана
+        gameScreen = new GameObject("GameScreen");
+        gameScreen.transform.SetParent(miniGamePanel.transform, false);
+        gameScreen.SetActive(false); // Изначально скрыт
+
+        RectTransform gameRect = gameScreen.AddComponent<RectTransform>();
+        gameRect.anchorMin = Vector2.zero;
+        gameRect.anchorMax = Vector2.one;
+        gameRect.offsetMin = Vector2.zero;
+        gameRect.offsetMax = Vector2.zero;
+
+        // Теперь все игровые элементы будут родителями gameScreen вместо miniGamePanel
+        CreateVerticalTrack();
+        CreateColorZones();
+        CreateVerticalIndicator();
+        CreateGameButtons();
+        CreateInstructionText();
+        CalculateTrackBounds();
     }
 
     private void CreateVerticalTrack()
     {
         GameObject trackObj = new GameObject("Track");
-        trackObj.transform.SetParent(miniGamePanel.transform, false);
+        trackObj.transform.SetParent(gameScreen.transform, false); // Родитель = gameScreen
 
         Image trackImage = trackObj.AddComponent<Image>();
-        trackImage.color = Color.clear; // ← УБИРАЕМ БЕЛЫЙ ФОН! Делаем прозрачным
+        trackImage.color = Color.clear;
 
         trackBackground = trackObj.GetComponent<RectTransform>();
         trackBackground.sizeDelta = new Vector2(trackWidth, trackHeight);
@@ -149,29 +273,21 @@ public class FlowerMiniGameManager : MonoBehaviour
 
     private void CreateColorZones()
     {
-        // 4 зоны сверху вниз: темно-красная, желтая, зеленая, ярко-красная
         float startY = trackHeight / 2f - zoneHeight / 2f;
 
-        // Темно-красная зона (сверху)
         darkRedZone = CreateZone("DarkRedZone", darkRedColor, new Vector2(0, startY), new Vector2(trackWidth, zoneHeight));
-
-        // Желтая зона
         yellowZone = CreateZone("YellowZone", yellowZoneColor, new Vector2(0, startY - zoneHeight), new Vector2(trackWidth, zoneHeight));
-
-        // Зеленая зона
         greenZone = CreateZone("GreenZone", greenZoneColor, new Vector2(0, startY - zoneHeight * 2), new Vector2(trackWidth, zoneHeight));
-
-        // Ярко-красная зона (снизу)
         brightRedZone = CreateZone("BrightRedZone", brightRedColor, new Vector2(0, startY - zoneHeight * 3), new Vector2(trackWidth, zoneHeight));
     }
 
     private RectTransform CreateZone(string name, Color color, Vector2 position, Vector2 size)
     {
         GameObject zoneObj = new GameObject(name);
-        zoneObj.transform.SetParent(miniGamePanel.transform, false);
+        zoneObj.transform.SetParent(gameScreen.transform, false); // Родитель = gameScreen
 
         Image zoneImage = zoneObj.AddComponent<Image>();
-        zoneImage.color = new Color(color.r, color.g, color.b, 0.7f); // Полупрозрачность
+        zoneImage.color = new Color(color.r, color.g, color.b, 0.7f);
 
         RectTransform zoneRect = zoneObj.GetComponent<RectTransform>();
         zoneRect.sizeDelta = size;
@@ -183,16 +299,15 @@ public class FlowerMiniGameManager : MonoBehaviour
     private void CreateVerticalIndicator()
     {
         GameObject indicatorObj = new GameObject("Indicator");
-        indicatorObj.transform.SetParent(miniGamePanel.transform, false);
+        indicatorObj.transform.SetParent(gameScreen.transform, false); // Родитель = gameScreen
 
         Image indicatorImage = indicatorObj.AddComponent<Image>();
         indicatorImage.color = indicatorColor;
 
         indicator = indicatorObj.GetComponent<RectTransform>();
-        indicator.sizeDelta = new Vector2(trackWidth + 10, 15); // Немного шире трека
+        indicator.sizeDelta = new Vector2(trackWidth + 10, 15);
         indicator.anchoredPosition = new Vector2(0, -trackHeight / 2f);
 
-        // Добавить стрелку (треугольник справа)
         CreateArrow();
     }
 
@@ -207,25 +322,25 @@ public class FlowerMiniGameManager : MonoBehaviour
         RectTransform arrowRect = arrowObj.GetComponent<RectTransform>();
         arrowRect.sizeDelta = new Vector2(20, 20);
         arrowRect.anchoredPosition = new Vector2(trackWidth / 2f + 15, 0);
-
-        // Можно добавить спрайт треугольника или использовать простой квадрат
     }
 
-    private void CreateButtons()
+    private void CreateGameButtons()
     {
         // Кнопка действия (нажми E)
-        actionButton = CreateButton("ActionButton", "Нажми E", new Vector2(-100, -trackHeight / 2f - 50), new Color(0.2f, 0.6f, 1f));
+        actionButton = CreateButton("ActionButton", "Нажми E", new Vector2(-100, -trackHeight / 2f - 50), new Color(0.2f, 0.6f, 1f), new Vector2(80, 40));
         actionButton.onClick.AddListener(OnActionButtonClick);
+        actionButton.transform.SetParent(gameScreen.transform, false);
 
         // Кнопка выхода
-        exitButton = CreateButton("ExitButton", "Выход", new Vector2(100, -trackHeight / 2f - 50), Color.gray);
-        exitButton.onClick.AddListener(OnExitButtonClick);
+        exitButton = CreateButton("ExitButton", "Выход", new Vector2(100, -trackHeight / 2f - 50), Color.gray, new Vector2(80, 40));
+        exitButton.onClick.AddListener(ExitMiniGame);
+        exitButton.transform.SetParent(gameScreen.transform, false);
     }
 
-    private Button CreateButton(string name, string text, Vector2 position, Color color)
+    private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size)
     {
         GameObject buttonObj = new GameObject(name);
-        buttonObj.transform.SetParent(miniGamePanel.transform, false);
+        buttonObj.transform.SetParent(startScreen.transform, false); // ← ВАЖНО! Родитель = startScreen
 
         Image buttonImage = buttonObj.AddComponent<Image>();
         buttonImage.color = color;
@@ -233,7 +348,41 @@ public class FlowerMiniGameManager : MonoBehaviour
         Button button = buttonObj.AddComponent<Button>();
 
         RectTransform buttonRect = buttonObj.GetComponent<RectTransform>();
-        buttonRect.sizeDelta = new Vector2(80, 40);
+        buttonRect.sizeDelta = size;
+        buttonRect.anchoredPosition = position;
+
+        // Текст на кнопке
+        GameObject textObj = new GameObject("Text");
+        textObj.transform.SetParent(buttonObj.transform, false);
+
+        Text buttonText = textObj.AddComponent<Text>();
+        buttonText.text = text;
+        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        buttonText.alignment = TextAnchor.MiddleCenter;
+        buttonText.color = Color.white;
+        buttonText.fontSize = 12;
+
+        RectTransform textRect = textObj.GetComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.offsetMin = Vector2.zero;
+        textRect.offsetMax = Vector2.zero;
+
+        return button;
+    }
+
+    private Button CreateButton(string name, string text, Vector2 position, Color color, Vector2 size)
+    {
+        GameObject buttonObj = new GameObject(name);
+        buttonObj.transform.SetParent(gameScreen.transform, false); // Временно, потом переназначим
+
+        Image buttonImage = buttonObj.AddComponent<Image>();
+        buttonImage.color = color;
+
+        Button button = buttonObj.AddComponent<Button>();
+
+        RectTransform buttonRect = buttonObj.GetComponent<RectTransform>();
+        buttonRect.sizeDelta = size;
         buttonRect.anchoredPosition = position;
 
         // Текст на кнопке
@@ -259,7 +408,7 @@ public class FlowerMiniGameManager : MonoBehaviour
     private void CreateInstructionText()
     {
         GameObject textObj = new GameObject("InstructionText");
-        textObj.transform.SetParent(miniGamePanel.transform, false);
+        textObj.transform.SetParent(gameScreen.transform, false); // Родитель = gameScreen
 
         instructionText = textObj.AddComponent<Text>();
         instructionText.text = "Нажми E в нужный момент!";
@@ -271,6 +420,18 @@ public class FlowerMiniGameManager : MonoBehaviour
         RectTransform textRect = textObj.GetComponent<RectTransform>();
         textRect.sizeDelta = new Vector2(250, 40);
         textRect.anchoredPosition = new Vector2(trackWidth + 130, trackHeight / 2f);
+    }
+
+    private void ClearExistingElements()
+    {
+        Transform[] children = miniGamePanel.GetComponentsInChildren<Transform>();
+        for (int i = children.Length - 1; i >= 0; i--)
+        {
+            if (children[i] != miniGamePanel.transform)
+            {
+                DestroyImmediate(children[i].gameObject);
+            }
+        }
     }
 
     private void CalculateTrackBounds()
@@ -289,12 +450,59 @@ public class FlowerMiniGameManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("🎮 Запуск вертикальной мини-игры");
+        Debug.Log("🎮 Открытие мини-игры (стартовый экран)");
 
-        // ВКЛЮЧИТЬ панель при запуске мини-игры
+        // Включить Input Actions если используется новая система
+        if (!useDirectInput)
+        {
+            actionInputAction?.action.Enable();
+            startInputAction?.action.Enable();
+        }
+
         miniGamePanel.SetActive(true);
-        Debug.Log("MiniGamePanel включена!");
+        if (startScreen != null)
+        {
+            startScreen.SetActive(true);
+            Debug.Log("Стартовый экран скрыт!");
+        }
 
+        // Показать игровой экран
+        if (gameScreen != null)
+        {
+            gameScreen.SetActive(false);
+            Debug.Log("Игровой экран показан!");
+        }
+
+        // ВКЛЮЧИТЬ панель с стартовым экраном
+
+
+
+
+        gameStarted = false;
+        isGameActive = false;
+
+        Debug.Log("Стартовый экран показан!");
+    }
+
+    private void StartGame()
+    {
+        Debug.Log("🎮 Запуск игры!");
+
+        // Скрыть стартовый экран, показать игровой
+        if (startScreen != null)
+        {
+            startScreen.SetActive(false);
+            Debug.Log("Стартовый экран скрыт!");
+        }
+
+        // Показать игровой экран
+        if (gameScreen != null)
+        {
+            gameScreen.SetActive(true);
+            Debug.Log("Игровой экран показан!");
+        }
+
+        gameStarted = true;
         currentAttempts = 0;
         isGameActive = true;
 
@@ -307,6 +515,14 @@ public class FlowerMiniGameManager : MonoBehaviour
         Debug.Log("🎮 Завершение мини-игры");
 
         isGameActive = false;
+        gameStarted = false;
+
+        // Отключить Input Actions если используется новая система
+        if (!useDirectInput)
+        {
+            actionInputAction?.action.Disable();
+            startInputAction?.action.Disable();
+        }
 
         // ВЫКЛЮЧИТЬ панель при завершении
         if (miniGamePanel != null)
@@ -318,7 +534,13 @@ public class FlowerMiniGameManager : MonoBehaviour
         OnMiniGameComplete?.Invoke();
     }
 
-    // ЛОГИКА ИГРЫ
+    private void ExitMiniGame()
+    {
+        Debug.Log("Выход из мини-игры");
+        EndMiniGame();
+    }
+
+    // ЛОГИКА ИГРЫ (остается без изменений)
 
     private void ResetIndicator()
     {
@@ -327,7 +549,7 @@ public class FlowerMiniGameManager : MonoBehaviour
             indicatorPosition = trackBottom;
             indicator.anchoredPosition = new Vector2(0, indicatorPosition);
             isMovingUp = true;
-            isGameActive = true; // Включить движение
+            isGameActive = true;
         }
     }
 
@@ -337,22 +559,18 @@ public class FlowerMiniGameManager : MonoBehaviour
         {
             if (indicator != null)
             {
-                // Движение вверх
                 indicatorPosition += indicatorSpeed * Time.deltaTime;
 
-                // Проверка достижения верха
                 if (indicatorPosition >= trackTop)
                 {
                     indicatorPosition = trackTop;
                     isMovingUp = false;
 
-                    // Автоматически завершить игру если достиг верха
                     yield return new WaitForSeconds(0.5f);
                     Debug.Log("Индикатор достиг верха!");
-                    OnActionButtonClick(); // Автоматический "промах"
+                    OnActionButtonClick();
                 }
 
-                // Обновить позицию
                 indicator.anchoredPosition = new Vector2(0, indicatorPosition);
             }
 
@@ -370,45 +588,28 @@ public class FlowerMiniGameManager : MonoBehaviour
 
         Debug.Log("✅ E обработана! Останавливаем индикатор...");
 
-        // ОСТАНОВИТЬ движение индикатора
         isGameActive = false;
         isMovingUp = false;
 
-        // Определить в какой зоне находится индикатор
         string result = CheckIndicatorZone();
 
         if (result == "success")
         {
             Debug.Log("✅ Цветок полит!");
             OnWateringAttempt?.Invoke(true);
-
-            // Показать результат на 1 секунду, затем закрыть
             StartCoroutine(ShowResultAndEnd(1f));
         }
         else if (result == "warning")
         {
             Debug.Log("⚠️ Цветок полит, но не идеально!");
             OnWateringAttempt?.Invoke(true);
-
-            // Показать результат на 1 секунду, затем закрыть
             StartCoroutine(ShowResultAndEnd(1f));
         }
         else
         {
-            currentAttempts++;
-            Debug.Log($"❌ Сейчас завянет! Попытка {currentAttempts}/{maxAttempts}");
+            Debug.Log($"❌ Сейчас завянет!");
             OnWateringAttempt?.Invoke(false);
-
-            if (currentAttempts >= maxAttempts)
-            {
-                Debug.Log("Попытки закончились!");
-                StartCoroutine(ShowResultAndEnd(1.5f));
-            }
-            else
-            {
-                // Показать результат на 1 секунду, затем перезапустить
-                StartCoroutine(ShowResultAndRestart(1f));
-            }
+            StartCoroutine(ShowResultAndEnd(1.5f));
         }
     }
 
@@ -418,39 +619,24 @@ public class FlowerMiniGameManager : MonoBehaviour
         EndMiniGame();
     }
 
-    private IEnumerator ShowResultAndRestart(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        // Сбросить текст инструкции
-        UpdateInstructionText("Нажми E в нужный момент!");
-
-        // Перезапустить движение
-        ResetIndicator();
-        StartCoroutine(MoveIndicatorVertically());
-    }
-
     private string CheckIndicatorZone()
     {
         if (indicator == null) return "fail";
 
         float indicatorY = indicator.anchoredPosition.y;
 
-        // Проверить зеленую зону (лучший результат)
         if (IsInZone(indicatorY, greenZone))
         {
             UpdateInstructionText("🌸 Цветок полит!");
             return "success";
         }
 
-        // Проверить желтую зону (хороший результат)
         if (IsInZone(indicatorY, yellowZone))
         {
             UpdateInstructionText("🌼 Цветок полит!");
             return "warning";
         }
 
-        // Проверить красные зоны (плохой результат)
         if (IsInZone(indicatorY, darkRedZone) || IsInZone(indicatorY, brightRedZone))
         {
             UpdateInstructionText("💀 Сейчас завянет!");
@@ -477,12 +663,4 @@ public class FlowerMiniGameManager : MonoBehaviour
             instructionText.text = message;
         }
     }
-
-    private void OnExitButtonClick()
-    {
-        Debug.Log("Выход из мини-игры");
-        EndMiniGame();
-    }
-
-    // Удалить старый метод CheckIfInGreenZone - заменен на CheckIndicatorZone
 }
