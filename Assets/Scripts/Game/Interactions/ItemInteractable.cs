@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utilities;
 
 
@@ -14,22 +14,39 @@ namespace Game.Interactions
     [RequireComponent(typeof(Collider))]
     public class ItemInteractable : MonoBehaviour, IInteractable
     {
-        [SerializeField] private GameObject popup;
         [SerializeField] private LayerMask targetMask;
         [SerializeField] private string id;
         [SerializeField] private ItemCategory category;
         
+        [Header("Popup Settings")]
+        [SerializeField] private Vector3 popupOffset = new Vector3(0, 1.5f, 0);
+        [SerializeField] private int popupScale = 1;
+        
         public bool CheckStayCollider{ get; set; }
-
         public string Guid => id;
         public ItemCategory Category => category;
 
         public event Action<ItemInteractable> OnEnter;
         public event Action<ItemInteractable> OnExit;
+        
 
+        private FollowProjectionWithConstantSize _popup;
+        
         private void Awake()
         {
             targetMask = LayerMask.GetMask("Player");
+            
+            
+            _popup = GameObject.Find("PopupE").GetComponent<FollowProjectionWithConstantSize>();
+            if (_popup == null)
+            {
+                Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
+            }
+        }
+
+        private void Start()
+        {
+            _popup.gameObject.SetActive(false);
         }
 
         private void OnTriggerStay(Collider other)
@@ -75,17 +92,20 @@ namespace Game.Interactions
 
         public void TurnPopup(bool turn = true)
         {
-            if (popup != null)
+            if (_popup != null)
             {
-                popup.SetActive(turn);
+                _popup.gameObject.SetActive(turn);
+                _popup.target = transform;
+                _popup.worldOffset = popupOffset;
+                _popup.scaleFactor = popupScale;
 
                 if (turn)
                 {
-                    popup.gameObject.GetComponent<UIElementTweener>()?.Show();
+                    _popup.gameObject.GetComponent<UIElementTweener>()?.Show();
                 }
                 else
                 {
-                    popup.gameObject.GetComponent<UIElementTweener>()?.Hide();
+                    _popup.gameObject.GetComponent<UIElementTweener>()?.Hide();
                 }
             }
         }

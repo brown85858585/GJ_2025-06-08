@@ -103,7 +103,16 @@ namespace Player
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
             Debug.Log(item);
-            if (item != ItemCategory.WateringCan) return;
+            if (item != ItemCategory.WateringCan)
+            {
+                if (item == ItemCategory.Flower)
+                {
+                    return;
+                }
+
+                PutTheItemDown();
+                return;
+            }
             
             _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
