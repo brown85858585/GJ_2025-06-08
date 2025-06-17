@@ -66,11 +66,13 @@ public class FlowerMiniGameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*
         if (isGameActive && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E нажата в MiniGameController!");
             OnActionButtonClick();
         }
+        */
     }
 
 

@@ -8,6 +8,7 @@ namespace Player.Interfaces
         Vector3 Direction { get; }
         Vector3 Look { get; }
         bool IsAccelerating { get; }
+        event Action<bool> OnGameInteract;
         event Action<bool> OnInteract;
         event Action OnPutItemDown; 
         event Action<bool> OnTest;

@@ -10,6 +10,7 @@ namespace Player
         public Vector3 Direction { get; private set; }
         public Vector3 Look { get; private set; }
         public bool IsAccelerating => _accelerateAction.IsPressed();
+        public event Action<bool> OnGameInteract;
         public event Action<bool> OnInteract;
         public event Action OnPutItemDown;
         public event Action<bool> OnTest;
@@ -24,11 +25,16 @@ namespace Player
         private readonly InputAction _questsAction;
         
         private readonly InputAction _NavigateAction;
+        private readonly InputAction _GameInteractAction;
+
+        private PlayerInput BasePlayerInput;
 
         public InputAdapter(PlayerInput playerInput)
         {
             if (playerInput == null) throw new ArgumentNullException(nameof(playerInput));
-            
+
+
+            BasePlayerInput = playerInput;
             _accelerateAction = playerInput.actions.FindAction("Sprint", true);
             _moveAction     = playerInput.actions.FindAction("Move",     true);
             _lookAction     = playerInput.actions.FindAction("Look",     true);
@@ -37,8 +43,11 @@ namespace Player
             _crouchAction = playerInput.actions.FindAction("Crouch", true);
             _questsAction = playerInput.actions.FindAction("Quests", true);
             _NavigateAction = playerInput.actions.FindAction("Navigate", true);
-        
-            
+            _GameInteractAction = playerInput.actions.FindAction("GameInteract", true);
+
+
+
+
             _accelerateAction.Enable();
             _moveAction.Enable();
             _lookAction.Enable();
@@ -47,6 +56,7 @@ namespace Player
             _interactAction.Enable();
             _crouchAction.Enable();
             _NavigateAction.Enable();
+            _GameInteractAction.Enable();
             _NavigateAction.performed += context =>
             {
                Debug.Log("Navigate " + context.action.name);
@@ -58,40 +68,46 @@ namespace Player
             
             _testAction.started += OnTestInput;
             _testAction.canceled += OnTestInput;
+            _GameInteractAction.started += OnGameInteractInput;
             
+
+
+
             _questsAction.started += OnQuestsInput;
             _questsAction.canceled += OnQuestsInput;
             
             _interactAction.started += OnInteractInput;
             _crouchAction.started += OnPutItemDownInput;
+
           
             playerInput.actions.FindActionMap("UI", true).Disable();
+            playerInput.actions.FindActionMap("GInteractive", true).Disable();
 
-            
         }
 
         public void SwitchAdapterToMiniGameMode()
         {
-            _accelerateAction.Disable();
-            _moveAction.Disable();
-  //          _lookAction.Disable();
 
- //           _testAction.Disable();
-//            _interactAction.Disable();
-            _crouchAction.Disable();
+
+            BasePlayerInput.actions.FindActionMap("Player", true).Disable();
+            BasePlayerInput.actions.FindActionMap("GInteractive", true).Enable();
+
+
         }
 
         public void SwitchAdapterToGlobalMode()
         {
-            _accelerateAction.Enable();
-            _moveAction.Enable();
-            _lookAction.Enable();
-
-            _testAction.Enable();
-            _interactAction.Enable();
-            _crouchAction.Enable();
+            BasePlayerInput.actions.FindActionMap("GInteractive", true).Disable();
+            BasePlayerInput.actions.FindActionMap("Player", true).Enable();
         }
 
+
+        private void OnGameInteractInput(InputAction.CallbackContext obj)
+        {
+            var readValue = obj.ReadValue<float>();
+            OnGameInteract?.Invoke(readValue != 0);
+            if (obj.canceled) OnGameInteract?.Invoke(false);
+        }
 
         private void OnPutItemDownInput(InputAction.CallbackContext obj)
         {
@@ -141,7 +157,8 @@ namespace Player
             _lookAction.canceled -= OnLook;
             _interactAction.started -= OnInteractInput;
             _testAction.started -= OnTestInput;
-            
+            _GameInteractAction.started -= OnGameInteractInput;
+
             _accelerateAction.Disable();
             _moveAction.Disable();
             _lookAction.Disable();

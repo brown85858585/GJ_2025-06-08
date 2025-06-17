@@ -60,10 +60,17 @@ namespace Game.MiniGames
             {
                 var playerController = (_playerController as PlayerController);
                 playerController.InputAdaptep.SwitchAdapterToMiniGameMode();
-              
+                playerController.InputAdaptep.OnGameInteract += InputAdaptep_OnGameInteract;
             }
+
+
             //Unsubscribe(currentGame);
-            
+
+        }
+
+        private void InputAdaptep_OnGameInteract(bool obj)
+        {
+            currentMiniGame.OnActionButtonClick();
         }
 
         private void SwitchOffInputSystem(Quests.QuestType questType)
@@ -72,6 +79,7 @@ namespace Game.MiniGames
             {
                 var playerController = (_playerController as PlayerController);
                 playerController.InputAdaptep.SwitchAdapterToGlobalMode();
+                playerController.InputAdaptep.OnGameInteract -= InputAdaptep_OnGameInteract;
             }
             Unsubscribe(currentMiniGame);
             currentMiniGame = null; // Сбрасываем текущую игру после переключения
@@ -89,11 +97,6 @@ namespace Game.MiniGames
                 return;
             }
 
-            if (currentMiniGame != null)
-            {
-                game.OnActionButtonClick();
-                return;
-            }
 
             // Создаём делегаты и сохраняем их для последующей отписки
             Action<Quests.QuestType> startHandler = SwitchOnInputSystem;

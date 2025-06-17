@@ -36,7 +36,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
@@ -1037,6 +1037,34 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "GInteractive",
+            "id": "c538d249-770a-4628-bae8-7d5f3bffec3c",
+            "actions": [
+                {
+                    "name": "GameInteract",
+                    "type": "PassThrough",
+                    "id": "1e7b0904-1e45-42b3-8660-5811b4c141eb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c737374e-a867-4cf0-8331-57628bfc5800",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "GameInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

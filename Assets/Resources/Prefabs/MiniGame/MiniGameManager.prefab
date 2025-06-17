@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 6021685621929793975}
   panel: {fileID: 8012524612185898012}
-  indicatorSpeed: 200
+  indicatorSpeed: 50
   trackHeight: 300
   trackWidth: 60
   zoneHeight: 75
