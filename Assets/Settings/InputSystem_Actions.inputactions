@@ -1052,7 +1052,7 @@
                     "id": "1e7b0904-1e45-42b3-8660-5811b4c141eb",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold,Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -1061,7 +1061,7 @@
                     "id": "d1a7dd66-71f5-4fbe-a5e4-1d46cb065608",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -1081,7 +1081,7 @@
                     "name": "",
                     "id": "adcba995-0b1d-4c54-bb3e-9b30c774561c",
                     "path": "<Mouse>/clickCount",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "GameInteract",

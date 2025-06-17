@@ -3,6 +3,7 @@ using Game.MiniGames;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks.Triggers;
 
 public class FlowerMiniGameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class FlowerMiniGameManager : MonoBehaviour
     private Button actionButton;
     private Button exitButton;
     private Button startButton; // Новая кнопка старта
+    private Button startExitButton;
     private Text instructionText;
     private GameObject startScreen; // Стартовый экран
     private GameObject gameScreen;  // Игровой экран
@@ -129,7 +131,7 @@ public class FlowerMiniGameManager : MonoBehaviour
     {
         // Использовать прямой ввод только если Input System не настроена
         if (!useDirectInput) return;
-
+        /*
         // Fallback на старую Input System если InputActionReference не назначены
         if (gameStarted && isGameActive && Input.GetKeyDown(KeyCode.E))
         {
@@ -142,6 +144,7 @@ public class FlowerMiniGameManager : MonoBehaviour
             Debug.Log("Пробел нажат через старую Input System - запуск игры!");
             StartGame();
         }
+        */
     }
 
     private void FindSceneComponents()
@@ -207,11 +210,11 @@ public class FlowerMiniGameManager : MonoBehaviour
         CreateStartText("🔴 Красная зона = плохо", new Vector2(0, -30), 14, Color.red);
 
         // Кнопка старта
-        startButton = CreateButton("StartButton", "Начать игру (Пробел)", new Vector2(0, -80), new Color(0.2f, 0.8f, 0.2f), new Vector2(200, 50));
+        startButton = CreateStartButton("StartButton", "Начать игру (Пробел)", new Vector2(0, -80), new Color(0.2f, 0.8f, 0.2f), new Vector2(200, 50));
         startButton.onClick.AddListener(StartGame);
 
         // Кнопка выхода на стартовом экране
-        Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(0, -140), Color.gray, new Vector2(120, 40));
+        startExitButton = CreateStartButton("StartExitButton", "Выход", new Vector2(0, -140), Color.gray, new Vector2(120, 40));
         startExitButton.onClick.AddListener(ExitMiniGame);
     }
 
@@ -234,6 +237,7 @@ public class FlowerMiniGameManager : MonoBehaviour
 
     private void CreateGameScreen()
     {
+
         // Контейнер для игрового экрана
         gameScreen = new GameObject("GameScreen");
         gameScreen.transform.SetParent(miniGamePanel.transform, false);
@@ -333,10 +337,44 @@ public class FlowerMiniGameManager : MonoBehaviour
         exitButton.transform.SetParent(gameScreen.transform, false);
     }
 
+    private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size)
+    {
+        GameObject buttonObj = new GameObject(name);
+        buttonObj.transform.SetParent(startScreen.transform, false); // ← ВАЖНО! Родитель = startScreen
+
+        Image buttonImage = buttonObj.AddComponent<Image>();
+        buttonImage.color = color;
+
+        Button button = buttonObj.AddComponent<Button>();
+
+        RectTransform buttonRect = buttonObj.GetComponent<RectTransform>();
+        buttonRect.sizeDelta = size;
+        buttonRect.anchoredPosition = position;
+
+        // Текст на кнопке
+        GameObject textObj = new GameObject("Text");
+        textObj.transform.SetParent(buttonObj.transform, false);
+
+        Text buttonText = textObj.AddComponent<Text>();
+        buttonText.text = text;
+        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        buttonText.alignment = TextAnchor.MiddleCenter;
+        buttonText.color = Color.white;
+        buttonText.fontSize = 12;
+
+        RectTransform textRect = textObj.GetComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.offsetMin = Vector2.zero;
+        textRect.offsetMax = Vector2.zero;
+
+        return button;
+    }
+
     private Button CreateButton(string name, string text, Vector2 position, Color color, Vector2 size)
     {
         GameObject buttonObj = new GameObject(name);
-        buttonObj.transform.SetParent(miniGamePanel.transform, false); // Временно, потом переназначим
+        buttonObj.transform.SetParent(gameScreen.transform, false); // Временно, потом переназначим
 
         Image buttonImage = buttonObj.AddComponent<Image>();
         buttonImage.color = color;
@@ -421,12 +459,24 @@ public class FlowerMiniGameManager : MonoBehaviour
             startInputAction?.action.Enable();
         }
 
-        // ВКЛЮЧИТЬ панель с стартовым экраном
         miniGamePanel.SetActive(true);
+        if (startScreen != null)
+        {
+            startScreen.SetActive(true);
+            Debug.Log("Стартовый экран скрыт!");
+        }
 
-        // Показать стартовый экран, скрыть игровой
-        if (startScreen != null) startScreen.SetActive(true);
-        if (gameScreen != null) gameScreen.SetActive(false);
+        // Показать игровой экран
+        if (gameScreen != null)
+        {
+            gameScreen.SetActive(false);
+            Debug.Log("Игровой экран показан!");
+        }
+
+        // ВКЛЮЧИТЬ панель с стартовым экраном
+
+
+
 
         gameStarted = false;
         isGameActive = false;
@@ -439,8 +489,18 @@ public class FlowerMiniGameManager : MonoBehaviour
         Debug.Log("🎮 Запуск игры!");
 
         // Скрыть стартовый экран, показать игровой
-        if (startScreen != null) startScreen.SetActive(false);
-        if (gameScreen != null) gameScreen.SetActive(true);
+        if (startScreen != null)
+        {
+            startScreen.SetActive(false);
+            Debug.Log("Стартовый экран скрыт!");
+        }
+
+        // Показать игровой экран
+        if (gameScreen != null)
+        {
+            gameScreen.SetActive(true);
+            Debug.Log("Игровой экран показан!");
+        }
 
         gameStarted = true;
         currentAttempts = 0;
