@@ -7,6 +7,8 @@ namespace Player
     public class PlayerView : MonoBehaviour
     {
         private static readonly int Move = Animator.StringToHash("Move");
+        private static readonly float Verticale = Animator.StringToHash("Verticale");
+        private static readonly float Horizontal = Animator.StringToHash("Horizontal");
         private static readonly int IsDancing = Animator.StringToHash("IsDancing");
 
         [SerializeField] private Animator animator;
@@ -66,14 +68,15 @@ namespace Player
             moveForwardButton.onClick.RemoveAllListeners();
         }
 
-        public void SetWalkAnimation(float walking)
+        public void SetWalkAnimation(Vector3 walking)
         {
-            var speed = walking / (MoveSpeed * animatorOffset);
-            animator.SetFloat(Move, speed);
-            if (speed > 0.1f)
-            {
-                animator.SetBool(IsDancing, false);
-            }
+            //var speed = walking / (MoveSpeed * animatorOffset);
+            animator.SetFloat("Verticale", walking.z);
+            animator.SetFloat("Horizontal",walking.x);
+            //if (speed > 0.1f)
+            //{
+           //     animator.SetBool(IsDancing, false);
+           // }
         }
 
         public void StartDanceAnimation()
