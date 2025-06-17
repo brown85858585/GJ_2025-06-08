@@ -9,24 +9,23 @@ namespace Player
         
         private readonly PlayerModel _model;
         private Vector3 _direction;
-        private readonly Transform _virtualCamera;
         
-        public PlayerMovement(IInputAdapter input, PlayerModel model, Transform virtualCamera)
+        public Transform VirtualCamera;
+        
+        public PlayerMovement(IInputAdapter input, PlayerModel model)
         {
             _input = input;
             _model = model;
-            _virtualCamera = virtualCamera;
-            
         }
         public Vector3 Move(float moveSpeed, Transform playerTransform)
         {
             var offsetDirection = _input.Direction.normalized;
             
-            if (_virtualCamera)
+            if (VirtualCamera)
             {
                 // Базовые оси камеры
-                var camForward = _virtualCamera.forward;
-                var camRight = _virtualCamera.right;
+                var camForward = VirtualCamera.forward;
+                var camRight = VirtualCamera.right;
 
                 // Проецируем на плоскость, чтобы исключить наклон камеры
                 camForward.y = 0f;

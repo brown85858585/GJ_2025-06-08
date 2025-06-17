@@ -1,6 +1,5 @@
 ﻿using System;
 using Game;
-using Game.MiniGames;
 using Player.Interfaces;
 using UnityEngine;
 
@@ -8,6 +7,11 @@ namespace Player
 {
     public class PlayerController : IPlayerController
     {
+        public Transform CamTransform
+        {
+            set => _movement.VirtualCamera = value;
+        }
+
         public event Action OnDied;
         public IInputAdapter InputAdaptep => _input;
         private PlayerModel _model;
@@ -22,13 +26,13 @@ namespace Player
         public IPlayerMovement Movement => _currentMovement;
         public PlayerModel Model => _model;
 
-        public PlayerController(PlayerModel model, IInputAdapter input, Transform camTransform)
+        public PlayerController(PlayerModel model, IInputAdapter input)
         {
             _model = model;
             _input = input;
 
             _runMovement = new PlayerRunMovement(_input);
-            _movement = new PlayerMovement(_input, model, camTransform);
+            _movement = new PlayerMovement(_input, model);
             _currentMovement = _movement;
             
             _input.OnPutItemDown += PutTheItemDown;
