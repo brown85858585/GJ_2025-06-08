@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 171224788936378787}
   - component: {fileID: 1837833069583332646}
+  - component: {fileID: 2418155457038976336}
   - component: {fileID: 4342274205226811338}
   - component: {fileID: 6088528587665086779}
-  - component: {fileID: 2418155457038976336}
   m_Layer: 3
   m_Name: PopupE
   m_TagString: Untagged
@@ -53,8 +53,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   worldOffset: {x: -0.61, y: 2, z: -0.4}
-  scaleFactor: 12
-  _baseScale: {x: 1, y: 1, z: 1}
+--- !u!114 &2418155457038976336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4939423913341891105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 0.3
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 27
+  hideEase: 26
+  scaleFactor: 1
 --- !u!23 &4342274205226811338
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -189,24 +209,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4342274205226811338}
   m_maskType: 0
---- !u!114 &2418155457038976336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939423913341891105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startScale: {x: 0, y: 0, z: 0}
-  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
-  endScale: {x: 1, y: 1, z: 1}
-  showDuration: 0.3
-  hideDuration: 0.2
-  overshootRatio: 0.6
-  settleRatio: 0.4
-  showEase: 27
-  hideEase: 26

@@ -31,6 +31,7 @@ namespace Game.Interactions
         
 
         private FollowProjectionWithConstantSize _popup;
+        private UIElementTweener _popupTweener;
         
         private void Awake()
         {
@@ -38,6 +39,7 @@ namespace Game.Interactions
             
             
             _popup = GameObject.Find("PopupE").GetComponent<FollowProjectionWithConstantSize>();
+            _popupTweener = _popup.GetComponent<UIElementTweener>();
             if (_popup == null)
             {
                 Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
@@ -97,15 +99,15 @@ namespace Game.Interactions
                 _popup.gameObject.SetActive(turn);
                 _popup.target = transform;
                 _popup.worldOffset = popupOffset;
-                _popup.scaleFactor = popupScale;
+                _popupTweener.scaleFactor = popupScale;
 
                 if (turn)
                 {
-                    _popup.gameObject.GetComponent<UIElementTweener>()?.Show();
+                    _popupTweener?.Show();
                 }
                 else
                 {
-                    _popup.gameObject.GetComponent<UIElementTweener>()?.Hide();
+                    _popupTweener?.Hide();
                 }
             }
         }

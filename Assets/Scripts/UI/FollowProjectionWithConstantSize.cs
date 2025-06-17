@@ -7,10 +7,7 @@ namespace UI
     {
         public Transform target;
         public Vector3 worldOffset = Vector3.up * 1f;
-        private Camera cam;
-        public float scaleFactor = 1f; 
-        
-        public Vector3 _baseScale = Vector3.one;
+        private Camera cam; 
 
         void Awake()
         {
@@ -21,11 +18,9 @@ namespace UI
         {
             if (target == null || cam == null) return;
 
-            // восстанавливаем мировую позицию
             transform.position = target.position + worldOffset;
 
             transform.forward = cam.transform.forward;
-            transform.localScale = _baseScale * scaleFactor;
         }
     }
 }
