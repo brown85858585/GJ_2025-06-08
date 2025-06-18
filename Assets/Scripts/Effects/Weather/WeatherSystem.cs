@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public enum LocationType { Apartment, Park }
 
@@ -13,7 +12,8 @@ public enum WeatherType
     Rain,
     HeavyRain,
     Thunderstorm,
-    ClearMorning
+    ClearMorning,
+    Default
 }
 
 public class WeatherSystem : MonoBehaviour
@@ -50,7 +50,18 @@ public class WeatherSystem : MonoBehaviour
         }
     }
 
-    public void SetWeather(LocationType location, int cycle, Transform transformParam = null)
+    public void ButtonSetWeather()
+    {
+        CurrentCycle = Random.Range(1, 8);
+        SetWeather(CurrentCycle);
+    }
+
+    public void ButtonDisableWeather()
+    {
+        DisableWeather();
+    }
+
+    public void SetWeather(int cycle, LocationType location = LocationType.Park, Transform transformParam = null)
     {
         CurrentLocation = location;
 
@@ -65,14 +76,19 @@ public class WeatherSystem : MonoBehaviour
 
         CurrentCycle = cycle;
 
-        ApplyWeatherForCurrentCycle(location, cycle, transformParam);
+        ApplyWeatherForCurrentCycle(cycle, location, transformParam);
+    }
+
+    public void DisableWeather()
+    {
+        ApplyWeather(WeatherType.Default);
     }
 
     public void SetLocation(LocationType location)
     {
         _weatherEffectsArray[(int)CurrentLocation].ResetAllEffects();
         CurrentLocation = location;
-        ApplyWeatherForCurrentCycle(location, CurrentCycle);
+        ApplyWeatherForCurrentCycle(CurrentCycle, CurrentLocation);
     }
 
     public void SetSycle(int cycle)
@@ -90,7 +106,7 @@ public class WeatherSystem : MonoBehaviour
 
         Debug.Log("Current Cycle: " + CurrentCycle);
 
-        ApplyWeatherForCurrentCycle(CurrentLocation, cycle);
+        ApplyWeatherForCurrentCycle(CurrentCycle, CurrentLocation);
     }
 
     public void NextCycle()
@@ -104,13 +120,17 @@ public class WeatherSystem : MonoBehaviour
 
         Debug.Log("Current Cycle: " + CurrentCycle);
 
-        ApplyWeatherForCurrentCycle(CurrentLocation, CurrentCycle);
+        ApplyWeatherForCurrentCycle(CurrentCycle, CurrentLocation);
     }
 
-    private void ApplyWeatherForCurrentCycle(LocationType location, int cycle, Transform transformParam = null)
+    private void ApplyWeatherForCurrentCycle(int cycle, LocationType location = LocationType.Park, Transform transformParam = null)
     {
         WeatherType weatherType = GetWeatherTypeForCycle(cycle);
+        ApplyWeather(weatherType, location, transformParam);
+    }
 
+    private void ApplyWeather(WeatherType weatherType, LocationType location = LocationType.Park, Transform transformParam = null)
+    {
         if (_weatherEffectsArray[(int)location] != null)
         {
             _weatherEffectsArray[(int)location].ApplyWeather(weatherType, transformParam);
@@ -132,7 +152,7 @@ public class WeatherSystem : MonoBehaviour
             case 5: return WeatherType.HeavyRain;
             case 6: return WeatherType.Thunderstorm;
             case 7: return WeatherType.ClearMorning;
-            default: return WeatherType.ClearNoon;
+            default: return WeatherType.Default;
         }
     }
 }

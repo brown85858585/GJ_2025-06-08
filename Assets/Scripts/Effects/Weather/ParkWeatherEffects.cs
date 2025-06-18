@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
@@ -13,35 +14,42 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
 
     [Header("Environment")]
     [SerializeField] private AudioSource _ambientAudioSource;
+    [SerializeField] private Material _defaultSkyBoxMaterial;
 
     [Header("Clear Noon")]
+    [SerializeField] private TextMeshProUGUI _txtClearNoon;
     [SerializeField] private Material _w1_SkyboxMaterial;
     [SerializeField] private float _w1_LightIntensity = 1.0f;
     [SerializeField] private Color _w1_LightColor = Color.white;
 
-    [Header("FoggyMorning")]
+    [Header("Foggy Morning")]
+    [SerializeField] private TextMeshProUGUI _txtFoggyMorning;
     [SerializeField] private Material _w2_SkyboxMaterial;
     [SerializeField] private float _w2_fogDensity = 0.03f;
     [SerializeField] private float _w2_LightIntensity = 0.7f;
     [SerializeField] private Color _w2_LightColor = new Color(0.9f, 0.9f, 0.9f);
 
     [Header("Cloudy")]
+    [SerializeField] private TextMeshProUGUI _txtCloudy;
     [SerializeField] private Material _w3_SkyboxMaterial;
     [SerializeField] private float _w3_LightIntensity = 0.6f;
     [SerializeField] private Color _w3_LightColor = new Color(0.9f, 0.9f, 0.9f);
     
     [Header("Overcast")]
+    [SerializeField] private TextMeshProUGUI _txtOvercast;
     [SerializeField] private Material _w4_SkyboxMaterial;
     [SerializeField] private float _w4_LightIntensity = 0.5f;
     [SerializeField] private Color _w4_LightColor = new Color(0.9f, 0.9f, 0.9f);
 
-    [Header("HeavyRain")]
+    [Header("Heavy Rain")]
+    [SerializeField] private TextMeshProUGUI _txtHeavyRain;
     [SerializeField] private Material _w5_SkyboxMaterial;
     [SerializeField] private float _w5_LightIntensity = 0.0f;
     [SerializeField] private Color _w5_LightColor = new Color(0.9f, 0.9f, 0.9f);
     [SerializeField] private ParticleSystem _heavyRainParticles;
 
     [Header("Thunderstorm")]
+    [SerializeField] private TextMeshProUGUI _txtThunderstorm;
     [SerializeField] private Material _w6_SkyboxMaterial;
     [SerializeField] private AudioClip _rainSound;
     [SerializeField] private AudioClip _thunderSound;
@@ -49,7 +57,8 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private Color _w6_LightColor = new Color(0.9f, 0.9f, 0.9f);
     [SerializeField] private ParticleSystem _thunderRainParticles;
 
-    [Header("ClearMorning")]
+    [Header("Clear Morning")]
+    [SerializeField] private TextMeshProUGUI _txtClearMorning;
     [SerializeField] private Material _w7_SkyboxMaterial;
     [SerializeField] private float _w7_LightIntensity = 1.0f;
     [SerializeField] private Color _w7_LightColor = Color.white;
@@ -96,11 +105,49 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             case WeatherType.ClearMorning:
                 ApplyClearMorning();
                 break;
+            case WeatherType.Default:
+                ApplyDefaultWeather();
+                break;
         }
     }
 
     public void ResetAllEffects()
     {
+        if (_txtClearNoon != null)
+        {
+            _txtClearNoon.gameObject.SetActive(false);
+        }
+
+        if (_txtFoggyMorning != null)
+        {
+            _txtFoggyMorning.gameObject.SetActive(false);
+        }
+
+        if (_txtCloudy != null)
+        {
+            _txtCloudy.gameObject.SetActive(false);
+        }
+
+        if (_txtOvercast != null)
+        {
+            _txtOvercast.gameObject.SetActive(false);
+        }
+
+        if (_txtHeavyRain != null)
+        {
+            _txtHeavyRain.gameObject.SetActive(false);
+        }
+
+        if (_txtThunderstorm != null)
+        {
+            _txtThunderstorm.gameObject.SetActive(false);
+        }
+
+        if (_txtClearMorning != null)
+        {
+            _txtClearMorning.gameObject.SetActive(false);
+        }
+
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.localScale = new Vector3(1, 1, 1);
@@ -115,6 +162,7 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             StopCoroutine(_lightningFlashParkRoutine);
         }
 
+        RenderSettings.skybox = _defaultSkyBoxMaterial;
         RenderSettings.fog = false;
 
         if (_directionalLight != null)
@@ -143,6 +191,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         Debug.Log("Park: Apply Clear Noon");
 
+        if (_txtClearNoon != null)
+        {
+            _txtClearNoon.gameObject.SetActive(true);
+        }
+
         if (_w1_SkyboxMaterial != null)
         {
             RenderSettings.skybox = _w1_SkyboxMaterial;
@@ -160,6 +213,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     private void ApplyFoggyMorning()
     {
         Debug.Log("Park: Apply Foggy Morning");
+
+        if (_txtFoggyMorning != null)
+        {
+            _txtFoggyMorning.gameObject.SetActive(true);
+        }
 
         if (_w2_SkyboxMaterial)
         {
@@ -180,6 +238,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         Debug.Log("Park: Apply Cloudy");
 
+        if (_txtCloudy != null)
+        {
+            _txtCloudy.gameObject.SetActive(true);
+        }
+
         if (_w3_SkyboxMaterial)
         {
             RenderSettings.skybox = _w3_SkyboxMaterial;
@@ -198,6 +261,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         Debug.Log("Park: Apply Overcast");
 
+        if (_txtOvercast != null)
+        {
+            _txtOvercast.gameObject.SetActive(true);
+        }
+
         if (_w4_SkyboxMaterial)
         {
             RenderSettings.skybox = _w4_SkyboxMaterial;
@@ -215,6 +283,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     private void ApplyHeavyRain()
     {
         Debug.Log("Park: Apply HeavyRain");
+
+        if (_txtHeavyRain != null)
+        {
+            _txtHeavyRain.gameObject.SetActive(true);
+        }
 
         if (_w5_SkyboxMaterial)
         {
@@ -238,6 +311,11 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     private void ApplyThunderstorm()
     {
         Debug.Log("Park: Apply Thunderstorm");
+
+        if (_txtThunderstorm != null)
+        {
+            _txtThunderstorm.gameObject.SetActive(true);
+        }
 
         if (_w6_SkyboxMaterial)
         {
@@ -275,12 +353,30 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         Debug.Log("Park: Apply Clear Morning");
 
+        if (_txtClearMorning != null)
+        {
+            _txtClearMorning.gameObject.SetActive(true);
+        }
+
         if (_w7_SkyboxMaterial)
         {
             RenderSettings.skybox = _w7_SkyboxMaterial;
         }
 
+        if (_directionalLight != null)
+        {
+            _directionalLight.intensity = _w7_LightIntensity;
+            _directionalLight.color = _w7_LightColor;
+        }
+
         RenderSettings.fog = false;
+    }
+
+    private void ApplyDefaultWeather()
+    {
+        Debug.Log("Park: Apply Default Weather");
+
+        ResetAllEffects();
     }
 
     private IEnumerator ThunderRoutine(Light parkLightning, float minInterval, float maxInterval)
