@@ -7,6 +7,9 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
 
     [Header("Lighting")]
     [SerializeField] private Light _directionalLight;
+    [SerializeField] private Light _lightning;
+    [SerializeField] private float _lightningMinInterval = 5.0f;
+    [SerializeField] private float _lightningMaxInterval = 15.0f;
 
     [Header("Environment")]
     [SerializeField] private AudioSource _ambientAudioSource;
@@ -20,39 +23,39 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private Material _w2_SkyboxMaterial;
     [SerializeField] private float _w2_fogDensity = 0.03f;
     [SerializeField] private float _w2_LightIntensity = 0.7f;
-    [SerializeField] private Color _w2_LightColor = new Color(0.9f, 0.9f, 0.8f);
+    [SerializeField] private Color _w2_LightColor = new Color(0.9f, 0.9f, 0.9f);
 
     [Header("Cloudy")]
     [SerializeField] private Material _w3_SkyboxMaterial;
-    [SerializeField] private float _w3_LightIntensity;
-    [SerializeField] private Color _w3_LightColor;
+    [SerializeField] private float _w3_LightIntensity = 0.6f;
+    [SerializeField] private Color _w3_LightColor = new Color(0.9f, 0.9f, 0.9f);
     
     [Header("Overcast")]
     [SerializeField] private Material _w4_SkyboxMaterial;
-    [SerializeField] private float _w4_LightIntensity;
-    [SerializeField] private Color _w4_LightColor;
+    [SerializeField] private float _w4_LightIntensity = 0.5f;
+    [SerializeField] private Color _w4_LightColor = new Color(0.9f, 0.9f, 0.9f);
 
     [Header("HeavyRain")]
     [SerializeField] private Material _w5_SkyboxMaterial;
-    [SerializeField] private float _w5_LightIntensity;
-    [SerializeField] private Color _w5_LightColor;
+    [SerializeField] private float _w5_LightIntensity = 0.0f;
+    [SerializeField] private Color _w5_LightColor = new Color(0.9f, 0.9f, 0.9f);
     [SerializeField] private ParticleSystem _heavyRainParticles;
 
     [Header("Thunderstorm")]
     [SerializeField] private Material _w6_SkyboxMaterial;
     [SerializeField] private AudioClip _rainSound;
     [SerializeField] private AudioClip _thunderSound;
-    [SerializeField] private float _w6_LightIntensity = 0.3f;
-    [SerializeField] private Color _w6_LightColor;
+    [SerializeField] private float _w6_LightIntensity = 0.0f;
+    [SerializeField] private Color _w6_LightColor = new Color(0.9f, 0.9f, 0.9f);
     [SerializeField] private ParticleSystem _thunderRainParticles;
 
     [Header("ClearMorning")]
     [SerializeField] private Material _w7_SkyboxMaterial;
     [SerializeField] private float _w7_LightIntensity = 1.0f;
-    [SerializeField] private Color _w7_LightColor;
+    [SerializeField] private Color _w7_LightColor = Color.white;
 
-    private Coroutine _lightningRoutine = null;
-    private Coroutine _lightningFlashRoutine = null;
+    private Coroutine _parkLightningRoutine = null;
+    private Coroutine _lightningFlashParkRoutine = null;
 
     private void OnDestroy()
     {
@@ -102,20 +105,21 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.localScale = new Vector3(1, 1, 1);
 
-        if (_lightningRoutine != null)
+        if (_parkLightningRoutine != null)
         {
-            StopCoroutine(_lightningRoutine);
+            StopCoroutine(_parkLightningRoutine);
         }
 
-        if (_lightningFlashRoutine != null)
+        if (_lightningFlashParkRoutine != null)
         {
-            StopCoroutine(_lightningFlashRoutine);
+            StopCoroutine(_lightningFlashParkRoutine);
         }
 
         RenderSettings.fog = false;
 
         if (_directionalLight != null)
         {
+            _directionalLight.gameObject.SetActive(true);
             _directionalLight.intensity = 1.0f;
         }
 
@@ -259,12 +263,12 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _ambientAudioSource.Play();
         }
 
-        if (_lightningRoutine != null)
+        if (_parkLightningRoutine != null)
         {
-            StopCoroutine(_lightningRoutine);
+            StopCoroutine(_parkLightningRoutine);
         }
 
-        _lightningRoutine = StartCoroutine(ThunderRoutine());
+        _parkLightningRoutine = StartCoroutine(ThunderRoutine(_lightning, _lightningMinInterval, _lightningMaxInterval));
     }
 
     private void ApplyClearMorning()
@@ -279,25 +283,27 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         RenderSettings.fog = false;
     }
 
-    private IEnumerator ThunderRoutine()
+    private IEnumerator ThunderRoutine(Light parkLightning, float minInterval, float maxInterval)
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(5f, 15f));
-            PlayThunder();
+            yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
+            PlayThunder(parkLightning);
         }
     }
 
-    private void PlayThunder()
+    private void PlayThunder(Light parkLightning)
     {
-        if (_lightningFlashRoutine != null)
+        Debug.Log("PlayThunder");
+
+        if (_lightningFlashParkRoutine != null)
         {
-            StopCoroutine(_lightningFlashRoutine);
+            StopCoroutine(_lightningFlashParkRoutine);
         }
 
         if (_directionalLight != null)
         {
-            _lightningFlashRoutine = StartCoroutine(LightningFlashRoutine());
+            _lightningFlashParkRoutine = StartCoroutine(LightningFlashParkRoutine(parkLightning));
         }
 
         if (_ambientAudioSource != null)
@@ -306,10 +312,16 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         }
     }
 
-    private IEnumerator LightningFlashRoutine()
+    private IEnumerator LightningFlashParkRoutine(Light parkLightning)
     {
-        _directionalLight.intensity = 1.5f;
+        parkLightning.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        _directionalLight.intensity = 0.3f;
+        parkLightning.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.05f);
+        parkLightning.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        parkLightning.gameObject.SetActive(false);
+
+        _lightningFlashParkRoutine = null;
     }
 }

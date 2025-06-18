@@ -169,9 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9a66bc97c07f941bec0fa1d01fe4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _windowRenderer: {fileID: 0}
+  _windowRenderers: []
   _sunLight: {fileID: 0}
   _lightning: {fileID: 8983189648005025719}
+  _lightningMinInterval: 2
+  _lightningMaxInterval: 5
   _weatherAudio: {fileID: 0}
   _w1_WindowViewMaterial: {fileID: 0}
   _w1_SunLightIntencity: 1
@@ -238,6 +240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionalLight: {fileID: 0}
+  _lightning: {fileID: 7108289529474396065}
+  _lightningMinInterval: 3
+  _lightningMaxInterval: 7
   _ambientAudioSource: {fileID: 0}
   _w1_SkyboxMaterial: {fileID: 2100000, guid: 73324b55f67f54c7bbf43204788b8bbe, type: 2}
   _w1_LightIntensity: 1

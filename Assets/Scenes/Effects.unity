@@ -1078,9 +1078,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
         type: 3}
+      propertyPath: _w3_LightColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w3_LightColor.b
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w3_LightColor.g
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w3_LightColor.r
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w4_LightColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w4_LightColor.b
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w4_LightColor.g
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w4_LightColor.r
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
       propertyPath: _directionalLight
       value: 
       objectReference: {fileID: 410087040}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w3_LightIntensity
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w4_LightIntensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717466597405595339, guid: f1617134343c36b429195b023169e855,
+        type: 3}
+      propertyPath: _w5_LightIntensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5669002638928743652, guid: f1617134343c36b429195b023169e855,
         type: 3}
       propertyPath: _sunLight

@@ -6,13 +6,15 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
     public LocationType Location => LocationType.Apartment;
 
     [Header("Window Views")]
-    [SerializeField] private Renderer _windowRenderer;
+    [SerializeField] private Renderer[] _windowRenderers;
     
     [Header("Light Effects")]
     // Sun rays through the window
     [SerializeField] private Light _sunLight;
     // Flashes of lightning
     [SerializeField] private Light _lightning;
+    [SerializeField] private float _lightningMinInterval = 5.0f;
+    [SerializeField] private float _lightningMaxInterval = 15.0f;
 
     [Header("Audio")]
     [SerializeField] private AudioSource _weatherAudio;
@@ -47,6 +49,9 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private Material _w7_WindowViewMaterial;
     [SerializeField] private float _w7_SunLightIntencity = 0.8f;
     [SerializeField] private Color _w7_SunLightColor = new Color(1.0f, 0.95f, 0.9f);
+
+    private Coroutine _apartmentLightningRoutine;
+    private Coroutine _lightningFlashApartmentRoutine;
 
     private void OnDestroy()
     {
@@ -98,6 +103,16 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         //Lightning.Instance.StopApartmentLightning();
 
+        if (_lightningFlashApartmentRoutine != null)
+        {
+            StopCoroutine(_lightningFlashApartmentRoutine);
+        }
+
+        if (_apartmentLightningRoutine != null)
+        {
+            StopCoroutine(_apartmentLightningRoutine);
+        }
+
         if (_sunLight != null)
         {
             _sunLight.gameObject.SetActive(false);
@@ -120,9 +135,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         Debug.Log(_lightning);
 
-        if (_windowRenderer != null && _w1_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w1_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w1_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w1_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -139,9 +157,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         Debug.Log(_lightning);
 
-        if (_windowRenderer != null && _w2_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w2_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w2_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w2_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -158,9 +179,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         Debug.Log(_lightning);
 
-        if (_windowRenderer != null && _w3_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w3_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w3_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w3_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -175,9 +199,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         Debug.Log(_lightning);
 
-        if (_windowRenderer != null && _w4_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w4_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w4_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w4_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -192,9 +219,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         Debug.Log(_lightning);
 
-        if (_windowRenderer != null && _w5_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w5_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w5_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w5_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -218,11 +248,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         Debug.Log("Apartrment: Apply Thunderstorm");
 
-        Debug.Log(_lightning);
-
-        if (_windowRenderer != null && _w6_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w6_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w6_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w6_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -238,9 +269,13 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
 
         if (_lightning != null)
         {
-            float minInterval = 5.0f;
-            float maxInterval = 15.0f;
-            //Lightning.Instance.StartApartmentLightning(_lightning, minInterval, maxInterval);
+            //Lightning.Instance.StartApartmentLightning(_lightning, _lightningMinInterval, _lightningMaxInterval);
+            if (_apartmentLightningRoutine != null)
+            {
+                StopCoroutine(_apartmentLightningRoutine);
+            }
+
+            _apartmentLightningRoutine = StartCoroutine(LightningApartmentRoutine(_lightning, _lightningMinInterval, _lightningMaxInterval));
         }
         else
         {
@@ -252,9 +287,12 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         Debug.Log("Apartrment: Apply Clear Morning");
 
-        if (_windowRenderer != null && _w7_WindowViewMaterial != null)
+        if (_windowRenderers != null && _windowRenderers.Length > 0 && _w7_WindowViewMaterial != null)
         {
-            _windowRenderer.material = _w7_WindowViewMaterial;
+            foreach (Renderer windowRenderer in _windowRenderers)
+            {
+                windowRenderer.material = _w7_WindowViewMaterial;
+            }
         }
 
         if (_sunLight != null)
@@ -263,5 +301,51 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
             _sunLight.intensity = _w7_SunLightIntencity;
             _sunLight.color = _w7_SunLightColor;
         }
+    }
+
+    private IEnumerator LightningApartmentRoutine(Light apartmentLightning, float minInterval, float maxInterval)
+    {
+        Debug.Log("LightningApartmentRoutine()");
+
+        while (this != null)
+        {
+            yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
+            PlayThunder(apartmentLightning);
+        }
+    }
+
+    private void PlayThunder(Light apartmentLightning)
+    {
+        Debug.Log("PlayThunder()");
+
+        if (apartmentLightning != null)
+        {
+            if (_lightningFlashApartmentRoutine != null)
+            {
+                StopCoroutine(_lightningFlashApartmentRoutine);
+            }
+
+            _lightningFlashApartmentRoutine = StartCoroutine(LightningFlashApartmentRoutine(apartmentLightning));
+        }
+
+        if (_weatherAudio != null)
+        {
+            _weatherAudio.PlayOneShot(_thunderSound);
+        }
+    }
+
+    private IEnumerator LightningFlashApartmentRoutine(Light apartmentLightning)
+    {
+        Debug.Log("PlayApartmentLightning()");
+
+        apartmentLightning.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        apartmentLightning.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.05f);
+        apartmentLightning.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        apartmentLightning.gameObject.SetActive(false);
+
+        _lightningFlashApartmentRoutine = null;
     }
 }

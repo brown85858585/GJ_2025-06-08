@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public enum LocationType { Apartment, Park }
 
@@ -64,14 +65,14 @@ public class WeatherSystem : MonoBehaviour
 
         CurrentCycle = cycle;
 
-        ApplyWeatherForCurrentCycle(transformParam);
+        ApplyWeatherForCurrentCycle(location, cycle, transformParam);
     }
 
     public void SetLocation(LocationType location)
     {
         _weatherEffectsArray[(int)CurrentLocation].ResetAllEffects();
         CurrentLocation = location;
-        ApplyWeatherForCurrentCycle();
+        ApplyWeatherForCurrentCycle(location, CurrentCycle);
     }
 
     public void SetSycle(int cycle)
@@ -89,7 +90,7 @@ public class WeatherSystem : MonoBehaviour
 
         Debug.Log("Current Cycle: " + CurrentCycle);
 
-        ApplyWeatherForCurrentCycle();
+        ApplyWeatherForCurrentCycle(CurrentLocation, cycle);
     }
 
     public void NextCycle()
@@ -103,16 +104,16 @@ public class WeatherSystem : MonoBehaviour
 
         Debug.Log("Current Cycle: " + CurrentCycle);
 
-        ApplyWeatherForCurrentCycle();
+        ApplyWeatherForCurrentCycle(CurrentLocation, CurrentCycle);
     }
 
-    private void ApplyWeatherForCurrentCycle(Transform transformParam = null)
+    private void ApplyWeatherForCurrentCycle(LocationType location, int cycle, Transform transformParam = null)
     {
-        WeatherType weatherType = GetWeatherTypeForCycle(CurrentCycle);
+        WeatherType weatherType = GetWeatherTypeForCycle(cycle);
 
-        if (_weatherEffectsArray[(int)CurrentLocation] != null)
+        if (_weatherEffectsArray[(int)location] != null)
         {
-            _weatherEffectsArray[(int)CurrentLocation].ApplyWeather(weatherType, transformParam);
+            _weatherEffectsArray[(int)location].ApplyWeather(weatherType, transformParam);
         }
         else
         {
