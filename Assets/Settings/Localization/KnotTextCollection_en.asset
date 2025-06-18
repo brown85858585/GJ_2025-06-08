@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: KnotTextCollection_en
   m_EditorClassIdentifier: 
   _items:
-  - _key: testKey
-    _rawText: ' Test'
+  - _key: Day1_Bed1
+    _rawText: Bed
+  - _key: Day1_Bed2
+    _rawText: Bred
+  - _key: Day1_Bed3
+    _rawText: Led
   - _key: Settings
-    _rawText: Setings
+    _rawText: Set
+  - _key: testKey
+    _rawText: Test
+  - _key: "\u042F\u042B\u0441"
+    _rawText: 

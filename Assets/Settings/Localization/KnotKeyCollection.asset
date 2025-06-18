@@ -21,6 +21,22 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day1_Bed1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Bed2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Bed3
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: "\u042F\u042B\u0441"
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 2
     RefIds: []
