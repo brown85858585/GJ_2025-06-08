@@ -110,14 +110,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004854224215098675}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab733f89bcaa10e4185a824fb40fd294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCanvas: {fileID: 6021685621929793975}
-  panel: {fileID: 8012524612185898012}
-  indicatorSpeed: 50
+  mainCanvas: {fileID: 0}
+  panel: {fileID: 0}
+  indicatorSpeed: 100
   trackHeight: 300
   trackWidth: 60
   zoneHeight: 75
@@ -127,10 +127,8 @@ MonoBehaviour:
   greenZoneColor: {r: 0, g: 1, b: 0, a: 1}
   brightRedColor: {r: 1, g: 0, b: 0, a: 1}
   indicatorColor: {r: 0, g: 0, b: 0, a: 1}
-  actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
-    type: 3}
-  startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
-    type: 3}
+  actionInputAction: {fileID: 0}
+  startInputAction: {fileID: 0}
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0
