@@ -6,10 +6,9 @@ namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
-        private static readonly int Move = Animator.StringToHash("Move");
-        private static readonly float Verticale = Animator.StringToHash("Verticale");
-        private static readonly float Horizontal = Animator.StringToHash("Horizontal");
         private static readonly int IsDancing = Animator.StringToHash("IsDancing");
+        private static readonly int PositionX = Animator.StringToHash("PositionX");
+        private static readonly int PositionY = Animator.StringToHash("PositionY");
 
         [SerializeField] private Animator animator;
         [Range(0f,3f)]
@@ -32,6 +31,8 @@ namespace Player
 
         private Transform _saveCurrentObj;
         private Transform _saveLastParentObj;
+
+        private const float dampTime = 0.1f;
 
         public float MoveSpeed => moveSpeed;
         public float GroundDrag => groundDrag;
@@ -67,16 +68,28 @@ namespace Player
         { 
             moveForwardButton.onClick.RemoveAllListeners();
         }
-
-        public void SetWalkAnimation(Vector3 walking)
+        
+        public void SetWalkAnimation(Vector3 input)
         {
-            //var speed = walking / (MoveSpeed * animatorOffset);
-            animator.SetFloat("Verticale", walking.z);
-            animator.SetFloat("Horizontal",walking.x);
-            //if (speed > 0.1f)
-            //{
-           //     animator.SetBool(IsDancing, false);
-           // }
+            // ВАРИАНТ A: направление движения относительно камеры
+            // Vector3 camFwd = Camera.main.transform.forward; camFwd.y = 0f;
+            // Vector3 camRight = Camera.main.transform.right; camRight.y = 0f;
+            // worldMove = input.z * camFwd.normalized + input.x * camRight.normalized;
+            // ВАРИАНТ B: реальная скорость Rigidbody (комментируем вариант A, если нужен этот)
+            Vector3 worldMove;
+            Vector3 vel = Rigidbody.velocity;
+            worldMove = new Vector3(vel.x, 0, vel.z);
+            
+            /* 2. Конвертируем в локальные координаты */
+            Vector3 localMove = transform.InverseTransformDirection(worldMove);
+
+            /* 3. Нормализуем, оставляем диапазон -1…1  */
+            Vector2 planar = new Vector2(localMove.x, localMove.z);
+            if (planar.sqrMagnitude > 1f)
+                planar.Normalize();                   // чтобы не «вываливаться» за края BlendTree
+            
+            animator.SetFloat(PositionX, planar.x, dampTime, Time.deltaTime);
+            animator.SetFloat(PositionY, planar.y, dampTime, Time.deltaTime);
         }
 
         public void StartDanceAnimation()
