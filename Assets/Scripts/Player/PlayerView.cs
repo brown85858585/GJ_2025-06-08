@@ -37,7 +37,8 @@ namespace Player
         public float GroundDrag => groundDrag;
         public float TurnSmooth => turnSmooth;
         public LayerMask WhatIsGround => whatIsGround;
-
+        public PlayerDialogueView DialogueView => dialogueView;
+        
         public Rigidbody Rigidbody { get; private set; }
         public CapsuleCollider CapsuleCollider { get; private set; }
         

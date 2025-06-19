@@ -6,5 +6,7 @@ namespace Player
     {
         public void SetPosition(Vector3 position);
         public void ToggleMovement();
+        
+        public IPlayerDialogue Dialogue { get; }
     }
 }
