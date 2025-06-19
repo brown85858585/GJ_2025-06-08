@@ -11,6 +11,13 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private Light _lightning;
     [SerializeField] private float _lightningMinInterval = 5.0f;
     [SerializeField] private float _lightningMaxInterval = 15.0f;
+    [SerializeField] private float _lightningFlashInterval_1 = 0.1f;
+    [SerializeField] private float _lightningFlashInterval_2 = 0.05f;
+    [SerializeField] private float _lightningFlashInterval_3 = 0.05f;
+    [SerializeField] private float _lightningSkyboxExposure_1 = 2.0f;
+    [SerializeField] private float _lightningSkyboxExposure_2 = 1.0f;
+    [SerializeField] private float _lightningSkyboxExposure_3 = 2.0f;
+    [SerializeField] private float _lightningSkyboxExposure_4 = 1.0f;
 
     [Header("Environment")]
     [SerializeField] private AudioSource _ambientAudioSource;
@@ -414,34 +421,34 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
 
         if (_w6_SkyboxMaterial != null)
         {
-            _w6_SkyboxMaterial.SetFloat("_Exposure", 2.0f);
+            _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_1);
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(_lightningFlashInterval_1);
 
         parkLightning.gameObject.SetActive(false);
 
         if (_w6_SkyboxMaterial != null)
         {
-            _w6_SkyboxMaterial.SetFloat("_Exposure", 1.0f);
+            _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_2);
         }
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(_lightningFlashInterval_2);
 
         parkLightning.gameObject.SetActive(true);
 
         if (_w6_SkyboxMaterial != null)
         {
-            _w6_SkyboxMaterial.SetFloat("_Exposure", 2.0f);
+            _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_3);
         }
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(_lightningFlashInterval_3);
 
         parkLightning.gameObject.SetActive(false);
 
         if (_w6_SkyboxMaterial != null)
         {
-            _w6_SkyboxMaterial.SetFloat("_Exposure", 1.0f);
+            _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_4);
         }
 
         _lightningFlashParkRoutine = null;
