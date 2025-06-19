@@ -411,16 +411,38 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     private IEnumerator LightningFlashParkRoutine(Light parkLightning)
     {
         parkLightning.gameObject.SetActive(true);
-        _w6_SkyboxMaterial.SetFloat("_Exposure", 2.0f);
+
+        if (_w6_SkyboxMaterial != null)
+        {
+            _w6_SkyboxMaterial.SetFloat("_Exposure", 2.0f);
+        }
+
         yield return new WaitForSeconds(0.1f);
+
         parkLightning.gameObject.SetActive(false);
-        _w6_SkyboxMaterial.SetFloat("_Exposure", 1.0f);
+
+        if (_w6_SkyboxMaterial != null)
+        {
+            _w6_SkyboxMaterial.SetFloat("_Exposure", 1.0f);
+        }
+
         yield return new WaitForSeconds(0.05f);
+
         parkLightning.gameObject.SetActive(true);
-        _w6_SkyboxMaterial.SetFloat("_Exposure", 2.0f);
+
+        if (_w6_SkyboxMaterial != null)
+        {
+            _w6_SkyboxMaterial.SetFloat("_Exposure", 2.0f);
+        }
+
         yield return new WaitForSeconds(0.05f);
+
         parkLightning.gameObject.SetActive(false);
-        _w6_SkyboxMaterial.SetFloat("_Exposure", 1.0f);
+
+        if (_w6_SkyboxMaterial != null)
+        {
+            _w6_SkyboxMaterial.SetFloat("_Exposure", 1.0f);
+        }
 
         _lightningFlashParkRoutine = null;
     }
