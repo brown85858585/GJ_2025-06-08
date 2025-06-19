@@ -3,7 +3,7 @@ guid: 43f5fb39ddbfaf44c9ee52d756a44e24
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -396,7 +396,7 @@ TextureImporter:
         width: 610
         height: 168
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 85, y: 86, z: 94, w: 72}
       outline: []
       physicsShape: []
@@ -417,7 +417,7 @@ TextureImporter:
         width: 505
         height: 191
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 83, y: 103, z: 101, w: 88}
       outline: []
       physicsShape: []
@@ -425,6 +425,27 @@ TextureImporter:
       bones: []
       spriteID: 3885ae3661a531449b60f8ab2a9a48dc
       internalID: -1500107050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upscaled_4k_dialog
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 2494
+        width: 1236
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 100, y: 79, z: 90, w: 71}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0490d9d23fb8a7248ac63373a65f1b96
+      internalID: 858649817
       vertices: []
       indices: 
       edges: []
@@ -454,6 +475,7 @@ TextureImporter:
       upscaled_4k_7: 499769278
       upscaled_4k_8: 1916914251
       upscaled_4k_9: -881771072
+      upscaled_4k_dialog: 858649817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

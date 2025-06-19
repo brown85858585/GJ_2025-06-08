@@ -37,19 +37,15 @@ namespace Player
             
             _input.OnPutItemDown += PutTheItemDown;
             // _input.OnTest += ToggleMovement;
+            
+            
         }
 
         public void InitView(PlayerView playerView)
         {
             _view = playerView;
-            _view.OnButtonClick += OnButtonClick;
             _view.OnCollision += OnCollision;
             _view.OnUpdate += Update;
-        }
-
-        private void OnButtonClick()
-        {
-            SetPosition(Vector3.zero);
         }
 
         private void Update()

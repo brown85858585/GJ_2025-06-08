@@ -11,9 +11,8 @@ namespace Player
         private static readonly int PositionY = Animator.StringToHash("PositionY");
 
         [SerializeField] private Animator animator;
-        [Range(0f,3f)]
-        [SerializeField] private float animatorOffset = 1f;
         [SerializeField] private Transform rightHand;
+        [SerializeField] private PlayerDialogueView dialogueView;
         
         [Header("Movement Settings")]
         [SerializeField]
@@ -44,14 +43,11 @@ namespace Player
         
         public event Action OnCollision;
         public event Action OnUpdate;
-        public event Action OnButtonClick;
 
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
             CapsuleCollider = GetComponent<CapsuleCollider>();
-            
-            moveForwardButton.onClick.AddListener(() => OnButtonClick?.Invoke());
         }
 
         private void FixedUpdate()
