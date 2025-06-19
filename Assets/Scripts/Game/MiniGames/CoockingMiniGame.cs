@@ -21,6 +21,11 @@ namespace Game.MiniGames
         public Color successZoneColor = Color.green;
         public Color indicatorColor = Color.black;
 
+        [Header("Visual Components - Assign in Prefab")]
+        [SerializeField] protected Image arcImage;           // Для круговых игр (готовка)
+        [SerializeField] protected Image successZoneImage;   // Для зеленой зоны в круговых играх
+        [SerializeField] protected Image indicatorImage;     // Главный индикатор/стрелка
+
         private RectTransform arcBackground;
         private RectTransform successZone;
         private float currentAngle;
@@ -107,6 +112,8 @@ namespace Game.MiniGames
             // Поворот для правильного позиционирования дуги
             arcBackground.rotation = Quaternion.Euler(0, 0, -arcStartAngle);
         }
+
+
 
         private void CreateSuccessZone()
         {
@@ -250,7 +257,7 @@ namespace Game.MiniGames
             }
         }
 
-        protected override void OnActionButtonClick()
+        public override void OnActionButtonClick()
         {
             if (!isGameActive)
             {

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 
 namespace Game.MiniGames
@@ -14,7 +15,7 @@ namespace Game.MiniGames
         [SerializeField] protected GameObject panel;
 
         public GameObject Panel => panel;
-        protected GameObject miniGamePanel;
+        protected GameObject miniGamePanel { get { return panel; }  set => panel = value; }
 
         [Header("Input")]
         [SerializeField] protected InputActionReference actionInputAction; // E клавиша
@@ -30,18 +31,12 @@ namespace Game.MiniGames
         protected GameObject startScreen;
         protected GameObject gameScreen;
 
-        [Header("Visual Components - Assign in Prefab")]
-        [SerializeField] protected Image arcImage;           // Для круговых игр (готовка)
-        [SerializeField] protected Image successZoneImage;   // Для зеленой зоны в круговых играх
-        [SerializeField] protected Image trackImage;         // Для вертикального трека (полив)
-        [SerializeField] protected Image[] zoneImages;       // Для цветных зон (полив: красная, желтая, зеленая, красная)
-        [SerializeField] protected Image indicatorImage;     // Главный индикатор/стрелка
 
         [Header("Game Settings")]
         public float indicatorSpeed = 100f;
         public int maxAttempts = 3;
 
-        protected bool isGameActive = false;
+        public bool isGameActive = false;
         protected bool gameStarted = false;
         protected int currentAttempts = 0;
 
@@ -51,19 +46,48 @@ namespace Game.MiniGames
 
         protected virtual void Start()
         {
-            FindSceneComponents();
-            SetupInput();
+             FindSceneComponents();
+             SetupInput();
+
+            HideMiniGameUI();
+            CreateMiniGameUI();
+            ShowMiniGameUI();
+        }
+
+
+        /// <summary>
+        /// ЕДИНСТВЕННОЕ место где показываем UI мини-игры
+        /// </summary>
+        protected void ShowMiniGameUI()
+        {
+            Debug.Log("🔵 ПОКАЗЫВАЕМ UI мини-игры");
+
+            if (miniGamePanel != null)
+            {
+                miniGamePanel.SetActive(true);
+                Debug.Log("✅ MiniGamePanel включена");
+            }
+            else
+            {
+                Debug.LogError("❌ miniGamePanel == null! UI не может быть показан");
+            }
+        }
+
+        /// <summary>
+        /// ЕДИНСТВЕННОЕ место где скрываем UI мини-игры
+        /// </summary>
+        protected void HideMiniGameUI()
+        {
+            Debug.Log("🔴 СКРЫВАЕМ UI мини-игры");
 
             if (miniGamePanel != null)
             {
                 miniGamePanel.SetActive(false);
-                Debug.Log("MiniGamePanel выключена при инициализации");
+                Debug.Log("✅ MiniGamePanel выключена");
             }
-
-            CreateMiniGameUI();
         }
 
-        protected virtual void SetupInput()
+        public virtual void SetupInput()
         {
             if (actionInputAction == null || startInputAction == null)
             {
@@ -130,7 +154,14 @@ namespace Game.MiniGames
                 return;
             }
 
-            miniGamePanel = GameObject.Find("MiniGamePanel");
+           
+            if (miniGamePanel == null)
+            { 
+                miniGamePanel = GameObject.Find("MiniGamePanel");
+                //if (miniGamePanel == null)
+                  //  miniGamePanel = Instantiate(panel);
+            }
+
             if (miniGamePanel == null)
             {
                 Debug.LogError("MiniGamePanel не найдена в Canvas!");
@@ -144,16 +175,13 @@ namespace Game.MiniGames
         {
             if (miniGamePanel == null) return;
 
-            miniGamePanel.SetActive(false);
+          
             ClearExistingElements();
             CreateStartScreen();
             CreateGameScreen();
 
             // Инициализировать массив зон если он не задан
-            if (zoneImages == null || zoneImages.Length == 0)
-            {
-                zoneImages = new Image[4]; // По умолчанию 4 зоны для полива
-            }
+
 
             Debug.Log("Базовая мини-игра готова!");
         }
@@ -172,7 +200,7 @@ namespace Game.MiniGames
 
         protected abstract void CreateStartScreen();
         protected abstract void CreateGameScreen();
-        protected abstract void OnActionButtonClick();
+        public abstract void OnActionButtonClick();
         protected abstract string CheckResult();
 
         // Базовые методы для создания UI элементов
@@ -212,7 +240,7 @@ namespace Game.MiniGames
             return button;
         }
 
-        protected Text CreateText(string name, string text, Vector2 position, int fontSize, Color color, Vector2 size, Transform parent = null)
+        public Text CreateText(string name, string text, Vector2 position, int fontSize, Color color, Vector2 size, Transform parent = null)
         {
             if (parent == null) parent = miniGamePanel.transform;
 
@@ -279,7 +307,7 @@ namespace Game.MiniGames
                 startInputAction?.action.Enable();
             }
 
-            miniGamePanel.SetActive(true);
+
 
             if (startScreen != null) startScreen.SetActive(true);
             if (gameScreen != null) gameScreen.SetActive(false);
@@ -287,6 +315,7 @@ namespace Game.MiniGames
             gameStarted = false;
             isGameActive = false;
 
+            ShowMiniGameUI();
             Debug.Log("Стартовый экран готов!");
         }
 
@@ -321,7 +350,7 @@ namespace Game.MiniGames
 
             if (miniGamePanel != null)
             {
-                miniGamePanel.SetActive(false);
+                HideMiniGameUI();
                 Debug.Log("MiniGamePanel выключена!");
             }
 

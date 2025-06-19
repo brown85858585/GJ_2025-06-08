@@ -19,6 +19,13 @@ namespace Game.MiniGames
         public Color brightRedColor = Color.red;
         public Color indicatorColor = Color.black;
 
+
+        [Header("Visual Components - Assign in Prefab")]
+        [SerializeField] protected Image trackImage;         // Для вертикального трека (полив)
+        [SerializeField] protected Image[] zoneImages;       // Для цветных зон (полив: красная, желтая, зеленая, красная)
+        [SerializeField] protected Image indicatorImage;     // Главный индикатор/стрелка
+
+
         private bool isMovingUp = true;
         private float indicatorPosition = 0f;
         private float trackTop, trackBottom;
@@ -130,6 +137,16 @@ namespace Game.MiniGames
             }
         }
 
+        protected override void CreateMiniGameUI()
+        {
+            base.CreateMiniGameUI();
+            if (zoneImages == null || zoneImages.Length == 0)
+            {
+                zoneImages = new Image[4]; // По умолчанию 4 зоны для полива
+            }
+
+        }
+
         private RectTransform CreateZone(string name, Color color, Vector2 position, Vector2 size)
         {
             GameObject zoneObj = new GameObject(name);
@@ -235,7 +252,7 @@ namespace Game.MiniGames
             }
         }
 
-        protected override void OnActionButtonClick()
+        public override void OnActionButtonClick()
         {
             if (!isGameActive)
             {
