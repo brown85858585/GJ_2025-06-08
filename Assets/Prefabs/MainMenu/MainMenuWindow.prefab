@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1947833212047792939}
+  - component: {fileID: 1207021734020460293}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -35,6 +36,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -74.55469}
   m_SizeDelta: {x: 422.6895, y: 606.0135}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1207021734020460293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021070246997464907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &2562945201155547195
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +200,6 @@ MonoBehaviour:
   scaleFactor: 1
   buttonPrefabs:
   - {fileID: 1472073090436116044, guid: 799faa771b4d49e4c9458339dfc54f3e, type: 3}
-  - {fileID: 5536047471097438766, guid: 2c2238ba9e6cd6f4f878a86b05474f16, type: 3}
   - {fileID: 8375676770721540304, guid: 2b17e7003b046e04e89124ba03a8cc7a, type: 3}
   - {fileID: 3015289267442919154, guid: 61fb1a4192cf5284cafe0ce8827c10bb, type: 3}
   buttonContainer: {fileID: 1947833212047792939}
