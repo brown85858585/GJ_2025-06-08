@@ -911,12 +911,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionalLight: {fileID: 0}
+  _sunForWindow: {fileID: 0}
+  _sunForWindowMultiplyer: 100
   _lightning: {fileID: 7108289529474396065}
   _lightningMinInterval: 3
   _lightningMaxInterval: 7
+  _lightningFlashInterval_1: 0.1
+  _lightningFlashInterval_2: 0.05
+  _lightningFlashInterval_3: 0.05
+  _lightningSkyboxExposure_1: 2
+  _lightningSkyboxExposure_2: 1
+  _lightningSkyboxExposure_3: 2
+  _lightningSkyboxExposure_4: 1
   _ambientAudioSource: {fileID: 0}
   _defaultSkyBoxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000,
     type: 0}
+  _roomWindowMaterial: {fileID: 2100000, guid: da15b9cc6cfc7354f9c450717ff566d4, type: 2}
   _txtClearNoon: {fileID: 3927936010787691559}
   _w1_SkyboxMaterial: {fileID: 2100000, guid: 73324b55f67f54c7bbf43204788b8bbe, type: 2}
   _w1_LightIntensity: 1

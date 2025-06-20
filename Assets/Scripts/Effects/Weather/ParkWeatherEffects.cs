@@ -26,6 +26,9 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private AudioSource _ambientAudioSource;
     [SerializeField] private Material _defaultSkyBoxMaterial;
 
+    [Header("Room Window")]
+    [SerializeField] private Material _roomWindowMaterial;
+
     [Header("Clear Noon")]
     [SerializeField] private TextMeshProUGUI _txtClearNoon;
     [SerializeField] private Material _w1_SkyboxMaterial;
@@ -560,36 +563,79 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     {
         parkLightning.gameObject.SetActive(true);
 
+        if (_sunForWindow != null)
+        {
+            _sunForWindow.intensity = _lightningSkyboxExposure_1 * _sunForWindowMultiplyer;
+            _sunForWindow.color = Color.white;
+            _sunForWindow.color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
+        }
+
         if (_w6_SkyboxMaterial != null)
         {
             _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_1);
+        }
+
+        if (_roomWindowMaterial != null)
+        {
+            _roomWindowMaterial.color = new Color(1, 1, 1, 1);
         }
 
         yield return new WaitForSeconds(_lightningFlashInterval_1);
 
         parkLightning.gameObject.SetActive(false);
 
+        if (_sunForWindow != null)
+        {
+            _sunForWindow.intensity = 0.0f;
+        }
+
         if (_w6_SkyboxMaterial != null)
         {
             _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_2);
+        }
+
+        if (_roomWindowMaterial != null)
+        {
+            _roomWindowMaterial.color = new Color(1, 1, 1, 0.02f);
         }
 
         yield return new WaitForSeconds(_lightningFlashInterval_2);
 
         parkLightning.gameObject.SetActive(true);
 
+        if (_sunForWindow != null)
+        {
+            _sunForWindow.intensity = _lightningSkyboxExposure_2 * _sunForWindowMultiplyer;
+        }
+
         if (_w6_SkyboxMaterial != null)
         {
             _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_3);
+        }
+
+        if (_roomWindowMaterial != null)
+        {
+            _roomWindowMaterial.color = new Color(1, 1, 1, 1);
         }
 
         yield return new WaitForSeconds(_lightningFlashInterval_3);
 
         parkLightning.gameObject.SetActive(false);
 
+        if (_sunForWindow != null)
+        {
+            _sunForWindow.intensity = 0.0f;
+            _sunForWindow.color = Color.white;
+        }
+
         if (_w6_SkyboxMaterial != null)
         {
             _w6_SkyboxMaterial.SetFloat("_Exposure", _lightningSkyboxExposure_4);
+        }
+
+        if (_roomWindowMaterial != null)
+        {
+            _roomWindowMaterial.color = new Color(1, 1, 1, 0.02f);
         }
 
         _lightningFlashParkRoutine = null;
