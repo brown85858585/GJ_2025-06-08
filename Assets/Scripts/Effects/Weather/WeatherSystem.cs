@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum LocationType { Apartment, Park }
+public enum LocationType { Park, Apartment }
 
 public enum WeatherType
 {
