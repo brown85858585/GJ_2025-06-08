@@ -162,7 +162,7 @@ MonoBehaviour:
     type: 3}
   effectAccumulator: {fileID: 5187277923117056417, guid: a5772df89723f5141850e0e50f6887ef,
     type: 3}
-  nextLevelButton: {fileID: 0}
+  nextLevelButton: {fileID: 1300471548}
   config: {fileID: 11400000, guid: 048663349ec771847bb1d25e9f5c4cfd, type: 2}
 --- !u!4 &23532009
 Transform:
