@@ -9,5 +9,6 @@ namespace Game
         Kitchen,
         WateringCan,
         Computer,
+        Guitar
     }
 }

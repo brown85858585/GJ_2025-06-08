@@ -1,6 +1,7 @@
 using CameraField;
 using Cinemachine;
 using Game.Levels;
+using Game.Monolog;
 using Game.Quests;
 using Player;
 using UnityEngine;
@@ -46,6 +47,8 @@ namespace Game.Installers
             InitPlayer();
             InitCamera();
             InitQuestLog();
+
+            var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager);
         }
 
         private void InitLevelOne()
@@ -91,7 +94,7 @@ namespace Game.Installers
 
         private void HandleLevelCompletion(ItemCategory category)
         {
-            if (category == ItemCategory.Bed && !_allQuestsCompleted)
+            if (category == ItemCategory.Bed && _allQuestsCompleted)
                 LoadNextLevel();
         }
 
