@@ -22,6 +22,11 @@ namespace Game.MiniGames
         [SerializeField] private GameObject flowerGameViewPrefab; // Префаб FlowerGameView
         private GameObject instantiatedFlowerView;
 
+        [Header("Prefab Settings")]
+        [SerializeField] private float prefabScale = 0.5f; // Масштаб префаба
+        [SerializeField] private Vector2 prefabPosition = Vector2.zero; // Позиция префаба
+        [SerializeField] private bool disablePrefabCanvas = true; // Отключать Canvas в префабе
+
         // Ссылки на элементы из префаба
         private RectTransform waterMask; // Маска для воды
         private Image waterImage; // Изображение воды
@@ -43,8 +48,8 @@ namespace Game.MiniGames
         public int maxAttempts = 3;
 
         [Header("Water Animation")]
-        [SerializeField] private float waterMinY = -200f; // Минимальная позиция воды
-        [SerializeField] private float waterMaxY = 200f;  // Максимальная позиция воды
+        [SerializeField] private float waterMinY = -750f; // Минимальная позиция воды
+        [SerializeField] private float waterMaxY = -150f;  // Максимальная позиция воды
 
         private bool isGameActive = false;
         private bool isMovingUp = true;
@@ -78,6 +83,28 @@ namespace Game.MiniGames
             }
 
             CreateMiniGameUI();
+            SetupWaterZones();
+        }
+
+
+        private void SetupWaterCoordinates()
+        {
+            if (waterMask == null || waterImage == null) return;
+
+            // Получить реальные размеры маски воды
+            RectTransform waterRect = waterImage.GetComponent<RectTransform>();
+            RectTransform maskRect = waterMask;
+
+            // Рассчитать диапазон движения воды на основе размера маски
+            float maskHeight = maskRect.rect.height;
+
+            // Установить диапазон относительно маски
+            //waterMinY = -maskHeight / 2f; // Низ маски
+            //waterMaxY = maskHeight / 2f;  // Верх маски
+
+            Debug.Log($"🔧 Настройка координат воды: maskHeight={maskHeight}, minY={waterMinY}, maxY={waterMaxY}");
+
+            // Пересчитать зоны полива
             SetupWaterZones();
         }
 
@@ -170,15 +197,18 @@ namespace Game.MiniGames
                 RectTransform flowerRect = instantiatedFlowerView.GetComponent<RectTransform>();
                 if (flowerRect != null)
                 {
-                    flowerRect.anchorMin = Vector2.zero;
-                    flowerRect.anchorMax = Vector2.one;
-                    flowerRect.offsetMin = Vector2.zero;
-                    flowerRect.offsetMax = Vector2.zero;
-                    flowerRect.localScale = new Vector3(1f, 1f, 1f); // Устанавливаем scale 0.5
+                    // ЦЕНТРИРОВАНИЕ - привязка к центру экрана
+                    flowerRect.anchorMin = new Vector2(0.5f, 0.5f);
+                    flowerRect.anchorMax = new Vector2(0.5f, 0.5f);
+                    flowerRect.anchoredPosition = Vector2.zero; // Позиция в центре
+                    flowerRect.localScale = new Vector3(0.8f, 0.8f, 1f); // Немного уменьшим
                 }
 
                 // Найти компоненты в префабе
                 FindPrefabComponents();
+
+                // НАСТРОЙКА КООРДИНАТ ПОЛИВА после поиска компонентов
+                SetupWaterCoordinates();
             }
             else
             {
@@ -191,19 +221,42 @@ namespace Game.MiniGames
 
         private void FindPrefabComponents()
         {
-            if (instantiatedFlowerView == null) return;
+            if (instantiatedFlowerView == null)
+            {
+                Debug.LogError("❌ instantiatedFlowerView == null!");
+                return;
+            }
+
+            Debug.Log($"🔍 Поиск компонентов в префабе: {instantiatedFlowerView.name}");
+
+            // Показать всю структуру префаба
+            LogChildren(instantiatedFlowerView.transform, 0);
 
             // Найти маску и изображение воды
             Transform maskTransform = instantiatedFlowerView.transform.Find("Panel/Mask");
+            Debug.Log($"🔍 Поиск Panel/Mask: {maskTransform}");
+
             if (maskTransform != null)
             {
                 waterMask = maskTransform.GetComponent<RectTransform>();
+                Debug.Log($"✅ Маска найдена: {waterMask}");
 
                 Transform waterTransform = maskTransform.Find("Water");
+                Debug.Log($"🔍 Поиск Water: {waterTransform}");
+
                 if (waterTransform != null)
                 {
                     waterImage = waterTransform.GetComponent<Image>();
+                    Debug.Log($"✅ Вода найдена: {waterImage}");
                 }
+                else
+                {
+                    Debug.LogError("❌ Water не найден в Mask!");
+                }
+            }
+            else
+            {
+                Debug.LogError("❌ Panel/Mask не найден!");
             }
 
             // Найти контейнер цветка (если нужно)
@@ -211,31 +264,53 @@ namespace Game.MiniGames
             if (flowerTransform != null)
             {
                 flowerContainer = flowerTransform.GetComponent<RectTransform>();
+                Debug.Log($"✅ Panel найден: {flowerContainer}");
             }
 
             if (waterMask == null || waterImage == null)
             {
-                Debug.LogError("Не удалось найти компоненты воды в префабе!");
+                Debug.LogError("❌ Не удалось найти компоненты воды в префабе!");
+            }
+            else
+            {
+                Debug.Log("✅ Все компоненты найдены успешно!");
+            }
+        }
+
+        private void LogChildren(Transform parent, int depth)
+        {
+            string indent = new string(' ', depth * 2);
+            Debug.Log($"{indent}📁 {parent.name}");
+
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                LogChildren(parent.GetChild(i), depth + 1);
             }
         }
 
         private void SetupWaterZones()
         {
-            // Определить зоны в координатах воды
-            float zoneSize = (waterMaxY - waterMinY) / 4f;
+            // Определить зоны в координатах воды (относительно размера маски)
+            float totalRange = waterMaxY - waterMinY;
+            float zoneSize = totalRange / 4f;
 
-            brightRedZoneMin = waterMinY;
+            // Снизу вверх: плохо -> хорошо -> отлично -> хорошо
+            brightRedZoneMin = waterMinY;                    // Дно - плохо
             brightRedZoneMax = waterMinY + zoneSize;
 
-            greenZoneMin = waterMinY + zoneSize;
-            greenZoneMax = waterMinY + zoneSize * 2;
+            yellowZoneMin = waterMinY + zoneSize;           // Желтая - хорошо  
+            yellowZoneMax = waterMinY + zoneSize * 2;
 
-            yellowZoneMin = waterMinY + zoneSize * 2;
-            yellowZoneMax = waterMinY + zoneSize * 3;
+            greenZoneMin = waterMinY + zoneSize * 2;        // Зеленая - отлично
+            greenZoneMax = waterMinY + zoneSize * 3;
 
-            darkRedZoneMin = waterMinY + zoneSize * 3;
+            darkRedZoneMin = waterMinY + zoneSize * 3;      // Верх - плохо
             darkRedZoneMax = waterMaxY;
+
+            Debug.Log($"🎯 Зоны: Красная1({brightRedZoneMin:F1}-{brightRedZoneMax:F1}) Желтая({yellowZoneMin:F1}-{yellowZoneMax:F1}) Зеленая({greenZoneMin:F1}-{greenZoneMax:F1}) Красная2({darkRedZoneMin:F1}-{darkRedZoneMax:F1})");
         }
+
+
 
         private void CreateStartScreen()
         {
@@ -421,14 +496,25 @@ namespace Game.MiniGames
 
         private void StartGame()
         {
+            Debug.Log("🎮 StartGame вызван!");
+
             if (startScreen != null)
             {
                 startScreen.SetActive(false);
+                Debug.Log("✅ Стартовый экран скрыт");
             }
 
             if (gameScreen != null)
             {
                 gameScreen.SetActive(true);
+                Debug.Log("✅ Игровой экран показан");
+
+                // Проверить что префаб активен
+                if (instantiatedFlowerView != null)
+                {
+                    Debug.Log($"✅ Префаб активен: {instantiatedFlowerView.activeSelf}");
+                    instantiatedFlowerView.SetActive(true); // Принудительно активировать
+                }
             }
 
             gameStarted = true;
