@@ -129,7 +129,7 @@ MonoBehaviour:
   waterMinY: -700
   waterMaxY: -150
   waterHorizontalRange: 50
-  waterHorizontalSpeed: 5
+  waterHorizontalSpeed: 0
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
