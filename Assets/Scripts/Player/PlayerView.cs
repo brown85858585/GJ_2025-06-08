@@ -61,11 +61,6 @@ namespace Player
             OnCollision?.Invoke();
         }
 
-        private void OnDestroy()
-        { 
-            moveForwardButton.onClick.RemoveAllListeners();
-        }
-        
         public void SetWalkAnimation(Vector3 input)
         {
             // ВАРИАНТ A: направление движения относительно камеры

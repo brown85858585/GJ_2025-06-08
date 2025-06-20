@@ -1,3 +1,4 @@
+using Knot.Localization.Components;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Player
         {
             if (_text != null)
             {
-                _text.text = text;
+                _text.GetComponent<KnotLocalizedTextMeshProUGUI>().KeyReference.Key = text;
             }
             else
             {
