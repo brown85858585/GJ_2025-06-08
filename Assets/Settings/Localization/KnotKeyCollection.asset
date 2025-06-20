@@ -17,7 +17,55 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Settings
+  - _key: Settings_Header
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Settings_Music
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Settings_Sounds
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Settings_Language
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quit
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quit_Accept0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quest_Awakening0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quest_Door0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quest_Flower0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quest_Kitchen0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quest_Computer0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Quest_Sleep0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Bed0
     _metadata:
       _runtime: []
       _editor: []
@@ -25,15 +73,611 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day1_Bed2
+  - _key: Day2_Bed0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day1_Bed3
+  - _key: Day2_Bed1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: "\u042F\u042B\u0441"
+  - _key: Day3_Bed0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Bed1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Bed0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Bed1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Bed0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Bed1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Bed0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Bed1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Awakening
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Awakening
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Awakening
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Awakening
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Awakening
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Sleep
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Sleep
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Sleep
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Sleep
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Door_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Door_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Door_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Door_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Door_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Door_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Door_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Door_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Door_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Door_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Door0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Door1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Flower_WateringCup
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Flower_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Flower_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Flower_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Flower_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Flower_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Flower_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Flower_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Flower_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Flower_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Flower_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Flower_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Flower_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Kitchen_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Kitchen_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Kitchen_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Kitchen_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Kitchen_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Kitchen_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Kitchen_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Kitchen_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Kitchen_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Kitchen_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Kitchen_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Kitchen_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Letter_Head
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Attempt
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Delete
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Accept
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Final
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Correctly
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Wrong
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Computer_UI_Button
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Computer_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Computer_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Computer0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Computer1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Computer2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Computer_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Computer_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Computer_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Computer_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Computer_Win
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Computer_Defeat
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Computer0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Guitar0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Guitar1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Guitar2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Guitar0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Guitar1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Guitar2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Guitar0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Guitar1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Guitar2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Guitar0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Guitar1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Guitar2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Guitar0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Guitar1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Guitar2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Guitar0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Guitar1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Guitar2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Painting0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Painting1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Painting2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Painting0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Painting1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Painting2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Painting0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Painting1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Painting2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Painting0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Painting1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Painting2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Painting0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Painting1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Painting2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Painting0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Painting1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Painting2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Books0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Books1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Books2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Books0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Books1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Books2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Books0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Books1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Books2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Books0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Books1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Books2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Books0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Books1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Books2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Books0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Books1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Books2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Basket0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Basket1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Basket2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Basket0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Basket1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Basket2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Basket0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Basket1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Basket2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Basket0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Basket1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Basket2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Basket0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Basket1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Basket2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Basket0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Basket1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Basket2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Window0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Window1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_Window2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Window0
     _metadata:
       _runtime: []
       _editor: []
