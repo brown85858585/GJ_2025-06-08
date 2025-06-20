@@ -50,6 +50,12 @@ namespace Game.MiniGames
         [Header("Water Animation")]
         [SerializeField] private float waterMinY = -750f; // Минимальная позиция воды
         [SerializeField] private float waterMaxY = -150f;  // Максимальная позиция воды
+        [SerializeField] private float waterHorizontalRange = 50f; // Диапазон горизонтального движения
+        [SerializeField] private float waterHorizontalSpeed = 2f; // Скорость горизонтального движения
+
+        // Добавить переменную для горизонтального движения
+        private float waterHorizontalPosition = 0f;
+        private bool isMovingRight = true;
 
         private bool isGameActive = false;
         private bool isMovingUp = true;
@@ -448,6 +454,7 @@ namespace Game.MiniGames
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.sizeDelta = new Vector2(250, 40);
             textRect.anchoredPosition = new Vector2(0, 250);
+            textObj.SetActive(false);
         }
 
         private void ClearExistingElements()
@@ -556,6 +563,8 @@ namespace Game.MiniGames
             if (waterImage != null)
             {
                 waterPosition = waterMinY;
+                waterHorizontalPosition = 0f; // Сброс горизонтальной позиции
+                isMovingRight = true; // Сброс направления
                 UpdateWaterPosition();
                 isMovingUp = true;
                 isGameActive = true;
@@ -567,7 +576,8 @@ namespace Game.MiniGames
             if (waterImage != null)
             {
                 RectTransform waterRect = waterImage.GetComponent<RectTransform>();
-                waterRect.anchoredPosition = new Vector2(waterRect.anchoredPosition.x, waterPosition);
+                // Обновляем и вертикальную, и горизонтальную позицию
+                waterRect.anchoredPosition = new Vector2(waterHorizontalPosition, waterPosition);
             }
         }
 
@@ -577,8 +587,30 @@ namespace Game.MiniGames
             {
                 if (waterImage != null)
                 {
+                    // Вертикальное движение (как было)
                     waterPosition += indicatorSpeed * Time.deltaTime;
 
+                    // Горизонтальное движение влево-вправо
+                    if (isMovingRight)
+                    {
+                        waterHorizontalPosition += waterHorizontalSpeed * indicatorSpeed * Time.deltaTime;
+                        if (waterHorizontalPosition >= waterHorizontalRange)
+                        {
+                            waterHorizontalPosition = waterHorizontalRange;
+                            isMovingRight = false;
+                        }
+                    }
+                    else
+                    {
+                        waterHorizontalPosition -= waterHorizontalSpeed * indicatorSpeed * Time.deltaTime;
+                        if (waterHorizontalPosition <= -waterHorizontalRange)
+                        {
+                            waterHorizontalPosition = -waterHorizontalRange;
+                            isMovingRight = true;
+                        }
+                    }
+
+                    // Проверка достижения верха
                     if (waterPosition >= waterMaxY)
                     {
                         waterPosition = waterMaxY;

@@ -126,8 +126,10 @@ MonoBehaviour:
   trackHeight: 300
   zoneHeight: 75
   maxAttempts: 3
-  waterMinY: -750
+  waterMinY: -730
   waterMaxY: -140
+  waterHorizontalRange: 50
+  waterHorizontalSpeed: 5
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
