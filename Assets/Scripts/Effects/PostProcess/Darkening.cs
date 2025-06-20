@@ -15,12 +15,15 @@ namespace PostProcess
         [SerializeField] private float _maxValue = 0.0f;
 
         private ColorAdjustments _colorAdjustments;
-    
+        private DepthOfField _depthOfField;
+
+
         private Coroutine _fadeCoroutine;
 
         private void Start()
         {
             _volume.profile.TryGet(out _colorAdjustments);
+            _volume.profile.TryGet(out _depthOfField);
         }
 
         // Fade In
@@ -28,7 +31,11 @@ namespace PostProcess
         {
             Debug.Log("FadeIn");
 
-            if(_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+            if (_fadeCoroutine != null)
+            {
+                StopCoroutine(_fadeCoroutine);
+            }
+
             _fadeCoroutine = StartCoroutine(AnimateExposure(_minValue));
         }
 
@@ -37,8 +44,22 @@ namespace PostProcess
         {
             Debug.Log("FadeOut");
 
-            if(_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+            if (_fadeCoroutine != null)
+            {
+                StopCoroutine(_fadeCoroutine);
+            }
+
             _fadeCoroutine = StartCoroutine(AnimateExposure(_maxValue));
+        }
+
+        public void Blur()
+        {
+            _depthOfField.active = true;
+        }
+
+        public void Unblur()
+        {
+            _depthOfField.active = false;
         }
 
         private IEnumerator AnimateExposure(float targetValue)
