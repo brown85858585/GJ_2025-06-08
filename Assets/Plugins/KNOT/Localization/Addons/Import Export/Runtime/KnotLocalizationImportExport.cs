@@ -29,6 +29,7 @@ namespace Knot.Localization
         {
             public bool Enabled = true;
             public KnotTextCollection TextCollection;
+            public KnotKeyCollection KeyCollection;
 
             public abstract void Import(KnotDatabase database);
 
@@ -51,6 +52,7 @@ namespace Knot.Localization
                 Undo.RegisterCompleteObjectUndo(TextCollection, "Import");
 
                 TextCollection.Clear();
+                KeyCollection.Clear();
                 int failedImportLines = 0;
                 foreach (var l in TextAsset.text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 {
@@ -87,6 +89,8 @@ namespace Knot.Localization
                         
 
                         TextCollection.Add(new KnotTextData(keyVal.left, keyVal.right));
+                        KeyCollection.Add(new KnotKeyData(keyVal.left));
+                        
                     }
                     catch
                     {
