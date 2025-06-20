@@ -19,6 +19,7 @@ namespace Game.Installers
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private QuestLogView questLogPrefab;
         [SerializeField] private EffectAccumulatorView effectAccumulator;
+        [SerializeField] private Button nextLevelButton;
         
         [SerializeField] private LevelsConfig config;
 
@@ -34,6 +35,7 @@ namespace Game.Installers
         private void Awake()
         {
             Install();
+            nextLevelButton.onClick.AddListener(LoadNextLevel);
         }
 
         private void Install()
@@ -101,7 +103,7 @@ namespace Game.Installers
 
         private void HandleLevelCompletion(ItemCategory category)
         {
-            if (category == ItemCategory.Bed && !_allQuestsCompleted)
+            if (category == ItemCategory.Bed && _allQuestsCompleted)
                 LoadNextLevel();
         }
 
@@ -119,6 +121,7 @@ namespace Game.Installers
                 _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
                 _allQuestsCompleted = false;
                 
+                _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
                 _effectAccumulator.FadeOut();
             });
         }
