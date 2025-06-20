@@ -23,7 +23,7 @@ MonoBehaviour:
         asm: Knot.Localization}
       data:
         Enabled: 1
-        TextCollection: {fileID: 11400000, guid: 4bda7e24428f79a4399117df8aafc778,
+        TextCollection: {fileID: 11400000, guid: fd9d7b9f57473594195391ada7edb5ad,
           type: 2}
         KeyCollection: {fileID: 11400000, guid: fa5769e7cebc3b645a456eaa78b928e7,
           type: 2}
