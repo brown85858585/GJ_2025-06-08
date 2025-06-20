@@ -170,6 +170,7 @@ MonoBehaviour:
   settleRatio: 0.4
   showEase: 5
   hideEase: 26
+  scaleFactor: 1
   buttonPrefabs:
   - {fileID: 1472073090436116044, guid: 799faa771b4d49e4c9458339dfc54f3e, type: 3}
   - {fileID: 5536047471097438766, guid: 2c2238ba9e6cd6f4f878a86b05474f16, type: 3}
@@ -189,6 +190,7 @@ GameObject:
   - component: {fileID: 10351495854881703}
   - component: {fileID: 6599817962595258518}
   - component: {fileID: 3025089259649692204}
+  - component: {fileID: 1129732861846036634}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -243,7 +245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: My Game
+  m_text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df4c4427852e16544b52f3e845b0b9f7, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 4cf869dd676502e4c849ee5297e33bda, type: 2}
@@ -333,3 +335,22 @@ MonoBehaviour:
   settleRatio: 0.4
   showEase: 27
   hideEase: 26
+  scaleFactor: 1
+--- !u!114 &1129732861846036634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444591039056112296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dae449646f11534f81928346b3b6341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keyReference:
+    _key: Settings
+    _formatters: []
+  references:
+    version: 2
+    RefIds: []
