@@ -17,7 +17,7 @@ MonoBehaviour:
     levelPrefab: {fileID: 554074100522983698, guid: 8551f1249cec1a04c8c5b8b43ff4c2da,
       type: 3}
   - levelName: Second
-    levelPrefab: {fileID: 629543909847731020, guid: 114b3bb5ba191c746a6b9af952056ac7,
+    levelPrefab: {fileID: 554074100522983698, guid: 8551f1249cec1a04c8c5b8b43ff4c2da,
       type: 3}
   - levelName: Third
     levelPrefab: {fileID: 629543909847731020, guid: 8c9d7abd2424f7f4fb1eb0d9ca50fa2e,

@@ -7,7 +7,6 @@ namespace PostProcess
 {
     public class Darkening : MonoBehaviour
     {
-        [SerializeField] private Volume _volume;
         [SerializeField] private float _fadeDuration = 5.0f;
         [Range(-10.0f, 0.0f)]
         [SerializeField] private float _minValue = -8.0f;
@@ -18,10 +17,12 @@ namespace PostProcess
         private DepthOfField _depthOfField;
 
 
+        private Volume _volume;
         private Coroutine _fadeCoroutine;
 
-        private void Start()
+        private void Awake()
         {
+            _volume = FindObjectOfType<Volume>();
             _volume.profile.TryGet(out _colorAdjustments);
             _volume.profile.TryGet(out _depthOfField);
         }
