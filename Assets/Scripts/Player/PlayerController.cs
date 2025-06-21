@@ -13,6 +13,7 @@ namespace Player
         }
 
         public event Action OnDied;
+        public event Action OnWakeUp;
         public IInputAdapter InputAdaptep => _input;
         private PlayerModel _model;
         private IInputAdapter _input;
@@ -123,6 +124,15 @@ namespace Player
             _view.StartDanceAnimation();
         }
 
+        public void PlayerWakeUpAnimation()
+        {
+            _view.SetWakeUpAnimation();
+        }
+
+        public void WakeUpEnd()
+        {
+            OnWakeUp?.Invoke();
+        }
         private void PutTheItemDown()
         {
             _model.ItemInHand = ItemCategory.None;

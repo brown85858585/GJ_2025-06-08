@@ -68,6 +68,11 @@ namespace Player
         { 
             moveForwardButton.onClick.RemoveAllListeners();
         }
+
+        public void SetWakeUpAnimation()
+        {
+            animator.SetTrigger("WakeUp");
+        }
         
         public void SetWalkAnimation(Vector3 input)
         {

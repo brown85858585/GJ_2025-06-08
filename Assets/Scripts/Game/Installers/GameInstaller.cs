@@ -44,6 +44,7 @@ namespace Game.Installers
             
             InitLevelOne();
             InitPlayer();
+            InitStartWakeUp();
             InitCamera();
             InitQuestLog();
         }
@@ -61,6 +62,18 @@ namespace Game.Installers
             var playerView = playerObj.GetComponent<PlayerView>();
             _logic.PlayerController.InitView(playerView);
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
+        }
+
+        private void InitStartWakeUp()
+        {
+            Debug.Log("InitStartWakeUp");
+            //_core.InputAdapter.DisablePlayerInput();
+            _logic.PlayerController.PlayerWakeUpAnimation();
+            _logic.PlayerController.OnWakeUp += () =>
+            {
+                //_core.InputAdapter.EnablePlayerInput();
+                _logic.PlayerController.OnWakeUp -= null;
+            };
         }
 
         private void InitCamera()

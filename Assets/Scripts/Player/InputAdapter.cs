@@ -96,6 +96,24 @@ namespace Player
 
         }
 
+        public void DisablePlayerInput()
+        {
+            Debug.Log("DisablePlayerInput");
+            //BasePlayerInput.actions.FindActionMap("Player", true).Disable();
+            _moveAction.performed -= OnMoveInput;
+            _moveAction.canceled -= OnMoveInput;
+            _moveAction.Disable();
+        }
+
+        public void EnablePlayerInput()
+        {
+            Debug.Log("EnablePlayerInput");
+            //BasePlayerInput.actions.FindActionMap("Player", true).Enable();
+            _moveAction.Enable();
+            _moveAction.performed += OnMoveInput;
+            _moveAction.canceled += OnMoveInput;
+        }
+
         public void SwitchAdapterToGlobalMode()
         {
             BasePlayerInput.actions.FindActionMap("GInteractive", true).Disable();
