@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 1501780194213132343}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.954168, y: 1.17, z: -2.03}
+  m_LocalPosition: {x: 11.61, y: 0.751, z: -1.653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -326,7 +326,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {fileID: 8466072267986928842}
-  objectsToInteract: []
+  objectsToInteract:
+  - {fileID: 1503323495273104944}
+  - {fileID: 3417134517084611378}
+  - {fileID: 6660915295289984512}
+  - {fileID: 2929984774745945236}
+  - {fileID: 1646052007361980098}
+  - {fileID: 5904305944932321489}
+  - {fileID: 3459634653826995736}
+  - {fileID: 8138686854583634432}
+  - {fileID: 2809502351193795804}
 --- !u!1 &2859465172470743892
 GameObject:
   m_ObjectHideFlags: 0
@@ -4459,7 +4468,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
