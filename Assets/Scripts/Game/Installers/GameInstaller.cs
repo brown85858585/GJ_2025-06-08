@@ -63,7 +63,7 @@ namespace Game.Installers
 
         private void InitLevelOne()
         {
-            _levelManager.LoadLevel(0, transform.parent, _effectAccumulator);
+            _levelManager.LoadLevel(0, transform?.parent, _effectAccumulator);
             _core.InteractionSystem.OnInteraction += HandlePlayerInteraction;
         }
 
