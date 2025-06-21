@@ -11,7 +11,7 @@ namespace Game.Installers
     public class GameInstaller : MonoBehaviour
     {
         [SerializeField] private GameObject playerPrefab;
-        [SerializeField] private GameObject virtualCameraObj;
+        [SerializeField] private GameObject virtualCameraPrefab;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private QuestLogView questLogPrefab;
         
@@ -23,6 +23,7 @@ namespace Game.Installers
         
         private LevelManager _levelManager;
         private QuestLogView _questsView;
+        private GameObject _virtualCamera;
 
         private void Awake()
         {
@@ -32,7 +33,7 @@ namespace Game.Installers
         private void Install()
         {
             _core = new CoreInstaller(playerInput);
-            _logic = new GameLogicInstaller(_core, virtualCameraObj.transform);
+            _logic = new GameLogicInstaller(_core);
             
             _levelManager = new LevelManager(config, _core.InteractionSystem, _logic.MiniGameCoordinator);
         }
@@ -64,12 +65,14 @@ namespace Game.Installers
 
         private void InitCamera()
         {
-            var vCamObj = Instantiate(virtualCameraObj, transform.parent);
-            var vCam = vCamObj.GetComponent<CinemachineVirtualCamera>();
+            _virtualCamera = Instantiate(virtualCameraPrefab, transform.parent);
+            var vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
             vCam.Follow = _core.PlayerModel.PlayerTransform;
             vCam.LookAt = _core.PlayerModel.PlayerTransform;
-            var cameraRotation = vCamObj.AddComponent<CameraRotation>();
-            cameraRotation.Initialization(_core.InputAdapter, vCamObj.transform);
+            var cameraRotation = _virtualCamera.AddComponent<CameraRotation>();
+            cameraRotation.Initialization(_core.InputAdapter, _virtualCamera.transform);
+            
+            _logic.PlayerController.CamTransform = _virtualCamera.transform;
         }
 
         private void InitQuestLog()

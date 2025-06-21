@@ -7,18 +7,19 @@ namespace Game.MiniGames
 {
     public class FlowerMiniGame : IMiniGame
     {
-        private FlowerMiniGameManager _miniGameController;
+        private BaseTimingMiniGame _miniGameController;
         private readonly GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Flower;
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
-        public FlowerMiniGame()
+        public FlowerMiniGame(GameObject miniGameObj)
         {
-            _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/MiniGameManager"));
-            if (_miniGameObj != null)
+            
+            if (miniGameObj != null)
             {
-                _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
+                _miniGameObj = miniGameObj;
+                _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameInherited>();
             }
         }
 
@@ -29,7 +30,7 @@ namespace Game.MiniGames
             {
                 if (_miniGameObj != null)
                 {
-                    _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
+                    _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameInherited>();
                     //_miniGameController = FindObjectOfType<MiniGameController>();
                 }
             }
@@ -48,7 +49,7 @@ namespace Game.MiniGames
 
                 // Подписаться на события мини-игры
                 _miniGameController.OnMiniGameComplete += OnMiniGameCompleted;
-                _miniGameController.OnWateringAttempt += OnWateringAttempt;
+               // (_miniGameController as FlowerMiniGameInherited ) += OnWateringAttempt;
 
                 // Запустить мини-игру (панель включится автоматически)
                 _miniGameController.StartMiniGame();
@@ -76,7 +77,7 @@ namespace Game.MiniGames
             if (_miniGameController != null)
             {
                 _miniGameController.OnMiniGameComplete -= OnMiniGameCompleted;
-                _miniGameController.OnWateringAttempt -= OnWateringAttempt;
+               // _miniGameController.OnWateringAttempt -= OnWateringAttempt;
             }
 
             // Здесь можно добавить логику завершения:

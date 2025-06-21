@@ -1,7 +1,6 @@
 using Game.MiniGames;
 using Game.Quests;
 using Player;
-using UnityEngine;
 
 namespace Game
 {
@@ -11,9 +10,9 @@ namespace Game
         public MiniGameCoordinator MiniGameCoordinator { get; }
         public QuestLog QuestLog { get; }
 
-        public GameLogicInstaller(CoreInstaller core, Transform cameraTransform)
+        public GameLogicInstaller(CoreInstaller core)
         {
-            PlayerController = new PlayerController(core.PlayerModel, core.InputAdapter, cameraTransform);
+            PlayerController = new PlayerController(core.PlayerModel, core.InputAdapter);
             MiniGameCoordinator = new MiniGameCoordinator(core.InteractionSystem, core.PlayerModel, PlayerController);
             QuestLog = new QuestLog(core.InputAdapter, core.QuestsData);
         }

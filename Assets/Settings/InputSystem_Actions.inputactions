@@ -1090,6 +1090,17 @@
                 },
                 {
                     "name": "",
+                    "id": "58805731-bfb8-45fe-b81c-2767ab9d98d1",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GameInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4f74171e-70aa-4a99-9984-13b2c0c0e21e",
                     "path": "<Keyboard>/space",
                     "interactions": "Press",
@@ -1102,7 +1113,7 @@
                 {
                     "name": "",
                     "id": "c1bae94b-16d7-43a1-8bde-5762c3779e14",
-                    "path": "<Mouse>/clickCount",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "Press",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",

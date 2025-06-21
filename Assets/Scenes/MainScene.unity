@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8902517036189002289, guid: 6bee1aed920c9904fbf4de5a9c1e64fe,
     type: 3}
-  virtualCameraObj: {fileID: 9040953646878404776, guid: 76f98f25aea1fea4ea954ab09bbc3465,
+  virtualCameraPrefab: {fileID: 9040953646878404776, guid: 76f98f25aea1fea4ea954ab09bbc3465,
     type: 3}
   playerInput: {fileID: 5613807469492303565, guid: e206649806dfc924aa28f21855ac4ebe,
     type: 3}
