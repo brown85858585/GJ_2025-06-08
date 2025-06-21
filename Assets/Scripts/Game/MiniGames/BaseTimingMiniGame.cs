@@ -134,7 +134,7 @@ namespace Game.MiniGames
                 return;
             }
 
-            miniGamePanel = GameObject.Find("MiniGamePanel");
+            miniGamePanel = GameObject.Find("MiniGamePanel1");
             if (miniGamePanel == null)
             {
                 Debug.LogError("MiniGamePanel не найдена в Canvas!");

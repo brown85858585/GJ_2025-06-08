@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebb9b8c963a8734fb439625fe4f48d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCanvas: {fileID: 0}
-  panel: {fileID: 0}
+  mainCanvas: {fileID: 6021685621929793975}
+  panel: {fileID: 8012524612185898012}
   actionInputAction: {fileID: 0}
   startInputAction: {fileID: 0}
   arcImage: {fileID: 0}
