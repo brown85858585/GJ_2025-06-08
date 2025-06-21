@@ -23,8 +23,10 @@ namespace Player
         private PlayerMovement _movement;
         private PlayerRunMovement _runMovement;
         private IPlayerMovement _currentMovement;
+        private PlayerDialogue _playerDialogue;
         public IPlayerMovement Movement => _currentMovement;
         public PlayerModel Model => _model;
+        public IPlayerDialogue Dialogue => _playerDialogue;
 
         public PlayerController(PlayerModel model, IInputAdapter input)
         {
@@ -37,19 +39,16 @@ namespace Player
             
             _input.OnPutItemDown += PutTheItemDown;
             // _input.OnTest += ToggleMovement;
+            
         }
 
         public void InitView(PlayerView playerView)
         {
             _view = playerView;
-            _view.OnButtonClick += OnButtonClick;
             _view.OnCollision += OnCollision;
             _view.OnUpdate += Update;
-        }
-
-        private void OnButtonClick()
-        {
-            SetPosition(Vector3.zero);
+            
+            _playerDialogue = new PlayerDialogue(_view.DialogueView);
         }
 
         private void Update()
@@ -93,7 +92,7 @@ namespace Player
                 _currentMovement = _movement;
             }
         }
-
+        
         private void DecreaseHealth()
         {
             _model.Stamina -= 20;
@@ -129,6 +128,4 @@ namespace Player
             _view.PutTheItemDown();
         }
     }
-
-
 }

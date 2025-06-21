@@ -6,7 +6,8 @@ namespace Game.Interactions
     public class InteractionSystem : IInteractionSystem, IDisposable
     {
         public event Action<ItemCategory> OnInteraction;
-        
+        public event Action ExitInteraction;
+
         private RoomView _roomView = new ();
         private readonly IInputAdapter _inputAdapter;
         public ItemInteractable CurrentInteractable { get; private set; }
@@ -50,6 +51,8 @@ namespace Game.Interactions
         
         private void RemoveItemInteractable(ItemInteractable item)
         {
+            ExitInteraction?.Invoke();
+            
             if (CurrentInteractable == item)
             {
                 CurrentInteractable = null;

@@ -11,7 +11,8 @@ namespace Game.Levels
         private readonly MiniGameCoordinator _miniGameCoordinator;
         private GameObject _currentLevel;
         private int _currentIndex;
-
+        
+        public int CurrentLevelIndex => _currentIndex;
         public RoomView CurrentRoomView { get; private set; }
 
         public LevelManager(LevelsConfig config,
