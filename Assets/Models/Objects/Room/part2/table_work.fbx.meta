@@ -3,7 +3,13 @@ guid: 5263896d9aaa7eb41bae83a94c4af2d0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ocher
+    second: {fileID: -5057955108841266895, guid: d0346d5c6ccfb174cb4712da6e94ae84,
+      type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +41,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.8
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +96,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.8
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
