@@ -360,6 +360,7 @@ MonoBehaviour:
   - {fileID: 3459634653826995736}
   - {fileID: 8138686854583634432}
   - {fileID: 2809502351193795804}
+  - {fileID: 2310917433849122643}
 --- !u!1 &2634300754645478549
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,8 +648,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.85
-  m_Center: {x: 0, y: 0, z: 0.28}
+  m_Radius: 1.59
+  m_Center: {x: 0.41, y: 0.12, z: 0.59}
 --- !u!114 &2809502351193795804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8212,22 +8213,22 @@ PrefabInstance:
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95356363
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.25738052
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.1510297
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.04076508
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
