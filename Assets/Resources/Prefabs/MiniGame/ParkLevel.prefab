@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4433300570232777854}
   - component: {fileID: 6546537836048536248}
   - component: {fileID: 2171468000825418754}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightGrassWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 4085618868083337028}
   - component: {fileID: 1323184760259551095}
   - component: {fileID: 5164887248319042976}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EdllessGrass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 7600373747700519025}
   - component: {fileID: 5588380937271376545}
   - component: {fileID: 4457937728536051244}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightGrassWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1137,7 +1137,7 @@ GameObject:
   - component: {fileID: 4440142314420684113}
   - component: {fileID: 1601563579531266261}
   - component: {fileID: 6490310030585525195}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1468,7 @@ GameObject:
   - component: {fileID: 1571830912980143408}
   - component: {fileID: 441270783753145216}
   - component: {fileID: 866323161890537902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightGrassWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1821,7 +1821,7 @@ GameObject:
   - component: {fileID: 8822708121873839049}
   - component: {fileID: 3367525109804269216}
   - component: {fileID: 3941578301439261122}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2168,6 +2168,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -2227,6 +2232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -2742,10 +2752,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1860
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -2821,6 +2841,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -2880,6 +2905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -3394,6 +3424,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1310
       objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
       propertyPath: m_VersionIndex
@@ -3454,6 +3489,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3478,10 +3518,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -3562,10 +3612,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -3646,10 +3706,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -3725,6 +3795,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -3784,6 +3859,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -4298,6 +4378,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1310
       objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
       propertyPath: m_VersionIndex
@@ -4358,6 +4443,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4377,6 +4467,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -4436,6 +4531,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -4951,10 +5051,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -5035,10 +5145,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -5119,10 +5239,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -5198,6 +5328,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -5257,6 +5392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -5771,6 +5911,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1310
       objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
       propertyPath: m_VersionIndex
@@ -5831,6 +5976,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5855,10 +6005,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1614
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -5938,6 +6098,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1310
       objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
       propertyPath: m_VersionIndex
@@ -5998,6 +6163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6017,6 +6187,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -6076,6 +6251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -6590,6 +6770,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1310
       objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
       propertyPath: m_VersionIndex
@@ -6650,6 +6835,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6672,6 +6862,11 @@ PrefabInstance:
     - target: {fileID: 1999510497579897, guid: 7d5a0d259041a3542ad7393512d1b87c, type: 3}
       propertyPath: m_VersionIndex
       value: 1310
+      objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
@@ -6733,6 +6928,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6757,10 +6957,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -6841,10 +7051,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1614
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -6925,10 +7145,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -7008,6 +7238,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1310
       objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
       propertyPath: m_VersionIndex
@@ -7068,6 +7303,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7090,6 +7330,11 @@ PrefabInstance:
     - target: {fileID: 1999510497579897, guid: 7d5a0d259041a3542ad7393512d1b87c, type: 3}
       propertyPath: m_VersionIndex
       value: 1310
+      objectReference: {fileID: 0}
+    - target: {fileID: 619231223933226168, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1272749714552769771, guid: 7d5a0d259041a3542ad7393512d1b87c,
         type: 3}
@@ -7151,6 +7396,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skameka (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2846232236617594736, guid: 7d5a0d259041a3542ad7393512d1b87c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7170,6 +7420,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -7229,6 +7484,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
@@ -7744,10 +8004,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1857
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -7828,10 +8098,20 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1614
       objectReference: {fileID: 0}
+    - target: {fileID: 7960235052645517644, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
       propertyPath: m_Name
       value: Lighter (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168231997525571306, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8605709480492896994, guid: fb27e45d6a0cc3a479f5b0f0569f1eab,
         type: 3}
@@ -7907,6 +8187,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6881385761810940475}
     m_Modifications:
+    - target: {fileID: 330677452016590949, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 916040011675386087, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
       propertyPath: m_Enabled
@@ -7966,6 +8251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashbacket (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476092215659091306, guid: cf415b40dbd42df43b6c2752d5e72561,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5537955948036386438, guid: cf415b40dbd42df43b6c2752d5e72561,
         type: 3}
