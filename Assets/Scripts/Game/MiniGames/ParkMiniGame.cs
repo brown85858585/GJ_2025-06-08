@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Effects;
 using Game.Quests;
 using Player;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Game.MiniGames
     {
         private readonly IPlayerController _playerController;
         private GameObject _parkLevel;
+        private EffectAccumulatorView _effectsAccumulatorView;
 
         public QuestType QType { get; } = QuestType.Sprint;
         public event Action<QuestType> OnMiniGameComplete;
@@ -21,27 +23,39 @@ namespace Game.MiniGames
             _playerController = playerController;
         }
 
-        public void Initialization(GameObject parkLevel)
+        public void Initialization(GameObject parkLevel, EffectAccumulatorView effectAccumulatorView)
         {
             _parkLevel = parkLevel;
             _parkLevel.SetActive(false);
             _parkLevel.transform.position = Vector3.up * 5f;
+            
+            _effectsAccumulatorView = effectAccumulatorView;
         }
         public void StartGame()
         {
-            _parkLevel.SetActive(true);
-            _playerController.SetPosition(Vector3.up * 5.1f);
-            _playerController.ToggleMovement();
-
-            RunTimer().Forget();
+            _effectsAccumulatorView.FadeIn();
+            UniTask.Delay(1000).ContinueWith(() =>
+            {
+                _parkLevel.SetActive(true);
+                _playerController.SetPosition(Vector3.up * 5.1f);
+                _playerController.ToggleMovement();
+                RunTimer().Forget();
+                
+                _effectsAccumulatorView.FadeOut();
+            });
         }
 
         private async UniTask RunTimer()
         {
             Debug.Log("Park Mini Game Started");
-            await UniTask.Delay(TimeSpan.FromSeconds(10)); // Задержка в 5 секунд для симуляции мини-игры
+            await UniTask.Delay(TimeSpan.FromSeconds(9));
+            _effectsAccumulatorView.FadeIn();
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _parkLevel.SetActive(false);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            
+            _effectsAccumulatorView.FadeOut();
             
             _playerController.ToggleMovement();
             Debug.Log("Park Mini Game Completed");

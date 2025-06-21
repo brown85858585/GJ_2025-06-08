@@ -1,3 +1,4 @@
+using Effects;
 using Game.Interactions;
 using Game.MiniGames;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace Game.Levels
         /// <summary>
         /// Загружает уровень по индексу из LevelsConfig.
         /// </summary>
-        public void LoadLevel(int index, Transform parent)
+        public void LoadLevel(int index, Transform parent, EffectAccumulatorView effectAccumulatorView = null)
         {
             // Убираем старый уровень
             if (_currentLevel != null)
@@ -46,7 +47,7 @@ namespace Game.Levels
 
             // Регистрируем взаимодействия и мини-игры
             _interactionSystem.AddNewInteractionCollection(CurrentRoomView);
-            _miniGameCoordinator.RegisterGames(_currentLevel.transform);
+            _miniGameCoordinator.RegisterGames(_currentLevel.transform, effectAccumulatorView);
         }
 
         /// <summary>

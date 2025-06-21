@@ -48,6 +48,9 @@ namespace Game.Installers
 
         private void Start()
         {
+            _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
+            _effectAccumulator.FadeOut();
+            
             Instantiate(playerInput);
             
             InitLevelOne();
@@ -56,13 +59,11 @@ namespace Game.Installers
             InitQuestLog();
             var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager);
 
-            _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
-            _effectAccumulator.FadeOut();
         }
 
         private void InitLevelOne()
         {
-            _levelManager.LoadLevel(0, transform.parent);
+            _levelManager.LoadLevel(0, transform.parent, _effectAccumulator);
             _core.InteractionSystem.OnInteraction += HandlePlayerInteraction;
         }
 

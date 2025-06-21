@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Effects;
 using Game.Interactions;
 using Game.Quests;
 using Player;
@@ -40,7 +41,7 @@ namespace Game.MiniGames
             _playerController = playerController;
         }
 
-        public void RegisterGames(Transform firstLevel)
+        public void RegisterGames(Transform firstLevel, EffectAccumulatorView effectAccumulatorView)
         {
             _interactionSystem.OnInteraction += HandleInteraction;
          
@@ -52,7 +53,7 @@ namespace Game.MiniGames
             
             var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);
-            (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel);
+            (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel, effectAccumulatorView);
         }
 
         private void SwitchOnInputSystem(Quests.QuestType questType)
