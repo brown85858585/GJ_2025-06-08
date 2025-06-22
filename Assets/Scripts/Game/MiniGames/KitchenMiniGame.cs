@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using Game.Quests;
 using UnityEngine;
 
@@ -10,90 +10,175 @@ namespace Game.MiniGames
     public class KitchenMiniGame : IMiniGame
     {
         private BaseTimingMiniGame _miniGameController;
-        private readonly GameObject _miniGameObj;
+        private  GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Kitchen;
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
         public KitchenMiniGame()
         {
-            _miniGameObj = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/MiniGameManager1"));
-            if (_miniGameObj != null)
-            {  
-                _miniGameController = _miniGameObj.GetComponent<CookingMiniGame>();
-            }
+            // РџРѕРїСЂРѕР±СѓРµРј РЅР°Р№С‚Рё РїСЂРµС„Р°Р± MiniGameManager1 РёР»Рё СЃРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№
+            _miniGameObj = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameManager"));
 
+            if (_miniGameObj != null)
+            {
+                _miniGameController = _miniGameObj.GetComponent<CookingMiniGame>();
+
+                if (_miniGameController == null)
+                {
+                    // Р•СЃР»Рё CookingMiniGame РЅРµ РЅР°Р№РґРµРЅ, РґРѕР±Р°РІР»СЏРµРј РµРіРѕ
+                    _miniGameController = _miniGameObj.AddComponent<CookingMiniGame>();
+                }
+            }
+            else
+            {
+                Debug.LogError("РќРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё MiniGameManager1 РїСЂРµС„Р°Р±! РЎРѕР·РґР°РµРј РЅРѕРІС‹Р№ GameObject...");
+                CreateFallbackMiniGame();
+            }
+        }
+
+        private void CreateFallbackMiniGame()
+        {
+            // РЎРѕР·РґР°РµРј РЅРѕРІС‹Р№ GameObject РµСЃР»Рё РїСЂРµС„Р°Р± РЅРµ РЅР°Р№РґРµРЅ
+            _miniGameObj = new GameObject("KitchenMiniGameManager");
+            Object.DontDestroyOnLoad(_miniGameObj);
+
+            _miniGameController = _miniGameObj.AddComponent<CookingMiniGame>();
+
+            // РќР°СЃС‚СЂР°РёРІР°РµРј РѕСЃРЅРѕРІРЅС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹
+            Canvas canvas = Object.FindObjectOfType<Canvas>();
+            if (canvas != null)
+            {
+                // РЎРѕР·РґР°РµРј РїР°РЅРµР»СЊ РґР»СЏ РјРёРЅРё-РёРіСЂС‹
+                GameObject panel = new GameObject("MiniGamePanel1");
+                panel.transform.SetParent(canvas.transform, false);
+
+                RectTransform panelRect = panel.AddComponent<RectTransform>();
+                panelRect.anchorMin = Vector2.zero;
+                panelRect.anchorMax = Vector2.one;
+                panelRect.offsetMin = Vector2.zero;
+                panelRect.offsetMax = Vector2.zero;
+
+                Image panelImage = panel.AddComponent<Image>();
+                panelImage.color = new Color(0, 0, 0, 0.5f);
+
+                panel.SetActive(false);
+            }
         }
 
         public void OnActionButtonClick()
         {
-            throw new NotImplementedException();
+            // Р­С‚РѕС‚ РјРµС‚РѕРґ РІС‹Р·С‹РІР°РµС‚СЃСЏ СЃРёСЃС‚РµРјРѕР№ РІРІРѕРґР°, РµСЃР»Рё РЅСѓР¶РЅРѕ
+            if (_miniGameController != null && _miniGameController.gameObject.activeInHierarchy)
+            {
+                // РњРѕР¶РЅРѕ РІС‹Р·РІР°С‚СЊ РјРµС‚РѕРґ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° РЅР°РїСЂСЏРјСѓСЋ
+                Debug.Log("Р’РЅРµС€РЅРёР№ РІС‹Р·РѕРІ РґРµР№СЃС‚РІРёСЏ РІ РєСѓС…РѕРЅРЅРѕР№ РјРёРЅРё-РёРіСЂРµ");
+            }
         }
 
         public void StartGame()
         {
-            Debug.Log("Kitchen Mini Game Started");
-            OnMiniGameComplete?.Invoke(QType);
+            Debug.Log("рџЌі Kitchen Mini Game Started");
+            OnMiniGameStart?.Invoke(QType);
+
             if (_miniGameController == null)
             {
                 if (_miniGameObj != null)
                 {
                     _miniGameController = _miniGameObj.GetComponent<CookingMiniGame>();
-                    //_miniGameController = FindObjectOfType<MiniGameController>();
+
+                    if (_miniGameController == null)
+                    {
+                        Debug.LogError("CookingMiniGame РєРѕРјРїРѕРЅРµРЅС‚ РЅРµ РЅР°Р№РґРµРЅ РЅР° РѕР±СЉРµРєС‚Рµ!");
+                        return;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("РћР±СЉРµРєС‚ РјРёРЅРё-РёРіСЂС‹ РЅРµ СЃРѕР·РґР°РЅ!");
+                    return;
                 }
             }
 
-            if (_miniGameController != null)
+            Debug.Log("рџЋ® MiniGameController РЅР°Р№РґРµРЅ! Р—Р°РїСѓСЃРє РєСѓС…РѕРЅРЅРѕР№ РјРёРЅРё-РёРіСЂС‹...");
+
+            // РЈР±РµРґРёРјСЃСЏ С‡С‚Рѕ РїР°РЅРµР»СЊ РІС‹РєР»СЋС‡РµРЅР° РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј
+            var panel = _miniGameController.Panel;
+            if (panel != null && panel.activeInHierarchy)
             {
-                Debug.Log("? MiniGameController найден! Запуск мини-игры...");
+                Debug.Log("рџ“± РџР°РЅРµР»СЊ Р±С‹Р»Р° РІРєР»СЋС‡РµРЅР°, РІС‹РєР»СЋС‡Р°РµРј РµС‘ РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј");
+                panel.SetActive(false);
+            }
 
-                // Дополнительно убедиться что панель выключена перед запуском
-                var panel = _miniGameController.Panel;
-                if (panel != null && panel.activeInHierarchy)
-                {
-                    Debug.Log("?? Панель была включена, выключаем её перед запуском");
-                    panel.SetActive(false);
-                }
+            // РџРѕРґРїРёСЃС‹РІР°РµРјСЃСЏ РЅР° СЃРѕР±С‹С‚РёСЏ РјРёРЅРё-РёРіСЂС‹
+            _miniGameController.OnMiniGameComplete += OnMiniGameCompleted;
+            _miniGameController.OnGameAttempt += OnCookingAttempt;
 
-                // Подписаться на события мини-игры
-                _miniGameController.OnMiniGameComplete += OnMiniGameCompleted;
-                // (_miniGameController as FlowerMiniGameInherited ) += OnWateringAttempt;
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃР»РѕР¶РЅРѕСЃС‚СЊ (РѕРїС†РёРѕРЅР°Р»СЊРЅРѕ)
+            if (_miniGameController is CookingMiniGame cookingGame)
+            {
+                cookingGame.SetDifficulty(80f, 30f); // РЎРєРѕСЂРѕСЃС‚СЊ 80, СЂР°Р·РјРµСЂ Р·РѕРЅС‹ 30 РіСЂР°РґСѓСЃРѕРІ
+            }
 
-                // Запустить мини-игру (панель включится автоматически)
-                _miniGameController.StartMiniGame();
+            // Р—Р°РїСѓСЃРєР°РµРј РјРёРЅРё-РёРіСЂСѓ
+            _miniGameController.StartMiniGame();
+        }
+
+        private void OnCookingAttempt(bool success)
+        {
+            if (success)
+            {
+                Debug.Log("рџЌЅпёЏ РЈСЃРїРµС€РЅР°СЏ РїРѕРїС‹С‚РєР° РіРѕС‚РѕРІРєРё!");
             }
             else
             {
-                Debug.LogError("? MiniGameController не найден! Проверь что скрипт добавлен на MiniGameManager в префабе комнаты.");
+                Debug.Log("рџ”Ґ РќРµСѓРґР°С‡РЅР°СЏ РїРѕРїС‹С‚РєР° РіРѕС‚РѕРІРєРё!");
             }
         }
 
         private void OnMiniGameCompleted()
         {
-            Debug.Log("Мини-игра завершена!");
+            Debug.Log("рџЌі РљСѓС…РѕРЅРЅР°СЏ РјРёРЅРё-РёРіСЂР° Р·Р°РІРµСЂС€РµРЅР°!");
 
             OnMiniGameComplete?.Invoke(QType);
 
-            // Отписаться от событий чтобы избежать утечек памяти
+            // РћС‚РїРёСЃС‹РІР°РµРјСЃСЏ РѕС‚ СЃРѕР±С‹С‚РёР№
             if (_miniGameController != null)
             {
                 _miniGameController.OnMiniGameComplete -= OnMiniGameCompleted;
-                // _miniGameController.OnWateringAttempt -= OnWateringAttempt;
+                _miniGameController.OnGameAttempt -= OnCookingAttempt;
             }
 
-            // Здесь можно добавить логику завершения:
-            // - Дать награду игроку
-            // - Показать анимацию роста цветка
-            // - Обновить состояние цветка в комнате
-            // - Сохранить прогресс
-
+            // Р—РґРµСЃСЊ РјРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ Р»РѕРіРёРєСѓ:
+            // - РћР±РЅРѕРІРёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РєСѓС…РЅРё
+            // - Р”Р°С‚СЊ РёРіСЂРѕРєСѓ РµРґСѓ
+            // - РџРѕРєР°Р·Р°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚ РіРѕС‚РѕРІРєРё
+            // - РЎРѕС…СЂР°РЅРёС‚СЊ РїСЂРѕРіСЂРµСЃСЃ
         }
 
         public void ForceEndMiniGame()
         {
             if (_miniGameController != null && _miniGameController.gameObject.activeSelf)
             {
+                Debug.Log("рџ›‘ РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РєСѓС…РѕРЅРЅРѕР№ РјРёРЅРё-РёРіСЂС‹");
                 _miniGameController.EndMiniGame();
+            }
+        }
+
+        public void SetDifficulty(float speed, float successZoneSize)
+        {
+            if (_miniGameController is CookingMiniGame cookingGame)
+            {
+                cookingGame.SetDifficulty(speed, successZoneSize);
+            }
+        }
+
+        ~KitchenMiniGame()
+        {
+            // РћС‡РёСЃС‚РєР° РїСЂРё СѓРЅРёС‡С‚РѕР¶РµРЅРёРё
+            if (_miniGameObj != null)
+            {
+                Object.Destroy(_miniGameObj);
             }
         }
     }

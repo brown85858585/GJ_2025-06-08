@@ -3,301 +3,409 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CookingMiniGame : BaseTimingMiniGame
+namespace Game.MiniGames
 {
-    [Header("Cooking Settings")]
-    public float arcRadius = 150f;
-    public float arcStartAngle = 200f; // Начальный угол дуги
-    public float arcEndAngle = 340f;   // Конечный угол дуги
-    public float successZoneAngle = 45f; // Размер зеленой зоны в градусах
-
-    [Header("Colors")]
-    public Color arcColor = Color.gray;
-    public Color successZoneColor = Color.green;
-    public Color indicatorColor = Color.black;
-
-    private RectTransform arcBackground;
-    private RectTransform successZone;
-    private float currentAngle;
-    private float targetAngle; // Угол для зеленой зоны
-    private bool movingClockwise = true;
-
-    protected override void CreateStartScreen()
+    public class CookingMiniGame : BaseTimingMiniGame
     {
-        // Контейнер для стартового экрана
-        startScreen = new GameObject("StartScreen");
-        startScreen.transform.SetParent(miniGamePanel.transform, false);
+        [Header("Prefab Integration")]
+        [SerializeField] private GameObject cookingViewPrefab; // Ссылка на CookingGameView префаб
+        private GameObject instantiatedCookingView;
 
-        RectTransform startRect = startScreen.AddComponent<RectTransform>();
-        startRect.anchorMin = Vector2.zero;
-        startRect.anchorMax = Vector2.one;
-        startRect.offsetMin = Vector2.zero;
-        startRect.offsetMax = Vector2.zero;
+        [Header("Cooking Settings")]
+        public float arcRadius = 150f;
+        public float arcStartAngle = 200f;
+        public float arcEndAngle = 340f;
+        public float successZoneAngle = 45f;
 
-        // Фон стартового экрана
-        Image startBg = startScreen.AddComponent<Image>();
-        startBg.color = new Color(0, 0, 0, 0.7f);
+        [Header("Colors")]
+        public Color arcColor = Color.gray;
+        public Color successZoneColor = Color.green;
+        public Color indicatorColor = Color.black;
 
-        // Заголовок и инструкции
-        CreateText("Title", "🍳 Готовка еды", new Vector2(0, 100), 24, Color.white, new Vector2(400, 40), startScreen.transform);
-        CreateText("Subtitle", "Алгоритм:", new Vector2(0, 60), 18, Color.yellow, new Vector2(400, 30), startScreen.transform);
+        [Header("Prefab Elements References")]
+        private Transform knifeHandler;
+        private Transform winZoneHandler;
+        private Image winZone;
+        private RectTransform knife;
 
-        CreateText("Step1", "1. Игрок нажимает на кухню", new Vector2(0, 20), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-        CreateText("Step2", "2. ГГ подходит к холодильнику, берет пакет, переносит его на стол", new Vector2(0, -5), 14, Color.white, new Vector2(500, 25), startScreen.transform);
-        CreateText("Step3", "3. Запускается анимация нарезки продуктов", new Vector2(0, -30), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-        CreateText("Step4", "4. Мини-игра: остановите стрелку в зеленой зоне", new Vector2(0, -55), 14, Color.green, new Vector2(400, 25), startScreen.transform);
-        CreateText("Step5", "5. После завершения ГГ садится за стол и ест", new Vector2(0, -80), 14, Color.white, new Vector2(400, 25), startScreen.transform);
+        private float currentAngle;
+        private float targetAngle;
+        private bool movingClockwise = true;
 
-        // Кнопки
-        startButton = CreateButton("StartButton", "Начать готовку (Пробел)", new Vector2(0, -130), new Color(0.2f, 0.8f, 0.2f), new Vector2(220, 50), startScreen.transform);
-        startButton.onClick.AddListener(StartGame);
-
-        Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(0, -190), Color.gray, new Vector2(120, 40), startScreen.transform);
-        startExitButton.onClick.AddListener(ExitMiniGame);
-    }
-
-    protected override void CreateGameScreen()
-    {
-        // Контейнер для игрового экрана
-        gameScreen = new GameObject("GameScreen");
-        gameScreen.transform.SetParent(miniGamePanel.transform, false);
-        gameScreen.SetActive(false);
-
-        RectTransform gameRect = gameScreen.AddComponent<RectTransform>();
-        gameRect.anchorMin = Vector2.zero;
-        gameRect.anchorMax = Vector2.one;
-        gameRect.offsetMin = Vector2.zero;
-        gameRect.offsetMax = Vector2.zero;
-
-        // Создать дугу и индикатор
-        CreateArc();
-        CreateSuccessZone();
-        CreateIndicator();
-        CreateGameButtons();
-        CreateInstructionText();
-    }
-
-    private void CreateArc()
-    {
-        // Базовая дуга (серая) - используем Image из базового класса
-        GameObject arcObj = CreateImageObject("Arc", arcImage, new Vector2(arcRadius * 2, arcRadius * 2), Vector2.zero);
-
-        Image currentArcImage = arcObj.GetComponentInChildren<Image>();
-        if (currentArcImage == null)
+        protected override void Start()
         {
-            currentArcImage = arcObj.GetComponent<Image>();
-        }
-
-        currentArcImage.color = arcColor;
-
-        // Настройка для отображения дуги
-        currentArcImage.sprite = CreateCircleSprite();
-        currentArcImage.type = Image.Type.Filled;
-        currentArcImage.fillMethod = Image.FillMethod.Radial360;
-        currentArcImage.fillOrigin = 2; // Top
-        currentArcImage.fillAmount = (arcEndAngle - arcStartAngle) / 360f;
-
-        arcBackground = arcObj.GetComponent<RectTransform>();
-
-        // Поворот для правильного позиционирования дуги
-        arcBackground.rotation = Quaternion.Euler(0, 0, -arcStartAngle);
-    }
-
-    private void CreateSuccessZone()
-    {
-        // Зеленая зона успеха - используем Image из базового класса
-        GameObject successObj = CreateImageObject("SuccessZone", successZoneImage, new Vector2(arcRadius * 2, arcRadius * 2), Vector2.zero);
-
-        Image currentSuccessImage = successObj.GetComponentInChildren<Image>();
-        if (currentSuccessImage == null)
-        {
-            currentSuccessImage = successObj.GetComponent<Image>();
-        }
-
-        currentSuccessImage.color = successZoneColor;
-        currentSuccessImage.sprite = CreateCircleSprite();
-        currentSuccessImage.type = Image.Type.Filled;
-        currentSuccessImage.fillMethod = Image.FillMethod.Radial360;
-        currentSuccessImage.fillOrigin = 2;
-        currentSuccessImage.fillAmount = successZoneAngle / 360f;
-
-        successZone = successObj.GetComponent<RectTransform>();
-
-        // Случайная позиция для зеленой зоны
-        targetAngle = Random.Range(arcStartAngle + successZoneAngle / 2, arcEndAngle - successZoneAngle / 2);
-        successZone.rotation = Quaternion.Euler(0, 0, -targetAngle);
-    }
-
-    private void CreateIndicator()
-    {
-        // Стрелка-индикатор - используем Image из базового класса
-        GameObject indicatorObj = CreateImageObject("Indicator", indicatorImage, new Vector2(10, arcRadius + 20), Vector2.zero);
-
-        Image currentIndicatorImage = indicatorObj.GetComponentInChildren<Image>();
-        if (currentIndicatorImage == null)
-        {
-            currentIndicatorImage = indicatorObj.GetComponent<Image>();
-        }
-
-        currentIndicatorImage.color = indicatorColor;
-
-        indicator = indicatorObj.GetComponent<RectTransform>();
-        indicator.pivot = new Vector2(0.5f, 0f); // Поворот от основания
-
-        // Начальная позиция
-        currentAngle = arcStartAngle;
-        UpdateIndicatorPosition();
-    }
-
-    private void CreateGameButtons()
-    {
-        // Кнопка действия
-        actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
-        actionButton.onClick.AddListener(OnActionButtonClick);
-
-        // Кнопка выхода
-        exitButton = CreateButton("ExitButton", "Выход", new Vector2(100, -200), Color.gray, new Vector2(80, 40), gameScreen.transform);
-        exitButton.onClick.AddListener(ExitMiniGame);
-    }
-
-    private void CreateInstructionText()
-    {
-        instructionText = CreateText("InstructionText", "Остановите стрелку в зеленой зоне!", new Vector2(0, 200), 16, Color.black, new Vector2(300, 40), gameScreen.transform);
-    }
-
-    private Sprite CreateCircleSprite()
-    {
-        // Создаем простой белый круг
-        Texture2D texture = new Texture2D(100, 100);
-        Color[] pixels = new Color[100 * 100];
-
-        Vector2 center = new Vector2(50, 50);
-        float radius = 45f;
-
-        for (int y = 0; y < 100; y++)
-        {
-            for (int x = 0; x < 100; x++)
+            // Если префаб не назначен, попробуем найти его в Resources
+            if (cookingViewPrefab == null)
             {
-                float distance = Vector2.Distance(new Vector2(x, y), center);
-                if (distance <= radius && distance >= radius - 10) // Кольцо
-                {
-                    pixels[y * 100 + x] = Color.white;
-                }
-                else
-                {
-                    pixels[y * 100 + x] = Color.clear;
-                }
+                cookingViewPrefab = Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameView");
             }
+
+            base.Start();
         }
 
-        texture.SetPixels(pixels);
-        texture.Apply();
-
-        return Sprite.Create(texture, new Rect(0, 0, 100, 100), new Vector2(0.5f, 0.5f));
-    }
-
-    protected override void StartGameLogic()
-    {
-        // Сбросить позицию и начать движение
-        currentAngle = arcStartAngle;
-        movingClockwise = true;
-        UpdateIndicatorPosition();
-
-        StartCoroutine(MoveIndicator());
-    }
-
-    private IEnumerator MoveIndicator()
-    {
-        while (isGameActive)
+        protected override void CreateStartScreen()
         {
-            // Движение стрелки
-            float angleSpeed = indicatorSpeed * Time.deltaTime;
+            startScreen = new GameObject("StartScreen");
+            startScreen.transform.SetParent(miniGamePanel.transform, false);
 
-            if (movingClockwise)
+            RectTransform startRect = startScreen.AddComponent<RectTransform>();
+            startRect.anchorMin = Vector2.zero;
+            startRect.anchorMax = Vector2.one;
+            startRect.offsetMin = Vector2.zero;
+            startRect.offsetMax = Vector2.zero;
+
+            Image startBg = startScreen.AddComponent<Image>();
+            startBg.color = new Color(0, 0, 0, 0.7f);
+
+            CreateText("Title", "🍳 Готовка еды", new Vector2(0, 100), 24, Color.white, new Vector2(400, 40), startScreen.transform);
+            CreateText("Subtitle", "Алгоритм:", new Vector2(0, 60), 18, Color.yellow, new Vector2(400, 30), startScreen.transform);
+
+            CreateText("Step1", "1. Игрок нажимает на кухню", new Vector2(0, 20), 14, Color.white, new Vector2(400, 25), startScreen.transform);
+            CreateText("Step2", "2. ГГ подходит к холодильнику, берет пакет, переносит его на стол", new Vector2(0, -5), 14, Color.white, new Vector2(500, 25), startScreen.transform);
+            CreateText("Step3", "3. Запускается анимация нарезки продуктов", new Vector2(0, -30), 14, Color.white, new Vector2(400, 25), startScreen.transform);
+            CreateText("Step4", "4. Мини-игра: остановите нож в зеленой зоне", new Vector2(0, -55), 14, Color.green, new Vector2(400, 25), startScreen.transform);
+            CreateText("Step5", "5. После завершения ГГ садится за стол и ест", new Vector2(0, -80), 14, Color.white, new Vector2(400, 25), startScreen.transform);
+
+            startButton = CreateButton("StartButton", "Начать готовку (Пробел)", new Vector2(0, -130), new Color(0.2f, 0.8f, 0.2f), new Vector2(220, 50), startScreen.transform);
+            startButton.onClick.AddListener(StartGame);
+
+            Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(0, -190), Color.gray, new Vector2(120, 40), startScreen.transform);
+            startExitButton.onClick.AddListener(ExitMiniGame);
+        }
+
+        protected override void CreateGameScreen()
+        {
+            // Создаем gameScreen как обычно
+            gameScreen = new GameObject("GameScreen");
+            gameScreen.transform.SetParent(miniGamePanel.transform, false);
+            gameScreen.SetActive(false);
+
+            RectTransform gameRect = gameScreen.AddComponent<RectTransform>();
+            gameRect.anchorMin = Vector2.zero;
+            gameRect.anchorMax = Vector2.one;
+            gameRect.offsetMin = Vector2.zero;
+            gameRect.offsetMax = Vector2.zero;
+
+            // Создаем префаб как отдельный Canvas поверх всего
+            InstantiateCookingView();
+
+            // Создаем дополнительные UI элементы управления в gameScreen
+            CreateGameButtons();
+            CreateInstructionText();
+        }
+
+        private void InstantiateCookingView()
+        {
+            if (cookingViewPrefab != null)
             {
-                currentAngle += angleSpeed;
-                if (currentAngle >= arcEndAngle)
+                // Создаем префаб в gameScreen, но сохраняем его Canvas
+                instantiatedCookingView = Instantiate(cookingViewPrefab, gameScreen.transform);
+
+                // Настраиваем RectTransform для полного заполнения
+                RectTransform viewRect = instantiatedCookingView.GetComponent<RectTransform>();
+                if (viewRect != null)
                 {
-                    currentAngle = arcEndAngle;
-                    movingClockwise = false;
+                    viewRect.anchorMin = Vector2.zero;
+                    viewRect.anchorMax = Vector2.one;
+                    viewRect.offsetMin = Vector2.zero;
+                    viewRect.offsetMax = Vector2.zero;
+                    viewRect.localScale = Vector3.one;
                 }
+
+                // Настраиваем Canvas префаба
+                Canvas prefabCanvas = instantiatedCookingView.GetComponent<Canvas>();
+                if (prefabCanvas != null)
+                {
+                    // Оставляем Canvas включенным, но делаем его дочерним
+                    prefabCanvas.overrideSorting = true;
+                    prefabCanvas.sortingOrder = 1; // Поверх других элементов в gameScreen
+                    Debug.Log("Canvas префаба настроен как дочерний");
+                }
+
+                SetupPrefabReferences();
             }
             else
             {
-                currentAngle -= angleSpeed;
-                if (currentAngle <= arcStartAngle)
+                Debug.LogError("CookingGameView префаб не найден! Убедитесь что он находится в Resources/Prefabs/MiniGame/");
+                // Fallback к старому методу создания UI
+                CreateFallbackUI();
+            }
+        }
+
+        private void SetupPrefabReferences()
+        {
+            // Находим элементы в префабе
+            knifeHandler = instantiatedCookingView.transform.Find("Panel/knifeHandler");
+            winZoneHandler = instantiatedCookingView.transform.Find("Panel/winZoneHandler");
+
+            if (knifeHandler != null)
+            {
+                knife = knifeHandler.GetComponent<RectTransform>();
+                Debug.Log("Knife handler найден!");
+            }
+            else
+            {
+                Debug.LogError("knifeHandler не найден в префабе!");
+            }
+
+            if (winZoneHandler != null)
+            {
+                winZone = winZoneHandler.GetComponentInChildren<Image>();
+                SetupWinZone();
+                Debug.Log("Win zone handler найден!");
+            }
+            else
+            {
+                Debug.LogError("winZoneHandler не найден в префабе!");
+            }
+        }
+
+        private void SetupWinZone()
+        {
+            if (winZone != null)
+            {
+                // Устанавливаем случайную позицию для зеленой зоны
+                targetAngle = Random.Range(-60f, 60f); // Диапазон углов для зоны победы
+
+                // Меняем цвет зоны на зеленый
+                winZone.color = successZoneColor;
+
+                // Поворачиваем зону победы
+                winZoneHandler.rotation = Quaternion.Euler(0, 0, targetAngle);
+
+                Debug.Log($"Win zone установлена на угол: {targetAngle}");
+            }
+        }
+
+        private void CreateFallbackUI()
+        {
+            // Старый метод создания UI на случай если префаб не загрузился
+            CreateArc();
+            CreateSuccessZone();
+            CreateIndicator();
+        }
+
+        private void CreateArc()
+        {
+            GameObject arcObj = CreateImageObject("Arc", arcImage, new Vector2(arcRadius * 2, arcRadius * 2), Vector2.zero);
+            Image currentArcImage = arcObj.GetComponentInChildren<Image>() ?? arcObj.GetComponent<Image>();
+            currentArcImage.color = arcColor;
+            currentArcImage.sprite = CreateCircleSprite();
+            currentArcImage.type = Image.Type.Filled;
+            currentArcImage.fillMethod = Image.FillMethod.Radial360;
+            currentArcImage.fillOrigin = 2;
+            currentArcImage.fillAmount = (arcEndAngle - arcStartAngle) / 360f;
+
+            RectTransform arcBackground = arcObj.GetComponent<RectTransform>();
+            arcBackground.rotation = Quaternion.Euler(0, 0, -arcStartAngle);
+        }
+
+        private void CreateSuccessZone()
+        {
+            GameObject successObj = CreateImageObject("SuccessZone", successZoneImage, new Vector2(arcRadius * 2, arcRadius * 2), Vector2.zero);
+            Image currentSuccessImage = successObj.GetComponentInChildren<Image>() ?? successObj.GetComponent<Image>();
+            currentSuccessImage.color = successZoneColor;
+            currentSuccessImage.sprite = CreateCircleSprite();
+            currentSuccessImage.type = Image.Type.Filled;
+            currentSuccessImage.fillMethod = Image.FillMethod.Radial360;
+            currentSuccessImage.fillOrigin = 2;
+            currentSuccessImage.fillAmount = successZoneAngle / 360f;
+
+            RectTransform successZone = successObj.GetComponent<RectTransform>();
+            targetAngle = Random.Range(arcStartAngle + successZoneAngle / 2, arcEndAngle - successZoneAngle / 2);
+            successZone.rotation = Quaternion.Euler(0, 0, -targetAngle);
+        }
+
+        private void CreateIndicator()
+        {
+            GameObject indicatorObj = CreateImageObject("Indicator", indicatorImage, new Vector2(10, arcRadius + 20), Vector2.zero);
+            Image currentIndicatorImage = indicatorObj.GetComponentInChildren<Image>() ?? indicatorObj.GetComponent<Image>();
+            currentIndicatorImage.color = indicatorColor;
+
+            indicator = indicatorObj.GetComponent<RectTransform>();
+            indicator.pivot = new Vector2(0.5f, 0f);
+
+            currentAngle = arcStartAngle;
+            UpdateIndicatorPosition();
+        }
+
+        private void CreateGameButtons()
+        {
+            // Создаем кнопки в gameScreen
+            actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
+            actionButton.onClick.AddListener(OnActionButtonClick);
+
+            exitButton = CreateButton("ExitButton", "Выход", new Vector2(100, -200), Color.gray, new Vector2(80, 40), gameScreen.transform);
+            exitButton.onClick.AddListener(ExitMiniGame);
+        }
+
+        private void CreateInstructionText()
+        {
+            // Создаем текст инструкций в gameScreen
+            instructionText = CreateText("InstructionText", "Остановите нож в зеленой зоне!", new Vector2(0, 200), 16, Color.black, new Vector2(300, 40), gameScreen.transform);
+        }
+
+        private Sprite CreateCircleSprite()
+        {
+            Texture2D texture = new Texture2D(100, 100);
+            Color[] pixels = new Color[100 * 100];
+            Vector2 center = new Vector2(50, 50);
+            float radius = 45f;
+
+            for (int y = 0; y < 100; y++)
+            {
+                for (int x = 0; x < 100; x++)
                 {
-                    currentAngle = arcStartAngle;
-                    movingClockwise = true;
+                    float distance = Vector2.Distance(new Vector2(x, y), center);
+                    if (distance <= radius && distance >= radius - 10)
+                    {
+                        pixels[y * 100 + x] = Color.white;
+                    }
+                    else
+                    {
+                        pixels[y * 100 + x] = Color.clear;
+                    }
                 }
             }
 
-            UpdateIndicatorPosition();
-            yield return null;
+            texture.SetPixels(pixels);
+            texture.Apply();
+            return Sprite.Create(texture, new Rect(0, 0, 100, 100), new Vector2(0.5f, 0.5f));
         }
-    }
 
-    private void UpdateIndicatorPosition()
-    {
-        if (indicator != null)
+        protected override void StartGameLogic()
         {
-            indicator.rotation = Quaternion.Euler(0, 0, -currentAngle);
-        }
-    }
+            currentAngle = 0f; // Начинаем с центра
+            movingClockwise = true;
 
-    protected override void OnActionButtonClick()
-    {
-        if (!isGameActive)
+            if (knife != null)
+            {
+                UpdateKnifePosition();
+            }
+            else if (indicator != null)
+            {
+                UpdateIndicatorPosition();
+            }
+
+            StartCoroutine(MoveKnife());
+        }
+
+        private IEnumerator MoveKnife()
         {
-            Debug.Log("Игра неактивна, игнорируем нажатие E");
-            return;
+            float angleRange = 180f; // Диапазон движения ножа (-60 до +60 градусов)
+
+            while (isGameActive)
+            {
+                float angleSpeed = indicatorSpeed * Time.deltaTime;
+
+                if (movingClockwise)
+                {
+                    currentAngle += angleSpeed;
+                    if (currentAngle >= angleRange / 2)
+                    {
+                        currentAngle = angleRange / 2;
+                        movingClockwise = false;
+                    }
+                }
+                else
+                {
+                    currentAngle -= angleSpeed;
+                    if (currentAngle <= -angleRange / 2)
+                    {
+                        currentAngle = -angleRange / 2;
+                        movingClockwise = true;
+                    }
+                }
+
+                if (knife != null)
+                {
+                    UpdateKnifePosition();
+                }
+                else if (indicator != null)
+                {
+                    UpdateIndicatorPosition();
+                }
+
+                yield return null;
+            }
         }
 
-        Debug.Log("✅ E обработана! Останавливаем индикатор...");
-
-        isGameActive = false;
-
-        string result = CheckResult();
-
-        if (result == "success")
+        private void UpdateKnifePosition()
         {
-            Debug.Log("✅ Еда приготовлена идеально!");
-            UpdateInstructionText("🍽️ Идеально приготовлено!");
-            OnGameAttempt?.Invoke(true);
-            StartCoroutine(ShowResultAndEnd(1.5f));
+            if (knife != null)
+            {
+                knife.rotation = Quaternion.Euler(0, 0, currentAngle);
+            }
         }
-        else
+
+        private void UpdateIndicatorPosition()
         {
-            Debug.Log("❌ Еда подгорела!");
-            UpdateInstructionText("🔥 Еда подгорела!");
-            OnGameAttempt?.Invoke(false);
-            StartCoroutine(ShowResultAndEnd(1.5f));
+            if (indicator != null)
+            {
+                indicator.rotation = Quaternion.Euler(0, 0, -currentAngle);
+            }
         }
-    }
 
-    protected override string CheckResult()
-    {
-        // Проверить попадание в зеленую зону
-        float zoneStart = targetAngle - successZoneAngle / 2f;
-        float zoneEnd = targetAngle + successZoneAngle / 2f;
-
-        if (currentAngle >= zoneStart && currentAngle <= zoneEnd)
+        protected override void OnActionButtonClick()
         {
-            return "success";
+            if (!isGameActive)
+            {
+                Debug.Log("Игра неактивна, игнорируем нажатие E");
+                return;
+            }
+
+            Debug.Log("✅ E обработана! Останавливаем нож...");
+            isGameActive = false;
+
+            string result = CheckResult();
+
+            if (result == "success")
+            {
+                Debug.Log("✅ Еда приготовлена идеально!");
+                UpdateInstructionText("🍽️ Идеально приготовлено!");
+                OnGameAttempt?.Invoke(true);
+                StartCoroutine(ShowResultAndEnd(1.5f));
+            }
+            else
+            {
+                Debug.Log("❌ Еда подгорела!");
+                UpdateInstructionText("🔥 Еда подгорела!");
+                OnGameAttempt?.Invoke(false);
+                StartCoroutine(ShowResultAndEnd(1.5f));
+            }
         }
 
-        return "fail";
-    }
+        protected override string CheckResult()
+        {
+            // Проверяем попадание в зону победы
+            float tolerance = 20f; // Допустимое отклонение в градусах
 
-    // Публичные методы для интеграции с системой готовки
-    public void SetDifficulty(float speed, float zoneSize)
-    {
-        indicatorSpeed = speed;
-        successZoneAngle = zoneSize;
-    }
+            if (Mathf.Abs(currentAngle - targetAngle) <= tolerance)
+            {
+                return "success";
+            }
 
-    public void StartCooking()
-    {
-        StartMiniGame();
+            return "fail";
+        }
+
+        public void SetDifficulty(float speed, float zoneSize)
+        {
+            indicatorSpeed = speed;
+            successZoneAngle = zoneSize;
+        }
+
+        public void StartCooking()
+        {
+            StartMiniGame();
+        }
+
+        protected override void OnDestroy()
+        {
+            if (instantiatedCookingView != null)
+            {
+                Destroy(instantiatedCookingView);
+            }
+            base.OnDestroy();
+        }
     }
 }

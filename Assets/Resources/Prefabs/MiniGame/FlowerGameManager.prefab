@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6989259518087681353}
   - component: {fileID: 4472745033177413589}
   m_Layer: 5
-  m_Name: MiniGameManager
+  m_Name: FlowerGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

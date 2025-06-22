@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6989259518087681353}
   - component: {fileID: 3866101427543812026}
   m_Layer: 5
-  m_Name: MiniGameManager1
+  m_Name: CookingGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,8 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 6021685621929793975}
   panel: {fileID: 8012524612185898012}
-  actionInputAction: {fileID: 0}
-  startInputAction: {fileID: 0}
+  actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
+    type: 3}
+  startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
+    type: 3}
   arcImage: {fileID: 0}
   successZoneImage: {fileID: 0}
   trackImage: {fileID: 0}
@@ -126,6 +128,8 @@ MonoBehaviour:
   indicatorImage: {fileID: 0}
   indicatorSpeed: 100
   maxAttempts: 3
+  cookingViewPrefab: {fileID: 5345630855882479413, guid: 00a0af693410afa46a5f6d0609750493,
+    type: 3}
   arcRadius: 150
   arcStartAngle: 200
   arcEndAngle: 340

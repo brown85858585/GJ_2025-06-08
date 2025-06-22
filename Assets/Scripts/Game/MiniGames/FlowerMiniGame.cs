@@ -15,7 +15,7 @@ namespace Game.MiniGames
 
         public FlowerMiniGame()
         {
-            _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/MiniGameManager"));
+            _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/FlowerGameManager"));
             if (_miniGameObj != null)
             {
                 _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
