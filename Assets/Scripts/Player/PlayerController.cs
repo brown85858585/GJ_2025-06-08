@@ -12,7 +12,6 @@ namespace Player
             set => _movement.VirtualCamera = value;
         }
 
-        public event Action OnDied;
         public IInputAdapter InputAdaptep => _input;
         private PlayerModel _model;
         private IInputAdapter _input;
@@ -37,8 +36,7 @@ namespace Player
             _movement = new PlayerMovement(_input, model);
             _currentMovement = _movement;
             
-            _input.OnPutItemDown += PutTheItemDown;
-            // _input.OnTest += ToggleMovement;
+            _input.OnSwitchInteract += PutTheItemDown;
             
         }
 
@@ -59,7 +57,6 @@ namespace Player
         private void OnCollision()
         {
             _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
-            DecreaseHealth();
         }
 
         public void FixedUpdateMove()
@@ -90,16 +87,6 @@ namespace Player
             else
             {
                 _currentMovement = _movement;
-            }
-        }
-        
-        private void DecreaseHealth()
-        {
-            _model.Stamina -= 20;
-            // Debug.Log(_data.Stamina);
-            if (_model.Stamina <= 0)
-            {
-                OnDied?.Invoke();
             }
         }
 

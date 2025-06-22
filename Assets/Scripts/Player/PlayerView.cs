@@ -29,7 +29,7 @@ namespace Player
         private LayerMask whatIsGround;
 
         private Transform _saveCurrentObj;
-        private Transform _saveLastParentObj;
+        private bool _moveSavedObject;
 
         private const float dampTime = 0.1f;
 
@@ -54,6 +54,11 @@ namespace Player
         private void FixedUpdate()
         {
             OnUpdate?.Invoke();
+            
+            if (_moveSavedObject)
+            {
+                _saveCurrentObj.position = rightHand.position;
+            }
         }
 
         private void OnCollisionEnter(Collision other)
@@ -95,10 +100,10 @@ namespace Player
             _saveCurrentObj = obj;
 
             var rb = _saveCurrentObj.gameObject.GetComponent<Rigidbody>();
-            Destroy(rb);       
+            rb.useGravity = false;
+            _saveCurrentObj.gameObject.GetComponent<BoxCollider>().enabled = false;
             
-            _saveLastParentObj = obj.parent;
-            obj.SetParent(rightHand.transform);
+            _moveSavedObject = true;
             obj.position = rightHand.position;
         }
 
@@ -107,12 +112,15 @@ namespace Player
             if (_saveCurrentObj == null) return;
             
             Debug.Log( "put the item down: " + _saveCurrentObj.name);
-            _saveCurrentObj.gameObject.AddComponent<Rigidbody>().mass = 0.2f;
-
-            _saveCurrentObj.SetParent(_saveLastParentObj);
-            _saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
-            _saveLastParentObj = null;
+            var rb = _saveCurrentObj.gameObject.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            _saveCurrentObj.gameObject.GetComponent<BoxCollider>().enabled = true;
+  
+            
+            _moveSavedObject = false;_saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
+            
             _saveCurrentObj = null;
+            
         }
     }
 }

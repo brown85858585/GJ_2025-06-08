@@ -12,7 +12,7 @@ namespace Player
         public bool IsAccelerating => _accelerateAction.IsPressed();
         public event Action<bool> OnGameInteract;
         public event Action<bool> OnInteract;
-        public event Action OnPutItemDown;
+        public event Action OnSwitchInteract;
         public event Action<bool> OnTest;
         public event Action<bool> OnQuests;
         
@@ -119,7 +119,7 @@ namespace Player
 
         private void OnPutItemDownInput(InputAction.CallbackContext obj)
         {
-            OnPutItemDown?.Invoke();
+            OnSwitchInteract?.Invoke();
         }
 
         private void OnInteractInput(InputAction.CallbackContext obj)

@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 8192114661329531348}
   - component: {fileID: 8138686854583634432}
   - component: {fileID: 5119177701683979134}
+  - component: {fileID: 1787636624853928258}
   m_Layer: 0
   m_Name: WateringCan
   m_TagString: Untagged
@@ -190,6 +191,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!54 &1787636624853928258
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681398818184041678}
+  serializedVersion: 4
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &1298727896134994286
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +290,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 81a8bbf213f9abe4e82bfcda5130622e
   category: 4
-  isMultiplyInteractable: 1
+  isMultiplyInteractable: 0
   popupOffset: {x: -0.23, y: 1.9, z: -1.12}
   popupScale: 1
 --- !u!1 &1501780194213132343
@@ -747,7 +775,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 3788c62c58e3cc64fa4a430d2b040a65
   category: 6
-  isMultiplyInteractable: 1
+  isMultiplyInteractable: 0
   popupOffset: {x: 0, y: 1.84, z: 0}
   popupScale: 1
 --- !u!1 &7085043112238868771
@@ -2337,7 +2365,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 4d7174ad6f55d8e4c8bbe6c47ff37c33
   category: 2
-  isMultiplyInteractable: 1
+  isMultiplyInteractable: 0
   popupOffset: {x: 0.43, y: 2.41, z: -1.38}
   popupScale: 1
 --- !u!1001 &1465589251969685243
@@ -7352,7 +7380,7 @@ MonoBehaviour:
     m_Bits: 64
   id: a32cbf93281af984ab6c23d1a46ed717
   category: 3
-  isMultiplyInteractable: 1
+  isMultiplyInteractable: 0
   popupOffset: {x: -0.69, y: 2.14, z: -0.85}
   popupScale: 1
 --- !u!4 &5215850616248492372 stripped
@@ -8791,22 +8819,22 @@ PrefabInstance:
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9786276
+      value: 0.95356363
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.17256433
+      value: 0.25738052
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.110146955
+      value: 0.1510297
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.019422542
+      value: -0.04076508
       objectReference: {fileID: 0}
     - target: {fileID: 171224788936378787, guid: 374551d3f1bc1a9468ff504cab33a436,
         type: 3}
