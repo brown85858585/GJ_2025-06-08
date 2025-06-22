@@ -166,7 +166,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 41c2d427155e11045b8a284e736e0269
   category: 5
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: 0, y: 1.5, z: 0}
   popupScale: 1
 --- !u!65 &5119177701683979134
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 81a8bbf213f9abe4e82bfcda5130622e
   category: 4
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: -0.23, y: 1.9, z: -1.12}
   popupScale: 1
 --- !u!1 &1501780194213132343
@@ -368,7 +368,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 8e50a389de1e02546b2854e60f195a9b
   category: 1
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: 0, y: 1.5, z: 0}
   popupScale: 1
 --- !u!1 &2021931254209527203
@@ -429,7 +429,7 @@ MonoBehaviour:
   startPoint: {fileID: 8466072267986928842}
   objectsToInteract:
   - {fileID: 1503323495273104944}
-  - {fileID: 0}
+  - {fileID: 4563096514230025904}
   - {fileID: 6660915295289984512}
   - {fileID: 2929984774745945236}
   - {fileID: 1646052007361980098}
@@ -512,7 +512,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 54c7b769b7ea4324e8403e66fa6b1f9d
   category: 8
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: -0.23, y: 2.62, z: -1.31}
   popupScale: 1
 --- !u!1 &2859465172470743892
@@ -745,7 +745,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 3788c62c58e3cc64fa4a430d2b040a65
   category: 6
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: 0, y: 1.84, z: 0}
   popupScale: 1
 --- !u!1 &7320856196885130022
@@ -897,7 +897,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 6e755700ac4776b49a8e0b7b0ea326a9
   category: 9
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: -0.31, y: 3.46, z: -1.38}
   popupScale: 1
 --- !u!135 &3397845792855187182
@@ -1060,7 +1060,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 88cbdd8ab8dd1a64db98ff04a49c6d9c
   category: 7
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: 0, y: 1.5, z: 0}
   popupScale: 1
 --- !u!1001 &56227222362961740
@@ -2179,7 +2179,7 @@ MonoBehaviour:
     m_Bits: 64
   id: 4d7174ad6f55d8e4c8bbe6c47ff37c33
   category: 2
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: 0.43, y: 2.41, z: -1.38}
   popupScale: 1
 --- !u!1001 &1465589251969685243
@@ -5088,7 +5088,7 @@ MonoBehaviour:
     m_Bits: 64
   id: e29e4e5c99616be41b9e49e12face87c
   category: 10
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: 0, y: 1.5, z: 0}
   popupScale: 1
 --- !u!135 &829547829789009715
@@ -6895,7 +6895,7 @@ MonoBehaviour:
     m_Bits: 64
   id: a32cbf93281af984ab6c23d1a46ed717
   category: 3
-  multiplyInteractable: 1
+  isMultiplyInteractable: 1
   popupOffset: {x: -0.69, y: 2.14, z: -0.85}
   popupScale: 1
 --- !u!4 &5215850616248492372 stripped
