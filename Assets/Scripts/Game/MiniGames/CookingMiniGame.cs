@@ -8,8 +8,9 @@ namespace Game.MiniGames
     public class CookingMiniGame : BaseTimingMiniGame
     {
         [Header("Prefab Integration")]
-        [SerializeField] private GameObject cookingViewPrefab; // Ссылка на CookingGameView префаб
+        [SerializeField] private CookingMiniGameView cookingViewPrefab; // Ссылка на CookingGameView префаб
         private GameObject instantiatedCookingView;
+        private CookingMiniGameView instantiatedCookingGameView;
 
         [Header("Cooking Settings")]
         public float arcRadius = 150f;
@@ -37,10 +38,10 @@ namespace Game.MiniGames
         protected override void Start()
         {
             // Если префаб не назначен, попробуем найти его в Resources
-            if (cookingViewPrefab == null)
-            {
-                cookingViewPrefab = Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameView");
-            }
+            // if (cookingViewPrefab == null)
+            // {
+            //     cookingViewPrefab = Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameView");
+            // }
 
             base.Start();
         }
@@ -101,7 +102,8 @@ namespace Game.MiniGames
             if (cookingViewPrefab != null)
             {
                 // Создаем префаб в gameScreen, но сохраняем его Canvas
-                instantiatedCookingView = Instantiate(cookingViewPrefab, gameScreen.transform);
+                instantiatedCookingGameView = Instantiate(cookingViewPrefab, gameScreen.transform);
+                instantiatedCookingView = instantiatedCookingGameView.gameObject;
 
                 // Настраиваем RectTransform для полного заполнения
                 RectTransform viewRect = instantiatedCookingView.GetComponent<RectTransform>();
