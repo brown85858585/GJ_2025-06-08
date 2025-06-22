@@ -117,16 +117,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 6021685621929793975}
   panel: {fileID: 8012524612185898012}
+  flowerGameViewPrefab: {fileID: 6051155464596156260, guid: 88aa080ecf622f44da8a5c22d9272597,
+    type: 3}
+  prefabScale: 0.5
+  prefabPosition: {x: 0, y: 0}
+  disablePrefabCanvas: 1
   indicatorSpeed: 50
   trackHeight: 300
-  trackWidth: 60
   zoneHeight: 75
   maxAttempts: 3
-  darkRedColor: {r: 0.6, g: 0, b: 0, a: 1}
-  yellowZoneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  greenZoneColor: {r: 0, g: 1, b: 0, a: 1}
-  brightRedColor: {r: 1, g: 0, b: 0, a: 1}
-  indicatorColor: {r: 0, g: 0, b: 0, a: 1}
+  waterMinY: -700
+  waterMaxY: -150
+  waterHorizontalRange: 50
+  waterHorizontalSpeed: 0
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,

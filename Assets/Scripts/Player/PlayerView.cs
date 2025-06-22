@@ -11,9 +11,8 @@ namespace Player
         private static readonly int PositionY = Animator.StringToHash("PositionY");
 
         [SerializeField] private Animator animator;
-        [Range(0f,3f)]
-        [SerializeField] private float animatorOffset = 1f;
         [SerializeField] private Transform rightHand;
+        [SerializeField] private PlayerDialogueView dialogueView;
         
         [Header("Movement Settings")]
         [SerializeField]
@@ -38,20 +37,18 @@ namespace Player
         public float GroundDrag => groundDrag;
         public float TurnSmooth => turnSmooth;
         public LayerMask WhatIsGround => whatIsGround;
-
+        public PlayerDialogueView DialogueView => dialogueView;
+        
         public Rigidbody Rigidbody { get; private set; }
         public CapsuleCollider CapsuleCollider { get; private set; }
         
         public event Action OnCollision;
         public event Action OnUpdate;
-        public event Action OnButtonClick;
 
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
             CapsuleCollider = GetComponent<CapsuleCollider>();
-            
-            moveForwardButton.onClick.AddListener(() => OnButtonClick?.Invoke());
         }
 
         private void FixedUpdate()
@@ -64,11 +61,6 @@ namespace Player
             OnCollision?.Invoke();
         }
 
-        private void OnDestroy()
-        { 
-            moveForwardButton.onClick.RemoveAllListeners();
-        }
-        
         public void SetWalkAnimation(Vector3 input)
         {
             // ВАРИАНТ A: направление движения относительно камеры

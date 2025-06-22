@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MainMenu
 {
@@ -36,7 +37,8 @@ namespace MainMenu
 
         private void HandlePlayClicked()
         {
-            Debug.Log("Play button clicked");
+            SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+           // LoadScene("MainMenu");
         }
 
         private void HandleSettingClicked()
