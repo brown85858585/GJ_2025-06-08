@@ -23,10 +23,8 @@ namespace Game.Interactions
         [SerializeField] private bool isMultiplyInteractable = true;
         [SerializeField] private Vector3 popupOffset = new Vector3(0, 1.5f, 0);
         [SerializeField] private int popupScale = 1;
-
-
+        
         public bool IsMultiplyInteractable => isMultiplyInteractable;
-        public bool CheckStayCollider{ get; set; }
         public string Guid => id;
         public ItemCategory Category => category;
 
@@ -57,16 +55,16 @@ namespace Game.Interactions
 
         private void OnTriggerStay(Collider other)
         {
-            if (!CheckStayCollider) return;
-            
-            if (CheckLayerMask(other.gameObject, targetMask))
-            {
-                OnEnter?.Invoke(this);
-            
-                TurnPopup();
-            }
-
-            CheckStayCollider = false;
+            // if (!CheckStayCollider) return;
+            //
+            // if (CheckLayerMask(other.gameObject, targetMask))
+            // {
+            //     OnEnter?.Invoke(this);
+            //
+            //     TurnPopup();
+            // }
+            //
+            // CheckStayCollider = false;
         }
 
         private void OnTriggerEnter(Collider other)

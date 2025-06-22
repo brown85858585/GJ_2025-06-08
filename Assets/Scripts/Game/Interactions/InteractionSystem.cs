@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Player.Interfaces;
 
 namespace Game.Interactions
@@ -7,10 +8,11 @@ namespace Game.Interactions
     {
         public event Action<ItemCategory> OnInteraction;
         public event Action ExitInteraction;
+        public ItemInteractable CurrentInteractable { get; private set; }
 
         private RoomView _roomView = new ();
         private readonly IInputAdapter _inputAdapter;
-        public ItemInteractable CurrentInteractable { get; private set; }
+        private List<ItemInteractable> _itemPool = new();
         public InteractionSystem(IInputAdapter inputAdapter)
         {
             _inputAdapter = inputAdapter;
@@ -57,15 +59,18 @@ namespace Game.Interactions
             {
                 CurrentInteractable = null;
 
-                foreach (var itemInCollection in _roomView.ObjectsToInteract)
-                {
-                    itemInCollection.CheckStayCollider = true;
-                }
+                // foreach (var itemInCollection in _roomView.ObjectsToInteract)
+                // {
+                //     itemInCollection.CheckStayCollider = true;
+                // }
             }
+            
+            _itemPool.Remove(item);
         }
 
         private void SetItemInteractable(ItemInteractable item)
         {
+            _itemPool.Add(item);
             CurrentInteractable?.TurnPopup(false);
             CurrentInteractable = item;
         }

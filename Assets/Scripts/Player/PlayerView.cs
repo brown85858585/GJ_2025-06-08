@@ -91,6 +91,7 @@ namespace Player
 
         public void TakeObject(Transform obj)
         {
+            Debug.Log("take object: " + obj.name);
             _saveCurrentObj = obj;
 
             var rb = _saveCurrentObj.gameObject.GetComponent<Rigidbody>();
@@ -105,6 +106,7 @@ namespace Player
         {
             if (_saveCurrentObj == null) return;
             
+            Debug.Log( "put the item down: " + _saveCurrentObj.name);
             _saveCurrentObj.gameObject.AddComponent<Rigidbody>().mass = 0.2f;
 
             _saveCurrentObj.SetParent(_saveLastParentObj);
