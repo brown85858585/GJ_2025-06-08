@@ -136,6 +136,7 @@ namespace Game.MiniGames
             foreach (var game in _factories.Values)
             {
                 game.OnMiniGameComplete -= OnMiniGameComplete;
+                game.Dispose();
             }
 
             _factories.Clear();

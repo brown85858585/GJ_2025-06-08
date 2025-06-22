@@ -173,7 +173,14 @@ namespace Game.MiniGames
             }
         }
 
-        ~KitchenMiniGame()
+        public void Dispose()
+        {
+            Object.Destroy(_miniGameController);
+            Object.Destroy(_miniGameObj);
+
+        }
+
+       /* ~KitchenMiniGame()
         {
             // Очистка при уничтожении
             if (_miniGameObj != null)
@@ -181,5 +188,6 @@ namespace Game.MiniGames
                 Object.Destroy(_miniGameObj);
             }
         }
+       */
     }
 }

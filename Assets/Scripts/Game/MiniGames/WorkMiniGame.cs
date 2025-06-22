@@ -10,9 +10,16 @@ namespace Game.MiniGames
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
+        public void Dispose()
+        {
+            // TODO
+            //throw new NotImplementedException();
+        }
+
         public void OnActionButtonClick()
         {
-            throw new NotImplementedException();
+            // TODO
+           // throw new NotImplementedException();
         }
 
         public void StartGame()

@@ -66,5 +66,11 @@ namespace Game.MiniGames
         {
             throw new NotImplementedException();
         }
+
+        public void Dispose()
+        {
+            //TODO: Implement Dispose logic if needed
+            // throw new NotImplementedException();
+        }
     }
 }

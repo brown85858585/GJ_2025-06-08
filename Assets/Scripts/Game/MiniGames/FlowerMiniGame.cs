@@ -120,6 +120,13 @@ namespace Game.MiniGames
             }
         }
 
+        public void Dispose()
+        {
+            Object.Destroy(_miniGameController);
+            Object.Destroy(_miniGameObj);
+
+        }
+
         // Альтернативный метод если нужно вызвать мини-игру напрямую
         [ContextMenu("Test Mini Game")]
         public void TestMiniGame()
