@@ -89,7 +89,6 @@ namespace Game.Interactions
             if (CurrentInteractable != null && CurrentInteractable.IsMultiplyInteractable)
             {
                 CurrentInteractable.DisableMultiplyInteractable();
-                CurrentInteractable = null;
             }
         }
         
