@@ -3,7 +3,17 @@ guid: a6384388a4f514647b560411f9866c9c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrownWood
+    second: {fileID: 2100000, guid: 22e16fc44ec97ee4aaaa2ae850217ff1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: biege
+    second: {fileID: 2100000, guid: b8b83e858f76d4948b5b80036b244d81, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

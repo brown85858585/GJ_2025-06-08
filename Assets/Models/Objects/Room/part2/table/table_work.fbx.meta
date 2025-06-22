@@ -7,9 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ButtonLTWO
+    second: {fileID: 2100000, guid: 907e2f7167f099849bbeedd2fae72cf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ocher
-    second: {fileID: -5057955108841266895, guid: d0346d5c6ccfb174cb4712da6e94ae84,
-      type: 3}
+    second: {fileID: 2100000, guid: 5e991c8e9e460504ab86dfaae7e2c735, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
