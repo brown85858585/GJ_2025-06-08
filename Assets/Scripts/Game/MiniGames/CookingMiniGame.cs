@@ -15,6 +15,8 @@ namespace Game.MiniGames
         public float arcRadius = 150f;
         public float arcStartAngle = 200f;
         public float arcEndAngle = 340f;
+
+        [Header("Game Settings")]
         public float successZoneAngle = 45f;
 
         [Header("Colors")]
@@ -134,6 +136,8 @@ namespace Game.MiniGames
 
         private void SetupPrefabReferences()
         {
+            
+
             // Находим элементы в префабе
             knifeHandler = instantiatedCookingView.transform.Find("Panel/knifeHandler");
             winZoneHandler = instantiatedCookingView.transform.Find("Panel/winZoneHandler");
@@ -390,7 +394,7 @@ namespace Game.MiniGames
 
         public void SetDifficulty(float speed, float zoneSize)
         {
-            indicatorSpeed = speed;
+            //indicatorSpeed = speed;
             successZoneAngle = zoneSize;
         }
 

@@ -126,14 +126,14 @@ MonoBehaviour:
   trackImage: {fileID: 0}
   zoneImages: []
   indicatorImage: {fileID: 0}
-  indicatorSpeed: 100
+  indicatorSpeed: 25
   maxAttempts: 3
   cookingViewPrefab: {fileID: 5345630855882479413, guid: 00a0af693410afa46a5f6d0609750493,
     type: 3}
   arcRadius: 150
   arcStartAngle: 200
   arcEndAngle: 340
-  successZoneAngle: 45
+  successZoneAngle: 44
   arcColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   successZoneColor: {r: 0, g: 1, b: 0, a: 1}
   indicatorColor: {r: 0, g: 0, b: 0, a: 1}
