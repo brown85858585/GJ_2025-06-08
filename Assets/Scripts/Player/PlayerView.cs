@@ -33,6 +33,7 @@ namespace Player
 
         private const float dampTime = 0.1f;
 
+        private static readonly Quaternion _rotationOffset = Quaternion.Euler(180f, 0f, 0f);
         public float MoveSpeed => moveSpeed;
         public float GroundDrag => groundDrag;
         public float TurnSmooth => turnSmooth;
@@ -50,14 +51,15 @@ namespace Player
             Rigidbody = GetComponent<Rigidbody>();
             CapsuleCollider = GetComponent<CapsuleCollider>();
         }
-
         private void FixedUpdate()
         {
             OnUpdate?.Invoke();
             
             if (_moveSavedObject)
             {
-                _saveCurrentObj.position = rightHand.position;
+                _saveCurrentObj.position = rightHand.position + new Vector3(0.04f, -0.40f, 0);
+                _saveCurrentObj.rotation = rightHand.rotation * _rotationOffset;
+                
             }
         }
 
