@@ -6,5 +6,7 @@ namespace Game.Interactions
     {
         public event Action<ItemCategory> OnInteraction;
         public event Action ExitInteraction;
+        
+        public void DisableCurrentMultiplyInteractable();
     }
 }

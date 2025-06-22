@@ -74,12 +74,25 @@ namespace Game.Interactions
         {
             if (interact && CurrentInteractable != null)
             {
-                CurrentInteractable.Interact();
                 OnInteraction?.Invoke(CurrentInteractable.Category);
-                CurrentInteractable = null;
+                
+                if (!CurrentInteractable.IsMultiplyInteractable)
+                {
+                    CurrentInteractable.Interact();
+                    CurrentInteractable = null;
+                }
             }
         }
 
+        public void DisableCurrentMultiplyInteractable()
+        {
+            if (CurrentInteractable != null && CurrentInteractable.IsMultiplyInteractable)
+            {
+                CurrentInteractable.DisableMultiplyInteractable();
+                CurrentInteractable = null;
+            }
+        }
+        
         public void ClearAll()
         {
             if (_roomView.ObjectsToInteract != null)
