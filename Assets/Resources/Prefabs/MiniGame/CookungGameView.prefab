@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5ae334c0a7a6848acb2df90c620296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cookingViewPrefab: {fileID: 0}
+  gameSpeed: 100
   winZone: {fileID: 4167873197321052902}
   knife: {fileID: 5794802996471557980}
 --- !u!1 &5747441576244784970
