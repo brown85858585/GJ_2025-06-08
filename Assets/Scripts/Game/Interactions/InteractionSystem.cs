@@ -85,6 +85,7 @@ namespace Game.Interactions
                     item.OnExit -= RemoveItemInteractable;
                 }
                 _roomView.ObjectsToInteract.Clear();
+                _itemPool.Clear();
                 
             }
             _roomView = itemCollection;
