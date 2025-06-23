@@ -53,20 +53,6 @@ namespace Game.Interactions
             _popup.gameObject.SetActive(false);
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            // if (!CheckStayCollider) return;
-            //
-            // if (CheckLayerMask(other.gameObject, targetMask))
-            // {
-            //     OnEnter?.Invoke(this);
-            //
-            //     TurnPopup();
-            // }
-            //
-            // CheckStayCollider = false;
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (CheckLayerMask(other.gameObject, targetMask))
