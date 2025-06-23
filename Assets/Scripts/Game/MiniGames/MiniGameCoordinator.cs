@@ -7,6 +7,7 @@ using Game.Quests;
 using Player;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 using Object = UnityEngine.Object;
 
 namespace Game.MiniGames
@@ -26,6 +27,9 @@ namespace Game.MiniGames
         private readonly IPlayerController _playerController;
         private Transform _firstLevel;
 
+        private int CurrentLevelIndex { get; set; } = 0;
+        public static int DayLevel { get; set; } = 0; // Уровень дня, который будет использоваться в мини-играх
+
         // Словари для хранения делегатов
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _completeHandlers = new();
@@ -41,10 +45,15 @@ namespace Game.MiniGames
             _playerController = playerController;
         }
 
+        public void SetLevel(int level)
+        {
+            CurrentLevelIndex = level;
+            DayLevel = level; // Устанавливаем уровень дня для мини-игр
+        }
+
         public void RegisterGames(Transform firstLevel, EffectAccumulatorView effectAccumulatorView)
         {
             _interactionSystem.OnInteraction += HandleInteraction;
-         
             _firstLevel = firstLevel;
 
             _factories[ItemCategory.Flower] = new FlowerMiniGame();
@@ -120,7 +129,7 @@ namespace Game.MiniGames
                 _firstLevel.gameObject .SetActive(false);
                 game.OnMiniGameComplete += OnMiniGameComplete;
             }
-
+            game.Level = CurrentLevelIndex;
             game.StartGame();
         }
 

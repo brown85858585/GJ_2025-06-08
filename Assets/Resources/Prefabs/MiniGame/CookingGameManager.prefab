@@ -128,7 +128,8 @@ MonoBehaviour:
   indicatorImage: {fileID: 0}
   indicatorSpeed: 25
   maxAttempts: 3
-  currentCookingViewPrefab: {fileID: 0}
+  currentCookingViewPrefab: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
+    type: 3}
   cookingViewPrefabs:
   - {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493, type: 3}
   - {fileID: 6999308029474351358, guid: 52b34cd6bcea13c468496ce4e1abdbcc, type: 3}

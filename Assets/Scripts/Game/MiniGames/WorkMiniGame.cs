@@ -7,8 +7,14 @@ namespace Game.MiniGames
     public class WorkMiniGame: IMiniGame
     {
         public QuestType QType { get; } = QuestType.Work;
+        public int Level { get ; set; }
+
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
+        public WorkMiniGame()
+        {
+            Level = MiniGameCoordinator.DayLevel;
+        }
 
         public void Dispose()
         {

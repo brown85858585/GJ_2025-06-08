@@ -5,8 +5,9 @@ namespace Game.MiniGames
     public class CookingMiniGameView : MonoBehaviour
     {
         [Header("")]
-        [SerializeField] private int gameSpeed; 
-        [SerializeField] private GameObject winZone; 
-        [SerializeField] private GameObject knife;
+        [SerializeField] public GameObject CookingViewPrefab;
+        [SerializeField] public int gameSpeed; 
+        [SerializeField] public GameObject winZone; 
+        [SerializeField] public GameObject knife;
     }
 }

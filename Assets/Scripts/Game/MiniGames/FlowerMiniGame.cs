@@ -10,12 +10,15 @@ namespace Game.MiniGames
         private FlowerMiniGameManager _miniGameController;
         private readonly GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Flower;
+        public int Level { get; set; } = 0;
+
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
         public FlowerMiniGame()
         {
             _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/FlowerGameManager"));
+            Level = MiniGameCoordinator.DayLevel;
             if (_miniGameObj != null)
             {
                 _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();

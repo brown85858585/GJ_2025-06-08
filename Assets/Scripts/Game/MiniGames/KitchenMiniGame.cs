@@ -3,6 +3,7 @@ using Game.Quests;
 using UnityEngine;
 
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 using Object = UnityEngine.Object;
 
 namespace Game.MiniGames
@@ -12,6 +13,8 @@ namespace Game.MiniGames
         private BaseTimingMiniGame _miniGameController;
         private  GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Kitchen;
+        public int Level { get ; set ; }
+
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
@@ -19,7 +22,7 @@ namespace Game.MiniGames
         {
             // Попробуем найти префаб MiniGameManager1 или создать новый
             _miniGameObj = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameManager"));
-
+            Level = Level = MiniGameCoordinator.DayLevel; ;
             if (_miniGameObj != null)
             {
                 _miniGameController = _miniGameObj.GetComponent<CookingMiniGame>();

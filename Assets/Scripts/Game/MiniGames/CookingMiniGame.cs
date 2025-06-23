@@ -40,6 +40,8 @@ namespace Game.MiniGames
 
         protected override void Start()
         {
+            instantiatedCookingView= cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
+            indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
             // Если префаб не назначен, попробуем найти его в Resources
             // if (cookingViewPrefab == null)
             // {
@@ -102,13 +104,15 @@ namespace Game.MiniGames
 
         private void InstantiateCookingView()
         {
-            if (currentCookingViewPrefab != null)
+            if (cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab != null)
             {
+                //var origin = cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
                 // Создаем префаб в gameScreen, но сохраняем его Canvas
-                instantiatedCookingGameView = Instantiate(currentCookingViewPrefab, gameScreen.transform);
+                instantiatedCookingGameView = Instantiate(cookingViewPrefabs[MiniGameCoordinator.DayLevel], gameScreen.transform);
                 instantiatedCookingView = instantiatedCookingGameView.gameObject;
 
                 // Настраиваем RectTransform для полного заполнения
+                
                 RectTransform viewRect = instantiatedCookingView.GetComponent<RectTransform>();
                 if (viewRect != null)
                 {
@@ -117,6 +121,7 @@ namespace Game.MiniGames
                     viewRect.offsetMin = Vector2.zero;
                     viewRect.offsetMax = Vector2.zero;
                     viewRect.localScale = Vector3.one;
+                  
                 }
 
                 // Настраиваем Canvas префаба

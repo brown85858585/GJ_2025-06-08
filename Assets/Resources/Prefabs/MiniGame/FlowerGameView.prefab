@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40f69fdaf8cc094f9b604f65e63018a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UsedPrefab: {fileID: 6051155464596156260}
   waterMinY: -750
   waterMaxY: -150
   waterHorizontalRange: 50

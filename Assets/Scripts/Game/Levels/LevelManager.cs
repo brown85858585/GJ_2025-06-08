@@ -14,6 +14,7 @@ namespace Game.Levels
         private int _currentIndex;
         private EffectAccumulatorView _effectAccumulatorView;
 
+        //public static int MyLevelIndex => _currentIndex;
         public int CurrentLevelIndex => _currentIndex;
         public RoomView CurrentRoomView { get; private set; }
 
@@ -46,13 +47,17 @@ namespace Game.Levels
 
             // Загружаем новый
             _currentIndex = index;
+
+
             var prefab = _config.levels[index].levelPrefab;
             _currentLevel = Object.Instantiate(prefab, parent);
             CurrentRoomView = _currentLevel.GetComponentInChildren<RoomView>();
 
             // Регистрируем взаимодействия и мини-игры
             _interactionSystem.AddNewInteractionCollection(CurrentRoomView);
+            _miniGameCoordinator.SetLevel(index);
             _miniGameCoordinator.RegisterGames(_currentLevel.transform, _effectAccumulatorView);
+           
         }
 
         /// <summary>

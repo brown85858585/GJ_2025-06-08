@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class FloweGameOptions : MonoBehaviour
 {
+
+    [Header("Curent View")]
+    [SerializeField] public GameObject UsedPrefab; // Скорость горизонтального движения
     [Header("Water Animation")]
-    [SerializeField] private float waterMinY = -750f; // Минимальная позиция воды
-    [SerializeField] private float waterMaxY = -150f;  // Максимальная позиция воды
-    [SerializeField] private float waterHorizontalRange = 50f; // Диапазон горизонтального движения
-    [SerializeField] private float waterHorizontalSpeed = 2f; // Скорость горизонтального движения
+    [SerializeField] public float waterMinY = -750f; // Минимальная позиция воды
+    [SerializeField] public float waterMaxY = -150f;  // Максимальная позиция воды
+    [SerializeField] public float waterHorizontalRange = 50f; // Диапазон горизонтального движения
+    [SerializeField] public float waterHorizontalSpeed = 2f; // Скорость горизонтального движения
+
     [Header("Game Settings")]
     public float indicatorSpeed = 100f;
     public float trackHeight = 300f; // Высота зоны для воды

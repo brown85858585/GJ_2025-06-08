@@ -15,6 +15,8 @@ namespace Game.MiniGames
         private EffectAccumulatorView _effectsAccumulatorView;
 
         public QuestType QType { get; } = QuestType.Sprint;
+        public int Level { get ; set ; }
+
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
