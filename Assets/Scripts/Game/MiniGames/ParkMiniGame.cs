@@ -5,6 +5,7 @@ using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Object = UnityEngine.Object;
 
 namespace Game.MiniGames
 {
@@ -71,6 +72,7 @@ namespace Game.MiniGames
 
         public void Dispose()
         {
+            Object.Destroy(_parkLevel);
             //TODO: Implement Dispose logic if needed
             // throw new NotImplementedException();
         }
