@@ -134,6 +134,15 @@ MonoBehaviour:
     type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
+  floweGameOption: {fileID: 0}
+  floweGameOptions:
+  - {fileID: 4772034972375203899, guid: 88aa080ecf622f44da8a5c22d9272597, type: 3}
+  - {fileID: 1619337605520156344, guid: e10c287ff1d3e37489bc2b781fb3e859, type: 3}
+  - {fileID: 1619337605520156344, guid: 9a40ed68912e4d04984bbc65cd102410, type: 3}
+  - {fileID: 1619337605520156344, guid: e2d3a0f8676f1b44888633bb09667f35, type: 3}
+  - {fileID: 1619337605520156344, guid: dfc2c604009f5b94eadc40205e22ad75, type: 3}
+  - {fileID: 1619337605520156344, guid: 55d6c4fc9f8763140a1301b4797d3cf8, type: 3}
+  - {fileID: 1619337605520156344, guid: 0d2848c466d284647be4092ea403bd2f, type: 3}
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0

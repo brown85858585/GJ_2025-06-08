@@ -128,8 +128,15 @@ MonoBehaviour:
   indicatorImage: {fileID: 0}
   indicatorSpeed: 25
   maxAttempts: 3
-  cookingViewPrefab: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
-    type: 3}
+  currentCookingViewPrefab: {fileID: 0}
+  cookingViewPrefabs:
+  - {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493, type: 3}
+  - {fileID: 6999308029474351358, guid: 52b34cd6bcea13c468496ce4e1abdbcc, type: 3}
+  - {fileID: 6999308029474351358, guid: 69181847483f7b04b978772b764fb18a, type: 3}
+  - {fileID: 6999308029474351358, guid: 19483d250c9c7ef42a498e6a6fc87563, type: 3}
+  - {fileID: 6999308029474351358, guid: 5bedfdc4f08a70a4e8026a5d6191ebd9, type: 3}
+  - {fileID: 6999308029474351358, guid: 638a81b62619b3543a94626a58fa76b4, type: 3}
+  - {fileID: 6999308029474351358, guid: dba8be04e09253e4c9bc376fbe97f889, type: 3}
   arcRadius: 150
   arcStartAngle: 200
   arcEndAngle: 340

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks.Triggers;
+using System.Collections.Generic;
 
 namespace Game.MiniGames
 {
@@ -77,6 +78,10 @@ namespace Game.MiniGames
         // События
         public System.Action OnMiniGameComplete;
         public System.Action<bool> OnWateringAttempt;
+
+
+        [SerializeField] FloweGameOptions floweGameOption;
+        [SerializeField] List<FloweGameOptions> floweGameOptions;
 
         void Start()
         {

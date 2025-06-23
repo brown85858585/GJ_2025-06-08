@@ -1,5 +1,6 @@
 ﻿using Game.MiniGames;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,9 @@ namespace Game.MiniGames
     public class CookingMiniGame : BaseTimingMiniGame
     {
         [Header("Prefab Integration")]
-        [SerializeField] private CookingMiniGameView cookingViewPrefab; // Ссылка на CookingGameView префаб
+        [SerializeField] private CookingMiniGameView currentCookingViewPrefab; // Ссылка на CookingGameView префаб
+        [SerializeField] private List<CookingMiniGameView> cookingViewPrefabs; // Префаб для создания UI
+
         private GameObject instantiatedCookingView;
         private CookingMiniGameView instantiatedCookingGameView;
 
@@ -99,10 +102,10 @@ namespace Game.MiniGames
 
         private void InstantiateCookingView()
         {
-            if (cookingViewPrefab != null)
+            if (currentCookingViewPrefab != null)
             {
                 // Создаем префаб в gameScreen, но сохраняем его Canvas
-                instantiatedCookingGameView = Instantiate(cookingViewPrefab, gameScreen.transform);
+                instantiatedCookingGameView = Instantiate(currentCookingViewPrefab, gameScreen.transform);
                 instantiatedCookingView = instantiatedCookingGameView.gameObject;
 
                 // Настраиваем RectTransform для полного заполнения
