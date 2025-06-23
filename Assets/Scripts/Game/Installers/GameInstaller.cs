@@ -82,6 +82,16 @@ namespace Game.Installers
             var vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
             vCam.Follow = _core.PlayerModel.PlayerTransform;
             vCam.LookAt = _core.PlayerModel.PlayerTransform;
+            _core.InputAdapter.OnZoomIn += () =>
+            {
+                vCam.m_Lens.FieldOfView = Mathf.Clamp(vCam.m_Lens.FieldOfView - 5, 20, 60);
+                Debug.Log(vCam.m_Lens.FieldOfView);
+            };
+            _core.InputAdapter.OnZoomOut += () =>
+            {
+                vCam.m_Lens.FieldOfView = Mathf.Clamp(vCam.m_Lens.FieldOfView + 5, 20, 60);
+                Debug.Log(vCam.m_Lens.FieldOfView);
+            };
             var cameraRotation = _virtualCamera.AddComponent<CameraRotation>();
             cameraRotation.Initialization(_core.InputAdapter, _virtualCamera.transform);
             

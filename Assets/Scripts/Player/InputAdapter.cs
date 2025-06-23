@@ -15,6 +15,9 @@ namespace Player
         public event Action OnSwitchInteract;
         public event Action<bool> OnTest;
         public event Action<bool> OnQuests;
+        public event Action OnZoomIn;
+        public event Action OnZoomOut;
+        
         
         private readonly InputAction _accelerateAction;
         private readonly InputAction _moveAction;
@@ -23,6 +26,7 @@ namespace Player
         private readonly InputAction _interactAction;
         private readonly InputAction _crouchAction;
         private readonly InputAction _questsAction;
+        private readonly InputAction _zoomAction;
         
         private readonly InputAction _NavigateAction;
         private readonly InputAction _GameInteractAction;
@@ -43,13 +47,12 @@ namespace Player
             _interactAction = playerInput.actions.FindAction("Interact", true);
             _crouchAction = playerInput.actions.FindAction("Crouch", true);
             _questsAction = playerInput.actions.FindAction("Quests", true);
+            _zoomAction = playerInput.actions.FindAction("Zoom", true);
 
             _GameInteractAction = playerInput.actions.FindAction("GameInteract", true);
             _GameStartAction = playerInput.actions.FindAction("StartMiniGame", true);
 
-
-
-
+            
             _accelerateAction.Enable();
             _moveAction.Enable();
             _lookAction.Enable();
@@ -57,6 +60,7 @@ namespace Player
             _testAction.Enable();
             _interactAction.Enable();
             _crouchAction.Enable();
+            _zoomAction.Enable();
 
             _GameInteractAction.Enable();
 
@@ -70,7 +74,7 @@ namespace Player
             _GameInteractAction.started += OnGameInteractInput;
             _GameStartAction.started += OnGameStartInput;
 
-
+            _zoomAction.performed += OnZoomInput;
 
             _questsAction.started += OnQuestsInput;
             _questsAction.canceled += OnQuestsInput;
@@ -84,7 +88,16 @@ namespace Player
 
         }
 
+        private void OnZoomInput(InputAction.CallbackContext obj)
+        {
+            var scroll = obj.ReadValue<float>();
 
+            if (scroll > 0)
+                OnZoomIn?.Invoke();    // прокрутка вперёд
+            else if (scroll < 0)
+                OnZoomOut?.Invoke();   // прокрутка назад
+        }
+ 
 
         public void SwitchAdapterToMiniGameMode()
         {

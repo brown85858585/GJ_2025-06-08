@@ -13,6 +13,9 @@ namespace Player.Interfaces
         event Action OnSwitchInteract; 
         event Action<bool> OnTest;
         event Action<bool> OnQuests;
+        public event Action OnZoomIn;
+        public event Action OnZoomOut;
+        
        void  SwitchAdapterToMiniGameMode();
        void SwitchAdapterToGlobalMode();
     }
