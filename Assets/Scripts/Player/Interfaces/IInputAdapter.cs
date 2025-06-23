@@ -10,7 +10,7 @@ namespace Player.Interfaces
         bool IsAccelerating { get; }
         event Action<bool> OnGameInteract;
         event Action<bool> OnInteract;
-        event Action OnPutItemDown; 
+        event Action OnSwitchInteract; 
         event Action<bool> OnTest;
         event Action<bool> OnQuests;
        void  SwitchAdapterToMiniGameMode();

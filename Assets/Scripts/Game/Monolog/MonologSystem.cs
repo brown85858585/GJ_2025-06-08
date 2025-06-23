@@ -35,103 +35,58 @@ namespace Game.Monolog
 
         private void HandleInteraction(ItemCategory item)
         {
-            var itemKeySuffix = $"Day{_levelManager.CurrentLevelIndex+1}_{item}";
-            
-            if (_monologIndexesBySuffix.TryGetValue(itemKeySuffix, out var indexPostfix))
-            {
-                indexPostfix++;
-                if(_keyCollection.ContainsKey(itemKeySuffix+indexPostfix.ToString()))
-                {
-                    _monologIndexesBySuffix[itemKeySuffix] = indexPostfix;
-                    
-                    _playerController.Dialogue.OpenDialogue(itemKeySuffix + indexPostfix);
-                }
-                else
-                {
-                    _playerController.Dialogue.OpenDialogue(itemKeySuffix + _monologIndexesBySuffix[itemKeySuffix]);
-                }
+            var suffix = GetItemKeySuffix(item);
 
+            if (_monologIndexesBySuffix.TryGetValue(suffix, out var currentIndex))
+                HandleExistingMonolog(suffix, currentIndex);
+            else
+                HandleNewMonolog(suffix);
+        }
+
+        private string GetItemKeySuffix(ItemCategory item) => $"Day{_levelManager.CurrentLevelIndex + 1}_{item}";
+
+        private void HandleExistingMonolog(string suffix, int currentIndex)
+        {
+            var nextIndex = currentIndex + 1;
+            var nextKey = ComposeKey(suffix, nextIndex);
+
+            if (_keyCollection.ContainsKey(nextKey))
+            {
+                // Сохраняем и показываем следующий диалог
+                _monologIndexesBySuffix[suffix] = nextIndex;
+                OpenDialogue(nextKey);
+
+                // Если за ним больше нет ключа — дизейблим интерактив
+                var afterNext = ComposeKey(suffix, nextIndex + 1);
+                if (!_keyCollection.ContainsKey(afterNext))
+                    _interactionSystem.DisableCurrentMultiplyInteractable();
             }
             else
             {
-                const int zeroPostfix = 0;
-                if (_keyCollection.ContainsKey(itemKeySuffix + zeroPostfix.ToString()))
-                {
-                    _monologIndexesBySuffix[itemKeySuffix] = zeroPostfix;
-                    _playerController.Dialogue.OpenDialogue(itemKeySuffix + zeroPostfix.ToString());
-                } 
-                else
-                {
-                    // Handle case where the key does not exist
-                    // For example, you might log a message or show a default message
-                    Debug.LogWarning($"Monolog key '{itemKeySuffix + zeroPostfix}' not found.");
-                }
+                // Больше нет новых диалогов — дизейблим и показываем текущий
+                _interactionSystem.DisableCurrentMultiplyInteractable();
+                OpenDialogue(ComposeKey(suffix, currentIndex));
             }
         }
-    }
 
-    internal class Phrases
-    {
-        public List<string> PhrasesList { get; private set; } = new List<string>();
-
-        public Phrases(string[] phrases = null)
+        private void HandleNewMonolog(string suffix)
         {
-            if (phrases != null)
-            {
-                PhrasesList.AddRange(phrases);
-            }
-        } 
-        private Dictionary<ItemCategory, Phrases> _monologPhrases = new Dictionary<ItemCategory, Phrases>
-                 {
-                     {
-                         ItemCategory.Bed, new Phrases(new[]
-                         {
-                             "I should get some rest.",
-                             "This bed looks comfortable.",
-                             "I could use a nap."
-                         })
-                     },
-                     {
-                         ItemCategory.Door, new Phrases(new[]
-                         {
-                             "I wonder where this door leads.",
-                             "I should check if it's locked.",
-                             "Maybe I can find something interesting behind this door."
-                         })
-                     },
-                     {
-                         ItemCategory.Flower, new Phrases(new[]
-                         {
-                             "These flowers are beautiful.",
-                             "I love the smell of these flowers.",
-                             "They remind me of spring."
-                         })
-                     },
-                     {
-                         ItemCategory.Kitchen, new Phrases(new[]
-                         {
-                             "I could use a snack from the kitchen.",
-                             "The kitchen is well stocked.",
-                             "I wonder if I can cook something here."
-                         })
-                     },
-                     {
-                         ItemCategory.WateringCan, new Phrases(new[]
-                         {
-                             "I should water the plants with this can.",
-                             "This watering can is handy.",
-                             "I love taking care of the plants."
-                         })
-                     },
-                     {
-                         ItemCategory.Computer, new Phrases(new[]
-                         {
-                             "I should check my emails on this computer.",
-                             "Maybe I can find some useful information online.",
-                             "This computer looks like it has a lot of potential."
-                         })
-                     }
-                 };
+            const int initialIndex = 0;
+            var key = ComposeKey(suffix, initialIndex);
 
+            if (_keyCollection.ContainsKey(key))
+            {
+                _monologIndexesBySuffix[suffix] = initialIndex;
+                OpenDialogue(key);
+            }
+            else
+            {
+                Debug.LogWarning($"Monolog key '{key}' not found.");
+            }
+        }
+
+        private string ComposeKey(string suffix, int index) => $"{suffix}{index}";
+
+        private void OpenDialogue(string key) => _playerController.Dialogue.OpenDialogue(key);
     }
 }

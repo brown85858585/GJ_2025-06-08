@@ -17,12 +17,14 @@ namespace Game.Interactions
         [SerializeField] private LayerMask targetMask = 1 << 6;
         [SerializeField] private string id;
         [SerializeField] private ItemCategory category;
-        
-        [Header("Popup Settings")]
+
+        [FormerlySerializedAs("multiplyInteractable")]
+        [Header("Popup Settings")] 
+        [SerializeField] private bool isMultiplyInteractable = true;
         [SerializeField] private Vector3 popupOffset = new Vector3(0, 1.5f, 0);
         [SerializeField] private int popupScale = 1;
         
-        public bool CheckStayCollider{ get; set; }
+        public bool IsMultiplyInteractable => isMultiplyInteractable;
         public string Guid => id;
         public ItemCategory Category => category;
 
@@ -53,16 +55,16 @@ namespace Game.Interactions
 
         private void OnTriggerStay(Collider other)
         {
-            if (!CheckStayCollider) return;
-            
-            if (CheckLayerMask(other.gameObject, targetMask))
-            {
-                OnEnter?.Invoke(this);
-            
-                TurnPopup();
-            }
-
-            CheckStayCollider = false;
+            // if (!CheckStayCollider) return;
+            //
+            // if (CheckLayerMask(other.gameObject, targetMask))
+            // {
+            //     OnEnter?.Invoke(this);
+            //
+            //     TurnPopup();
+            // }
+            //
+            // CheckStayCollider = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -85,10 +87,14 @@ namespace Game.Interactions
             }
         }
 
+        public void DisableMultiplyInteractable()
+        {
+            isMultiplyInteractable = false;
+            TurnPopup(false);
+        }
         public void Interact()
         {
             Debug.Log("Interact with item: " + Category + " with ID: " + Guid);
-
             TurnPopup(false);
         }
 

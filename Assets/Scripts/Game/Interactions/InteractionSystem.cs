@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Player.Interfaces;
+using UnityEngine;
 
 namespace Game.Interactions
 {
@@ -7,14 +9,21 @@ namespace Game.Interactions
     {
         public event Action<ItemCategory> OnInteraction;
         public event Action ExitInteraction;
-
-        private RoomView _roomView = new ();
-        private readonly IInputAdapter _inputAdapter;
         public ItemInteractable CurrentInteractable { get; private set; }
+
+        private RoomView _roomView;
+        private readonly IInputAdapter _inputAdapter;
+        private List<ItemInteractable> _itemPool = new();
         public InteractionSystem(IInputAdapter inputAdapter)
         {
             _inputAdapter = inputAdapter;
             _inputAdapter.OnInteract += HandleInteract;
+            _inputAdapter.OnSwitchInteract += HandleSwitchInteract;
+        }
+
+        private void HandleSwitchInteract()
+        {
+            Debug.Log(_itemPool.Contains(CurrentInteractable));
         }
 
         public void Dispose()
@@ -29,7 +38,7 @@ namespace Game.Interactions
 
         public void AddNewInteractionCollection(RoomView itemCollection)
         {
-            if (_roomView.ObjectsToInteract != null)
+            if (_roomView?.ObjectsToInteract != null)
             {
                 foreach (var item in _roomView.ObjectsToInteract)
                 {
@@ -56,16 +65,14 @@ namespace Game.Interactions
             if (CurrentInteractable == item)
             {
                 CurrentInteractable = null;
-
-                foreach (var itemInCollection in _roomView.ObjectsToInteract)
-                {
-                    itemInCollection.CheckStayCollider = true;
-                }
             }
+            
+            _itemPool.Remove(item);
         }
 
         private void SetItemInteractable(ItemInteractable item)
         {
+            _itemPool.Add(item);
             CurrentInteractable?.TurnPopup(false);
             CurrentInteractable = item;
         }
@@ -74,12 +81,24 @@ namespace Game.Interactions
         {
             if (interact && CurrentInteractable != null)
             {
-                CurrentInteractable.Interact();
                 OnInteraction?.Invoke(CurrentInteractable.Category);
-                CurrentInteractable = null;
+                
+                if (!CurrentInteractable.IsMultiplyInteractable)
+                {
+                    CurrentInteractable.Interact();
+                    CurrentInteractable = null;
+                }
             }
         }
 
+        public void DisableCurrentMultiplyInteractable()
+        {
+            if (CurrentInteractable != null && CurrentInteractable.IsMultiplyInteractable)
+            {
+                CurrentInteractable.DisableMultiplyInteractable();
+            }
+        }
+        
         public void ClearAll()
         {
             if (_roomView.ObjectsToInteract != null)
