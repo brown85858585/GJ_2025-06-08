@@ -4,7 +4,6 @@ using Effects;
 using Game.Quests;
 using Player;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Game.MiniGames
 {
@@ -13,6 +12,7 @@ namespace Game.MiniGames
         private readonly IPlayerController _playerController;
         private GameObject _parkLevel;
         private EffectAccumulatorView _effectsAccumulatorView;
+        private Transform _level;
 
         public QuestType QType { get; } = QuestType.Sprint;
         public event Action<QuestType> OnMiniGameComplete;
@@ -23,12 +23,12 @@ namespace Game.MiniGames
             _playerController = playerController;
         }
 
-        public void Initialization(GameObject parkLevel, EffectAccumulatorView effectAccumulatorView)
+        public void Initialization(GameObject parkLevel, EffectAccumulatorView effectAccumulatorView, Transform level)
         {
             _parkLevel = parkLevel;
             _parkLevel.SetActive(false);
             _parkLevel.transform.position = Vector3.up * 5f;
-            
+            _level = level;
             _effectsAccumulatorView = effectAccumulatorView;
         }
         public void StartGame()
@@ -39,10 +39,19 @@ namespace Game.MiniGames
                 _parkLevel.SetActive(true);
                 _playerController.SetPosition(Vector3.up * 5.1f);
                 _playerController.ToggleMovement();
+                
+                DisableLevelInNextFrame().Forget();
+
                 RunTimer().Forget();
                 
                 _effectsAccumulatorView.FadeOut();
             });
+        }
+
+        private async UniTask DisableLevelInNextFrame()
+        {
+            await UniTask.WaitForFixedUpdate();
+            _level.gameObject.SetActive(false);
         }
 
         private async UniTask RunTimer()

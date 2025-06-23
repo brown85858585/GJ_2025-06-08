@@ -74,7 +74,7 @@ namespace Player
 
         public void SetPosition( Vector3 position)
         {
-            _model.PlayerTransform.position = position;
+            _view.Rigidbody.MovePosition(position);
         }
 
         public void ToggleMovement()
