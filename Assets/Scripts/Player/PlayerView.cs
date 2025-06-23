@@ -91,11 +91,6 @@ namespace Player
             animator.SetFloat(PositionY, planar.y, dampTime, Time.deltaTime);
         }
 
-        public void StartDanceAnimation()
-        {
-            animator.SetBool(IsDancing, true);
-        }
-
         public void TakeObject(Transform obj)
         {
             _saveCurrentObj = obj;

@@ -106,7 +106,6 @@ namespace Player
             
             _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
-            _view.StartDanceAnimation();
         }
 
         private void PutTheItemDown()
