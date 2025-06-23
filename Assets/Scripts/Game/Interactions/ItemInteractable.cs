@@ -38,14 +38,6 @@ namespace Game.Interactions
         private void Awake()
         {
             targetMask = LayerMask.GetMask("Player");
-            
-            
-            _popup = GameObject.Find("PopupE").GetComponent<FollowProjectionWithConstantSize>();
-            _popupTweener = _popup.GetComponent<UIElementTweener>();
-            if (_popup == null)
-            {
-                Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
-            }
         }
 
         private void Start()
@@ -78,11 +70,6 @@ namespace Game.Interactions
             isMultiplyInteractable = false;
             TurnPopup(false);
         }
-        public void Interact()
-        {
-            Debug.Log("Interact with item: " + Category + " with ID: " + Guid);
-            TurnPopup(false);
-        }
 
         public void TurnPopup(bool turn = true)
         {
@@ -104,6 +91,17 @@ namespace Game.Interactions
             }
         }
 
+        public void AddPopup(FollowProjectionWithConstantSize itemCollectionPopupForInteract)
+        {
+            _popup = itemCollectionPopupForInteract.GetComponent<FollowProjectionWithConstantSize>();
+            _popupTweener = _popup.GetComponent<UIElementTweener>();
+           
+            if (_popup == null)
+            {
+                Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
+            }
+        }
+
         private bool CheckLayerMask(GameObject obj, LayerMask layers)
         {
             if (((1 << obj.layer) & layers) != 0)
@@ -115,6 +113,7 @@ namespace Game.Interactions
         }
 #if UNITY_EDITOR
         // генерация GUID при первом создании
+
         private void OnValidate()
         {
             if (string.IsNullOrEmpty(id))

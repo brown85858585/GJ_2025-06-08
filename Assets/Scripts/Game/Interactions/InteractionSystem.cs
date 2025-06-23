@@ -61,7 +61,7 @@ namespace Game.Interactions
                     _poolSwitchIndex = 0;
                 }
                 
-                CurrentInteractable.TurnPopup(true);
+                CurrentInteractable.TurnPopup();
             }
         }
 
@@ -77,21 +77,12 @@ namespace Game.Interactions
 
         public void AddNewInteractionCollection(RoomView itemCollection)
         {
-            if (_roomView?.ObjectsToInteract != null)
-            {
-                foreach (var item in _roomView.ObjectsToInteract)
-                {
-                    item.OnEnter -= SetItemInteractable;
-                    item.OnExit -= RemoveItemInteractable;
-                }
-                _roomView.ObjectsToInteract.Clear();
-                _itemPool.Clear();
-                
-            }
+            ClearAll();
             _roomView = itemCollection;
            
             foreach (var item in _roomView.ObjectsToInteract)
             {
+                item.AddPopup(itemCollection.PopupForInteract);
                 item.OnEnter += SetItemInteractable;
                 item.OnExit += RemoveItemInteractable;
             }
@@ -132,7 +123,7 @@ namespace Game.Interactions
                 
                 if (!CurrentInteractable.IsMultiplyInteractable)
                 {
-                    CurrentInteractable.Interact();
+                    CurrentInteractable.TurnPopup(false);
                     CurrentInteractable = null;
                 }
             }
@@ -148,7 +139,7 @@ namespace Game.Interactions
         
         public void ClearAll()
         {
-            if (_roomView.ObjectsToInteract != null)
+            if (_roomView?.ObjectsToInteract != null)
             {
                 foreach (var item in _roomView.ObjectsToInteract)
                 {
@@ -156,6 +147,7 @@ namespace Game.Interactions
                     item.OnExit -= RemoveItemInteractable;
                 }
                 _roomView.ObjectsToInteract.Clear();
+                _itemPool.Clear();
             }
             CurrentInteractable = null;
         }
