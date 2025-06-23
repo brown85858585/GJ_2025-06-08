@@ -57,7 +57,7 @@ namespace Player
             
             if (_moveSavedObject)
             {
-                _saveCurrentObj.position = rightHand.position + new Vector3(0.04f, -0.40f, 0);
+                _saveCurrentObj.position = rightHand.position;
                 _saveCurrentObj.rotation = rightHand.rotation * _rotationOffset;
                 
             }
