@@ -98,7 +98,6 @@ namespace Player
 
         public void TakeObject(Transform obj)
         {
-            Debug.Log("take object: " + obj.name);
             _saveCurrentObj = obj;
 
             var rb = _saveCurrentObj.gameObject.GetComponent<Rigidbody>();
@@ -113,7 +112,6 @@ namespace Player
         {
             if (_saveCurrentObj == null) return;
             
-            Debug.Log( "put the item down: " + _saveCurrentObj.name);
             var rb = _saveCurrentObj.gameObject.GetComponent<Rigidbody>();
             rb.useGravity = true;
             _saveCurrentObj.gameObject.GetComponent<BoxCollider>().enabled = true;
@@ -122,7 +120,6 @@ namespace Player
             _moveSavedObject = false;_saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
             
             _saveCurrentObj = null;
-            
         }
     }
 }
