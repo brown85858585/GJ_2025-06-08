@@ -385,3 +385,7 @@ MonoBehaviour:
     _rawText: "The world\u2019s losing it. And I\u2019m just\u2026 left behind."
   - _key: Day6_Window2
     _rawText: "I can\u2019t see anything. Not even myself in the reflection."
+  - _key: Hint_Switch
+    _rawText: Choose
+  - _key: Hint_Interact
+    _rawText: Interact

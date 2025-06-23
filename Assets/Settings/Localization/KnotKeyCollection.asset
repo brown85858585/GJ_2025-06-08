@@ -681,6 +681,14 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Hint_Switch
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Hint_Interact
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 2
     RefIds: []
