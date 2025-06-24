@@ -11,6 +11,7 @@ namespace Player
         private Vector3 _direction;
         
         public Transform VirtualCamera;
+        public float NormalizedSpeed { get; private set; }
         
         public PlayerMovement(IInputAdapter input, PlayerModel model)
         {
