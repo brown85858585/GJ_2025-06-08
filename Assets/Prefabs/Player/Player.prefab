@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5379882913803322865}
+  playerObject: {fileID: 2038164520245731211}
   rightHand: {fileID: 177353846175795112}
   dialogueView: {fileID: 8974123649122541329}
   moveSpeed: 25
@@ -313,11 +314,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6671095583087799955}
     m_Modifications:
-    - target: {fileID: 4376652074975279770, guid: 9a8716608ac31e14b872a1b2a7761f5b,
+    - target: {fileID: 515164156721986395, guid: 9a8716608ac31e14b872a1b2a7761f5b,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: playerView
       value: 
-      objectReference: {fileID: 2100000, guid: 8fe5a139cfe38434cb9fe8f7b3b62183, type: 2}
+      objectReference: {fileID: 8827756126029776017}
     - target: {fileID: 7036173529271817034, guid: 9a8716608ac31e14b872a1b2a7761f5b,
         type: 3}
       propertyPath: m_Name

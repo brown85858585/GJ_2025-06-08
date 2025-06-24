@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace Player
         private static readonly int PositionY = Animator.StringToHash("PositionY");
 
         [SerializeField] private Animator animator;
+        [SerializeField] private Transform playerObject;
         [SerializeField] private Transform rightHand;
         [SerializeField] private PlayerDialogueView dialogueView;
         
@@ -45,6 +47,7 @@ namespace Player
         
         public event Action OnCollision;
         public event Action OnUpdate;
+        public event Action OnWakeUpEnded;
 
         private void Awake()
         {
@@ -66,6 +69,37 @@ namespace Player
         private void OnCollisionEnter(Collision other)
         {
             OnCollision?.Invoke();
+        }
+
+        public void SetWakeUpAnimation()
+        {
+            animator.SetTrigger("WakeUp");
+        }
+
+        public void WakeUpAnimationEnded()
+        {
+            Debug.Log("WakeUpAnimationEnded");
+            StartCoroutine(ResetPlayerObjectTransform());
+        }
+
+        IEnumerator ResetPlayerObjectTransform()
+        {
+            yield return new WaitForEndOfFrame();
+
+            transform.localPosition = new Vector3(
+                transform.localPosition.x + playerObject.localPosition.x,
+                transform.localPosition.y + playerObject.localPosition.y,
+                transform.localPosition.z + playerObject.localPosition.z
+             );
+
+            transform.localEulerAngles = new Vector3(
+                transform.localEulerAngles.x + playerObject.localEulerAngles.x,
+                transform.localEulerAngles.y + playerObject.localEulerAngles.y,
+                transform.localEulerAngles.z + playerObject.localEulerAngles.z
+            );
+            
+            playerObject.localPosition = new Vector3(0, 0, 0);
+            playerObject.localEulerAngles = new Vector3(0, 0, 0);
         }
 
         public void SetWalkAnimation(Vector3 input)

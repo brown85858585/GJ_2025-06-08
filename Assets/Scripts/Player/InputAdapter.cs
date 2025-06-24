@@ -97,6 +97,20 @@ namespace Player
             else if (scroll < 0)
                 OnZoomOut?.Invoke();   // прокрутка назад
         }
+
+        public void DisablePlayerInput()
+        {
+            _moveAction.performed -= OnMoveInput;
+            _moveAction.canceled -= OnMoveInput;
+            _moveAction.Disable();
+        }
+
+        public void EnablePlayerInput()
+        {
+            _moveAction.Enable();
+            _moveAction.performed += OnMoveInput;
+            _moveAction.canceled += OnMoveInput;
+        }
  
 
         public void SwitchAdapterToMiniGameMode()
