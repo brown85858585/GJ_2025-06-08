@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: gameSpeed
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: winZoneWidth
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 2336026716207983623, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
       propertyPath: m_LocalRotation.w

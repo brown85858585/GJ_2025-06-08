@@ -33,7 +33,7 @@ namespace Game.MiniGames
 
         private void SetupMiniGameComponents()
         {
-
+            /*
             Canvas canvas = _miniGameController.MainCanvas;
             if (canvas != null)
             {
@@ -54,6 +54,7 @@ namespace Game.MiniGames
 
                 Debug.Log("📋 Панель мини-игры Papers созданa");
             }
+            */
         }
 
         public void OnActionButtonClick()
