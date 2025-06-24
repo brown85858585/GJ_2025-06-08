@@ -127,23 +127,8 @@ namespace Game.MiniGames
             }
         }
 
-        protected virtual void FindSceneComponents()
-        {
-            if (mainCanvas == null)
-            {
-                Debug.LogError("Canvas не найден в сцене!");
-                return;
-            }
+        protected abstract void FindSceneComponents();
 
-            miniGamePanel = GameObject.Find("MiniGamePanel");
-            if (miniGamePanel == null)
-            {
-                Debug.LogError("MiniGamePanel не найдена в Canvas!");
-                return;
-            }
-
-            Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
-        }
 
         protected virtual void CreateMiniGameUI()
         {
