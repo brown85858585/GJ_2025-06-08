@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2504934466686907669}
   - component: {fileID: 2515856884778240760}
   - component: {fileID: 4653197086418106500}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SkamekaModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1304
+  m_VersionIndex: 1313
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -369,8 +369,8 @@ GameObject:
   - component: {fileID: 9151737245336745907}
   - component: {fileID: 8019344367511415535}
   - component: {fileID: 1647232581036027459}
-  m_Layer: 0
-  m_Name: Skameka
+  m_Layer: 3
+  m_Name: Skameika
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2846232236617594736}
   serializedVersion: 2
-  m_LocalRotation: {x: 1.110223e-17, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.999212, y: 0.00000023841858, z: -2.000525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1304
+  m_VersionIndex: 1313
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

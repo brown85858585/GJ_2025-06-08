@@ -77,7 +77,7 @@ namespace Player
         
         public void SetWalkAnimation(Vector3 input)
         {
-            
+            animator.SetFloat(IsMove, 0);
             animator.SetBool(IsRun, false);
             // ВАРИАНТ A: направление движения относительно камеры
             // Vector3 camFwd = Camera.main.transform.forward; camFwd.y = 0f;
