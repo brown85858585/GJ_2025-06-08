@@ -57,7 +57,7 @@ namespace Game.MiniGames
 
             _factories[ItemCategory.Flower] = new FlowerMiniGame();
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame();
-            _factories[ItemCategory.Computer] = new WorkMiniGame();
+            _factories[ItemCategory.Computer] = new WorkPapersMiniGame();
             
             var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);

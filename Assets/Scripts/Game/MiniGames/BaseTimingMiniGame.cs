@@ -19,6 +19,7 @@ namespace Game.MiniGames
 
         public GameObject Panel => panel;
         protected GameObject miniGamePanel;
+        public Canvas MainCanvas => mainCanvas;
 
         [Header("Input")]
         [SerializeField] protected InputActionReference actionInputAction; // E клавиша
@@ -134,7 +135,7 @@ namespace Game.MiniGames
                 return;
             }
 
-            miniGamePanel = GameObject.Find("MiniGamePanel1");
+            miniGamePanel = GameObject.Find("MiniGamePanel");
             if (miniGamePanel == null)
             {
                 Debug.LogError("MiniGamePanel не найдена в Canvas!");

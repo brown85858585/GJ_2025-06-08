@@ -174,6 +174,24 @@ namespace Game.MiniGames
             }
         }
 
+        protected override void FindSceneComponents()
+        {
+            if (mainCanvas == null)
+            {
+                Debug.LogError("Canvas не найден в сцене!");
+                return;
+            }
+
+            miniGamePanel = GameObject.Find("CookingMiniGamePanel");
+            if (miniGamePanel == null)
+            {
+                Debug.LogError("MiniGamePanel не найдена в Canvas!");
+                return;
+            }
+
+            Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
+        }
+
         private void SetupWinZone()
         {
             if (winZone != null)
