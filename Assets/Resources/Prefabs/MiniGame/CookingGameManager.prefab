@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6021685621929793975}
   - component: {fileID: 1877112663808393877}
   - component: {fileID: 6989259518087681353}
-  - component: {fileID: 4472745033177413589}
+  - component: {fileID: 3866101427543812026}
   m_Layer: 5
-  m_Name: MiniGameManager
+  m_Name: CookingGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4472745033177413589
+--- !u!114 &3866101427543812026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,28 +112,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1004854224215098675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab733f89bcaa10e4185a824fb40fd294, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ebb9b8c963a8734fb439625fe4f48d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 6021685621929793975}
   panel: {fileID: 8012524612185898012}
-  flowerGameViewPrefab: {fileID: 6051155464596156260, guid: 88aa080ecf622f44da8a5c22d9272597,
-    type: 3}
-  prefabScale: 0.5
-  prefabPosition: {x: 0, y: 0}
-  disablePrefabCanvas: 1
-  indicatorSpeed: 50
-  trackHeight: 300
-  zoneHeight: 75
-  maxAttempts: 3
-  waterMinY: -700
-  waterMaxY: -150
-  waterHorizontalRange: 50
-  waterHorizontalSpeed: 0
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
+  arcImage: {fileID: 0}
+  successZoneImage: {fileID: 0}
+  trackImage: {fileID: 0}
+  zoneImages: []
+  indicatorImage: {fileID: 0}
+  indicatorSpeed: 25
+  maxAttempts: 3
+  currentCookingViewPrefab: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
+    type: 3}
+  cookingViewPrefabs:
+  - {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493, type: 3}
+  - {fileID: 6999308029474351358, guid: 52b34cd6bcea13c468496ce4e1abdbcc, type: 3}
+  - {fileID: 6999308029474351358, guid: 69181847483f7b04b978772b764fb18a, type: 3}
+  - {fileID: 6999308029474351358, guid: 19483d250c9c7ef42a498e6a6fc87563, type: 3}
+  - {fileID: 6999308029474351358, guid: 5bedfdc4f08a70a4e8026a5d6191ebd9, type: 3}
+  - {fileID: 6999308029474351358, guid: 638a81b62619b3543a94626a58fa76b4, type: 3}
+  - {fileID: 6999308029474351358, guid: dba8be04e09253e4c9bc376fbe97f889, type: 3}
+  arcRadius: 150
+  arcStartAngle: 200
+  arcEndAngle: 340
+  successZoneAngle: 44
+  arcColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  successZoneColor: {r: 0, g: 1, b: 0, a: 1}
+  indicatorColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +157,7 @@ GameObject:
   - component: {fileID: 6948801968954101854}
   - component: {fileID: 5524480163805478366}
   m_Layer: 5
-  m_Name: MiniGamePanel
+  m_Name: MiniGamePanel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

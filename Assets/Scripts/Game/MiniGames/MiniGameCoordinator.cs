@@ -5,7 +5,6 @@ using Effects;
 using Game.Interactions;
 using Game.Quests;
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -26,6 +25,9 @@ namespace Game.MiniGames
         private readonly IPlayerController _playerController;
         private Transform _level;
 
+        private int CurrentLevelIndex { get; set; } = 0;
+        public static int DayLevel { get; set; } = 0; // Уровень дня, который будет использоваться в мини-играх
+
         // Словари для хранения делегатов
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _completeHandlers = new();
@@ -39,6 +41,12 @@ namespace Game.MiniGames
             _interactionSystem = interactionSystem;
             _playerModel = playerModel;
             _playerController = playerController;
+        }
+
+        public void SetLevel(int level)
+        {
+            CurrentLevelIndex = level;
+            DayLevel = level; // Устанавливаем уровень дня для мини-игр
         }
 
         public void RegisterGames(Transform level, EffectAccumulatorView effectAccumulatorView)
@@ -119,7 +127,7 @@ namespace Game.MiniGames
             {
                 game.OnMiniGameComplete += OnMiniGameComplete;
             }
-
+            game.Level = CurrentLevelIndex;
             game.StartGame();
         }
 
@@ -135,6 +143,7 @@ namespace Game.MiniGames
             foreach (var game in _factories.Values)
             {
                 game.OnMiniGameComplete -= OnMiniGameComplete;
+                game.Dispose();
             }
 
             _factories.Clear();

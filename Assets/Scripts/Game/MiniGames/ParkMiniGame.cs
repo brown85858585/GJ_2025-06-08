@@ -4,6 +4,7 @@ using Effects;
 using Game.Quests;
 using Player;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.MiniGames
 {
@@ -15,6 +16,8 @@ namespace Game.MiniGames
         private Transform _level;
 
         public QuestType QType { get; } = QuestType.Sprint;
+        public int Level { get ; set ; }
+
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
@@ -74,6 +77,13 @@ namespace Game.MiniGames
         public void OnActionButtonClick()
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            Object.Destroy(_parkLevel);
+            //TODO: Implement Dispose logic if needed
+            // throw new NotImplementedException();
         }
     }
 }

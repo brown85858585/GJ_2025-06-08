@@ -7,12 +7,25 @@ namespace Game.MiniGames
     public class WorkMiniGame: IMiniGame
     {
         public QuestType QType { get; } = QuestType.Work;
+        public int Level { get ; set; }
+
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
+        public WorkMiniGame()
+        {
+            Level = MiniGameCoordinator.DayLevel;
+        }
+
+        public void Dispose()
+        {
+            // TODO
+            //throw new NotImplementedException();
+        }
 
         public void OnActionButtonClick()
         {
-            throw new NotImplementedException();
+            // TODO
+           // throw new NotImplementedException();
         }
 
         public void StartGame()
