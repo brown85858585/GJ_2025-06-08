@@ -65,7 +65,16 @@ namespace Player
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             var move = Movement.Move(_view.MoveSpeed, _view.transform);
-            _view.SetWalkAnimation( _input.Direction.normalized);
+            // _view.SetWalkAnimation( _input.Direction.normalized);
+            
+            if (_isRunMovement)
+            {
+                _view.SetRunAnimation(_input.Direction.magnitude);
+            }
+            else
+            {
+                _view.SetWalkAnimation( _input.Direction.normalized);
+            }
             _view.Rigidbody.AddForce(move, ForceMode.Force);
             
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);

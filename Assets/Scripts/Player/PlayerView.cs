@@ -6,7 +6,8 @@ namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
-        private static readonly int IsDancing = Animator.StringToHash("IsDancing");
+        private static readonly int IsMove = Animator.StringToHash("Move");
+        private static readonly int IsRun = Animator.StringToHash("Run");
         private static readonly int PositionX = Animator.StringToHash("PositionX");
         private static readonly int PositionY = Animator.StringToHash("PositionY");
 
@@ -68,8 +69,16 @@ namespace Player
             OnCollision?.Invoke();
         }
 
+        public void SetRunAnimation(float speed)
+        {
+            animator.SetBool(IsRun, true);
+            animator.SetFloat(IsMove, speed);
+        }
+        
         public void SetWalkAnimation(Vector3 input)
         {
+            
+            animator.SetBool(IsRun, false);
             // ВАРИАНТ A: направление движения относительно камеры
             // Vector3 camFwd = Camera.main.transform.forward; camFwd.y = 0f;
             // Vector3 camRight = Camera.main.transform.right; camRight.y = 0f;
