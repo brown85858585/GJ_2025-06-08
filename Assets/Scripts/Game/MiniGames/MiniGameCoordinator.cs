@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Effects;
 using Game.Interactions;
+using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
 using UnityEngine;
@@ -61,7 +62,8 @@ namespace Game.MiniGames
             
             var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);
-            (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel, effectAccumulatorView, level);
+            (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel.GetComponent<ParkLevelView>(),
+                effectAccumulatorView, level);
         }
 
         private void SwitchOnInputSystem(Quests.QuestType questType)

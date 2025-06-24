@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Effects;
+using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
 using UnityEngine;
@@ -11,9 +12,10 @@ namespace Game.MiniGames
     public class ParkMiniGame : IMiniGame
     {
         private readonly IPlayerController _playerController;
-        private GameObject _parkLevel;
+        private ParkLevelView _parkLevelView;
         private EffectAccumulatorView _effectsAccumulatorView;
-        private Transform _level;
+        private Transform _levelRoom;
+        private ParkSprintController _parkSprintController;
 
         public QuestType QType { get; } = QuestType.Sprint;
         public int Level { get ; set ; }
@@ -26,12 +28,12 @@ namespace Game.MiniGames
             _playerController = playerController;
         }
 
-        public void Initialization(GameObject parkLevel, EffectAccumulatorView effectAccumulatorView, Transform level)
+        public void Initialization(ParkLevelView parkView, EffectAccumulatorView effectAccumulatorView, Transform level)
         {
-            _parkLevel = parkLevel;
-            _parkLevel.SetActive(false);
-            _parkLevel.transform.position = Vector3.up * 5f;
-            _level = level;
+            _parkLevelView = parkView;
+            _parkLevelView.gameObject.SetActive(false);
+            _parkLevelView.transform.position = Vector3.up * 5f;
+            _levelRoom = level;
             _effectsAccumulatorView = effectAccumulatorView;
         }
         public void StartGame()
@@ -39,13 +41,17 @@ namespace Game.MiniGames
             _effectsAccumulatorView.FadeIn();
             UniTask.Delay(1000).ContinueWith(() =>
             {
-                _parkLevel.SetActive(true);
+                _parkLevelView.gameObject.SetActive(true);
                 _playerController.SetPosition(Vector3.up * 5.1f);
                 _playerController.ToggleMovement();
                 
                 DisableLevelInNextFrame().Forget();
-
-                RunTimer().Forget();
+                
+                _parkSprintController = new ParkSprintController(_playerController, _parkLevelView);
+                _parkSprintController.EndSprint += () =>
+                {
+                    RunTimer().Forget();
+                };
                 
                 _effectsAccumulatorView.FadeOut();
             });
@@ -54,34 +60,35 @@ namespace Game.MiniGames
         private async UniTask DisableLevelInNextFrame()
         {
             await UniTask.WaitForFixedUpdate();
-            _level.gameObject.SetActive(false);
+            _levelRoom.gameObject.SetActive(false);
         }
 
         private async UniTask RunTimer()
         {
             Debug.Log("Park Mini Game Started");
-            await UniTask.Delay(TimeSpan.FromSeconds(9));
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
             _effectsAccumulatorView.FadeIn();
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
-            _parkLevel.SetActive(false);
+            _parkLevelView.gameObject.SetActive(false);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _effectsAccumulatorView.FadeOut();
             
             _playerController.ToggleMovement();
             Debug.Log("Park Mini Game Completed");
+            _parkSprintController.Dispose();
             OnMiniGameComplete?.Invoke(QType);
         }
 
         public void OnActionButtonClick()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Dispose()
         {
-            Object.Destroy(_parkLevel);
+            Object.Destroy(_parkLevelView);
             //TODO: Implement Dispose logic if needed
             // throw new NotImplementedException();
         }
