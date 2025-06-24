@@ -98,7 +98,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9221386433218707361}
   - component: {fileID: 6707963081237460943}
-  - component: {fileID: 8631047554623777579}
   - component: {fileID: 7668532997128560940}
   m_Layer: 0
   m_Name: UICamera
@@ -173,14 +172,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8631047554623777579
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6819693044726912650}
-  m_Enabled: 1
 --- !u!114 &7668532997128560940
 MonoBehaviour:
   m_ObjectHideFlags: 0
