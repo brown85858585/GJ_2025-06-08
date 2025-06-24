@@ -23,7 +23,7 @@ namespace Game.MiniGames
 
         private void HandleRingEntered(int id)
         {
-            if (id != _currentRingIndex || id >= _parkLevelView.Rings.Count-1)
+            if (id != _currentRingIndex || id >= _parkLevelView.CheckpointViews.Count-1)
             {
                 EndSprint?.Invoke();
                 return;

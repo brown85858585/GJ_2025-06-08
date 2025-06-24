@@ -4,8 +4,10 @@ using Utilities;
 
 namespace Game.MiniGames.Park
 {
-    public class RingView : MonoBehaviour
+    public class CheckpointView : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem particleSphere;
+        [SerializeField] private ParticleSystem particleBum;
         public event Action<int> OnEnteredTargetMask;
         
         // LayerMask - Player
@@ -22,12 +24,13 @@ namespace Game.MiniGames.Park
 
         public void HideRing()
         {
-            gameObject.SetActive(false);
+            particleSphere.gameObject.SetActive(false);
+            particleBum.Play();
         }
         
         public void ShowRing()
         {
-            gameObject.SetActive(true);
+            particleSphere.gameObject.SetActive(true);
         }
     }
 }
