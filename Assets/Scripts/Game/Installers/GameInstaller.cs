@@ -8,6 +8,7 @@ using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace Game.Installers
@@ -82,18 +83,16 @@ namespace Game.Installers
             var vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
             vCam.Follow = _core.PlayerModel.PlayerTransform;
             vCam.LookAt = _core.PlayerModel.PlayerTransform;
-            _core.InputAdapter.OnZoomIn += () =>
-            {
-                vCam.m_Lens.FieldOfView = Mathf.Clamp(vCam.m_Lens.FieldOfView - 5, 20, 60);
-                Debug.Log(vCam.m_Lens.FieldOfView);
-            };
-            _core.InputAdapter.OnZoomOut += () =>
-            {
-                vCam.m_Lens.FieldOfView = Mathf.Clamp(vCam.m_Lens.FieldOfView + 5, 20, 60);
-                Debug.Log(vCam.m_Lens.FieldOfView);
-            };
-            var cameraRotation = _virtualCamera.AddComponent<CameraRotation>();
+            
+
+            var cameraDependence = _virtualCamera.GetComponent<CameraDependence>();
+            var cameraData = Camera.main.GetUniversalAdditionalCameraData();
+            cameraData.cameraStack.Add(cameraDependence.Cam);
+            
+            var cameraRotation = _virtualCamera.GetComponent<CameraRotation>();
             cameraRotation.Initialization(_core.InputAdapter, _virtualCamera.transform);
+            var cameraZoom = _virtualCamera.GetComponent<SmoothZoomController>();
+            cameraZoom.Initialization(_core.InputAdapter, vCam);
             
             _logic.PlayerController.CamTransform = _virtualCamera.transform;
         }

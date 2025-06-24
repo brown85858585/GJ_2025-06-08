@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Cinemachine;
 using Player.Interfaces;
@@ -17,6 +18,8 @@ namespace CameraField
         private IInputAdapter _inputAdapter;
         private CinemachineVirtualCamera _vCam;
 
+        public event Action<float> OnTargetFOVChanged;
+        
         public void Initialization(IInputAdapter inputAdapter, CinemachineVirtualCamera cam)
         {
             _inputAdapter = inputAdapter;
@@ -27,15 +30,22 @@ namespace CameraField
         {
             _targetFOV = _vCam.m_Lens.FieldOfView;
 
+            OnTargetFOVChanged?.Invoke(_targetFOV);
             _inputAdapter.OnZoomIn += () => ChangeZoom(-zoomStep);
             _inputAdapter.OnZoomOut += () => ChangeZoom(+zoomStep);
         }
 
         private void ChangeZoom(float delta)
         {
+            float previousFOV = _targetFOV;
             // обновляем цель и ограничиваем её
             _targetFOV = Mathf.Clamp(_targetFOV + delta, minFOV, maxFOV);
-
+            //
+            // if (!Mathf.Approximately(previousFOV, _targetFOV))
+            // {
+            // }
+            //     OnTargetFOVChanged?.Invoke(_targetFOV);
+            
             // если уже идёт корутина, перезапускаем её
             if (_zoomCoroutine != null)
                 StopCoroutine(_zoomCoroutine);
@@ -51,6 +61,8 @@ namespace CameraField
                 float current = _vCam.m_Lens.FieldOfView;
                 float next = Mathf.MoveTowards(current, _targetFOV, zoomSpeed * Time.deltaTime);
                 _vCam.m_Lens.FieldOfView = next;
+                
+                OnTargetFOVChanged?.Invoke(next);
                 yield return null;
             }
             _zoomCoroutine = null;
