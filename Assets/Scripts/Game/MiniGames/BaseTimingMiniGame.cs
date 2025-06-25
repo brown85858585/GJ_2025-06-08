@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Knot.Localization.Components;
 
 
 namespace Game.MiniGames
@@ -41,6 +43,10 @@ namespace Game.MiniGames
         [SerializeField] protected Image trackImage;         // Для вертикального трека (полив)
         [SerializeField] protected Image[] zoneImages;       // Для цветных зон (полив: красная, желтая, зеленая, красная)
         [SerializeField] protected Image indicatorImage;     // Главный индикатор/стрелка
+
+        [Header("Fonts")]
+        [SerializeField] string ButtonFont = "LegacyRuntime.ttf";
+        [SerializeField] private string TextFont = "LegacyRuntime.ttf";
 
         [Header("Game Settings")]
         public float indicatorSpeed = 100f;
@@ -188,7 +194,7 @@ namespace Game.MiniGames
 
             Text buttonText = textObj.AddComponent<Text>();
             buttonText.text = text;
-            buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
             buttonText.fontSize = 12;
@@ -198,6 +204,8 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
+            var component = textObj.AddComponent<KnotLocalizedUIText>();
+            //component.KeyReference =
 
             return button;
         }
@@ -211,12 +219,15 @@ namespace Game.MiniGames
 
             Text textComponent = textObj.AddComponent<Text>();
             textComponent.text = text;
-            textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            textComponent.font = Resources.GetBuiltinResource<Font>(TextFont);
             textComponent.alignment = TextAnchor.MiddleCenter;
             textComponent.color = color;
             textComponent.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
+            var component = textObj.AddComponent<KnotLocalizedUIText>();
+        
+
             textRect.sizeDelta = size;
             textRect.anchoredPosition = position;
 

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks.Triggers;
 using System.Collections.Generic;
 using static Cinemachine.DocumentationSortingAttribute;
+using Knot.Localization.Components;
 
 namespace Game.MiniGames
 {
@@ -72,6 +73,9 @@ namespace Game.MiniGames
         private float brightRedZoneMin, brightRedZoneMax;
         private int level = 0;
 
+        [Header("Fonts")]
+        [SerializeField] private string ButtonFont = "LegacyRuntime.ttf";
+        [SerializeField] private string TextFont = "LegacyRuntime.ttf";
 
 
         [Header("Input")]
@@ -364,7 +368,7 @@ namespace Game.MiniGames
 
             Text startText = textObj.AddComponent<Text>();
             startText.text = text;
-            startText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            startText.font = Resources.GetBuiltinResource<Font> (TextFont);
             startText.alignment = TextAnchor.MiddleCenter;
             startText.color = color;
             startText.fontSize = fontSize;
@@ -372,6 +376,7 @@ namespace Game.MiniGames
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.sizeDelta = new Vector2(400, 30);
             textRect.anchoredPosition = position;
+            var component = textObj.AddComponent<KnotLocalizedUIText>();
         }
 
         private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size)
@@ -393,7 +398,7 @@ namespace Game.MiniGames
 
             Text buttonText = textObj.AddComponent<Text>();
             buttonText.text = text;
-            buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
             buttonText.fontSize = 12;
@@ -403,6 +408,8 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
+            var component = textObj.AddComponent<KnotLocalizedUIText>();
+
 
             return button;
         }
@@ -437,7 +444,7 @@ namespace Game.MiniGames
 
             Text buttonText = textObj.AddComponent<Text>();
             buttonText.text = text;
-            buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
             buttonText.fontSize = 12;
@@ -447,6 +454,7 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
+            var component = textObj.AddComponent<KnotLocalizedUIText>();
 
             return button;
         }
@@ -458,7 +466,7 @@ namespace Game.MiniGames
 
             instructionText = textObj.AddComponent<Text>();
             instructionText.text = "Нажми E в нужный момент!";
-            instructionText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            instructionText.font = Resources.GetBuiltinResource<Font>(TextFont);
             instructionText.alignment = TextAnchor.MiddleCenter;
             instructionText.color = Color.black;
             instructionText.fontSize = 16;
