@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Game.MiniGames.Park;
 using Player;
 
@@ -12,7 +11,7 @@ namespace Game.MiniGames
         
         private int _currentRingIndex;
 
-        private int _staminaMultiplyer = 10;
+        private int _staminaMultiplyer = 40;
         private int _staminaMax = 10000;
         private float _floatDelta = 0.001f;
         private bool _isFirstStaminaUpdateView = true;
@@ -53,10 +52,10 @@ namespace Game.MiniGames
             _parkLevelView.UpdateStaminaView(_playerController.Model.Stamina);
 
             if (_playerController.Model.Stamina == 0)
-            {
-                //StaminaReset();
+            { 
+                _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
                 EndSprint?.Invoke();
-                return;
+                StaminaReset();
             }
         }
 
@@ -68,6 +67,7 @@ namespace Game.MiniGames
 
         public void Dispose()
         {
+            _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
             _parkLevelView.OnRingEntered -= HandleRingEntered;
         }
     }
