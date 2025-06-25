@@ -71,15 +71,14 @@ MonoBehaviour:
     \u0442\u0430\u043A\nOk"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62bc0e50161029740ae2dde4d9201529, type: 2}
-  m_sharedMaterial: {fileID: 8605116668295533090, guid: 62bc0e50161029740ae2dde4d9201529,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 3084e95a5b0c033469348bd8b2028f10, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281130062
-  m_fontColor: {r: 0.30557248, g: 0.8616352, b: 0.1707012, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -132,7 +131,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -25.927399, y: 7.5745163, z: -35.297028, w: 11.580349}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
