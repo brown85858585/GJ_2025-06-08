@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2504934466686907669}
   - component: {fileID: 2515856884778240760}
   - component: {fileID: 4653197086418106500}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SkamekaModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 9151737245336745907}
   - component: {fileID: 8019344367511415535}
   - component: {fileID: 1647232581036027459}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Skameika
   m_TagString: Untagged
   m_Icon: {fileID: 0}
