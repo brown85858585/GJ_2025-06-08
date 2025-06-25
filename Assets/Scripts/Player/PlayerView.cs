@@ -73,12 +73,13 @@ namespace Player
 
         public void SetWakeUpAnimation()
         {
+            Rigidbody.useGravity = false;
+            GetComponent<CapsuleCollider>().enabled = false;
             animator.SetTrigger("WakeUp");
         }
 
         public void WakeUpAnimationEnded()
         {
-            Debug.Log("WakeUpAnimationEnded");
             StartCoroutine(ResetPlayerObjectTransform());
         }
 
@@ -88,18 +89,14 @@ namespace Player
 
             transform.localPosition = new Vector3(
                 transform.localPosition.x + playerObject.localPosition.x,
-                transform.localPosition.y + playerObject.localPosition.y,
+                0,//transform.localPosition.y + playerObject.localPosition.y,
                 transform.localPosition.z + playerObject.localPosition.z
              );
-
-            transform.localEulerAngles = new Vector3(
-                transform.localEulerAngles.x + playerObject.localEulerAngles.x,
-                transform.localEulerAngles.y + playerObject.localEulerAngles.y,
-                transform.localEulerAngles.z + playerObject.localEulerAngles.z
-            );
             
             playerObject.localPosition = new Vector3(0, 0, 0);
-            playerObject.localEulerAngles = new Vector3(0, 0, 0);
+
+            GetComponent<CapsuleCollider>().enabled = true;
+            Rigidbody.useGravity = true;
         }
 
         public void SetWalkAnimation(Vector3 input)
