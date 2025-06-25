@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.MiniGames.Park
@@ -9,7 +8,7 @@ namespace Game.MiniGames.Park
     public class ParkLevelView : MonoBehaviour
     {
         [SerializeField] private List<CheckpointView> checkpointViews;
-        [SerializeField] private GameObject staminaSlider;
+        [SerializeField] private Slider staminaSlider;
         public List<CheckpointView> CheckpointViews => checkpointViews;
 
         public event Action<int> OnRingEntered;
@@ -43,7 +42,7 @@ namespace Game.MiniGames.Park
 
             if (staminaSlider != null)
             {
-                staminaSlider.GetComponent<Slider>().value = stamina;
+                staminaSlider.value = stamina;
             }
         }
 

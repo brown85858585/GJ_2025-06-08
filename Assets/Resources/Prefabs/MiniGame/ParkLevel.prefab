@@ -181,7 +181,7 @@ MonoBehaviour:
   - {fileID: 7052412466331834983}
   - {fileID: 6450332017564020480}
   - {fileID: 9121175923282131995}
-  staminaSlider: {fileID: 4897092640419960167}
+  staminaSlider: {fileID: 7958330976876374005}
 --- !u!1 &7117343954928632408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,9 +1768,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8612098710125565709}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4897092640419960167 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3778983988455735914, guid: 87de27ba57370924690125c7bfbf4fe7,
+--- !u!114 &7958330976876374005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1870676090131214584, guid: 87de27ba57370924690125c7bfbf4fe7,
     type: 3}
   m_PrefabInstance: {fileID: 8612098710125565709}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
