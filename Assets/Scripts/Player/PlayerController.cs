@@ -2,6 +2,7 @@
 using Game;
 using Player.Interfaces;
 using UnityEngine;
+using Utilities;
 
 namespace Player
 {
@@ -54,9 +55,12 @@ namespace Player
             FixedUpdateMove();
         }
 
-        private void OnCollision()
+        private void OnCollision(Collision collision)
         {
-            _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
+            if (!LayerChecker.CheckLayerMask(collision.gameObject, _view.WhatIsGround))
+            {
+                _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
+            }
         }
 
         public void FixedUpdateMove()

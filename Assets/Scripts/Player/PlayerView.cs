@@ -44,7 +44,7 @@ namespace Player
         public Rigidbody Rigidbody { get; private set; }
         public CapsuleCollider CapsuleCollider { get; private set; }
         
-        public event Action OnCollision;
+        public event Action<Collision> OnCollision;
         public event Action OnUpdate;
 
         private void Awake()
@@ -64,9 +64,9 @@ namespace Player
             }
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision Collision)
         {
-            OnCollision?.Invoke();
+            OnCollision?.Invoke(Collision);
         }
 
         public void SetRunAnimation(float speed)
