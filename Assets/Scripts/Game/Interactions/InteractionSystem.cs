@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Player.Interfaces;
+using UnityEngine;
 
 namespace Game.Interactions
 {
@@ -7,14 +9,60 @@ namespace Game.Interactions
     {
         public event Action<ItemCategory> OnInteraction;
         public event Action ExitInteraction;
-
-        private RoomView _roomView = new ();
-        private readonly IInputAdapter _inputAdapter;
         public ItemInteractable CurrentInteractable { get; private set; }
+
+        private RoomView _roomView;
+        private readonly IInputAdapter _inputAdapter;
+        private List<ItemInteractable> _itemPool = new();
+        private int _poolSwitchIndex;
+
         public InteractionSystem(IInputAdapter inputAdapter)
         {
             _inputAdapter = inputAdapter;
             _inputAdapter.OnInteract += HandleInteract;
+            _inputAdapter.OnSwitchInteract += HandleSwitchInteract;
+        }
+
+        private void HandleSwitchInteract()
+        {
+            Debug.Log( $"[HandleSwitchInteract]" +
+                       $"Pool{_itemPool.Count} contained {CurrentInteractable?.Category} is:"+_itemPool.Contains(CurrentInteractable));
+            if (CurrentInteractable != null)
+            {
+                var findIndex = _itemPool.FindIndex(currentInteractable => currentInteractable == CurrentInteractable);
+                if (findIndex != -1)
+                {
+                   _poolSwitchIndex = findIndex;
+                }
+                else
+                {
+                    _poolSwitchIndex = 0;
+                }
+                
+                _poolSwitchIndex++;
+                if(_itemPool.Count-1 < _poolSwitchIndex)
+                {
+                    _poolSwitchIndex = 0;
+                }
+                
+                CurrentInteractable = _itemPool[_poolSwitchIndex];
+                CurrentInteractable.TurnPopup();
+            }
+            else
+            {
+                CurrentInteractable = _itemPool[_poolSwitchIndex];
+                if(_itemPool.Count-1 >_poolSwitchIndex)
+                {
+                    
+                    _poolSwitchIndex++;
+                }
+                else
+                {
+                    _poolSwitchIndex = 0;
+                }
+                
+                CurrentInteractable.TurnPopup();
+            }
         }
 
         public void Dispose()
@@ -29,20 +77,12 @@ namespace Game.Interactions
 
         public void AddNewInteractionCollection(RoomView itemCollection)
         {
-            if (_roomView.ObjectsToInteract != null)
-            {
-                foreach (var item in _roomView.ObjectsToInteract)
-                {
-                    item.OnEnter -= SetItemInteractable;
-                    item.OnExit -= RemoveItemInteractable;
-                }
-                _roomView.ObjectsToInteract.Clear();
-                
-            }
+            ClearAll();
             _roomView = itemCollection;
            
             foreach (var item in _roomView.ObjectsToInteract)
             {
+                item.AddPopup(itemCollection.PopupForInteract);
                 item.OnEnter += SetItemInteractable;
                 item.OnExit += RemoveItemInteractable;
             }
@@ -51,21 +91,26 @@ namespace Game.Interactions
         
         private void RemoveItemInteractable(ItemInteractable item)
         {
-            ExitInteraction?.Invoke();
+             ExitInteraction?.Invoke();
             
             if (CurrentInteractable == item)
             {
                 CurrentInteractable = null;
-
-                foreach (var itemInCollection in _roomView.ObjectsToInteract)
-                {
-                    itemInCollection.CheckStayCollider = true;
-                }
             }
+            
+            _itemPool.Remove(item);
+            _poolSwitchIndex = 0;
+            Debug.Log( $"[RemoveItemInteractable]" +
+                       $"Pool{_itemPool.Count} contained {item.Category} is:"+_itemPool.Contains(item));
+
         }
 
         private void SetItemInteractable(ItemInteractable item)
         {
+            _itemPool.Add(item);
+            _poolSwitchIndex = 0;
+            Debug.Log( $"[SetItemInteractable]" +
+                       $"Pool{_itemPool.Count} contained {item.Category} is:"+_itemPool.Contains(item));
             CurrentInteractable?.TurnPopup(false);
             CurrentInteractable = item;
         }
@@ -78,7 +123,7 @@ namespace Game.Interactions
                 
                 if (!CurrentInteractable.IsMultiplyInteractable)
                 {
-                    CurrentInteractable.Interact();
+                    CurrentInteractable.TurnPopup(false);
                     CurrentInteractable = null;
                 }
             }
@@ -89,13 +134,12 @@ namespace Game.Interactions
             if (CurrentInteractable != null && CurrentInteractable.IsMultiplyInteractable)
             {
                 CurrentInteractable.DisableMultiplyInteractable();
-                CurrentInteractable = null;
             }
         }
         
         public void ClearAll()
         {
-            if (_roomView.ObjectsToInteract != null)
+            if (_roomView?.ObjectsToInteract != null)
             {
                 foreach (var item in _roomView.ObjectsToInteract)
                 {
@@ -103,6 +147,7 @@ namespace Game.Interactions
                     item.OnExit -= RemoveItemInteractable;
                 }
                 _roomView.ObjectsToInteract.Clear();
+                _itemPool.Clear();
             }
             CurrentInteractable = null;
         }

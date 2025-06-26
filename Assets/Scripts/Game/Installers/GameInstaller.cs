@@ -8,6 +8,7 @@ using Game.Quests;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 namespace Game.Installers
@@ -63,7 +64,7 @@ namespace Game.Installers
 
         private void InitLevelOne()
         {
-            _levelManager.LoadLevel(0, transform.parent, _effectAccumulator);
+            _levelManager.LoadLevel(0, transform?.parent, _effectAccumulator);
             _core.InteractionSystem.OnInteraction += HandlePlayerInteraction;
         }
 
@@ -82,8 +83,16 @@ namespace Game.Installers
             var vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
             vCam.Follow = _core.PlayerModel.PlayerTransform;
             vCam.LookAt = _core.PlayerModel.PlayerTransform;
-            var cameraRotation = _virtualCamera.AddComponent<CameraRotation>();
+            
+
+            var cameraDependence = _virtualCamera.GetComponent<CameraDependence>();
+            var cameraData = Camera.main.GetUniversalAdditionalCameraData();
+            cameraData.cameraStack.Add(cameraDependence.Cam);
+            
+            var cameraRotation = _virtualCamera.GetComponent<CameraRotation>();
             cameraRotation.Initialization(_core.InputAdapter, _virtualCamera.transform);
+            var cameraZoom = _virtualCamera.GetComponent<SmoothZoomController>();
+            cameraZoom.Initialization(_core.InputAdapter, vCam);
             
             _logic.PlayerController.CamTransform = _virtualCamera.transform;
         }

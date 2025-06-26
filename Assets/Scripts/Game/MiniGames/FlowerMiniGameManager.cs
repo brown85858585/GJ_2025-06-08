@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks.Triggers;
+using System.Collections.Generic;
+using static Cinemachine.DocumentationSortingAttribute;
 
 namespace Game.MiniGames
 {
@@ -41,17 +43,17 @@ namespace Game.MiniGames
         private GameObject startScreen;
         private GameObject gameScreen;
 
-        [Header("Game Settings")]
-        public float indicatorSpeed = 100f;
-        public float trackHeight = 300f; // Высота зоны для воды
-        public float zoneHeight = 75f;
-        public int maxAttempts = 3;
+       // [Header("Game Settings")]
+      //  public float indicatorSpeed = 100f;
+      //  public float trackHeight = 300f; // Высота зоны для воды
+       // public float zoneHeight = 75f;
+       // public int maxAttempts = 3;
 
-        [Header("Water Animation")]
-        [SerializeField] private float waterMinY = -750f; // Минимальная позиция воды
-        [SerializeField] private float waterMaxY = -150f;  // Максимальная позиция воды
-        [SerializeField] private float waterHorizontalRange = 50f; // Диапазон горизонтального движения
-        [SerializeField] private float waterHorizontalSpeed = 2f; // Скорость горизонтального движения
+       // [Header("Water Animation")]
+       // [SerializeField] private float waterMinY = -750f; // Минимальная позиция воды
+      //  [SerializeField] private float waterMaxY = -150f;  // Максимальная позиция воды
+      //  [SerializeField] private float waterHorizontalRange = 50f; // Диапазон горизонтального движения
+      //  [SerializeField] private float waterHorizontalSpeed = 2f; // Скорость горизонтального движения
 
         // Добавить переменную для горизонтального движения
         private float waterHorizontalPosition = 0f;
@@ -68,6 +70,9 @@ namespace Game.MiniGames
         private float yellowZoneMin, yellowZoneMax;
         private float greenZoneMin, greenZoneMax;
         private float brightRedZoneMin, brightRedZoneMax;
+        private int level = 0;
+
+
 
         [Header("Input")]
         [SerializeField] private InputActionReference actionInputAction;
@@ -78,8 +83,15 @@ namespace Game.MiniGames
         public System.Action OnMiniGameComplete;
         public System.Action<bool> OnWateringAttempt;
 
+
+        [SerializeField] FloweGameOptions floweGameOption;
+        [SerializeField] List<FloweGameOptions> floweGameOptions;
+
+        
+
         void Start()
         {
+            level = MiniGameCoordinator.DayLevel;
             FindSceneComponents();
             SetupInput();
 
@@ -87,7 +99,7 @@ namespace Game.MiniGames
             {
                 miniGamePanel.SetActive(false);
             }
-
+            
             CreateMiniGameUI();
             SetupWaterZones();
         }
@@ -108,7 +120,7 @@ namespace Game.MiniGames
             //waterMinY = -maskHeight / 2f; // Низ маски
             //waterMaxY = maskHeight / 2f;  // Верх маски
 
-            Debug.Log($"🔧 Настройка координат воды: maskHeight={maskHeight}, minY={waterMinY}, maxY={waterMaxY}");
+            Debug.Log($"🔧 Настройка координат воды: maskHeight={maskHeight}, minY={floweGameOptions[level].waterMinY}, maxY={floweGameOptions[level].waterMaxY}");
 
             // Пересчитать зоны полива
             SetupWaterZones();
@@ -195,9 +207,9 @@ namespace Game.MiniGames
             gameRect.offsetMax = Vector2.zero;
 
             // Инстанцировать префаб цветка
-            if (flowerGameViewPrefab != null)
+            if (floweGameOptions[level].UsedPrefab != null)
             {
-                instantiatedFlowerView = Instantiate(flowerGameViewPrefab, gameScreen.transform);
+                instantiatedFlowerView = Instantiate(floweGameOptions[level].UsedPrefab, gameScreen.transform);
 
                 // Настроить RectTransform для префаба
                 RectTransform flowerRect = instantiatedFlowerView.GetComponent<RectTransform>();
@@ -297,21 +309,21 @@ namespace Game.MiniGames
         private void SetupWaterZones()
         {
             // Определить зоны в координатах воды (относительно размера маски)
-            float totalRange = waterMaxY - waterMinY;
+            float totalRange = floweGameOptions[level].waterMaxY - floweGameOptions[level].waterMinY;
             float zoneSize = totalRange / 4f;
 
             // Снизу вверх: плохо -> хорошо -> отлично -> хорошо
-            brightRedZoneMin = waterMinY;                    // Дно - плохо
-            brightRedZoneMax = waterMinY + zoneSize;
+            brightRedZoneMin = floweGameOptions[level].waterMinY;                    // Дно - плохо
+            brightRedZoneMax = floweGameOptions[level].waterMinY + zoneSize;
 
-            yellowZoneMin = waterMinY + zoneSize;           // Желтая - хорошо  
-            yellowZoneMax = waterMinY + zoneSize * 2;
+            yellowZoneMin = floweGameOptions[level].waterMinY + zoneSize;           // Желтая - хорошо  
+            yellowZoneMax = floweGameOptions[level].waterMinY + zoneSize * 2;
 
-            greenZoneMin = waterMinY + zoneSize * 2;        // Зеленая - отлично
-            greenZoneMax = waterMinY + zoneSize * 3;
+            greenZoneMin = floweGameOptions[level].waterMinY + zoneSize * 2;        // Зеленая - отлично
+            greenZoneMax = floweGameOptions[level].waterMinY + zoneSize * 3;
 
-            darkRedZoneMin = waterMinY + zoneSize * 3;      // Верх - плохо
-            darkRedZoneMax = waterMaxY;
+            darkRedZoneMin = floweGameOptions[level].waterMinY + zoneSize * 3;      // Верх - плохо
+            darkRedZoneMax = floweGameOptions[level].waterMaxY;
 
             Debug.Log($"🎯 Зоны: Красная1({brightRedZoneMin:F1}-{brightRedZoneMax:F1}) Желтая({yellowZoneMin:F1}-{yellowZoneMax:F1}) Зеленая({greenZoneMin:F1}-{greenZoneMax:F1}) Красная2({darkRedZoneMin:F1}-{darkRedZoneMax:F1})");
         }
@@ -562,7 +574,7 @@ namespace Game.MiniGames
         {
             if (waterImage != null)
             {
-                waterPosition = waterMinY;
+                waterPosition = floweGameOptions[level].waterMinY;
                 waterHorizontalPosition = 0f; // Сброс горизонтальной позиции
                 isMovingRight = true; // Сброс направления
                 UpdateWaterPosition();
@@ -588,32 +600,32 @@ namespace Game.MiniGames
                 if (waterImage != null)
                 {
                     // Вертикальное движение (как было)
-                    waterPosition += indicatorSpeed * Time.deltaTime;
+                    waterPosition += floweGameOptions[level].indicatorSpeed * Time.deltaTime;
 
                     // Горизонтальное движение влево-вправо
                     if (isMovingRight)
                     {
-                        waterHorizontalPosition += waterHorizontalSpeed * indicatorSpeed * Time.deltaTime;
-                        if (waterHorizontalPosition >= waterHorizontalRange)
+                        waterHorizontalPosition += floweGameOptions[level].waterHorizontalSpeed * floweGameOptions[level].indicatorSpeed * Time.deltaTime;
+                        if (waterHorizontalPosition >= floweGameOptions[level].waterHorizontalRange)
                         {
-                            waterHorizontalPosition = waterHorizontalRange;
+                            waterHorizontalPosition = floweGameOptions[level].waterHorizontalRange;
                             isMovingRight = false;
                         }
                     }
                     else
                     {
-                        waterHorizontalPosition -= waterHorizontalSpeed * indicatorSpeed * Time.deltaTime;
-                        if (waterHorizontalPosition <= -waterHorizontalRange)
+                        waterHorizontalPosition -= floweGameOptions[level].waterHorizontalSpeed * floweGameOptions[level].indicatorSpeed * Time.deltaTime;
+                        if (waterHorizontalPosition <= -floweGameOptions[level].waterHorizontalRange)
                         {
-                            waterHorizontalPosition = -waterHorizontalRange;
+                            waterHorizontalPosition = -floweGameOptions[level].waterHorizontalRange;
                             isMovingRight = true;
                         }
                     }
 
                     // Проверка достижения верха
-                    if (waterPosition >= waterMaxY)
+                    if (waterPosition >= floweGameOptions[level].waterMaxY)
                     {
-                        waterPosition = waterMaxY;
+                        waterPosition = floweGameOptions[level].waterMaxY;
                         isMovingUp = false;
 
                         yield return new WaitForSeconds(0.5f);

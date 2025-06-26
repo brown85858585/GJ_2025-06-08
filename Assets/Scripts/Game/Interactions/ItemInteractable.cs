@@ -23,10 +23,8 @@ namespace Game.Interactions
         [SerializeField] private bool isMultiplyInteractable = true;
         [SerializeField] private Vector3 popupOffset = new Vector3(0, 1.5f, 0);
         [SerializeField] private int popupScale = 1;
-
-
+        
         public bool IsMultiplyInteractable => isMultiplyInteractable;
-        public bool CheckStayCollider{ get; set; }
         public string Guid => id;
         public ItemCategory Category => category;
 
@@ -40,14 +38,6 @@ namespace Game.Interactions
         private void Awake()
         {
             targetMask = LayerMask.GetMask("Player");
-            
-            
-            _popup = GameObject.Find("PopupE").GetComponent<FollowProjectionWithConstantSize>();
-            _popupTweener = _popup.GetComponent<UIElementTweener>();
-            if (_popup == null)
-            {
-                Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
-            }
         }
 
         private void Start()
@@ -55,23 +45,9 @@ namespace Game.Interactions
             _popup.gameObject.SetActive(false);
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            if (!CheckStayCollider) return;
-            
-            if (CheckLayerMask(other.gameObject, targetMask))
-            {
-                OnEnter?.Invoke(this);
-            
-                TurnPopup();
-            }
-
-            CheckStayCollider = false;
-        }
-
         private void OnTriggerEnter(Collider other)
         {
-            if (CheckLayerMask(other.gameObject, targetMask))
+            if (LayerChecker.CheckLayerMask(other.gameObject, targetMask))
             {
                 OnEnter?.Invoke(this);
 
@@ -81,7 +57,7 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
-            if (CheckLayerMask(other.gameObject, targetMask))
+            if (LayerChecker.CheckLayerMask(other.gameObject, targetMask))
             {
                 OnExit?.Invoke(this);
 
@@ -92,11 +68,6 @@ namespace Game.Interactions
         public void DisableMultiplyInteractable()
         {
             isMultiplyInteractable = false;
-            TurnPopup(false);
-        }
-        public void Interact()
-        {
-            Debug.Log("Interact with item: " + Category + " with ID: " + Guid);
             TurnPopup(false);
         }
 
@@ -120,17 +91,20 @@ namespace Game.Interactions
             }
         }
 
-        private bool CheckLayerMask(GameObject obj, LayerMask layers)
+        public void AddPopup(FollowProjectionWithConstantSize itemCollectionPopupForInteract)
         {
-            if (((1 << obj.layer) & layers) != 0)
+            _popup = itemCollectionPopupForInteract.GetComponent<FollowProjectionWithConstantSize>();
+            _popupTweener = _popup.GetComponent<UIElementTweener>();
+           
+            if (_popup == null)
             {
-                return true;
+                Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
             }
-
-            return false;
         }
+        
 #if UNITY_EDITOR
         // генерация GUID при первом создании
+
         private void OnValidate()
         {
             if (string.IsNullOrEmpty(id))

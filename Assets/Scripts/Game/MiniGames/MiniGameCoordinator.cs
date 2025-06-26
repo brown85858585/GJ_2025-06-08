@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Effects;
 using Game.Interactions;
+using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -24,7 +24,10 @@ namespace Game.MiniGames
 
         private readonly Dictionary<ItemCategory, IMiniGame> _factories = new();
         private readonly IPlayerController _playerController;
-        private Transform _firstLevel;
+        private Transform _level;
+
+        private int CurrentLevelIndex { get; set; } = 0;
+        public static int DayLevel { get; set; } = 0; // Уровень дня, который будет использоваться в мини-играх
 
         // Словари для хранения делегатов
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
@@ -41,11 +44,17 @@ namespace Game.MiniGames
             _playerController = playerController;
         }
 
-        public void RegisterGames(Transform firstLevel, EffectAccumulatorView effectAccumulatorView)
+        public void SetLevel(int level)
+        {
+            CurrentLevelIndex = level;
+            DayLevel = level; // Устанавливаем уровень дня для мини-игр
+        }
+
+        public void RegisterGames(Transform level, EffectAccumulatorView effectAccumulatorView)
         {
             _interactionSystem.OnInteraction += HandleInteraction;
          
-            _firstLevel = firstLevel;
+            _level = level;
 
             _factories[ItemCategory.Flower] = new FlowerMiniGame();
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame();
@@ -53,7 +62,8 @@ namespace Game.MiniGames
             
             var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);
-            (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel, effectAccumulatorView);
+            (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel.GetComponent<ParkLevelView>(),
+                effectAccumulatorView, level);
         }
 
         private void SwitchOnInputSystem(Quests.QuestType questType)
@@ -117,16 +127,15 @@ namespace Game.MiniGames
 
             if (category == ItemCategory.Door)
             {
-                _firstLevel.gameObject .SetActive(false);
                 game.OnMiniGameComplete += OnMiniGameComplete;
             }
-
+            game.Level = CurrentLevelIndex;
             game.StartGame();
         }
 
         private void OnMiniGameComplete(QuestType type)
         {
-            _firstLevel.gameObject.SetActive(true);
+            _level.gameObject.SetActive(true);
             _playerController.SetPosition(Vector3.zero * 6);
         }
 
@@ -136,11 +145,12 @@ namespace Game.MiniGames
             foreach (var game in _factories.Values)
             {
                 game.OnMiniGameComplete -= OnMiniGameComplete;
+                game.Dispose();
             }
 
             _factories.Clear();
 
-            _firstLevel = null;
+            _level = null;
         }
 
         // Метод для отписки, если потребуется

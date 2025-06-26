@@ -2,6 +2,7 @@
 using Game;
 using Player.Interfaces;
 using UnityEngine;
+using Utilities;
 
 namespace Player
 {
@@ -12,7 +13,6 @@ namespace Player
             set => _movement.VirtualCamera = value;
         }
 
-        public event Action OnDied;
         public IInputAdapter InputAdaptep => _input;
         private PlayerModel _model;
         private IInputAdapter _input;
@@ -37,8 +37,7 @@ namespace Player
             _movement = new PlayerMovement(_input, model);
             _currentMovement = _movement;
             
-            _input.OnPutItemDown += PutTheItemDown;
-            // _input.OnTest += ToggleMovement;
+            _input.OnSwitchInteract += PutTheItemDown;
             
         }
 
@@ -56,10 +55,12 @@ namespace Player
             FixedUpdateMove();
         }
 
-        private void OnCollision()
+        private void OnCollision(Collision collision)
         {
-            _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
-            DecreaseHealth();
+            if (!LayerChecker.CheckLayerMask(collision.gameObject, _view.WhatIsGround))
+            {
+                _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
+            }
         }
 
         public void FixedUpdateMove()
@@ -68,7 +69,14 @@ namespace Player
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             var move = Movement.Move(_view.MoveSpeed, _view.transform);
-            _view.SetWalkAnimation( _input.Direction.normalized);
+           if (_isRunMovement)
+            {
+                _view.SetRunAnimation(Movement.NormalizedSpeed);
+            }
+            else
+            {
+                _view.SetWalkAnimation( _input.Direction.normalized);
+            }
             _view.Rigidbody.AddForce(move, ForceMode.Force);
             
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
@@ -77,7 +85,7 @@ namespace Player
 
         public void SetPosition( Vector3 position)
         {
-            _model.PlayerTransform.position = position;
+            _view.Rigidbody.MovePosition(position);
         }
 
         public void ToggleMovement()
@@ -90,16 +98,6 @@ namespace Player
             else
             {
                 _currentMovement = _movement;
-            }
-        }
-        
-        private void DecreaseHealth()
-        {
-            _model.Stamina -= 20;
-            // Debug.Log(_data.Stamina);
-            if (_model.Stamina <= 0)
-            {
-                OnDied?.Invoke();
             }
         }
 
@@ -119,7 +117,6 @@ namespace Player
             
             _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
-            _view.StartDanceAnimation();
         }
 
         private void PutTheItemDown()

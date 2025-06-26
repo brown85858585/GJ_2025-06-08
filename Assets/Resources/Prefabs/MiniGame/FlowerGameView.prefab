@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 1117596959615471576}
   - component: {fileID: 5443733071456758146}
   - component: {fileID: 8297014379975047725}
+  - component: {fileID: 4772034972375203899}
   m_Layer: 5
   m_Name: FlowerGameView
   m_TagString: Untagged
@@ -342,6 +343,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4772034972375203899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051155464596156260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40f69fdaf8cc094f9b604f65e63018a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UsedPrefab: {fileID: 6051155464596156260}
+  waterMinY: -750
+  waterMaxY: -150
+  waterHorizontalRange: 50
+  waterHorizontalSpeed: 2
+  indicatorSpeed: 100
+  trackHeight: 300
+  zoneHeight: 75
+  maxAttempts: 3
 --- !u!1 &6137522896563493456
 GameObject:
   m_ObjectHideFlags: 0
