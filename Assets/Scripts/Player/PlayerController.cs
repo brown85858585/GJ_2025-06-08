@@ -38,7 +38,6 @@ namespace Player
             _currentMovement = _movement;
             
             _input.OnSwitchInteract += PutTheItemDown;
-            
         }
 
         public void InitView(PlayerView playerView)
@@ -48,6 +47,18 @@ namespace Player
             _view.OnUpdate += Update;
             
             _playerDialogue = new PlayerDialogue(_view.DialogueView);
+            
+            
+            //todo change normal switcher 
+            //Input off
+            _input.SwitchAdapterToMiniGameMode();
+            _view.OnWakeUpEnded += InputOn;
+        }
+
+        private void InputOn()
+        {
+            _view.OnWakeUpEnded -= InputOn;
+            _input.SwitchAdapterToGlobalMode();
         }
 
         private void Update()

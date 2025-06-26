@@ -41,7 +41,7 @@ namespace Game.Installers
 
         private void Install()
         {
-            _core = new CoreInstaller(playerInput);
+            _core = new CoreInstaller(Instantiate(playerInput));
             _logic = new GameLogicInstaller(_core);
             
             _levelManager = new LevelManager(config, _core.InteractionSystem, _logic.MiniGameCoordinator);
@@ -52,7 +52,7 @@ namespace Game.Installers
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut();
             
-            Instantiate(playerInput);
+            // Instantiate(playerInput);
             
             InitLevelOne();
             InitPlayer();
