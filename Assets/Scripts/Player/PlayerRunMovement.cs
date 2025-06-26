@@ -12,6 +12,8 @@ namespace Player
         
         private const float Acceleration = 40f;
         private const float SpeedMultiplier = 3;
+        
+        public float NormalizedSpeed { get;private set; }
 
         public PlayerRunMovement(IInputAdapter input)
         {
@@ -20,11 +22,15 @@ namespace Player
         public Vector3 Move(float moveSpeed, Transform playerTransform)
         {
             float targetSpeed = _input.Direction.z * moveSpeed * SpeedMultiplier;
+            targetSpeed = Mathf.Clamp(targetSpeed, 0, float.MaxValue);
             _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, Acceleration * Time.fixedDeltaTime);
-
+            
             Vector3 desiredAcceleration =  playerTransform.transform.forward * (_currentSpeed);
 
-            desiredAcceleration.y = 0f;
+            // Мета для ускорения анимации 
+            NormalizedSpeed = _currentSpeed /(moveSpeed * SpeedMultiplier);
+            
+            desiredAcceleration.y = 0;
 
             return desiredAcceleration;
         }

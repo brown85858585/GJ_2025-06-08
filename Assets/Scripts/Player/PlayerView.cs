@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +6,12 @@ namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
-        private static readonly int IsDancing = Animator.StringToHash("IsDancing");
+        private static readonly int IsMove = Animator.StringToHash("Move");
+        private static readonly int IsRun = Animator.StringToHash("Run");
         private static readonly int PositionX = Animator.StringToHash("PositionX");
         private static readonly int PositionY = Animator.StringToHash("PositionY");
 
         [SerializeField] private Animator animator;
-        [SerializeField] private Transform playerObject;
         [SerializeField] private Transform rightHand;
         [SerializeField] private PlayerDialogueView dialogueView;
         
@@ -45,9 +44,8 @@ namespace Player
         public Rigidbody Rigidbody { get; private set; }
         public CapsuleCollider CapsuleCollider { get; private set; }
         
-        public event Action OnCollision;
+        public event Action<Collision> OnCollision;
         public event Action OnUpdate;
-        public event Action OnWakeUpEnded;
 
         private void Awake()
         {
@@ -66,41 +64,21 @@ namespace Player
             }
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision Collision)
         {
-            OnCollision?.Invoke();
+            OnCollision?.Invoke(Collision);
         }
 
-        public void SetWakeUpAnimation()
+        public void SetRunAnimation(float speed)
         {
-            Rigidbody.useGravity = false;
-            GetComponent<CapsuleCollider>().enabled = false;
-            animator.SetTrigger("WakeUp");
+            animator.SetBool(IsRun, true);
+            animator.SetFloat(IsMove, speed);
         }
-
-        public void WakeUpAnimationEnded()
-        {
-            StartCoroutine(ResetPlayerObjectTransform());
-        }
-
-        IEnumerator ResetPlayerObjectTransform()
-        {
-            yield return new WaitForEndOfFrame();
-
-            transform.localPosition = new Vector3(
-                transform.localPosition.x + playerObject.localPosition.x,
-                0,//transform.localPosition.y + playerObject.localPosition.y,
-                transform.localPosition.z + playerObject.localPosition.z
-             );
-            
-            playerObject.localPosition = new Vector3(0, 0, 0);
-
-            GetComponent<CapsuleCollider>().enabled = true;
-            Rigidbody.useGravity = true;
-        }
-
+        
         public void SetWalkAnimation(Vector3 input)
         {
+            animator.SetFloat(IsMove, 0);
+            animator.SetBool(IsRun, false);
             // ВАРИАНТ A: направление движения относительно камеры
             // Vector3 camFwd = Camera.main.transform.forward; camFwd.y = 0f;
             // Vector3 camRight = Camera.main.transform.right; camRight.y = 0f;

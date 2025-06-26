@@ -47,7 +47,7 @@ namespace Game.Interactions
 
         private void OnTriggerEnter(Collider other)
         {
-            if (CheckLayerMask(other.gameObject, targetMask))
+            if (LayerChecker.CheckLayerMask(other.gameObject, targetMask))
             {
                 OnEnter?.Invoke(this);
 
@@ -57,7 +57,7 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
-            if (CheckLayerMask(other.gameObject, targetMask))
+            if (LayerChecker.CheckLayerMask(other.gameObject, targetMask))
             {
                 OnExit?.Invoke(this);
 
@@ -101,16 +101,7 @@ namespace Game.Interactions
                 Debug.LogError("PopupE not found in the scene. Please ensure it exists.");
             }
         }
-
-        private bool CheckLayerMask(GameObject obj, LayerMask layers)
-        {
-            if (((1 << obj.layer) & layers) != 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        
 #if UNITY_EDITOR
         // генерация GUID при первом создании
 

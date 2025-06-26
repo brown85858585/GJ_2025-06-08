@@ -2,6 +2,7 @@
 using Game;
 using Player.Interfaces;
 using UnityEngine;
+using Utilities;
 
 namespace Player
 {
@@ -54,9 +55,12 @@ namespace Player
             FixedUpdateMove();
         }
 
-        private void OnCollision()
+        private void OnCollision(Collision collision)
         {
-            _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
+            if (!LayerChecker.CheckLayerMask(collision.gameObject, _view.WhatIsGround))
+            {
+                _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
+            }
         }
 
         public void FixedUpdateMove()
@@ -65,7 +69,14 @@ namespace Player
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             var move = Movement.Move(_view.MoveSpeed, _view.transform);
-            _view.SetWalkAnimation( _input.Direction.normalized);
+           if (_isRunMovement)
+            {
+                _view.SetRunAnimation(Movement.NormalizedSpeed);
+            }
+            else
+            {
+                _view.SetWalkAnimation( _input.Direction.normalized);
+            }
             _view.Rigidbody.AddForce(move, ForceMode.Force);
             
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
