@@ -808,3 +808,5 @@ MonoBehaviour:
     _rawText: Anonymous
   - _key: Day7_CardContent14
     _rawText: You have received a secret gift, find out the details
+  - _key: Day7_CardHeader0
+    _rawText: Spam

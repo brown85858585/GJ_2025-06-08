@@ -27,7 +27,7 @@ MonoBehaviour:
           type: 2}
         KeyCollection: {fileID: 11400000, guid: fa5769e7cebc3b645a456eaa78b928e7,
           type: 2}
-        TextAsset: {fileID: 4900000, guid: 42b75546ef13c9049a4b9fc46a95479f, type: 3}
+        TextAsset: {fileID: 4900000, guid: a809acc472faec74ca7a0f956e48964f, type: 3}
         Settings:
           ImportDelimiter: ','
           ExportDelimiter: ','
