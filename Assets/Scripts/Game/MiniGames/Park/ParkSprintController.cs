@@ -14,6 +14,7 @@ namespace Game.MiniGames
         private int _staminaMultiplyer = 40;
         private int _staminaMax = 10000;
         private float _floatDelta = 0.001f;
+        private int _staminaForRing = 2000;
         private bool _isFirstStaminaUpdateView = true;
 
         public event Action EndSprint; 
@@ -32,10 +33,18 @@ namespace Game.MiniGames
             if (id != _currentRingIndex || id >= _parkLevelView.CheckpointViews.Count-1)
             {
                 EndSprint?.Invoke();
+                ResetParkLevel();
                 return;
             }
-            
+
             _currentRingIndex++;
+            AddStamina(_staminaForRing);
+        }
+
+        private void AddStamina(int value)
+        {
+            _playerController.Model.Stamina += value;
+            _parkLevelView.UpdateStaminaView(_playerController.Model.Stamina);
         }
 
         private void HandleStaminaChanged()
@@ -55,11 +64,24 @@ namespace Game.MiniGames
             { 
                 _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
                 EndSprint?.Invoke();
-                StaminaReset();
+                //ResetStamina();
+                ResetParkLevel();
             }
         }
 
-        private void StaminaReset()
+        private void ResetParkLevel()
+        {
+            ResetRings();
+            ResetStamina();
+        }
+
+        private void ResetRings()
+        {
+            _currentRingIndex = 0;
+            _parkLevelView.ResetRings();
+        }
+ 
+        private void ResetStamina()
         {
             _isFirstStaminaUpdateView = true;
             _playerController.Model.Stamina = _staminaMax;
