@@ -56,6 +56,7 @@ namespace Game.Installers
             
             InitLevelOne();
             InitPlayer();
+            InitStartWakeUp();
             InitCamera();
             InitQuestLog();
             var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager);
@@ -75,6 +76,12 @@ namespace Game.Installers
             var playerView = playerObj.GetComponent<PlayerView>();
             _logic.PlayerController.InitView(playerView);
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
+        }
+
+        private void InitStartWakeUp()
+        {
+            //_core.InputAdapter.DisablePlayerInput();
+            _logic.PlayerController.PlayWakeUpAnimation();
         }
 
         private void InitCamera()

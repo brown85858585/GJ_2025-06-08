@@ -119,6 +119,11 @@ namespace Player
             _view.TakeObject(obj);
         }
 
+        public void PlayWakeUpAnimation()
+        {
+            _view.SetWakeUpAnimation();
+        }
+
         private void PutTheItemDown()
         {
             _model.ItemInHand = ItemCategory.None;
