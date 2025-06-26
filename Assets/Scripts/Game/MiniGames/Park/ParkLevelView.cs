@@ -39,15 +39,15 @@ namespace Game.MiniGames.Park
 
         private void InitRings()
         {
-            if (checkpointViews.Count > 0)
-            {
-                checkpointViews[0].IsCurrent = true;
-            }
-
             foreach (var ringView in checkpointViews)
             {
                 ringView.ShowRing();
                 ringView.OnEnteredTargetMask += HandleEnteredTargetMask;
+            }
+
+            if (checkpointViews.Count > 0)
+            {
+                checkpointViews[0].Select();
             }
         }
 
@@ -74,11 +74,11 @@ namespace Game.MiniGames.Park
             checkpointViews[id].HideRing();
             OnRingEntered?.Invoke(id);
 
-            checkpointViews[id].IsCurrent = false;
+            checkpointViews[id].Unselect();
 
             if (id < checkpointViews.Count - 1)
             {
-                checkpointViews[id + 1].IsCurrent = true;
+                checkpointViews[id + 1].Select();
             }
         }
 
