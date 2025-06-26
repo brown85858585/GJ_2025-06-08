@@ -42,6 +42,8 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private Button rejectButton;
     private GameObject resultScreen;
 
+    public int CardCount => gameCards.Count;
+
     // Состояние игры
     private int currentCardIndex = 0;
     private int correctAnswers = 0;
@@ -73,7 +75,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     {
         if (gameCards.Count == 0)
         {
-            InitializeDefaultCards();
+            //InitializeDefaultCards();
         }
 
         cardsRemaining = gameCards.Count;

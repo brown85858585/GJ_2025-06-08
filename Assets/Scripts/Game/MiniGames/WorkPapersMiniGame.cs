@@ -70,7 +70,8 @@ namespace Game.MiniGames
         {
             //SetupForDeveloper(); // Настройка для программиста
             //-----------------------------------// Тест кард
-            SetupForLanguage();                 //TODO Test Card  закоментировать при добавлении карт
+            if(_miniGameController.CardCount == 0)
+                SetupForLanguage();                 //TODO Test Card  закоментировать при добавлении карт
             //----------------------------------//
 
             SetDifficulty(DifficultyLevel.Medium);

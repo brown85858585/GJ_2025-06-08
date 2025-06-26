@@ -154,7 +154,12 @@ namespace Game.MiniGames
 
             // Добавляем новые карточки
             List<CardSwipeMiniGame.CardData> cards = GetAllCards();
-            cardGame.SetCustomCards(cards);
+            var lvl = MiniGameCoordinator.DayLevel;
+
+           var enumForCurrentDay =  cards.Where(t => t.sender.Contains($"Day{lvl + 1}"));
+
+
+            cardGame.SetCustomCards(enumForCurrentDay.ToList());
 
             // Применяем настройки если есть
             if (currentConfig != null)
