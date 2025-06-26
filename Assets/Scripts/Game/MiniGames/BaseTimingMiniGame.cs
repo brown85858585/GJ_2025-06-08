@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Knot.Localization.Components;
+using Unity.VisualScripting;
 
 
 namespace Game.MiniGames
@@ -204,9 +205,10 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
-            var component = textObj.AddComponent<KnotLocalizedUIText>();
-            //component.KeyReference =
-
+           // var component = textObj.AddComponent<KnotLocalizedUIText>();
+           // component.AddComponent<>
+           // component.KeyReference.Key = "Day1_Guitar1";
+          //  component.GetComponent<>
             return button;
         }
 
@@ -225,7 +227,7 @@ namespace Game.MiniGames
             textComponent.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
-            var component = textObj.AddComponent<KnotLocalizedUIText>();
+            //var component = textObj.AddComponent<KnotLocalizedUIText>();
         
 
             textRect.sizeDelta = size;

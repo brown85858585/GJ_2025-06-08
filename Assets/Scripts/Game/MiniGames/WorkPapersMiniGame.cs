@@ -68,7 +68,11 @@ namespace Game.MiniGames
 
         public void StartGame()
         {
-            SetupForDeveloper(); // Настройка для программиста
+            //SetupForDeveloper(); // Настройка для программиста
+            //-----------------------------------// Тест кард
+            SetupForLanguage();                 //TODO Test Card  закоментировать при добавлении карт
+            //----------------------------------//
+
             SetDifficulty(DifficultyLevel.Medium);
            
             Debug.Log("📋 Work Papers Mini Game Started");
@@ -255,6 +259,33 @@ namespace Game.MiniGames
                 ("Друг", "Обсудить новую игру"),
                 ("YouTube", "Видео про новый фреймворк"),
                 ("StackOverflow", "Интересный вопрос не по работе")
+            );
+
+            SetTargetScore(6); // Программисты должны быть точными
+        }
+
+        public void SetupForLanguage()
+        {
+            ClearCustomCards();
+
+            // Рабочие задачи разработчика
+            _configurator?.AddWorkCards(
+                ("Day1_CardHeader0", "Day1_CardContent0"),
+                ("Day1_CardHeader1", "Day1_CardContent1"),
+                ("Day1_CardHeader2", "Day1_CardContent2"),
+                ("Day1_CardHeader3", "Day1_CardContent3"),
+                ("Day1_CardHeader4", "Day1_CardContent4"),
+                ("Day1_CardHeader5", "Day1_CardContent5")
+            );
+
+            // Личные отвлечения программиста
+            _configurator?.AddPersonalCards(
+                ("Day1_CardHeader6", "Day1_CardContent6"),
+                ("Day1_CardHeader7", "Day1_CardContent7"),
+                ("Day1_CardHeader8", "Day1_CardContent8"),
+                ("Day1_CardHeader9", "Day1_CardContent9"),
+                ("Day1_CardHeader0", "Видео про новый фреймворк"),
+                ("Day1_CardHeader0", "Интересный вопрос не по работе")
             );
 
             SetTargetScore(6); // Программисты должны быть точными

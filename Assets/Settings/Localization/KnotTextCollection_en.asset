@@ -389,3 +389,5 @@ MonoBehaviour:
     _rawText: Choose
   - _key: Hint_Interact
     _rawText: Interact
+  - _key: Day1_CardHeader0
+    _rawText: Hello

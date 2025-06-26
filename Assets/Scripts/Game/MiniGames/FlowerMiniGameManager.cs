@@ -376,7 +376,9 @@ namespace Game.MiniGames
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.sizeDelta = new Vector2(400, 30);
             textRect.anchoredPosition = position;
-            var component = textObj.AddComponent<KnotLocalizedUIText>();
+
+            //var component = textObj.AddComponent<KnotLocalizedUIText>();
+
         }
 
         private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size)
@@ -408,8 +410,8 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
-            var component = textObj.AddComponent<KnotLocalizedUIText>();
 
+            //var component = textObj.AddComponent<KnotLocalizedUIText>();
 
             return button;
         }
@@ -454,7 +456,7 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
-            var component = textObj.AddComponent<KnotLocalizedUIText>();
+            //var component = textObj.AddComponent<KnotLocalizedUIText>();
 
             return button;
         }

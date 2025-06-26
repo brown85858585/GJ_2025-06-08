@@ -1,6 +1,8 @@
 ﻿using Game.MiniGames;
+using Knot.Localization.Components;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -22,10 +24,18 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [Header("Game Data")]
     [SerializeField] private List<CardData> gameCards = new List<CardData>();
 
+    [Header("UI Prefabs")]
+    [SerializeField] private GameObject currentCardPrefab; // Перетащите префаб в инспекторе
+    /*
+    [SerializeField] private Transform headerContainer;
+    [SerializeField] private Transform contentContainer;
+    [SerializeField] private Transform headerText;
+    [SerializeField] private Transform contentText;
+    */
     // UI компоненты
     private GameObject currentCard;
-    private Text cardSenderText;
-    private Text cardContentText;
+    private TextMeshProUGUI cardSenderText;
+    private TextMeshProUGUI cardContentText;
     private Text cardCounterText;
     private Text scoreText;
     private Button acceptButton;
@@ -185,6 +195,59 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     private void CreateCardInterface()
     {
+        if (currentCardPrefab != null)
+        {
+            // Создаем экземпляр префаба
+            currentCard = Instantiate(currentCardPrefab, gameScreen.transform);
+
+            // Настраиваем позицию и размер
+            RectTransform cardRect = currentCard.GetComponent<RectTransform>();
+            cardRect.anchoredPosition = new Vector2(0, 20);
+            cardRect.sizeDelta = cardSize;
+
+            // Находим компоненты в префабе по структуре
+            FindCardComponentsByPath();
+        }
+        else
+        {
+            Debug.LogError("CurrentCardPrefab не назначен в инспекторе!");
+            CreateCardInterfaceOldWay();
+        }
+    }
+
+    private void FindCardComponentsByPath()
+    {
+        // Ищем по точной структуре из скриншота
+        Transform headerContainer = currentCard.transform.Find("HeaderContainer");
+        if (headerContainer != null)
+        {
+            Transform headerText = headerContainer.Find("HeaderText");
+            if (headerText != null)
+                cardSenderText = headerText.GetComponent<TextMeshProUGUI>();
+        }
+
+        Transform contentContainer = currentCard.transform.Find("ContentContainer");
+        if (contentContainer != null)
+        {
+            Transform contentText = contentContainer.Find("ContentText");
+            if (contentText != null)
+                cardContentText = contentText.GetComponent<TextMeshProUGUI>();
+        }
+
+        // Проверяем что нашли компоненты
+        if (cardSenderText == null || cardContentText == null)
+        {
+            Debug.LogWarning("Не все Text компоненты найдены в префабе CurrentCard");
+        }
+        else
+        {
+            Debug.Log("✅ Компоненты карточки найдены в префабе");
+        }
+    }
+
+    
+    private void CreateCardInterfaceOldWay()
+    {
         // Основная карточка в центре
         currentCard = new GameObject("CurrentCard");
         currentCard.transform.SetParent(gameScreen.transform, false);
@@ -234,11 +297,13 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         GameObject senderTextObj = new GameObject("SenderText");
         senderTextObj.transform.SetParent(headerContainer.transform, false);
 
-        cardSenderText = senderTextObj.AddComponent<Text>();
-        cardSenderText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        cardSenderText.fontSize = 18;
+        cardSenderText = senderTextObj.AddComponent<TextMeshProUGUI>();
+        cardSenderText.fontStyle = FontStyles.Bold;
         cardSenderText.color = cardTextColor;
-        cardSenderText.fontStyle = FontStyle.Bold;
+        //cardSenderText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        //cardSenderText.fontSize = 18;
+
+        //cardSenderText.fontStyle = FontStyle.Bold;
         cardSenderText.text = "От кого";
 
         RectTransform senderTextRect = senderTextObj.GetComponent<RectTransform>();
@@ -259,13 +324,14 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         contentRect.offsetMin = new Vector2(20, 0);
         contentRect.offsetMax = new Vector2(-20, 0);
 
-        cardContentText = contentContainer.AddComponent<Text>();
-        cardContentText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        cardContentText = contentContainer.AddComponent<TextMeshProUGUI>();
+      //  cardContentText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         cardContentText.fontSize = 16;
         cardContentText.color = cardTextColor;
-        cardContentText.alignment = TextAnchor.MiddleCenter;
+       // cardContentText.alignment = TextAnchor.MiddleCenter;
         cardContentText.text = "Текст";
     }
+    
 
     private void CreateStatusTexts()
     {
@@ -325,12 +391,15 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         CardData card = gameCards[currentCardIndex];
 
+
         // Обновляем содержимое карточки
         if (cardSenderText != null)
-            cardSenderText.text = card.sender;
+            cardSenderText.GetComponent<KnotLocalizedTextMeshProUGUI>().KeyReference.Key = card.sender;
+        //cardSenderText.text = card.sender;
 
         if (cardContentText != null)
-            cardContentText.text = card.content;
+            cardContentText.GetComponent<KnotLocalizedTextMeshProUGUI>().KeyReference.Key = card.content;
+        //cardContentText.text = card.content;
 
         UpdateUI();
 
