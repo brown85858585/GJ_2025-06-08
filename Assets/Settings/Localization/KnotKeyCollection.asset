@@ -689,6 +689,10 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day1_CardHeader0
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 2
     RefIds: []

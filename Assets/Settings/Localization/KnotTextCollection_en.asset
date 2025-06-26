@@ -386,6 +386,8 @@ MonoBehaviour:
   - _key: Day6_Window2
     _rawText: "I can\u2019t see anything. Not even myself in the reflection."
   - _key: Hint_Switch
-    _rawText: Q - Choose
+    _rawText: Choose
   - _key: Hint_Interact
-    _rawText: E - Interact
+    _rawText: Interact
+  - _key: Day1_CardHeader0
+    _rawText: Hello

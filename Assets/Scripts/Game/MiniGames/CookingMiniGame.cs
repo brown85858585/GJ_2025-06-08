@@ -42,6 +42,8 @@ namespace Game.MiniGames
         {
             instantiatedCookingView= cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
             indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
+        
+
             // Если префаб не назначен, попробуем найти его в Resources
             // if (cookingViewPrefab == null)
             // {
@@ -50,6 +52,43 @@ namespace Game.MiniGames
 
             base.Start();
         }
+
+        public void SetWinZoneWidth(float newWidth)
+        {
+            Image targetWinZone =  winZone;
+            if (targetWinZone != null)
+            {
+                RectTransform rect = targetWinZone.rectTransform;
+                rect.sizeDelta = new Vector2(newWidth, rect.sizeDelta.y);
+            }
+        }
+        /*
+        private void SetupWinZone()
+        {
+            Image targetWinZone = cookingComponents?.winZone ?? winZone;
+            Transform targetWinZoneHandler = cookingComponents?.winZoneHandler ?? winZoneHandler;
+
+            if (targetWinZone != null && targetWinZoneHandler != null)
+            {
+                // Устанавливаем случайную позицию для зеленой зоны
+                targetAngle = Random.Range(-60f, 60f); // Диапазон углов для зоны победы
+
+                // Меняем цвет зоны на зеленый
+                targetWinZone.color = successZoneColor;
+
+                // Настраиваем размер winZone если включена кастомизация
+                if (useCustomWinZoneSize)
+                {
+                    SetWinZoneSize(winZoneWidthSlider, winZoneHeight);
+                }
+
+                // Поворачиваем зону победы
+                targetWinZoneHandler.rotation = Quaternion.Euler(0, 0, targetAngle);
+
+                Debug.Log($"Win zone установлена на угол: {targetAngle}, размер: {winZoneWidthSlider}x{winZoneHeight}");
+            }
+        }
+        */
 
         protected override void CreateStartScreen()
         {
@@ -151,7 +190,7 @@ namespace Game.MiniGames
             // Находим элементы в префабе
             knifeHandler = instantiatedCookingView.transform.Find("Panel/knifeHandler");
             winZoneHandler = instantiatedCookingView.transform.Find("Panel/winZoneHandler");
-
+           
             if (knifeHandler != null)
             {
                 knife = knifeHandler.GetComponent<RectTransform>();
@@ -165,6 +204,7 @@ namespace Game.MiniGames
             if (winZoneHandler != null)
             {
                 winZone = winZoneHandler.GetComponentInChildren<Image>();
+               
                 SetupWinZone();
                 Debug.Log("Win zone handler найден!");
             }
@@ -172,6 +212,24 @@ namespace Game.MiniGames
             {
                 Debug.LogError("winZoneHandler не найден в префабе!");
             }
+        }
+
+        protected override void FindSceneComponents()
+        {
+            if (mainCanvas == null)
+            {
+                Debug.LogError("Canvas не найден в сцене!");
+                return;
+            }
+
+            miniGamePanel = GameObject.Find("CookingMiniGamePanel");
+            if (miniGamePanel == null)
+            {
+                Debug.LogError("MiniGamePanel не найдена в Canvas!");
+                return;
+            }
+
+            Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
         }
 
         private void SetupWinZone()
@@ -186,6 +244,8 @@ namespace Game.MiniGames
 
                 // Поворачиваем зону победы
                 winZoneHandler.rotation = Quaternion.Euler(0, 0, targetAngle);
+
+                SetWinZoneWidth(cookingViewPrefabs[MiniGameCoordinator.DayLevel].winZoneWidth);
 
                 Debug.Log($"Win zone установлена на угол: {targetAngle}");
             }
