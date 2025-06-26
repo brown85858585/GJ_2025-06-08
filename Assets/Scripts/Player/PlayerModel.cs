@@ -18,12 +18,12 @@ namespace Player
         public int Stamina
         {
             get => _stamina;
-            set => _stamina = Mathf.Clamp(value, 0, 100);
+            set => _stamina = Mathf.Clamp(value, 0, 10000);
         }
 
         public PlayerModel()
         {
-            _stamina = 100;
+            _stamina = 10000;
             _score = 0;
             _speed = 5;
             _mood = 100;

@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Game.MiniGames.Park
 {
     public class ParkLevelView : MonoBehaviour
     {
         [SerializeField] private List<CheckpointView> checkpointViews;
+        [SerializeField] private Slider staminaSlider;
         public List<CheckpointView> CheckpointViews => checkpointViews;
 
         public event Action<int> OnRingEntered;
+        public event Action OnStaminaChanged;
 
         private void Awake()
         {
@@ -26,6 +28,21 @@ namespace Game.MiniGames.Park
             {
                 ringView.ShowRing();
                 ringView.OnEnteredTargetMask += HandleEnteredTargetMask;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            OnStaminaChanged?.Invoke();
+        }
+
+        public void UpdateStaminaView(int stamina)
+        {
+            //Debug.Log("Stamina: " + stamina);
+
+            if (staminaSlider != null)
+            {
+                staminaSlider.value = stamina;
             }
         }
 
