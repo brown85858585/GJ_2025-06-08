@@ -52,8 +52,6 @@ namespace Game.Installers
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut();
             
-            // Instantiate(playerInput);
-            
             InitLevelOne();
             InitPlayer();
             InitStartWakeUp();

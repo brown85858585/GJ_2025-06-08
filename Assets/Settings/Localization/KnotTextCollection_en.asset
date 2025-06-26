@@ -419,7 +419,7 @@ MonoBehaviour:
     _rawText: 'Reminder: appointment scheduled on June 30 at 2:00 PM'
   - _key: Day1_CardHeader7
     _rawText: Operator
-  - _key: Day1_CardContent7
+  - _key: Day1_
     _rawText: Your balance has been topped up by 200
   - _key: Day1_CardHeader8
     _rawText: Service
@@ -810,3 +810,5 @@ MonoBehaviour:
     _rawText: You have received a secret gift, find out the details
   - _key: Day7_CardHeader0
     _rawText: Spam
+  - _key: Day1_Flower0
+    _rawText: 
