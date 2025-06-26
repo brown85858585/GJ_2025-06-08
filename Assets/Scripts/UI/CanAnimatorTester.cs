@@ -4,10 +4,8 @@ using DG.Tweening;
 public class CanAnimatorTester : MonoBehaviour
 {
     [Header("Tilt Settings")]
-    [Tooltip("Максимальный угол наклона лейки (в градусах)")]
     [SerializeField] private float tiltAngle = 30f;
 
-    [Tooltip("Длительности ударов: короткий, короткий, длинный, длинный, короткий, короткий, длинный")]
     [SerializeField] private float[] patternDurations = {
         0.2f, 0.2f,   // раз-раз
         0.4f, 0.4f,   // –– ––
@@ -15,11 +13,9 @@ public class CanAnimatorTester : MonoBehaviour
         0.4f          // ––
     };
 
-    [Tooltip("Пауза между ударами в секундах")]
     [SerializeField] private float intervalBetweenBeats = 0.1f;
 
     [Header("Water Particles")]
-    [Tooltip("Particle System для эффекта воды")]
     [SerializeField] private ParticleSystem waterPS;
 
     private Sequence _beatSequence;
@@ -39,8 +35,9 @@ public class CanAnimatorTester : MonoBehaviour
     {
         // Нажмите пробел, чтобы запустить/остановить анимацию
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             TogglePouring();
-        
+        }        
         // transform.position.z
     }
 
