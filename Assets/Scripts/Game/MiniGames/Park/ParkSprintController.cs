@@ -33,6 +33,7 @@ namespace Game.MiniGames
             if (id != _currentRingIndex || id >= _parkLevelView.CheckpointViews.Count-1)
             {
                 EndSprint?.Invoke();
+                ResetParkLevel();
                 return;
             }
 
@@ -63,11 +64,24 @@ namespace Game.MiniGames
             { 
                 _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
                 EndSprint?.Invoke();
-                StaminaReset();
+                //ResetStamina();
+                ResetParkLevel();
             }
         }
 
-        private void StaminaReset()
+        private void ResetParkLevel()
+        {
+            ResetRings();
+            ResetStamina();
+        }
+
+        private void ResetRings()
+        {
+            _currentRingIndex = 0;
+            _parkLevelView.ResetRings();
+        }
+ 
+        private void ResetStamina()
         {
             _isFirstStaminaUpdateView = true;
             _playerController.Model.Stamina = _staminaMax;

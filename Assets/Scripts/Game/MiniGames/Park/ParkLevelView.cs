@@ -24,11 +24,7 @@ namespace Game.MiniGames.Park
 
         private void Start()
         {
-            foreach (var ringView in checkpointViews)
-            {
-                ringView.ShowRing();
-                ringView.OnEnteredTargetMask += HandleEnteredTargetMask;
-            }
+            InitRings();
         }
 
         private void FixedUpdate()
@@ -36,10 +32,36 @@ namespace Game.MiniGames.Park
             OnStaminaChanged?.Invoke();
         }
 
+        public void ResetRings()
+        {
+            InitRings();
+        }
+
+        private void InitRings()
+        {
+            if (checkpointViews.Count > 0)
+            {
+                checkpointViews[0].IsCurrent = true;
+            }
+
+            foreach (var ringView in checkpointViews)
+            {
+                ringView.ShowRing();
+                ringView.OnEnteredTargetMask += HandleEnteredTargetMask;
+            }
+        }
+
+        private void HideRings()
+        {
+            foreach (var ringView in checkpointViews)
+            {
+                ringView.OnEnteredTargetMask -= HandleEnteredTargetMask;
+                ringView.HideRing();
+            }
+        }
+
         public void UpdateStaminaView(int stamina)
         {
-            //Debug.Log("Stamina: " + stamina);
-
             if (staminaSlider != null)
             {
                 staminaSlider.value = stamina;
@@ -51,6 +73,13 @@ namespace Game.MiniGames.Park
             checkpointViews[id].OnEnteredTargetMask -= HandleEnteredTargetMask;
             checkpointViews[id].HideRing();
             OnRingEntered?.Invoke(id);
+
+            checkpointViews[id].IsCurrent = false;
+
+            if (id < checkpointViews.Count - 1)
+            {
+                checkpointViews[id + 1].IsCurrent = true;
+            }
         }
 
         private void OnDestroy()

@@ -9,6 +9,7 @@ namespace Game.MiniGames.Park
         [SerializeField] private ParticleSystem particleSphere;
         [SerializeField] private ParticleSystem particleBum;
         public event Action<int> OnEnteredTargetMask;
+        public bool IsCurrent { get; set; }
         
         // LayerMask - Player
         private LayerMask _targetMask = 1 << 6;
