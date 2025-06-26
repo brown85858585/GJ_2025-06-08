@@ -420,7 +420,7 @@ MonoBehaviour:
   - _key: Day1_CardHeader7
     _rawText: Operator
   - _key: Day1_CardContent7
-    _rawText: Your balance has been topped up by 200 UAH
+    _rawText: Your balance has been topped up by 200
   - _key: Day1_CardHeader8
     _rawText: Service
   - _key: Day1_CardContent8
