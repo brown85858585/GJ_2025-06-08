@@ -156,25 +156,25 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         Image startBg = startScreen.AddComponent<Image>();
         startBg.color = new Color(0, 0, 0, 0.8f);
 
-        CreateText("Title", "📋 Работа", new Vector2(0, 180), 32, Color.white, new Vector2(400, 50), startScreen.transform);
-        CreateText("Subtitle", "(вдохновение: Papers, please!)", new Vector2(0, 140), 16, Color.gray, new Vector2(400, 30), startScreen.transform);
+        //CreateText("Title", "📋 Работа", new Vector2(0, 180), 32, Color.white, new Vector2(400, 50), startScreen.transform);
+        //CreateText("Subtitle", "(вдохновение: Papers, please!)", new Vector2(0, 140), 16, Color.gray, new Vector2(400, 30), startScreen.transform);
 
-        CreateText("AlgorithmTitle", "Алгоритм:", new Vector2(0, 100), 20, Color.yellow, new Vector2(400, 30), startScreen.transform);
+        //CreateText("AlgorithmTitle", "Алгоритм:", new Vector2(0, 100), 20, Color.yellow, new Vector2(400, 30), startScreen.transform);
 
-        CreateText("Step1", "1. ГГ садится за стол.", new Vector2(0, 70), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-        CreateText("Step2", "2. Появляется интерфейс перебора карточек (одно окно, одна карточка за раз).", new Vector2(0, 45), 14, Color.white, new Vector2(500, 25), startScreen.transform);
-        CreateText("Step2a", "   a. вверху «От кого» и иллюстрация", new Vector2(0, 20), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
-        CreateText("Step2b", "   b. тело письма", new Vector2(0, 0), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
-        CreateText("Step2c", "   c. под карточкой счет оставшихся писем", new Vector2(0, -20), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
-        CreateText("Step3", "3. Удалить свайп влево, принять: свайп вправо.", new Vector2(0, -50), 14, Color.white, new Vector2(450, 25), startScreen.transform);
+        //CreateText("Step1", "1. ГГ садится за стол.", new Vector2(0, 70), 14, Color.white, new Vector2(400, 25), startScreen.transform);
+        //CreateText("Step2", "2. Появляется интерфейс перебора карточек (одно окно, одна карточка за раз).", new Vector2(0, 45), 14, Color.white, new Vector2(500, 25), startScreen.transform);
+        //CreateText("Step2a", "   a. вверху «От кого» и иллюстрация", new Vector2(0, 20), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
+        //CreateText("Step2b", "   b. тело письма", new Vector2(0, 0), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
+        //CreateText("Step2c", "   c. под карточкой счет оставшихся писем", new Vector2(0, -20), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
+        //CreateText("Step3", "3. Удалить свайп влево, принять: свайп вправо.", new Vector2(0, -50), 14, Color.white, new Vector2(450, 25), startScreen.transform);
 
-        CreateText("Goal", "🎯 Цель: набрать больше 5 очков (нейтральные всегда правильные)", new Vector2(0, -90), 14, Color.green, new Vector2(500, 25), startScreen.transform);
-        CreateText("Controls", "Управление: Q (удалить) | E (принять)", new Vector2(0, -120), 14, Color.cyan, new Vector2(400, 25), startScreen.transform);
+        //CreateText("Goal", "🎯 Цель: набрать больше 5 очков (нейтральные всегда правильные)", new Vector2(0, -90), 14, Color.green, new Vector2(500, 25), startScreen.transform);
+        //CreateText("Controls", "Управление: Q (удалить) | E (принять)", new Vector2(0, -120), 14, Color.cyan, new Vector2(400, 25), startScreen.transform);
 
-        startButton = CreateButton("StartButton", "Начать работу (Пробел)", new Vector2(0, -160), new Color(0.2f, 0.8f, 0.2f), new Vector2(220, 50), startScreen.transform);
+        startButton = CreateButton("StartButton", "Начать работу (Пробел)", new Vector2(-200, 0), new Color(0.2f, 0.8f, 0.2f), new Vector2(300, 100), startScreen.transform, 24);
         startButton.onClick.AddListener(StartGame);
 
-        Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(0, -220), Color.gray, new Vector2(120, 40), startScreen.transform);
+        Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(200, 0), Color.gray, new Vector2(300, 100), startScreen.transform, 24);
         startExitButton.onClick.AddListener(ExitMiniGame);
     }
 

@@ -361,16 +361,16 @@ namespace Game.MiniGames
             Image startBg = startScreen.AddComponent<Image>();
             startBg.color = new Color(0, 0, 0, 0.7f);
 
-            CreateStartText("Мини-игра: Полив цветка", new Vector2(0, 80), 24, Color.white);
-            CreateStartText("Остановите воду в нужной зоне", new Vector2(0, 40), 16, Color.yellow);
-            CreateStartText("🟢 Зеленая зона = отлично", new Vector2(0, 10), 14, Color.green);
-            CreateStartText("🟡 Желтая зона = хорошо", new Vector2(0, -10), 14, Color.yellow);
-            CreateStartText("🔴 Красная зона = плохо", new Vector2(0, -30), 14, Color.red);
+            //CreateStartText("Мини-игра: Полив цветка", new Vector2(0, 80), 24, Color.white);
+            //CreateStartText("Остановите воду в нужной зоне", new Vector2(0, 40), 16, Color.yellow);
+            //CreateStartText("🟢 Зеленая зона = отлично", new Vector2(0, 10), 14, Color.green);
+            //CreateStartText("🟡 Желтая зона = хорошо", new Vector2(0, -10), 14, Color.yellow);
+            //CreateStartText("🔴 Красная зона = плохо", new Vector2(0, -30), 14, Color.red);
 
-            startButton = CreateStartButton("StartButton", "Начать игру (Пробел)", new Vector2(0, -80), new Color(0.2f, 0.8f, 0.2f), new Vector2(200, 50));
+            startButton = CreateStartButton("StartButton", "Начать игру (Пробел)", new Vector2(-200, 0), new Color(0.2f, 0.8f, 0.2f), new Vector2(300, 100), 24);
             startButton.onClick.AddListener(StartGame);
 
-            startExitButton = CreateStartButton("StartExitButton", "Выход", new Vector2(0, -140), Color.gray, new Vector2(120, 40));
+            startExitButton = CreateStartButton("StartExitButton", "Выход", new Vector2(200, 0), Color.gray, new Vector2(300, 100), 24);
             startExitButton.onClick.AddListener(ExitMiniGame);
         }
 
@@ -394,7 +394,7 @@ namespace Game.MiniGames
 
         }
 
-        private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size)
+        private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size, int fontSize = 12)
         {
             GameObject buttonObj = new GameObject(name);
             buttonObj.transform.SetParent(startScreen.transform, false);
@@ -416,7 +416,7 @@ namespace Game.MiniGames
             buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
-            buttonText.fontSize = 12;
+            buttonText.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.anchorMin = Vector2.zero;
@@ -650,7 +650,7 @@ namespace Game.MiniGames
             {
                 miniGamePanel.SetActive(false);
             }
-            CanRoot.SetActive(false);
+            CanRoot?.SetActive(false);
             OnMiniGameComplete?.Invoke();
         }
 

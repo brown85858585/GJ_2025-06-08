@@ -193,7 +193,7 @@ namespace Game.MiniGames
         protected abstract string CheckResult();
 
         // Базовые методы для создания UI элементов
-        protected Button CreateButton(string name, string text, Vector2 position, Color color, Vector2 size, Transform parent = null)
+        protected Button CreateButton(string name, string text, Vector2 position, Color color, Vector2 size, Transform parent = null, int fontSize = 12)
         {
             if (parent == null) parent = miniGamePanel.transform;
 
@@ -218,7 +218,7 @@ namespace Game.MiniGames
             buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
-            buttonText.fontSize = 12;
+            buttonText.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.anchorMin = Vector2.zero;
