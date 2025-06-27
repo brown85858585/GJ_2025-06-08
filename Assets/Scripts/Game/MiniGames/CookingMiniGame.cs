@@ -439,6 +439,7 @@ namespace Game.MiniGames
                 UpdateInstructionText("🍽️ Идеально приготовлено!");
                 OnGameAttempt?.Invoke(true);
                 StartCoroutine(ShowResultAndEnd(1.5f));
+                model.Score += 100;
             }
             else
             {
@@ -446,6 +447,7 @@ namespace Game.MiniGames
                 UpdateInstructionText("🔥 Еда подгорела!");
                 OnGameAttempt?.Invoke(false);
                 StartCoroutine(ShowResultAndEnd(1.5f));
+                model.Score += 50;
             }
         }
 

@@ -10,6 +10,7 @@ using Knot.Localization.Components;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.SearchService;
+using Player;
 
 namespace Game.MiniGames
 {
@@ -95,14 +96,19 @@ namespace Game.MiniGames
 
         [SerializeField] FloweGameOptions floweGameOption;
         [SerializeField] List<FloweGameOptions> floweGameOptions;
+        PlayerModel model;
 
-        
+
+        public void SetPlayer(PlayerModel model)
+        {
+            this.model = model;
+        }
 
         void Start()
         {
             level = MiniGameCoordinator.DayLevel;
             FindSceneComponents();
-            SetupInput();
+            //SetupInput();
 
             if (miniGamePanel != null)
             {
@@ -502,6 +508,8 @@ namespace Game.MiniGames
 
         public void StartMiniGame()
         {
+
+            SetupInput();
             if (miniGamePanel == null)
             {
                 Debug.LogError("Мини-игра не инициализирована!");
@@ -762,12 +770,14 @@ namespace Game.MiniGames
         {
             if (waterPosition >= greenZoneMin && waterPosition <= greenZoneMax)
             {
+                model.Score += 500;
                 UpdateInstructionText("🌸 Цветок полит!");
                 return "success";
             }
 
             if (waterPosition >= yellowZoneMin && waterPosition <= yellowZoneMax)
             {
+                model.Score += 300;
                 UpdateInstructionText("🌼 Цветок полит!");
                 return "warning";
             }
@@ -775,12 +785,14 @@ namespace Game.MiniGames
             if ((waterPosition >= darkRedZoneMin && waterPosition <= darkRedZoneMax) ||
                 (waterPosition >= brightRedZoneMin && waterPosition <= brightRedZoneMax))
             {
+                model.Score += 50;
                 UpdateInstructionText("💀 Сейчас завянет!");
                 return "fail";
             }
 
             return "fail";
         }
+
 
         private void UpdateInstructionText(string message)
         {

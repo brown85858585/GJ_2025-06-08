@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Quests;
+using Player;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,6 +8,8 @@ namespace Game.MiniGames
 {
     public class FlowerMiniGame : IMiniGame
     {
+
+        private IPlayerController playerController;
         private FlowerMiniGameManager _miniGameController;
         private readonly GameObject _miniGameObj;
         public QuestType QType { get; } = QuestType.Flower;
@@ -15,14 +18,18 @@ namespace Game.MiniGames
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
-        public FlowerMiniGame()
+        public FlowerMiniGame(IPlayerController playerController)
         {
+            this.playerController = playerController;
+
             _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/FlowerGameManager"));
             Level = MiniGameCoordinator.DayLevel;
             if (_miniGameObj != null)
             {
                 _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
             }
+
+
         }
 
         private void StartFlowerMiniGame()
@@ -54,6 +61,7 @@ namespace Game.MiniGames
                 _miniGameController.OnWateringAttempt += OnWateringAttempt;
 
                 // Запустить мини-игру (панель включится автоматически)
+                _miniGameController.SetPlayer(playerController.Model);
                 _miniGameController.StartMiniGame();
             }
             else
@@ -72,7 +80,7 @@ namespace Game.MiniGames
         private void OnMiniGameCompleted()
         {
             Debug.Log("Мини-игра завершена!");
-
+           // playerController.Model.Score += _miniGameController.GetGameScore;
             OnMiniGameComplete?.Invoke(QType);
             
             // Отписаться от событий чтобы избежать утечек памяти
