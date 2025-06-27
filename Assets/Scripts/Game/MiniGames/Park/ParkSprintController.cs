@@ -30,12 +30,12 @@ namespace Game.MiniGames
 
         private void HandleRingEntered(int id)
         {
-            if (id != _currentRingIndex || id >= _parkLevelView.CheckpointViews.Count-1)
-            {
-                EndSprint?.Invoke();
-                ResetParkLevel();
-                return;
-            }
+            // if (id != _currentRingIndex || id >= _parkLevelView.CheckpointViews.Count-1)
+            // {
+            //     EndSprint?.Invoke();
+            //     ResetParkLevel();
+            //     return;
+            // }
 
             _currentRingIndex++;
             AddStamina(_staminaForRing);
