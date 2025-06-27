@@ -10,15 +10,23 @@ public class KeepConstantScreenSize : MonoBehaviour
     private float initDist;
     private float initFovTan;
     private Vector3 initScale;
+    private bool isInitialized = false;
 
-    void Start()
+    public void InitializeFromSceneStart()
     {
+        if (isInitialized) return;
+
         if (cam == null) cam = Camera.main;
-        // исходная дистанция точечной лейки до камеры
-        initDist = Vector3.Distance(cam.transform.position, transform.position);
-        // тангенс половины начального FOV
-        initFovTan = Mathf.Tan(cam.fieldOfView * Mathf.Deg2Rad * 0.5f);
-        initScale   = transform.localScale;
+
+        if (cam != null)
+        {
+            initDist = Vector3.Distance(cam.transform.position, transform.position);
+            initFovTan = Mathf.Tan(cam.fieldOfView * Mathf.Deg2Rad * 0.5f);
+            initScale = transform.localScale;
+            isInitialized = true;
+
+            Debug.Log($"KeepConstantScreenSize инициализирован из MainSceneManager для {gameObject.name}");
+        }
     }
 
     void LateUpdate()

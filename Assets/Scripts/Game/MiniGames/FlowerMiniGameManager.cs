@@ -7,6 +7,9 @@ using Cysharp.Threading.Tasks.Triggers;
 using System.Collections.Generic;
 using static Cinemachine.DocumentationSortingAttribute;
 using Knot.Localization.Components;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.SearchService;
 
 namespace Game.MiniGames
 {
@@ -16,6 +19,8 @@ namespace Game.MiniGames
         [Header("Scene References")]
         [SerializeField] private Canvas mainCanvas;
         [SerializeField] private GameObject panel;
+
+        [SerializeField] private GameObject CanRoot;
 
         public GameObject Panel => panel;
 
@@ -163,6 +168,8 @@ namespace Game.MiniGames
         {
             if (!gameStarted)
             {
+
+               // var parent = WhaterCan.transform.parent;
                 StartGame();
             }
         }
@@ -523,8 +530,74 @@ namespace Game.MiniGames
             isGameActive = false;
         }
 
+
+        private void SetObjectToForeground(GameObject obj)
+        {
+            // Пробуем Canvas
+            Canvas canvas = obj.GetComponent<Canvas>();
+            if (canvas != null)
+            {
+                canvas.sortingOrder = 100;
+                return;
+            }
+
+            // Пробуем SpriteRenderer
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sortingOrder = 100;
+                return;
+            }
+
+            // Через Z-координату
+            obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, -10f);
+        }
+
+        private void SetObjectToBackground(GameObject obj)
+        {
+            // Аналогично, но с меньшими значениями
+            Canvas canvas = obj.GetComponent<Canvas>();
+            if (canvas != null)
+            {
+                canvas.sortingOrder = 1;
+                return;
+            }
+
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sortingOrder = 1;
+                return;
+            }
+
+            obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, 0f);
+        }
+
+
+
         private void StartGame()
         {
+     
+            var tryfind = FindObjectsOfType<Transform>();
+
+            foreach (Transform t in tryfind)
+            {
+                if (t.name.Contains("RoomCamera"))
+                {
+                    Transform canRoot = t.Find("CanRoot");
+                    if (canRoot != null)
+                    {
+                        CanRoot = canRoot.gameObject;
+                        canRoot.gameObject.SetActive(true);
+
+                       // SetObjectToBackground(gameScreen);
+                       //  SetObjectToForeground(CanRoot);
+                        break;
+                    }
+                }
+            }
+            //CanRt.GameObject().SetActive(true);
+
             Debug.Log("🎮 StartGame вызван!");
 
             if (startScreen != null)
@@ -569,12 +642,13 @@ namespace Game.MiniGames
             {
                 miniGamePanel.SetActive(false);
             }
-
+            CanRoot.SetActive(false);
             OnMiniGameComplete?.Invoke();
         }
 
         private void ExitMiniGame()
         {
+            
             EndMiniGame();
         }
 

@@ -26,15 +26,39 @@ public class CanAnimatorTester : MonoBehaviour
     private void Awake()
     {
         BuildBeatSequence();
+        SetupParticleSystem();
         _beatSequence.Pause();
         _camera = Camera.main;
         _startFov = _camera.fieldOfView;
+      
+    }
+
+    private void SetupParticleSystem()
+    {
+        if (waterPS != null)
+        {
+            var main = waterPS.main;
+            // Ключевой момент - используем Hierarchy scaling!
+            main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+            /*
+            // Устанавливаем базовые размеры частиц
+            main.startSize = new ParticleSystem.MinMaxCurve(0.02f, 0.05f);
+            main.startSpeed = new ParticleSystem.MinMaxCurve(2f, 4f);
+
+            // Настраиваем форму эмиттера
+            var shape = waterPS.shape;
+            shape.enabled = true;
+            shape.shapeType = ParticleSystemShapeType.Cone;
+            shape.angle = 8f;
+            shape.radius = 0.02f;
+            */
+        }
     }
 
     private void Update()
     {
         // Нажмите пробел, чтобы запустить/остановить анимацию
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             TogglePouring();
         }        
