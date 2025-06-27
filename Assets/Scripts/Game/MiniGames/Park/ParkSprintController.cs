@@ -37,6 +37,7 @@ namespace Game.MiniGames
             //     return;
             // }
 
+            _playerController.Model.Score += 100;
             _currentRingIndex++;
             AddStamina(_staminaForRing);
         }

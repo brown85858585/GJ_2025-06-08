@@ -6,6 +6,8 @@ using Game.Levels;
 using Game.Monolog;
 using Game.Quests;
 using Player;
+using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -21,6 +23,7 @@ namespace Game.Installers
         [SerializeField] private QuestLogView questLogPrefab;
         [SerializeField] private EffectAccumulatorView effectAccumulator;
         [SerializeField] private Button nextLevelButton;
+        [SerializeField] private Canvas mainCanvas;
         
         [SerializeField] private LevelsConfig config;
 
@@ -32,6 +35,7 @@ namespace Game.Installers
         private QuestLogView _questsView;
         private GameObject _virtualCamera;
         private EffectAccumulatorView _effectAccumulator;
+        private TMP_Text _scoreText;
 
         private void Awake()
         {
@@ -51,6 +55,10 @@ namespace Game.Installers
         {
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut();
+
+            _scoreText = mainCanvas.GetComponentInChildren<TMP_Text>();
+            _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.text = newScore.ToString())
+                .AddTo(this);
             
             InitLevelOne();
             InitPlayer();
