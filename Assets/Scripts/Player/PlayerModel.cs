@@ -1,13 +1,13 @@
 ﻿using Game;
 using UniRx;
-using UnityEngine;
-
-namespace Player
-{
-    public class PlayerModel
-    {
-        public readonly ReactiveProperty<int> CurrentScore = new ReactiveProperty<int>();
+        using UnityEngine;
         
+        namespace Player
+        {
+            public class PlayerModel
+            {
+                public readonly ReactiveProperty<int> CurrentScore = new ReactiveProperty<int>();
+                
         private int _stamina;
         private int _speed;
         private int _mood;
