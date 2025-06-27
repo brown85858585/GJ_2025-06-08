@@ -64,7 +64,9 @@ namespace Game.MiniGames
         protected virtual void Start()
         {
             FindSceneComponents();
-            SetupInput();
+           // SetupInput();
+
+
 
             if (miniGamePanel != null)
             {
@@ -75,7 +77,7 @@ namespace Game.MiniGames
             CreateMiniGameUI();
         }
 
-        protected virtual void SetupInput()
+        public virtual void SetupInput()
         {
             if (actionInputAction == null || startInputAction == null)
             {
@@ -86,6 +88,10 @@ namespace Game.MiniGames
 
             actionInputAction.action.performed += OnActionInput;
             startInputAction.action.performed += OnStartInput;
+
+            
+            actionInputAction?.action.Disable();
+            startInputAction?.action.Disable();
 
             Debug.Log("Input System настроена для мини-игры");
         }
@@ -268,6 +274,7 @@ namespace Game.MiniGames
         // Публичные методы
         public virtual void StartMiniGame()
         {
+            SetupInput();
             if (miniGamePanel == null)
             {
                 Debug.LogError("Мини-игра не инициализирована!");
