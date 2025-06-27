@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Game;
 using Player.Interfaces;
 using UnityEngine;
@@ -114,6 +115,14 @@ namespace Player
 
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
+            
+                //todo for meat up 
+            if(item == ItemCategory.Flower && _model.ItemInHand == ItemCategory.WateringCan)
+            {
+                UniTask.Delay(10).ContinueWith(() => { _playerDialogue.CloseDialogue(); });
+            }
+            
+            
             Debug.Log(item);
             if (item != ItemCategory.WateringCan)
             {
@@ -121,11 +130,11 @@ namespace Player
                 {
                     return;
                 }
-
+                
                 PutTheItemDown();
                 return;
             }
-            
+
             _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
         }
