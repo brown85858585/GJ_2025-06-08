@@ -108,6 +108,20 @@ namespace Game.Installers
             cameraZoom.Initialization(_core.InputAdapter, vCam);
             
             _logic.PlayerController.CamTransform = _virtualCamera.transform;
+            KeepConstantScreenSize[] allComponents = FindObjectsOfType<KeepConstantScreenSize>(true); // true - включая неактивные
+
+            foreach (var component in allComponents)
+            {
+                component.InitializeFromSceneStart();
+            }
+
+
+           /* CanAnimatorTester[] animation = FindObjectsOfType<CanAnimatorTester>(true); // true - включая неактивные
+            foreach (var component in animation)
+            {
+                component.Init();
+            }
+           */
         }
 
         private void InitQuestLog()

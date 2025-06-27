@@ -1,7 +1,8 @@
 ﻿using System;
 using Game.Quests;
+using Player;
 using UnityEngine;
-
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using static Cinemachine.DocumentationSortingAttribute;
 using Object = UnityEngine.Object;
@@ -12,14 +13,17 @@ namespace Game.MiniGames
     {
         private BaseTimingMiniGame _miniGameController;
         private  GameObject _miniGameObj;
+        private IPlayerController playerController;
+
         public QuestType QType { get; } = QuestType.Kitchen;
         public int Level { get ; set ; }
 
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
-        public KitchenMiniGame()
+        public KitchenMiniGame(IPlayerController playerController)
         {
+            this.playerController = playerController;
             // Попробуем найти префаб MiniGameManager1 или создать новый
             _miniGameObj = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameManager"));
             Level = Level = MiniGameCoordinator.DayLevel; ;
@@ -38,6 +42,7 @@ namespace Game.MiniGames
                 Debug.LogError("Не удалось найти MiniGameManager1 префаб! Создаем новый GameObject...");
                 CreateFallbackMiniGame();
             }
+            _miniGameController.SetPlayer(playerController.Model);
         }
 
         private void CreateFallbackMiniGame()
@@ -131,6 +136,7 @@ namespace Game.MiniGames
         {
             if (success)
             {
+               
                 Debug.Log("🍽️ Успешная попытка готовки!");
             }
             else
@@ -141,6 +147,8 @@ namespace Game.MiniGames
 
         private void OnMiniGameCompleted()
         {
+
+           // playerController.Model.Score += _miniGameController.gameScore;
             Debug.Log("🍳 Кухонная мини-игра завершена!");
 
             OnMiniGameComplete?.Invoke(QType);
