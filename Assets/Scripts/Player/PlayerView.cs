@@ -64,6 +64,7 @@ namespace Player
 
         public void WakeUpAnimationEnded()
         {
+            OnWakeUpEnded?.Invoke();
             StartCoroutine(ResetPlayerObjectTransform());
         }
 

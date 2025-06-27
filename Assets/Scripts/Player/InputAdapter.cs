@@ -98,25 +98,9 @@ namespace Player
                 OnZoomOut?.Invoke();   // прокрутка назад
         }
 
-        public void DisablePlayerInput()
-        {
-            _moveAction.performed -= OnMoveInput;
-            _moveAction.canceled -= OnMoveInput;
-            _moveAction.Disable();
-        }
-
-        public void EnablePlayerInput()
-        {
-            _moveAction.Enable();
-            _moveAction.performed += OnMoveInput;
-            _moveAction.canceled += OnMoveInput;
-        }
- 
-
         public void SwitchAdapterToMiniGameMode()
         {
-
-
+            Debug.Log("SwitchAdapterToMiniGameMode");
             BasePlayerInput.actions.FindActionMap("Player", true).Disable();
             BasePlayerInput.actions.FindActionMap("GInteractive", true).Enable();
 
@@ -125,6 +109,7 @@ namespace Player
 
         public void SwitchAdapterToGlobalMode()
         {
+            Debug.Log("SwitchAdapterToGlobalMode");
             BasePlayerInput.actions.FindActionMap("GInteractive", true).Disable();
             BasePlayerInput.actions.FindActionMap("Player", true).Enable();
         }

@@ -23,11 +23,11 @@ MonoBehaviour:
         asm: Knot.Localization}
       data:
         Enabled: 1
-        TextCollection: {fileID: 11400000, guid: fd9d7b9f57473594195391ada7edb5ad,
+        TextCollection: {fileID: 11400000, guid: 4bda7e24428f79a4399117df8aafc778,
           type: 2}
         KeyCollection: {fileID: 11400000, guid: fa5769e7cebc3b645a456eaa78b928e7,
           type: 2}
-        TextAsset: {fileID: 4900000, guid: 9538c5280d7c9614997ebb68612a6f9e, type: 3}
+        TextAsset: {fileID: 4900000, guid: a809acc472faec74ca7a0f956e48964f, type: 3}
         Settings:
           ImportDelimiter: ','
           ExportDelimiter: ','

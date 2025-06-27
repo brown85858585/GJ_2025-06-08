@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Knot.Localization.Components;
+using Unity.VisualScripting;
 
 
 namespace Game.MiniGames
@@ -19,6 +22,7 @@ namespace Game.MiniGames
 
         public GameObject Panel => panel;
         protected GameObject miniGamePanel;
+        public Canvas MainCanvas => mainCanvas;
 
         [Header("Input")]
         [SerializeField] protected InputActionReference actionInputAction; // E клавиша
@@ -40,6 +44,10 @@ namespace Game.MiniGames
         [SerializeField] protected Image trackImage;         // Для вертикального трека (полив)
         [SerializeField] protected Image[] zoneImages;       // Для цветных зон (полив: красная, желтая, зеленая, красная)
         [SerializeField] protected Image indicatorImage;     // Главный индикатор/стрелка
+
+        [Header("Fonts")]
+        [SerializeField] string ButtonFont = "LegacyRuntime.ttf";
+        [SerializeField] private string TextFont = "LegacyRuntime.ttf";
 
         [Header("Game Settings")]
         public float indicatorSpeed = 100f;
@@ -126,23 +134,8 @@ namespace Game.MiniGames
             }
         }
 
-        protected virtual void FindSceneComponents()
-        {
-            if (mainCanvas == null)
-            {
-                Debug.LogError("Canvas не найден в сцене!");
-                return;
-            }
+        protected abstract void FindSceneComponents();
 
-            miniGamePanel = GameObject.Find("MiniGamePanel1");
-            if (miniGamePanel == null)
-            {
-                Debug.LogError("MiniGamePanel не найдена в Canvas!");
-                return;
-            }
-
-            Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
-        }
 
         protected virtual void CreateMiniGameUI()
         {
@@ -202,7 +195,7 @@ namespace Game.MiniGames
 
             Text buttonText = textObj.AddComponent<Text>();
             buttonText.text = text;
-            buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
             buttonText.fontSize = 12;
@@ -212,7 +205,10 @@ namespace Game.MiniGames
             textRect.anchorMax = Vector2.one;
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
-
+           // var component = textObj.AddComponent<KnotLocalizedUIText>();
+           // component.AddComponent<>
+           // component.KeyReference.Key = "Day1_Guitar1";
+          //  component.GetComponent<>
             return button;
         }
 
@@ -225,12 +221,15 @@ namespace Game.MiniGames
 
             Text textComponent = textObj.AddComponent<Text>();
             textComponent.text = text;
-            textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            textComponent.font = Resources.GetBuiltinResource<Font>(TextFont);
             textComponent.alignment = TextAnchor.MiddleCenter;
             textComponent.color = color;
             textComponent.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
+            //var component = textObj.AddComponent<KnotLocalizedUIText>();
+        
+
             textRect.sizeDelta = size;
             textRect.anchoredPosition = position;
 

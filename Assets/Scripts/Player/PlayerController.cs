@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Game;
 using Player.Interfaces;
 using UnityEngine;
@@ -38,7 +39,6 @@ namespace Player
             _currentMovement = _movement;
             
             _input.OnSwitchInteract += PutTheItemDown;
-            
         }
 
         public void InitView(PlayerView playerView)
@@ -48,6 +48,18 @@ namespace Player
             _view.OnUpdate += Update;
             
             _playerDialogue = new PlayerDialogue(_view.DialogueView);
+            
+            
+            //todo change normal switcher 
+            //Input off
+            _input.SwitchAdapterToMiniGameMode();
+            _view.OnWakeUpEnded += InputOn;
+        }
+
+        private void InputOn()
+        {
+            _view.OnWakeUpEnded -= InputOn;
+            _input.SwitchAdapterToGlobalMode();
         }
 
         private void Update()
@@ -103,6 +115,14 @@ namespace Player
 
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
+            
+                //todo for meat up 
+            if(item == ItemCategory.Flower && _model.ItemInHand == ItemCategory.WateringCan)
+            {
+                UniTask.Delay(10).ContinueWith(() => { _playerDialogue.CloseDialogue(); });
+            }
+            
+            
             Debug.Log(item);
             if (item != ItemCategory.WateringCan)
             {
@@ -110,11 +130,11 @@ namespace Player
                 {
                     return;
                 }
-
+                
                 PutTheItemDown();
                 return;
             }
-            
+
             _model.ItemInHand = ItemCategory.WateringCan;
             _view.TakeObject(obj);
         }
