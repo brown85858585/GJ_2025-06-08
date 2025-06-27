@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6149849902115646826}
   - component: {fileID: 8136129537358618446}
   - component: {fileID: 1739838801911378431}
+  - component: {fileID: 4682919891362629534}
   m_Layer: 3
   m_Name: PopupE
   m_TagString: Untagged
@@ -141,6 +142,27 @@ MonoBehaviour:
   showEase: 27
   hideEase: 26
   scaleFactor: 1
+--- !u!114 &4682919891362629534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087975859324678026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c502cc8e18e8b14a9604374f4cb96de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupImage: {fileID: 430408449795260973}
+  sprites:
+  - {fileID: 1193015006, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
+  - {fileID: -572035769, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
+  - {fileID: -1672999132, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
+  - {fileID: -2116861910, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
+  - {fileID: -107856283, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
+  - {fileID: -798874496, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
+  - {fileID: 2106375947, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
 --- !u!1 &2321835404741727001
 GameObject:
   m_ObjectHideFlags: 0

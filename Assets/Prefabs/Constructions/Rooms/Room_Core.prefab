@@ -240,7 +240,7 @@ MonoBehaviour:
   id: 81a8bbf213f9abe4e82bfcda5130622e
   category: 4
   isMultiplyInteractable: 0
-  popupOffset: {x: -0.23, y: 1.9, z: -1.12}
+  popupOffset: {x: -0.23, y: 1.54, z: -1.12}
   popupScale: 1
 --- !u!1 &1501780194213132343
 GameObject:
@@ -346,7 +346,7 @@ MonoBehaviour:
   id: 8e50a389de1e02546b2854e60f195a9b
   category: 1
   isMultiplyInteractable: 1
-  popupOffset: {x: 0, y: 1.5, z: 0}
+  popupOffset: {x: 0, y: 1.1, z: 0.26}
   popupScale: 1
 --- !u!1 &2021931254209527203
 GameObject:
@@ -904,7 +904,7 @@ MonoBehaviour:
   id: a32cbf93281af984ab6c23d1a46ed717
   category: 3
   isMultiplyInteractable: 0
-  popupOffset: {x: -0.69, y: 2.14, z: -0.85}
+  popupOffset: {x: -0.69, y: 1.82, z: -0.85}
   popupScale: 1
 --- !u!1 &4844984277415521382
 GameObject:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   id: 3788c62c58e3cc64fa4a430d2b040a65
   category: 6
   isMultiplyInteractable: 0
-  popupOffset: {x: 0, y: 1.84, z: 0}
+  popupOffset: {x: 0.38, y: 1.53, z: -0.65}
   popupScale: 1
 --- !u!1 &7085043112238868771
 GameObject:
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   id: 6e755700ac4776b49a8e0b7b0ea326a9
   category: 9
   isMultiplyInteractable: 1
-  popupOffset: {x: -0.31, y: 3.46, z: -1.38}
+  popupOffset: {x: -0.31, y: 2.5, z: -1.38}
   popupScale: 1
 --- !u!135 &3397845792855187182
 SphereCollider:
@@ -1456,7 +1456,7 @@ MonoBehaviour:
   id: 88cbdd8ab8dd1a64db98ff04a49c6d9c
   category: 7
   isMultiplyInteractable: 1
-  popupOffset: {x: 0, y: 1.5, z: 0}
+  popupOffset: {x: 0, y: 1.43, z: 0}
   popupScale: 1
 --- !u!1001 &253636502370695371
 PrefabInstance:
@@ -1931,7 +1931,7 @@ PrefabInstance:
     - target: {fileID: 1087975859324678026, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1092992223468015409, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
@@ -2006,7 +2006,7 @@ PrefabInstance:
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.047
+      value: -2.002
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
@@ -2031,12 +2031,12 @@ PrefabInstance:
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11.257
+      value: -0.488
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.629
+      value: 2.1999998
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
@@ -2065,8 +2065,18 @@ PrefabInstance:
       objectReference: {fileID: 7867517002633563486}
     - target: {fileID: 8136129537358618446, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
+      propertyPath: worldOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136129537358618446, guid: 073d3db9d03729a44a25b174c75dfc7c,
+        type: 3}
       propertyPath: worldOffset.y
-      value: 1.1
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136129537358618446, guid: 073d3db9d03729a44a25b174c75dfc7c,
+        type: 3}
+      propertyPath: worldOffset.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
