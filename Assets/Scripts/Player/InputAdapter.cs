@@ -97,12 +97,10 @@ namespace Player
             else if (scroll < 0)
                 OnZoomOut?.Invoke();   // прокрутка назад
         }
- 
 
         public void SwitchAdapterToMiniGameMode()
         {
-
-
+            Debug.Log("SwitchAdapterToMiniGameMode");
             BasePlayerInput.actions.FindActionMap("Player", true).Disable();
             BasePlayerInput.actions.FindActionMap("GInteractive", true).Enable();
 
@@ -111,6 +109,7 @@ namespace Player
 
         public void SwitchAdapterToGlobalMode()
         {
+            Debug.Log("SwitchAdapterToGlobalMode");
             BasePlayerInput.actions.FindActionMap("GInteractive", true).Disable();
             BasePlayerInput.actions.FindActionMap("Player", true).Enable();
         }

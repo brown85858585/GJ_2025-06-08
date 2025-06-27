@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace Player
         private static readonly int PositionY = Animator.StringToHash("PositionY");
 
         [SerializeField] private Animator animator;
+        [SerializeField] private Transform playerObject;
         [SerializeField] private Transform rightHand;
         [SerializeField] private PlayerDialogueView dialogueView;
         
@@ -46,11 +48,40 @@ namespace Player
         
         public event Action<Collision> OnCollision;
         public event Action OnUpdate;
-
+        public event Action OnWakeUpEnded;
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
             CapsuleCollider = GetComponent<CapsuleCollider>();
+        }
+
+        public void SetWakeUpAnimation()
+        {
+            Rigidbody.useGravity = false;
+            CapsuleCollider.enabled = false;
+            animator.SetTrigger("WakeUp");
+        }
+
+        public void WakeUpAnimationEnded()
+        {
+            OnWakeUpEnded?.Invoke();
+            StartCoroutine(ResetPlayerObjectTransform());
+        }
+
+        IEnumerator ResetPlayerObjectTransform()
+        {
+            yield return new WaitForEndOfFrame();
+
+            transform.localPosition = new Vector3(
+                transform.localPosition.x + playerObject.localPosition.x,
+                0,
+                transform.localPosition.z + playerObject.localPosition.z
+             );
+
+            playerObject.localPosition = new Vector3(0, 0, 0);
+
+            GetComponent<CapsuleCollider>().enabled = true;
+            Rigidbody.useGravity = true;
         }
         private void FixedUpdate()
         {

@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 9ad9892eddbfa534d9f3f6223101ede4
+guid: 72970f8351dec674cb572ad09ac9b77b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: display
+    second: {fileID: 2100000, guid: 6653fd7157fa88240b6b8abf890d6987, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -19,6 +24,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: plastic_1
     second: {fileID: 2100000, guid: 6755789c2494bea4bbabf1ca54d2d637, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: touchpad
+    second: {fileID: 2100000, guid: 7542959e9141cc84d8e6c061bcbfd8ab, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

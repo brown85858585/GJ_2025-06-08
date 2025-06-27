@@ -1,12 +1,14 @@
 ﻿using Game;
+using UniRx;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerModel
     {
+        public readonly ReactiveProperty<int> CurrentScore = new ReactiveProperty<int>();
+        
         private int _stamina;
-        private int _score;
         private int _speed;
         private int _mood;
 
@@ -21,10 +23,15 @@ namespace Player
             set => _stamina = Mathf.Clamp(value, 0, 10000);
         }
 
+        public int Score
+        {
+            get => CurrentScore.Value;
+            set => CurrentScore.SetValueAndForceNotify(value);
+        }
         public PlayerModel()
         {
             _stamina = 10000;
-            _score = 0;
+            CurrentScore.SetValueAndForceNotify(0);
             _speed = 5;
             _mood = 100;
         }

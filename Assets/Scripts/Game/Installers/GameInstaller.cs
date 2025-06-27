@@ -41,7 +41,7 @@ namespace Game.Installers
 
         private void Install()
         {
-            _core = new CoreInstaller(playerInput);
+            _core = new CoreInstaller(Instantiate(playerInput));
             _logic = new GameLogicInstaller(_core);
             
             _levelManager = new LevelManager(config, _core.InteractionSystem, _logic.MiniGameCoordinator);
@@ -52,10 +52,9 @@ namespace Game.Installers
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut();
             
-            Instantiate(playerInput);
-            
             InitLevelOne();
             InitPlayer();
+            InitStartWakeUp();
             InitCamera();
             InitQuestLog();
             var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager);
@@ -75,6 +74,12 @@ namespace Game.Installers
             var playerView = playerObj.GetComponent<PlayerView>();
             _logic.PlayerController.InitView(playerView);
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
+        }
+
+        private void InitStartWakeUp()
+        {
+            //_core.InputAdapter.DisablePlayerInput();
+            _logic.PlayerController.PlayWakeUpAnimation();
         }
 
         private void InitCamera()

@@ -34,7 +34,8 @@ namespace Game.Interactions
 
         private FollowProjectionWithConstantSize _popup;
         private UIElementTweener _popupTweener;
-        
+        private PopupInteractionView _popupIcon;
+
         private void Awake()
         {
             targetMask = LayerMask.GetMask("Player");
@@ -79,6 +80,7 @@ namespace Game.Interactions
                 _popup.target = transform;
                 _popup.worldOffset = popupOffset;
                 _popupTweener.scaleFactor = popupScale;
+                _popupIcon.SetInteractionImage(category);
 
                 if (turn)
                 {
@@ -95,6 +97,7 @@ namespace Game.Interactions
         {
             _popup = itemCollectionPopupForInteract.GetComponent<FollowProjectionWithConstantSize>();
             _popupTweener = _popup.GetComponent<UIElementTweener>();
+            _popupIcon = _popup.GetComponent<PopupInteractionView>();
            
             if (_popup == null)
             {
