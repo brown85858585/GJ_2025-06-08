@@ -92,3 +92,5 @@ Desktop.ini        # Windows explorer settings
 ._*                # macOS resource forks
 .Spotlight-V100
 .Trashes
+Assets/Polytope Studio/Lowpoly_Environments.meta
+Assets/Polytope Studio/Lowpoly_Environments/URP.meta
