@@ -9,7 +9,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 using Knot.Localization.Components;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 using Player;
 
 namespace Game.MiniGames
