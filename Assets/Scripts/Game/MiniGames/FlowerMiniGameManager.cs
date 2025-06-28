@@ -650,7 +650,7 @@ namespace Game.MiniGames
             {
                 miniGamePanel.SetActive(false);
             }
-            CanRoot?.SetActive(false);
+            CanRoot.SetActive(false);
             OnMiniGameComplete?.Invoke();
         }
 
