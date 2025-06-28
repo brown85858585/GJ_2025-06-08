@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Quests;
+using Player;
 using UnityEngine;
 
 namespace Game.MiniGames
@@ -9,14 +10,15 @@ namespace Game.MiniGames
         private CardSwipeMiniGame _miniGameController;
         private WorkCardGameConfigurator _configurator;
         private readonly GameObject _miniGameObj;
-
+        private IPlayerController playerController;
         public QuestType QType { get; } = QuestType.Work;
         public int Level { get ; set; }
 
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
-        public WorkPapersMiniGame()
+        public WorkPapersMiniGame(IPlayerController playerController)
         {
+            this.playerController = playerController;
             //var workGame = new WorkPapersMiniGame();
             _miniGameObj = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/WorkGameManager"));
             Level = MiniGameCoordinator.DayLevel;
@@ -55,6 +57,8 @@ namespace Game.MiniGames
                 Debug.Log("📋 Панель мини-игры Papers созданa");
             }
             */
+
+            _miniGameController.SetPlayer(playerController.Model);
         }
 
         public void OnActionButtonClick()
@@ -111,6 +115,7 @@ namespace Game.MiniGames
 
         private void OnWorkPapersAttempt(bool success)
         {
+            //playerController.Model.Score += _miniGameController.gameScore;
             if (success)
             {
                 Debug.Log("📋 Успешная обработка документов! Квест выполнен.");

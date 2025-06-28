@@ -7,6 +7,10 @@ using Cysharp.Threading.Tasks.Triggers;
 using System.Collections.Generic;
 using static Cinemachine.DocumentationSortingAttribute;
 using Knot.Localization.Components;
+using System.Linq;
+using Unity.VisualScripting;
+//using UnityEditor.SearchService;
+using Player;
 
 namespace Game.MiniGames
 {
@@ -16,6 +20,8 @@ namespace Game.MiniGames
         [Header("Scene References")]
         [SerializeField] private Canvas mainCanvas;
         [SerializeField] private GameObject panel;
+
+        [SerializeField] private GameObject CanRoot;
 
         public GameObject Panel => panel;
 
@@ -90,14 +96,19 @@ namespace Game.MiniGames
 
         [SerializeField] FloweGameOptions floweGameOption;
         [SerializeField] List<FloweGameOptions> floweGameOptions;
+        PlayerModel model;
 
-        
+
+        public void SetPlayer(PlayerModel model)
+        {
+            this.model = model;
+        }
 
         void Start()
         {
             level = MiniGameCoordinator.DayLevel;
             FindSceneComponents();
-            SetupInput();
+            //SetupInput();
 
             if (miniGamePanel != null)
             {
@@ -163,6 +174,8 @@ namespace Game.MiniGames
         {
             if (!gameStarted)
             {
+
+               // var parent = WhaterCan.transform.parent;
                 StartGame();
             }
         }
@@ -348,16 +361,16 @@ namespace Game.MiniGames
             Image startBg = startScreen.AddComponent<Image>();
             startBg.color = new Color(0, 0, 0, 0.7f);
 
-            CreateStartText("Мини-игра: Полив цветка", new Vector2(0, 80), 24, Color.white);
-            CreateStartText("Остановите воду в нужной зоне", new Vector2(0, 40), 16, Color.yellow);
-            CreateStartText("🟢 Зеленая зона = отлично", new Vector2(0, 10), 14, Color.green);
-            CreateStartText("🟡 Желтая зона = хорошо", new Vector2(0, -10), 14, Color.yellow);
-            CreateStartText("🔴 Красная зона = плохо", new Vector2(0, -30), 14, Color.red);
+            //CreateStartText("Мини-игра: Полив цветка", new Vector2(0, 80), 24, Color.white);
+            //CreateStartText("Остановите воду в нужной зоне", new Vector2(0, 40), 16, Color.yellow);
+            //CreateStartText("🟢 Зеленая зона = отлично", new Vector2(0, 10), 14, Color.green);
+            //CreateStartText("🟡 Желтая зона = хорошо", new Vector2(0, -10), 14, Color.yellow);
+            //CreateStartText("🔴 Красная зона = плохо", new Vector2(0, -30), 14, Color.red);
 
-            startButton = CreateStartButton("StartButton", "Начать игру (Пробел)", new Vector2(0, -80), new Color(0.2f, 0.8f, 0.2f), new Vector2(200, 50));
+            startButton = CreateStartButton("StartButton", "Начать игру (Пробел)", new Vector2(-200, 0), new Color(0.2f, 0.8f, 0.2f), new Vector2(300, 100), 24);
             startButton.onClick.AddListener(StartGame);
 
-            startExitButton = CreateStartButton("StartExitButton", "Выход", new Vector2(0, -140), Color.gray, new Vector2(120, 40));
+            startExitButton = CreateStartButton("StartExitButton", "Выход", new Vector2(200, 0), Color.gray, new Vector2(300, 100), 24);
             startExitButton.onClick.AddListener(ExitMiniGame);
         }
 
@@ -381,7 +394,7 @@ namespace Game.MiniGames
 
         }
 
-        private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size)
+        private Button CreateStartButton(string name, string text, Vector2 position, Color color, Vector2 size, int fontSize = 12)
         {
             GameObject buttonObj = new GameObject(name);
             buttonObj.transform.SetParent(startScreen.transform, false);
@@ -403,7 +416,7 @@ namespace Game.MiniGames
             buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
-            buttonText.fontSize = 12;
+            buttonText.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.anchorMin = Vector2.zero;
@@ -495,6 +508,8 @@ namespace Game.MiniGames
 
         public void StartMiniGame()
         {
+
+            SetupInput();
             if (miniGamePanel == null)
             {
                 Debug.LogError("Мини-игра не инициализирована!");
@@ -523,8 +538,74 @@ namespace Game.MiniGames
             isGameActive = false;
         }
 
+
+        private void SetObjectToForeground(GameObject obj)
+        {
+            // Пробуем Canvas
+            Canvas canvas = obj.GetComponent<Canvas>();
+            if (canvas != null)
+            {
+                canvas.sortingOrder = 100;
+                return;
+            }
+
+            // Пробуем SpriteRenderer
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sortingOrder = 100;
+                return;
+            }
+
+            // Через Z-координату
+            obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, -10f);
+        }
+
+        private void SetObjectToBackground(GameObject obj)
+        {
+            // Аналогично, но с меньшими значениями
+            Canvas canvas = obj.GetComponent<Canvas>();
+            if (canvas != null)
+            {
+                canvas.sortingOrder = 1;
+                return;
+            }
+
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sortingOrder = 1;
+                return;
+            }
+
+            obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, 0f);
+        }
+
+
+
         private void StartGame()
         {
+     
+            var tryfind = FindObjectsOfType<Transform>();
+
+            foreach (Transform t in tryfind)
+            {
+                if (t.name.Contains("RoomCamera"))
+                {
+                    Transform canRoot = t.Find("CanRoot");
+                    if (canRoot != null)
+                    {
+                        CanRoot = canRoot.gameObject;
+                        canRoot.gameObject.SetActive(true);
+
+                       // SetObjectToBackground(gameScreen);
+                       //  SetObjectToForeground(CanRoot);
+                        break;
+                    }
+                }
+            }
+            //CanRt.GameObject().SetActive(true);
+
             Debug.Log("🎮 StartGame вызван!");
 
             if (startScreen != null)
@@ -569,12 +650,13 @@ namespace Game.MiniGames
             {
                 miniGamePanel.SetActive(false);
             }
-
+            CanRoot?.SetActive(false);
             OnMiniGameComplete?.Invoke();
         }
 
         private void ExitMiniGame()
         {
+            
             EndMiniGame();
         }
 
@@ -688,12 +770,14 @@ namespace Game.MiniGames
         {
             if (waterPosition >= greenZoneMin && waterPosition <= greenZoneMax)
             {
+                model.Score += 500;
                 UpdateInstructionText("🌸 Цветок полит!");
                 return "success";
             }
 
             if (waterPosition >= yellowZoneMin && waterPosition <= yellowZoneMax)
             {
+                model.Score += 300;
                 UpdateInstructionText("🌼 Цветок полит!");
                 return "warning";
             }
@@ -701,12 +785,14 @@ namespace Game.MiniGames
             if ((waterPosition >= darkRedZoneMin && waterPosition <= darkRedZoneMax) ||
                 (waterPosition >= brightRedZoneMin && waterPosition <= brightRedZoneMax))
             {
+                model.Score += 50;
                 UpdateInstructionText("💀 Сейчас завянет!");
                 return "fail";
             }
 
             return "fail";
         }
+
 
         private void UpdateInstructionText(string message)
         {

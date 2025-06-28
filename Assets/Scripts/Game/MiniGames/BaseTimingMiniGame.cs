@@ -10,6 +10,8 @@ using UnityEngine.UI;
 using TMPro;
 using Knot.Localization.Components;
 using Unity.VisualScripting;
+using UnityEngine.SocialPlatforms.Impl;
+using Player;
 
 
 namespace Game.MiniGames
@@ -57,12 +59,24 @@ namespace Game.MiniGames
         protected bool gameStarted = false;
         protected int currentAttempts = 0;
 
+        protected PlayerModel model;
+
         // События
         public System.Action OnMiniGameComplete;
         public System.Action<bool> OnGameAttempt;
+        //public int GetGameScore => gameScore;
+
+        public int gameScore = 0;
+
+
+        public void SetPlayer(PlayerModel model)
+        {
+            this.model = model;
+        }
 
         protected virtual void Start()
         {
+            
             FindSceneComponents();
            // SetupInput();
 
@@ -179,7 +193,7 @@ namespace Game.MiniGames
         protected abstract string CheckResult();
 
         // Базовые методы для создания UI элементов
-        protected Button CreateButton(string name, string text, Vector2 position, Color color, Vector2 size, Transform parent = null)
+        protected Button CreateButton(string name, string text, Vector2 position, Color color, Vector2 size, Transform parent = null, int fontSize = 12)
         {
             if (parent == null) parent = miniGamePanel.transform;
 
@@ -204,7 +218,7 @@ namespace Game.MiniGames
             buttonText.font = Resources.GetBuiltinResource<Font>(ButtonFont);
             buttonText.alignment = TextAnchor.MiddleCenter;
             buttonText.color = Color.white;
-            buttonText.fontSize = 12;
+            buttonText.fontSize = fontSize;
 
             RectTransform textRect = textObj.GetComponent<RectTransform>();
             textRect.anchorMin = Vector2.zero;
