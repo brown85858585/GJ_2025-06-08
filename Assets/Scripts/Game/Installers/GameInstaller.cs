@@ -3,6 +3,8 @@ using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects;
 using Game.Levels;
+using Game.MiniGames;
+using Game.MiniGames.Flower;
 using Game.Monolog;
 using Game.Quests;
 using Player;
@@ -24,6 +26,7 @@ namespace Game.Installers
         [SerializeField] private EffectAccumulatorView effectAccumulator;
         [SerializeField] private Button nextLevelButton;
         [SerializeField] private Canvas mainCanvas;
+        [SerializeField] private MiniGamePrefabAccumulator miniGamePrefabAccumulator;
         
         [SerializeField] private LevelsConfig config;
 
@@ -46,7 +49,7 @@ namespace Game.Installers
         private void Install()
         {
             _core = new CoreInstaller(Instantiate(playerInput));
-            _logic = new GameLogicInstaller(_core);
+            _logic = new GameLogicInstaller(_core, miniGamePrefabAccumulator);
             
             _levelManager = new LevelManager(config, _core.InteractionSystem, _logic.MiniGameCoordinator);
         }
@@ -108,7 +111,7 @@ namespace Game.Installers
             cameraZoom.Initialization(_core.InputAdapter, vCam);
             
             _logic.PlayerController.CamTransform = _virtualCamera.transform;
-            KeepConstantScreenSize[] allComponents = FindObjectsOfType<KeepConstantScreenSize>(true); // true - включая неактивные
+            KeepConstantScreenSize[] allComponents = FindObjectsOfType<KeepConstantScreenSize>(true); // true - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             foreach (var component in allComponents)
             {
@@ -116,7 +119,7 @@ namespace Game.Installers
             }
 
 
-           /* CanAnimatorTester[] animation = FindObjectsOfType<CanAnimatorTester>(true); // true - включая неактивные
+           /* CanAnimatorTester[] animation = FindObjectsOfType<CanAnimatorTester>(true); // true - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             foreach (var component in animation)
             {
                 component.Init();

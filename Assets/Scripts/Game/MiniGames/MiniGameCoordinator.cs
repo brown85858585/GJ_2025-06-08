@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Effects;
 using Game.Interactions;
+using Game.MiniGames.Flower;
 using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
@@ -21,11 +22,13 @@ namespace Game.MiniGames
     {
         private readonly IInteractionSystem _interactionSystem;
         private readonly PlayerModel _playerModel;
+        private readonly MiniGamePrefabAccumulator _prefabAccumulator;
 
         private readonly Dictionary<ItemCategory, IMiniGame> _factories = new();
         private readonly IPlayerController _playerController;
         private Transform _level;
 
+        private Canvas _miniGameCanvas;
         private int CurrentLevelIndex { get; set; } = 0;
         public static int DayLevel { get; set; } = 0; // Уровень дня, который будет использоваться в мини-играх
 
@@ -37,11 +40,14 @@ namespace Game.MiniGames
         public List<IMiniGame> Games => _factories.Values.ToList();
 
         public MiniGameCoordinator(IInteractionSystem interactionSystem, PlayerModel playerModel,
-            IPlayerController playerController)
+            IPlayerController playerController, MiniGamePrefabAccumulator prefabAccumulator)
         {
             _interactionSystem = interactionSystem;
             _playerModel = playerModel;
             _playerController = playerController;
+            _prefabAccumulator = prefabAccumulator;
+
+            _miniGameCanvas = Object.Instantiate(_prefabAccumulator.MiniGameCanvas);
         }
 
         public void SetLevel(int level)
@@ -56,7 +62,7 @@ namespace Game.MiniGames
          
             _level = level;
 
-            _factories[ItemCategory.Flower] = new FlowerMiniGame(_playerController);
+            _factories[ItemCategory.Flower] = new FlowerMiniGame(_playerController, _prefabAccumulator, _miniGameCanvas);
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame(_playerController);
             _factories[ItemCategory.Computer] = new WorkPapersMiniGame(_playerController);
             

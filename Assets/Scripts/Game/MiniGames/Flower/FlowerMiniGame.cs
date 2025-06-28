@@ -1,35 +1,62 @@
 ﻿using System;
 using Game.Quests;
 using Player;
+using UI.Flower;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Game.MiniGames
+namespace Game.MiniGames.Flower
 {
     public class FlowerMiniGame : IMiniGame
     {
 
-        private IPlayerController playerController;
+        private readonly IPlayerController _playerController;
         private FlowerMiniGameManager _miniGameController;
         private readonly GameObject _miniGameObj;
+        private readonly PressIndicator _pressIndicator;
+        private readonly FlowerMiniGameView _flowerView;
         public QuestType QType { get; } = QuestType.Flower;
         public int Level { get; set; } = 0;
 
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
-        public FlowerMiniGame(IPlayerController playerController)
+        public FlowerMiniGame(IPlayerController playerController, MiniGamePrefabAccumulator prefabAccumulator, Canvas miniGameCanvas)
         {
-            this.playerController = playerController;
+            _playerController = playerController;
 
-            _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/FlowerGameManager"));
             Level = MiniGameCoordinator.DayLevel;
-            if (_miniGameObj != null)
+            // _miniGameObj =  Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/FlowerGameManager"));
+            // if (_miniGameObj != null)
+            // {
+            //     _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
+            // }
+
+            _flowerView = Object.Instantiate(prefabAccumulator.FlowerMiniGameViews[Level], miniGameCanvas.transform);
+            _pressIndicator = Object.Instantiate(prefabAccumulator.PressIndicator, _flowerView.PressPoint);
+            _pressIndicator.gameObject.SetActive(false);
+            _flowerView.gameObject.SetActive(false);
+
+            _pressIndicator.OnCompleteIndicator += SompleteFloverMiniGame;
+        }
+
+        private void SompleteFloverMiniGame(bool isSuccess)
+        {
+            OnMiniGameComplete?.Invoke(QType);
+            
+            Debug.Log(isSuccess);
+            
+            _pressIndicator.gameObject.SetActive(false);
+            _flowerView.gameObject.SetActive(false);
+            
+            if (isSuccess)
             {
-                _miniGameController = _miniGameObj.GetComponent<FlowerMiniGameManager>();
+                _playerController.Model.Score += 500;
             }
-
-
+            else
+            {
+                _playerController.Model.Score -= 500;
+            }
         }
 
         private void StartFlowerMiniGame()
@@ -61,7 +88,7 @@ namespace Game.MiniGames
                 _miniGameController.OnWateringAttempt += OnWateringAttempt;
 
                 // Запустить мини-игру (панель включится автоматически)
-                _miniGameController.SetPlayer(playerController.Model);
+                _miniGameController.SetPlayer(_playerController.Model);
                 _miniGameController.StartMiniGame();
             }
             else
@@ -73,7 +100,10 @@ namespace Game.MiniGames
         public void StartGame()
         {
             OnMiniGameStart?.Invoke(QType);
-            StartFlowerMiniGame();
+            _pressIndicator.gameObject.SetActive(true);
+            
+            _flowerView.gameObject.SetActive(true);
+            // StartFlowerMiniGame();
         }
 
 
@@ -137,14 +167,7 @@ namespace Game.MiniGames
             Object.Destroy(_miniGameObj);
 
         }
-
-        // Альтернативный метод если нужно вызвать мини-игру напрямую
-        [ContextMenu("Test Mini Game")]
-        public void TestMiniGame()
-        {
-            StartFlowerMiniGame();
-        }
-
+        
         public void OnActionButtonClick()
         {
             //_miniGameController.OnActionButtonClick();
