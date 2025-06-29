@@ -124,10 +124,16 @@ MonoBehaviour:
   arcImage: {fileID: 0}
   successZoneImage: {fileID: 0}
   trackImage: {fileID: 0}
-  zoneImages: []
+  zoneImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   indicatorImage: {fileID: 0}
+  ButtonFont: LegacyRuntime.ttf
+  TextFont: LegacyRuntime.ttf
   indicatorSpeed: 25
   maxAttempts: 3
+  gameScore: 0
   currentCookingViewPrefab: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
     type: 3}
   cookingViewPrefabs:
@@ -198,7 +204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8012524612185898012}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

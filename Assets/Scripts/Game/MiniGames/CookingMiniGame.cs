@@ -15,6 +15,16 @@ namespace Game.MiniGames
         private GameObject instantiatedCookingView;
         private CookingMiniGameView instantiatedCookingGameView;
 
+
+        [Header("Multiple Win Zones Game")]
+        private Transform[] winZoneHandlers = new Transform[3];
+        private Image[] winZones = new Image[3];
+        private float[] targetAngles = new float[3];
+        private bool[] zoneCompleted = new bool[3]; // Отслеживаем выполненные зоны
+        private int currentTarget = 0; // Текущая цель (0, 1, 2)
+        private int completedZones = 0; // Количество завершенных зон
+
+
         [Header("Cooking Settings")]
         public float arcRadius = 150f;
         public float arcStartAngle = 200f;
@@ -38,6 +48,232 @@ namespace Game.MiniGames
         private float targetAngle;
         private bool movingClockwise = true;
 
+
+
+
+
+
+        private void SetupMultipleWinZones()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (winZones[i] != null && winZoneHandlers[i] != null)
+                {
+                    // ЧИТАЕМ реальный угол из Transform, а не задаем фиксированный
+                    targetAngles[i] = winZoneHandlers[i].rotation.eulerAngles.z;
+
+                    // Нормализуем угол (-180 до 180)
+                    if (targetAngles[i] > 180f)
+                        targetAngles[i] -= 360f;
+
+                    zoneCompleted[i] = false;
+                    winZones[i].color = successZoneColor;
+
+                    // НЕ поворачиваем - оставляем как в префабе!
+                    // winZoneHandlers[i].rotation = Quaternion.Euler(0, 0, targetAngles[i]);
+
+                    Debug.Log($"WinZone {i + 1} реальный угол: {targetAngles[i]}");
+                }
+            }
+
+            completedZones = 0;
+            UpdateInstructionText($"🎯 Попадите в любую из 3 зон");
+        }
+
+        private int CheckCurrentZone()
+        {
+            float tolerance = 15f;
+
+            // Проверяем попадание в любую из НЕ завершенных зон
+            for (int i = 0; i < targetAngles.Length; i++)
+            {
+                if (!zoneCompleted[i]) // Зона еще не выполнена
+                {
+                    float targetAngle = targetAngles[i];
+                    if (Mathf.Abs(currentAngle - targetAngle) <= tolerance)
+                    {
+                        Debug.Log($"✅ Попадание в зону {i + 1}! Угол: {targetAngle}");
+                        return i; // Возвращаем индекс найденной зоны
+                    }
+                }
+            }
+
+            Debug.Log($"❌ Промах! Текущий угол: {currentAngle}");
+            return -1; // Промах
+        }
+
+        protected override void OnActionButtonClick()
+        {
+            if (!isGameActive)
+            {
+                Debug.Log("Игра неактивна, игнорируем нажатие E");
+                return;
+            }
+
+            int hitZoneIndex = CheckCurrentZone(); // Получаем индекс попавшей зоны
+
+            if (hitZoneIndex >= 0)
+            {
+                // Попадание в зону с индексом hitZoneIndex
+                HideCompletedZone(hitZoneIndex); // Скрываем именно ту зону, в которую попали
+                completedZones++;
+
+                if (completedZones >= 3)
+                {
+                    Debug.Log("🎉 Все зоны выполнены! Победа!");
+                    isGameActive = false;
+                    UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
+                    OnGameAttempt?.Invoke(true);
+                    model.Score += 150;
+                    StartCoroutine(ShowResultAndEnd(2f));
+                }
+                else
+                {
+                    int remainingZones = 3 - completedZones;
+                    UpdateInstructionText($"🎯 Попадите в любую из {remainingZones} оставшихся зон");
+                    Debug.Log($"✅ Зона {hitZoneIndex + 1} выполнена! Осталось: {remainingZones}");
+                }
+            }
+            else
+            {
+                // Промах
+                Debug.Log("❌ Промах! Игра окончена!");
+                isGameActive = false;
+                UpdateInstructionText("❌ Промах! Попробуйте снова!");
+                OnGameAttempt?.Invoke(false);
+                model.Score += 25;
+                StartCoroutine(ShowResultAndEnd(1.5f));
+            }
+        }
+
+        private void HideCompletedZone(int zoneIndex)
+        {
+            if (zoneIndex >= 0 && zoneIndex < winZones.Length && winZones[zoneIndex] != null)
+            {
+                zoneCompleted[zoneIndex] = true;
+
+                // Анимация исчезновения
+                StartCoroutine(FadeOutZone(zoneIndex));
+
+                Debug.Log($"Зона {zoneIndex + 1} скрыта");
+            }
+        }
+
+        private IEnumerator FadeOutZone(int zoneIndex)
+        {
+            Image zone = winZones[zoneIndex];
+            Color startColor = zone.color;
+            float duration = 0.5f;
+            float elapsedTime = 0f;
+
+            // Плавное исчезновение
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+
+                Color newColor = startColor;
+                newColor.a = alpha;
+                zone.color = newColor;
+
+                yield return null;
+            }
+
+            // Полностью скрываем
+            zone.gameObject.transform.parent.gameObject.SetActive(false);
+        }
+
+        // Сброс для новой игры
+        protected override void StartGameLogic()
+        {
+            // Сбрасываем все зоны
+            for (int i = 0; i < 3; i++)
+            {
+                if (winZones[i] != null)
+                {
+                    winZones[i].gameObject.SetActive(true);
+                    winZones[i].color = successZoneColor;
+                    zoneCompleted[i] = false;
+                }
+            }
+
+            currentTarget = 0;
+            completedZones = 0;
+            currentAngle = 0f;
+            movingClockwise = true;
+
+            UpdateInstructionText("🎯 Попадите в зону 1 из 3");
+
+            if (knife != null)
+            {
+                UpdateKnifePosition();
+            }
+
+            StartCoroutine(MoveKnife());
+        }
+
+        private void SetupPrefabReferences()
+        {
+            knifeHandler = instantiatedCookingView.transform.Find("Panel/knifeHandler");
+
+            // Находим все 3 winZone по именам из иерархии
+            string[] zoneNames = { "winZone", "winZone", "winZone" };
+
+            for (int i = 0; i < 3; i++)
+            {
+                // Ищем по полному пути
+                Transform foundZone = instantiatedCookingView.transform.Find($"Panel/winZoneHandler{i}/{zoneNames[i]}");
+                if (foundZone != null)
+                {
+                    winZoneHandlers[i] = foundZone;
+                    winZones[i] = foundZone.GetComponent<Image>();
+                    Debug.Log($"WinZone {i + 1} найдена: {zoneNames[i]}");
+                }
+                else
+                {
+                    Debug.LogError($"WinZone {i + 1} не найдена: {zoneNames[i]}");
+                }
+            }
+
+            if (knifeHandler != null)
+            {
+                knife = knifeHandler.GetComponent<RectTransform>();
+            }
+
+            SetupMultipleWinZones();
+        }
+
+ 
+
+        // Обновленный метод для конкретной зоны
+        public void SetWinZoneWidth(int zoneIndex, float newWidth)
+        {
+            if (zoneIndex >= 0 && zoneIndex < winZones.Length && winZones[zoneIndex] != null)
+            {
+                RectTransform rect = winZones[zoneIndex].rectTransform;
+                rect.sizeDelta = new Vector2(newWidth, rect.sizeDelta.y);
+                Debug.Log($"WinZone {zoneIndex + 1} размер установлен: {newWidth}");
+            }
+        }
+
+        // Обновленная проверка попадания в любую из 3 зон
+        protected override string CheckResult()
+        {
+            float tolerance = 15f; // Допустимое отклонение
+
+            for (int i = 0; i < targetAngles.Length; i++)
+            {
+                if (winZones[i] != null && Mathf.Abs(currentAngle - targetAngles[i]) <= tolerance)
+                {
+                    Debug.Log($"✅ Попадание в WinZone {i + 1}! Угол: {targetAngles[i]}");
+                    return "success";
+                }
+            }
+
+            Debug.Log($"❌ Промах! Текущий угол: {currentAngle}");
+            return "fail";
+        }
+
         protected override void Start()
         {
             instantiatedCookingView= cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
@@ -52,43 +288,43 @@ namespace Game.MiniGames
 
             base.Start();
         }
-
-        public void SetWinZoneWidth(float newWidth)
-        {
-            Image targetWinZone =  winZone;
-            if (targetWinZone != null)
-            {
-                RectTransform rect = targetWinZone.rectTransform;
-                rect.sizeDelta = new Vector2(newWidth, rect.sizeDelta.y);
-            }
-        }
         /*
-        private void SetupWinZone()
-        {
-            Image targetWinZone = cookingComponents?.winZone ?? winZone;
-            Transform targetWinZoneHandler = cookingComponents?.winZoneHandler ?? winZoneHandler;
+           public void SetWinZoneWidth(float newWidth)
+           {
+               Image targetWinZone =  winZone;
+               if (targetWinZone != null)
+               {
+                   RectTransform rect = targetWinZone.rectTransform;
+                   rect.sizeDelta = new Vector2(newWidth, rect.sizeDelta.y);
+               }
+           }
 
-            if (targetWinZone != null && targetWinZoneHandler != null)
-            {
-                // Устанавливаем случайную позицию для зеленой зоны
-                targetAngle = Random.Range(-60f, 60f); // Диапазон углов для зоны победы
+           private void SetupWinZone()
+           {
+               Image targetWinZone = cookingComponents?.winZone ?? winZone;
+               Transform targetWinZoneHandler = cookingComponents?.winZoneHandler ?? winZoneHandler;
 
-                // Меняем цвет зоны на зеленый
-                targetWinZone.color = successZoneColor;
+               if (targetWinZone != null && targetWinZoneHandler != null)
+               {
+                   // Устанавливаем случайную позицию для зеленой зоны
+                   targetAngle = Random.Range(-60f, 60f); // Диапазон углов для зоны победы
 
-                // Настраиваем размер winZone если включена кастомизация
-                if (useCustomWinZoneSize)
-                {
-                    SetWinZoneSize(winZoneWidthSlider, winZoneHeight);
-                }
+                   // Меняем цвет зоны на зеленый
+                   targetWinZone.color = successZoneColor;
 
-                // Поворачиваем зону победы
-                targetWinZoneHandler.rotation = Quaternion.Euler(0, 0, targetAngle);
+                   // Настраиваем размер winZone если включена кастомизация
+                   if (useCustomWinZoneSize)
+                   {
+                       SetWinZoneSize(winZoneWidthSlider, winZoneHeight);
+                   }
 
-                Debug.Log($"Win zone установлена на угол: {targetAngle}, размер: {winZoneWidthSlider}x{winZoneHeight}");
-            }
-        }
-        */
+                   // Поворачиваем зону победы
+                   targetWinZoneHandler.rotation = Quaternion.Euler(0, 0, targetAngle);
+
+                   Debug.Log($"Win zone установлена на угол: {targetAngle}, размер: {winZoneWidthSlider}x{winZoneHeight}");
+               }
+           }
+           */
 
         protected override void CreateStartScreen()
         {
@@ -183,6 +419,7 @@ namespace Game.MiniGames
             }
         }
 
+        /*
         private void SetupPrefabReferences()
         {
             
@@ -213,6 +450,7 @@ namespace Game.MiniGames
                 Debug.LogError("winZoneHandler не найден в префабе!");
             }
         }
+        */
 
         protected override void FindSceneComponents()
         {
@@ -232,6 +470,7 @@ namespace Game.MiniGames
             Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
         }
 
+        /*
         private void SetupWinZone()
         {
             if (winZone != null)
@@ -250,6 +489,7 @@ namespace Game.MiniGames
                 Debug.Log($"Win zone установлена на угол: {targetAngle}");
             }
         }
+        */
 
         private void CreateFallbackUI()
         {
@@ -308,9 +548,11 @@ namespace Game.MiniGames
             // Создаем кнопки в gameScreen
             actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
             actionButton.onClick.AddListener(OnActionButtonClick);
+            actionButton.gameObject.SetActive(false);
 
             exitButton = CreateButton("ExitButton", "Выход", new Vector2(100, -200), Color.gray, new Vector2(80, 40), gameScreen.transform);
             exitButton.onClick.AddListener(ExitMiniGame);
+            exitButton.gameObject.SetActive(false);
         }
 
         private void CreateInstructionText()
@@ -347,22 +589,7 @@ namespace Game.MiniGames
             return Sprite.Create(texture, new Rect(0, 0, 100, 100), new Vector2(0.5f, 0.5f));
         }
 
-        protected override void StartGameLogic()
-        {
-            currentAngle = 0f; // Начинаем с центра
-            movingClockwise = true;
 
-            if (knife != null)
-            {
-                UpdateKnifePosition();
-            }
-            else if (indicator != null)
-            {
-                UpdateIndicatorPosition();
-            }
-
-            StartCoroutine(MoveKnife());
-        }
 
         private IEnumerator MoveKnife()
         {
@@ -420,37 +647,10 @@ namespace Game.MiniGames
             }
         }
 
-        protected override void OnActionButtonClick()
-        {
-            if (!isGameActive)
-            {
-                Debug.Log("Игра неактивна, игнорируем нажатие E");
-                return;
-            }
 
-            Debug.Log("✅ E обработана! Останавливаем нож...");
-            isGameActive = false;
 
-            string result = CheckResult();
 
-            if (result == "success")
-            {
-                Debug.Log("✅ Еда приготовлена идеально!");
-                UpdateInstructionText("🍽️ Идеально приготовлено!");
-                OnGameAttempt?.Invoke(true);
-                StartCoroutine(ShowResultAndEnd(1.5f));
-                model.Score += 100;
-            }
-            else
-            {
-                Debug.Log("❌ Еда подгорела!");
-                UpdateInstructionText("🔥 Еда подгорела!");
-                OnGameAttempt?.Invoke(false);
-                StartCoroutine(ShowResultAndEnd(1.5f));
-                model.Score += 50;
-            }
-        }
-
+        /*
         protected override string CheckResult()
         {
             // Проверяем попадание в зону победы
@@ -463,6 +663,7 @@ namespace Game.MiniGames
 
             return "fail";
         }
+        */
 
         public void SetDifficulty(float speed, float zoneSize)
         {
