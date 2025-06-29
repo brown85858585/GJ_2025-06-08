@@ -165,7 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fcf8b3ac66461db046ab230748d43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questDescription: {fileID: 8808921917357497249}
+  questTMPText: {fileID: 8808921917357497249}
+  quesTranslator: {fileID: 1186409584063725690}
   checkmark: {fileID: 6415376792269165365}
 --- !u!1 &5354934408605953490
 GameObject:
@@ -339,6 +340,7 @@ GameObject:
   - component: {fileID: 8733959398926186414}
   - component: {fileID: 1569419786970434584}
   - component: {fileID: 8808921917357497249}
+  - component: {fileID: 1186409584063725690}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -395,9 +397,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 62bc0e50161029740ae2dde4d9201529, type: 2}
-  m_sharedMaterial: {fileID: 8605116668295533090, guid: 62bc0e50161029740ae2dde4d9201529,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b8825e090e756f64e86a6405ee529aaf, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 84dad80991644d44ca25c2fe09de6fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -463,3 +464,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1186409584063725690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526328303599638747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dae449646f11534f81928346b3b6341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keyReference:
+    _key: 
+    _formatters: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Quests
 {
     public class QuestLogView : MonoBehaviour
     {
-        [SerializeField] Transform questListContainer;
-        [SerializeField] QuestView _questViewPrefab;
+        [SerializeField] private Transform questListContainer;
+        [FormerlySerializedAs("_questViewPrefab")] 
+        [SerializeField] private QuestView questViewPrefab;
         
-        private Dictionary<QuestType, QuestView> _quests = new ();
+        private readonly Dictionary<QuestType, QuestView> _quests = new ();
 
         private void Start()
         {
@@ -23,14 +25,14 @@ namespace Game.Quests
             {
                 if (_quests.ContainsKey(quest.Type))
                 {
-                    _quests[quest.Type].Initialize($"{quest.Type}: {quest.Description}", quest.IsCompleted);
+                    _quests[quest.Type].Initialize(quest.Key, quest.IsCompleted);
                     continue;
                 }
         
-                var questItem = Instantiate(_questViewPrefab, questListContainer);
-                questItem.name = quest.Type + "Quest";
-                questItem.Initialize($"{quest.Type}: {quest.Description}", quest.IsCompleted);
-                _quests.Add(quest.Type, questItem);
+                var questView = Instantiate(questViewPrefab, questListContainer);
+                questView.name = quest.Type + "Quest";
+                questView.Initialize(quest.Key, quest.IsCompleted);
+                _quests.Add(quest.Type, questView);
             }
         }
 
