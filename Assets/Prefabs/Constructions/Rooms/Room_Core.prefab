@@ -905,7 +905,7 @@ MonoBehaviour:
   id: a32cbf93281af984ab6c23d1a46ed717
   category: 3
   isMultiplyInteractable: 0
-  popupOffset: {x: -0.69, y: 1.82, z: -0.85}
+  popupOffset: {x: 0, y: 1.82, z: 0}
   popupScale: 1
 --- !u!1 &4844984277415521382
 GameObject:
@@ -1958,22 +1958,22 @@ PrefabInstance:
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.94286203
+      value: 0.9270918
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.23806794
+      value: 0.27566195
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.22600555
+      value: 0.24345657
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.05706527
+      value: -0.0723895
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
