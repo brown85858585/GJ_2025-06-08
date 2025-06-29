@@ -50,11 +50,14 @@ namespace Knot.Localization
                     return;
 
                 Undo.RegisterCompleteObjectUndo(TextCollection, "Import");
-
+                
                 TextCollection.Clear();
                 KeyCollection.Clear();
                 int failedImportLines = 0;
-                foreach (var l in TextAsset.text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+                
+                var lines = GetListFromTextAsset(TextAsset.text);
+                
+                foreach (var l in lines)
                 {
                     try
                     {
@@ -104,6 +107,34 @@ namespace Knot.Localization
                 if (failedImportLines > 0)
                     Debug.Log($"{this.GetType()} {nameof(failedImportLines)}: {failedImportLines}");
 #endif
+            }
+
+            private List<string> GetListFromTextAsset(string asset)
+            {
+                var lines = new List<string>();
+                using var reader = new StringReader(asset);
+                
+                var inQuotes = false;
+                var currentLine = "";
+                while (reader.ReadLine() is { } rawLine)
+                {
+                    if (!inQuotes)
+                        currentLine = rawLine;
+                    else
+                        currentLine += "\n" + rawLine;
+
+                    int quoteCount = rawLine.Count(c => c == '\"');
+                    if (quoteCount % 2 != 0)
+                        inQuotes = !inQuotes;
+
+                    if (!inQuotes)
+                    {
+                        lines.Add(currentLine);
+                        currentLine = "";
+                    }
+                }
+
+                return lines;
             }
 
             public override void Export(KnotDatabase database)
