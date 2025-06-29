@@ -28,8 +28,8 @@ RectTransform:
   m_GameObject: {fileID: 26613881461284153}
   m_LocalRotation: {x: 0, y: 0, z: -0.20827872, w: 0.97806954}
   m_LocalPosition: {x: 0, y: 0, z: -9.910269}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.61, y: 1.61, z: 1.61}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 392692081504601697}
   m_Father: {fileID: 0}
@@ -79,9 +79,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b565ca0b04a6c9a44aca7c5948c5ab30, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.47484267, g: 0.8933612, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -214,6 +214,11 @@ PrefabInstance:
       propertyPath: ShapeModule.radius.value
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 198244127493087640, guid: a82a87e68ab906d4bbf876f687e2a155,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.84
+      objectReference: {fileID: 0}
     - target: {fileID: 198716508116803946, guid: a82a87e68ab906d4bbf876f687e2a155,
         type: 3}
       propertyPath: UVModule.flipU
@@ -233,6 +238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Flip.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 199347863135064356, guid: a82a87e68ab906d4bbf876f687e2a155,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199710676194690076, guid: a82a87e68ab906d4bbf876f687e2a155,
         type: 3}
