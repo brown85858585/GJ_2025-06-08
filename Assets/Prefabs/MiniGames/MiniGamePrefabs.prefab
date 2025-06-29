@@ -48,6 +48,7 @@ MonoBehaviour:
     type: 3}
   pressIndicator: {fileID: 3091687347874788365, guid: 7ee4a23e7fe994a499fbb46f6766fd53,
     type: 3}
+  canPrefab: {fileID: 26613881461284153, guid: 413569abc8b78af42816e56b9afd1f4a, type: 3}
   flowerMiniGameViews:
   - {fileID: 930876032188750650, guid: 88aa080ecf622f44da8a5c22d9272597, type: 3}
   - {fileID: 6389346385268227513, guid: e10c287ff1d3e37489bc2b781fb3e859, type: 3}
