@@ -64,33 +64,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6401120487850086942}
     m_Modifications:
-    - target: {fileID: 814902725565696826, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ec7d4c62cd4c0d34e9234e5c9aacabc7,
-        type: 3}
-    - target: {fileID: 1682305860034032148, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6e9a4916f0a16764b87066ba1b911f5b,
-        type: 3}
-    - target: {fileID: 1682305860034032148, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1682305860034032148, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1682305860034032148, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1682305860034032148, guid: 786dfd50e453b1041a2937d066da9cae,
         type: 3}
       propertyPath: m_FillAmount
@@ -200,42 +173,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PressEButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395787959050622495, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395787959050622495, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 8438990936281414285, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ac0ea4d56e9ae2f449f437f8568aa761,
-        type: 3}
-    - target: {fileID: 8763171856658791126, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8763171856658791126, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8834712737873088909, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 130
-      objectReference: {fileID: 0}
-    - target: {fileID: 8834712737873088909, guid: 786dfd50e453b1041a2937d066da9cae,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 130
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
