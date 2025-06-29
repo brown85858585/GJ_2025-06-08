@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using Game.Quests;
 using Player;
 using UI.Flower;
@@ -9,17 +10,21 @@ namespace Game.MiniGames.Flower
 {
     public class FlowerMiniGame : IMiniGame
     {
-
         private readonly IPlayerController _playerController;
         private readonly PressIndicator _pressIndicator;
         private readonly FlowerMiniGameView _flowerView;
+        private GameObject _canView;
+        
+        
+        public bool IsCompleted { get; set; }
         public QuestType QType { get; } = QuestType.Flower;
         public int Level { get; set; } = 0;
 
         public event Action<QuestType> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
-        public FlowerMiniGame(IPlayerController playerController, MiniGamePrefabAccumulator prefabAccumulator, Canvas miniGameCanvas)
+        public FlowerMiniGame(IPlayerController playerController, MiniGamePrefabAccumulator prefabAccumulator,
+            Canvas miniGameCanvas)
         {
             _playerController = playerController;
 
@@ -32,14 +37,56 @@ namespace Game.MiniGames.Flower
             _flowerView.gameObject.SetActive(false);
 
             _pressIndicator.OnCompleteIndicator += CompleteFlowerMiniGame;
+            _pressIndicator.SetMultiplier(_flowerView.PressForce);
         }
-
+        
         public void StartGame()
         {
             OnMiniGameStart?.Invoke(QType);
-            _pressIndicator.gameObject.SetActive(true);
+            
+            _canView.gameObject.SetActive(true);
+            
+            StartCanAnimationAndStartPressInteraction();
+           
             
             _flowerView.gameObject.SetActive(true);
+        }
+
+        private void StartCanAnimationAndStartPressInteraction()
+        {
+            RectTransform uiRect = _flowerView.CanPoint as RectTransform;
+            Canvas canvas = uiRect.GetComponentInParent<Canvas>();
+            Camera uiCam = canvas.renderMode == RenderMode.ScreenSpaceCamera ? canvas.worldCamera : null;
+            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(uiCam, uiRect.position);
+
+            float distanceZ = Mathf.Abs(Camera.main.transform.position.z - _canView.transform.position.z);
+            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(
+                screenPoint.x,
+                screenPoint.y,
+                distanceZ
+            ));
+            
+            //Собираем последовательность: движение → поворот → включение индикатора
+            var seq = DOTween.Sequence();
+            seq.Append(_canView.transform
+                .DOMove(worldPoint, 1.5f)
+                .SetEase(Ease.OutBack)
+            );
+            seq.Insert(0.2f, _canView.transform
+                .DOLocalRotate(
+                    new Vector3(
+                        _canView.transform.localEulerAngles.x,
+                        180f,
+                        _canView.transform.localEulerAngles.z
+                    ),
+                    0.5f
+                )
+                .SetEase(Ease.InOutSine)
+            );
+            seq.OnComplete(() =>
+            {
+                _pressIndicator.gameObject.SetActive(true);
+            });
         }
 
         private void CompleteFlowerMiniGame(bool isSuccess)
@@ -47,9 +94,11 @@ namespace Game.MiniGames.Flower
             _pressIndicator.OnCompleteIndicator -= CompleteFlowerMiniGame;
             
             OnMiniGameComplete?.Invoke(QType);
+            IsCompleted = true;
             
             _pressIndicator.gameObject.SetActive(false);
             _flowerView.gameObject.SetActive(false);
+            _canView.gameObject.SetActive(false);
             
             SetReward(isSuccess);
         }
@@ -70,18 +119,17 @@ namespace Game.MiniGames.Flower
         {
         }
 
-
-        private void OnMiniGameCompleted()
-        {
-            OnMiniGameComplete?.Invoke(QType);
-        }
-
         public void Dispose()
         {
             _pressIndicator.OnCompleteIndicator -= CompleteFlowerMiniGame;
   
             Object.Destroy(_flowerView);
             Object.Destroy(_pressIndicator);
+        }
+
+        public void SetWateringCanView(GameObject wateringCanView)
+        {
+            _canView = wateringCanView.gameObject.transform.parent.gameObject;
         }
     }
 }

@@ -11,5 +11,6 @@ namespace Game.MiniGames
         public event Action<QuestType> OnMiniGameStart;
         void OnActionButtonClick();
         void StartGame();
+        bool IsCompleted { get; set; }
     }
 }

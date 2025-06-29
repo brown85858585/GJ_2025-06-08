@@ -57,6 +57,8 @@ namespace Game.MiniGames
             });
         }
 
+        public bool IsCompleted { get; set; }
+
         private async UniTask DisableLevelInNextFrame()
         {
             await UniTask.WaitForFixedUpdate();

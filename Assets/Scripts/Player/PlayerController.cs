@@ -75,20 +75,23 @@ namespace Player
             }
         }
 
-        public void FixedUpdateMove()
+        private void FixedUpdateMove()
         {
             Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
-            var move = Movement.Move(_view.MoveSpeed, _view.transform);
-           if (_isRunMovement)
+            Vector3 move = Vector3.zero;
+            if (_input.IsAccelerating)
             {
-                _view.SetRunAnimation(Movement.NormalizedSpeed);
+                move = Movement.Move(_view.SprintSpeed, _view.transform);
+                
             }
             else
             {
-                _view.SetWalkAnimation( _input.Direction.normalized);
+                move = Movement.Move(_view.MoveSpeed, _view.transform);
+                
             }
+            _view.SetWalkAnimation( _input.Direction.normalized);
             _view.Rigidbody.AddForce(move, ForceMode.Force);
             
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);

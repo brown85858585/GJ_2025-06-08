@@ -132,6 +132,8 @@ namespace Game.MiniGames
             _miniGameController.StartMiniGame();
         }
 
+        public bool IsCompleted { get; set; }
+
         private void OnCookingAttempt(bool success)
         {
             if (success)

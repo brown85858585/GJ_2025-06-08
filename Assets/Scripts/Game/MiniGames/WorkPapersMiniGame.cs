@@ -113,6 +113,8 @@ namespace Game.MiniGames
             _miniGameController.StartMiniGame();
         }
 
+        public bool IsCompleted { get; set; }
+
         private void OnWorkPapersAttempt(bool success)
         {
             //playerController.Model.Score += _miniGameController.gameScore;

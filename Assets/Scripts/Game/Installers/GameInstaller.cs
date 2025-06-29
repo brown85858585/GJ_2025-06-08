@@ -117,14 +117,8 @@ namespace Game.Installers
             {
                 component.InitializeFromSceneStart();
             }
-
-
-           /* CanAnimatorTester[] animation = FindObjectsOfType<CanAnimatorTester>(true); // true - ������� ����������
-            foreach (var component in animation)
-            {
-                component.Init();
-            }
-           */
+            
+            _logic.MiniGameCoordinator.SetWateringCanView(allComponents[0].gameObject);
         }
 
         private void InitQuestLog()

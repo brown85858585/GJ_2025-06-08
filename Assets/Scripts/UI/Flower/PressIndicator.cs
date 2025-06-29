@@ -59,7 +59,7 @@ namespace UI.Flower
 
         private void CheckCompletedIndicator()
         {
-            if (mySlider.fillAmount >= 0.95f)
+            if (mySlider.fillAmount >= 0.99f)
             {
                 OnCompleteIndicator?.Invoke(true);
             }
@@ -78,6 +78,11 @@ namespace UI.Flower
             // Увеличение значения слайдера 
 
             mySlider.fillAmount += Random.Range(0.02f, 0.05f);
+        }
+
+        public void SetMultiplier(float newMultiplier)
+        {
+            multiplier = newMultiplier;
         }
     }
 }

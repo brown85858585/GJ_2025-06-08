@@ -19,7 +19,9 @@ namespace Player
         
         [Header("Movement Settings")]
         [SerializeField]
-        private float moveSpeed = 5f;
+        private float moveSpeed = 25f;
+        [SerializeField]
+        public float sprintSpeed = 45f;
         [SerializeField]
         private Button moveForwardButton;
         [SerializeField]
@@ -38,6 +40,7 @@ namespace Player
 
         private static readonly Quaternion _rotationOffset = Quaternion.Euler(180f, 0f, 0f);
         public float MoveSpeed => moveSpeed;
+        public float SprintSpeed => sprintSpeed;
         public float GroundDrag => groundDrag;
         public float TurnSmooth => turnSmooth;
         public LayerMask WhatIsGround => whatIsGround;

@@ -72,6 +72,12 @@ namespace Game.MiniGames
                 effectAccumulatorView, level);
         }
 
+        public void SetWateringCanView(GameObject wateringCanView)
+        {
+            var flowerGame = _factories[ItemCategory.Flower] as FlowerMiniGame;
+                flowerGame.SetWateringCanView(wateringCanView);
+        }
+        
         private void SwitchOnInputSystem(Quests.QuestType questType)
         {
             if (questType != Quests.QuestType.Sprint)
@@ -107,6 +113,8 @@ namespace Game.MiniGames
         {
             if (!_factories.TryGetValue(category, out var game)) return;
 
+            if(game.IsCompleted) return;
+            
             if (category == ItemCategory.Flower && _playerModel.ItemInHand != ItemCategory.WateringCan)
             {
                 Debug.Log("You need a watering can to start the flower mini-game.");
