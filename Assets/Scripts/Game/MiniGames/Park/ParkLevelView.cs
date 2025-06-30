@@ -10,7 +10,8 @@ namespace Game.MiniGames.Park
         [SerializeField] private List<CheckpointView> checkpointViews;
         [SerializeField] private Slider staminaSlider;
         public List<CheckpointView> CheckpointViews => checkpointViews;
-
+        private int _checkpointCounter;
+        public int CheckpointCounter => _checkpointCounter;
         public event Action<int> OnRingEntered;
         public event Action OnStaminaChanged;
 
@@ -22,9 +23,16 @@ namespace Game.MiniGames.Park
             }
         }
 
-        private void Start()
+        private void OnEnable()
         {
             InitRings();
+            _checkpointCounter = CheckpointViews.Count;
+        }
+
+        private void OnDisable()
+        {
+            _checkpointCounter = 0;
+            HideRings();
         }
 
         private void FixedUpdate()
@@ -43,11 +51,6 @@ namespace Game.MiniGames.Park
             {
                 ringView.ShowRing();
                 ringView.OnEnteredTargetMask += HandleEnteredTargetMask;
-            }
-
-            if (checkpointViews.Count > 0)
-            {
-                checkpointViews[0].Select();
             }
         }
 
@@ -70,24 +73,17 @@ namespace Game.MiniGames.Park
 
         private void HandleEnteredTargetMask(int id)
         {
+            _checkpointCounter--;
+            
             checkpointViews[id].OnEnteredTargetMask -= HandleEnteredTargetMask;
             checkpointViews[id].HideRing();
             OnRingEntered?.Invoke(id);
-
-            checkpointViews[id].Unselect();
-
-            if (id < checkpointViews.Count - 1)
-            {
-                checkpointViews[id + 1].Select();
-            }
+            
         }
 
         private void OnDestroy()
         {
-            foreach (var ringView in checkpointViews)
-            {
-                ringView.OnEnteredTargetMask -= HandleEnteredTargetMask;
-            }
+            HideRings();
         }
     }
 }

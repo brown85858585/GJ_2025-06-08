@@ -14,8 +14,11 @@ namespace Game.MiniGames.Flower
         private readonly PressIndicator _pressIndicator;
         private readonly FlowerMiniGameView _flowerView;
         private GameObject _canView;
-        
-        
+        private Vector3 _defaultPosition;
+        private Quaternion _defaultRotation;
+        private CanAnimatorTester _canAnimation;
+
+
         public bool IsCompleted { get; set; }
         public QuestType QType { get; } = QuestType.Flower;
         public int Level { get; set; } = 0;
@@ -38,6 +41,7 @@ namespace Game.MiniGames.Flower
 
             _pressIndicator.OnCompleteIndicator += CompleteFlowerMiniGame;
             _pressIndicator.SetMultiplier(_flowerView.PressForce);
+
         }
         
         public void StartGame()
@@ -54,6 +58,8 @@ namespace Game.MiniGames.Flower
 
         private void StartCanAnimationAndStartPressInteraction()
         {
+            _canAnimation.TogglePouring();
+            
             RectTransform uiRect = _flowerView.CanPoint as RectTransform;
             Canvas canvas = uiRect.GetComponentInParent<Canvas>();
             Camera uiCam = canvas.renderMode == RenderMode.ScreenSpaceCamera ? canvas.worldCamera : null;
@@ -94,11 +100,13 @@ namespace Game.MiniGames.Flower
             _pressIndicator.OnCompleteIndicator -= CompleteFlowerMiniGame;
             
             OnMiniGameComplete?.Invoke(QType);
-            IsCompleted = true;
             
             _pressIndicator.gameObject.SetActive(false);
             _flowerView.gameObject.SetActive(false);
             _canView.gameObject.SetActive(false);
+            _canView.transform.position = _defaultPosition;
+            _canView.transform.rotation = _defaultRotation;
+            _canAnimation.TogglePouring();
             
             SetReward(isSuccess);
         }
@@ -130,6 +138,11 @@ namespace Game.MiniGames.Flower
         public void SetWateringCanView(GameObject wateringCanView)
         {
             _canView = wateringCanView.gameObject.transform.parent.gameObject;
+            
+            _defaultPosition = wateringCanView.transform.position;
+            _defaultRotation = wateringCanView.transform.rotation;
+            
+            _canAnimation = wateringCanView.GetComponent<CanAnimatorTester>();
         }
     }
 }

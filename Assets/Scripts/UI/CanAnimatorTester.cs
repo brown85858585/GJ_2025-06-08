@@ -55,16 +55,6 @@ public class CanAnimatorTester : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // Нажмите пробел, чтобы запустить/остановить анимацию
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TogglePouring();
-        }        
-        // transform.position.z
-    }
-
     private void BuildBeatSequence()
     {
         _beatSequence = DOTween.Sequence()

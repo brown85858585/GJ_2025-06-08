@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Effects;
+using Effects.VolumeEffects;
 using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
@@ -11,17 +12,17 @@ namespace Game.MiniGames
 {
     public class ParkMiniGame : IMiniGame
     {
-        private readonly IPlayerController _playerController;
-        private ParkLevelView _parkLevelView;
-        private EffectAccumulatorView _effectsAccumulatorView;
-        private Transform _levelRoom;
-        private ParkSprintController _parkSprintController;
-
-        public QuestType QType { get; } = QuestType.Sprint;
         public int Level { get ; set ; }
-
-        public event Action<QuestType> OnMiniGameComplete;
+        public bool IsCompleted { get; set; }
         public event Action<QuestType> OnMiniGameStart;
+        public event Action<QuestType> OnMiniGameComplete;
+        public QuestType QType { get; } = QuestType.Sprint;
+
+        private Transform _levelRoom;
+        private ParkLevelView _parkLevelView;
+        private ParkSprintController _parkSprintController;
+        private readonly IPlayerController _playerController;
+        private EffectAccumulatorView _effectsAccumulatorView;
 
         public ParkMiniGame(IPlayerController playerController)
         {
@@ -50,14 +51,13 @@ namespace Game.MiniGames
                 _parkSprintController = new ParkSprintController(_playerController, _parkLevelView);
                 _parkSprintController.EndSprint += () =>
                 {
-                    RunTimer().Forget();
+                    RunCompletingTimer().Forget();
                 };
                 
                 _effectsAccumulatorView.FadeOut();
+                VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Vignette);
             });
         }
-
-        public bool IsCompleted { get; set; }
 
         private async UniTask DisableLevelInNextFrame()
         {
@@ -65,9 +65,10 @@ namespace Game.MiniGames
             _levelRoom.gameObject.SetActive(false);
         }
 
-        private async UniTask RunTimer()
+        private async UniTask RunCompletingTimer()
         {
-            Debug.Log("Park Mini Game Started");
+            _playerController.ToggleMovement();
+            
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
             _effectsAccumulatorView.FadeIn();
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
@@ -76,9 +77,7 @@ namespace Game.MiniGames
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _effectsAccumulatorView.FadeOut();
-            
-            _playerController.ToggleMovement();
-            Debug.Log("Park Mini Game Completed");
+
             _parkSprintController.Dispose();
             OnMiniGameComplete?.Invoke(QType);
         }
@@ -91,8 +90,8 @@ namespace Game.MiniGames
         public void Dispose()
         {
             Object.Destroy(_parkLevelView);
+            _parkSprintController?.Dispose();
             //TODO: Implement Dispose logic if needed
-            // throw new NotImplementedException();
         }
     }
 }
