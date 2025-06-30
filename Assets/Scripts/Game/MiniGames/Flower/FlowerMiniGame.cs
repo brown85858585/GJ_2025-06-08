@@ -38,7 +38,7 @@ namespace Game.MiniGames.Flower
             
             _pressIndicator.gameObject.SetActive(false);
             _flowerView.gameObject.SetActive(false);
-
+            
             _pressIndicator.OnCompleteIndicator += CompleteFlowerMiniGame;
             _pressIndicator.SetMultiplier(_flowerView.PressForce);
         }
