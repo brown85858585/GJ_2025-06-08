@@ -41,7 +41,6 @@ namespace Game.MiniGames.Flower
 
             _pressIndicator.OnCompleteIndicator += CompleteFlowerMiniGame;
             _pressIndicator.SetMultiplier(_flowerView.PressForce);
-
         }
         
         public void StartGame()
@@ -125,6 +124,7 @@ namespace Game.MiniGames.Flower
 
         public void OnActionButtonClick()
         {
+            _pressIndicator.HandleInteract();
         }
 
         public void Dispose()

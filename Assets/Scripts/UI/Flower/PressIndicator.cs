@@ -40,12 +40,6 @@ namespace UI.Flower
                 return;
             }
             
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                HandleInteract();
-            }
-            
-            // уменьшение значения слайдера
             mySlider.fillAmount -= Time.deltaTime * multiplier;
             
             // Анимация пульсации
@@ -70,7 +64,7 @@ namespace UI.Flower
             }
         }
 
-        private void HandleInteract()
+        public void HandleInteract()
         {
             // Сброс анимации пульсации
             _animationTime = 0;
