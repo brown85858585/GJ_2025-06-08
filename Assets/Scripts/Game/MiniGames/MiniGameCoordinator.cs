@@ -120,8 +120,7 @@ namespace Game.MiniGames
                 Debug.Log("You need a watering can to start the flower mini-game.");
                 return;
             }
-
-
+            
             // Создаём делегаты и сохраняем их для последующей отписки
             Action<Quests.QuestType> startHandler = SwitchOnInputSystem;
             Action<Quests.QuestType> completeHandler = SwitchOffInputSystem;

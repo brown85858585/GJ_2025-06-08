@@ -50,7 +50,7 @@ namespace Game.MiniGames
                 _parkSprintController = new ParkSprintController(_playerController, _parkLevelView);
                 _parkSprintController.EndSprint += () =>
                 {
-                    RunTimer().Forget();
+                    RunCompletingTimer().Forget();
                 };
                 
                 _effectsAccumulatorView.FadeOut();
@@ -63,9 +63,10 @@ namespace Game.MiniGames
             _levelRoom.gameObject.SetActive(false);
         }
 
-        private async UniTask RunTimer()
+        private async UniTask RunCompletingTimer()
         {
-            Debug.Log("Park Mini Game Started");
+            _playerController.ToggleMovement();
+            
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
             _effectsAccumulatorView.FadeIn();
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
@@ -75,8 +76,10 @@ namespace Game.MiniGames
             
             _effectsAccumulatorView.FadeOut();
             
-            _playerController.ToggleMovement();
+            
             Debug.Log("Park Mini Game Completed");
+            IsCompleted = true;
+
             _parkSprintController.Dispose();
             OnMiniGameComplete?.Invoke(QType);
         }
