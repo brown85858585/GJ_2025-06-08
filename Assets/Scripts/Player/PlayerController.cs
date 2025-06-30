@@ -121,6 +121,10 @@ namespace Player
         {
             _view.Rigidbody.MovePosition(position);
         }
+        public void SetRotation(Quaternion rotation)
+        {
+            _view.transform.rotation = rotation;
+        }
         
         public void HandleInteraction(ItemCategory item, Transform obj)
         {

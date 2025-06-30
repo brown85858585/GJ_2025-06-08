@@ -141,16 +141,17 @@ namespace Game.MiniGames
 
             if (category == ItemCategory.Door)
             {
-                game.OnMiniGameComplete += OnMiniGameComplete;
+                game.OnMiniGameComplete += OnRunMiniGameComplete;
             }
             game.Level = CurrentLevelIndex;
             game.StartGame();
         }
 
-        private void OnMiniGameComplete(QuestType type)
+        private void OnRunMiniGameComplete(QuestType type)
         {
             _level.gameObject.SetActive(true);
-            _playerController.SetPosition(Vector3.zero * 6);
+            _playerController.SetPosition(new Vector3(11.005374f,0.0271916389f,4.8061552f));
+            _playerController.SetRotation(new Quaternion(0f,0.984181404f,0f,-0.177163616f));
         }
 
         public void UnregisterAll()
@@ -158,7 +159,7 @@ namespace Game.MiniGames
             _interactionSystem.OnInteraction -= HandleInteraction;
             foreach (var game in _factories.Values)
             {
-                game.OnMiniGameComplete -= OnMiniGameComplete;
+                game.OnMiniGameComplete -= OnRunMiniGameComplete;
                 game.Dispose();
             }
 
