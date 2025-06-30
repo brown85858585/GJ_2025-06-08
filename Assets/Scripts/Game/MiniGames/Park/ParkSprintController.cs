@@ -1,6 +1,7 @@
 using System;
 using Game.MiniGames.Park;
 using Player;
+using UnityEngine;
 
 namespace Game.MiniGames
 {
@@ -8,8 +9,6 @@ namespace Game.MiniGames
     {
         private readonly ParkLevelView _parkLevelView;
         private readonly IPlayerController _playerController;
-        
-        private int _currentRingIndex;
 
         private int _staminaMultiplyer = 40;
         private int _staminaMax = 10000;
@@ -29,17 +28,15 @@ namespace Game.MiniGames
         }
 
         private void HandleRingEntered(int id)
-        {
-            // if (id != _currentRingIndex || id >= _parkLevelView.CheckpointViews.Count-1)
-            // {
-            //     EndSprint?.Invoke();
-            //     ResetParkLevel();
-            //     return;
-            // }
-
+        { 
             _playerController.Model.Score += 100;
-            _currentRingIndex++;
             AddStamina(_staminaForRing);
+            
+            Debug.Log(_parkLevelView.CheckpointCounter);
+            if(_parkLevelView.CheckpointCounter == 0)
+            {
+                EndGame();
+            }
         }
 
         private void AddStamina(int value)
@@ -62,26 +59,19 @@ namespace Game.MiniGames
             _parkLevelView.UpdateStaminaView(_playerController.Model.Stamina);
 
             if (_playerController.Model.Stamina == 0)
-            { 
-                _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
-                EndSprint?.Invoke();
-                //ResetStamina();
-                ResetParkLevel();
+            {
+                EndGame();
             }
         }
 
-        private void ResetParkLevel()
+        private void EndGame()
         {
-            ResetRings();
+            _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
+            EndSprint?.Invoke();
+
             ResetStamina();
         }
-
-        private void ResetRings()
-        {
-            _currentRingIndex = 0;
-            _parkLevelView.ResetRings();
-        }
- 
+        
         private void ResetStamina()
         {
             _isFirstStaminaUpdateView = true;

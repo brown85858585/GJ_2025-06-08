@@ -38,6 +38,7 @@ namespace Game.Installers
         private EffectAccumulatorView _effectAccumulator;
         private ScoreView _scoreText;
 
+        private GameObject _savedCan;
         private void Awake()
         {
             Install();
@@ -115,8 +116,9 @@ namespace Game.Installers
             {
                 component.InitializeFromSceneStart();
             }
-            
-            _logic.MiniGameCoordinator.SetWateringCanView(allComponents[0].gameObject);
+
+            _savedCan = allComponents[0].gameObject;
+            _logic.MiniGameCoordinator.SetWateringCanView(_savedCan);
         }
 
         private void InitQuestLog()
@@ -151,6 +153,7 @@ namespace Game.Installers
                 _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
                 _logic.QuestLog.ResetQuests();
                 _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
+                _logic.MiniGameCoordinator.SetWateringCanView(_savedCan);
                 _allQuestsCompleted = false;
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
