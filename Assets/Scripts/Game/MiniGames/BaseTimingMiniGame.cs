@@ -75,7 +75,7 @@ namespace Game.MiniGames
 
         public void SetPlayer(PlayerModel model)
         {
-            model.Score
+         
             this.model = model;
         }
 
