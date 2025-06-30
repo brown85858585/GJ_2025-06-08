@@ -478,7 +478,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
         else
         {
-            model.Score += 50;
+            model.Score -= 50;
             incorrectAnswers++;
             Debug.Log($"❌ Неправильно! {currentCardData.sender}: {currentCardData.content}");
         }

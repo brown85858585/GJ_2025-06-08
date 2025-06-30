@@ -3,12 +3,10 @@ using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects;
 using Game.Levels;
-using Game.MiniGames;
 using Game.MiniGames.Flower;
 using Game.Monolog;
 using Game.Quests;
 using Player;
-using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,7 +36,7 @@ namespace Game.Installers
         private QuestLogView _questsView;
         private GameObject _virtualCamera;
         private EffectAccumulatorView _effectAccumulator;
-        private TMP_Text _scoreText;
+        private ScoreView _scoreText;
 
         private void Awake()
         {
@@ -59,8 +57,8 @@ namespace Game.Installers
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut();
 
-            _scoreText = mainCanvas.GetComponentInChildren<TMP_Text>();
-            _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.text = newScore.ToString())
+            _scoreText = mainCanvas.GetComponentInChildren<ScoreView>();
+            _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.Score = newScore)
                 .AddTo(this);
             
             InitLevelOne();
