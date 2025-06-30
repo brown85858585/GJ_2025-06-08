@@ -45,8 +45,7 @@ namespace Effects.VolumeEffects
                     _currentEffect = Object.Instantiate(_viewInstance.Blur);
                     break;
                 case VolumeEffectType.Vignette:
-                    // Assuming there's a vignette volume to activate
-                    // _viewInstance.Vignette.SetActive(true);
+                    _currentEffect = Object.Instantiate(_viewInstance.Vignette);
                     break;
                 default:
                     Debug.LogWarning($"Unknown VolumeEffectType: {type}");

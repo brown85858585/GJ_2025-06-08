@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Effects;
+using Effects.VolumeEffects;
 using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
@@ -54,6 +55,7 @@ namespace Game.MiniGames
                 };
                 
                 _effectsAccumulatorView.FadeOut();
+                VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Vignette);
             });
         }
 

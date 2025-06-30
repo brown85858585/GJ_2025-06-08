@@ -142,9 +142,15 @@ namespace Game.MiniGames
            
             game.Level = CurrentLevelIndex;
             game.StartGame();
-            
-            if(game.QType == QuestType.Sprint) return;
-            VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Blur);
+
+            if (game.QType == QuestType.Sprint)
+            {
+               
+            }
+            else
+            {
+                VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Blur);
+            }
         }
 
         private void OnMiniGameComplete(QuestType questType)
