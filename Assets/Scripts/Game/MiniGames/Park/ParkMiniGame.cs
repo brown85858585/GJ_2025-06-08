@@ -75,10 +75,6 @@ namespace Game.MiniGames
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _effectsAccumulatorView.FadeOut();
-            
-            
-            Debug.Log("Park Mini Game Completed");
-            IsCompleted = true;
 
             _parkSprintController.Dispose();
             OnMiniGameComplete?.Invoke(QType);

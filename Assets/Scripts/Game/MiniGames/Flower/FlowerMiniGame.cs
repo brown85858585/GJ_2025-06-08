@@ -100,7 +100,6 @@ namespace Game.MiniGames.Flower
             _pressIndicator.OnCompleteIndicator -= CompleteFlowerMiniGame;
             
             OnMiniGameComplete?.Invoke(QType);
-            IsCompleted = true;
             
             _pressIndicator.gameObject.SetActive(false);
             _flowerView.gameObject.SetActive(false);
