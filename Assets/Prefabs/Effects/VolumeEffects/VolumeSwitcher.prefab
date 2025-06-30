@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4ff1630eea27942b4f68355b928cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blurVolume: {fileID: 0}
+  blurVolume: {fileID: 7148717658078883407, guid: 4392763127c076d4dbb1e8c03b248bc4,
+    type: 3}

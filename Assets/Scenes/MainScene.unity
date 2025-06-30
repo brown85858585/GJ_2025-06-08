@@ -812,7 +812,7 @@ PrefabInstance:
     - target: {fileID: 8334590982083432147, guid: 3673174e561b2bd47af83a7b557b7b40,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000015258789
+      value: -0.000045776367
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1858,12 +1858,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VolumeSwitcher
       objectReference: {fileID: 0}
-    - target: {fileID: 1809907424314215640, guid: 05e531a4484e5384b942a4cd29f6186e,
-        type: 3}
-      propertyPath: blurVolume
-      value: 
-      objectReference: {fileID: 7148717658078883407, guid: 4392763127c076d4dbb1e8c03b248bc4,
-        type: 3}
     - target: {fileID: 2666300858091253586, guid: 05e531a4484e5384b942a4cd29f6186e,
         type: 3}
       propertyPath: m_LocalPosition.x
