@@ -27,7 +27,7 @@ namespace Game.MiniGames.Park
         public void HideRing()
         {
             particleSphere.gameObject.SetActive(false);
-            particleBum.Play();
+            // particleBum.Play();
         }
         
         public void ShowRing()
