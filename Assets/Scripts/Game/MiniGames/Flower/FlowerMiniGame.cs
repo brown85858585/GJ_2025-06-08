@@ -16,6 +16,7 @@ namespace Game.MiniGames.Flower
         private GameObject _canView;
         private Vector3 _defaultPosition;
         private Quaternion _defaultRotation;
+        private CanAnimatorTester _canAnimation;
 
 
         public bool IsCompleted { get; set; }
@@ -57,6 +58,8 @@ namespace Game.MiniGames.Flower
 
         private void StartCanAnimationAndStartPressInteraction()
         {
+            _canAnimation.TogglePouring();
+            
             RectTransform uiRect = _flowerView.CanPoint as RectTransform;
             Canvas canvas = uiRect.GetComponentInParent<Canvas>();
             Camera uiCam = canvas.renderMode == RenderMode.ScreenSpaceCamera ? canvas.worldCamera : null;
@@ -104,6 +107,7 @@ namespace Game.MiniGames.Flower
             _canView.gameObject.SetActive(false);
             _canView.transform.position = _defaultPosition;
             _canView.transform.rotation = _defaultRotation;
+            _canAnimation.TogglePouring();
             
             SetReward(isSuccess);
         }
@@ -138,6 +142,8 @@ namespace Game.MiniGames.Flower
             
             _defaultPosition = wateringCanView.transform.position;
             _defaultRotation = wateringCanView.transform.rotation;
+            
+            _canAnimation = wateringCanView.GetComponent<CanAnimatorTester>();
         }
     }
 }
