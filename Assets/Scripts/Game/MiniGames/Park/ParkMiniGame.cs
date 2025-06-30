@@ -14,6 +14,7 @@ namespace Game.MiniGames
     {
         public int Level { get ; set ; }
         public bool IsCompleted { get; set; }
+        public bool IsWin { get; private set; }
         public event Action<QuestType> OnMiniGameStart;
         public event Action<QuestType> OnMiniGameComplete;
         public QuestType QType { get; } = QuestType.Sprint;
@@ -23,6 +24,7 @@ namespace Game.MiniGames
         private ParkSprintController _parkSprintController;
         private readonly IPlayerController _playerController;
         private EffectAccumulatorView _effectsAccumulatorView;
+        private int _savedScore;
 
         public ParkMiniGame(IPlayerController playerController)
         {
@@ -39,6 +41,8 @@ namespace Game.MiniGames
         }
         public void StartGame()
         {
+            _savedScore = _playerController.Model.Score;
+            
             _effectsAccumulatorView.FadeIn();
             UniTask.Delay(1000).ContinueWith(() =>
             {
@@ -49,9 +53,9 @@ namespace Game.MiniGames
                 DisableLevelInNextFrame().Forget();
                 
                 _parkSprintController = new ParkSprintController(_playerController, _parkLevelView);
-                _parkSprintController.EndSprint += () =>
+                _parkSprintController.EndSprint += (win) =>
                 {
-                    RunCompletingTimer().Forget();
+                    RunCompletingTimer(win).Forget();
                 };
                 
                 _effectsAccumulatorView.FadeOut();
@@ -65,7 +69,7 @@ namespace Game.MiniGames
             _levelRoom.gameObject.SetActive(false);
         }
 
-        private async UniTask RunCompletingTimer()
+        private async UniTask RunCompletingTimer(bool win)
         {
             _playerController.ToggleMovement();
             
@@ -79,6 +83,9 @@ namespace Game.MiniGames
             _effectsAccumulatorView.FadeOut();
 
             _parkSprintController.Dispose();
+            
+            IsWin = win;
+            
             OnMiniGameComplete?.Invoke(QType);
         }
 

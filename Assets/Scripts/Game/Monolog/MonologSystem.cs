@@ -53,7 +53,7 @@ namespace Game.Monolog
                 case InteractionOutcome.Interrupt:
                     return;
                 case InteractionOutcome.NeedFindMiniGameKey:
-                    OpenDialogue(_miniGameHandler.FindMiniGameKey(item));
+                    OpenDialogue(_miniGameHandler.FindMiniGameKey(item, _levelManager.CurrentLevelIndex));
                     break;
                 case InteractionOutcome.Continue:
                 {

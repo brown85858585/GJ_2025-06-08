@@ -133,16 +133,18 @@ namespace Game.MiniGames
         }
 
         public bool IsCompleted { get; set; }
+        public bool IsWin { get; private set; }
 
         private void OnCookingAttempt(bool success)
         {
             if (success)
             {
-               
+                IsWin = true;
                 Debug.Log("🍽️ Успешная попытка готовки!");
             }
             else
             {
+                IsWin = false;
                 Debug.Log("🔥 Неудачная попытка готовки!");
             }
         }

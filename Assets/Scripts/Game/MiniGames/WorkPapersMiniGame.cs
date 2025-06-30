@@ -114,16 +114,19 @@ namespace Game.MiniGames
         }
 
         public bool IsCompleted { get; set; }
+        public bool IsWin { get; private set; }
 
         private void OnWorkPapersAttempt(bool success)
         {
             //playerController.Model.Score += _miniGameController.gameScore;
             if (success)
             {
+                IsWin = true;
                 Debug.Log("📋 Успешная обработка документов! Квест выполнен.");
             }
             else
             {
+                IsWin = false;
                 Debug.Log("📋 Документы обработаны неправильно. Квест не выполнен.");
             }
         }
