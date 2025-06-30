@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Player
@@ -16,12 +17,15 @@ namespace Player
         [SerializeField] private Transform playerObject;
         [SerializeField] private Transform rightHand;
         [SerializeField] private PlayerDialogueView dialogueView;
+        [SerializeField] private Vector2 correctionVector;
         
         [Header("Movement Settings")]
         [SerializeField]
         private float moveSpeed = 25f;
         [SerializeField]
-        public float sprintSpeed = 45f;
+        private float runSpeed = 45f;
+        [SerializeField]
+        private float sprintSpeed = 60f;
         [SerializeField]
         private Button moveForwardButton;
         [SerializeField]
@@ -40,6 +44,7 @@ namespace Player
 
         private static readonly Quaternion _rotationOffset = Quaternion.Euler(180f, 0f, 0f);
         public float MoveSpeed => moveSpeed;
+        public float RunSpeed => runSpeed;
         public float SprintSpeed => sprintSpeed;
         public float GroundDrag => groundDrag;
         public float TurnSmooth => turnSmooth;
@@ -126,9 +131,10 @@ namespace Player
             Vector3 localMove = transform.InverseTransformDirection(worldMove);
 
             /* 3. Нормализуем, оставляем диапазон -1…1  */
-            Vector2 planar = new Vector2(localMove.x, localMove.z);
-            if (planar.sqrMagnitude > 1f)
-                planar.Normalize();                   // чтобы не «вываливаться» за края BlendTree
+            Vector2 planar = new Vector2(localMove.x*correctionVector.x, localMove.z*correctionVector.y);
+            
+            // if (planar.sqrMagnitude > 1f)
+            //     planar.Normalize();                   // чтобы не «вываливаться» за края BlendTree
             
             animator.SetFloat(PositionX, planar.x, dampTime, Time.deltaTime);
             animator.SetFloat(PositionY, planar.y, dampTime, Time.deltaTime);

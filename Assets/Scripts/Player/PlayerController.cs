@@ -80,10 +80,10 @@ namespace Player
             Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
-            Vector3 move = Vector3.zero;
+            Vector3 move;
             if (_input.IsAccelerating)
             {
-                move = Movement.Move(_view.SprintSpeed, _view.transform);
+                move = Movement.Move(_view.RunSpeed, _view.transform);
                 
             }
             else
@@ -91,11 +91,11 @@ namespace Player
                 move = Movement.Move(_view.MoveSpeed, _view.transform);
                 
             }
-            _view.SetWalkAnimation( _input.Direction.normalized);
             _view.Rigidbody.AddForce(move, ForceMode.Force);
-            
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
             _view.transform.rotation = newRotation;
+            
+            _view.SetWalkAnimation(_input.Direction.normalized);
         }
 
         public void SetPosition( Vector3 position)
@@ -105,6 +105,7 @@ namespace Player
 
         public void ToggleMovement()
         {
+            return;
             _isRunMovement = !_isRunMovement;
             if (_isRunMovement)
             {

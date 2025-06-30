@@ -1175,7 +1175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4289834863755780051}
   - component: {fileID: 3459634653826995736}
-  - component: {fileID: 3397845792855187182}
+  - component: {fileID: 6261653395404524440}
   m_Layer: 0
   m_Name: Shelf
   m_TagString: Untagged
@@ -1242,8 +1242,8 @@ MonoBehaviour:
   isMultiplyInteractable: 1
   popupOffset: {x: -0.31, y: 2.5, z: -1.38}
   popupScale: 1
---- !u!135 &3397845792855187182
-SphereCollider:
+--- !u!65 &6261653395404524440
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1261,8 +1261,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.73
-  m_Center: {x: -0.78, y: -0, z: -0.45}
+  m_Size: {x: 1.7702734, y: 1, z: 2.6352558}
+  m_Center: {x: -0.38513196, y: 0, z: -0.8176253}
 --- !u!1 &7962161044004227894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,22 +1958,22 @@ PrefabInstance:
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9270918
+      value: 0.9545696
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.27566195
+      value: 0.257652
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.24345657
+      value: 0.14453547
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0723895
+      value: -0.039012197
       objectReference: {fileID: 0}
     - target: {fileID: 4729274831487404509, guid: 073d3db9d03729a44a25b174c75dfc7c,
         type: 3}

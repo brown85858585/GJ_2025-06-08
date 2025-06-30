@@ -45,7 +45,10 @@ namespace Player
             _direction = offsetDirection;
             Vector3 movement = _direction * moveSpeed;
 
-            return _model.Grounded ? movement : Vector3.zero;
+            var move = _model.Grounded ? movement : Vector3.zero;
+            NormalizedSpeed = move.magnitude * Time.deltaTime;
+            Debug.Log(NormalizedSpeed);
+            return move;
         }
 
         public Quaternion Rotation(Transform transform, float rotationSpeed)
