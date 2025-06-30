@@ -11,7 +11,22 @@ PrefabInstance:
     - target: {fileID: 2021931254209527203, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
       propertyPath: m_Name
-      value: Room_Core
+      value: Room_Core Variant 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809502351193795804, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: category
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929984774745945236, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: category
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904305944932321489, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: category
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8849465179124743606, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
