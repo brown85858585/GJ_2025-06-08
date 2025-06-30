@@ -83,8 +83,6 @@ namespace Game.MiniGames
 
         private void ResetActionButtonIndicator()
         {
-            Debug.Log("ResetActionButtonIndicator");
-
             if (actionButtonIndicator != null)
             {
                 actionButtonIndicator.color = buttonIndicatorColorDefault;
@@ -93,8 +91,6 @@ namespace Game.MiniGames
 
         private void SetActionButtonIndicatorSuccess()
         {
-            Debug.Log("SetActionButtonIndicatorSuccess");
-
             if (actionButtonIndicator != null)
             {
                 actionButtonIndicator.color = buttonIndicatorColorSuccess;
@@ -104,8 +100,6 @@ namespace Game.MiniGames
 
         private void SetActionButtonIndicatorWrong()
         {
-            Debug.Log("SetActionButtonIndicatorWrong");
-
             if (actionButtonIndicator != null)
             {
                 actionButtonIndicator.color = buttonIndicatorColorWrong;
@@ -285,6 +279,7 @@ namespace Game.MiniGames
             SetupMultipleWinZones();
 
             actionButtonIndicator = instantiatedCookingView.transform.Find("Panel/PressEButton/MySlider").GetComponent<Image>();
+            actionButtonIndicator.color = buttonIndicatorColorDefault;
         }
 
  
