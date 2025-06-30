@@ -11,17 +11,17 @@ namespace Game.MiniGames
 {
     public class ParkMiniGame : IMiniGame
     {
-        private readonly IPlayerController _playerController;
-        private ParkLevelView _parkLevelView;
-        private EffectAccumulatorView _effectsAccumulatorView;
-        private Transform _levelRoom;
-        private ParkSprintController _parkSprintController;
-
-        public QuestType QType { get; } = QuestType.Sprint;
         public int Level { get ; set ; }
-
-        public event Action<QuestType> OnMiniGameComplete;
+        public bool IsCompleted { get; set; }
         public event Action<QuestType> OnMiniGameStart;
+        public event Action<QuestType> OnMiniGameComplete;
+        public QuestType QType { get; } = QuestType.Sprint;
+
+        private Transform _levelRoom;
+        private ParkLevelView _parkLevelView;
+        private ParkSprintController _parkSprintController;
+        private readonly IPlayerController _playerController;
+        private EffectAccumulatorView _effectsAccumulatorView;
 
         public ParkMiniGame(IPlayerController playerController)
         {
@@ -57,8 +57,6 @@ namespace Game.MiniGames
             });
         }
 
-        public bool IsCompleted { get; set; }
-
         private async UniTask DisableLevelInNextFrame()
         {
             await UniTask.WaitForFixedUpdate();
@@ -91,8 +89,8 @@ namespace Game.MiniGames
         public void Dispose()
         {
             Object.Destroy(_parkLevelView);
+            _parkSprintController?.Dispose();
             //TODO: Implement Dispose logic if needed
-            // throw new NotImplementedException();
         }
     }
 }

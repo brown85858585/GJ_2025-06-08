@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8896869505362336603}
   - component: {fileID: 7717588901106995910}
   m_Layer: 0
-  m_Name: MiniGamePrefabs
+  m_Name: MiniGamePrefabAccumulator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,3 +57,11 @@ MonoBehaviour:
   - {fileID: 6389346385268227513, guid: dfc2c604009f5b94eadc40205e22ad75, type: 3}
   - {fileID: 6389346385268227513, guid: 55d6c4fc9f8763140a1301b4797d3cf8, type: 3}
   - {fileID: 6389346385268227513, guid: 0d2848c466d284647be4092ea403bd2f, type: 3}
+  parkLevelViews:
+  - {fileID: 5075954410285169512, guid: b5f5e0c6b934e304dba7e51653a5eed9, type: 3}
+  - {fileID: 5075954410285169512, guid: 86bc2c411c21995448fa8736aed5e2d1, type: 3}
+  - {fileID: 5075954410285169512, guid: c1841e236bb7cda4aa323a389a27ee8a, type: 3}
+  - {fileID: 5075954410285169512, guid: a9d450a123baf51439228ea2fdbb268e, type: 3}
+  - {fileID: 5075954410285169512, guid: f27cb24400aa69f439a636a44ac1e734, type: 3}
+  - {fileID: 5075954410285169512, guid: dffbd8ebaaaa6934db55f817f68f3377, type: 3}
+  - {fileID: 5075954410285169512, guid: 488c3cba68998c54e828bcf0296a17c8, type: 3}

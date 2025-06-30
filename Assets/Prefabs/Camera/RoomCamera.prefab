@@ -345,9 +345,9 @@ MonoBehaviour:
   sensY: 1
   smoothTime: 0.1
   minYaw: 10
-  maxYaw: 30
+  maxYaw: 15
   minPitch: 20
-  maxPitch: 40
+  maxPitch: 30
 --- !u!114 &7068390459358827353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,8 +361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomStep: 5
-  minFOV: 20
-  maxFOV: 60
+  minFOV: 15
+  maxFOV: 40
   zoomSpeed: 10
 --- !u!114 &4183581377915360668
 MonoBehaviour:

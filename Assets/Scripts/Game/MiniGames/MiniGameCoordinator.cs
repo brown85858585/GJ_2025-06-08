@@ -66,7 +66,7 @@ namespace Game.MiniGames
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame(_playerController);
             _factories[ItemCategory.Computer] = new WorkPapersMiniGame(_playerController);
             
-            var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
+            var parkLevel = Object.Instantiate(_prefabAccumulator.ParkLevelViews[CurrentLevelIndex]);
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);
             (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel.GetComponent<ParkLevelView>(),
                 effectAccumulatorView, level);

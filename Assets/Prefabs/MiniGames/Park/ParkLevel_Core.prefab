@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6881385761810940475}
   - component: {fileID: 5687517932603896794}
   m_Layer: 3
-  m_Name: ParkLevel
+  m_Name: ParkLevel_Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1511,6 +1511,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 339614617875816356, guid: 7f1b179070f8df4479bbf8ca00c1cafd,
         type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 339614617875816356, guid: 7f1b179070f8df4479bbf8ca00c1cafd,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -1523,6 +1528,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 454000632166034139, guid: 7f1b179070f8df4479bbf8ca00c1cafd,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454000632166034139, guid: 7f1b179070f8df4479bbf8ca00c1cafd,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454000632166034139, guid: 7f1b179070f8df4479bbf8ca00c1cafd,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 534028607387031487, guid: 7f1b179070f8df4479bbf8ca00c1cafd,
         type: 3}
