@@ -102,8 +102,12 @@ MonoBehaviour:
   playerObject: {fileID: 4548452864485024950}
   rightHand: {fileID: 2386991911503821973}
   dialogueView: {fileID: 8974123649122541329}
+  correctionVector: {x: 0.6, y: 0.6}
   moveSpeed: 25
+  runSpeed: 45
+  sprintSpeed: 80
   moveForwardButton: {fileID: 0}
+  staminaDecreaseMultiplayer: 0.75
   groundDrag: 10
   turnSmooth: 5
   whatIsGround:
@@ -172,6 +176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: char_fullset_RIG_T
       objectReference: {fileID: 0}
+    - target: {fileID: 7102387990256270998, guid: 6d74c07faf18ee3418ff94da5d4c0934,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 36a03caffbbc5b246b4e599ac640ed06, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

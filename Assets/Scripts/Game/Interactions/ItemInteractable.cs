@@ -22,7 +22,7 @@ namespace Game.Interactions
         [Header("Popup Settings")] 
         [SerializeField] private bool isMultiplyInteractable = true;
         [SerializeField] private Vector3 popupOffset = new Vector3(0, 1.5f, 0);
-        [SerializeField] private int popupScale = 1;
+        [SerializeField] private float popupScale = 1;
         
         public bool IsMultiplyInteractable => isMultiplyInteractable;
         public string Guid => id;

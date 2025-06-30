@@ -29,7 +29,7 @@ namespace Game.Quests
 	public class Quest
 	{
 		public QuestType Type { get; protected set; }
-		public string Description { get; protected set; }	
+		public string Key { get; protected set; }	
 		public bool IsCompleted { get; set; }
 	}
 
@@ -38,7 +38,7 @@ namespace Game.Quests
 		public KitchenQuest()
 		{
 			Type = QuestType.Kitchen;
-			Description = "Cook a meal in the kitchen.";
+			Key = "Quest_Kitchen0";
 			IsCompleted = false;
 		}
 	}
@@ -48,7 +48,7 @@ namespace Game.Quests
 		public SprintQuest()
 		{
 			Type = QuestType.Sprint;
-			Description = "Run around the house and collect items.";
+			Key = "Quest_Door0";
 			IsCompleted = false;
 		}
 	}
@@ -58,7 +58,7 @@ namespace Game.Quests
 		public FlowerQuest()
 		{
 			Type = QuestType.Flower;
-			Description = "Collect flowers in the garden.";
+			Key = "Quest_Flower0";
 			IsCompleted = false;
 		}
 	}
@@ -68,7 +68,7 @@ namespace Game.Quests
 		public WorkQuest()
 		{
 			Type = QuestType.Work;
-			Description = "Complete your work tasks.";
+			Key = "Quest_Computer0";
 			IsCompleted = false;
 		}
 	}

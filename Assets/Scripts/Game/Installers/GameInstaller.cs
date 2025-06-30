@@ -3,12 +3,10 @@ using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects;
 using Game.Levels;
-using Game.MiniGames;
 using Game.MiniGames.Flower;
 using Game.Monolog;
 using Game.Quests;
 using Player;
-using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,8 +36,9 @@ namespace Game.Installers
         private QuestLogView _questsView;
         private GameObject _virtualCamera;
         private EffectAccumulatorView _effectAccumulator;
-        private TMP_Text _scoreText;
+        private ScoreView _scoreText;
 
+        private GameObject _savedCan;
         private void Awake()
         {
             Install();
@@ -59,8 +58,8 @@ namespace Game.Installers
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut();
 
-            _scoreText = mainCanvas.GetComponentInChildren<TMP_Text>();
-            _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.text = newScore.ToString())
+            _scoreText = mainCanvas.GetComponentInChildren<ScoreView>();
+            _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.Score = newScore)
                 .AddTo(this);
             
             InitLevelOne();
@@ -117,8 +116,9 @@ namespace Game.Installers
             {
                 component.InitializeFromSceneStart();
             }
-            
-            _logic.MiniGameCoordinator.SetWateringCanView(allComponents[0].gameObject);
+
+            _savedCan = allComponents[0].gameObject;
+            _logic.MiniGameCoordinator.SetWateringCanView(_savedCan);
         }
 
         private void InitQuestLog()
@@ -153,6 +153,7 @@ namespace Game.Installers
                 _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
                 _logic.QuestLog.ResetQuests();
                 _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
+                _logic.MiniGameCoordinator.SetWateringCanView(_savedCan);
                 _allQuestsCompleted = false;
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);

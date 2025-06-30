@@ -18,7 +18,7 @@ namespace Player
             _input = input;
             _model = model;
         }
-        public Vector3 Move(float moveSpeed, Transform playerTransform)
+        public Vector3 Move(float moveSpeed, float staminaDecrease)
         {
             var offsetDirection = _input.Direction.normalized;
             
@@ -45,7 +45,9 @@ namespace Player
             _direction = offsetDirection;
             Vector3 movement = _direction * moveSpeed;
 
-            return _model.Grounded ? movement : Vector3.zero;
+            var move = _model.Grounded ? movement : Vector3.zero;
+            NormalizedSpeed = move.magnitude * Time.deltaTime * staminaDecrease;
+            return move;
         }
 
         public Quaternion Rotation(Transform transform, float rotationSpeed)
@@ -68,6 +70,15 @@ namespace Player
 
         public void SpeedDrop(Rigidbody rb, Transform transform)
         {
+            // Debug.Log( "SpeedDrop called with current speed: " + _currentSpeed);
+            // _currentSpeed *= 0.2f;
+            //
+            // Vector3 reducedHorizontal = transform.forward * _currentSpeed;
+            // rb.velocity = new Vector3(
+            //     reducedHorizontal.x,
+            //     rb.velocity.y,
+            //     reducedHorizontal.z
+            // );
         }
     }
 }

@@ -7,10 +7,8 @@ namespace Game.MiniGames.Park
     public class CheckpointView : MonoBehaviour
     {
         [SerializeField] private ParticleSystem particleSphere;
-        [SerializeField] private GameObject CurrentPointer;
-        [SerializeField] private ParticleSystem particleBum;
+        [SerializeField] private GameObject sphere;
         public event Action<int> OnEnteredTargetMask;
-        public bool Current { get; set; }
         
         // LayerMask - Player
         private LayerMask _targetMask = 1 << 6;
@@ -27,24 +25,13 @@ namespace Game.MiniGames.Park
         public void HideRing()
         {
             particleSphere.gameObject.SetActive(false);
-            particleBum.Play();
+            sphere.gameObject.SetActive(false);
         }
         
         public void ShowRing()
         {
             particleSphere.gameObject.SetActive(true);
-        }
-
-        public void Select()
-        {
-            Current = true;
-            CurrentPointer.gameObject.SetActive(true);
-        }
-
-        public void Unselect()
-        {
-            Current = false;
-            CurrentPointer.gameObject.SetActive(false);
+            sphere.gameObject.SetActive(true);
         }
     }
 }

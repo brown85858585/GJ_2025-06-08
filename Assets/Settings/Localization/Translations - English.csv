@@ -18,43 +18,61 @@ Day2_Bed1,I haven’t done everything.
 Day3_Bed0,I don’t want to sleep yet.
 Day3_Bed1,No.
 Day4_Bed0,I don’t want to sleep yet.
-Day4_Bed1,I’m tired… but it’s too early.
+Day4_Bed1,"I’m tired…
+but it’s too early."
 Day5_Bed0,I don’t want to sleep yet.
 Day5_Bed1,I have to do something.
 Day6_Bed0,I don’t want to sleep yet.
-Day6_Bed1,"It’s hard, but I need to at least try..."
-Day1_Awakening,New day. Let’s begin.
-Day2_Awakening,I feel… off. Maybe just tired.
-Day3_Awakening,Sleep didn’t help. I just need to start moving.
+Day6_Bed1,"It’s hard, but I need
+to at least try..."
+Day1_Awakening,"New day.
+Let’s begin."
+Day2_Awakening,"I feel… off.
+Maybe just tired."
+Day3_Awakening,"Sleep didn’t help.
+I just need to start moving."
 Day4_Awakening,Feels like this body isn’t mine.
 Day5_Awakening,Everything feels so heavy…
-Day1_Sleep,Wish I could just get some real sleep.
+Day1_Sleep,"Wish I could just
+get some real sleep."
 Day2_Sleep,Can’t get it out of my head.
 Day3_Sleep,What if tomorrow’s worse?
-Day4_Sleep,"Please, just make it all stop."
-Day1_Door_Win,Got a bit more energy after the run.
+Day4_Sleep,"Please,
+just make it all stop."
+Day1_Door_Win,"Got a bit more energy
+after the run."
 Day1_Door_Defeat,No time to keep going.
 Day2_Door_Win,Still in shape.
-Day2_Door_Defeat,Today was… rough.
-Day3_Door_Win,"It was hard, but I’m not giving up."
+Day2_Door_Defeat,"Today was…
+rough."
+Day3_Door_Win,"It was hard,
+but I’m not giving up."
 Day3_Door_Defeat,It was hard…
 Day4_Door_Win,My heart’s pounding.
 Day4_Door_Defeat,I can’t do this anymore…
 Day5_Door_Win,Can I still keep going?
-Day5_Door_Defeat,Feels like I’m not in shape anymore.
+Day5_Door_Defeat,"Feels like I’m not
+in shape anymore."
 Day6_Door0,No. Not today.
 Day6_Door1,I can’t do this anymore...
 Flower_WateringCup,Need a watering can.
 Day1_Flower_Win,"Grow, little flower."
-Day1_Flower_Defeat,It’s okay. Maybe next time.
+Day1_Flower_Defeat,"It’s okay.
+Maybe next time."
 Day2_Flower_Win,You’ve got this.
-Day2_Flower_Defeat,Withering’s easier than I thought.
-Day3_Flower_Win,"People say “Stay strong”. So you hang in there too, huh."
-Day3_Flower_Defeat,“Stay strong”? What the hell am I supposed to stay strong for?
+Day2_Flower_Defeat,"Withering’s easier
+than I thought."
+Day3_Flower_Win,"People say “Stay strong”.
+So you hang in there too, huh."
+Day3_Flower_Defeat,"“Stay strong”?
+What the hell am I supposed
+to stay strong for?"
 Day4_Flower_Win,We’re alike.
 Day4_Flower_Defeat,We’re alike.
-Day5_Flower_Win,Feels like we’re both falling apart.
-Day5_Flower_Defeat,Feels like we’re both falling apart.
+Day5_Flower_Win,"Feels like we’re
+both falling apart."
+Day5_Flower_Defeat,"Feels like we’re
+both falling apart."
 Day6_Flower_Win,I’m sorry.
 Day6_Flower_Defeat,I’m sorry.
 Day1_Kitchen_Win,Simple food tastes the best.
@@ -65,10 +83,16 @@ Day3_Kitchen_Win,...
 Day3_Kitchen_Defeat,Taste’s kind of gone.
 Day4_Kitchen_Win,Tastes like laundry detergent.
 Day4_Kitchen_Defeat,...
-Day5_Kitchen_Win,I can’t. I just can’t.
-Day5_Kitchen_Defeat,I can’t. I just can’t.
-Day6_Kitchen_Win,I don’t feel anything. Not hunger. Not taste.
-Day6_Kitchen_Defeat,I don’t feel anything. Not hunger. Not taste.
+Day5_Kitchen_Win,"I can’t.
+I just can’t."
+Day5_Kitchen_Defeat,"I can’t.
+I just can’t."
+Day6_Kitchen_Win,"I don’t feel anything.
+Not hunger.
+Not taste."
+Day6_Kitchen_Defeat,"I don’t feel anything.
+Not hunger.
+Not taste."
 Computer_UI_Letter_Head,From:
 Computer_UI_Attempt,Unread messages:
 Computer_UI_Delete,Delete
@@ -87,310 +111,422 @@ Day2_Computer_Defeat,I can’t get it out of my head...
 Day3_Computer_Win,"Well, I did everything I could."
 Day3_Computer_Defeat,I can’t focus.
 Day4_Computer_Win,...
-Day4_Computer_Defeat,“Stay strong”? What does that even mean?!
+Day4_Computer_Defeat,"“Stay strong”?
+What does that even mean?!"
 Day5_Computer_Win,Every message feels the same.
 Day5_Computer_Defeat,The letters are blurring.
-Day6_Computer0,What does it say? I can’t tell.
+Day6_Computer0,"What does it say?
+I can’t tell."
 Day6_Computer1,It all feels like mockery.
 Day6_Computer2,I can’t read this.
-Day1_Guitar0,"I remember us singing in the kitchen, the four of us…"
-Day1_Guitar1,We even talked about playing on a stage someday...
-Day1_Guitar2,Haven’t played in a while. Should probably tune it sometime.
-Day2_Guitar0,"We used to drag it to the lake: campfire, wet sand, strings smelling of smoke."
-Day2_Guitar1,Now it’s just deadlines and doctor’s visits. The fires live in photos.
+Day1_Guitar0,"I remember us singing
+in the kitchen, the four of us…"
+Day1_Guitar1,"We even talked about
+playing on a stage someday..."
+Day1_Guitar2,"Haven’t played in a while.
+Should probably tune it sometime."
+Day2_Guitar0,"We used to drag it to the lake:
+campfire, wet sand,
+strings smelling of smoke..."
+Day2_Guitar1,"Now it’s just deadlines
+and doctor’s visits.
+The fires live in photos."
 Day2_Guitar2,Someday I’ll hold you again.
-Day3_Guitar0,I can’t even remember where A minor goes.
-Day3_Guitar1,"My fingers shake, and my head’s full of test results."
-Day3_Guitar2,The guitar’s in the corner. I’m not touching it. Not now.
-Day4_Guitar0,String snapped. Symbolic.
-Day4_Guitar1,Don’t even want to replace it. Let it stay off.
-Day4_Guitar2,The strings ring too loud. It’s irritating.
-Day5_Guitar0,I want it to sound again. But I can’t.
-Day5_Guitar1,It’s dusty. Feels like it’s not mine anymore.
-Day5_Guitar2,The guitar doesn’t recognize me. And I don’t recognize it.
-Day6_Guitar0,Noise in my head drowns everything.
-Day6_Guitar1,Too heavy. Even my eyes slide past it.
+Day3_Guitar0,"I can’t even remember
+where A minor goes."
+Day3_Guitar1,"My fingers shake,
+and my head’s full
+of test results."
+Day3_Guitar2,"The guitar’s in the corner.
+I’m not touching it.
+Not now."
+Day4_Guitar0,"String snapped.
+Symbolic."
+Day4_Guitar1,"Don’t even want to replace it.
+Let it stay off."
+Day4_Guitar2,"The strings ring too loud.
+It’s irritating."
+Day5_Guitar0,"I want it to sound again.
+But I can’t."
+Day5_Guitar1,"It’s dusty.
+Feels like it’s not mine anymore."
+Day5_Guitar2,"The guitar doesn’t recognize me.
+And I don’t recognize it."
+Day6_Guitar0,"Noise in my head
+drowns everything."
+Day6_Guitar1,"Too heavy.
+Even my eyes slide past it."
 Day6_Guitar2,I don’t have the strength.
-Day1_Painting0,I suddenly decided I was going to paint…
-Day1_Painting1,"I bought brushes, canvases, and even brought an easel from the village..."
+Day1_Painting0,"I suddenly decided
+I was going to paint…"
+Day1_Painting1,"I bought brushes, canvases,
+and even brought an easel
+from the village..."
 Day1_Painting2,And never finished a single one.
-Day2_Painting0,"Every time I’d say, “I’ll start painting as soon as I wrap up this project”…"
-Day2_Painting1,Then another deadline. And another…
-Day2_Painting2,"The canvases just sit there. Waiting, same as me."
-Day3_Painting0,One day I picked up a brush and just stared at the canvas…
-Day3_Painting1,"No image, no spark. Only a low hum in my head…"
-Day3_Painting2,Set the brush down. Didn’t even pour out the water.
-Day4_Painting0,These canvases weigh on me like open loops…
-Day4_Painting1,Everything unfinished starts screaming louder…
-Day4_Painting2,What was I even trying to say with them?
-Day5_Painting0,"Shoved the whole stack into a corner. Kept bumping into it, got angry…"
-Day5_Painting1,"Wanted to throw it all out, but my hand wouldn’t move…"
-Day5_Painting2,They just get in the way. Like so much else.
-Day6_Painting0,"Too much emptiness. Inside me, on the canvas…"
+Day2_Painting0,"Every time I’d say:
+“I’ll start painting as soon
+as I wrap up this project”…"
+Day2_Painting1,"Then another deadline.
+And another…"
+Day2_Painting2,"The canvases just sit there.
+Waiting, same as me."
+Day3_Painting0,"One day I picked up a brush
+and just stared at the canvas…"
+Day3_Painting1,"No image, no spark.
+Only a low hum in my head…"
+Day3_Painting2,"Set the brush down.
+Didn’t even pour out the water."
+Day4_Painting0,"These canvases weigh
+on me like open loops…"
+Day4_Painting1,"Everything unfinished
+starts screaming louder…"
+Day4_Painting2,"What was I even trying
+to say with them?"
+Day5_Painting0,"Shoved the whole stack
+into a corner.
+Kept bumping into it, got angry…"
+Day5_Painting1,"Wanted to throw it all out,
+but my hand wouldn’t move…"
+Day5_Painting2,"They just get in the way.
+Like so much else."
+Day6_Painting0,"Too much emptiness.
+Inside me, on the canvas…"
 Day6_Painting1,Too late to finish anything now…
 Day6_Painting2,No one’s going to see it anyway.
-Day1_Books0,I was always dragging books home from sales — for “inspiration”…
-Day1_Books1,"Sometimes I’d read at night, mark passages, scribble in the margins…"
-Day1_Books2,I should at least finish one someday.
-Day2_Books0,The bookmark’s still on the same page...
-Day2_Books1,What was it even about? I forgot.
-Day2_Books2,The books stare at me. Judging.
-Day3_Books0,My brain refuses to absorb the text.
+Day1_Books0,"I was always dragging books
+home from sales
+for “inspiration”…"
+Day1_Books1,"Sometimes I’d read at night,
+mark passages,
+scribble in the margins…"
+Day1_Books2,"I should at least finish
+one someday."
+Day2_Books0,"The bookmark’s still
+on the same page..."
+Day2_Books1,"What was it even about?
+I forgot."
+Day2_Books2,"The books stare at me.
+Judging."
+Day3_Books0,"My brain refuses
+to absorb the text."
 Day3_Books1,I can’t hold a single thought.
-Day3_Books2,"Just meaningless words, wrapped in paper."
-Day4_Books0,What could they tell me that I’m not already feeling?
+Day3_Books2,"Just meaningless words,
+wrapped in paper."
+Day4_Books0,"What could they tell me
+that I’m not already feeling?"
 Day4_Books1,No author wrote about this.
-Day4_Books2,Maybe I should throw them out. Make space.
+Day4_Books2,"Maybe I should throw them out.
+Make space."
 Day5_Books0,The shelf feels heavier somehow...
-Day5_Books1,It all presses down like someone else’s expectations...
-Day5_Books2,I don’t think I can even read the titles anymore.
-Day6_Books0,Finishing them won’t make me stronger.
-Day6_Books1,The books are gone. Just empty rectangles now.
+Day5_Books1,"It all presses down
+like someone else’s expectations..."
+Day5_Books2,"I don’t think I can
+even read the titles anymore."
+Day6_Books0,"Finishing them
+won’t make me stronger."
+Day6_Books1,"The books are gone.
+Just empty rectangles now."
 Day6_Books2,I can’t.
-Day1_Basket0,"I wanted to learn knitting, but I never had the patience."
-Day1_Basket1,Someday I’ll make a scarf. Maybe for me. Maybe for someone else.
-Day1_Basket2,The colors feel so warm. Nice to touch.
-Day2_Basket0,There’s always something else. No time for yarn.
-Day2_Basket1,I started a couple times. Then gave up.
+Day1_Basket0,"I wanted to learn knitting,
+but I never had the patience."
+Day1_Basket1,"Someday I’ll make a scarf.
+Maybe for me.
+Maybe for someone else."
+Day1_Basket2,"The colors feel so warm.
+Nice to touch."
+Day2_Basket0,"There’s always something else.
+No time for yarn."
+Day2_Basket1,"I started a couple times.
+Then gave up."
 Day2_Basket2,They tangle just like my thoughts.
-Day3_Basket0,The hook’s broken. I didn’t even notice when.
-Day3_Basket1,Everything feels so thin. Fragile.
-Day3_Basket2,I can’t focus. Every stitch feels like a task.
-Day4_Basket0,I’m not even angry. Just watching it fade away...
+Day3_Basket0,"The hook’s broken.
+I didn’t even notice when."
+Day3_Basket1,"Everything feels so thin.
+Fragile."
+Day3_Basket2,"I can’t focus.
+Every stitch feels like a task."
+Day4_Basket0,"I’m not even angry.
+Just watching it fade away..."
 Day4_Basket1,Like everything else.
 Day4_Basket2,A monument to old ambitions.
 Day5_Basket0,Even the yarn looks tired.
 Day5_Basket1,I should throw it out.
-Day5_Basket2,Why is it so hard to let go of useless things?
-Day6_Basket0,Fine motor skills are the enemy now.
+Day5_Basket2,"Why is it so hard
+to let go of useless things?"
+Day6_Basket0,"Fine motor skills
+are the enemy now."
 Day6_Basket1,My hands won’t listen.
-Day6_Basket2,Everything in this basket is a frozen “what never was.”
-Day1_Window0,I love the morning light. Everything feels possible.
-Day1_Window1,Even the birds sound like they’re whispering.
+Day6_Basket2,"Everything in this basket
+is a frozen “what never was.”"
+Day1_Window0,"I love the morning light.
+Everything feels possible."
+Day1_Window1,"Even the birds sound
+like they’re whispering."
 Day1_Window2,It’s a good day.
-Day2_Window0,It’s sunny… but strange. Like it’s on delay.
-Day2_Window1,Today was supposed to be a good day. Maybe.
+Day2_Window0,"It’s sunny… but strange.
+Like it’s on delay."
+Day2_Window1,"Today was supposed
+to be a good day.
+Maybe."
 Day2_Window2,Fog?
 Day3_Window0,Everyone else’s life keeps going…
-Day3_Window1,People move forward. I feel like I’m not allowed.
-Day3_Window2,The world outside looks out of focus.
-Day4_Window0,Rain noise makes it hard to think.
-Day4_Window1,Puddles reflect the ceiling. Can’t even see the sky.
-Day4_Window2,Everything’s gone gray. Even the trees.
+Day3_Window1,"People move forward.
+I feel like I’m not allowed."
+Day3_Window2,"The world outside
+looks out of focus."
+Day4_Window0,"Rain noise makes
+it hard to think."
+Day4_Window1,"Puddles reflect the ceiling.
+Can’t even see the sky."
+Day4_Window2,"Everything’s gone gray.
+Even the trees."
 Day5_Window0,"Thunder, somewhere far off."
-Day5_Window1,Just water and glass. That’s all.
+Day5_Window1,"Just water and glass.
+That’s all."
 Day5_Window2,There’s barely any light.
-Day6_Window0,Storm. Lightning like torn-up thoughts.
-Day6_Window1,The world’s losing it. And I’m just… left behind.
-Day6_Window2,I can’t see anything. Not even myself in the reflection.
+Day6_Window0,"Storm.
+Lightning like torn-up thoughts."
+Day6_Window1,"The world’s losing it.
+And I’m just…
+left behind."
+Day6_Window2,"I can’t see anything.
+Not even myself in the reflection."
 Hint_Switch,Choose
 Hint_Interact,Interact
-Day1_CardHeader0,Spam
-Day1_CardContent0,Get a loan with no overpayment in 5 minutes
-Day1_CardHeader1,Advertisement
-Day1_CardContent1,New! Buy an iPhone with up to 40% off
-Day1_CardHeader2,Work
-Day1_CardContent2,Urgently attend a client meeting tomorrow at 9:00 AM
-Day1_CardHeader3,Email
-Day1_CardContent3,Your order has been shipped and will arrive the day after tomorrow
-Day1_CardHeader4,Colleague
-Day1_CardContent4,"Ivan, don’t forget to submit the report before lunch"
-Day1_CardHeader5,Friend
-Day1_CardContent5,Let’s meet at the metro station this evening
-Day1_CardHeader6,Hospital
-Day1_CardContent6,Reminder: appointment scheduled on June 30 at 2:00 PM
-Day1_CardHeader7,Operator
-Day1_CardContent7,Your balance has been topped up by 200 UAH
-Day1_CardHeader8,Service
-Day1_CardContent8,Please update the app to the latest version
-Day1_CardHeader9,Bank
-Day1_CardContent9,Your account has been blocked due to a suspicious transaction
-Day1_CardHeader10,Store
-Day1_CardContent10,Your gift is ready for pickup
-Day1_CardHeader11,Government Services
-Day1_CardContent11,Pay the fine by July 5 to avoid penalties
-Day1_CardHeader12,Social Network
-Day1_CardContent12,You’ve been tagged in a photo
-Day1_CardHeader13,Delivery
-Day1_CardContent13,Your package will arrive today between 4:00 PM and 6:00 PM
-Day1_CardHeader14,Anonymous
-Day1_CardContent14,You’ve won a prize! Call now
-Day2_CardHeader0,Spam
-Day2_CardContent0,Find out how to double your income in a week
-Day2_CardHeader1,Advertisement
-Day2_CardContent1,50% discount on gym membership until the end of the month
-Day2_CardHeader2,Work
-Day2_CardContent2,You have been assigned a business trip on July 3
-Day2_CardHeader3,Email
-Day2_CardContent3,Get your e-ticket for the concert in the app
-Day2_CardHeader4,Colleague
-Day2_CardContent4,"Maria, check the accuracy of the data by tomorrow morning"
-Day2_CardHeader5,Friend
-Day2_CardContent5,Don’t forget to buy movie tickets for the weekend
-Day2_CardHeader6,Hospital
-Day2_CardContent6,You need to have a blood test on July 2 at 10:00 AM
-Day2_CardHeader7,Operator
-Day2_CardContent7,Your plan has been extended for another 30 days
-Day2_CardHeader8,Service
-Day2_CardContent8,Scheduled server maintenance tonight
-Day2_CardHeader9,Bank
-Day2_CardContent9,Your credit limit has been approved
-Day2_CardHeader10,Store
-Day2_CardContent10,The item in your wishlist is back in stock
-Day2_CardHeader11,Government Services
-Day2_CardContent11,Request a free online extract from the USRN
-Day2_CardHeader12,Social Network
-Day2_CardContent12,New comment on your post
-Day2_CardHeader13,Delivery
-Day2_CardContent13,Your order has been placed and will be delivered tomorrow morning
-Day2_CardHeader14,Anonymous
-Day2_CardContent14,Congratulations! You are a participant in an exclusive promotion
-Day3_CardHeader0,Spam
-Day3_CardContent0,You have won a car! Reply “YES” to claim
-Day3_CardHeader1,Advertisement
-Day3_CardContent1,"The new bag collection is now available, hurry to grab a deal"
-Day3_CardHeader2,Work
-Day3_CardContent2,Write the project report by the end of the day
-Day3_CardHeader3,Email
-Day3_CardContent3,Your invoice is available for download
-Day3_CardHeader4,Colleague
-Day3_CardContent4,"Anna, send me the presentation for review"
-Day3_CardHeader5,Friend
-Day3_CardContent5,Shall we meet for a run tomorrow morning?
-Day3_CardHeader6,Hospital
-Day3_CardContent6,Please confirm your ultrasound appointment on July 4 at 11:30 AM
-Day3_CardHeader7,Operator
-Day3_CardContent7,Your internet connection has been restored
-Day3_CardHeader8,Service
-Day3_CardContent8,Your car is ready for service
-Day3_CardHeader9,Bank
-Day3_CardContent9,Reminder to top up your deposit by July 10
-Day3_CardHeader10,Store
-Day3_CardContent10,20% off electronics only today
-Day3_CardHeader11,Government Services
-Day3_CardContent11,You can renew your driver’s license online
-Day3_CardHeader12,Social Network
-Day3_CardContent12,Your post has reached 100 likes
-Day3_CardHeader13,Delivery
-Day3_CardContent13,The courier will deliver your order by 8:00 PM today
-Day3_CardHeader14,Anonymous
-Day3_CardContent14,"You have a new secret offer, find out the details"
-Day4_CardHeader0,Spam
-Day4_CardContent0,"Your number has won 1 million rubles, confirm participation"
-Day4_CardHeader1,Advertisement
-Day4_CardContent1,Hurry to book a trip to the Maldives at 30% off
-Day4_CardHeader2,Work
-Day4_CardContent2,Please approve the work plan for next week
-Day4_CardHeader3,Email
-Day4_CardContent3,Your payment receipt has been sent to your email
-Day4_CardHeader4,Colleague
-Day4_CardContent4,"Dmitry, check the accuracy of the financial data by the end of the day"
-Day4_CardHeader5,Friend
-Day4_CardContent5,Shall we go to the exhibition on Saturday?
-Day4_CardHeader6,Hospital
-Day4_CardContent6,Don't forget to get a fluorography by July 10
-Day4_CardHeader7,Operator
-Day4_CardContent7,A new tariff plan is available without a price increase
-Day4_CardHeader8,Service
-Day4_CardContent8,Please update your password urgently for account security
-Day4_CardHeader9,Bank
-Day4_CardContent9,Your credit card has been successfully activated
-Day4_CardHeader10,Store
-Day4_CardContent10,Free delivery today on orders over 2000 ₽
-Day4_CardHeader11,Government Services
-Day4_CardContent11,Get a criminal record check online in 5 minutes
-Day4_CardHeader12,Social Network
-Day4_CardContent12,Your video has reached 1000 views
-Day4_CardHeader13,Delivery
-Day4_CardContent13,Your food will be delivered within 45 minutes
-Day4_CardHeader14,Anonymous
-Day4_CardContent14,You have a new secret promotion – find out the details
-Day5_CardHeader0,Spam
-Day5_CardContent0,Learn the secret to eternal youth in 30 seconds!
-Day5_CardHeader1,Advertisement
-Day5_CardContent1,60% off all smartphones today only!
-Day5_CardHeader2,Work
-Day5_CardContent2,Your interview has been moved to July 2 at 10:00 AM
-Day5_CardHeader3,Email
-Day5_CardContent3,Your delivery report is available for viewing
-Day5_CardHeader4,Colleague
-Day5_CardContent4,"Olga, please send me the presentation outline by tonight"
-Day5_CardHeader5,Friend
-Day5_CardContent5,Want to go hiking this weekend?
-Day5_CardHeader6,Hospital
-Day5_CardContent6,Vaccination appointment on July 5 at 9:00 AM—please confirm
-Day5_CardHeader7,Operator
-Day5_CardContent7,You’ve used 300 MB of data; please top up your balance
-Day5_CardHeader8,Service
-Day5_CardContent8,Don’t forget to clear the app cache for stability
-Day5_CardHeader9,Bank
-Day5_CardContent9,Your PIN change was successful
-Day5_CardHeader10,Store
-Day5_CardContent10,Black Friday: up to 70% off electronics
-Day5_CardHeader11,Government Services
-Day5_CardContent11,Book a doctor’s appointment online
-Day5_CardHeader12,Social Network
-Day5_CardContent12,You have a new follower on your page
-Day5_CardHeader13,Delivery
-Day5_CardContent13,The courier will contact you 15 minutes before arrival
-Day5_CardHeader14,Anonymous
-Day5_CardContent14,You’ve been selected as the winner of a secret draw
-Day6_CardHeader0,Spam
-Day6_CardContent0,Your phone number is entered in an iPhone X giveaway—reply “YES”
-Day6_CardHeader1,Advertisement
-Day6_CardContent1,Free 3-month music subscription for new users
-Day6_CardHeader2,Work
-Day6_CardContent2,Urgent call with the project manager today at 4:00 PM
-Day6_CardHeader3,Email
-Day6_CardContent3,Attached documents are available for download
-Day6_CardHeader4,Colleague
-Day6_CardContent4,"Sergey, check last quarter’s sales figures"
-Day6_CardHeader5,Friend
-Day6_CardContent5,Shall we order pizza and watch the match tonight?
-Day6_CardHeader6,Hospital
-Day6_CardContent6,Reminder: dental check-up on July 6 at 1:00 PM
-Day6_CardHeader7,Operator
-Day6_CardContent7,Your tariff change request has been processed successfully
-Day6_CardHeader8,Service
-Day6_CardContent8,Please clear device memory for optimization
-Day6_CardHeader9,Bank
-Day6_CardContent9,New notification: interest has been credited to your deposit
-Day6_CardHeader10,Store
-Day6_CardContent10,“3 for 2” deal on household products until tomorrow
-Day6_CardHeader11,Government Services
-Day6_CardContent11,Register for the online professional development course
-Day6_CardHeader12,Social Network
-Day6_CardContent12,Your photo has received 50 comments
-Day6_CardHeader13,Delivery
-Day6_CardContent13,Your package is awaiting pickup at the collection point
-Day6_CardHeader14,Anonymous
-Day6_CardContent14,Special offer exclusively for selected users
-Day7_CardContent0,Enter the draw for a free trip to Paris
-Day7_CardHeader1,Advertisement
-Day7_CardContent1,"Buy 2, get the 3rd item free in our store"
-Day7_CardHeader2,Work
-Day7_CardContent2,"Department meeting tomorrow at 11:00 AM, don’t be late"
-Day7_CardHeader3,Email
-Day7_CardContent3,"You have an important message, check your inbox"
-Day7_CardHeader4,Colleague
-Day7_CardContent4,"Olga, send me the project data file by 6:00 PM"
-Day7_CardHeader5,Friend
-Day7_CardContent5,Let’s go to the concert on Friday
-Day7_CardHeader6,Hospital
-Day7_CardContent6,"Your test results are ready, view them in your account"
-Day7_CardHeader7,Operator
-Day7_CardContent7,Your number has been successfully transferred to a new plan
-Day7_CardHeader8,Service
-Day7_CardContent8,System update scheduled overnight
-Day7_CardHeader9,Bank
-Day7_CardContent9,Check your card statement for June
-Day7_CardHeader10,Store
-Day7_CardContent10,The new summer clothing collection is now available
-Day7_CardHeader11,Government Services
-Day7_CardContent11,Apply for benefits online
-Day7_CardHeader12,Social Network
-Day7_CardContent12,Someone liked your photo
-Day7_CardHeader13,Delivery
-Day7_CardContent13,Your order has been handed over to the courier
-Day7_CardHeader14,Anonymous
-Day7_CardContent14,"You have received a secret gift, find out the details"
+Day1_CardHeader0,Utilities
+Day1_CardContent0,"Heating bill:
+360"
+Day1_CardHeader1,Accounting
+Day1_CardContent1,"Please sign
+the April payroll sheet"
+Day1_CardHeader2,Government Services
+Day1_CardContent2,"Tax form:
+3 days left"
+Day1_CardHeader3,Deliveries
+Day1_CardContent3,"Your package
+is at the pickup point"
+Day1_CardHeader4,HR
+Day1_CardContent4,"Submit your
+timesheet by Friday"
+Day1_CardHeader5,SelfGuru
+Day1_CardContent5,"Unlock your inner power
+70% off today only!"
+Day1_CardHeader6,BeautyBox
+Day1_CardContent6,"You deserve 
+the best in self-care!"
+Day1_CardHeader7,Nutritionist
+Day1_CardContent7,"5 steps to
+a toxin-free life"
+Day1_CardHeader8,Fuzzball of the Day
+Day1_CardContent8,"Cat of the day:
+smiling just for you!"
+Day1_CardHeader9,Unknown
+Day1_CardContent9,🌈💰TRY IT NOW💰🌈
+Day1_CardHeader10,Mom
+Day1_CardContent10,"How are you?
+Hope everything’s
+okay with you."
+Day1_CardHeader11,Kira
+Day1_CardContent11,"Look, our cat's
+grown so much!"
+Day1_CardHeader12,June
+Day1_CardContent12,"Still writing?
+We need someone
+to cover."
+Day1_CardHeader13,Sasha
+Day1_CardContent13,"Just found
+one of your old photos
+got all warm inside!"
+Day1_CardHeader14,Kay
+Day1_CardContent14,"Hey.
+I hope things
+feel more stable
+for you now."
+Day2_CardHeader0,Editorial Team
+Day2_CardContent0,"Please send
+the topic for
+the next article"
+Day2_CardHeader1,Utilities
+Day2_CardContent1,"Late fee on water bill:
++112"
+Day2_CardHeader2,Accounting
+Day2_CardContent2,"Salary received.
+Check your account
+details"
+Day2_CardHeader3,Deliveries
+Day2_CardContent3,"Notification:
+Delivery failed"
+Day2_CardHeader4,Automated System
+Day2_CardContent4,"Task deadline
+in 6 hours"
+Day2_CardHeader5,Planner
+Day2_CardContent5,"Your goals
+miss you!"
+Day2_CardHeader6,Dance
+Day2_CardContent6,"Start your week
+with a dance!"
+Day2_CardHeader7,ImgaGirl
+Day2_CardContent7,"5 power poses
+for confident photos"
+Day2_CardHeader8,Digital
+Day2_CardContent8,"Don’t stall
+the world won’t wait!"
+Day2_CardHeader9,Automated System
+Day2_CardContent9,"You are invited
+to take a look…"
+Day2_CardHeader10,Mom
+Day2_CardContent10,"It rained today.
+Hope you took
+an umbrella?"
+Day2_CardHeader11,Sasha
+Day2_CardContent11,"Hey!
+Do you still have
+that cottage cheese
+casserole recipe?"
+Day2_CardHeader12,Anna
+Day2_CardContent12,"You won’t believe it
+they played your favorite
+song at the station!"
+Day2_CardHeader13,Mom
+Day2_CardContent13,"Remember you asked
+for a reminder to pay
+for your phone?"
+Day2_CardHeader14,Medical Center
+Day2_CardContent14,"Test results…
+...urgent follow-up
+recommended…"
+Day3_CardHeader0,Editor
+Day3_CardContent0,"Need the text by evening.
+No delays."
+Day3_CardHeader1,Client
+Day3_CardContent1,"Wording%#? …
+re@%write this mess"
+Day3_CardHeader2,Medical Center
+Day3_CardContent2,Payment ✓
+Day3_CardHeader3,Anna
+Day3_CardContent3,"Your articl? Submi@@@…
+in dr@fts"
+Day3_CardHeader4,IT
+Day3_CardContent4,"Pass_expired.
+Ch@nge w/in 24h"
+Day3_CardHeader5,MedMed
+Day3_CardContent5,"5 symptoms you
+shouldn’t ignore"
+Day3_CardHeader6,LifeCoach
+Day3_CardContent6,"You can still
+change everything!"
+Day3_CardHeader7,MedOk
+Day3_CardContent7,"We've noticed:
+you’re going out
+less lately"
+Day3_CardHeader8,Newsletter
+Day3_CardContent8,"Your pain is
+a growth point"
+Day3_CardHeader9,Fitness
+Day3_CardContent9,"Do y0u_#even
+enj0y_be!ng in
+th%t v&rs!on
+0f y0ur@self?"
+Day3_CardHeader10,Kira
+Day3_CardContent10,"Haven’t heard
+from you!
+I got a new fox mug
+and thought of you."
+Day3_CardHeader11,Mom
+Day3_CardContent11,"I get that you
+might be busy.
+Just send a quick message
+if you're okay."
+Day3_CardHeader12,Sasha
+Day3_CardContent12,Stay strong!
+Day3_CardHeader13,DO NOT REPLY
+Day3_CardContent13,"Hey!
+Just in case you want
+to come back
+we’ve got an opening."
+Day3_CardHeader14,Kay
+Day3_CardContent14,It’s all from stress!
+Day4_CardHeader0,Edit0r
+Day4_CardContent0,▌▌ ž•••*k•*ž••• ▌▌
+Day4_CardHeader1,Client
+Day4_CardContent1,"Why haven’t you
+responded to the edits?"
+Day4_CardHeader2,AutoSystem
+Day4_CardContent2,Connection error
+Day4_CardHeader3,HR
+Day4_CardContent3,"F!le not s#nt.
+Please try again."
+Day4_CardHeader4,░░░
+Day4_CardContent4,...you shou▓▓▓...
+Day4_CardHeader5,Guru
+Day4_CardContent5,"Find inner harmony
+in just 5 minutes a day!"
+Day4_CardHeader6,[unknown]
+Day4_CardContent6,Pain is a choice
+Day4_CardHeader7,SelfHelpPro
+Day4_CardContent7,"Do you know why
+you’re still not happy?"
+Day4_CardHeader8,CareYou
+Day4_CardContent8,"Struggling to get out of bed?
+We’re here for you"
+Day4_CardHeader9,!!!
+Day4_CardContent9,Have you eaten today?
+Day4_CardHeader10,Mom
+Day4_CardContent10,"You need
+to stay positive."
+Day4_CardHeader11,Colleague
+Day4_CardContent11,Everything will be fine.
+Day4_CardHeader12,Anna
+Day4_CardContent12,"Well, at least you’ll
+lose weight."
+Day4_CardHeader13,Sasha
+Day4_CardContent13,"My aunt had
+the same thing, actually…"
+Day4_CardHeader14,Kira
+Day4_CardContent14,Stay strong!
+Day5_CardHeader0,HR
+Day5_CardContent0,"Smile!
+You’re thriving!"
+Day5_CardHeader1,Editor
+Day5_CardContent1,"Waiting as usual.
+You’re our fighter, right?"
+Day5_CardHeader2,AutoSystem
+Day5_CardContent2,"You didn’t complete
+your Happy Monday.
+Want to try again?"
+Day5_CardHeader3,Info
+Day5_CardContent3,"Your health is
+in your hands.
+Don’t forget to check it!"
+Day5_CardHeader4,Calendar
+Day5_CardContent4,"Your birthday’s
+coming up.
+Ready to start a new life?"
+Day5_CardHeader5,Anna
+Day5_CardContent5,"You are not alone.
+You are not alone.
+You are not alo... T... %$#!"
+Day5_CardHeader6,Support Service
+Day5_CardContent6,..........
+Day5_CardHeader7,Anna
+Day5_CardContent7,"You are not alone.
+You are not alone.
+You are not alo... T... %$#!"
+Day5_CardHeader8,—
+Day5_CardContent8,"...s_h_e_’s_w**atching...
+T#_t#m?"
+Day5_CardHeader9,<<NULL>>
+Day5_CardContent9,"REB0OT%@...
+REB0OT%@...
+%$!$!"
+Day5_CardHeader10,Kira
+Day5_CardContent10,"Here, read some stories
+people who recovered…"
+Day5_CardHeader11,Mom
+Day5_CardContent11,You’ll get through this.
+Day5_CardHeader12,—
+Day5_CardContent12,Stay strong!
+Day5_CardHeader13,—
+Day5_CardContent13,Stay strong!
+Day5_CardHeader14,—
+Day5_CardContent14,Stay strong!

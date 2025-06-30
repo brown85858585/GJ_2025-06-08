@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 767433373653307845}
   - component: {fileID: 2588227166212395499}
   - component: {fileID: 3549041799309945314}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,8 +69,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 149}
-  m_SizeDelta: {x: 512, y: 768}
+  m_AnchoredPosition: {x: 0, y: 260}
+  m_SizeDelta: {x: 744.6824, y: 1117.0236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2588227166212395499
 CanvasRenderer:
@@ -110,6 +110,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4367157460514502187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1847696451072314187}
+  m_Layer: 0
+  m_Name: CanDefault
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1847696451072314187
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367157460514502187}
+  m_LocalRotation: {x: 0, y: 0, z: -0.1945768, w: 0.9808873}
+  m_LocalPosition: {x: 0, y: 0, z: 79.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8248699350353836129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -22.44}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -17.4, y: 1.4}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6051155464596156260
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +154,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8248699350353836129}
-  - component: {fileID: 4772034972375203899}
   - component: {fileID: 930876032188750650}
   m_Layer: 5
   m_Name: FlowerGameView
@@ -143,6 +177,7 @@ RectTransform:
   - {fileID: 2763590159395864943}
   - {fileID: 963710337666417965}
   - {fileID: 1937727726028460015}
+  - {fileID: 1847696451072314187}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -150,27 +185,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4772034972375203899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6051155464596156260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40f69fdaf8cc094f9b604f65e63018a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UsedPrefab: {fileID: 6051155464596156260}
-  waterMinY: -750
-  waterMaxY: -150
-  waterHorizontalRange: 50
-  waterHorizontalSpeed: 2
-  indicatorSpeed: 100
-  trackHeight: 300
-  zoneHeight: 75
-  maxAttempts: 3
 --- !u!114 &930876032188750650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressPoint: {fileID: 963710337666417965}
   canPoint: {fileID: 1937727726028460015}
+  canDefaultTransform: {fileID: 1847696451072314187}
   winScore: 500
   pressForce: 0.05
 --- !u!1 &6137522896563493456
@@ -221,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -178}
+  m_AnchoredPosition: {x: -194, y: -290}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2915295965795145144
@@ -264,6 +279,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 272, y: 207}
+  m_AnchoredPosition: {x: 186, y: 222}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

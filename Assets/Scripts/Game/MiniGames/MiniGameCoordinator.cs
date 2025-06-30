@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Effects;
+using Effects.VolumeEffects;
 using Game.Interactions;
 using Game.MiniGames.Flower;
 using Game.MiniGames.Park;
@@ -35,7 +36,7 @@ namespace Game.MiniGames
         // Словари для хранения делегатов
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _completeHandlers = new();
-        IMiniGame currentMiniGame;
+        private IMiniGame _currentMiniGame;
 
         public List<IMiniGame> Games => _factories.Values.ToList();
 
@@ -66,7 +67,7 @@ namespace Game.MiniGames
             _factories[ItemCategory.Kitchen] = new KitchenMiniGame(_playerController);
             _factories[ItemCategory.Computer] = new WorkPapersMiniGame(_playerController);
             
-            var parkLevel = Object.Instantiate(Resources.Load<GameObject>("Prefabs/MiniGame/ParkLevel"));
+            var parkLevel = Object.Instantiate(_prefabAccumulator.ParkLevelViews[CurrentLevelIndex]);
             _factories[ItemCategory.Door] = new ParkMiniGame(_playerController);
             (_factories[ItemCategory.Door] as ParkMiniGame)?.Initialization(parkLevel.GetComponent<ParkLevelView>(),
                 effectAccumulatorView, level);
@@ -94,7 +95,7 @@ namespace Game.MiniGames
 
         private void InputAdaptep_OnGameInteract(bool obj)
         {
-            currentMiniGame.OnActionButtonClick();
+            _currentMiniGame.OnActionButtonClick();
         }
 
         private void SwitchOffInputSystem(Quests.QuestType questType)
@@ -113,8 +114,8 @@ namespace Game.MiniGames
                 playerController.InputAdaptep.SwitchAdapterToGlobalMode();
                 playerController.InputAdaptep.OnGameInteract -= InputAdaptep_OnGameInteract;
             }
-            Unsubscribe(currentMiniGame);
-            currentMiniGame = null; // Сбрасываем текущую игру после переключения
+            Unsubscribe(_currentMiniGame);
+            _currentMiniGame = null; // Сбрасываем текущую игру после переключения
         }
 
         private void HandleInteraction(ItemCategory category)
@@ -128,8 +129,7 @@ namespace Game.MiniGames
                 Debug.Log("You need a watering can to start the flower mini-game.");
                 return;
             }
-
-
+            
             // Создаём делегаты и сохраняем их для последующей отписки
             Action<Quests.QuestType> startHandler = SwitchOnInputSystem;
             Action<Quests.QuestType> completeHandler = SwitchOffInputSystem;
@@ -144,24 +144,44 @@ namespace Game.MiniGames
 
             game.OnMiniGameStart += startHandler;
             game.OnMiniGameComplete += completeHandler;
-            currentMiniGame = game;
-            
+            _currentMiniGame = game;
 
-            if (category == ItemCategory.Door)
-            {
-                game.OnMiniGameComplete += OnMiniGameComplete;
-            }
+            game.OnMiniGameComplete += OnMiniGameComplete;
+           
             game.Level = CurrentLevelIndex;
             game.StartGame();
+
+            if (game.QType == QuestType.Sprint)
+            {
+               
+            }
+            else
+            {
+                VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Blur);
+            }
         }
 
-        private void OnMiniGameComplete(QuestType type)
+        private void OnMiniGameComplete(QuestType questType)
+        {
+            _currentMiniGame = TypeMatchingForCurrentGame(questType);
+
+            if (questType == QuestType.Sprint)
+            {
+                OnRunMiniGameComplete();
+            }
+            
+            _currentMiniGame.IsCompleted = true;
+            _currentMiniGame.OnMiniGameComplete -= OnMiniGameComplete;
+            
+            VolumeSwitcher.Instance.ClearVolume();
+        }
+
+       
+        private void OnRunMiniGameComplete()
         {
             _level.gameObject.SetActive(true);
-            _playerController.SetPosition(Vector3.zero * 6);
-            
-
-
+            _playerController.SetPosition(new Vector3(11.005374f,0.0271916389f,4.8061552f));
+            _playerController.SetRotation(new Quaternion(0f,0.984181404f,0f,-0.177163616f));
         }
 
         public void UnregisterAll()
@@ -188,5 +208,35 @@ namespace Game.MiniGames
             _startHandlers.Remove(game);
             _completeHandlers.Remove(game);
         }
+        
+        private IMiniGame TypeMatchingForCurrentGame(QuestType questType)
+        {
+            switch (questType)
+            {
+                case QuestType.Sprint:
+                {
+                    _factories.TryGetValue(ItemCategory.Door, out var game);
+                    return game;
+                }
+                case QuestType.Kitchen:
+                {
+                    _factories.TryGetValue(ItemCategory.Kitchen, out var game);
+                    return game;
+                }
+                case QuestType.Flower:
+                {
+                    _factories.TryGetValue(ItemCategory.Flower, out var game);
+                    return game;
+                }
+                case QuestType.Work:
+                {
+                    _factories.TryGetValue(ItemCategory.Computer, out var game);
+                    return game;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(questType), questType, null);
+            }
+        }
+
     }
 }
