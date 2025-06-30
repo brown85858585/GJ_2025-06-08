@@ -191,13 +191,13 @@ namespace Game.MiniGames
                 {
                     UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
-                    model.Score += 150;
+                    
                 }
                 else
                 {
                     UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
                     OnGameAttempt?.Invoke(false);
-                    model.Score += completedZones * 25;
+                    //model.Score += completedZones * 25;
                 }
 
                 StartCoroutine(ShowResultAndEnd(2f));
@@ -215,7 +215,7 @@ namespace Game.MiniGames
             if (zoneIndex >= 0 && zoneIndex < winZones.Length && winZones[zoneIndex] != null)
             {
                 zoneCompleted[zoneIndex] = true;
-
+                model.Score += 50;
                 // Анимация исчезновения
                 StartCoroutine(FadeOutZone(zoneIndex));
 
