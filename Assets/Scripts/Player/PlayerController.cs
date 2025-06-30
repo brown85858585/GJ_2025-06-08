@@ -22,10 +22,29 @@ namespace Player
         private bool _isRunMovement;
 
         private PlayerMovement _movement;
-        private PlayerRunMovement _runMovement;
         private IPlayerMovement _currentMovement;
         private PlayerDialogue _playerDialogue;
         public IPlayerMovement Movement => _currentMovement;
+        
+        private float _normalSpeed;
+        private float _acceleratedSpeed;
+        public void ToggleMovement()
+        {
+            _isRunMovement = !_isRunMovement;
+            if (_isRunMovement)
+            {
+                _normalSpeed = _view.RunSpeed;
+                _acceleratedSpeed = _view.SprintSpeed;
+                
+                // _movement.VirtualCamera.
+            }
+            else
+            {
+                _normalSpeed = _view.MoveSpeed;
+                _acceleratedSpeed = _view.RunSpeed;
+            }
+        }
+
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
@@ -33,8 +52,7 @@ namespace Player
         {
             _model = model;
             _input = input;
-
-            _runMovement = new PlayerRunMovement(_input);
+            
             _movement = new PlayerMovement(_input, model);
             _currentMovement = _movement;
             
@@ -44,6 +62,9 @@ namespace Player
         public void InitView(PlayerView playerView)
         {
             _view = playerView;
+            _normalSpeed = _view.MoveSpeed;
+            _acceleratedSpeed = _view.RunSpeed;
+            
             _view.OnCollision += OnCollision;
             _view.OnUpdate += Update;
             
@@ -83,13 +104,11 @@ namespace Player
             Vector3 move;
             if (_input.IsAccelerating)
             {
-                move = Movement.Move(_view.RunSpeed, _view.transform);
-                
+                move = Movement.Move(_acceleratedSpeed, _view.StaminaDecreaseMultiplayer);
             }
             else
             {
-                move = Movement.Move(_view.MoveSpeed, _view.transform);
-                
+                move = Movement.Move(_normalSpeed, _view.StaminaDecreaseMultiplayer);
             }
             _view.Rigidbody.AddForce(move, ForceMode.Force);
             var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
@@ -102,21 +121,7 @@ namespace Player
         {
             _view.Rigidbody.MovePosition(position);
         }
-
-        public void ToggleMovement()
-        {
-            return;
-            _isRunMovement = !_isRunMovement;
-            if (_isRunMovement)
-            {
-                _currentMovement = _runMovement;
-            }
-            else
-            {
-                _currentMovement = _movement;
-            }
-        }
-
+        
         public void HandleInteraction(ItemCategory item, Transform obj)
         {
             

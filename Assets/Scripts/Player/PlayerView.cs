@@ -29,6 +29,8 @@ namespace Player
         [SerializeField]
         private Button moveForwardButton;
         [SerializeField]
+        private float staminaDecreaseMultiplayer;
+        [SerializeField]
         private float groundDrag = 7f;
         
         [Header("Rotation Settings")]
@@ -47,13 +49,14 @@ namespace Player
         public float RunSpeed => runSpeed;
         public float SprintSpeed => sprintSpeed;
         public float GroundDrag => groundDrag;
+        public float StaminaDecreaseMultiplayer => staminaDecreaseMultiplayer;
         public float TurnSmooth => turnSmooth;
         public LayerMask WhatIsGround => whatIsGround;
         public PlayerDialogueView DialogueView => dialogueView;
         
         public Rigidbody Rigidbody { get; private set; }
         public CapsuleCollider CapsuleCollider { get; private set; }
-        
+
         public event Action<Collision> OnCollision;
         public event Action OnUpdate;
         public event Action OnWakeUpEnded;

@@ -105,7 +105,9 @@ MonoBehaviour:
   correctionVector: {x: 0.6, y: 0.6}
   moveSpeed: 25
   runSpeed: 45
+  sprintSpeed: 80
   moveForwardButton: {fileID: 0}
+  staminaDecreaseMultiplayer: 0.75
   groundDrag: 10
   turnSmooth: 5
   whatIsGround:
