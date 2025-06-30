@@ -38,20 +38,21 @@ namespace Game.MiniGames
         public Color successZoneColor = Color.green;
         public Color indicatorColor = Color.black;
 
+        public Color buttonIndicatorColorDefault = new Color(0.4f, 0.4f, 0.4f);
+        public Color buttonIndicatorColorSuccess = new Color(0, 0.56f, 0.47f);
+        public Color buttonIndicatorColorWrong = new Color(0.35f, 0.35f, 0.59f);
+
         [Header("Prefab Elements References")]
         private Transform knifeHandler;
         private Transform winZoneHandler;
         private Image winZone;
         private RectTransform knife;
 
+        private Image actionButtonIndicator;
+
         private float currentAngle;
         private float targetAngle;
         private bool movingClockwise = true;
-
-
-
-
-
 
         private void SetupMultipleWinZones()
         {
@@ -78,6 +79,44 @@ namespace Game.MiniGames
 
             completedZones = 0;
             UpdateInstructionText($"🎯 Попадите в любую из 3 зон");
+        }
+
+        private void ResetActionButtonIndicator()
+        {
+            Debug.Log("ResetActionButtonIndicator");
+
+            if (actionButtonIndicator != null)
+            {
+                actionButtonIndicator.color = buttonIndicatorColorDefault;
+            }
+        }
+
+        private void SetActionButtonIndicatorSuccess()
+        {
+            Debug.Log("SetActionButtonIndicatorSuccess");
+
+            if (actionButtonIndicator != null)
+            {
+                actionButtonIndicator.color = buttonIndicatorColorSuccess;
+                StartCoroutine(RevertActionButtonIndicator(1.0f));
+            }
+        }
+
+        private void SetActionButtonIndicatorWrong()
+        {
+            Debug.Log("SetActionButtonIndicatorWrong");
+
+            if (actionButtonIndicator != null)
+            {
+                actionButtonIndicator.color = buttonIndicatorColorWrong;
+                StartCoroutine(RevertActionButtonIndicator(1.0f));
+            }
+        }
+
+        private IEnumerator RevertActionButtonIndicator(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            ResetActionButtonIndicator();
         }
 
         private int CheckCurrentZone()
@@ -115,6 +154,8 @@ namespace Game.MiniGames
             if (hitZoneIndex >= 0)
             {
                 // Попадание в зону с индексом hitZoneIndex
+                SetActionButtonIndicatorSuccess();
+
                 HideCompletedZone(hitZoneIndex); // Скрываем именно ту зону, в которую попали
                 completedZones++;
 
@@ -138,6 +179,7 @@ namespace Game.MiniGames
             {
                 // Промах
                 Debug.Log("❌ Промах! Игра окончена!");
+                SetActionButtonIndicatorWrong();
                 isGameActive = false;
                 UpdateInstructionText("❌ Промах! Попробуйте снова!");
                 OnGameAttempt?.Invoke(false);
@@ -241,6 +283,8 @@ namespace Game.MiniGames
             }
 
             SetupMultipleWinZones();
+
+            actionButtonIndicator = instantiatedCookingView.transform.Find("Panel/PressEButton/MySlider").GetComponent<Image>();
         }
 
  
@@ -278,7 +322,8 @@ namespace Game.MiniGames
         {
             instantiatedCookingView= cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
             indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
-        
+
+            ResetActionButtonIndicator();
 
             // Если префаб не назначен, попробуем найти его в Resources
             // if (cookingViewPrefab == null)
@@ -546,7 +591,8 @@ namespace Game.MiniGames
         private void CreateGameButtons()
         {
             // Создаем кнопки в gameScreen
-            actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
+            //actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
+            actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-60, 400), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
             actionButton.onClick.AddListener(OnActionButtonClick);
             actionButton.gameObject.SetActive(false);
 
