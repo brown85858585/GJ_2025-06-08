@@ -51,6 +51,11 @@ namespace Game.MiniGames
             _miniGameCanvas = Object.Instantiate(_prefabAccumulator.MiniGameCanvas);
         }
 
+        public IMiniGame GetMiniGame(ItemCategory category)
+        {
+            return _factories.GetValueOrDefault(category);
+        }
+        
         public void SetLevel(int level)
         {
             CurrentLevelIndex = level;

@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Game.Interactions;
 using Game.Levels;
+using Game.MiniGames;
+using Game.Quests;
 using Knot.Localization;
 using Knot.Localization.Data;
 using Player;
@@ -16,14 +19,19 @@ namespace Game.Monolog
         private Dictionary<string, int> _monologIndexesBySuffix = new ();
         private readonly KnotKeyCollection _keyCollection;
         private readonly LevelManager _levelManager;
+        private readonly MonologMiniGameHandler _miniGameHandler;
+        private readonly QuestLog _questLog;
 
-       
-
-        public MonologSystem(IInteractionSystem interactionSystem, IPlayerController playerController, LevelManager levelManager)
+        public MonologSystem(IInteractionSystem interactionSystem,
+            IPlayerController playerController,
+            LevelManager levelManager,
+            MiniGameCoordinator miniGameCoordinator, 
+            QuestLog logicQuestLog)
         {
             _interactionSystem = interactionSystem;
             _playerController = playerController;
             _levelManager = levelManager;
+            _questLog = logicQuestLog;
             _keyCollection = KnotLocalization.Manager.Database.TextKeyCollections[0];
 
             _interactionSystem.OnInteraction += HandleInteraction;
@@ -31,16 +39,35 @@ namespace Game.Monolog
             {
                 _playerController.Dialogue.CloseDialogue();
             };
+            
+            _miniGameHandler = new MonologMiniGameHandler(miniGameCoordinator, playerController);
         }
 
         private void HandleInteraction(ItemCategory item)
         {
-            var suffix = GetItemKeySuffix(item);
+            if(_questLog.IsAllQuestsCompleted && item == ItemCategory.Bed) return;
+            
+            var outcome = _miniGameHandler.HandleMinigameDialogue(item);
+            switch (outcome)
+            {
+                case InteractionOutcome.Interrupt:
+                    return;
+                case InteractionOutcome.NeedFindMiniGameKey:
+                    OpenDialogue(_miniGameHandler.FindMiniGameKey(item));
+                    break;
+                case InteractionOutcome.Continue:
+                {
+                    var suffix = GetItemKeySuffix(item);
 
-            if (_monologIndexesBySuffix.TryGetValue(suffix, out var currentIndex))
-                HandleExistingMonolog(suffix, currentIndex);
-            else
-                HandleNewMonolog(suffix);
+                    if (_monologIndexesBySuffix.TryGetValue(suffix, out var currentIndex))
+                        HandleExistingMonolog(suffix, currentIndex);
+                    else
+                        HandleNewMonolog(suffix);
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private string GetItemKeySuffix(ItemCategory item) => $"Day{_levelManager.CurrentLevelIndex + 1}_{item}";
