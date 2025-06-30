@@ -20,20 +20,13 @@ namespace Game.Installers
         [SerializeField] private float deltaFadeOutTime  = 0.4f;   // сколько исчезает
 
         private int  _lastScore = 0;
-        private Tween _deltaTween;   // чтобы не наслаивались анимации
+        private Tween _deltaTween;
         private Tween _scoreTween;
 
         public int Score
         {
             get => int.Parse(scoreText.text);
             set => SetScore(value);
-        }
-
-        private void Awake()
-        {
-            // гарантируем начальное состояние дельты — невидима и схлопнута
-            deltaText.transform.localScale = Vector3.zero;
-            deltaText.alpha = 0;
         }
 
         private void SetScore(int score)
