@@ -55,6 +55,8 @@ namespace Game.MiniGames
         public float indicatorSpeed = 100f;
         public int maxAttempts = 3;
 
+
+
         protected bool isGameActive = false;
         protected bool gameStarted = false;
         protected int currentAttempts = 0;
@@ -62,8 +64,10 @@ namespace Game.MiniGames
         protected PlayerModel model;
 
         // События
+        public bool IsComplete { get; set; } = false;
         public System.Action OnMiniGameComplete;
         public System.Action<bool> OnGameAttempt;
+
         //public int GetGameScore => gameScore;
 
         public int gameScore = 0;
@@ -71,6 +75,7 @@ namespace Game.MiniGames
 
         public void SetPlayer(PlayerModel model)
         {
+            model.Score
             this.model = model;
         }
 
@@ -163,8 +168,9 @@ namespace Game.MiniGames
 
             miniGamePanel.SetActive(false);
             ClearExistingElements();
-            CreateStartScreen();
+           //CreateStartScreen();
             CreateGameScreen();
+            //StartGame();
 
             // Инициализировать массив зон если он не задан
             if (zoneImages == null || zoneImages.Length == 0)
@@ -305,8 +311,9 @@ namespace Game.MiniGames
 
             miniGamePanel.SetActive(true);
 
-            if (startScreen != null) startScreen.SetActive(true);
-            if (gameScreen != null) gameScreen.SetActive(false);
+            StartGame();
+            //if (startScreen != null) startScreen.SetActive(true);
+            //if (gameScreen != null) gameScreen.SetActive(false);
 
             gameStarted = false;
             isGameActive = false;
@@ -318,7 +325,7 @@ namespace Game.MiniGames
         {
             Debug.Log("🎮 Запуск игры!");
 
-            if (startScreen != null) startScreen.SetActive(false);
+           // if (startScreen != null) startScreen.SetActive(false);
             if (gameScreen != null) gameScreen.SetActive(true);
 
             gameStarted = true;

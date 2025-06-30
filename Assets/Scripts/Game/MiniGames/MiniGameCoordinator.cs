@@ -99,6 +99,14 @@ namespace Game.MiniGames
 
         private void SwitchOffInputSystem(Quests.QuestType questType)
         {
+            var game = _factories.Where(k => k.Key.ToString() == questType.ToString()).ToList();
+           
+            if (game.Count > 0)
+                game.First().Value.IsCompleted = true;
+
+
+            //        var ss = _factories.TryGetValue((ItemCategory)questType, out var Game);
+
             if (questType != Quests.QuestType.Sprint)
             {
                 var playerController = (_playerController as PlayerController);
@@ -151,6 +159,9 @@ namespace Game.MiniGames
         {
             _level.gameObject.SetActive(true);
             _playerController.SetPosition(Vector3.zero * 6);
+            
+
+
         }
 
         public void UnregisterAll()
