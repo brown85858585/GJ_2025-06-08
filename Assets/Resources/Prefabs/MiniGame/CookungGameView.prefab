@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CookingViewPrefab: {fileID: 5345630855882479413}
-  gameSpeed: 150
+  gameSpeed: 100
   knife: {fileID: 5794802996471557980}
   winZoneWidth: 300
   winZones:

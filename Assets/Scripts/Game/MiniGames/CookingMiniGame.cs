@@ -38,21 +38,20 @@ namespace Game.MiniGames
         public Color successZoneColor = Color.green;
         public Color indicatorColor = Color.black;
 
-        public Color buttonIndicatorColorDefault = new Color(0.4f, 0.4f, 0.4f);
-        public Color buttonIndicatorColorSuccess = new Color(0, 0.56f, 0.47f);
-        public Color buttonIndicatorColorWrong = new Color(0.35f, 0.35f, 0.59f);
-
         [Header("Prefab Elements References")]
         private Transform knifeHandler;
         private Transform winZoneHandler;
         private Image winZone;
         private RectTransform knife;
 
-        private Image actionButtonIndicator;
-
         private float currentAngle;
         private float targetAngle;
         private bool movingClockwise = true;
+
+        [Header("Attempts System")]
+        private int maxGameAttempts = 3; // Максимальное количество нажатий E
+        private int usedAttempts = 0; // Количество использованных нажатий E
+
 
         private void SetupMultipleWinZones()
         {
@@ -60,57 +59,21 @@ namespace Game.MiniGames
             {
                 if (winZones[i] != null && winZoneHandlers[i] != null)
                 {
-                    // ЧИТАЕМ реальный угол из Transform, а не задаем фиксированный
                     targetAngles[i] = winZoneHandlers[i].rotation.eulerAngles.z;
 
-                    // Нормализуем угол (-180 до 180)
                     if (targetAngles[i] > 180f)
                         targetAngles[i] -= 360f;
 
                     zoneCompleted[i] = false;
                     winZones[i].color = successZoneColor;
 
-                    // НЕ поворачиваем - оставляем как в префабе!
-                    // winZoneHandlers[i].rotation = Quaternion.Euler(0, 0, targetAngles[i]);
-
                     Debug.Log($"WinZone {i + 1} реальный угол: {targetAngles[i]}");
                 }
             }
 
             completedZones = 0;
-            UpdateInstructionText($"🎯 Попадите в любую из 3 зон");
-        }
-
-        private void ResetActionButtonIndicator()
-        {
-            if (actionButtonIndicator != null)
-            {
-                actionButtonIndicator.color = buttonIndicatorColorDefault;
-            }
-        }
-
-        private void SetActionButtonIndicatorSuccess()
-        {
-            if (actionButtonIndicator != null)
-            {
-                actionButtonIndicator.color = buttonIndicatorColorSuccess;
-                StartCoroutine(RevertActionButtonIndicator(1.0f));
-            }
-        }
-
-        private void SetActionButtonIndicatorWrong()
-        {
-            if (actionButtonIndicator != null)
-            {
-                actionButtonIndicator.color = buttonIndicatorColorWrong;
-                StartCoroutine(RevertActionButtonIndicator(1.0f));
-            }
-        }
-
-        private IEnumerator RevertActionButtonIndicator(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            ResetActionButtonIndicator();
+            usedAttempts = 0; // ДОБАВИТЬ ЭТУ СТРОКУ
+            UpdateInstructionText($"🎯 Попадите в любую из 3 зон (Попытки: {maxGameAttempts})");
         }
 
         private int CheckCurrentZone()
@@ -143,42 +106,68 @@ namespace Game.MiniGames
                 return;
             }
 
-            int hitZoneIndex = CheckCurrentZone(); // Получаем индекс попавшей зоны
+            // Увеличиваем счетчик использованных попыток при каждом нажатии E
+            usedAttempts++;
+            int remainingAttempts = maxGameAttempts - usedAttempts;
+
+            Debug.Log($"Нажатие E #{usedAttempts} из {maxGameAttempts}");
+
+            int hitZoneIndex = CheckCurrentZone(); // Проверяем попадание
 
             if (hitZoneIndex >= 0)
             {
-                // Попадание в зону с индексом hitZoneIndex
-                SetActionButtonIndicatorSuccess();
-
-                HideCompletedZone(hitZoneIndex); // Скрываем именно ту зону, в которую попали
+                // Попадание в зону
+                HideCompletedZone(hitZoneIndex);
                 completedZones++;
+                Debug.Log($"✅ Зона {hitZoneIndex + 1} выполнена! Попаданий: {completedZones}/3");
 
                 if (completedZones >= 3)
                 {
+                    // Все зоны выполнены - победа!
                     Debug.Log("🎉 Все зоны выполнены! Победа!");
                     isGameActive = false;
                     UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
                     model.Score += 150;
                     StartCoroutine(ShowResultAndEnd(2f));
-                }
-                else
-                {
-                    int remainingZones = 3 - completedZones;
-                    UpdateInstructionText($"🎯 Попадите в любую из {remainingZones} оставшихся зон");
-                    Debug.Log($"✅ Зона {hitZoneIndex + 1} выполнена! Осталось: {remainingZones}");
+                    return;
                 }
             }
             else
             {
                 // Промах
-                Debug.Log("❌ Промах! Игра окончена!");
-                SetActionButtonIndicatorWrong();
+                Debug.Log($"❌ Промах! Попытка {usedAttempts}");
+            }
+
+            // Проверяем остались ли попытки
+            if (usedAttempts >= maxGameAttempts)
+            {
+                // Все попытки исчерпаны
+                bool isVictory = completedZones >= 3;
+                Debug.Log($"Все {maxGameAttempts} попытки использованы. Выполнено зон: {completedZones}/3");
+
                 isGameActive = false;
-                UpdateInstructionText("❌ Промах! Попробуйте снова!");
-                OnGameAttempt?.Invoke(false);
-                model.Score += 25;
-                StartCoroutine(ShowResultAndEnd(1.5f));
+
+                if (isVictory)
+                {
+                    UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
+                    OnGameAttempt?.Invoke(true);
+                    model.Score += 150;
+                }
+                else
+                {
+                    UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
+                    OnGameAttempt?.Invoke(false);
+                    model.Score += completedZones * 25;
+                }
+
+                StartCoroutine(ShowResultAndEnd(2f));
+            }
+            else
+            {
+                // Есть еще попытки - обновляем инструкции
+                int remainingZones = 3 - completedZones;
+                UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
             }
         }
 
@@ -235,10 +224,11 @@ namespace Game.MiniGames
 
             currentTarget = 0;
             completedZones = 0;
+            usedAttempts = 0; // ДОБАВИТЬ ЭТУ СТРОКУ - сбрасываем счетчик нажатий
             currentAngle = 0f;
             movingClockwise = true;
 
-            UpdateInstructionText("🎯 Попадите в зону 1 из 3");
+            UpdateInstructionText($"🎯 Попадите в 3 зоны за {maxGameAttempts} нажатий E");
 
             if (knife != null)
             {
@@ -277,9 +267,6 @@ namespace Game.MiniGames
             }
 
             SetupMultipleWinZones();
-
-            actionButtonIndicator = instantiatedCookingView.transform.Find("Panel/PressEButton/MySlider").GetComponent<Image>();
-            actionButtonIndicator.color = buttonIndicatorColorDefault;
         }
 
  
@@ -312,13 +299,12 @@ namespace Game.MiniGames
             Debug.Log($"❌ Промах! Текущий угол: {currentAngle}");
             return "fail";
         }
-
+/*
         protected override void Start()
         {
             instantiatedCookingView= cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
             indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
-
-            ResetActionButtonIndicator();
+        
 
             // Если префаб не назначен, попробуем найти его в Resources
             // if (cookingViewPrefab == null)
@@ -328,72 +314,15 @@ namespace Game.MiniGames
 
             base.Start();
         }
-        /*
-           public void SetWinZoneWidth(float newWidth)
-           {
-               Image targetWinZone =  winZone;
-               if (targetWinZone != null)
-               {
-                   RectTransform rect = targetWinZone.rectTransform;
-                   rect.sizeDelta = new Vector2(newWidth, rect.sizeDelta.y);
-               }
-           }
-
-           private void SetupWinZone()
-           {
-               Image targetWinZone = cookingComponents?.winZone ?? winZone;
-               Transform targetWinZoneHandler = cookingComponents?.winZoneHandler ?? winZoneHandler;
-
-               if (targetWinZone != null && targetWinZoneHandler != null)
-               {
-                   // Устанавливаем случайную позицию для зеленой зоны
-                   targetAngle = Random.Range(-60f, 60f); // Диапазон углов для зоны победы
-
-                   // Меняем цвет зоны на зеленый
-                   targetWinZone.color = successZoneColor;
-
-                   // Настраиваем размер winZone если включена кастомизация
-                   if (useCustomWinZoneSize)
-                   {
-                       SetWinZoneSize(winZoneWidthSlider, winZoneHeight);
-                   }
-
-                   // Поворачиваем зону победы
-                   targetWinZoneHandler.rotation = Quaternion.Euler(0, 0, targetAngle);
-
-                   Debug.Log($"Win zone установлена на угол: {targetAngle}, размер: {winZoneWidthSlider}x{winZoneHeight}");
-               }
-           }
-           */
-
+*/
         protected override void CreateStartScreen()
         {
+            // Создаем пустой startScreen объект чтобы не было null
             startScreen = new GameObject("StartScreen");
             startScreen.transform.SetParent(miniGamePanel.transform, false);
+            startScreen.SetActive(false); // Сразу скрываем
 
-            RectTransform startRect = startScreen.AddComponent<RectTransform>();
-            startRect.anchorMin = Vector2.zero;
-            startRect.anchorMax = Vector2.one;
-            startRect.offsetMin = Vector2.zero;
-            startRect.offsetMax = Vector2.zero;
-
-            Image startBg = startScreen.AddComponent<Image>();
-            startBg.color = new Color(0, 0, 0, 0.7f);
-
-            //CreateText("Title", "🍳 Готовка еды", new Vector2(0, 100), 24, Color.white, new Vector2(400, 40), startScreen.transform);
-            //CreateText("Subtitle", "Алгоритм:", new Vector2(0, 60), 18, Color.yellow, new Vector2(400, 30), startScreen.transform);
-
-            //CreateText("Step1", "1. Игрок нажимает на кухню", new Vector2(0, 20), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-            //CreateText("Step2", "2. ГГ подходит к холодильнику, берет пакет, переносит его на стол", new Vector2(0, -5), 14, Color.white, new Vector2(500, 25), startScreen.transform);
-            //CreateText("Step3", "3. Запускается анимация нарезки продуктов", new Vector2(0, -30), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-            //CreateText("Step4", "4. Мини-игра: остановите нож в зеленой зоне", new Vector2(0, -55), 14, Color.green, new Vector2(400, 25), startScreen.transform);
-            //CreateText("Step5", "5. После завершения ГГ садится за стол и ест", new Vector2(0, -80), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-
-            startButton = CreateButton("StartButton", "Начать готовку (Пробел)", new Vector2(-200, 0), new Color(0.2f, 0.8f, 0.2f), new Vector2(300, 100), startScreen.transform, 24);
-            startButton.onClick.AddListener(StartGame);
-
-            Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(200, 0), Color.gray, new Vector2(300, 100), startScreen.transform, 24);
-            startExitButton.onClick.AddListener(ExitMiniGame);
+            Debug.Log("Стартовый экран создан но скрыт");
         }
 
         protected override void CreateGameScreen()
@@ -586,8 +515,7 @@ namespace Game.MiniGames
         private void CreateGameButtons()
         {
             // Создаем кнопки в gameScreen
-            //actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
-            actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-60, 400), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
+            actionButton = CreateButton("ActionButton", "Остановить (E)", new Vector2(-100, -200), new Color(0.2f, 0.6f, 1f), new Vector2(120, 40), gameScreen.transform);
             actionButton.onClick.AddListener(OnActionButtonClick);
             actionButton.gameObject.SetActive(false);
 
@@ -715,6 +643,61 @@ namespace Game.MiniGames
         public void StartCooking()
         {
             StartMiniGame();
+        }
+
+
+        public override void StartMiniGame()
+        {
+            // Проверяем что скорость установлена
+            if (cookingViewPrefabs != null && cookingViewPrefabs.Count > MiniGameCoordinator.DayLevel)
+            {
+                indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
+                Debug.Log($"Скорость повторно проверена: {indicatorSpeed}");
+            }
+
+            SetupInput();
+            if (miniGamePanel == null)
+            {
+                Debug.LogError("Мини-игра не инициализирована!");
+                return;
+            }
+
+            Debug.Log("🎮 Запуск игры сразу без стартового экрана");
+
+            if (!useDirectInput)
+            {
+                actionInputAction?.action.Enable();
+                startInputAction?.action.Enable();
+            }
+
+            miniGamePanel.SetActive(true);
+
+            if (startScreen != null) startScreen.SetActive(false);
+            if (gameScreen != null) gameScreen.SetActive(true);
+
+            gameStarted = true;
+            isGameActive = true;
+            currentAttempts = 0;
+
+            StartGameLogic();
+        }
+
+        protected override void Start()
+        {
+            // Сначала инициализируем данные
+            if (cookingViewPrefabs != null && cookingViewPrefabs.Count > MiniGameCoordinator.DayLevel)
+            {
+                instantiatedCookingView = cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
+                indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
+                Debug.Log($"Скорость установлена: {indicatorSpeed}");
+            }
+            else
+            {
+                Debug.LogError("cookingViewPrefabs не настроены!");
+                indicatorSpeed = 100f; // Значение по умолчанию
+            }
+
+            base.Start(); // Вызываем базовый Start ПОСЛЕ установки скорости
         }
 
         protected override void OnDestroy()
