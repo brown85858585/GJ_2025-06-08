@@ -428,10 +428,7 @@ enj0y_be!ng in
 th%t v&rs!on
 0f y0ur@self?"
 Day3_CardHeader10,Kira
-Day3_CardContent10,"Haven’t heard
-from you!
-I got a new fox mug
-and thought of you."
+Day3_CardContent10,Oh... Stay strong!
 Day3_CardHeader11,Mom
 Day3_CardContent11,"I get that you
 might be busy.
@@ -475,10 +472,9 @@ Day4_CardHeader10,Mom
 Day4_CardContent10,"You need
 to stay positive."
 Day4_CardHeader11,Colleague
-Day4_CardContent11,Everything will be fine.
+Day4_CardContent11,Stay strong
 Day4_CardHeader12,Anna
-Day4_CardContent12,"Well, at least you’ll
-lose weight."
+Day4_CardContent12,Stay strong
 Day4_CardHeader13,Sasha
 Day4_CardContent13,"My aunt had
 the same thing, actually…"
@@ -530,3 +526,42 @@ Day5_CardHeader13,—
 Day5_CardContent13,Stay strong!
 Day5_CardHeader14,—
 Day5_CardContent14,Stay strong!
+Day1_LoadHeader0,Week 1
+Day1_LoadBody0,"You know, I was always rushing somewhere.
+Afraid I’d fall behind.
+Every day felt like the same
+repeating cycle…"
+Day2_Results0,Public utilities:
+Day2_LoadHeader0,Week 2
+Day2_LoadBody0,"...and that cycle would’ve kept looping forever
+if not for one but."
+Day3_Results0,Public utilities:
+Day3_Results1,Medical examination:
+Day3_LoadHeader0,Week 3
+Day3_LoadBody0,"One letter. That’s all it took.
+I... never thought it’d be me."
+Day4_Results0,Public utilities:
+Day4_Results1,Medical examination:
+Day4_Results2,Therapy:
+Day4_LoadHeader0,Week 8
+Day4_LoadBody0,"My head was a mess. Like wild birds crashing around.
+I couldn’t stop it.
+Work helped — gave me something else to focus on."
+Day5_Results0,Public utilities:
+Day5_Results1,Medical examination:
+Day5_Results2,Therapy:
+Day5_Results3,Штрафы:
+Day5_LoadHeader0,Week 9
+Day5_LoadBody0,"There were days when I wondered why I was even trying.
+I barely had the strength to do anything at all."
+Day6_Results0,Therapy:
+Day6_LoadHeader0,Week 14
+Day6_LoadBody0,But what scared me most was when my mind just… stopped working.
+Day7_LoadHeader0,Week 16
+Day7_LoadBody0,"Everyone kept saying I was getting better...
+But I was getting more and more scared."
+Final_Phrase,"I went through it alone.
+But if things ever get hard for you — don’t rush to expect the worst.
+Think about this instead: maybe it’s a way out.
+A way to break the cycle.
+And finally find peace with your real self. No masks."

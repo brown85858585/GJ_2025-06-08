@@ -170,7 +170,7 @@ namespace Game.Installers
                     await _core.IntertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
                         _logic.PlayerController.Model,
                         CancellationToken.None);
-                    await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex,
+                    await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
                         CancellationToken.None);
                     //Интертайтл со счетом появляется, ждет нажати игрока
                     //Интертайтл с сюжетом 2го лвл появляется, ждет нажатия игрока

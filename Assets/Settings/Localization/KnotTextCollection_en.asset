@@ -706,8 +706,7 @@ MonoBehaviour:
   - _key: Day3_CardHeader10
     _rawText: Kira
   - _key: Day3_CardContent10
-    _rawText: "Haven\u2019t heard\nfrom you!\nI got a new fox mug\nand thought of
-      you."
+    _rawText: Oh... Stay strong!
   - _key: Day3_CardHeader11
     _rawText: Mom
   - _key: Day3_CardContent11
@@ -785,11 +784,11 @@ MonoBehaviour:
   - _key: Day4_CardHeader11
     _rawText: Colleague
   - _key: Day4_CardContent11
-    _rawText: Everything will be fine.
+    _rawText: Stay strong
   - _key: Day4_CardHeader12
     _rawText: Anna
   - _key: Day4_CardContent12
-    _rawText: "Well, at least you\u2019ll\nlose weight."
+    _rawText: Stay strong
   - _key: Day4_CardHeader13
     _rawText: Sasha
   - _key: Day4_CardContent13
@@ -872,3 +871,68 @@ MonoBehaviour:
     _rawText: "\u2014"
   - _key: Day5_CardContent14
     _rawText: Stay strong!
+  - _key: Day1_LoadHeader0
+    _rawText: Week 1
+  - _key: Day1_LoadBody0
+    _rawText: "You know, I was always rushing somewhere.\nAfraid I\u2019d fall behind.\nEvery
+      day felt like the same\nrepeating cycle\u2026"
+  - _key: Day2_Results0
+    _rawText: 'Public utilities:'
+  - _key: Day2_LoadHeader0
+    _rawText: Week 2
+  - _key: Day2_LoadBody0
+    _rawText: "...and that cycle would\u2019ve kept looping forever\nif not for one
+      but."
+  - _key: Day3_Results0
+    _rawText: 'Public utilities:'
+  - _key: Day3_Results1
+    _rawText: 'Medical examination:'
+  - _key: Day3_LoadHeader0
+    _rawText: Week 3
+  - _key: Day3_LoadBody0
+    _rawText: "One letter. That\u2019s all it took.\nI... never thought it\u2019d
+      be me."
+  - _key: Day4_Results0
+    _rawText: 'Public utilities:'
+  - _key: Day4_Results1
+    _rawText: 'Medical examination:'
+  - _key: Day4_Results2
+    _rawText: 'Therapy:'
+  - _key: Day4_LoadHeader0
+    _rawText: Week 8
+  - _key: Day4_LoadBody0
+    _rawText: "My head was a mess. Like wild birds crashing around.\nI couldn\u2019t
+      stop it.\nWork helped \u2014 gave me something else to focus on."
+  - _key: Day5_Results0
+    _rawText: 'Public utilities:'
+  - _key: Day5_Results1
+    _rawText: 'Medical examination:'
+  - _key: Day5_Results2
+    _rawText: 'Therapy:'
+  - _key: Day5_Results3
+    _rawText: "\u0428\u0442\u0440\u0430\u0444\u044B:"
+  - _key: Day5_LoadHeader0
+    _rawText: Week 9
+  - _key: Day5_LoadBody0
+    _rawText: 'There were days when I wondered why I was even trying.
+
+      I barely
+      had the strength to do anything at all.'
+  - _key: Day6_Results0
+    _rawText: 'Therapy:'
+  - _key: Day6_LoadHeader0
+    _rawText: Week 14
+  - _key: Day6_LoadBody0
+    _rawText: "But what scared me most was when my mind just\u2026 stopped working."
+  - _key: Day7_LoadHeader0
+    _rawText: Week 16
+  - _key: Day7_LoadBody0
+    _rawText: 'Everyone kept saying I was getting better...
+
+      But I was getting
+      more and more scared.'
+  - _key: Final_Phrase
+    _rawText: "I went through it alone.\nBut if things ever get hard for you \u2014
+      don\u2019t rush to expect the worst.\nThink about this instead: maybe it\u2019s
+      a way out.\nA way to break the cycle.\nAnd finally find peace with your real
+      self. No masks."
