@@ -67,7 +67,8 @@ namespace Game.Installers
             InitStartWakeUp();
             InitCamera();
             InitQuestLog();
-            var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager);
+            var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
+                _logic.MiniGameCoordinator, _logic.QuestLog);
 
         }
 

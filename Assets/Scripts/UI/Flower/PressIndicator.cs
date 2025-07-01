@@ -25,6 +25,7 @@ namespace UI.Flower
     
         private float _baseScale;
         private float _animationTime;
+        private bool _isCompleted;
         
         public event Action<bool> OnCompleteIndicator;
         
@@ -35,17 +36,11 @@ namespace UI.Flower
 
         private void Update()
         {
-            if (mySlider.fillAmount is >= 1 or <= 0)
+            if (mySlider.fillAmount is >= 0.99f or <= 0)
             {
                 return;
             }
             
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                HandleInteract();
-            }
-            
-            // уменьшение значения слайдера
             mySlider.fillAmount -= Time.deltaTime * multiplier;
             
             // Анимация пульсации
@@ -53,25 +48,36 @@ namespace UI.Flower
             float sine = Mathf.Sin((_animationTime / pulseDuration) * Mathf.PI * 2f) * 0.5f + 0.5f;
             float currentScale = Mathf.Lerp(_baseScale, _baseScale * pulseScale, sine);
             iconButton.localScale = Vector3.one * currentScale;
-            
+        }
+
+        private void FixedUpdate()
+        {
             CheckCompletedIndicator();
         }
 
         private void CheckCompletedIndicator()
-        {
-            if (mySlider.fillAmount >= 0.99f)
+        {   
+            if (_isCompleted)
+            {
+                return;
+            }
+            
+            if (mySlider.fillAmount >= 1f)
             {
                 OnCompleteIndicator?.Invoke(true);
+                _isCompleted = true;
             }
 
             if (mySlider.fillAmount <= 0)
             {
                 OnCompleteIndicator?.Invoke(false);
+                _isCompleted = true;
             }
         }
 
-        private void HandleInteract()
+        public void HandleInteract()
         {
+            if(!gameObject.activeInHierarchy) return;
             // Сброс анимации пульсации
             _animationTime = 0;
 

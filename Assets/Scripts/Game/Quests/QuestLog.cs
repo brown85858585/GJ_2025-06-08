@@ -16,6 +16,7 @@ namespace Game.Quests
         private readonly QuestsData _data;
         private MiniGameCoordinator _coordinator;
         public event Action AllQuestsCompleted;
+        public bool IsAllQuestsCompleted { get; private set; }
 
         public QuestLog(IInputAdapter inputAdapter, QuestsData questsData)
         {
@@ -97,8 +98,10 @@ namespace Game.Quests
                 return;
 
             AllQuestsCompleted?.Invoke();
+            IsAllQuestsCompleted = true;
         }
-        
+
+
 
         public void RemoveQuest(Quest quest)
         {
@@ -120,6 +123,7 @@ namespace Game.Quests
             {
                 quest.IsCompleted = false;
             }
+            IsAllQuestsCompleted = false;
             _view?.UpdateQuestList(Quests);
         }
     }

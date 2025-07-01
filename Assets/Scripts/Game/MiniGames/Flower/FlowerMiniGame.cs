@@ -20,6 +20,7 @@ namespace Game.MiniGames.Flower
 
 
         public bool IsCompleted { get; set; }
+        public bool IsWin { get; private set; }
         public QuestType QType { get; } = QuestType.Flower;
         public int Level { get; set; } = 0;
 
@@ -38,10 +39,9 @@ namespace Game.MiniGames.Flower
             
             _pressIndicator.gameObject.SetActive(false);
             _flowerView.gameObject.SetActive(false);
-
+            
             _pressIndicator.OnCompleteIndicator += CompleteFlowerMiniGame;
             _pressIndicator.SetMultiplier(_flowerView.PressForce);
-
         }
         
         public void StartGame()
@@ -116,15 +116,18 @@ namespace Game.MiniGames.Flower
             if (isSuccess)
             {
                 _playerController.Model.Score += _flowerView.WinScore;
+                IsWin = true;
             }
             else
             {
                 _playerController.Model.Score -= _flowerView.WinScore;
+                IsWin = false;
             }
         }
 
         public void OnActionButtonClick()
         {
+            _pressIndicator.HandleInteract();
         }
 
         public void Dispose()

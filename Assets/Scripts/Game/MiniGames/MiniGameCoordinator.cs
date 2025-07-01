@@ -51,6 +51,11 @@ namespace Game.MiniGames
             _miniGameCanvas = Object.Instantiate(_prefabAccumulator.MiniGameCanvas);
         }
 
+        public IMiniGame GetMiniGame(ItemCategory category)
+        {
+            return _factories.GetValueOrDefault(category);
+        }
+        
         public void SetLevel(int level)
         {
             CurrentLevelIndex = level;
@@ -147,18 +152,18 @@ namespace Game.MiniGames
             _currentMiniGame = game;
 
             game.OnMiniGameComplete += OnMiniGameComplete;
+            
+           if (game.QType == QuestType.Sprint)
+           {
+                          
+           }
+           else
+           {
+               VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Blur);
+           }
            
             game.Level = CurrentLevelIndex;
             game.StartGame();
-
-            if (game.QType == QuestType.Sprint)
-            {
-               
-            }
-            else
-            {
-                VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Blur);
-            }
         }
 
         private void OnMiniGameComplete(QuestType questType)

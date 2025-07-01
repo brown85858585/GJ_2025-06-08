@@ -14,5 +14,8 @@ namespace Game
         Books,
         Basket,
         Window,
+        WMGDoor,
+        WMGKitchen,
+        WMGComputer,
     }
 }

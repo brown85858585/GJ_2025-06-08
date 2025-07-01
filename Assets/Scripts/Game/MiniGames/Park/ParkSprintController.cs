@@ -16,7 +16,7 @@ namespace Game.MiniGames
         private int _staminaForRing = 2000;
         private bool _isFirstStaminaUpdateView = true;
 
-        public event Action EndSprint; 
+        public event Action<bool> EndSprint; 
 
         public ParkSprintController(IPlayerController playerController, ParkLevelView parkLevelView)
         {
@@ -67,7 +67,8 @@ namespace Game.MiniGames
         private void EndGame()
         {
             _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
-            EndSprint?.Invoke();
+            var win = _parkLevelView.CheckpointCounter < _parkLevelView.CheckpointViews.Count/2;
+            EndSprint?.Invoke(win);
 
             ResetStamina();
         }

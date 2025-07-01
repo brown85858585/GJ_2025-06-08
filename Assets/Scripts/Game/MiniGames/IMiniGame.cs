@@ -12,5 +12,6 @@ namespace Game.MiniGames
         void OnActionButtonClick();
         void StartGame();
         bool IsCompleted { get; set; }
+        bool IsWin { get;}
     }
 }
