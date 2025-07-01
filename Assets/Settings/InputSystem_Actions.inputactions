@@ -1116,6 +1116,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GameQInteract",
+                    "type": "PassThrough",
+                    "id": "6dfd1b12-06ea-427a-82df-27cb5651ab15",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1171,6 +1180,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "StartMiniGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78c0a803-792d-4653-a324-84198db1c99c",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "GameQInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

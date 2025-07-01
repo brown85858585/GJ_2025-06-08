@@ -63,12 +63,22 @@ namespace Game.Installers
             _effectAccumulator.FadeOut(0);
             InitLevelOne();
 
+            _core.InputAdapter.SwitchAdapterToMiniGameMode();
             _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
                 () =>
                 {
                     _effectAccumulator.FadeIn(1);
+                    _effectAccumulator.OnFadeInComplete += Handler;
+                    
+                    _core.InputAdapter.SwitchAdapterToGlobalMode();
                     InitializeMainObjects();
                 });
+            void Handler()
+            {
+                //StartWakeUpAnim
+                _effectAccumulator.OnFadeInComplete -= Handler;
+                _core.InputAdapter.SwitchAdapterToGlobalMode();
+            }
         }
 
         private void InitializeMainObjects()
@@ -159,6 +169,8 @@ namespace Game.Installers
                 ScenarioNext().Forget();
                 async UniTask ScenarioNext()
                 {
+                    
+                    _core.InputAdapter.SwitchAdapterToMiniGameMode();
                     _monologSystem.OpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
                     // Старт Анимации
                     
@@ -172,8 +184,6 @@ namespace Game.Installers
                         CancellationToken.None);
                     await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
                         CancellationToken.None);
-                    //Интертайтл со счетом появляется, ждет нажати игрока
-                    //Интертайтл с сюжетом 2го лвл появляется, ждет нажатия игрока
                     
                     scenario.NextLevelScenario(LoadNextLevel);
                 }
@@ -196,6 +206,15 @@ namespace Game.Installers
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
                 
                 _effectAccumulator.FadeIn();
+
+                _effectAccumulator.OnFadeInComplete += Handler;
+                void Handler()
+                {
+                    
+                    //StartWakeUpAnim
+                    _effectAccumulator.OnFadeInComplete -= Handler;
+                    _core.InputAdapter.SwitchAdapterToGlobalMode();
+                }
             });
         }
 

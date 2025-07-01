@@ -35,12 +35,8 @@ namespace Game.Intertitles
 
         public async UniTask ShowScoreIntertitle(int levelManagerCurrentLevelIndex, PlayerModel playerModel, CancellationToken cancellationToken)
         {
-            _inputAdapter.SwitchAdapterToMiniGameMode();
-            
             await ShowScore(levelManagerCurrentLevelIndex, playerModel, cancellationToken);
             await ReadKeyPressAsync(_currentCardScoreObj.gameObject, cancellationToken);
-            
-            _inputAdapter.SwitchAdapterToGlobalMode();
         }
 
         private async UniTask ShowScore(
@@ -56,12 +52,8 @@ namespace Game.Intertitles
 
         public async UniTask ShowIntertitle(int levelManagerCurrentLevelIndex, CancellationToken cancellationToken)
         {
-            _inputAdapter.SwitchAdapterToMiniGameMode();
-            
             await Show(levelManagerCurrentLevelIndex, cancellationToken);
             await ReadKeyPressAsync(_currentCardObj.gameObject, cancellationToken);
-            
-            _inputAdapter.SwitchAdapterToGlobalMode();
         }
 
         private async UniTask Show(
