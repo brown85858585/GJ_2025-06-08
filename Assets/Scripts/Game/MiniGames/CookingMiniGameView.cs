@@ -41,6 +41,23 @@ namespace Game.MiniGames
             thirdItem.OnHideComplete += ThirdItem_OnHideComplete;
             thirdItem.Hide();
         }
+
+        private void OnDestroy()
+        {
+            board.OnShowComplete -= Board_OnShowComplete;
+            actionButton.OnShowComplete -= ActionButton_OnShowComplete;
+            firstItem.OnShowComplete -= FirstItem_OnShowComplete;
+            secondItem.OnShowComplete -= SecondItem_OnShowComplete;
+            thirdItem.OnShowComplete -= ThirdItem_OnShowComplete;
+
+            board.OnHideComplete -= Board_OnHideComplete;
+            knife.OnHideComplete -= Knife_OnHideComplete;
+            actionButton.OnHideComplete -= ActionButton_OnHideComplete;
+            firstItem.OnHideComplete -= FirstItem_OnHideComplete;
+            secondItem.OnHideComplete -= SecondItem_OnHideComplete;
+            thirdItem.OnHideComplete -= ThirdItem_OnHideComplete;
+        }
+
         private void Board_OnShowComplete()
         {
             knife.gameObject.SetActive(true);
