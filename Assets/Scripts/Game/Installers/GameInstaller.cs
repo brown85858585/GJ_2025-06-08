@@ -65,14 +65,13 @@ namespace Game.Installers
             _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
                 () =>
                 {
-                    _effectAccumulator.FadeIn();
+                    _effectAccumulator.FadeIn(1);
                     InitializeMainObjects();
                 });
         }
 
         private void InitializeMainObjects()
         {
-            _effectAccumulator.FadeIn();
             _mainCanvas = Instantiate(mainCanvasPrefab, transform.parent);
             _mainCanvas.NextLevelButton.onClick.AddListener(LoadNextLevel);
             _scoreText = _mainCanvas.GetComponentInChildren<ScoreView>();

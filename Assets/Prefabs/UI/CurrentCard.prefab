@@ -108,8 +108,9 @@ MonoBehaviour:
   texts:
   - {fileID: 7137261241813098085}
   - {fileID: 692125661530148089}
+  tweener: {fileID: 0}
   fadeDuration: 0.5
-  interval: 1
+  interval: 0.5
 --- !u!1 &3688151407294982386
 GameObject:
   m_ObjectHideFlags: 0

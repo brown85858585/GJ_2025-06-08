@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using Utilities;
 using Sequence = DG.Tweening.Sequence;
 
 namespace UI
@@ -11,6 +12,8 @@ namespace UI
     {
         [Header("Тексты (в нужном порядке)")]
         [SerializeField] private List<TMP_Text> texts = new();
+        
+        [SerializeField] private UIElementTweener tweener;
 
         [Header("Параметры анимации")]
         [SerializeField, Min(0f)]
@@ -30,6 +33,10 @@ namespace UI
                 c.a = 0;
                 t.color = c;
             }
+            if (tweener != null)
+            {
+                tweener.Hide();
+            }
         }
 
         private void OnDisable()
@@ -41,11 +48,20 @@ namespace UI
                 c.a = 0;
                 t.color = c;
             }
+            
+            if (tweener == null) return;
+            tweener.Hide();
+            OnComplete -= tweener.Show;  // отписываемся от события показа
         }
 
         private void OnEnable()
         {
             PlaySequence();
+            
+            
+            
+            if (tweener == null) return;
+            OnComplete += tweener.Show;  // подписываемся на событие показа
         }
 
         private void PlaySequence()
