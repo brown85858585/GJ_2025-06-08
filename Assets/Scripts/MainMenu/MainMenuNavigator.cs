@@ -7,31 +7,25 @@ namespace MainMenu
     public class MainMenuNavigator : IDisposable
     {
         private readonly MainMenu _mainMenu;
-        private readonly CharacterSelect.CharacterSelectView _characterSelectView;
         private bool _isDisposed;
+        private readonly SettingsMenuView _settings;
 
-        public MainMenuNavigator(MainMenu mainMenu, CharacterSelect.CharacterSelectView characterSelectView)
+        public MainMenuNavigator(MainMenu mainMenu, SettingsMenuView settingsMenuView)
         {
             _mainMenu = mainMenu;
-            _characterSelectView = characterSelectView;
+            _settings = settingsMenuView;
 
             _mainMenu.OnPlayClick += HandlePlayClicked;
             _mainMenu.OnSettingsClick += HandleSettingClicked;
-            _mainMenu.OnCharacterSelectClick += HandleCharacterSelectClicked;
             _mainMenu.OnQuitClick += HandleQuitClicked;
+            
+            settingsMenuView.SettingsBackButton.onClick.AddListener(HandleSettingsBack);
 
-            _characterSelectView.OnBackClicked += HandleBackCharacterSelectView;
         }
 
-        private void HandleCharacterSelectClicked()
+        private void HandleSettingsBack()
         {
-            _mainMenu.gameObject.SetActive(false);
-            _characterSelectView.gameObject.SetActive(true);
-        }
-
-        private void HandleBackCharacterSelectView()
-        {
-            _characterSelectView.gameObject.SetActive(false);
+            _settings.gameObject.SetActive(false);
             _mainMenu.gameObject.SetActive(true);
         }
 
@@ -43,7 +37,8 @@ namespace MainMenu
 
         private void HandleSettingClicked()
         {
-            Debug.Log("Settings button clicked");
+            _mainMenu.gameObject.SetActive(false);
+            _settings.gameObject.SetActive(true);
         }
 
         private void HandleQuitClicked()
@@ -62,10 +57,9 @@ namespace MainMenu
 
             _mainMenu.OnPlayClick -= HandlePlayClicked;
             _mainMenu.OnSettingsClick -= HandleSettingClicked;
-            _mainMenu.OnCharacterSelectClick -= HandleCharacterSelectClicked;
             _mainMenu.OnQuitClick -= HandleQuitClicked;
-
-            _characterSelectView.OnBackClicked -= HandleBackCharacterSelectView;
+            
+            _settings.SettingsBackButton.onClick.RemoveListener(HandleSettingsBack);
         }
     }
 }

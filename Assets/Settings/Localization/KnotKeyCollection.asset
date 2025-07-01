@@ -189,11 +189,11 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Door0
+  - _key: Day6_WMGDoor0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Door1
+  - _key: Day6_WMGDoor1
     _metadata:
       _runtime: []
       _editor: []
@@ -281,19 +281,19 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_Kitchen_Win
+  - _key: Day5_WMGKitchen0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_Kitchen_Defeat
+  - _key: Day5_WMGKitchen1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Kitchen_Win
+  - _key: Day6_WMGKitchen0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Kitchen_Defeat
+  - _key: Day6_WMGKitchen1
     _metadata:
       _runtime: []
       _editor: []
@@ -377,15 +377,15 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Computer0
+  - _key: Day6_WMGComputer0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Computer1
+  - _key: Day6_WMGComputer1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Computer2
+  - _key: Day6_WMGComputer2
     _metadata:
       _runtime: []
       _editor: []
@@ -1357,247 +1357,111 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader0
+  - _key: Day1_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent0
+  - _key: Day1_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader1
+  - _key: Day2_Results0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent1
+  - _key: Day2_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader2
+  - _key: Day2_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent2
+  - _key: Day3_Results0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader3
+  - _key: Day3_Results1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent3
+  - _key: Day3_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader4
+  - _key: Day3_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent4
+  - _key: Day4_Results0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader5
+  - _key: Day4_Results1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent5
+  - _key: Day4_Results2
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader6
+  - _key: Day4_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent6
+  - _key: Day4_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader7
+  - _key: Day5_Results0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent7
+  - _key: Day5_Results1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader8
+  - _key: Day5_Results2
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent8
+  - _key: Day5_Results3
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader9
+  - _key: Day5_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent9
+  - _key: Day5_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader10
+  - _key: Day6_Results0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent10
+  - _key: Day6_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader11
+  - _key: Day6_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent11
+  - _key: Day7_LoadHeader0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader12
+  - _key: Day7_LoadBody0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardContent12
+  - _key: Final_Phrase
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day6_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day6_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day6_CardContent14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent0
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader1
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent1
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader2
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent2
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader3
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent3
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader4
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent4
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader5
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent5
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader6
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent6
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader7
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent7
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader8
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent8
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader9
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent9
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardContent14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day7_CardHeader0
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_Flower0
+  - _key: Play
     _metadata:
       _runtime: []
       _editor: []

@@ -169,14 +169,8 @@ MonoBehaviour:
   uiRoot: {fileID: 505067557}
   mainMenuPrefab: {fileID: 3621265966824055260, guid: 13e41fa4d45f2154887c1fc4b0ba40ba,
     type: 3}
-  characterSelectPrefab: {fileID: 5791047896098060751, guid: da3f10fe5c762b34b8af53f67b88d959,
+  settingsPrefab: {fileID: 6238126728970479484, guid: c579ef5b58f209c47918ec7f2e0eb23f,
     type: 3}
-  characters:
-  - {fileID: 11400000, guid: 4512707cdc28a40459b9bbf66f1b5a5d, type: 2}
-  - {fileID: 11400000, guid: d997a87a5d39d6b4982f7e5726ee76a3, type: 2}
-  - {fileID: 11400000, guid: 3d4b88f26463f5f45adfd76c1784374c, type: 2}
-  - {fileID: 11400000, guid: dfd80d01106c4664da7aaf26f55fdacc, type: 2}
-  - {fileID: 11400000, guid: e5c0d8bac1ad19b4289f51d30656df57, type: 2}
 --- !u!1 &100617023
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,14 +528,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6037736, g: 0.59617895, b: 0.59617895, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c64fe4212bc21f4dac613b38d30afc5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62665960a67110f4db0c219c0c30e61c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
