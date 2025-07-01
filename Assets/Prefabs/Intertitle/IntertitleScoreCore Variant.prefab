@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1272164410491940008, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}
       propertyPath: m_Name
-      value: IntertitleScoreCore
+      value: IntertitleScoreCore Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5253553727484959770, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}
@@ -112,6 +112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7143229920478508140, guid: 075eac8e78639e642ba68129236f4645,
+        type: 3}
+      propertyPath: _keyReference._key
+      value: Day2_Results0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

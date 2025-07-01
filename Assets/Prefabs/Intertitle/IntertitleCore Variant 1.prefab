@@ -13,35 +13,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntertitleCore Variant 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2968333708459689866, guid: f8c998ad663db1543af67a5a2dbb1087,
+    - target: {fileID: 1728426092189772315, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
-      propertyPath: texts.Array.data[2]
-      value: 
+      propertyPath: _keyReference._key
+      value: Day2_LoadHeader0
       objectReference: {fileID: 0}
-    - target: {fileID: 2968333708459689866, guid: f8c998ad663db1543af67a5a2dbb1087,
+    - target: {fileID: 3403867112567755147, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
-      propertyPath: texts.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184669024593270808, guid: f8c998ad663db1543af67a5a2dbb1087,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 957.9114
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184669024593270808, guid: f8c998ad663db1543af67a5a2dbb1087,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 305.1771
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184669024593270808, guid: f8c998ad663db1543af67a5a2dbb1087,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1.5443
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184669024593270808, guid: f8c998ad663db1543af67a5a2dbb1087,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -27.5885
+      propertyPath: _keyReference._key
+      value: Day2_LoadBody0
       objectReference: {fileID: 0}
     - target: {fileID: 5253553727484959770, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
@@ -144,65 +124,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3182306846797498886, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
-    - {fileID: 1921095617622875341, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6348283841060636323, guid: f8c998ad663db1543af67a5a2dbb1087,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 242010490144840165}
-    - targetCorrespondingSourceObject: {fileID: 351199465725202732, guid: f8c998ad663db1543af67a5a2dbb1087,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1511892408069547242}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
---- !u!1 &2671920968967391141 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 351199465725202732, guid: f8c998ad663db1543af67a5a2dbb1087,
-    type: 3}
-  m_PrefabInstance: {fileID: 2435083984005469833}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1511892408069547242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2671920968967391141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dae449646f11534f81928346b3b6341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _keyReference:
-    _key: 
-    _formatters: []
-  references:
-    version: 2
-    RefIds: []
---- !u!1 &8778225406741712938 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6348283841060636323, guid: f8c998ad663db1543af67a5a2dbb1087,
-    type: 3}
-  m_PrefabInstance: {fileID: 2435083984005469833}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &242010490144840165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8778225406741712938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dae449646f11534f81928346b3b6341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _keyReference:
-    _key: 
-    _formatters: []
-  references:
-    version: 2
-    RefIds: []

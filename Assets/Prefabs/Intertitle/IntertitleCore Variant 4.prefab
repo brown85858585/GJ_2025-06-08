@@ -11,7 +11,17 @@ PrefabInstance:
     - target: {fileID: 1272164410491940008, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
       propertyPath: m_Name
-      value: IntertitleCore
+      value: IntertitleCore Variant 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1728426092189772315, guid: f8c998ad663db1543af67a5a2dbb1087,
+        type: 3}
+      propertyPath: _keyReference._key
+      value: Day5_LoadHeader0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403867112567755147, guid: f8c998ad663db1543af67a5a2dbb1087,
+        type: 3}
+      propertyPath: _keyReference._key
+      value: Day5_LoadBody0
       objectReference: {fileID: 0}
     - target: {fileID: 5253553727484959770, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
