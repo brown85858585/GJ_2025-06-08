@@ -68,8 +68,6 @@ namespace Game.Installers
                 {
                     _effectAccumulator.FadeIn(1);
                     InitializeMainObjects();
-
-                    UniTask.Delay(1000).ContinueWith(InitStartWakeUp);
                 });
         }
 
@@ -82,7 +80,7 @@ namespace Game.Installers
                 .AddTo(this);
             
             InitPlayer();
-            
+            InitStartWakeUp();
             InitCamera();
             InitQuestLog();
             _monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
@@ -154,6 +152,7 @@ namespace Game.Installers
 
         private void HandleLevelCompletion(ItemCategory category)
         {
+            //todo ! for debug
             if (category == ItemCategory.Bed && !_allQuestsCompleted)
             {
                 var scenario = new ScenarioInstaller();
@@ -162,13 +161,16 @@ namespace Game.Installers
                 {
                     _monologSystem.OpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
                     // Старт Анимации
+                    
                     await UniTask.Delay(1000);
                     _monologSystem.CloseDialogue();
                     var fadeTimer = 1100;
                     _effectAccumulator.FadeOut(fadeTimer/1000f);
                     await UniTask.Delay(fadeTimer);
                     await _core.IntertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
-                        _logic.PlayerController.Model.Score,
+                        _logic.PlayerController.Model,
+                        CancellationToken.None);
+                    await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex,
                         CancellationToken.None);
                     //Интертайтл со счетом появляется, ждет нажати игрока
                     //Интертайтл с сюжетом 2го лвл появляется, ждет нажатия игрока

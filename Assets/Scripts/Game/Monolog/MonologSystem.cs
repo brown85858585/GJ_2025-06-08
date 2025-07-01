@@ -45,7 +45,8 @@ namespace Game.Monolog
 
         private void HandleInteraction(ItemCategory item)
         {
-            if(_questLog.IsAllQuestsCompleted && item == ItemCategory.Bed) return;
+            //todo ! for debug
+            if(!_questLog.IsAllQuestsCompleted && item == ItemCategory.Bed) return;
             
             var outcome = _miniGameHandler.HandleMinigameDialogue(item);
             switch (outcome)

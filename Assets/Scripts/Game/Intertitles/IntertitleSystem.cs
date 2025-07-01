@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Player;
 using Player.Interfaces;
 using UnityEngine;
 
@@ -32,11 +33,11 @@ namespace Game.Intertitles
             }
         }
 
-        public async UniTask ShowScoreIntertitle(int levelManagerCurrentLevelIndex, int finalScore, CancellationToken cancellationToken)
+        public async UniTask ShowScoreIntertitle(int levelManagerCurrentLevelIndex, PlayerModel playerModel, CancellationToken cancellationToken)
         {
             _inputAdapter.SwitchAdapterToMiniGameMode();
             
-            await ShowScore(levelManagerCurrentLevelIndex, finalScore, cancellationToken);
+            await ShowScore(levelManagerCurrentLevelIndex, playerModel, cancellationToken);
             await ReadKeyPressAsync(_currentCardScoreObj.gameObject, cancellationToken);
             
             _inputAdapter.SwitchAdapterToGlobalMode();
@@ -44,12 +45,13 @@ namespace Game.Intertitles
 
         private async UniTask ShowScore(
             int levelManagerCurrentLevelIndex,
-            int finalScore,
+            PlayerModel playerModel,
             CancellationToken cancellationToken = default)
         {
             _currentCardScoreObj = Object.Instantiate(_scoreIntertitleCards[levelManagerCurrentLevelIndex]);
             _currentCardScoreObj.Tweener.Show();
-            _currentCardScoreObj.SetScore(finalScore-_currentCardScoreObj.RequiredScore);
+            playerModel.Score -= _currentCardScoreObj.RequiredScore;
+            _currentCardScoreObj.SetScore(playerModel.Score);
         }
 
         public async UniTask ShowIntertitle(int levelManagerCurrentLevelIndex, CancellationToken cancellationToken)

@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: IntertitleConfig
   m_EditorClassIdentifier: 
   intertitles:
-  - {fileID: 351247898809972732, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
+  - {fileID: 2671978049167696245, guid: 4f3c7ab3760939343bd902320243c6dd, type: 3}
+  - {fileID: 2671978049167696245, guid: e4a511c4ab3ed53498b82d27f8495847, type: 3}
+  - {fileID: 2671978049167696245, guid: 75bb74fab86cbc84787901e154a3110a, type: 3}
+  - {fileID: 2671978049167696245, guid: 2d42d122b167b2d41bf48555b25bc719, type: 3}
+  - {fileID: 2671978049167696245, guid: 221ad82debe6e7949bccc01e5ab10b97, type: 3}
+  - {fileID: 2671978049167696245, guid: 4a0dbcd44842b604d9bd3f3f61e53b9a, type: 3}
+  - {fileID: 2671978049167696245, guid: 5573e4da5685b2f419b14d55b961fca7, type: 3}
   scoreIntertitles:
-  - {fileID: 1919633741956995276, guid: 075eac8e78639e642ba68129236f4645, type: 3}
+  - {fileID: 2901622380700651412, guid: 6e2cdd8a4f8d9054ba3211560b87bee4, type: 3}
+  - {fileID: 2901622380700651412, guid: 5b0fe020ee487824881a082af52e866b, type: 3}
+  - {fileID: 2901622380700651412, guid: 2b63ef38119ed0b4b8a1b22fe53bd9f1, type: 3}
+  - {fileID: 2901622380700651412, guid: bfebdc670e35efc40b974fc0c566bfe4, type: 3}
+  - {fileID: 2901622380700651412, guid: f93c0d55b69043b49ac0942915d2b7f9, type: 3}
+  - {fileID: 2901622380700651412, guid: 6263893d53d0cac44b0c70ebffc0b44b, type: 3}
+  - {fileID: 2901622380700651412, guid: cd082c7102d733e4da2f9ad9721fee78, type: 3}
