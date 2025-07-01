@@ -35,7 +35,7 @@ namespace Game.MiniGames
 
         [Header("Colors")]
         public Color arcColor = Color.gray;
-        public Color successZoneColor = Color.green;
+        //public Color successZoneColor = Color.green;
         public Color indicatorColor = Color.black;
 
         public Color buttonIndicatorColorDefault = new Color(0.4f, 0.4f, 0.4f);
@@ -71,7 +71,7 @@ namespace Game.MiniGames
                         targetAngles[i] -= 360f;
 
                     zoneCompleted[i] = false;
-                    winZones[i].color = successZoneColor;
+                    //winZones[i].color = successZoneColor;
 
                     Debug.Log($"WinZone {i + 1} реальный угол: {targetAngles[i]}");
                 }
@@ -256,7 +256,7 @@ namespace Game.MiniGames
                 if (winZones[i] != null)
                 {
                     winZones[i].gameObject.SetActive(true);
-                    winZones[i].color = successZoneColor;
+                    //winZones[i].color = successZoneColor;
                     zoneCompleted[i] = false;
                 }
             }
@@ -530,7 +530,7 @@ namespace Game.MiniGames
         {
             GameObject successObj = CreateImageObject("SuccessZone", successZoneImage, new Vector2(arcRadius * 2, arcRadius * 2), Vector2.zero);
             Image currentSuccessImage = successObj.GetComponentInChildren<Image>() ?? successObj.GetComponent<Image>();
-            currentSuccessImage.color = successZoneColor;
+            //currentSuccessImage.color = successZoneColor;
             currentSuccessImage.sprite = CreateCircleSprite();
             currentSuccessImage.type = Image.Type.Filled;
             currentSuccessImage.fillMethod = Image.FillMethod.Radial360;
