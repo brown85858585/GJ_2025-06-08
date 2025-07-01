@@ -3,7 +3,17 @@ guid: c2dff7e9baf929348998b138ebc5ae23
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoxLegYellow
+    second: {fileID: 2100000, guid: 66774bf217cb14347a6105d4828e41c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SilverMetal
+    second: {fileID: 2100000, guid: 89cfce7bda4c84f4da0ba9dda2a80824, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
