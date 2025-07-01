@@ -1,3 +1,4 @@
+using System;
 using Effects.PostProcess;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -16,6 +17,9 @@ namespace Effects
         private WeatherProvider _weather;
         private Vignette _vignette;
         private bool _isVignetteEnabled;
+        
+        public event Action OnFadeInComplete;
+        public event Action OnFadeOutComplete;
 
         private void Awake()
         {
@@ -42,12 +46,13 @@ namespace Effects
 
         public void FadeIn(float duration = -1)
         {
-            _darker.FadeIn(duration);
+            _darker.FadeIn(OnFadeInComplete,duration);
+            
         }
 
         public void FadeOut(float duration = -1)
         {
-            _darker.FadeOut(duration);
+            _darker.FadeOut(OnFadeOutComplete, duration);
         }
 
         public void SetWeather(int cycle)

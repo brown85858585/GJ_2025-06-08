@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -37,15 +38,15 @@ namespace Effects.PostProcess
         /* ------------------------------------------------------------------ */
 
         /// <summary>Фейд-ин (ярко). Если duration &lt;= 0 — мгновенно.</summary>
-        public void FadeIn(float duration = -1f)
+        public void FadeIn(Action onOnFadeInComplete, float duration = -1f)
         {
-            StartFade(_maxValue, duration);
+            StartFade(_maxValue, duration, onOnFadeInComplete);
         }
 
         /// <summary>Фейд-аут (темно). Если duration &lt;= 0 — мгновенно.</summary>
-        public void FadeOut(float duration = -1f)
+        public void FadeOut(Action onOnFadeOutComplete, float duration = -1f)
         {
-            StartFade(_minValue, duration);
+            StartFade(_minValue, duration, onOnFadeOutComplete);
         }
 
         public void Blur()    => _depthOfField.active = true;
@@ -55,7 +56,7 @@ namespace Effects.PostProcess
         /*                             INTERNALS                              */
         /* ------------------------------------------------------------------ */
 
-        private void StartFade(float targetValue, float duration)
+        private void StartFade(float targetValue, float duration, Action onOnFadeComplete)
         {
             // если пользователь не передал длительность, берём дефолт
             if (duration < 0f) duration = _defaultFadeDuration;
@@ -63,10 +64,10 @@ namespace Effects.PostProcess
             if (_fadeCoroutine != null)
                 StopCoroutine(_fadeCoroutine);
 
-            _fadeCoroutine = StartCoroutine(AnimateExposure(targetValue, duration));
+            _fadeCoroutine = StartCoroutine(AnimateExposure(targetValue, duration, onOnFadeComplete));
         }
 
-        private IEnumerator AnimateExposure(float targetValue, float duration)
+        private IEnumerator AnimateExposure(float targetValue, float duration, Action onOnFadeComplete)
         {
             // мгновенный переходw
             if (duration <= 0f)
@@ -87,6 +88,7 @@ namespace Effects.PostProcess
                 yield return null;
             }
 
+            onOnFadeComplete?.Invoke();
             _colorAdjustments.postExposure.value = targetValue;
         }
 
