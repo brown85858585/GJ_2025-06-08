@@ -8,25 +8,58 @@ namespace Game.Intertitles
 {
     public class IntertitleSystem
     {
-        private readonly List<IntertitleCardView> _intertitleCards;
-        private IntertitleCardView _currentCardObj;
         private readonly IInputAdapter _inputAdapter;
+        
+        private readonly List<IntertitleCardView> _intertitleCards;
+        private readonly List<ScoreIntertitleCardView> _scoreIntertitleCards;
+        private IntertitleCardView _currentCardObj;
+        private ScoreIntertitleCardView _currentCardScoreObj;
 
         public IntertitleSystem(IntertitleConfig intertitleConfig, IInputAdapter inputAdapter)
         {
-            _intertitleCards = new List<IntertitleCardView>();
             _inputAdapter = inputAdapter;
 
+            _intertitleCards = new List<IntertitleCardView>();
             foreach (var entry in intertitleConfig.intertitles)
             {
                 _intertitleCards.Add(entry);
             }
+            
+            _scoreIntertitleCards = new List<ScoreIntertitleCardView>();
+            foreach (var scoreCard in intertitleConfig.scoreIntertitles)
+            {
+                _scoreIntertitleCards.Add(scoreCard);
+            }
+        }
+
+        public async UniTask ShowScoreIntertitle(int levelManagerCurrentLevelIndex, int finalScore, CancellationToken cancellationToken)
+        {
+            _inputAdapter.SwitchAdapterToMiniGameMode();
+            
+            await ShowScore(levelManagerCurrentLevelIndex, finalScore, cancellationToken);
+            await ReadKeyPressAsync(_currentCardScoreObj.gameObject, cancellationToken);
+            
+            _inputAdapter.SwitchAdapterToGlobalMode();
+        }
+
+        private async UniTask ShowScore(
+            int levelManagerCurrentLevelIndex,
+            int finalScore,
+            CancellationToken cancellationToken = default)
+        {
+            _currentCardScoreObj = Object.Instantiate(_scoreIntertitleCards[levelManagerCurrentLevelIndex]);
+            _currentCardScoreObj.Tweener.Show();
+            _currentCardScoreObj.SetScore(finalScore-_currentCardScoreObj.RequiredScore);
         }
 
         public async UniTask ShowIntertitle(int levelManagerCurrentLevelIndex, CancellationToken cancellationToken)
         {
+            _inputAdapter.SwitchAdapterToMiniGameMode();
+            
             await Show(levelManagerCurrentLevelIndex, cancellationToken);
-            await ReadKeyPressAsync(cancellationToken);
+            await ReadKeyPressAsync(_currentCardObj.gameObject, cancellationToken);
+            
+            _inputAdapter.SwitchAdapterToGlobalMode();
         }
 
         private async UniTask Show(
@@ -57,14 +90,14 @@ namespace Game.Intertitles
             }
         }
 
-        private async UniTask ReadKeyPressAsync(CancellationToken cancellationToken = default)
+        private async UniTask ReadKeyPressAsync(GameObject cardObj, CancellationToken cancellationToken = default)
         {
             // UniTaskCompletionSource без значения
             
             Debug.Log("IntertitleSystem: Waiting for key press...");
             var tcs = new UniTaskCompletionSource();
 
-            _inputAdapter.OnInteract += Handler;
+            _inputAdapter.OnGameInteract += Handler;
 
             try
             {
@@ -72,8 +105,8 @@ namespace Game.Intertitles
             }
             finally
             {
-                _inputAdapter.OnInteract -= Handler;
-                Object.Destroy(_currentCardObj.gameObject); 
+                _inputAdapter.OnGameInteract -= Handler;
+                Object.Destroy(cardObj); 
             }
 
             return;

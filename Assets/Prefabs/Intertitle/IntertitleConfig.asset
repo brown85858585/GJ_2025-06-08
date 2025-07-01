@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intertitles:
   - {fileID: 351247898809972732, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
+  scoreIntertitles:
+  - {fileID: 1919633741956995276, guid: 075eac8e78639e642ba68129236f4645, type: 3}

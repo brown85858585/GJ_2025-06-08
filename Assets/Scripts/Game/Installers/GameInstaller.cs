@@ -42,6 +42,7 @@ namespace Game.Installers
 
         private GameObject _savedCan;
         private MainCanvasUi _mainCanvas;
+        private MonologSystem _monologSystem;
 
         private void Awake()
         {
@@ -67,6 +68,8 @@ namespace Game.Installers
                 {
                     _effectAccumulator.FadeIn(1);
                     InitializeMainObjects();
+
+                    UniTask.Delay(1000).ContinueWith(InitStartWakeUp);
                 });
         }
 
@@ -79,10 +82,10 @@ namespace Game.Installers
                 .AddTo(this);
             
             InitPlayer();
-            InitStartWakeUp();
+            
             InitCamera();
             InitQuestLog();
-            var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
+            _monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
                 _logic.MiniGameCoordinator, _logic.QuestLog);
         }
 
@@ -103,7 +106,6 @@ namespace Game.Installers
 
         private void InitStartWakeUp()
         {
-            //_core.InputAdapter.DisablePlayerInput();
             _logic.PlayerController.PlayWakeUpAnimation();
         }
 
@@ -152,15 +154,33 @@ namespace Game.Installers
 
         private void HandleLevelCompletion(ItemCategory category)
         {
-            if (category == ItemCategory.Bed && _allQuestsCompleted)
-                LoadNextLevel();
+            if (category == ItemCategory.Bed && !_allQuestsCompleted)
+            {
+                var scenario = new ScenarioInstaller();
+                ScenarioNext().Forget();
+                async UniTask ScenarioNext()
+                {
+                    _monologSystem.OpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
+                    // Старт Анимации
+                    await UniTask.Delay(1000);
+                    _monologSystem.CloseDialogue();
+                    var fadeTimer = 1100;
+                    _effectAccumulator.FadeOut(fadeTimer/1000f);
+                    await UniTask.Delay(fadeTimer);
+                    await _core.IntertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
+                        _logic.PlayerController.Model.Score,
+                        CancellationToken.None);
+                    //Интертайтл со счетом появляется, ждет нажати игрока
+                    //Интертайтл с сюжетом 2го лвл появляется, ждет нажатия игрока
+                    
+                    scenario.NextLevelScenario(LoadNextLevel);
+                }
+                
+            }
         }
 
         private void LoadNextLevel()
         {
-            _effectAccumulator.FadeIn();
-           
-            
             UniTask.Delay(1000).ContinueWith(() =>
             {
                 _levelManager.LoadNextLevel(transform.parent);
@@ -172,7 +192,8 @@ namespace Game.Installers
                 _allQuestsCompleted = false;
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
-                _effectAccumulator.FadeOut();
+                
+                _effectAccumulator.FadeIn();
             });
         }
 
