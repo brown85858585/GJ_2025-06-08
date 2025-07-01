@@ -2,6 +2,7 @@
 using Knot.Localization.Components;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +22,14 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     public Color acceptButtonColor = Color.green;
     public Color rejectButtonColor = Color.red;
 
+    [Header("UI References from Prefab")]
+    [SerializeField] private GameObject uiPanel; // Весь UI панель из префаба
+    /*
+    [Header("UI References from Prefab")]
+[SerializeField] private Button acceptButtonPrefab;   // Кнопка "E" (зеленая)
+[SerializeField] private Button rejectButtonPrefab;   // Кнопка "Q" (красная)
+[SerializeField] private Button exitButtonPrefab;     // Кнопка выхода
+    */
     [Header("Game Data")]
     [SerializeField] private List<CardData> gameCards = new List<CardData>();
 
@@ -51,6 +60,15 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private int cardsRemaining;
     private bool isProcessingCard = false;
 
+    [Header("Card Stack Settings")]
+    [SerializeField] private int visibleCardsInStack = 3; // Сколько карточек видно в стопке
+    [SerializeField] private Vector2 stackOffset = new Vector2(5f, -5f); // Смещение каждой карточки
+    [SerializeField] private float stackScaleReduction = 0.05f; // Уменьшение размера каждой карточки
+    [SerializeField] private float stackAlphaReduction = 0.2f; // Уменьшение прозрачности
+
+    // UI компоненты для стопки
+    private List<GameObject> cardStack = new List<GameObject>();
+
     [System.Serializable]
     public class CardData
     {
@@ -71,6 +89,8 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
     }
 
+
+
     protected override void Start()
     {
         if (gameCards.Count == 0)
@@ -80,6 +100,24 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         cardsRemaining = gameCards.Count;
         base.Start();
+    }
+
+    protected void SetupPrefabButtons()
+    {
+        if (uiPanel != null)
+        {
+            acceptButton = uiPanel.transform.Find("AcceptButton")?.GetComponent<Button>();
+            rejectButton = uiPanel.transform.Find("RejectButton")?.GetComponent<Button>();
+            exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
+
+            // Подключаем обработчики
+            if (acceptButton != null)
+                acceptButton.onClick.AddListener(() => ProcessCard(true));
+            if (rejectButton != null)
+                rejectButton.onClick.AddListener(() => ProcessCard(false));
+            if (exitButton != null)
+                exitButton.onClick.AddListener(ExitMiniGame);
+        }
     }
 
     private void InitializeDefaultCards()
@@ -128,18 +166,121 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     {
         if (mainCanvas == null)
         {
-            Debug.LogError("Canvas не найден в сцене!");
-            return;
+            mainCanvas = FindObjectOfType<Canvas>();
+            if (mainCanvas == null)
+            {
+                Debug.LogError("Canvas не найден в сцене!");
+                return;
+            }
         }
 
         miniGamePanel = GameObject.Find("WorkMiniGamePanel");
         if (miniGamePanel == null)
         {
-            Debug.LogError("MiniGamePanel не найдена в Canvas!");
+            Debug.LogError("WorkMiniGamePanel не найдена!");
             return;
         }
 
-        Debug.Log($"Компоненты найдены: Canvas = {mainCanvas.name}, Panel = {miniGamePanel.name}");
+        Debug.Log("=== ПОИСК КНОПОК ПО ВСЕЙ СЦЕНЕ ===");
+
+        // Ищем ВСЕ кнопки в сцене
+        Button[] allButtonsInScene = FindObjectsOfType<Button>();
+        Debug.Log($"Всего кнопок в сцене: {allButtonsInScene.Length}");
+
+        for (int i = 0; i < allButtonsInScene.Length; i++)
+        {
+            Button btn = allButtonsInScene[i];
+            Debug.Log($"Кнопка {i}: '{btn.name}' в объекте '{btn.gameObject.name}' - активна: {btn.gameObject.activeInHierarchy}");
+        }
+
+        // Ищем конкретно ButtonQ и ButtonE
+        GameObject buttonQObj = GameObject.Find("ButtonQ");
+        GameObject buttonEObj = GameObject.Find("ButtonE");
+
+        Debug.Log($"ButtonQ объект найден: {buttonQObj != null}");
+        Debug.Log($"ButtonE объект найден: {buttonEObj != null}");
+
+        if (buttonQObj != null)
+        {
+            rejectButton = buttonQObj.GetComponent<Button>();
+            Debug.Log($"ButtonQ компонент Button: {rejectButton != null}");
+        }
+
+        if (buttonEObj != null)
+        {
+            acceptButton = buttonEObj.GetComponent<Button>();
+            Debug.Log($"ButtonE компонент Button: {acceptButton != null}");
+        }
+
+        // Альтернативный поиск - по тексту на кнопках
+        foreach (Button btn in allButtonsInScene)
+        {
+            Text btnText = btn.GetComponentInChildren<Text>();
+            if (btnText != null)
+            {
+                Debug.Log($"Кнопка '{btn.name}' содержит текст: '{btnText.text}'");
+
+                if (btnText.text.Contains("Q") && rejectButton == null)
+                {
+                    rejectButton = btn;
+                    Debug.Log($"✅ Найдена кнопка Q по тексту: {btn.name}");
+                }
+                else if (btnText.text.Contains("E") && acceptButton == null)
+                {
+                    acceptButton = btn;
+                    Debug.Log($"✅ Найдена кнопка E по тексту: {btn.name}");
+                }
+            }
+        }
+
+        Debug.Log($"ФИНАЛЬНЫЙ РЕЗУЛЬТАТ: rejectButton={rejectButton?.name}, acceptButton={acceptButton?.name}");
+    }
+
+    private void LogChildrenRecursive(Transform parent, int level)
+    {
+        string indent = new string(' ', level * 2);
+        Debug.Log($"{indent}{parent.name} ({parent.GetType().Name})");
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            LogChildrenRecursive(parent.GetChild(i), level + 1);
+        }
+    }
+
+    private void FindButtonInHierarchy(string buttonName, ref Button buttonRef)
+    {
+        // Ищем во всей иерархии панели
+        Transform[] allTransforms = miniGamePanel.GetComponentsInChildren<Transform>();
+
+        foreach (Transform t in allTransforms)
+        {
+            if (t.name == buttonName)
+            {
+                buttonRef = t.GetComponent<Button>();
+                if (buttonRef != null)
+                {
+                    Debug.Log($"✅ Найдена кнопка {buttonName} по пути: {GetTransformPath(t)}");
+                    return;
+                }
+                else
+                {
+                    Debug.LogError($"❌ Объект {buttonName} найден, но на нем нет компонента Button!");
+                }
+            }
+        }
+
+        Debug.LogError($"❌ Кнопка {buttonName} не найдена в иерархии!");
+    }
+
+    private string GetTransformPath(Transform t)
+    {
+        string path = t.name;
+        while (t.parent != null && t.parent != miniGamePanel.transform)
+        {
+            t = t.parent;
+            path = t.name + "/" + path;
+        }
+        return path;
     }
 
     protected override void CreateStartScreen()
@@ -191,6 +332,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         gameRect.offsetMax = Vector2.zero;
 
         CreateCardInterface();
+        SetupPrefabButtons();
         CreateGameButtons();
         CreateStatusTexts();
     }
@@ -200,9 +342,11 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         if (currentCardPrefab != null)
         {
             // Создаем экземпляр префаба
-            currentCard = Instantiate(currentCardPrefab, gameScreen.transform);
-
+            var  BasecurrentCard = Instantiate(currentCardPrefab, gameScreen.transform);
+           var obg= BasecurrentCard.GetComponentsInChildren<Transform>();
             // Настраиваем позицию и размер
+
+            currentCard = obg.Where(card => card.name.Contains("CurrentCard")).First().gameObject;
             RectTransform cardRect = currentCard.GetComponent<RectTransform>();
             cardRect.anchoredPosition = new Vector2(0, 20);
             cardRect.sizeDelta = cardSize;
@@ -349,6 +493,8 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     private void CreateGameButtons()
     {
+
+        /*
         // Кнопка "Удалить" (красная)
         rejectButton = CreateButton("RejectButton", "Удалить (Q)", new Vector2(-120, -150), rejectButtonColor, new Vector2(100, 40), gameScreen.transform);
         rejectButton.onClick.AddListener(() => ProcessCard(false));
@@ -356,7 +502,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         // Кнопка "Принять" (зеленая)
         acceptButton = CreateButton("AcceptButton", "Принять (E)", new Vector2(120, -150), acceptButtonColor, new Vector2(100, 40), gameScreen.transform);
         acceptButton.onClick.AddListener(() => ProcessCard(true));
-
+        */
         // Кнопка выхода
         exitButton = CreateButton("ExitButton", "Выход", new Vector2(200, 200), Color.gray, new Vector2(80, 40), gameScreen.transform);
         exitButton.onClick.AddListener(ExitMiniGame);
@@ -438,15 +584,25 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     {
         base.Update();
 
-        if (!isGameActive || isProcessingCard) return;
+        if (isGameActive && isProcessingCard)
+        {
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ProcessCard(false); // Удалить
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                ProcessCard(false); // Удалить
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                ProcessCard(true); // Принять
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+    }
+
+    protected override void QInput()
+    {
+        if (isGameActive && !isProcessingCard)
         {
-            ProcessCard(true); // Принять
+            ProcessCard(false); // E = принять
         }
     }
 

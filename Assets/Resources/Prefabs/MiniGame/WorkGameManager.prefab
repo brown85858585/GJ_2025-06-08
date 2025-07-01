@@ -135,6 +135,8 @@ MonoBehaviour:
   panel: {fileID: 8012524612185898012}
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
+  actionQInputAction: {fileID: -7160357943707471078, guid: ec95c81ab2256c2449dbb762867506a9,
+    type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   arcImage: {fileID: 0}
@@ -146,6 +148,7 @@ MonoBehaviour:
   TextFont: LegacyRuntime.ttf
   indicatorSpeed: 100
   maxAttempts: 3
+  gameScore: 0
   swipeAnimationSpeed: 500
   cardSize: {x: 350, y: 450}
   targetScore: 5
@@ -155,6 +158,7 @@ MonoBehaviour:
   senderCircleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   acceptButtonColor: {r: 0, g: 1, b: 0, a: 1}
   rejectButtonColor: {r: 1, g: 0, b: 0, a: 1}
+  uiPanel: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c, type: 3}
   gameCards: []
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
