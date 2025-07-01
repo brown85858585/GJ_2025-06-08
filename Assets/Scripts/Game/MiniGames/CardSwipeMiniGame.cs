@@ -50,19 +50,23 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private int cardsRemaining;
     private bool isProcessingCard = false;
 
-[Header("Card Stack Settings")]
-[SerializeField] private int visibleCardsInStack = 3; // Сколько карточек видно в стопке
-[SerializeField] private Vector2 stackOffset = new Vector2(5f, -5f); // Смещение каждой карточки
-[SerializeField] private float stackScaleReduction = 0.03f; // Уменьшение размера каждой карточки
-[SerializeField] private float stackAlphaReduction = 0.05f; // Уменьшение прозрачности
+    [Header("Card Stack Settings")]
+    [SerializeField] private int visibleCardsInStack = 3; // Сколько карточек видно в стопке
+    [SerializeField] private Vector2 stackOffset = new Vector2(5f, -5f); // Смещение каждой карточки
+    [SerializeField] private float stackScaleReduction = 0.03f; // Уменьшение размера каждой карточки
+    [SerializeField] private float stackAlphaReduction = 0.05f; // Уменьшение прозрачности
+    [SerializeField] private float cardLockDuration = 1.5f; // Время блокировки карточки в секундах
 
-// UI компоненты для стопки
-private List<GameObject> cardStack = new List<GameObject>();
-private GameObject cardContainer; // Контейнер только для карточек
+    // UI компоненты для стопки
+    private List<GameObject> cardStack = new List<GameObject>();
+    private GameObject cardContainer; // Контейнер только для карточек
 
-// Заменить метод CreateCardInterface():
+    private bool isCardLocked = false; // Заблокирована ли карточка
+    private float cardLockTimer = 0f; // Таймер блокировки
 
-private void CreateCardInterface()
+    // Заменить метод CreateCardInterface():
+
+    private void CreateCardInterface()
 {
     if (currentCardPrefab != null)
     {
@@ -212,8 +216,10 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         UpdateStackContent();
         UpdateUI();
 
-        // Убираем старую анимацию появления - теперь стопка управляется через AnimateStackShift()
-        // StartCoroutine(AnimateCardAppear()); // УДАЛЕНО
+        // БЛОКИРУЕМ карточку на указанное время
+        StartCardLock();
+
+        Debug.Log($"Показана карточка {currentCardIndex}, заблокирована на {cardLockDuration} сек");
     }
 
     // Обновить метод AnimateCardExit():
@@ -430,8 +436,6 @@ private void UpdateCardContent(GameObject card, CardData cardData)
 
         Debug.Log("Стопка сдвинута, новая верхняя карточка готова");
     }
-
-
 
 
     [System.Serializable]
@@ -767,13 +771,15 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         correctAnswers = 0;
         incorrectAnswers = 0;
         isProcessingCard = false;
+        isCardLocked = false; // Сбрасываем блокировку
+        cardLockTimer = 0f; // Сбрасываем таймер
         cardsRemaining = gameCards.Count;
 
         UpdateUI();
 
         if (gameCards.Count > 0)
         {
-            ShowCurrentCard();
+            ShowCurrentCard(); // Это заблокирует первую карточку автоматически
         }
         else
         {
@@ -781,14 +787,47 @@ private void UpdateCardContent(GameObject card, CardData cardData)
             EndMiniGame();
         }
     }
-    
+
+    private void StartCardLock()
+    {
+        isCardLocked = true;
+        cardLockTimer = cardLockDuration;
+
+        // Визуальная индикация блокировки
+        UpdateInstructionText($"Подождите {cardLockDuration:F1} сек...");
+
+        StartCoroutine(CardLockCountdown());
+    }
+
+    // Корутина для отсчета времени блокировки:
+    private IEnumerator CardLockCountdown()
+    {
+        while (cardLockTimer > 0f)
+        {
+            cardLockTimer -= Time.deltaTime;
+
+            // Обновляем текст с оставшимся временем
+            if (cardLockTimer > 0f)
+                UpdateInstructionText($"Подождите {cardLockTimer:F1} сек...");
+
+            yield return null;
+        }
+
+        // Разблокируем карточку
+        isCardLocked = false;
+        UpdateInstructionText("Q - удалить ←  |  → принять - E");
+
+        Debug.Log("Карточка разблокирована!");
+    }
+
+    // Обновить методы ввода с проверкой блокировки:
+
     protected override void Update()
     {
         base.Update();
 
-        if (isGameActive && isProcessingCard)
+        if (isGameActive && !isProcessingCard && !isCardLocked) // Проверка блокировки
         {
-
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 ProcessCard(false); // Удалить
@@ -798,21 +837,34 @@ private void UpdateCardContent(GameObject card, CardData cardData)
                 ProcessCard(true); // Принять
             }
         }
+        else if (isCardLocked && (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E)))
+        {
+            // Игрок пытается нажать кнопку во время блокировки
+            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
+        }
     }
 
     protected override void QInput()
     {
-        if (isGameActive && !isProcessingCard)
+        if (isGameActive && !isProcessingCard && !isCardLocked) // Проверка блокировки
         {
-            ProcessCard(false); // E = принять
+            ProcessCard(false); // Q = удалить
+        }
+        else if (isCardLocked)
+        {
+            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
         }
     }
 
     protected override void OnActionButtonClick()
     {
-        if (isGameActive && !isProcessingCard)
+        if (isGameActive && !isProcessingCard && !isCardLocked) // Проверка блокировки
         {
             ProcessCard(true); // E = принять
+        }
+        else if (isCardLocked)
+        {
+            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
         }
     }
 
