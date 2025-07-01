@@ -108,7 +108,8 @@ namespace Game.MiniGames
 
             actionInputAction.action.performed += OnActionInput;
             startInputAction.action.performed += OnStartInput;
-            actionQInputAction.action.performed += OnActionQInput;
+            if(this is CardSwipeMiniGame)
+                actionQInputAction.action.performed += OnActionQInput;
 
 
             actionInputAction?.action.Disable();
@@ -125,7 +126,7 @@ namespace Game.MiniGames
             if (startInputAction != null)
                 startInputAction.action.performed -= OnStartInput;
 
-            if (actionQInputAction != null)
+            if (actionQInputAction != null )
                 actionQInputAction.action.performed -= OnActionQInput;
         }
 
