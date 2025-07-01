@@ -24,23 +24,13 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     [Header("UI References from Prefab")]
     [SerializeField] private GameObject uiPanel; // Весь UI панель из префаба
-    /*
-    [Header("UI References from Prefab")]
-[SerializeField] private Button acceptButtonPrefab;   // Кнопка "E" (зеленая)
-[SerializeField] private Button rejectButtonPrefab;   // Кнопка "Q" (красная)
-[SerializeField] private Button exitButtonPrefab;     // Кнопка выхода
-    */
+
     [Header("Game Data")]
     [SerializeField] private List<CardData> gameCards = new List<CardData>();
 
     [Header("UI Prefabs")]
     [SerializeField] private GameObject currentCardPrefab; // Перетащите префаб в инспекторе
-    /*
-    [SerializeField] private Transform headerContainer;
-    [SerializeField] private Transform contentContainer;
-    [SerializeField] private Transform headerText;
-    [SerializeField] private Transform contentText;
-    */
+
     // UI компоненты
     private GameObject currentCard;
     private TextMeshProUGUI cardSenderText;
@@ -60,14 +50,389 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private int cardsRemaining;
     private bool isProcessingCard = false;
 
-    [Header("Card Stack Settings")]
-    [SerializeField] private int visibleCardsInStack = 3; // Сколько карточек видно в стопке
-    [SerializeField] private Vector2 stackOffset = new Vector2(5f, -5f); // Смещение каждой карточки
-    [SerializeField] private float stackScaleReduction = 0.05f; // Уменьшение размера каждой карточки
-    [SerializeField] private float stackAlphaReduction = 0.2f; // Уменьшение прозрачности
+[Header("Card Stack Settings")]
+[SerializeField] private int visibleCardsInStack = 3; // Сколько карточек видно в стопке
+[SerializeField] private Vector2 stackOffset = new Vector2(5f, -5f); // Смещение каждой карточки
+[SerializeField] private float stackScaleReduction = 0.03f; // Уменьшение размера каждой карточки
+[SerializeField] private float stackAlphaReduction = 0.05f; // Уменьшение прозрачности
 
-    // UI компоненты для стопки
-    private List<GameObject> cardStack = new List<GameObject>();
+// UI компоненты для стопки
+private List<GameObject> cardStack = new List<GameObject>();
+private GameObject cardContainer; // Контейнер только для карточек
+
+// Заменить метод CreateCardInterface():
+
+private void CreateCardInterface()
+{
+    if (currentCardPrefab != null)
+    {
+        // Создаем ОДИН экземпляр префаба со всем UI
+        var baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
+        var allObjects = baseCardPanel.GetComponentsInChildren<Transform>();
+        
+        // Находим карточку в префабе
+        var cardTransform = allObjects.Where(obj => obj.name.Contains("CurrentCard")).FirstOrDefault();
+        if (cardTransform != null)
+        {
+            // Создаем контейнер специально для стопки карточек
+            cardContainer = new GameObject("CardStackContainer");
+            cardContainer.transform.SetParent(gameScreen.transform, false);
+            
+            RectTransform containerRect = cardContainer.AddComponent<RectTransform>();
+            containerRect.anchorMin = Vector2.zero;
+            containerRect.anchorMax = Vector2.one;
+            containerRect.offsetMin = Vector2.zero;
+            containerRect.offsetMax = Vector2.zero;
+            
+            // Перемещаем оригинальную карточку в контейнер стопки
+            cardTransform.SetParent(cardContainer.transform, false);
+            
+            CreateCardStack(cardTransform.gameObject);
+        }
+        else
+        {
+            Debug.LogError("CurrentCard не найдена в префабе!");
+        }
+    }
+    else
+    {
+        Debug.LogError("CurrentCardPrefab не назначен в инспекторе!");
+        CreateCardInterfaceOldWay();
+    }
+}
+
+// Новый метод для создания стопки ТОЛЬКО карточек:
+
+private void CreateCardStack(GameObject originalCard)
+{
+    cardStack.Clear();
+    
+    // Первая карточка - это оригинальная из префаба
+    currentCard = originalCard;
+    cardStack.Add(currentCard);
+    
+    // Создаем дополнительные карточки для стопки (копии только CurrentCard)
+    for (int i = 1; i < visibleCardsInStack; i++)
+    {
+        // Создаем копию ТОЛЬКО карточки, не всего префаба
+        GameObject duplicateCard = Instantiate(originalCard, cardContainer.transform);
+        duplicateCard.name = $"CurrentCard_Stack_{i}";
+        cardStack.Add(duplicateCard);
+    }
+    
+    // Настраиваем позиции и стили для всех карточек в стопке
+    SetupCardStackPositions();
+    
+    // Находим компоненты текста в активной (первой) карточке
+    FindCardComponentsByPath();
+    
+    // Заполняем содержимое стопки
+    UpdateStackContent();
+    
+    Debug.Log($"Создана стопка из {cardStack.Count} карточек");
+}
+
+// Метод для обновления содержимого стопки:
+
+private void UpdateStackContent()
+{
+    for (int i = 0; i < cardStack.Count && i < visibleCardsInStack; i++)
+    {
+        int cardIndex = currentCardIndex + i;
+        
+        if (cardIndex < gameCards.Count)
+        {
+            // Есть карточка для отображения
+            CardData cardData = gameCards[cardIndex];
+            UpdateCardContent(cardStack[i], cardData);
+            cardStack[i].SetActive(true);
+        }
+        else
+        {
+            // Нет больше карточек - скрываем
+            cardStack[i].SetActive(false);
+        }
+    }
+}
+
+// Метод для обновления содержимого конкретной карточки:
+
+private void UpdateCardContent(GameObject card, CardData cardData)
+{
+    // Находим компоненты текста в карточке
+    Transform headerContainer = card.transform.Find("HeaderContainer");
+    Transform contentContainer = card.transform.Find("ContentContainer");
+    
+    if (headerContainer != null)
+    {
+        Transform headerText = headerContainer.Find("HeaderText");
+        if (headerText != null)
+        {
+            var senderText = headerText.GetComponent<TextMeshProUGUI>();
+            if (senderText != null)
+            {
+                var localizedComponent = senderText.GetComponent<KnotLocalizedTextMeshProUGUI>();
+                if (localizedComponent != null)
+                    localizedComponent.KeyReference.Key = cardData.sender;
+                else
+                    senderText.text = cardData.sender;
+            }
+        }
+    }
+    
+    if (contentContainer != null)
+    {
+        Transform contentText = contentContainer.Find("ContentText");
+        if (contentText != null)
+        {
+            var contentTextComponent = contentText.GetComponent<TextMeshProUGUI>();
+            if (contentTextComponent != null)
+            {
+                var localizedComponent = contentTextComponent.GetComponent<KnotLocalizedTextMeshProUGUI>();
+                if (localizedComponent != null)
+                    localizedComponent.KeyReference.Key = cardData.content;
+                else
+                    contentTextComponent.text = cardData.content;
+            }
+        }
+    }
+}
+
+    // Заменить метод ShowCurrentCard():
+
+    private void ShowCurrentCard()
+    {
+        if (currentCardIndex >= gameCards.Count)
+        {
+            CompleteGame();
+            return;
+        }
+
+        // Обновляем содержимое всей стопки
+        UpdateStackContent();
+        UpdateUI();
+
+        // Убираем старую анимацию появления - теперь стопка управляется через AnimateStackShift()
+        // StartCoroutine(AnimateCardAppear()); // УДАЛЕНО
+    }
+
+    // Обновить метод AnimateCardExit():
+
+    private void SetupCardStackPositions()
+    {
+        Vector2 basePosition = new Vector2(0, 20);
+
+        for (int i = 0; i < cardStack.Count; i++)
+        {
+            GameObject card = cardStack[i];
+            RectTransform cardRect = card.GetComponent<RectTransform>();
+
+            // Смещение для создания эффекта стопки (ИСПРАВЛЕНО: i вместо cardStack.Count - 1 - i)
+            Vector2 offset = stackOffset * i; // Первая карточка (i=0) без смещения, последующие смещаются больше
+            cardRect.anchoredPosition = basePosition + offset;
+
+            // Размер (ИСПРАВЛЕНО: i вместо cardStack.Count - 1 - i)
+            float scaleReduction = stackScaleReduction * i;
+            Vector2 scaledSize = cardSize * (1f - scaleReduction);
+            cardRect.sizeDelta = scaledSize;
+
+            // Z-порядок (передняя карточка должна быть сверху) - ИСПРАВЛЕНО
+            cardRect.SetSiblingIndex(cardStack.Count - 1 - i); // Первая карточка (i=0) будет иметь самый высокий индекс
+
+            // Прозрачность (ИСПРАВЛЕНО: менее агрессивная прозрачность)
+            CanvasGroup canvasGroup = card.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+                canvasGroup = card.AddComponent<CanvasGroup>();
+
+            float alpha = 1f - (stackAlphaReduction * i); // Первая карточка полностью непрозрачная
+            canvasGroup.alpha = Mathf.Max(alpha, 0.7f); // Минимальная прозрачность 70% вместо 30%
+
+            // Блокируем взаимодействие с задними карточками
+            if (i > 0)
+            {
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+            }
+            else
+            {
+                // Первая карточка всегда интерактивная
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+            }
+
+            Debug.Log($"Карточка {i}: позиция {cardRect.anchoredPosition}, размер {scaledSize}, альфа {alpha}, sibling {cardRect.GetSiblingIndex()}");
+        }
+    }
+
+    // Исправить метод AnimateCardExit() - правильная анимация удаления ВЕРХНЕЙ карточки:
+
+    private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
+    {
+        if (currentCard == null || cardStack.Count == 0) yield break;
+
+        // ВАЖНО: currentCard должна быть первой в списке (верхней)
+        currentCard = cardStack[0];
+
+        RectTransform cardRect = currentCard.GetComponent<RectTransform>();
+        Vector2 startPos = cardRect.anchoredPosition;
+        Vector2 targetPos = new Vector2(accepted ? 800f : -800f, startPos.y);
+
+        // Цветовая обратная связь
+        Image cardImg = currentCard.GetComponent<Image>();
+        if (cardImg == null) cardImg = currentCard.GetComponentInChildren<Image>();
+
+        Color originalColor = cardImg != null ? cardImg.color : Color.white;
+        Color feedbackColor = isCorrect ? Color.green : Color.red;
+
+        float elapsedTime = 0f;
+        float duration = 0.4f;
+
+        Debug.Log($"Анимация удаления карточки: {currentCard.name} (индекс 0 в стопке)");
+
+        // Анимация удаления ТОЛЬКО верхней карточки
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / duration;
+
+            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, progress);
+            cardRect.rotation = Quaternion.Lerp(Quaternion.identity,
+                Quaternion.Euler(0, 0, accepted ? -20f : 20f), progress);
+
+            // Мигающий эффект для обратной связи
+            if (cardImg != null)
+                cardImg.color = Color.Lerp(originalColor, feedbackColor, Mathf.Sin(progress * Mathf.PI * 4));
+
+            yield return null;
+        }
+
+        // ПРАВИЛЬНОЕ удаление верхней карточки
+        GameObject removedCard = cardStack[0];
+        cardStack.RemoveAt(0); // Удаляем первую (верхнюю) карточку
+
+        // Перемещаем удаленную карточку в конец для переиспользования
+        removedCard.transform.SetAsFirstSibling(); // Помещаем в самый конец по Z-order
+
+        // Сбрасываем состояние удаленной карточки
+        RectTransform removedRect = removedCard.GetComponent<RectTransform>();
+        removedRect.anchoredPosition = new Vector2(0, 20);
+        removedRect.rotation = Quaternion.identity;
+        if (cardImg != null) cardImg.color = originalColor;
+
+        // Скрываем удаленную карточку
+        removedCard.SetActive(false);
+
+        // Добавляем в конец стопки для будущего использования
+        cardStack.Add(removedCard);
+
+        Debug.Log($"Карточка удалена. Осталось в стопке: {cardStack.Count}");
+
+        // Сдвигаем все оставшиеся карточки вперед
+        yield return StartCoroutine(AnimateStackShift());
+
+        currentCardIndex++;
+        cardsRemaining--;
+        isProcessingCard = false;
+
+        yield return new WaitForSeconds(0.1f);
+
+        ShowCurrentCard();
+    }
+
+    // Исправить метод AnimateStackShift():
+
+    private IEnumerator AnimateStackShift()
+    {
+        float duration = 0.3f;
+        float elapsedTime = 0f;
+
+        // Запоминаем начальные позиции ТОЛЬКО для видимых карточек
+        List<Vector2> startPositions = new List<Vector2>();
+        List<Vector2> startSizes = new List<Vector2>();
+        List<float> startAlphas = new List<float>();
+
+        // Считаем только активные карточки (исключаем последнюю скрытую)
+        int visibleCards = Mathf.Min(cardStack.Count - 1, visibleCardsInStack);
+
+        for (int i = 0; i < visibleCards; i++)
+        {
+            RectTransform rect = cardStack[i].GetComponent<RectTransform>();
+            CanvasGroup canvasGroup = cardStack[i].GetComponent<CanvasGroup>();
+
+            startPositions.Add(rect.anchoredPosition);
+            startSizes.Add(rect.sizeDelta);
+            startAlphas.Add(canvasGroup != null ? canvasGroup.alpha : 1f);
+        }
+
+        // Вычисляем целевые позиции (каждая карточка сдвигается на позицию предыдущей)
+        List<Vector2> targetPositions = new List<Vector2>();
+        List<Vector2> targetSizes = new List<Vector2>();
+        List<float> targetAlphas = new List<float>();
+
+        Vector2 basePosition = new Vector2(0, 20);
+        for (int i = 0; i < visibleCards; i++)
+        {
+            Vector2 offset = stackOffset * i; // Новая позиция для каждой карточки
+            targetPositions.Add(basePosition + offset);
+
+            float scaleReduction = stackScaleReduction * i;
+            targetSizes.Add(cardSize * (1f - scaleReduction));
+
+            float alpha = 1f - (stackAlphaReduction * i);
+            targetAlphas.Add(Mathf.Max(alpha, 0.7f));
+        }
+
+        // Анимация сдвига
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / duration;
+
+            for (int i = 0; i < visibleCards; i++)
+            {
+                RectTransform rect = cardStack[i].GetComponent<RectTransform>();
+                CanvasGroup canvasGroup = cardStack[i].GetComponent<CanvasGroup>();
+
+                rect.anchoredPosition = Vector2.Lerp(startPositions[i], targetPositions[i], progress);
+                rect.sizeDelta = Vector2.Lerp(startSizes[i], targetSizes[i], progress);
+
+                if (canvasGroup != null)
+                    canvasGroup.alpha = Mathf.Lerp(startAlphas[i], targetAlphas[i], progress);
+            }
+
+            yield return null;
+        }
+
+        // Устанавливаем финальные значения и правильные Z-order
+        for (int i = 0; i < visibleCards; i++)
+        {
+            RectTransform rect = cardStack[i].GetComponent<RectTransform>();
+            CanvasGroup canvasGroup = cardStack[i].GetComponent<CanvasGroup>();
+
+            rect.anchoredPosition = targetPositions[i];
+            rect.sizeDelta = targetSizes[i];
+            rect.SetSiblingIndex(cardStack.Count - 1 - i); // Правильный Z-order
+
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = targetAlphas[i];
+                canvasGroup.interactable = (i == 0); // Только первая карточка интерактивная
+                canvasGroup.blocksRaycasts = (i == 0);
+            }
+        }
+
+        // Обновляем текущую карточку (всегда первая в списке)
+        if (cardStack.Count > 0)
+        {
+            currentCard = cardStack[0];
+            FindCardComponentsByPath();
+        }
+
+        Debug.Log("Стопка сдвинута, новая верхняя карточка готова");
+    }
+
+
+
 
     [System.Serializable]
     public class CardData
@@ -120,36 +485,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
     }
 
-    private void InitializeDefaultCards()
-    {
-        gameCards.AddRange(new List<CardData>
-        {
-            // Рабочие задачи (принять - зеленая кнопка)
-            new CardData("Начальник", "Подготовьте отчет по проекту к пятнице", true),
-            new CardData("Клиент", "Нужно обсудить детали договора", true),
-            new CardData("HR", "Заполните анкету для аттестации", true),
-            new CardData("Коллега", "Помогите с код-ревью, пожалуйста", true),
-            new CardData("Техподдержка", "Обновите антивирус на рабочем ПК", true),
-            new CardData("Бухгалтерия", "Предоставьте документы для отчетности", true),
-            
-            // Личные дела (удалить - красная кнопка)
-            new CardData("Мама", "Не забудь купить молоко по дороге домой", false),
-            new CardData("Друг", "Давай встретимся вечером в кафе", false),
-            new CardData("Интернет-магазин", "Скидка 50% на всё! Только сегодня!", false),
-            new CardData("Соцсеть", "У вас 5 новых уведомлений", false),
-            new CardData("Игра", "Ваша энергия восстановлена! Заходите играть", false),
-            new CardData("YouTube", "Новое видео от вашего любимого блогера", false)
-        });
-
-        ShuffleCards();
-
-        // Берем только нужное количество карточек
-        if (gameCards.Count > maxCards)
-        {
-            gameCards = gameCards.GetRange(0, maxCards);
-        }
-        cardsRemaining = gameCards.Count;
-    }
 
     private void ShuffleCards()
     {
@@ -247,41 +582,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
     }
 
-    private void FindButtonInHierarchy(string buttonName, ref Button buttonRef)
-    {
-        // Ищем во всей иерархии панели
-        Transform[] allTransforms = miniGamePanel.GetComponentsInChildren<Transform>();
-
-        foreach (Transform t in allTransforms)
-        {
-            if (t.name == buttonName)
-            {
-                buttonRef = t.GetComponent<Button>();
-                if (buttonRef != null)
-                {
-                    Debug.Log($"✅ Найдена кнопка {buttonName} по пути: {GetTransformPath(t)}");
-                    return;
-                }
-                else
-                {
-                    Debug.LogError($"❌ Объект {buttonName} найден, но на нем нет компонента Button!");
-                }
-            }
-        }
-
-        Debug.LogError($"❌ Кнопка {buttonName} не найдена в иерархии!");
-    }
-
-    private string GetTransformPath(Transform t)
-    {
-        string path = t.name;
-        while (t.parent != null && t.parent != miniGamePanel.transform)
-        {
-            t = t.parent;
-            path = t.name + "/" + path;
-        }
-        return path;
-    }
 
     protected override void CreateStartScreen()
     {
@@ -296,21 +596,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         Image startBg = startScreen.AddComponent<Image>();
         startBg.color = new Color(0, 0, 0, 0.8f);
-
-        //CreateText("Title", "📋 Работа", new Vector2(0, 180), 32, Color.white, new Vector2(400, 50), startScreen.transform);
-        //CreateText("Subtitle", "(вдохновение: Papers, please!)", new Vector2(0, 140), 16, Color.gray, new Vector2(400, 30), startScreen.transform);
-
-        //CreateText("AlgorithmTitle", "Алгоритм:", new Vector2(0, 100), 20, Color.yellow, new Vector2(400, 30), startScreen.transform);
-
-        //CreateText("Step1", "1. ГГ садится за стол.", new Vector2(0, 70), 14, Color.white, new Vector2(400, 25), startScreen.transform);
-        //CreateText("Step2", "2. Появляется интерфейс перебора карточек (одно окно, одна карточка за раз).", new Vector2(0, 45), 14, Color.white, new Vector2(500, 25), startScreen.transform);
-        //CreateText("Step2a", "   a. вверху «От кого» и иллюстрация", new Vector2(0, 20), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
-        //CreateText("Step2b", "   b. тело письма", new Vector2(0, 0), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
-        //CreateText("Step2c", "   c. под карточкой счет оставшихся писем", new Vector2(0, -20), 12, Color.gray, new Vector2(450, 20), startScreen.transform);
-        //CreateText("Step3", "3. Удалить свайп влево, принять: свайп вправо.", new Vector2(0, -50), 14, Color.white, new Vector2(450, 25), startScreen.transform);
-
-        //CreateText("Goal", "🎯 Цель: набрать больше 5 очков (нейтральные всегда правильные)", new Vector2(0, -90), 14, Color.green, new Vector2(500, 25), startScreen.transform);
-        //CreateText("Controls", "Управление: Q (удалить) | E (принять)", new Vector2(0, -120), 14, Color.cyan, new Vector2(400, 25), startScreen.transform);
 
         startButton = CreateButton("StartButton", "Начать работу (Пробел)", new Vector2(-200, 0), new Color(0.2f, 0.8f, 0.2f), new Vector2(300, 100), startScreen.transform, 24);
         startButton.onClick.AddListener(StartGame);
@@ -337,29 +622,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         CreateStatusTexts();
     }
 
-    private void CreateCardInterface()
-    {
-        if (currentCardPrefab != null)
-        {
-            // Создаем экземпляр префаба
-            var  BasecurrentCard = Instantiate(currentCardPrefab, gameScreen.transform);
-           var obg= BasecurrentCard.GetComponentsInChildren<Transform>();
-            // Настраиваем позицию и размер
 
-            currentCard = obg.Where(card => card.name.Contains("CurrentCard")).First().gameObject;
-            RectTransform cardRect = currentCard.GetComponent<RectTransform>();
-            cardRect.anchoredPosition = new Vector2(0, 20);
-            cardRect.sizeDelta = cardSize;
-
-            // Находим компоненты в префабе по структуре
-            FindCardComponentsByPath();
-        }
-        else
-        {
-            Debug.LogError("CurrentCardPrefab не назначен в инспекторе!");
-            CreateCardInterfaceOldWay();
-        }
-    }
 
     private void FindCardComponentsByPath()
     {
@@ -494,16 +757,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private void CreateGameButtons()
     {
 
-        /*
-        // Кнопка "Удалить" (красная)
-        rejectButton = CreateButton("RejectButton", "Удалить (Q)", new Vector2(-120, -150), rejectButtonColor, new Vector2(100, 40), gameScreen.transform);
-        rejectButton.onClick.AddListener(() => ProcessCard(false));
-
-        // Кнопка "Принять" (зеленая)
-        acceptButton = CreateButton("AcceptButton", "Принять (E)", new Vector2(120, -150), acceptButtonColor, new Vector2(100, 40), gameScreen.transform);
-        acceptButton.onClick.AddListener(() => ProcessCard(true));
-        */
-        // Кнопка выхода
         exitButton = CreateButton("ExitButton", "Выход", new Vector2(200, 200), Color.gray, new Vector2(80, 40), gameScreen.transform);
         exitButton.onClick.AddListener(ExitMiniGame);
     }
@@ -528,58 +781,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             EndMiniGame();
         }
     }
-
-    private void ShowCurrentCard()
-    {
-        if (currentCardIndex >= gameCards.Count)
-        {
-            CompleteGame();
-            return;
-        }
-
-        CardData card = gameCards[currentCardIndex];
-
-
-        // Обновляем содержимое карточки
-        if (cardSenderText != null)
-            cardSenderText.GetComponent<KnotLocalizedTextMeshProUGUI>().KeyReference.Key = card.sender;
-        //cardSenderText.text = card.sender;
-
-        if (cardContentText != null)
-            cardContentText.GetComponent<KnotLocalizedTextMeshProUGUI>().KeyReference.Key = card.content;
-        //cardContentText.text = card.content;
-
-        UpdateUI();
-
-        // Анимация появления карточки
-        StartCoroutine(AnimateCardAppear());
-    }
-
-    private IEnumerator AnimateCardAppear()
-    {
-        if (currentCard == null) yield break;
-
-        RectTransform cardRect = currentCard.GetComponent<RectTransform>();
-        Vector2 targetPos = cardRect.anchoredPosition;
-        Vector2 startPos = new Vector2(800f, targetPos.y); // Появляется справа
-
-        cardRect.anchoredPosition = startPos;
-
-        float elapsedTime = 0f;
-        float duration = 0.3f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / duration;
-
-            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, progress);
-            yield return null;
-        }
-
-        cardRect.anchoredPosition = targetPos;
-    }
-
+    
     protected override void Update()
     {
         base.Update();
@@ -643,6 +845,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         StartCoroutine(AnimateCardExit(accepted, isCorrect));
     }
 
+    /*
     private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
     {
         if (currentCard == null) yield break;
@@ -687,6 +890,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         ShowCurrentCard();
     }
+    */
 
     private void UpdateUI()
     {

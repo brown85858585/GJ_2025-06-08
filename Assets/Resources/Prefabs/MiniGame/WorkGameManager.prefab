@@ -162,6 +162,10 @@ MonoBehaviour:
   gameCards: []
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
+  visibleCardsInStack: 3
+  stackOffset: {x: 5, y: -5}
+  stackScaleReduction: 0.01
+  stackAlphaReduction: 0.1
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0
