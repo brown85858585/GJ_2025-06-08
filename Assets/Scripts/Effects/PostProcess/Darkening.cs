@@ -8,7 +8,7 @@ namespace Effects.PostProcess
     public class Darkening : MonoBehaviour
     {
         [Header("Default settings (используются, если в метод не передана своя длительность)")]
-        [SerializeField] private float _defaultFadeDuration = 5.0f;
+        [SerializeField] private float _defaultFadeDuration = 1.0f;
 
         [Header("Экспозиция")]
         [Range(-15.0f, 0.0f)]
@@ -21,14 +21,17 @@ namespace Effects.PostProcess
         private Volume _volume;
         private Coroutine _fadeCoroutine;
 
-        private void Awake()
+        public void SetVolume (Volume volume)
         {
-            _volume = FindObjectOfType<Volume>();
+            _volume = volume;
 
-            _volume.profile.TryGet(out _colorAdjustments);
-            _volume.profile.TryGet(out _depthOfField);
+            if (_volume != null)
+            {
+                _volume.profile.TryGet(out _colorAdjustments);
+                _volume.profile.TryGet(out _depthOfField);
+            }
         }
-
+        
         /* ------------------------------------------------------------------ */
         /*                              PUBLIC API                            */
         /* ------------------------------------------------------------------ */
@@ -65,7 +68,7 @@ namespace Effects.PostProcess
 
         private IEnumerator AnimateExposure(float targetValue, float duration)
         {
-            // мгновенный переход
+            // мгновенный переходw
             if (duration <= 0f)
             {
                 _colorAdjustments.postExposure.value = targetValue;

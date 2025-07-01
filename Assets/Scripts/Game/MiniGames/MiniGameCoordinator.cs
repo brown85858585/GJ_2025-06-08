@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Effects;
-using Effects.VolumeEffects;
 using Game.Interactions;
 using Game.MiniGames.Flower;
 using Game.MiniGames.Park;
@@ -37,6 +36,7 @@ namespace Game.MiniGames
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _completeHandlers = new();
         private IMiniGame _currentMiniGame;
+        private EffectAccumulatorView _effectAccumulatorView;
 
         public List<IMiniGame> Games => _factories.Values.ToList();
 
@@ -64,6 +64,8 @@ namespace Game.MiniGames
 
         public void RegisterGames(Transform level, EffectAccumulatorView effectAccumulatorView)
         {
+            _effectAccumulatorView = effectAccumulatorView;
+            
             _interactionSystem.OnInteraction += HandleInteraction;
          
             _level = level;
@@ -159,7 +161,7 @@ namespace Game.MiniGames
            }
            else
            {
-               VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Blur);
+               _effectAccumulatorView.Blur();
            }
            
             game.Level = CurrentLevelIndex;
@@ -178,7 +180,7 @@ namespace Game.MiniGames
             _currentMiniGame.IsCompleted = true;
             _currentMiniGame.OnMiniGameComplete -= OnMiniGameComplete;
             
-            VolumeSwitcher.Instance.ClearVolume();
+            _effectAccumulatorView.Unblur();
         }
 
        
