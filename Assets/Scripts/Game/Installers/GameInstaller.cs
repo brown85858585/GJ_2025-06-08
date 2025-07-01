@@ -1,17 +1,19 @@
+using System.Threading;
 using CameraField;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects;
+using Game.Intertitles;
 using Game.Levels;
 using Game.MiniGames.Flower;
 using Game.Monolog;
 using Game.Quests;
 using Player;
+using UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
 
 namespace Game.Installers
 {
@@ -22,11 +24,11 @@ namespace Game.Installers
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private QuestLogView questLogPrefab;
         [SerializeField] private EffectAccumulatorView effectAccumulator;
-        [SerializeField] private Button nextLevelButton;
-        [SerializeField] private Canvas mainCanvas;
+        [SerializeField] private MainCanvasUi mainCanvasPrefab;
         [SerializeField] private MiniGamePrefabAccumulator miniGamePrefabAccumulator;
         
         [SerializeField] private LevelsConfig config;
+        [SerializeField] private IntertitleConfig intertitleConfig;
 
         private CoreInstaller _core;
         private GameLogicInstaller _logic;
@@ -39,15 +41,16 @@ namespace Game.Installers
         private ScoreView _scoreText;
 
         private GameObject _savedCan;
+        private MainCanvasUi _mainCanvas;
+
         private void Awake()
         {
             Install();
-            nextLevelButton.onClick.AddListener(LoadNextLevel);
         }
 
         private void Install()
         {
-            _core = new CoreInstaller(Instantiate(playerInput));
+            _core = new CoreInstaller(Instantiate(playerInput), intertitleConfig);
             _logic = new GameLogicInstaller(_core, miniGamePrefabAccumulator);
             
             _levelManager = new LevelManager(config, _core.InteractionSystem, _logic.MiniGameCoordinator);
@@ -56,20 +59,32 @@ namespace Game.Installers
         private void Start()
         {
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
-            _effectAccumulator.FadeOut();
+            _effectAccumulator.FadeOut(0);
+            InitLevelOne();
 
-            _scoreText = mainCanvas.GetComponentInChildren<ScoreView>();
+            _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
+                () =>
+                {
+                    _effectAccumulator.FadeIn();
+                    InitializeMainObjects();
+                });
+        }
+
+        private void InitializeMainObjects()
+        {
+            _effectAccumulator.FadeIn();
+            _mainCanvas = Instantiate(mainCanvasPrefab, transform.parent);
+            _mainCanvas.NextLevelButton.onClick.AddListener(LoadNextLevel);
+            _scoreText = _mainCanvas.GetComponentInChildren<ScoreView>();
             _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.Score = newScore)
                 .AddTo(this);
             
-            InitLevelOne();
             InitPlayer();
             InitStartWakeUp();
             InitCamera();
             InitQuestLog();
             var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
                 _logic.MiniGameCoordinator, _logic.QuestLog);
-
         }
 
         private void InitLevelOne()

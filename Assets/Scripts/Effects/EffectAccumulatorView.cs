@@ -1,5 +1,4 @@
 using Effects.PostProcess;
-using PostProcess;
 using UnityEngine;
 
 namespace Effects
@@ -30,13 +29,13 @@ namespace Effects
             _darker.Unblur();
         }
         
-        public void FadeIn()
+        public void FadeIn(float duration = -1)
         {
-            _darker.FadeIn();
+            _darker.FadeIn(duration);
         }
-        public void FadeOut()
+        public void FadeOut(float duration = -1)
         {
-            _darker.FadeOut();
+            _darker.FadeOut(duration);
         }
         
         public void SetWeather(int cycle)

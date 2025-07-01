@@ -3,84 +3,94 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace PostProcess
+namespace Effects.PostProcess
 {
     public class Darkening : MonoBehaviour
     {
-        [SerializeField] private float _fadeDuration = 5.0f;
-        [Range(-10.0f, 0.0f)]
-        [SerializeField] private float _minValue = -8.0f;
+        [Header("Default settings (используются, если в метод не передана своя длительность)")]
+        [SerializeField] private float _defaultFadeDuration = 5.0f;
+
+        [Header("Экспозиция")]
+        [Range(-15.0f, 0.0f)]
+        [SerializeField] private float _minValue = -15.0f;
         [Range(0.0f, 10.0f)]
         [SerializeField] private float _maxValue = 0.0f;
 
         private ColorAdjustments _colorAdjustments;
         private DepthOfField _depthOfField;
-
-
         private Volume _volume;
         private Coroutine _fadeCoroutine;
 
         private void Awake()
         {
             _volume = FindObjectOfType<Volume>();
+
             _volume.profile.TryGet(out _colorAdjustments);
             _volume.profile.TryGet(out _depthOfField);
         }
 
-        // Fade In
-        public void FadeIn()
+        /* ------------------------------------------------------------------ */
+        /*                              PUBLIC API                            */
+        /* ------------------------------------------------------------------ */
+
+        /// <summary>Фейд-ин (ярко). Если duration &lt;= 0 — мгновенно.</summary>
+        public void FadeIn(float duration = -1f)
         {
-            Debug.Log("FadeIn");
+            StartFade(_maxValue, duration);
+        }
+
+        /// <summary>Фейд-аут (темно). Если duration &lt;= 0 — мгновенно.</summary>
+        public void FadeOut(float duration = -1f)
+        {
+            StartFade(_minValue, duration);
+        }
+
+        public void Blur()    => _depthOfField.active = true;
+        public void Unblur()  => _depthOfField.active = false;
+
+        /* ------------------------------------------------------------------ */
+        /*                             INTERNALS                              */
+        /* ------------------------------------------------------------------ */
+
+        private void StartFade(float targetValue, float duration)
+        {
+            // если пользователь не передал длительность, берём дефолт
+            if (duration < 0f) duration = _defaultFadeDuration;
 
             if (_fadeCoroutine != null)
-            {
                 StopCoroutine(_fadeCoroutine);
+
+            _fadeCoroutine = StartCoroutine(AnimateExposure(targetValue, duration));
+        }
+
+        private IEnumerator AnimateExposure(float targetValue, float duration)
+        {
+            // мгновенный переход
+            if (duration <= 0f)
+            {
+                _colorAdjustments.postExposure.value = targetValue;
+                yield break;
             }
 
-            _fadeCoroutine = StartCoroutine(AnimateExposure(_minValue));
-        }
+            float startValue = _colorAdjustments.postExposure.value;
+            float time       = 0f;
 
-        // Fade Out
-        public void FadeOut()
-        {
-            Debug.Log("FadeOut");
-
-            if (_fadeCoroutine != null)
+            while (time < duration)
             {
-                StopCoroutine(_fadeCoroutine);
-            }
-
-            _fadeCoroutine = StartCoroutine(AnimateExposure(_maxValue));
-        }
-
-        public void Blur()
-        {
-            _depthOfField.active = true;
-        }
-
-        public void Unblur()
-        {
-            _depthOfField.active = false;
-        }
-
-        private IEnumerator AnimateExposure(float targetValue)
-        {
-            var elapsedTime = 0f;
-        
-            while (elapsedTime < _fadeDuration)
-            {
-                _colorAdjustments.postExposure.value = Mathf.Lerp(_colorAdjustments.postExposure.value, targetValue, 
-                    elapsedTime/_fadeDuration);
-                elapsedTime += Time.deltaTime;
+                time += Time.deltaTime;
+                float t = time / duration;              // 0 → 1
+                _colorAdjustments.postExposure.value =
+                    Mathf.Lerp(startValue, targetValue, t);
                 yield return null;
             }
+
+            _colorAdjustments.postExposure.value = targetValue;
         }
+
         private void OnDestroy()
         {
             if (_fadeCoroutine != null)
-            {
                 StopCoroutine(_fadeCoroutine);
-            }
         }
     }
 }
