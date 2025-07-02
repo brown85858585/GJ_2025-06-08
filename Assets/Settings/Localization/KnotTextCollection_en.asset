@@ -960,3 +960,7 @@ MonoBehaviour:
     _rawText: A way to break the cycle.
   - _key: Final_Phrase4
     _rawText: And finally find peace with your real self. No masks.
+  - _key: Play
+    _rawText: Play
+  - _key: results_header
+    _rawText: Results
