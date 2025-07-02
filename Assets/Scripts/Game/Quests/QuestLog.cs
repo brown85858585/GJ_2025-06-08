@@ -83,7 +83,7 @@ namespace Game.Quests
             }
         }
 
-        public void CompleteQuest(QuestType questCategory)
+        public void CompleteQuest(QuestType questCategory, bool isWin)
         {
             var quest = Quests.FirstOrDefault(q => q.Type == questCategory);
             if (quest == null || quest.IsCompleted)
@@ -91,7 +91,7 @@ namespace Game.Quests
 
             quest.IsCompleted = true;
 
-            _view.CompleteQuest(questCategory);
+            _view.CompleteQuest(questCategory, isWin);
 
             // Check if all quests are completed
             if (Quests.Any(q => !q.IsCompleted))

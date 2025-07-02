@@ -15,7 +15,7 @@ namespace Game.MiniGames
         public bool IsCompleted { get; set; }
         public bool IsWin { get; private set; }
         public event Action<QuestType> OnMiniGameStart;
-        public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType, bool> OnMiniGameComplete;
         public QuestType QType { get; } = QuestType.Sprint;
 
         private Transform _levelRoom;
@@ -86,7 +86,7 @@ namespace Game.MiniGames
             IsWin = win;
             
             _effectsAccumulatorView.VignetteToggle();
-            OnMiniGameComplete?.Invoke(QType);
+            OnMiniGameComplete?.Invoke(QType, IsWin);
         }
 
         public void OnActionButtonClick()

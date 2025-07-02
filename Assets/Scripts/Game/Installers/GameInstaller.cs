@@ -62,6 +62,7 @@ namespace Game.Installers
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut(0);
             InitLevelOne();
+            mainCanvasPrefab.LanguageSelector.ApplySavedLanguage();
 
             _core.InputAdapter.SwitchAdapterToMiniGameMode();
             _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(

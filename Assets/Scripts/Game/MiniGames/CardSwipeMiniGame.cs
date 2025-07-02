@@ -63,7 +63,10 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     private bool isCardLocked = false; // Заблокирована ли карточка
     private float cardLockTimer = 0f; // Таймер блокировки
-
+    private bool _victory;
+    
+    public bool Victory => _victory;
+    
     // Заменить метод CreateCardInterface():
 
     private void CreateCardInterface()
@@ -988,7 +991,8 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         CreateText("FinalScore", $"Счёт: {finalScore}", new Vector2(0, -20), 20, Color.yellow, new Vector2(200, 30), resultScreen.transform);
 
         // Результат
-        bool victory = finalScore >= targetScore;
+        _victory = finalScore >= targetScore;
+        bool victory = _victory;
         string resultMessage = victory ? "Победа:" : "Проигрыш:";
         string resultDescription = victory ?
             "Игрок набрал больше 5 очков.\nКвест считается выполненным." :

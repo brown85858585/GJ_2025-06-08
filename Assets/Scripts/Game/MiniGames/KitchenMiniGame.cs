@@ -18,7 +18,7 @@ namespace Game.MiniGames
         public QuestType QType { get; } = QuestType.Kitchen;
         public int Level { get ; set ; }
 
-        public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType, bool> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
 
         public KitchenMiniGame(IPlayerController playerController)
@@ -137,14 +137,13 @@ namespace Game.MiniGames
 
         private void OnCookingAttempt(bool success)
         {
+            
             if (success)
             {
-                IsWin = true;
                 Debug.Log("🍽️ Успешная попытка готовки!");
             }
             else
             {
-                IsWin = false;
                 Debug.Log("🔥 Неудачная попытка готовки!");
             }
         }
@@ -154,8 +153,9 @@ namespace Game.MiniGames
 
            // playerController.Model.Score += _miniGameController.gameScore;
             Debug.Log("🍳 Кухонная мини-игра завершена!");
-
-            OnMiniGameComplete?.Invoke(QType);
+            
+            OnMiniGameComplete?.Invoke(QType, ((CookingMiniGame)_miniGameController).WinCounter > 1);
+            ((CookingMiniGame)_miniGameController).WinCounter = 3;
 
             // Отписываемся от событий
             if (_miniGameController != null)

@@ -36,13 +36,13 @@ namespace Game.Quests
             }
         }
 
-        public void CompleteQuest(QuestType quest)
+        public void CompleteQuest(QuestType quest, bool isWin)
         {
             if (!_quests.TryGetValue(quest, value: out var questItem)) return;
             
             if (questItem != null)
             {
-                questItem.SetActiveCheckmark();
+                questItem.SetActiveCheckmark(isWin);
             }
         }
 

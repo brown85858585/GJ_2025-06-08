@@ -34,7 +34,7 @@ namespace Game.MiniGames
 
         // Словари для хранения делегатов
         private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _startHandlers = new();
-        private readonly Dictionary<IMiniGame, Action<Quests.QuestType>> _completeHandlers = new();
+        private readonly Dictionary<IMiniGame, Action<Quests.QuestType, bool>> _completeHandlers = new();
         private IMiniGame _currentMiniGame;
         private EffectAccumulatorView _effectAccumulatorView;
 
@@ -105,7 +105,7 @@ namespace Game.MiniGames
             _currentMiniGame.OnActionButtonClick();
         }
 
-        private void SwitchOffInputSystem(Quests.QuestType questType)
+        private void SwitchOffInputSystem(Quests.QuestType questType, bool isWin)
         {
             var game = _factories.Where(k => k.Key.ToString() == questType.ToString()).ToList();
            
@@ -139,7 +139,7 @@ namespace Game.MiniGames
             
             // Создаём делегаты и сохраняем их для последующей отписки
             Action<Quests.QuestType> startHandler = SwitchOnInputSystem;
-            Action<Quests.QuestType> completeHandler = SwitchOffInputSystem;
+            Action<Quests.QuestType, bool> completeHandler = SwitchOffInputSystem;
 
             // Сохраняем делегаты
             _startHandlers[game] = startHandler;
@@ -168,7 +168,7 @@ namespace Game.MiniGames
             game.StartGame();
         }
 
-        private void OnMiniGameComplete(QuestType questType)
+        private void OnMiniGameComplete(QuestType questType, bool isWin)
         {
             _currentMiniGame = TypeMatchingForCurrentGame(questType);
 
