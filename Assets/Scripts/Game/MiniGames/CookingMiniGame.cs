@@ -79,7 +79,8 @@ namespace Game.MiniGames
 
             completedZones = 0;
             usedAttempts = 0; // ДОБАВИТЬ ЭТУ СТРОКУ
-            UpdateInstructionText($"🎯 Попадите в любую из 3 зон (Попытки: {maxGameAttempts})");
+            //UpdateInstructionText($"🎯 Попадите в любую из 3 зон (Попытки: {maxGameAttempts})");
+            UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
         }
 
         private int CheckCurrentZone()
@@ -132,7 +133,7 @@ namespace Game.MiniGames
                     // Все зоны выполнены - победа!
                     Debug.Log("🎉 Все зоны выполнены! Победа!");
                     isGameActive = false;
-                    UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
+                    //UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
                     model.Score += 150;
                     StartCoroutine(ShowResultAndEnd(2f));
@@ -157,13 +158,13 @@ namespace Game.MiniGames
 
                 if (isVictory)
                 {
-                    UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
+                    //UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
                     
                 }
                 else
                 {
-                    UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
+                    //UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
                     OnGameAttempt?.Invoke(false);
                     //model.Score += completedZones * 25;
                 }
@@ -174,7 +175,8 @@ namespace Game.MiniGames
             {
                 // Есть еще попытки - обновляем инструкции
                 int remainingZones = 3 - completedZones;
-                UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
+                //UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
+                UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
             }
         }
 
@@ -236,7 +238,8 @@ namespace Game.MiniGames
             currentAngle = 90f;
             movingClockwise = true;
 
-            UpdateInstructionText($"🎯 Попадите в 3 зоны за {maxGameAttempts} нажатий E");
+            //UpdateInstructionText($"🎯 Попадите в 3 зоны за {maxGameAttempts} нажатий E");
+            UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
 
             if (knife != null)
             {
@@ -554,7 +557,7 @@ namespace Game.MiniGames
         private void CreateInstructionText()
         {
             // Создаем текст инструкций в gameScreen
-            instructionText = CreateText("InstructionText", "Остановите нож в зеленой зоне!", new Vector2(0, 200), 16, Color.black, new Vector2(300, 40), gameScreen.transform);
+            instructionText = CreateText("InstructionText", "3", new Vector2(0, 250), 64, Color.black, new Vector2(300, 80), gameScreen.transform);
         }
 
         private Sprite CreateCircleSprite()
