@@ -45,7 +45,7 @@ namespace Game.MiniGames
         private Image winZone;
         private RectTransform knife;
 
-        private Image actionButtonIndicator;
+        //private Image actionButtonIndicator;
 
         private float currentAngle;
         private float targetAngle;
@@ -55,12 +55,9 @@ namespace Game.MiniGames
         private int maxGameAttempts = 3; // Максимальное количество нажатий E
         private int usedAttempts = 0; // Количество использованных нажатий E
 
-        private bool isPaused = false;
+        private bool isPaused = true;
 
-        public void Pause(bool pause)
-        {
-            isPaused = pause;
-        }
+        private Coroutine moveKnifeRoutine = null;
 
         private void SetupMultipleWinZones()
         {
@@ -82,7 +79,8 @@ namespace Game.MiniGames
 
             completedZones = 0;
             usedAttempts = 0; // ДОБАВИТЬ ЭТУ СТРОКУ
-            UpdateInstructionText($"🎯 Попадите в любую из 3 зон (Попытки: {maxGameAttempts})");
+            //UpdateInstructionText($"🎯 Попадите в любую из 3 зон (Попытки: {maxGameAttempts})");
+            UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
         }
 
         private int CheckCurrentZone()
@@ -115,6 +113,9 @@ namespace Game.MiniGames
                 return;
             }
 
+            // Анимируем кнопку
+            instantiatedCookingGameView.AnimateActionButton();
+
             // Увеличиваем счетчик использованных попыток при каждом нажатии E
             usedAttempts++;
             int remainingAttempts = maxGameAttempts - usedAttempts;
@@ -135,7 +136,7 @@ namespace Game.MiniGames
                     // Все зоны выполнены - победа!
                     Debug.Log("🎉 Все зоны выполнены! Победа!");
                     isGameActive = false;
-                    UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
+                    //UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
                     model.Score += 150;
                     StartCoroutine(ShowResultAndEnd(2f));
@@ -160,13 +161,13 @@ namespace Game.MiniGames
 
                 if (isVictory)
                 {
-                    UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
+                    //UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
                     
                 }
                 else
                 {
-                    UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
+                    //UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
                     OnGameAttempt?.Invoke(false);
                     //model.Score += completedZones * 25;
                 }
@@ -176,8 +177,9 @@ namespace Game.MiniGames
             else
             {
                 // Есть еще попытки - обновляем инструкции
-                int remainingZones = 3 - completedZones;
-                UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
+                int remainingZones = maxGameAttempts - completedZones;
+                //UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
+                UpdateInstructionText($"{remainingZones}");
             }
         }
 
@@ -189,35 +191,36 @@ namespace Game.MiniGames
                 zoneCompleted[zoneIndex] = true;
                 model.Score += 50;
                 // Анимация исчезновения
-                StartCoroutine(FadeOutZone(zoneIndex));
+                //StartCoroutine(FadeOutZone(zoneIndex));
+                winZones[zoneIndex].gameObject.transform.parent.gameObject.SetActive(false);
 
                 Debug.Log($"Зона {zoneIndex + 1} скрыта");
             }
         }
 
-        private IEnumerator FadeOutZone(int zoneIndex)
-        {
-            Image zone = winZones[zoneIndex];
-            Color startColor = zone.color;
-            float duration = 0.5f;
-            float elapsedTime = 0f;
+        //private IEnumerator FadeOutZone(int zoneIndex)
+        //{
+        //    Image zone = winZones[zoneIndex];
+        //    Color startColor = zone.color;
+        //    float duration = 0.5f;
+        //    float elapsedTime = 0f;
 
-            // Плавное исчезновение
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+        //    // Плавное исчезновение
+        //    while (elapsedTime < duration)
+        //    {
+        //        elapsedTime += Time.deltaTime;
+        //        float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
 
-                Color newColor = startColor;
-                newColor.a = alpha;
-                zone.color = newColor;
+        //        Color newColor = startColor;
+        //        newColor.a = alpha;
+        //        zone.color = newColor;
 
-                yield return null;
-            }
+        //        yield return null;
+        //    }
 
-            // Полностью скрываем
-            zone.gameObject.transform.parent.gameObject.SetActive(false);
-        }
+        //    // Полностью скрываем
+        //    zone.gameObject.transform.parent.gameObject.SetActive(false);
+        //}
 
         // Сброс для новой игры
         protected override void StartGameLogic()
@@ -236,17 +239,23 @@ namespace Game.MiniGames
             currentTarget = 0;
             completedZones = 0;
             usedAttempts = 0; // ДОБАВИТЬ ЭТУ СТРОКУ - сбрасываем счетчик нажатий
-            currentAngle = 0f;
+            currentAngle = 90f;
             movingClockwise = true;
 
-            UpdateInstructionText($"🎯 Попадите в 3 зоны за {maxGameAttempts} нажатий E");
+            //UpdateInstructionText($"🎯 Попадите в 3 зоны за {maxGameAttempts} нажатий E");
+            UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
 
             if (knife != null)
             {
                 UpdateKnifePosition();
             }
 
-            StartCoroutine(MoveKnife());
+            if (moveKnifeRoutine != null)
+            {
+                StopCoroutine(moveKnifeRoutine);
+            }
+
+            moveKnifeRoutine = StartCoroutine(MoveKnife());
         }
 
         private void SetupPrefabReferences()
@@ -279,8 +288,6 @@ namespace Game.MiniGames
 
             SetupMultipleWinZones();
         }
-
- 
 
         // Обновленный метод для конкретной зоны
         public void SetWinZoneWidth(int zoneIndex, float newWidth)
@@ -366,6 +373,8 @@ namespace Game.MiniGames
                 instantiatedCookingGameView = Instantiate(cookingViewPrefabs[MiniGameCoordinator.DayLevel], gameScreen.transform);
                 instantiatedCookingView = instantiatedCookingGameView.gameObject;
 
+                instantiatedCookingGameView.OnAnimationComplete += InstantiatedCookingGameView_OnAnimationComplete;
+
                 // Настраиваем RectTransform для полного заполнения
                 
                 RectTransform viewRect = instantiatedCookingView.GetComponent<RectTransform>();
@@ -376,7 +385,6 @@ namespace Game.MiniGames
                     viewRect.offsetMin = Vector2.zero;
                     viewRect.offsetMax = Vector2.zero;
                     viewRect.localScale = Vector3.one;
-                  
                 }
 
                 // Настраиваем Canvas префаба
@@ -397,6 +405,18 @@ namespace Game.MiniGames
                 // Fallback к старому методу создания UI
                 CreateFallbackUI();
             }
+        }
+
+        private void InstantiatedCookingGameView_OnAnimationComplete()
+        {
+            isPaused = false;
+
+            if (moveKnifeRoutine != null)
+            {
+                StopCoroutine(moveKnifeRoutine);
+            }
+
+            moveKnifeRoutine = StartCoroutine(MoveKnife());
         }
 
         /*
@@ -538,7 +558,7 @@ namespace Game.MiniGames
         private void CreateInstructionText()
         {
             // Создаем текст инструкций в gameScreen
-            instructionText = CreateText("InstructionText", "Остановите нож в зеленой зоне!", new Vector2(0, 200), 16, Color.black, new Vector2(300, 40), gameScreen.transform);
+            instructionText = CreateText("InstructionText", "3", new Vector2(0, 250), 64, Color.black, new Vector2(300, 80), gameScreen.transform);
         }
 
         private Sprite CreateCircleSprite()
@@ -713,6 +733,11 @@ namespace Game.MiniGames
 
         protected override void OnDestroy()
         {
+            if (instantiatedCookingGameView != null)
+            {
+                instantiatedCookingGameView.OnAnimationComplete -= InstantiatedCookingGameView_OnAnimationComplete;
+            }
+
             if (instantiatedCookingView != null)
             {
                 Destroy(instantiatedCookingView);

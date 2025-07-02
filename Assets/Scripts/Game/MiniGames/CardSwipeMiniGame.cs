@@ -23,7 +23,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     public Color rejectButtonColor = Color.red;
 
     [Header("UI References from Prefab")]
-    [SerializeField] private GameObject uiPanel; // Весь UI панель из префаба
+    [SerializeField] private BaseCardPanel uiPanel; // Весь UI панель из префаба
 
     [Header("Game Data")]
     [SerializeField] private List<CardData> gameCards = new List<CardData>();
@@ -73,10 +73,13 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 {
     if (currentCardPrefab != null)
     {
-        // Создаем ОДИН экземпляр префаба со всем UI
-        var baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
-        var allObjects = baseCardPanel.GetComponentsInChildren<Transform>();
-        
+            // Создаем ОДИН экземпляр префаба со всем UI
+         var baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
+
+         var allObjects = baseCardPanel.GetComponentsInChildren<Transform>();
+
+            currentCardPrefab = baseCardPanel.gameObject;
+            //uiPanel.gameObject. = currentCardPrefab;
         // Находим карточку в префабе
         var cardTransform = allObjects.Where(obj => obj.name.Contains("CurrentCard")).FirstOrDefault();
         if (cardTransform != null)
@@ -478,10 +481,19 @@ private void UpdateCardContent(GameObject card, CardData cardData)
     {
         if (uiPanel != null)
         {
-            acceptButton = uiPanel.transform.Find("AcceptButton")?.GetComponent<Button>();
-            rejectButton = uiPanel.transform.Find("RejectButton")?.GetComponent<Button>();
+           
+            var panal = currentCardPrefab.gameObject;
+            acceptButton = panal.GetComponent("ButtonE") as Button;
+            //acceptButton = panal.transform.Find()?.GetComponent<Button>();
+            rejectButton = panal.GetComponent("ButtonQ") as Button;
+            exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
+            var ss = panal.GetComponentsInChildren<Button>().ToList();
+
+            acceptButton = ss[1];
+            rejectButton = ss[0];
             exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
 
+            /*
             // Подключаем обработчики
             if (acceptButton != null)
                 acceptButton.onClick.AddListener(() => ProcessCard(true));
@@ -489,6 +501,8 @@ private void UpdateCardContent(GameObject card, CardData cardData)
                 rejectButton.onClick.AddListener(() => ProcessCard(false));
             if (exitButton != null)
                 exitButton.onClick.AddListener(ExitMiniGame);
+            */
+   
         }
     }
 
@@ -805,6 +819,7 @@ private void UpdateCardContent(GameObject card, CardData cardData)
     // Корутина для отсчета времени блокировки:
     private IEnumerator CardLockCountdown()
     {
+       //actionButton.onClick.AddListener(OnActionButtonClick);
         while (cardLockTimer > 0f)
         {
             cardLockTimer -= Time.deltaTime;
@@ -847,6 +862,7 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         }
     }
 
+    /*
     protected override void QInput()
     {
         if (isGameActive && !isProcessingCard && !isCardLocked) // Проверка блокировки
@@ -870,7 +886,88 @@ private void UpdateCardContent(GameObject card, CardData cardData)
             Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
         }
     }
+    */
+    protected override void QInput()
+    {
+        if (isGameActive && !isProcessingCard && !isCardLocked)
+        {
 
+            StartCoroutine(ForceButtonPress(rejectButton));
+        }
+        else if (isCardLocked)
+        {
+            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
+        }
+    }
+
+
+
+    protected override void OnActionButtonClick()
+    {
+        if (isGameActive && !isProcessingCard && !isCardLocked)
+        {
+            StartCoroutine(ForceButtonPress(acceptButton));
+        }
+        else if (isCardLocked)
+        {
+            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
+        }
+    }
+
+    private IEnumerator ForceButtonPress(Button button)
+    {
+        if (button == null) yield break;
+
+        //uiPanel.gameObject
+        // Принудительно переводим кнопку в состояние Pressed
+        button.targetGraphic.CrossFadeColor(button.colors.pressedColor, 0f, true, true);
+
+        // Или если используем Sprite Swap, меняем спрайт напрямую
+        Image buttonImage = button.targetGraphic as Image;
+        if (buttonImage != null && button.spriteState.pressedSprite != null)
+        {
+            Sprite originalSprite = buttonImage.sprite;
+            buttonImage.sprite = button.spriteState.pressedSprite;
+
+            yield return new WaitForSeconds(0.9f);
+
+            buttonImage.sprite = originalSprite;
+        }
+        else
+        {
+            // Fallback для Color Tint
+            yield return new WaitForSeconds(0.9f);
+            button.targetGraphic.CrossFadeColor(button.colors.normalColor, 0f, true, true);
+        }
+
+        // Вызываем клик
+        button.onClick.Invoke();
+    }
+
+    private IEnumerator QuickButtonPress(Button button)
+    {
+        if (button == null) yield break;
+
+        // Временно делаем кнопку неинтерактивной и сразу обратно
+        // Это заставит её сменить спрайт
+        button.interactable = false;
+        yield return null; // Ждем один кадр
+        button.interactable = true;
+
+        // Или напрямую меняем спрайт
+        Image img = button.GetComponent<Image>();
+        Sprite normal = img.sprite;
+        Sprite pressed = button.spriteState.pressedSprite;
+
+        if (pressed != null)
+        {
+            img.sprite = pressed;
+            yield return new WaitForSeconds(1f);
+            img.sprite = normal;
+        }
+
+        //button.onClick.Invoke();
+    }
     private void ProcessCard(bool accepted)
     {
         if (currentCardIndex >= gameCards.Count || isProcessingCard)
