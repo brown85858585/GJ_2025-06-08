@@ -44,7 +44,7 @@ namespace Game.MiniGames
         private Image winZone;
         private RectTransform knife;
 
-        private Image actionButtonIndicator;
+        //private Image actionButtonIndicator;
 
         private float currentAngle;
         private float targetAngle;
@@ -54,12 +54,9 @@ namespace Game.MiniGames
         private int maxGameAttempts = 3; // Максимальное количество нажатий E
         private int usedAttempts = 0; // Количество использованных нажатий E
 
-        private bool isPaused = false;
+        private bool isPaused = true;
 
-        public void Pause(bool pause)
-        {
-            isPaused = pause;
-        }
+        private Coroutine moveKnifeRoutine = null;
 
         private void SetupMultipleWinZones()
         {
@@ -233,7 +230,7 @@ namespace Game.MiniGames
             currentTarget = 0;
             completedZones = 0;
             usedAttempts = 0; // ДОБАВИТЬ ЭТУ СТРОКУ - сбрасываем счетчик нажатий
-            currentAngle = 0f;
+            currentAngle = 90f;
             movingClockwise = true;
 
             UpdateInstructionText($"🎯 Попадите в 3 зоны за {maxGameAttempts} нажатий E");
@@ -243,7 +240,12 @@ namespace Game.MiniGames
                 UpdateKnifePosition();
             }
 
-            StartCoroutine(MoveKnife());
+            if (moveKnifeRoutine != null)
+            {
+                StopCoroutine(moveKnifeRoutine);
+            }
+
+            moveKnifeRoutine = StartCoroutine(MoveKnife());
         }
 
         private void SetupPrefabReferences()
@@ -363,6 +365,8 @@ namespace Game.MiniGames
                 instantiatedCookingGameView = Instantiate(cookingViewPrefabs[MiniGameCoordinator.DayLevel], gameScreen.transform);
                 instantiatedCookingView = instantiatedCookingGameView.gameObject;
 
+                instantiatedCookingGameView.OnAnimationComplete += InstantiatedCookingGameView_OnAnimationComplete;
+
                 // Настраиваем RectTransform для полного заполнения
                 
                 RectTransform viewRect = instantiatedCookingView.GetComponent<RectTransform>();
@@ -394,6 +398,18 @@ namespace Game.MiniGames
                 // Fallback к старому методу создания UI
                 CreateFallbackUI();
             }
+        }
+
+        private void InstantiatedCookingGameView_OnAnimationComplete()
+        {
+            isPaused = false;
+
+            if (moveKnifeRoutine != null)
+            {
+                StopCoroutine(moveKnifeRoutine);
+            }
+
+            moveKnifeRoutine = StartCoroutine(MoveKnife());
         }
 
         /*
@@ -710,6 +726,11 @@ namespace Game.MiniGames
 
         protected override void OnDestroy()
         {
+            if (instantiatedCookingGameView != null)
+            {
+                instantiatedCookingGameView.OnAnimationComplete -= InstantiatedCookingGameView_OnAnimationComplete;
+            }
+
             if (instantiatedCookingView != null)
             {
                 Destroy(instantiatedCookingView);

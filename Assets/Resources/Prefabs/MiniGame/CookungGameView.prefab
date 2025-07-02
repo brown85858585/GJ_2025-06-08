@@ -537,7 +537,6 @@ GameObject:
   - component: {fileID: 6089164992656416512}
   - component: {fileID: 3187135605320353600}
   - component: {fileID: 1342505215314386391}
-  - component: {fileID: 526910154026314832}
   m_Layer: 5
   m_Name: CookungGameView
   m_TagString: Untagged
@@ -641,7 +640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CookingViewPrefab: {fileID: 5345630855882479413}
-  cookingMiniGame: {fileID: 526910154026314832}
   gameSpeed: 100
   board: {fileID: 6604264297385063233}
   knife: {fileID: 3954981083361758629}
@@ -649,40 +647,6 @@ MonoBehaviour:
   firstItem: {fileID: 550445367583692355}
   secondItem: {fileID: 2926394852374153272}
   thirdItem: {fileID: 7670669962495130307}
---- !u!114 &526910154026314832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5345630855882479413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ebb9b8c963a8734fb439625fe4f48d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCanvas: {fileID: 0}
-  panel: {fileID: 0}
-  actionInputAction: {fileID: 0}
-  startInputAction: {fileID: 0}
-  arcImage: {fileID: 0}
-  successZoneImage: {fileID: 0}
-  trackImage: {fileID: 0}
-  zoneImages: []
-  indicatorImage: {fileID: 0}
-  ButtonFont: LegacyRuntime.ttf
-  TextFont: LegacyRuntime.ttf
-  indicatorSpeed: 100
-  maxAttempts: 3
-  gameScore: 0
-  currentCookingViewPrefab: {fileID: 0}
-  cookingViewPrefabs: []
-  arcRadius: 150
-  arcStartAngle: 200
-  arcEndAngle: 340
-  successZoneAngle: 45
-  arcColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  indicatorColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &5657239558979114076
 GameObject:
   m_ObjectHideFlags: 0

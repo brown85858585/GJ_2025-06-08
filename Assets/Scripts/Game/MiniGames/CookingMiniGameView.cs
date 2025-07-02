@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -9,7 +10,6 @@ namespace Game.MiniGames
     {
         [Header("")]
         [SerializeField] public GameObject CookingViewPrefab;
-        [SerializeField] private CookingMiniGame cookingMiniGame;
         [SerializeField] public int gameSpeed;
 
         [SerializeField] private UIElementTweener board;
@@ -19,7 +19,9 @@ namespace Game.MiniGames
         [SerializeField] private UIElementTweener secondItem;
         [SerializeField] private UIElementTweener thirdItem;
 
-        int dotweenKnifeAndActionButtonCount = 0; 
+        public event Action OnAnimationComplete;
+
+        private int dotweenKnifeAndActionButtonCount = 0;
 
         private void OnEnable()
         {
@@ -31,7 +33,7 @@ namespace Game.MiniGames
         private void OnDisable()
         {
             board.Hide();
-            //knife.Hide();
+            knife.Hide();
             actionButton.Hide();
             firstItem.Hide();
             secondItem.Hide();
@@ -73,7 +75,7 @@ namespace Game.MiniGames
         {
             dotweenKnifeAndActionButtonCount++;
 
-            if (dotweenKnifeAndActionButtonCount > 0)
+            if (dotweenKnifeAndActionButtonCount > 1)
             {
                 firstItem.OnShowComplete += FirstItem_OnShowComplete;
                 firstItem.gameObject.SetActive(true);
@@ -98,6 +100,7 @@ namespace Game.MiniGames
         private void ThirdItem_OnShowComplete()
         {
             // Start gameplay
+            OnAnimationComplete?.Invoke();
         }
 
         ////[SerializeField] public GameObject winZone; 
