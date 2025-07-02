@@ -21,6 +21,9 @@ namespace Game.MiniGames
 
         public event Action OnAnimationComplete;
 
+
+        private bool isFirstActionButtonShowed = false;
+
         private int dotweenKnifeAndActionButtonCount = 0;
 
         private void OnEnable()
@@ -50,6 +53,11 @@ namespace Game.MiniGames
             thirdItem.OnShowComplete -= ThirdItem_OnShowComplete;
         }
 
+        public void AnimateActionButton()
+        {
+            actionButton.Show();
+        }
+
         private void Board_OnShowComplete()
         {
             knife.OnShowComplete += Knife_OnShowComplete;
@@ -68,7 +76,11 @@ namespace Game.MiniGames
 
         private void ActionButton_OnShowComplete()
         {
-            CompleteKnifeAndActionButtonAnimations();
+            if (!isFirstActionButtonShowed)
+            {
+                isFirstActionButtonShowed = true;
+                CompleteKnifeAndActionButtonAnimations();
+            }
         }
 
         private void CompleteKnifeAndActionButtonAnimations()

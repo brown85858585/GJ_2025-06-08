@@ -113,6 +113,9 @@ namespace Game.MiniGames
                 return;
             }
 
+            // Анимируем кнопку
+            instantiatedCookingGameView.AnimateActionButton();
+
             // Увеличиваем счетчик использованных попыток при каждом нажатии E
             usedAttempts++;
             int remainingAttempts = maxGameAttempts - usedAttempts;
@@ -286,8 +289,6 @@ namespace Game.MiniGames
             SetupMultipleWinZones();
         }
 
- 
-
         // Обновленный метод для конкретной зоны
         public void SetWinZoneWidth(int zoneIndex, float newWidth)
         {
@@ -384,7 +385,6 @@ namespace Game.MiniGames
                     viewRect.offsetMin = Vector2.zero;
                     viewRect.offsetMax = Vector2.zero;
                     viewRect.localScale = Vector3.one;
-                  
                 }
 
                 // Настраиваем Canvas префаба
