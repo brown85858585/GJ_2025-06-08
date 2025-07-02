@@ -177,9 +177,9 @@ namespace Game.MiniGames
             else
             {
                 // Есть еще попытки - обновляем инструкции
-                int remainingZones = 3 - completedZones;
+                int remainingZones = maxGameAttempts - completedZones;
                 //UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
-                UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
+                UpdateInstructionText($"{remainingZones}");
             }
         }
 
