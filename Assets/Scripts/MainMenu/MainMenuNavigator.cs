@@ -9,6 +9,9 @@ namespace MainMenu
         private readonly MainMenu _mainMenu;
         private bool _isDisposed;
         private readonly SettingsMenuView _settings;
+        
+        private MenuStateType _menuStateType;
+        public MenuStateType State => _menuStateType;
 
         public MainMenuNavigator(MainMenu mainMenu, SettingsMenuView settingsMenuView)
         {
@@ -20,18 +23,21 @@ namespace MainMenu
             _mainMenu.OnQuitClick += HandleQuitClicked;
             
             settingsMenuView.SettingsBackButton.onClick.AddListener(HandleSettingsBack);
-
+            
+            _menuStateType = MenuStateType.MainMenu;
         }
 
         private void HandleSettingsBack()
         {
             _settings.gameObject.SetActive(false);
             _mainMenu.gameObject.SetActive(true);
+            _menuStateType = MenuStateType.MainMenu;
         }
 
         private void HandlePlayClicked()
         {
             SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+            _menuStateType = MenuStateType.None;
            // LoadScene("MainMenu");
         }
 
@@ -39,6 +45,7 @@ namespace MainMenu
         {
             _mainMenu.gameObject.SetActive(false);
             _settings.gameObject.SetActive(true);
+            _menuStateType = MenuStateType.SettingsMenu;
         }
 
         private void HandleQuitClicked()
@@ -61,5 +68,12 @@ namespace MainMenu
             
             _settings.SettingsBackButton.onClick.RemoveListener(HandleSettingsBack);
         }
+    }
+
+    public enum MenuStateType
+    {
+        None,
+        MainMenu,
+        SettingsMenu,
     }
 }

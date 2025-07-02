@@ -12,6 +12,7 @@ namespace MainMenu
         [SerializeField] private Transform buttonContainer;
 
         private readonly List<UIElementTweener> _buttonTweens = new();
+        public List<UIElementTweener> ButtonTweens => _buttonTweens;
 
         private Action _playButtonsHandler;
         private readonly List<Action> _peakHandlers = new();
