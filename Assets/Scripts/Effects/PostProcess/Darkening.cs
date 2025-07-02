@@ -38,13 +38,13 @@ namespace Effects.PostProcess
         /* ------------------------------------------------------------------ */
 
         /// <summary>Фейд-ин (ярко). Если duration &lt;= 0 — мгновенно.</summary>
-        public void FadeIn(Action onOnFadeInComplete, float duration = -1f)
+        public void FadeIn(float duration = -1f, Action onOnFadeInComplete = null)
         {
             StartFade(_maxValue, duration, onOnFadeInComplete);
         }
 
         /// <summary>Фейд-аут (темно). Если duration &lt;= 0 — мгновенно.</summary>
-        public void FadeOut(Action onOnFadeOutComplete, float duration = -1f)
+        public void FadeOut(float duration = -1f, Action onOnFadeOutComplete = null)
         {
             StartFade(_minValue, duration, onOnFadeOutComplete);
         }

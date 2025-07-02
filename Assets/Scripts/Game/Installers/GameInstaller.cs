@@ -68,18 +68,12 @@ namespace Game.Installers
             _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
                 () =>
                 {
-                    _effectAccumulator.FadeIn(1);
-                    _effectAccumulator.OnFadeInComplete += Handler;
+                    _effectAccumulator.FadeIn(1,_core.InputAdapter.SwitchAdapterToGlobalMode);
                     
                     _core.InputAdapter.SwitchAdapterToGlobalMode();
                     InitializeMainObjects();
                 });
-            void Handler()
-            {
-                //StartWakeUpAnim
-                _effectAccumulator.OnFadeInComplete -= Handler;
-                _core.InputAdapter.SwitchAdapterToGlobalMode();
-            }
+          
         }
 
         private void InitializeMainObjects()
@@ -205,17 +199,9 @@ namespace Game.Installers
                 _allQuestsCompleted = false;
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
-                
-                _effectAccumulator.FadeIn();
 
-                _effectAccumulator.OnFadeInComplete += Handler;
-                void Handler()
-                {
-                    
-                    //StartWakeUpAnim
-                    _effectAccumulator.OnFadeInComplete -= Handler;
-                    _core.InputAdapter.SwitchAdapterToGlobalMode();
-                }
+                _effectAccumulator.FadeIn(-1, _core.InputAdapter.SwitchAdapterToGlobalMode);
+
             });
         }
 

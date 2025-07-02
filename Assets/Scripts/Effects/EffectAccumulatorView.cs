@@ -17,9 +17,6 @@ namespace Effects
         private WeatherProvider _weather;
         private Vignette _vignette;
         private bool _isVignetteEnabled;
-        
-        public event Action OnFadeInComplete;
-        public event Action OnFadeOutComplete;
 
         private void Awake()
         {
@@ -44,15 +41,15 @@ namespace Effects
             _darker.Unblur();
         }
 
-        public void FadeIn(float duration = -1)
+        public void FadeIn(float duration = -1, Action onOnFadeInComplete = null)
         {
-            _darker.FadeIn(OnFadeInComplete,duration);
+            _darker.FadeIn(duration, onOnFadeInComplete);
             
         }
 
-        public void FadeOut(float duration = -1)
+        public void FadeOut(float duration = -1, Action onOnFadeOutComplete = null)
         {
-            _darker.FadeOut(OnFadeOutComplete, duration);
+            _darker.FadeOut(duration, onOnFadeOutComplete);
         }
 
         public void SetWeather(int cycle)
