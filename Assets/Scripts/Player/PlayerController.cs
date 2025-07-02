@@ -79,7 +79,6 @@ namespace Player
 
         private void InputOn()
         {
-            _view.OnWakeUpEnded -= InputOn;
             _input.SwitchAdapterToGlobalMode();
         }
 

@@ -68,9 +68,8 @@ namespace Game.Installers
             _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
                 () =>
                 {
-                    _effectAccumulator.FadeIn(1,_core.InputAdapter.SwitchAdapterToGlobalMode);
+                    _effectAccumulator.FadeIn(1);
                     
-                    _core.InputAdapter.SwitchAdapterToGlobalMode();
                     InitializeMainObjects();
                 });
           
@@ -200,7 +199,7 @@ namespace Game.Installers
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
 
-                _effectAccumulator.FadeIn(-1, _core.InputAdapter.SwitchAdapterToGlobalMode);
+                _effectAccumulator.FadeIn(-1, _logic.PlayerController.PlayWakeUpAnimation);
 
             });
         }
