@@ -156,7 +156,7 @@ namespace Game.MiniGames
             if (usedAttempts >= maxGameAttempts)
             {
                 // Все попытки исчерпаны
-                bool isVictory = completedZones >= 3;
+                bool isVictory = completedZones >= maxAttempts;
                 Debug.Log($"Все {maxGameAttempts} попытки использованы. Выполнено зон: {completedZones}/3");
 
                 isGameActive = false;
@@ -180,7 +180,7 @@ namespace Game.MiniGames
                 // Есть еще попытки - обновляем инструкции
                 int remainingZones = maxGameAttempts - completedZones;
                 //UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
-                UpdateInstructionText($"{remainingZones}");
+                UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
             }
         }
 
