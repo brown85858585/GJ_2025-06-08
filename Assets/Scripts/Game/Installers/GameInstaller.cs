@@ -199,7 +199,7 @@ namespace Game.Installers
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
 
-                _effectAccumulator.FadeIn(-1, _logic.PlayerController.PlayWakeUpAnimation);
+                _effectAccumulator.FadeIn(-1, _core.InputAdapter.SwitchAdapterToGlobalMode);
 
             });
         }

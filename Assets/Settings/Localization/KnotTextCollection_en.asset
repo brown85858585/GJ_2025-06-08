@@ -890,7 +890,7 @@ MonoBehaviour:
   - _key: Day1_LoadBody1
     _rawText: "Afraid I\u2019d fall behind."
   - _key: Day1_LoadBody2
-    _rawText: "Every day felt like the same\nrepeating cycle\u2026"
+    _rawText: "Every day felt like the same repeating cycle\u2026"
   - _key: Day2_Results0
     _rawText: 'Public utilities:'
   - _key: Day2_LoadHeader0
