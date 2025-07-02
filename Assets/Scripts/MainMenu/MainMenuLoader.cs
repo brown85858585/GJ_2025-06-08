@@ -19,9 +19,12 @@ namespace MainMenu
             _mainMenu = Instantiate(mainMenuPrefab, uiRoot).GetComponent<MainMenu>();
             
             _settingsMenuView = Instantiate(settingsPrefab, uiRoot).GetComponent<SettingsMenuView>();
-            _settingsMenuView.gameObject.SetActive(false);
             
             _navigator = new MainMenuNavigator(_mainMenu, _settingsMenuView);
+        }
+        private void Start()
+        {
+            _settingsMenuView.gameObject.SetActive(false);
         }
 
 

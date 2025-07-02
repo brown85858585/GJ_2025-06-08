@@ -16,27 +16,30 @@ namespace Utilities
             // на всякий случай, если забыли подвязать в инспекторе
             if (languageDropdown == null)
                 languageDropdown = GetComponent<TMP_Dropdown>();
-        }
-
-        private void Start()
-        {
-            // 1) Выставляем опции дропдауна
+            
             languageDropdown.ClearOptions();
             var langs = KnotLocalization.Manager.Languages.ToList();
             var names = langs.Select(l => l.NativeName).ToList();
             languageDropdown.AddOptions(names);
             languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
-        
+
+            ApplySavedLanguage();
+        }
+
+        public void ApplySavedLanguage()
+        {
             if (PlayerPrefs.HasKey(PrefKey))
             {
                 string savedCode = PlayerPrefs.GetString(PrefKey);
-                int savedIndex = langs.FindIndex(l => l.CultureName  == savedCode);
+                int savedIndex = KnotLocalization.Manager.Languages.ToList().
+                    FindIndex(l => l.CultureName  == savedCode);
                 if (savedIndex >= 0)
                 {
                     languageDropdown.value = savedIndex;
                     // загрузит язык внутри OnValueChanged
-                    return;
                 }
+
+                OnLanguageChanged(savedIndex);
             }
         }
 
@@ -49,6 +52,12 @@ namespace Utilities
             // 2) Сохраняем выбор
             PlayerPrefs.SetString(PrefKey, lang.CultureName );
             PlayerPrefs.Save();
+        }
+        
+        private void OnDestroy()
+        {
+            // Отписываемся от события, чтобы избежать утечек памяти
+            languageDropdown.onValueChanged.RemoveListener(OnLanguageChanged);
         }
     }
 }
