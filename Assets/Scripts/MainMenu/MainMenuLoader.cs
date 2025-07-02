@@ -8,40 +8,29 @@ namespace MainMenu
     {
         [SerializeField] private Transform uiRoot;
         [SerializeField] private GameObject mainMenuPrefab;
-        [SerializeField] private GameObject characterSelectPrefab;
-        [SerializeField] private CharacterData[] characters;
+        [SerializeField] private GameObject settingsPrefab;
 
         private MainMenu _mainMenu;
-        private CharacterSelectView _characterSelectView;
-        private CharacterSelectPresenter _presenter;
+        private SettingsMenuView _settingsMenuView;
         private MainMenuNavigator _navigator;
 
         private void Awake()
         {
             _mainMenu = Instantiate(mainMenuPrefab, uiRoot).GetComponent<MainMenu>();
             
-            _characterSelectView = Instantiate(characterSelectPrefab, uiRoot).GetComponent<CharacterSelectView>();
-            _characterSelectView.gameObject.SetActive(false);
-            InitCharacterSelect();
+            _settingsMenuView = Instantiate(settingsPrefab, uiRoot).GetComponent<SettingsMenuView>();
+            _settingsMenuView.gameObject.SetActive(false);
             
-            _navigator = new MainMenuNavigator(_mainMenu, _characterSelectView);
+            _navigator = new MainMenuNavigator(_mainMenu, _settingsMenuView);
         }
 
-        private void InitCharacterSelect()
-        {
-            var charModels = characters.Select(d => 
-                new CharacterModel(d, Random.Range(1,10), Random.Range(30,150))).ToArray();
-            var selectorModel = new SelectorModel(charModels);
-            _presenter = new CharacterSelectPresenter(_characterSelectView, selectorModel);
-        }
 
         private void OnDestroy()
         {
             _navigator?.Dispose();
-            _presenter?.Dispose();
 
             if (_mainMenu != null) Destroy(_mainMenu.gameObject);
-            if (_characterSelectView != null) Destroy(_characterSelectView.gameObject);
+            if (_settingsMenuView != null) Destroy(_settingsMenuView.gameObject);
         }
     }
 }

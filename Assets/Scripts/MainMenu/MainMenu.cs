@@ -10,7 +10,6 @@ namespace MainMenu
     {
         [SerializeField] private List<GameObject> buttonPrefabs;
         [SerializeField] private Transform buttonContainer;
-        [SerializeField] private UIElementTweener labelTweener;
 
         private readonly List<UIElementTweener> _buttonTweens = new();
 
@@ -21,7 +20,6 @@ namespace MainMenu
 
         public event Action OnSettingsClick = delegate { };
         public event Action OnPlayClick = delegate { };
-        public event Action OnCharacterSelectClick = delegate { };
         public event Action OnQuitClick = delegate { };
 
         protected void Awake()
@@ -35,13 +33,11 @@ namespace MainMenu
         private void OnEnable()
         {
             Show();
-            labelTweener.Show();
         }
 
         private void OnDisable()
         {
             Hide();
-            labelTweener.Hide();
             _buttonTweens.ForEach(tweener => tweener.Hide());
         }
 
@@ -82,9 +78,6 @@ namespace MainMenu
                     break;
                 case MenuBtnType.Settings:
                     menuButton.Button.onClick.AddListener(() => { OnSettingsClick?.Invoke(); });
-                    break;
-                case MenuBtnType.CharacterSelect:
-                    menuButton.Button.onClick.AddListener(() => { OnCharacterSelectClick?.Invoke(); });
                     break;
                 case MenuBtnType.Quit:
                     menuButton.Button.onClick.AddListener(() => { OnQuitClick?.Invoke(); });

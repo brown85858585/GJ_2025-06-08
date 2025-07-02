@@ -1,17 +1,19 @@
+using System.Threading;
 using CameraField;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects;
+using Game.Intertitles;
 using Game.Levels;
 using Game.MiniGames.Flower;
 using Game.Monolog;
 using Game.Quests;
 using Player;
+using UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
 
 namespace Game.Installers
 {
@@ -22,11 +24,11 @@ namespace Game.Installers
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private QuestLogView questLogPrefab;
         [SerializeField] private EffectAccumulatorView effectAccumulator;
-        [SerializeField] private Button nextLevelButton;
-        [SerializeField] private Canvas mainCanvas;
+        [SerializeField] private MainCanvasUi mainCanvasPrefab;
         [SerializeField] private MiniGamePrefabAccumulator miniGamePrefabAccumulator;
         
         [SerializeField] private LevelsConfig config;
+        [SerializeField] private IntertitleConfig intertitleConfig;
 
         private CoreInstaller _core;
         private GameLogicInstaller _logic;
@@ -39,15 +41,17 @@ namespace Game.Installers
         private ScoreView _scoreText;
 
         private GameObject _savedCan;
+        private MainCanvasUi _mainCanvas;
+        private MonologSystem _monologSystem;
+
         private void Awake()
         {
             Install();
-            nextLevelButton.onClick.AddListener(LoadNextLevel);
         }
 
         private void Install()
         {
-            _core = new CoreInstaller(Instantiate(playerInput));
+            _core = new CoreInstaller(Instantiate(playerInput), intertitleConfig);
             _logic = new GameLogicInstaller(_core, miniGamePrefabAccumulator);
             
             _levelManager = new LevelManager(config, _core.InteractionSystem, _logic.MiniGameCoordinator);
@@ -56,20 +60,41 @@ namespace Game.Installers
         private void Start()
         {
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
-            _effectAccumulator.FadeOut();
+            _effectAccumulator.FadeOut(0);
+            InitLevelOne();
 
-            _scoreText = mainCanvas.GetComponentInChildren<ScoreView>();
+            _core.InputAdapter.SwitchAdapterToMiniGameMode();
+            _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
+                () =>
+                {
+                    _effectAccumulator.FadeIn(1);
+                    _effectAccumulator.OnFadeInComplete += Handler;
+                    
+                    _core.InputAdapter.SwitchAdapterToGlobalMode();
+                    InitializeMainObjects();
+                });
+            void Handler()
+            {
+                //StartWakeUpAnim
+                _effectAccumulator.OnFadeInComplete -= Handler;
+                _core.InputAdapter.SwitchAdapterToGlobalMode();
+            }
+        }
+
+        private void InitializeMainObjects()
+        {
+            _mainCanvas = Instantiate(mainCanvasPrefab, transform.parent);
+            _mainCanvas.NextLevelButton.onClick.AddListener(LoadNextLevel);
+            _scoreText = _mainCanvas.GetComponentInChildren<ScoreView>();
             _core.PlayerModel.CurrentScore.Subscribe(newScore => _scoreText.Score = newScore)
                 .AddTo(this);
             
-            InitLevelOne();
             InitPlayer();
             InitStartWakeUp();
             InitCamera();
             InitQuestLog();
-            var monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
+            _monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
                 _logic.MiniGameCoordinator, _logic.QuestLog);
-
         }
 
         private void InitLevelOne()
@@ -89,7 +114,6 @@ namespace Game.Installers
 
         private void InitStartWakeUp()
         {
-            //_core.InputAdapter.DisablePlayerInput();
             _logic.PlayerController.PlayWakeUpAnimation();
         }
 
@@ -138,15 +162,37 @@ namespace Game.Installers
 
         private void HandleLevelCompletion(ItemCategory category)
         {
-            if (category == ItemCategory.Bed && _allQuestsCompleted)
-                LoadNextLevel();
+            //todo ! for debug
+            if (category == ItemCategory.Bed && !_allQuestsCompleted)
+            {
+                var scenario = new ScenarioInstaller();
+                ScenarioNext().Forget();
+                async UniTask ScenarioNext()
+                {
+                    
+                    _core.InputAdapter.SwitchAdapterToMiniGameMode();
+                    _monologSystem.OpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
+                    // Старт Анимации
+                    
+                    await UniTask.Delay(1000);
+                    _monologSystem.CloseDialogue();
+                    var fadeTimer = 1100;
+                    _effectAccumulator.FadeOut(fadeTimer/1000f);
+                    await UniTask.Delay(fadeTimer);
+                    await _core.IntertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
+                        _logic.PlayerController.Model,
+                        CancellationToken.None);
+                    await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
+                        CancellationToken.None);
+                    
+                    scenario.NextLevelScenario(LoadNextLevel);
+                }
+                
+            }
         }
 
         private void LoadNextLevel()
         {
-            _effectAccumulator.FadeIn();
-           
-            
             UniTask.Delay(1000).ContinueWith(() =>
             {
                 _levelManager.LoadNextLevel(transform.parent);
@@ -158,7 +204,17 @@ namespace Game.Installers
                 _allQuestsCompleted = false;
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
-                _effectAccumulator.FadeOut();
+                
+                _effectAccumulator.FadeIn();
+
+                _effectAccumulator.OnFadeInComplete += Handler;
+                void Handler()
+                {
+                    
+                    //StartWakeUpAnim
+                    _effectAccumulator.OnFadeInComplete -= Handler;
+                    _core.InputAdapter.SwitchAdapterToGlobalMode();
+                }
             });
         }
 

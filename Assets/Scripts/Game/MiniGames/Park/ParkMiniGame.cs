@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Effects;
-using Effects.VolumeEffects;
 using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
@@ -43,7 +42,7 @@ namespace Game.MiniGames
         {
             _savedScore = _playerController.Model.Score;
             
-            _effectsAccumulatorView.FadeIn();
+            _effectsAccumulatorView.FadeOut();
             UniTask.Delay(1000).ContinueWith(() =>
             {
                 _parkLevelView.gameObject.SetActive(true);
@@ -58,8 +57,8 @@ namespace Game.MiniGames
                     RunCompletingTimer(win).Forget();
                 };
                 
-                _effectsAccumulatorView.FadeOut();
-                VolumeSwitcher.Instance.SetVolume(VolumeEffectType.Vignette);
+                _effectsAccumulatorView.FadeIn();
+                _effectsAccumulatorView.VignetteToggle();
             });
         }
 
@@ -74,18 +73,19 @@ namespace Game.MiniGames
             _playerController.ToggleMovement();
             
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
-            _effectsAccumulatorView.FadeIn();
+            _effectsAccumulatorView.FadeOut();
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _parkLevelView.gameObject.SetActive(false);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
-            _effectsAccumulatorView.FadeOut();
+            _effectsAccumulatorView.FadeIn();
 
             _parkSprintController.Dispose();
             
             IsWin = win;
             
+            _effectsAccumulatorView.VignetteToggle();
             OnMiniGameComplete?.Invoke(QType);
         }
 

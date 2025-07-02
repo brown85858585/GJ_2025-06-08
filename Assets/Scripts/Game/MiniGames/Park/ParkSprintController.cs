@@ -32,7 +32,6 @@ namespace Game.MiniGames
             _playerController.Model.Score += 100;
             AddStamina(_staminaForRing);
             
-            Debug.Log(_parkLevelView.CheckpointCounter);
             if(_parkLevelView.CheckpointCounter == 0)
             {
                 EndGame();

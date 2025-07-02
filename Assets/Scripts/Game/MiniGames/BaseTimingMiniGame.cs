@@ -28,6 +28,7 @@ namespace Game.MiniGames
 
         [Header("Input")]
         [SerializeField] protected InputActionReference actionInputAction; // E клавиша
+        [SerializeField] protected InputActionReference actionQInputAction; // E клавиша
         [SerializeField] protected InputActionReference startInputAction;  // Пробел для старта
         protected bool useDirectInput = false;
 
@@ -107,8 +108,10 @@ namespace Game.MiniGames
 
             actionInputAction.action.performed += OnActionInput;
             startInputAction.action.performed += OnStartInput;
+            if(this is CardSwipeMiniGame)
+                actionQInputAction.action.performed += OnActionQInput;
 
-            
+
             actionInputAction?.action.Disable();
             startInputAction?.action.Disable();
 
@@ -122,6 +125,9 @@ namespace Game.MiniGames
 
             if (startInputAction != null)
                 startInputAction.action.performed -= OnStartInput;
+
+            if (actionQInputAction != null )
+                actionQInputAction.action.performed -= OnActionQInput;
         }
 
         protected virtual void Update()
@@ -138,6 +144,30 @@ namespace Game.MiniGames
             {
                 Debug.Log("Пробел нажат через старую Input System - запуск игры!");
                 StartGame();
+            }
+        }
+
+        protected virtual void OnActionQInteract(InputAction.CallbackContext context)
+        {
+            if (gameStarted && isGameActive)
+            {
+                Debug.Log("E нажата через Input System!");
+                OnActionButtonClick();
+            }
+        }
+
+        protected virtual void QInput()
+        {
+
+
+        }
+
+        protected virtual void OnActionQInput(InputAction.CallbackContext context)
+        {
+            if (gameStarted && isGameActive)
+            {
+                Debug.Log("E нажата через Input System!");
+                QInput();
             }
         }
 
@@ -315,8 +345,8 @@ namespace Game.MiniGames
             //if (startScreen != null) startScreen.SetActive(true);
             //if (gameScreen != null) gameScreen.SetActive(false);
 
-            gameStarted = false;
-            isGameActive = false;
+            gameStarted = true;
+            isGameActive = true;
 
             Debug.Log("Стартовый экран готов!");
         }

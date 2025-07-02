@@ -38,7 +38,7 @@ Day3_Sleep,А если завтра будет хуже?
 Day4_Sleep,"Пожалуйста, пусть просто 
 выключится всё."
 Day1_Door_Win,После пробежки больше энергии.
-Day1_Door_Defeat,Уже нет времени дальше бежать.
+Day1_Door_Defeat,Нет времени бежать второй круг.
 Day2_Door_Win,Все еще в форме.
 Day2_Door_Defeat,Сегодня как-то тяжело было…
 Day3_Door_Win,"Было сложно, но я не сдамся."
@@ -47,8 +47,8 @@ Day4_Door_Win,Сердце колотится.
 Day4_Door_Defeat,Я не могу больше...
 Day5_Door_Win,Все еще могу?
 Day5_Door_Defeat,"Кажется, я уже не в той форме."
-Day6_Door0,Нет. Сегодня — нет.
-Day6_Door1,Я не могу больше...
+Day6_WMGDoor0,Нет. Сегодня — нет.
+Day6_WMGDoor1,Я не могу больше...
 Flower_WateringCup,Нужна лейка.
 Day1_Flower_Win,"Расти, мой цветок."
 Day1_Flower_Defeat,"Ничего, в следующий раз
@@ -56,7 +56,8 @@ Day1_Flower_Defeat,"Ничего, в следующий раз
 Day2_Flower_Win,У тебя все получится.
 Day2_Flower_Defeat,"Засохнуть проще,
 чем я думала."
-Day3_Flower_Win,"Мне говорят «Держись». \n И ты держись, ага."
+Day3_Flower_Win,"Мне говорят «Держись».
+И ты держись, ага."
 Day3_Flower_Defeat,"«Держись»?
 А за что держаться то?"
 Day4_Flower_Win,Мы похожи.
@@ -69,16 +70,15 @@ Day1_Kitchen_Win,Простая еда самая вкусная.
 Day1_Kitchen_Defeat,Надо было заказать доставку.
 Day2_Kitchen_Win,Вкусно.
 Day2_Kitchen_Defeat,Что-то аппетита нет.
-Day3_Kitchen_Win,...
-Day3_Kitchen_Defeat,Вкус будто потерялся.
+Day3_Kitchen_Win,Вкус будто потерялся.
+Day3_Kitchen_Defeat,...
 Day4_Kitchen_Win,На вкус как стиральный порошок.
 Day4_Kitchen_Defeat,...
-Day5_Kitchen_Win,Не могу. Просто не могу.
-Day5_Kitchen_Defeat,Не могу. Просто не могу.
-Day6_Kitchen_Win,"Я ничего не чувствую.
+Day5_WMGKitchen0,Не могу. Просто не могу.
+Day5_WMGKitchen1,Есть не хочется.
+Day6_WMGKitchen0,"Я ничего не чувствую.
 Ни голода, ни вкуса."
-Day6_Kitchen_Defeat,"Я ничего не чувствую.
-Ни голода, ни вкуса."
+Day6_WMGKitchen1,Любая еда выглядит отвратительно.
 Computer_UI_Letter_Head,От кого:
 Computer_UI_Attempt,Непрочитанных писем:
 Computer_UI_Delete,Удалить
@@ -102,10 +102,10 @@ Day4_Computer_Defeat,"«Держись»?
 Что значит «держись»?!"
 Day5_Computer_Win,Все письма будто об одном.
 Day5_Computer_Defeat,Буквы плывут.
-Day6_Computer0,"Что там написано?
+Day6_WMGComputer0,"Что там написано?
 Не разобрать."
-Day6_Computer1,Все выглядит как издёвка.
-Day6_Computer2,Я не могу это читать.
+Day6_WMGComputer1,Все выглядит как издёвка.
+Day6_WMGComputer2,Я не могу это читать.
 Day1_Guitar0,"Помню, как мы пели
 вчетвером на кухне…"
 Day1_Guitar1,Мы даже хотели играть на сцене...
@@ -403,10 +403,7 @@ Day3_CardContent9,"На@о_#ишь ли
 ты рад@сть в
 п%вт&рны_х д%л@х?"
 Day3_CardHeader10,Кира
-Day3_CardContent10,"Ты не пропала?
-Я тут купила новую
-кружку с лисой
-и вспомнила тебя."
+Day3_CardContent10,Ох... Держись!
 Day3_CardHeader11,Мама
 Day3_CardContent11,"Я понимаю,
 что ты можешь быть
@@ -452,9 +449,9 @@ Day4_CardHeader10,Мама
 Day4_CardContent10,"Нужно позитивно
 мыслить."
 Day4_CardHeader11,Коллега
-Day4_CardContent11,Всё будет хорошо.
+Day4_CardContent11,Держись
 Day4_CardHeader12,Анна
-Day4_CardContent12,Зато похудеешь.
+Day4_CardContent12,Держись
 Day4_CardHeader13,Саша
 Day4_CardContent13,"А вот у моей тети
 тоже было такое…"
@@ -507,3 +504,43 @@ Day5_CardHeader13,—
 Day5_CardContent13,Держись.
 Day5_CardHeader14,—
 Day5_CardContent14,Держись.
+Day1_LoadHeader0,Неделя 1
+Day1_LoadBody0,"Знаешь, я всегда куда-то бежала.
+Боялась не успеть.
+Каждый день будто был одним и тем же 
+повторяющимся циклом..."
+Day2_Results0,Коммунальные услуги:
+Day2_LoadHeader0,Неделя 2
+Day2_LoadBody0,"...и этот цикл повторялся бы снова и снова,
+если бы не одно «но»..."
+Day3_Results0,Коммунальные услуги:
+Day3_Results1,Обследование:
+Day3_LoadHeader0,Неделя 3
+Day3_LoadBody0,"...всего одно письмо изменило мою жизнь.
+Я... не думала, что это коснется и меня."
+Day4_Results0,Коммунальные услуги:
+Day4_Results1,Обследования:
+Day4_Results2,Лечение:
+Day4_LoadHeader0,Неделя 8
+Day4_LoadBody0,"Мысли роились в голове, будто стаи бешеных птиц.
+И ничего с этим я не могла сделать.
+Хорошо, что есть работа, там я хотя бы отвлекалась."
+Day5_Results0,Коммунальные услуги:
+Day5_Results1,Обследования:
+Day5_Results2,Лечение:
+Day5_Results3,Штрафы:
+Day5_LoadHeader0,Неделя 9
+Day5_LoadBody0,"Иногда мне казалось, что я все делаю зря.
+Сил не хватало даже на обычные вещи..."
+Day6_Results0,Лечение:
+Day6_LoadHeader0,Неделя 14
+Day6_LoadBody0,"Но больше всего меня напугало то, что мой разум просто...
+перестал работать."
+Day7_LoadHeader0,Неделя 16
+Day7_LoadBody0,"Все твердили, что я иду на поправку...
+Но мне было все страшнее."
+Final_Phrase,"Я прошла это одна.
+Но если тебе вдруг станет тяжело, не спеши думать о худшем.
+Подумай вот о чём: может, это способ выбраться.
+Вырваться из цикла.
+И наконец оказаться в мире с собой — настоящим. Без масок."
