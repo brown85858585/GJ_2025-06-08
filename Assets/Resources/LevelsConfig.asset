@@ -26,11 +26,14 @@ MonoBehaviour:
     levelPrefab: {fileID: 540476296568130340, guid: 4cb18ab8de4f17940a12dd6e2d25fb60,
       type: 3}
   - levelName: Five
-    levelPrefab: {fileID: 540476296568130340, guid: 5f53dddbbc8a92a48a97a4645a6ddcb5,
+    levelPrefab: {fileID: 540476296568130340, guid: fbe569509a6437d4baeef80d84964cac,
       type: 3}
   - levelName: Six
-    levelPrefab: {fileID: 540476296568130340, guid: 3655890ce2b962444a07c0a0ae9317a7,
+    levelPrefab: {fileID: 540476296568130340, guid: ad1917afbdca2e145a390e79c1a0e3a6,
       type: 3}
   - levelName: Seven
-    levelPrefab: {fileID: 3236254522136015814, guid: 488c3cba68998c54e828bcf0296a17c8,
+    levelPrefab: {fileID: 540476296568130340, guid: a3b6a675a16f08b4ab29e97e27e1132c,
+      type: 3}
+  - levelName: Eight
+    levelPrefab: {fileID: 540476296568130340, guid: fe9b6cd472a4e01498b71b7834d3623d,
       type: 3}
