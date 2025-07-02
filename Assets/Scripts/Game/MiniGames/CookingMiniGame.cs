@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 namespace Game.MiniGames
 {
@@ -18,6 +19,7 @@ namespace Game.MiniGames
 
         [Header("Multiple Win Zones Game")]
         private Transform[] winZoneHandlers = new Transform[3];
+        private UIElementTweener[] winZoneHandlersTweens = new UIElementTweener[3];
         private Image[] winZones = new Image[3];
         private float[] targetAngles = new float[3];
         private bool[] zoneCompleted = new bool[3]; // Отслеживаем выполненные зоны
@@ -154,7 +156,7 @@ namespace Game.MiniGames
             if (usedAttempts >= maxGameAttempts)
             {
                 // Все попытки исчерпаны
-                bool isVictory = completedZones >= 3;
+                bool isVictory = completedZones >= maxAttempts;
                 Debug.Log($"Все {maxGameAttempts} попытки использованы. Выполнено зон: {completedZones}/3");
 
                 isGameActive = false;
@@ -163,7 +165,6 @@ namespace Game.MiniGames
                 {
                     //UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
                     OnGameAttempt?.Invoke(true);
-                    
                 }
                 else
                 {
@@ -179,10 +180,9 @@ namespace Game.MiniGames
                 // Есть еще попытки - обновляем инструкции
                 int remainingZones = maxGameAttempts - completedZones;
                 //UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
-                UpdateInstructionText($"{remainingZones}");
+                UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
             }
         }
-
 
         private void HideCompletedZone(int zoneIndex)
         {
@@ -192,7 +192,7 @@ namespace Game.MiniGames
                 model.Score += 50;
                 // Анимация исчезновения
                 //StartCoroutine(FadeOutZone(zoneIndex));
-                winZones[zoneIndex].gameObject.transform.parent.gameObject.SetActive(false);
+                winZoneHandlersTweens[zoneIndex].Hide();
 
                 Debug.Log($"Зона {zoneIndex + 1} скрыта");
             }
@@ -272,6 +272,7 @@ namespace Game.MiniGames
                 if (foundZone != null)
                 {
                     winZoneHandlers[i] = foundZone;
+                    winZoneHandlersTweens[i] = foundZone.parent.gameObject.GetComponent<UIElementTweener>();
                     winZones[i] = foundZone.GetComponent<Image>();
                     Debug.Log($"WinZone {i + 1} найдена: {zoneNames[i]}");
                 }
