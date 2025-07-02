@@ -58,10 +58,9 @@ namespace Game.MiniGames
 
         public void Pause(bool pause)
         {
-            Debug.Log("Pause");
-            Debug.Log(pause);
             isPaused = pause;
         }
+
         private void SetupMultipleWinZones()
         {
             for (int i = 0; i < 3; i++)
@@ -109,7 +108,7 @@ namespace Game.MiniGames
 
         protected override void OnActionButtonClick()
         {
-            if (!isGameActive)
+            if (!isGameActive || isPaused)
             {
                 Debug.Log("Игра неактивна, игнорируем нажатие E");
                 return;
