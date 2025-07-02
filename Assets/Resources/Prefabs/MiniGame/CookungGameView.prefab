@@ -241,7 +241,7 @@ MonoBehaviour:
   startScale: {x: 0, y: 0, z: 0}
   overshootScale: {x: 1.25, y: 1.25, z: 1.25}
   endScale: {x: 1, y: 1, z: 1}
-  showDuration: 1
+  showDuration: 0.3
   hideDuration: 0.2
   overshootRatio: 0.6
   settleRatio: 0.4
@@ -301,7 +301,7 @@ MonoBehaviour:
   startScale: {x: 0, y: 0, z: 0}
   overshootScale: {x: 1.25, y: 1.25, z: 1.25}
   endScale: {x: 1, y: 1, z: 1}
-  showDuration: 1
+  showDuration: 0.3
   hideDuration: 0.2
   overshootRatio: 0.6
   settleRatio: 0.4
@@ -436,7 +436,7 @@ MonoBehaviour:
   startScale: {x: 0, y: 0, z: 0}
   overshootScale: {x: 1.25, y: 1.25, z: 1.25}
   endScale: {x: 1, y: 1, z: 1}
-  showDuration: 1
+  showDuration: 0.3
   hideDuration: 0.2
   overshootRatio: 0.6
   settleRatio: 0.4
@@ -774,7 +774,7 @@ MonoBehaviour:
   startScale: {x: 0, y: 0, z: 0}
   overshootScale: {x: 1.25, y: 1.25, z: 1.25}
   endScale: {x: 1, y: 1, z: 1}
-  showDuration: 1
+  showDuration: 0.3
   hideDuration: 0.2
   overshootRatio: 0.6
   settleRatio: 0.4
@@ -834,7 +834,7 @@ MonoBehaviour:
   startScale: {x: 0, y: 0, z: 0}
   overshootScale: {x: 1.25, y: 1.25, z: 1.25}
   endScale: {x: 1, y: 1, z: 1}
-  showDuration: 1
+  showDuration: 0.3
   hideDuration: 0.2
   overshootRatio: 0.6
   settleRatio: 0.4
@@ -1177,7 +1177,7 @@ PrefabInstance:
     - target: {fileID: 7348681941331356875, guid: 23aef86754ff9f34898d5abd4137e4fd,
         type: 3}
       propertyPath: showDuration
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8943984082900865853, guid: 23aef86754ff9f34898d5abd4137e4fd,
         type: 3}
