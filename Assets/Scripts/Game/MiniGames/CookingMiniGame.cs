@@ -188,35 +188,36 @@ namespace Game.MiniGames
                 zoneCompleted[zoneIndex] = true;
                 model.Score += 50;
                 // Анимация исчезновения
-                StartCoroutine(FadeOutZone(zoneIndex));
+                //StartCoroutine(FadeOutZone(zoneIndex));
+                winZones[zoneIndex].gameObject.transform.parent.gameObject.SetActive(false);
 
                 Debug.Log($"Зона {zoneIndex + 1} скрыта");
             }
         }
 
-        private IEnumerator FadeOutZone(int zoneIndex)
-        {
-            Image zone = winZones[zoneIndex];
-            Color startColor = zone.color;
-            float duration = 0.5f;
-            float elapsedTime = 0f;
+        //private IEnumerator FadeOutZone(int zoneIndex)
+        //{
+        //    Image zone = winZones[zoneIndex];
+        //    Color startColor = zone.color;
+        //    float duration = 0.5f;
+        //    float elapsedTime = 0f;
 
-            // Плавное исчезновение
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+        //    // Плавное исчезновение
+        //    while (elapsedTime < duration)
+        //    {
+        //        elapsedTime += Time.deltaTime;
+        //        float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
 
-                Color newColor = startColor;
-                newColor.a = alpha;
-                zone.color = newColor;
+        //        Color newColor = startColor;
+        //        newColor.a = alpha;
+        //        zone.color = newColor;
 
-                yield return null;
-            }
+        //        yield return null;
+        //    }
 
-            // Полностью скрываем
-            zone.gameObject.transform.parent.gameObject.SetActive(false);
-        }
+        //    // Полностью скрываем
+        //    zone.gameObject.transform.parent.gameObject.SetActive(false);
+        //}
 
         // Сброс для новой игры
         protected override void StartGameLogic()
