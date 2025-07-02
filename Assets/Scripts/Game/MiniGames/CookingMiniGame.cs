@@ -38,10 +38,6 @@ namespace Game.MiniGames
         //public Color successZoneColor = Color.green;
         public Color indicatorColor = Color.black;
 
-        //public Color buttonIndicatorColorDefault = new Color(0.4f, 0.4f, 0.4f);
-        //public Color buttonIndicatorColorSuccess = new Color(0, 0.56f, 0.47f);
-        //public Color buttonIndicatorColorWrong = new Color(0.35f, 0.35f, 0.59f);
-
         [Header("Prefab Elements References")]
         private Transform knifeHandler;
         private Transform winZoneHandler;
@@ -58,7 +54,7 @@ namespace Game.MiniGames
         private int maxGameAttempts = 3; // Максимальное количество нажатий E
         private int usedAttempts = 0; // Количество использованных нажатий E
 
-        private bool isPaused = true;
+        private bool isPaused = false;
 
         public void Pause(bool pause)
         {
@@ -89,37 +85,6 @@ namespace Game.MiniGames
             UpdateInstructionText($"🎯 Попадите в любую из 3 зон (Попытки: {maxGameAttempts})");
         }
 
-        //private void ResetActionButtonIndicator()
-        //{
-        //    if (actionButtonIndicator != null)
-        //    {
-        //        actionButtonIndicator.color = buttonIndicatorColorDefault;
-        //    }
-        //}
-
-        //private void SetActionButtonIndicatorSuccess()
-        //{
-        //    if (actionButtonIndicator != null)
-        //    {
-        //        actionButtonIndicator.color = buttonIndicatorColorSuccess;
-        //        StartCoroutine(RevertActionButtonIndicator(1.0f));
-        //    }
-        //}
-
-        //private void SetActionButtonIndicatorWrong()
-        //{
-        //    if (actionButtonIndicator != null)
-        //    {
-        //        actionButtonIndicator.color = buttonIndicatorColorWrong;
-        //        StartCoroutine(RevertActionButtonIndicator(1.0f));
-        //    }
-        //}
-
-        private IEnumerator RevertActionButtonIndicator(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            //ResetActionButtonIndicator();
-        }
         private int CheckCurrentZone()
         {
             float tolerance = 15f;
@@ -161,7 +126,6 @@ namespace Game.MiniGames
             if (hitZoneIndex >= 0)
             {
                 // Попадание в зону
-                //SetActionButtonIndicatorSuccess();
                 HideCompletedZone(hitZoneIndex);
                 completedZones++;
                 Debug.Log($"✅ Зона {hitZoneIndex + 1} выполнена! Попаданий: {completedZones}/3");
@@ -182,7 +146,6 @@ namespace Game.MiniGames
             {
                 // Промах
                 Debug.Log($"❌ Промах! Попытка {usedAttempts}");
-                //SetActionButtonIndicatorWrong();
             }
 
             // Проверяем остались ли попытки
@@ -311,10 +274,6 @@ namespace Game.MiniGames
             {
                 knife = knifeHandler.GetComponent<RectTransform>();
             }
-
-            // Подложка для кнопки E
-            //actionButtonIndicator = instantiatedCookingView.transform.Find("Panel/PressEButton/MySlider").GetComponent<Image>();
-            //actionButtonIndicator.color = buttonIndicatorColorDefault;
 
             SetupMultipleWinZones();
         }

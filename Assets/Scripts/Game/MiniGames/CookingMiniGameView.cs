@@ -19,6 +19,8 @@ namespace Game.MiniGames
         [SerializeField] private UIElementTweener secondItem;
         [SerializeField] private UIElementTweener thirdItem;
 
+        int dotweenKnifeAndActionButtonCount = 0; 
+
         private void OnEnable()
         {
             board.OnShowComplete += Board_OnShowComplete;
@@ -28,38 +30,27 @@ namespace Game.MiniGames
 
         private void OnDisable()
         {
-            board.OnHideComplete += Board_OnHideComplete;
             board.Hide();
-            knife.OnHideComplete += Knife_OnHideComplete;
-            knife.Hide();
-            actionButton.OnHideComplete += ActionButton_OnHideComplete;
+            //knife.Hide();
             actionButton.Hide();
-            firstItem.OnHideComplete += FirstItem_OnHideComplete;
             firstItem.Hide();
-            secondItem.OnHideComplete += SecondItem_OnHideComplete;
             secondItem.Hide();
-            thirdItem.OnHideComplete += ThirdItem_OnHideComplete;
             thirdItem.Hide();
         }
 
         private void OnDestroy()
         {
             board.OnShowComplete -= Board_OnShowComplete;
+            knife.OnShowComplete -= Knife_OnShowComplete;
             actionButton.OnShowComplete -= ActionButton_OnShowComplete;
             firstItem.OnShowComplete -= FirstItem_OnShowComplete;
             secondItem.OnShowComplete -= SecondItem_OnShowComplete;
             thirdItem.OnShowComplete -= ThirdItem_OnShowComplete;
-
-            board.OnHideComplete -= Board_OnHideComplete;
-            knife.OnHideComplete -= Knife_OnHideComplete;
-            actionButton.OnHideComplete -= ActionButton_OnHideComplete;
-            firstItem.OnHideComplete -= FirstItem_OnHideComplete;
-            secondItem.OnHideComplete -= SecondItem_OnHideComplete;
-            thirdItem.OnHideComplete -= ThirdItem_OnHideComplete;
         }
 
         private void Board_OnShowComplete()
         {
+            knife.OnShowComplete += Knife_OnShowComplete;
             knife.gameObject.SetActive(true);
             knife.Show();
             actionButton.OnShowComplete += ActionButton_OnShowComplete;
@@ -68,11 +59,26 @@ namespace Game.MiniGames
             actionButton.Show();
         }
 
+        private void Knife_OnShowComplete()
+        {
+            CompleteKnifeAndActionButtonAnimations();
+        }
+
         private void ActionButton_OnShowComplete()
         {
-            firstItem.OnShowComplete += FirstItem_OnShowComplete;
-            firstItem.gameObject.SetActive(true);
-            firstItem.Show();
+            CompleteKnifeAndActionButtonAnimations();
+        }
+
+        private void CompleteKnifeAndActionButtonAnimations()
+        {
+            dotweenKnifeAndActionButtonCount++;
+
+            if (dotweenKnifeAndActionButtonCount > 0)
+            {
+                firstItem.OnShowComplete += FirstItem_OnShowComplete;
+                firstItem.gameObject.SetActive(true);
+                firstItem.Show();
+            }
         }
 
         private void FirstItem_OnShowComplete()
@@ -92,38 +98,6 @@ namespace Game.MiniGames
         private void ThirdItem_OnShowComplete()
         {
             // Start gameplay
-            cookingMiniGame.Pause(false);
-            //cookingMiniGame.StartCooking();
-        }
-
-        private void Board_OnHideComplete()
-        {
-            board.gameObject.SetActive(false);
-        }
-
-        private void Knife_OnHideComplete()
-        {
-            knife.gameObject.SetActive(false);
-        }
-
-        private void ActionButton_OnHideComplete()
-        {
-            actionButton.gameObject.SetActive(false);
-        }
-
-        private void FirstItem_OnHideComplete()
-        {
-            firstItem.gameObject.SetActive(false);
-        }
-
-        private void SecondItem_OnHideComplete()
-        {
-            secondItem.gameObject.SetActive(false);
-        }
-
-        private void ThirdItem_OnHideComplete()
-        {
-            thirdItem.gameObject.SetActive(false);
         }
 
         ////[SerializeField] public GameObject winZone; 
