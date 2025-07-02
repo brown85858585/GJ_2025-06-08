@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using CharacterSelect;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MainMenu
 {
@@ -10,6 +11,7 @@ namespace MainMenu
         [SerializeField] private Transform uiRoot;
         [SerializeField] private GameObject mainMenuPrefab;
         [SerializeField] private GameObject settingsPrefab;
+        [SerializeField] private GameObject closeButtonPrefab;
 
         private MainMenu _mainMenu;
         private SettingsMenuView _settingsMenuView;
@@ -51,6 +53,9 @@ namespace MainMenu
 
         private void DestroyInGame()
         {
+            var closeBtn = Instantiate(closeButtonPrefab, _mainMenu.gameObject.transform);
+            closeBtn.GetComponent<Button>().onClick.AddListener(() => { _mainMenu.gameObject.SetActive(false); });
+
             _mainMenu.ButtonTweens.RemoveAt(0);
             _mainMenu.OnPlayClick += DestroyInGame;
             _isGame = true;

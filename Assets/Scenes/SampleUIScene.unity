@@ -171,6 +171,8 @@ MonoBehaviour:
     type: 3}
   settingsPrefab: {fileID: 6238126728970479484, guid: c579ef5b58f209c47918ec7f2e0eb23f,
     type: 3}
+  closeButtonPrefab: {fileID: 8521744576099559639, guid: 888bf7ca88b4aae42b28f9fa1e861c8d,
+    type: 3}
 --- !u!1 &100617023
 GameObject:
   m_ObjectHideFlags: 0
