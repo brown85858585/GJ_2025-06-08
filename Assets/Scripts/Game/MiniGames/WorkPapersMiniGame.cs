@@ -14,7 +14,7 @@ namespace Game.MiniGames
         public QuestType QType { get; } = QuestType.Work;
         public int Level { get ; set; }
 
-        public event Action<QuestType> OnMiniGameComplete;
+        public event Action<QuestType, bool> OnMiniGameComplete;
         public event Action<QuestType> OnMiniGameStart;
         public WorkPapersMiniGame(IPlayerController playerController)
         {
@@ -135,7 +135,7 @@ namespace Game.MiniGames
         {
             Debug.Log("📋 Мини-игра обработки документов завершена!");
 
-            OnMiniGameComplete?.Invoke(QType);
+            OnMiniGameComplete?.Invoke(QType, _miniGameController.Victory);
 
             // Отписываемся от событий
             if (_miniGameController != null)

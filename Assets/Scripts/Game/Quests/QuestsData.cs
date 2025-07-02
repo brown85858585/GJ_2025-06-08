@@ -31,6 +31,7 @@ namespace Game.Quests
 		public QuestType Type { get; protected set; }
 		public string Key { get; protected set; }	
 		public bool IsCompleted { get; set; }
+		public bool IsWin { get; set; } = false;
 	}
 
 	public class KitchenQuest : Quest
@@ -40,6 +41,7 @@ namespace Game.Quests
 			Type = QuestType.Kitchen;
 			Key = "Quest_Kitchen0";
 			IsCompleted = false;
+			IsWin = false;
 		}
 	}
 
@@ -50,6 +52,7 @@ namespace Game.Quests
 			Type = QuestType.Sprint;
 			Key = "Quest_Door0";
 			IsCompleted = false;
+			IsWin = false;
 		}
 	}
 
@@ -60,6 +63,7 @@ namespace Game.Quests
 			Type = QuestType.Flower;
 			Key = "Quest_Flower0";
 			IsCompleted = false;
+			IsWin = false;
 		}
 	}
 
@@ -70,6 +74,7 @@ namespace Game.Quests
 			Type = QuestType.Work;
 			Key = "Quest_Computer0";
 			IsCompleted = false;
+			IsWin = false;
 		}
 	}
 

@@ -24,6 +24,7 @@ namespace Game.MiniGames
         private int currentTarget = 0; // Текущая цель (0, 1, 2)
         private int completedZones = 0; // Количество завершенных зон
 
+        public int WinCounter { get; set; } = 3;
 
         [Header("Cooking Settings")]
         public float arcRadius = 150f;
@@ -144,6 +145,7 @@ namespace Game.MiniGames
             else
             {
                 // Промах
+                WinCounter--;                
                 Debug.Log($"❌ Промах! Попытка {usedAttempts}");
             }
 
@@ -178,6 +180,7 @@ namespace Game.MiniGames
                 UpdateInstructionText($"🎯 Попадите в {remainingZones} зон (Попыток: {remainingAttempts})");
             }
         }
+
 
         private void HideCompletedZone(int zoneIndex)
         {
