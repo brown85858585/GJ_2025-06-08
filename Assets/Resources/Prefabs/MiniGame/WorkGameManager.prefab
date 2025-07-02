@@ -158,7 +158,7 @@ MonoBehaviour:
   senderCircleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   acceptButtonColor: {r: 0, g: 1, b: 0, a: 1}
   rejectButtonColor: {r: 1, g: 0, b: 0, a: 1}
-  uiPanel: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c, type: 3}
+  uiPanel: {fileID: 6331291014751302613, guid: ddd3b7f23db64e145a6420d32bbb498c, type: 3}
   gameCards: []
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
@@ -166,6 +166,7 @@ MonoBehaviour:
   stackOffset: {x: 5, y: -5}
   stackScaleReduction: 0.01
   stackAlphaReduction: 0.1
+  cardLockDuration: 1.5
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0
