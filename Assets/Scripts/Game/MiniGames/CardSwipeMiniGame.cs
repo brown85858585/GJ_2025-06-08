@@ -73,10 +73,13 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 {
     if (currentCardPrefab != null)
     {
-        // Создаем ОДИН экземпляр префаба со всем UI
-        var baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
-        var allObjects = baseCardPanel.GetComponentsInChildren<Transform>();
-        
+            // Создаем ОДИН экземпляр префаба со всем UI
+         var baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
+
+         var allObjects = baseCardPanel.GetComponentsInChildren<Transform>();
+
+            currentCardPrefab = baseCardPanel.gameObject;
+            //uiPanel.gameObject. = currentCardPrefab;
         // Находим карточку в префабе
         var cardTransform = allObjects.Where(obj => obj.name.Contains("CurrentCard")).FirstOrDefault();
         if (cardTransform != null)
@@ -478,9 +481,16 @@ private void UpdateCardContent(GameObject card, CardData cardData)
     {
         if (uiPanel != null)
         {
-            
-            acceptButton = uiPanel.ButtonE;
-            rejectButton = uiPanel.ButtonQ;
+           
+            var panal = currentCardPrefab.gameObject;
+            acceptButton = panal.GetComponent("ButtonE") as Button;
+            //acceptButton = panal.transform.Find()?.GetComponent<Button>();
+            rejectButton = panal.GetComponent("ButtonQ") as Button;
+            exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
+            var ss = panal.GetComponentsInChildren<Button>().ToList();
+
+            acceptButton = ss[1];
+            rejectButton = ss[0];
             exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
 
             /*
@@ -881,7 +891,8 @@ private void UpdateCardContent(GameObject card, CardData cardData)
     {
         if (isGameActive && !isProcessingCard && !isCardLocked)
         {
-            StartCoroutine(ForceButtonPress(uiPanel.ButtonE));
+
+            StartCoroutine(ForceButtonPress(rejectButton));
         }
         else if (isCardLocked)
         {
@@ -895,7 +906,7 @@ private void UpdateCardContent(GameObject card, CardData cardData)
     {
         if (isGameActive && !isProcessingCard && !isCardLocked)
         {
-            StartCoroutine(ForceButtonPress(uiPanel.ButtonQ));
+            StartCoroutine(ForceButtonPress(acceptButton));
         }
         else if (isCardLocked)
         {
@@ -906,7 +917,8 @@ private void UpdateCardContent(GameObject card, CardData cardData)
     private IEnumerator ForceButtonPress(Button button)
     {
         if (button == null) yield break;
-        currentCardPrefab.SetActive(false);
+
+        //uiPanel.gameObject
         // Принудительно переводим кнопку в состояние Pressed
         button.targetGraphic.CrossFadeColor(button.colors.pressedColor, 0f, true, true);
 
