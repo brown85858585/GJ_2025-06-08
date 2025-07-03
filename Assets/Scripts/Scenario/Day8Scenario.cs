@@ -1,3 +1,5 @@
+using Cinemachine;
+using Cysharp.Threading.Tasks;
 using Game.Installers;
 using Game.MiniGames.Park;
 using Player;
@@ -31,6 +33,21 @@ namespace Scenario
             Debug.Log("Park Mini Game Started");
             _installer.InputAdapter.SwitchAdapterToMiniGameMode();
             (_installer.PlayerController as PlayerController)?.StartEndRun();
+            StartCamera();
+        }
+
+        private void StartCamera()
+        {
+            var vcam = _installer?.VirtualCamera;
+            
+            vcam.DestroyCinemachineComponent<CinemachineFramingTransposer>();
+
+            vcam.AddCinemachineComponent<CinemachineComposer>();
+
+            UniTask.Delay(30000).ContinueWith(() =>
+            {
+                (_installer.PlayerController as PlayerController)?.StopMovement(true);
+            });
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Game.Installers;
 using Player;
+using UI;
 using UnityEngine;
 using Utilities;
 
@@ -35,10 +36,12 @@ namespace Scenario
         private async UniTask StartScenario()
         {
             _installer.PlayerController.SetFallingAnimation();
-            
+            MainCanvasUi mainCanvasUi = FindObjectOfType<MainCanvasUi>(true);
+            mainCanvasUi.gameObject.SetActive(false);
             _isSlowed = false;
             await UniTask.Delay(5000);
             _installer.NextLevelScenario().Forget();
+            Destroy(gameObject);
         }
         
     }

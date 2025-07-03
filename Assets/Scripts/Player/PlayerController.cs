@@ -104,7 +104,7 @@ namespace Player
             StopMovement(true);
         }
 
-        private void StopMovement(bool isStop)
+        public void StopMovement(bool isStop)
         {
             Debug.Log("Stop Movement: " + isStop);
             _stop = isStop;
@@ -144,8 +144,8 @@ namespace Player
             
             if (_isEndRun)
             {
-                _view.Rigidbody.AddForce( new Vector3(-25, 0, -25), ForceMode.Force);
-                _view.transform.rotation = Quaternion.Euler(0, 225, 0);
+                _view.Rigidbody.AddForce( new Vector3(30, 0, 20), ForceMode.Force);
+                _view.transform.rotation = Quaternion.Euler(0, 25, 0);
             }
             else
             {
