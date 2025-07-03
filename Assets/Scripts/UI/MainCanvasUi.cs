@@ -31,30 +31,6 @@ namespace UI
         {
             btnHelp.onClick.RemoveListener(OnButtonHelpClicked);
         }
-        //private void OnButtonHelpClicked()
-        //{
-        //    isHelpButtonActive = !isHelpButtonActive;
-
-        //    ColorBlock colors = btnHelp.colors;
-
-        //    // Сохраняем текущий highlightedColor перед изменением
-        //    Color savedHighlighted = colors.highlightedColor;
-
-        //    // Меняем только normalColor
-        //    colors.normalColor = isHelpButtonActive ? activeHelpButtonColor : inactiveHelpButtonColor;
-
-        //    // Восстанавливаем исходный highlightedColor
-        //    colors.highlightedColor = savedHighlighted;
-
-        //    btnHelp.colors = colors;
-
-        //    helpButtonText.color = isHelpButtonActive ? Color.white : Color.black;
-
-        //    if (isHelpButtonActive)
-        //        ShowTextPanel();
-        //    else
-        //        HideTextPanel();
-        //}
 
         private void OnButtonHelpClicked()
         {
@@ -65,45 +41,16 @@ namespace UI
 
             // Устанавливаем нужные цвета
             cb.normalColor = isHelpButtonActive ? activeNormalColor : inactiveNormalColor;
-            cb.highlightedColor = highlightedColor; // Фиксируем цвет наведения
-            cb.pressedColor = cb.normalColor * 0.8f; // Автоматическое затемнение при нажатии
+            cb.highlightedColor = highlightedColor;
+            cb.pressedColor = cb.normalColor * 0.8f;
 
-            // Важно! Сначала применить colors, потом менять другие параметры
             btnHelp.colors = cb;
-
-            // Обновляем визуальное состояние кнопки
-            btnHelp.GetComponent<Image>().color = cb.normalColor;
 
             // Меняем цвет текста
             helpButtonText.color = isHelpButtonActive ? Color.white : Color.black;
 
             // Управление панелью
             hintTextPanel.SetActive(isHelpButtonActive);
-        }
-        private void ShowTextPanel()
-        {
-            Debug.Log("ShowTextPanel");
-
-            if (hintTextPanel == null)
-            {
-                Debug.Log("hintTextPanel not found!");
-                return;
-            }
-
-            hintTextPanel.SetActive(true);
-        }
-
-        private void HideTextPanel()
-        {
-            Debug.Log("HideTextPanel");
-
-            if (hintTextPanel == null)
-            {
-                Debug.Log("hintTextPanel not found!");
-                return;
-            }
-
-            hintTextPanel.SetActive(false);
         }
     }
 }
