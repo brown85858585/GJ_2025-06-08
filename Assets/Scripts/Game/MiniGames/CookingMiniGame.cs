@@ -59,6 +59,9 @@ namespace Game.MiniGames
 
         private Coroutine moveKnifeRoutine = null;
 
+        private float tolerance = 15f;
+
+
         private void SetupMultipleWinZones()
         {
             for (int i = 0; i < 3; i++)
@@ -83,13 +86,41 @@ namespace Game.MiniGames
             UpdateInstructionText($"{maxGameAttempts - usedAttempts}");
         }
 
+
+        private float CalculateToleranceForZone(int zoneIndex)
+        {
+            if (zoneIndex < 0 || zoneIndex >= winZones.Length || winZones[zoneIndex] == null)
+                return 15f; // Fallback
+
+            // Получаем ширину зоны
+            RectTransform zoneRect = winZones[zoneIndex].rectTransform;
+            float zoneWidth = zoneRect.sizeDelta.x;
+
+            // Радиус окружности (расстояние от центра до ножа)
+            float radius = arcRadius; // или получить динамически
+
+            // Вычисляем угол, который занимает зона
+            // Формула: угол = (ширина_зоны / радиус) * (180 / π)
+            float angleInRadians = zoneWidth / radius;
+            float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
+
+            // Tolerance = половина углового размера зоны
+            float tolerance = angleInDegrees * 0.5f;
+
+            Debug.Log($"Зона {zoneIndex}: ширина={zoneWidth}, радиус={radius}, угол={angleInDegrees:F1}°, tolerance={tolerance:F1}°");
+
+            return tolerance;
+        }
+
         private int CheckCurrentZone()
         {
-            float tolerance = 15f;
+         
 
             // Проверяем попадание в любую из НЕ завершенных зон
             for (int i = 0; i < targetAngles.Length; i++)
             {
+                tolerance = CalculateToleranceForZone(i);
+
                 if (!zoneCompleted[i]) // Зона еще не выполнена
                 {
                     float targetAngle = targetAngles[i];
@@ -303,14 +334,20 @@ namespace Game.MiniGames
         // Обновленная проверка попадания в любую из 3 зон
         protected override string CheckResult()
         {
-            float tolerance = 15f; // Допустимое отклонение
+            
 
             for (int i = 0; i < targetAngles.Length; i++)
             {
-                if (winZones[i] != null && Mathf.Abs(currentAngle - targetAngles[i]) <= tolerance)
+                if (winZones[i] != null)
                 {
-                    Debug.Log($"✅ Попадание в WinZone {i + 1}! Угол: {targetAngles[i]}");
-                    return "success";
+                    var whidth = winZones[i].minWidth;
+
+                    if (Mathf.Abs(currentAngle - targetAngles[i]) <= tolerance)
+                    {
+                        Debug.Log($"✅ Попадание в WinZone {i + 1}! Угол: {targetAngles[i]}");
+                        return "success";
+                    }
+
                 }
             }
 
