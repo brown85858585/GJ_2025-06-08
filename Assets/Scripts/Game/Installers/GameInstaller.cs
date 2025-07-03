@@ -118,6 +118,7 @@ namespace Game.Installers
             var playerView = playerObj.GetComponent<PlayerView>();
             _logic.PlayerController.InitView(playerView);
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
+            _levelManager.OnNextLevelLoaded += _logic.PlayerController.SwitchHead;
         }
 
         private void InitStartWakeUp()
