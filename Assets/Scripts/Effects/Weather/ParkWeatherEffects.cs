@@ -78,24 +78,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     private Coroutine _parkLightningRoutine = null;
     private Coroutine _lightningFlashParkRoutine = null;
 
-    //private GameObject _windowClearNoon;
-    //private GameObject _windowFoggyMorning;
-    //private GameObject _windowCloudy;
-    //private GameObject _windowOvercast;
-    //private GameObject _windowHeavyRain;
-    //private GameObject _windowThunderstorm;
-    //private GameObject _windowClearMorning;
-
-    private void Start()
-    {
-        //_windowClearNoon = GameObject.FindGameObjectWithTag("WindowClearNoon");
-        //_windowFoggyMorning = GameObject.FindGameObjectWithTag("WindowFoggyMorning");
-        //_windowCloudy = GameObject.FindGameObjectWithTag("WindowCloudy");
-        //_windowOvercast = GameObject.FindGameObjectWithTag("WindowOvercast");
-        //_windowHeavyRain = GameObject.FindGameObjectWithTag("WindowHeavyRain");
-        //_windowThunderstorm = GameObject.FindGameObjectWithTag("WindowThunderstorm");
-        //_windowClearMorning = GameObject.FindGameObjectWithTag("WindowClearMorning");
-    }
     private void OnDestroy()
     {
         ResetAllEffects();
@@ -148,70 +130,35 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _txtClearNoon.gameObject.SetActive(false);
         }
 
-        //if (_windowClearNoon != null)
-        //{
-        //    _windowClearNoon.gameObject.SetActive(false);
-        //}
-
         if (_txtFoggyMorning != null)
         {
             _txtFoggyMorning.gameObject.SetActive(false);
         }
-
-        //if (_windowFoggyMorning != null)
-        //{
-        //    _windowFoggyMorning.gameObject.SetActive(false);
-        //}
 
         if (_txtCloudy != null)
         {
             _txtCloudy.gameObject.SetActive(false);
         }
 
-        //if (_windowCloudy != null)
-        //{
-        //    _windowCloudy.gameObject.SetActive(false);
-        //}
-
         if (_txtOvercast != null)
         {
             _txtOvercast.gameObject.SetActive(false);
         }
-
-        //if (_windowOvercast != null)
-        //{
-        //    _windowOvercast.gameObject.SetActive(false);
-        //}
 
         if (_txtHeavyRain != null)
         {
             _txtHeavyRain.gameObject.SetActive(false);
         }
 
-        //if (_windowHeavyRain != null)
-        //{
-        //    _windowHeavyRain.gameObject.SetActive(false);
-        //}
-
         if (_txtThunderstorm != null)
         {
             _txtThunderstorm.gameObject.SetActive(false);
         }
 
-        //if (_windowThunderstorm != null)
-        //{
-        //    _windowThunderstorm.gameObject.SetActive(false);
-        //}
-
         if (_txtClearMorning != null)
         {
             _txtClearMorning.gameObject.SetActive(false);
         }
-
-        //if (_windowClearMorning != null)
-        //{
-        //    _windowClearMorning.gameObject.SetActive(false);
-        //}
 
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -269,11 +216,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _txtClearNoon.gameObject.SetActive(true);
         }
 
-        //if (_windowClearNoon != null)
-        //{
-        //    _windowClearNoon.gameObject.SetActive(true);
-        //}
-
         if (_w1_SkyboxMaterial != null)
         {
             RenderSettings.skybox = _w1_SkyboxMaterial;
@@ -302,11 +244,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         {
             _txtFoggyMorning.gameObject.SetActive(true);
         }
-
-        //if (_windowFoggyMorning != null)
-        //{
-        //    _windowFoggyMorning.gameObject.SetActive(true);
-        //}
 
         if (_w2_SkyboxMaterial)
         {
@@ -338,11 +275,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _txtCloudy.gameObject.SetActive(true);
         }
 
-        //if (_windowCloudy != null)
-        //{
-        //    _windowCloudy.gameObject.SetActive(true);
-        //}
-
         if (_w3_SkyboxMaterial)
         {
             RenderSettings.skybox = _w3_SkyboxMaterial;
@@ -372,11 +304,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _txtOvercast.gameObject.SetActive(true);
         }
 
-        //if (_windowOvercast != null)
-        //{
-        //    _windowOvercast.gameObject.SetActive(true);
-        //}
-
         if (_w4_SkyboxMaterial)
         {
             RenderSettings.skybox = _w4_SkyboxMaterial;
@@ -405,11 +332,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         {
             _txtHeavyRain.gameObject.SetActive(true);
         }
-
-        //if (_windowHeavyRain != null)
-        //{
-        //    _windowHeavyRain.gameObject.SetActive(true);
-        //}
 
         if (_w5_SkyboxMaterial)
         {
@@ -444,11 +366,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         {
             _txtThunderstorm.gameObject.SetActive(true);
         }
-
-        //if (_windowThunderstorm != null)
-        //{
-        //    _windowThunderstorm.gameObject.SetActive(true);
-        //}
 
         if (_w6_SkyboxMaterial)
         {
@@ -497,11 +414,6 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _txtClearMorning.gameObject.SetActive(true);
         }
 
-        //if (_windowClearMorning != null)
-        //{
-        //    _windowClearMorning.gameObject.SetActive(true);
-        //}
-
         if (_w7_SkyboxMaterial)
         {
             RenderSettings.skybox = _w7_SkyboxMaterial;
@@ -547,7 +459,7 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             StopCoroutine(_lightningFlashParkRoutine);
         }
 
-        if (_directionalLight != null)
+        if (parkLightning != null)
         {
             _lightningFlashParkRoutine = StartCoroutine(LightningFlashParkRoutine(parkLightning));
         }
