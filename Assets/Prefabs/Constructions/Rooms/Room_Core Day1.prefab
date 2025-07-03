@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 2021931254209527203, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
       propertyPath: m_Name
-      value: Room_Core Variant
+      value: Room_Core Day1
       objectReference: {fileID: 0}
     - target: {fileID: 3312535793334060372, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
@@ -38,10 +38,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 16.548996
       objectReference: {fileID: 0}
+    - target: {fileID: 4120796857445230565, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120796857445230565, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120796857445230565, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4860422308079698639, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5346434717799920643, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
@@ -71,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 7681018520588866865, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8849465179124743606, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
