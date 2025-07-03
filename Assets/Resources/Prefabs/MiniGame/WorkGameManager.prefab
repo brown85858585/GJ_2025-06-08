@@ -164,12 +164,14 @@ MonoBehaviour:
     type: 3}
   enableTypingEffect: 1
   headerTypingSpeed: 0
-  contentTypingSpeed: 0.1
+  contentTypingSpeed: 0.04
   visibleCardsInStack: 4
   stackOffset: {x: 16, y: -16}
   stackScaleReduction: 0
-  stackAlphaReduction: 3
   cardLockDuration: 1.5
+  feedbackIconDuration: 1
+  successColor: {r: 0, g: 1, b: 0, a: 1}
+  failureColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0
