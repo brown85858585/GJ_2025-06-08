@@ -171,12 +171,7 @@ namespace Game.Installers
             //todo ! for debug
             if (category == ItemCategory.Bed && !_allQuestsCompleted)
             {
-                
                 _scenario.NextLevelScenario().Forget();
-                async UniTask ScenarioNext()
-                {
-                    await _scenario.NextLevelScenario();
-                }
             }
         }
 

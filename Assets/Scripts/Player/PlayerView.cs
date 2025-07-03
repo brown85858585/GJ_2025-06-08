@@ -13,6 +13,7 @@ namespace Player
         private static readonly int PositionX = Animator.StringToHash("PositionX");
         private static readonly int PositionY = Animator.StringToHash("PositionY");
         private static readonly int IsFalling = Animator.StringToHash("Falling");
+        private static readonly int IsExit = Animator.StringToHash("Exit");
 
         [SerializeField] private Animator animator;
         [SerializeField] private Transform playerObject;
@@ -42,6 +43,7 @@ namespace Player
 
         private Transform _saveCurrentObj;
         private bool _moveSavedObject;
+        private Coroutine _resetCorutine;
 
         private const float dampTime = 0.1f;
 
@@ -77,7 +79,25 @@ namespace Player
         public void WakeUpAnimationEnded()
         {
             OnWakeUpEnded?.Invoke();
-            StartCoroutine(ResetPlayerObjectTransform());
+            ResetPlayerObj();
+        }
+
+        public void ResetPlayerObj()
+        {
+            transform.localPosition = new Vector3(
+                transform.localPosition.x + playerObject.localPosition.x,
+                0,
+                transform.localPosition.z + playerObject.localPosition.z
+            );
+            Debug.Log( "ResetPlayerObjectTransform called, new position: " + transform.localPosition);
+            playerObject.localPosition = new Vector3(0, 0, 0);
+
+            GetComponent<CapsuleCollider>().enabled = true;
+            Rigidbody.useGravity = true;
+            //
+            //
+            // if(_resetCorutine != null) StopCoroutine(_resetCorutine);
+            // _resetCorutine =  StartCoroutine(ResetPlayerObjectTransform());
         }
 
         IEnumerator ResetPlayerObjectTransform()
@@ -89,11 +109,13 @@ namespace Player
                 0,
                 transform.localPosition.z + playerObject.localPosition.z
              );
-
+            Debug.Log( "ResetPlayerObjectTransform called, new position: " + transform.localPosition);
             playerObject.localPosition = new Vector3(0, 0, 0);
 
             GetComponent<CapsuleCollider>().enabled = true;
             Rigidbody.useGravity = true;
+            
+            StopCoroutine(_resetCorutine);
         }
         private void FixedUpdate()
         {
@@ -173,6 +195,11 @@ namespace Player
         public void SetTriggerFalling()
         {
             animator.SetTrigger(IsFalling);
+        }
+
+        public void SetExitAnimation()
+        {
+            animator.SetTrigger(IsExit);
         }
     }
 }

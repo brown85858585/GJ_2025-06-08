@@ -30,30 +30,7 @@ namespace Player
         private float _acceleratedSpeed;
         private bool _stop;
 
-        public void ToggleMovement()
-        {
-            _isRunMovement = !_isRunMovement;
-            if (_isRunMovement)
-            {
-                _normalSpeed = _view.RunSpeed;
-                _acceleratedSpeed = _view.SprintSpeed;
-                
-                // _movement.VirtualCamera.
-            }
-            else
-            {
-                _normalSpeed = _view.MoveSpeed;
-                _acceleratedSpeed = _view.RunSpeed;
-            }
-        }
-
-        public void SetFallingAnimation()
-        {
-            Debug.Log("Falling");
-            _view.SetTriggerFalling();
-            _stop = true;
-        }
-
+       
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
@@ -102,6 +79,43 @@ namespace Player
             {
                 _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
             }
+        }
+        public void ToggleMovement()
+        {
+            _isRunMovement = !_isRunMovement;
+            if (_isRunMovement)
+            {
+                _normalSpeed = _view.RunSpeed;
+                _acceleratedSpeed = _view.SprintSpeed;
+                
+                // _movement.VirtualCamera.
+            }
+            else
+            {
+                _normalSpeed = _view.MoveSpeed;
+                _acceleratedSpeed = _view.RunSpeed;
+            }
+        }
+        public void SetFallingAnimation()
+        {
+            Debug.Log("Falling");
+            _view.SetTriggerFalling();
+            StopMovement(true);
+        }
+
+        private void StopMovement(bool isStop)
+        {
+            Debug.Log("Stop Movement: " + isStop);
+            _stop = isStop;
+        }
+        
+        public void ResetPlayer()
+        {
+            _normalSpeed = _view.MoveSpeed;
+            _acceleratedSpeed = _view.RunSpeed;
+            StopMovement(false);
+            _view.SetExitAnimation();
+            _view.ResetPlayerObj();
         }
 
         public void ClampSpeed()

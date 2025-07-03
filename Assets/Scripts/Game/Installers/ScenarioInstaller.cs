@@ -48,8 +48,6 @@ namespace Game.Installers
             _inputAdapter.SwitchAdapterToMiniGameMode();
             
             _monologSystem.TryOpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
-            // Старт Анимации
-                    
             await UniTask.Delay(1000);
             _monologSystem.CloseDialogue();
             var fadeTimer = 1100;
@@ -60,11 +58,18 @@ namespace Game.Installers
                 CancellationToken.None);
             await _intertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
                 CancellationToken.None);
+
+            PlayerReset();
             
             
             ActionNextLevel?.Invoke();
         }
 
+        public void PlayerReset()
+        {
+            (_playerController as PlayerController)?.ResetPlayer();
+        }
+        
         private void OnDestroy()
         {
             ActionNextLevel = null;

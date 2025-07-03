@@ -10,6 +10,7 @@ namespace Scenario
     public class Day7FallingScenario : MonoBehaviour
     {
         private ScenarioInstaller _installer;
+        private bool _isSlowed = true;
 
         private void Awake()
         {
@@ -18,7 +19,8 @@ namespace Scenario
 
         private void Update()
         {
-            (_installer.PlayerController as PlayerController)?.ClampSpeed();
+            if (_isSlowed)
+                (_installer.PlayerController as PlayerController)?.ClampSpeed();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,8 +36,10 @@ namespace Scenario
         {
             _installer.PlayerController.SetFallingAnimation();
             
+            _isSlowed = false;
             await UniTask.Delay(5000);
-            _installer.NextLevelScenario();
+            _installer.NextLevelScenario().Forget();
         }
+        
     }
 }
