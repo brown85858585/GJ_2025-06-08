@@ -614,12 +614,12 @@ private void CreateCardStack(GameObject originalCard)
             acceptButton = panal.GetComponent("ButtonE") as Button;
             //acceptButton = panal.transform.Find()?.GetComponent<Button>();
             rejectButton = panal.GetComponent("ButtonQ") as Button;
-            exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
+           // exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
             var _baseButton = panal.GetComponentsInChildren<Button>().ToList();
 
             acceptButton = _baseButton[1];
             rejectButton = _baseButton[0];
-            exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
+          //  exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
 
 
    
@@ -741,8 +741,8 @@ private void CreateCardStack(GameObject originalCard)
         startButton = CreateButton("StartButton", "Начать работу (Пробел)", new Vector2(-200, 0), new Color(0.2f, 0.8f, 0.2f), new Vector2(300, 100), startScreen.transform, 24);
         startButton.onClick.AddListener(StartGame);
 
-        Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(200, 0), Color.gray, new Vector2(300, 100), startScreen.transform, 24);
-        startExitButton.onClick.AddListener(ExitMiniGame);
+        //Button startExitButton = CreateButton("StartExitButton", "Выход", new Vector2(200, 0), Color.gray, new Vector2(300, 100), startScreen.transform, 24);
+        //startExitButton.onClick.AddListener(ExitMiniGame);
     }
 
     protected override void CreateGameScreen()
@@ -759,7 +759,7 @@ private void CreateCardStack(GameObject originalCard)
 
         CreateCardInterface();
         SetupPrefabButtons();
-        CreateGameButtons();
+        //CreateGameButtons();
         CreateStatusTexts();
     }
 
