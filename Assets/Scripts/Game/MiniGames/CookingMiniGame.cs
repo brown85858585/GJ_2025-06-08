@@ -139,6 +139,7 @@ namespace Game.MiniGames
                     Debug.Log("🎉 Все зоны выполнены! Победа!");
                     isGameActive = false;
                     //UpdateInstructionText("🎉 Отлично! Все зоны выполнены!");
+                    UpdateInstructionText("0");
                     OnGameAttempt?.Invoke(true);
                     model.Score += 150;
                     StartCoroutine(ShowResultAndEnd(2f));
@@ -164,11 +165,13 @@ namespace Game.MiniGames
                 if (isVictory)
                 {
                     //UpdateInstructionText("🎉 Победа! Все зоны выполнены!");
+                    UpdateInstructionText("0");
                     OnGameAttempt?.Invoke(true);
                 }
                 else
                 {
                     //UpdateInstructionText($"⏰ Попытки закончились! Выполнено: {completedZones}/3 зон");
+                    UpdateInstructionText("0");
                     OnGameAttempt?.Invoke(false);
                     //model.Score += completedZones * 25;
                 }
