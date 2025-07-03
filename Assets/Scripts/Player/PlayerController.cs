@@ -29,6 +29,7 @@ namespace Player
         private float _normalSpeed;
         private float _acceleratedSpeed;
         private bool _stop;
+        private bool _isEndRun;
 
        
         public PlayerModel Model => _model;
@@ -131,6 +132,7 @@ namespace Player
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             Vector3 move;
+            Quaternion newRotation;
             if (_input.IsAccelerating)
             {
                 move = Movement.Move(_acceleratedSpeed, _view.StaminaDecreaseMultiplayer);
@@ -139,11 +141,20 @@ namespace Player
             {
                 move = Movement.Move(_normalSpeed, _view.StaminaDecreaseMultiplayer);
             }
-            _view.Rigidbody.AddForce(move, ForceMode.Force);
-            var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
-            _view.transform.rotation = newRotation;
+            
+            if (_isEndRun)
+            {
+                _view.Rigidbody.AddForce( new Vector3(-25, 0, -25), ForceMode.Force);
+                _view.transform.rotation = Quaternion.Euler(0, 225, 0);
+            }
+            else
+            {
+                _view.Rigidbody.AddForce(move, ForceMode.Force);
+            }
             
             _view.SetWalkAnimation(_input.Direction.normalized);
+            newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
+            _view.transform.rotation = newRotation;
         }
 
         public void SetPosition( Vector3 position)
@@ -182,6 +193,11 @@ namespace Player
         {
             _model.ItemInHand = ItemCategory.None;
             _view.PutTheItemDown();
+        }
+
+        public void StartEndRun()
+        {
+            _isEndRun = true;
         }
     }
 }

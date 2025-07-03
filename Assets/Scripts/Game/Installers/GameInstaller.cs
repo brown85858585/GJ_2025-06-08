@@ -44,6 +44,7 @@ namespace Game.Installers
         private MainCanvasUi _mainCanvas;
         private MonologSystem _monologSystem;
         private ScenarioInstaller _scenario;
+        private CinemachineVirtualCamera _vCam;
 
         private void Awake()
         {
@@ -100,6 +101,7 @@ namespace Game.Installers
                 _levelManager, 
                 _effectAccumulator,
                 _core.IntertitleSystem,
+                _vCam,
                 LoadNextLevel);
         }
 
@@ -126,9 +128,9 @@ namespace Game.Installers
         private void InitCamera()
         {
             _virtualCamera = Instantiate(virtualCameraPrefab, transform.parent);
-            var vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
-            vCam.Follow = _core.PlayerModel.PlayerTransform;
-            vCam.LookAt = _core.PlayerModel.PlayerTransform;
+            _vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
+            _vCam.Follow = _core.PlayerModel.PlayerTransform;
+            _vCam.LookAt = _core.PlayerModel.PlayerTransform;
             
 
             var cameraDependence = _virtualCamera.GetComponent<CameraDependence>();
@@ -138,7 +140,7 @@ namespace Game.Installers
             var cameraRotation = _virtualCamera.GetComponent<CameraRotation>();
             cameraRotation.Initialization(_core.InputAdapter, _virtualCamera.transform);
             var cameraZoom = _virtualCamera.GetComponent<SmoothZoomController>();
-            cameraZoom.Initialization(_core.InputAdapter, vCam);
+            cameraZoom.Initialization(_core.InputAdapter, _vCam);
             
             _logic.PlayerController.CamTransform = _virtualCamera.transform;
             KeepConstantScreenSize[] allComponents = FindObjectsOfType<KeepConstantScreenSize>(true); // true - ������� ����������

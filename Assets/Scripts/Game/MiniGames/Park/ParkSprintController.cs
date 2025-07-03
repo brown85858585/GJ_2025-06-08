@@ -10,7 +10,6 @@ namespace Game.MiniGames
         private readonly ParkLevelView _parkLevelView;
         private readonly IPlayerController _playerController;
 
-        private int _staminaMultiplyer = 40;
         private int _staminaMax = 10000;
         private float _floatDelta = 0.001f;
         private int _staminaForRing = 2000;
@@ -53,7 +52,7 @@ namespace Game.MiniGames
 
             _isFirstStaminaUpdateView = false;
 
-            _playerController.Model.Stamina -= (int)(_playerController.Movement.NormalizedSpeed * _staminaMultiplyer);
+            _playerController.Model.Stamina -= (int)(_playerController.Movement.NormalizedSpeed * _parkLevelView.StaminaMultiplyer);
 
             _parkLevelView.UpdateStaminaView(_playerController.Model.Stamina);
 

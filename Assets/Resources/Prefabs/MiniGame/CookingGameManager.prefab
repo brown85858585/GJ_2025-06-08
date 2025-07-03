@@ -119,6 +119,8 @@ MonoBehaviour:
   panel: {fileID: 8012524612185898012}
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
+  actionQInputAction: {fileID: -7160357943707471078, guid: ec95c81ab2256c2449dbb762867506a9,
+    type: 3}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   arcImage: {fileID: 0}
@@ -144,12 +146,12 @@ MonoBehaviour:
   - {fileID: 6999308029474351358, guid: 5bedfdc4f08a70a4e8026a5d6191ebd9, type: 3}
   - {fileID: 6999308029474351358, guid: 638a81b62619b3543a94626a58fa76b4, type: 3}
   - {fileID: 6999308029474351358, guid: dba8be04e09253e4c9bc376fbe97f889, type: 3}
+  - {fileID: 6999308029474351358, guid: 8fd3c1183ef325e48bb28f3996844646, type: 3}
   arcRadius: 150
   arcStartAngle: 200
   arcEndAngle: 340
   successZoneAngle: 44
   arcColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  successZoneColor: {r: 0, g: 1, b: 0, a: 1}
   indicatorColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &8012524612185898012
 GameObject:

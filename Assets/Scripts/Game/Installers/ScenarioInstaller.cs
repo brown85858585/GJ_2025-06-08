@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects;
 using Game.Intertitles;
@@ -18,8 +19,11 @@ namespace Game.Installers
         private LevelManager _levelManager;
         private EffectAccumulatorView _effectAccumulator;
         private IntertitleSystem _intertitleSystem;
+        private CinemachineVirtualCamera _virtualCamera;
 
         public IPlayerController PlayerController => _playerController;
+        public CinemachineVirtualCamera VirtualCamera => _virtualCamera;
+        public InputAdapter InputAdapter => _inputAdapter;
         private event Action ActionNextLevel;
 
         private void Awake()
@@ -32,6 +36,7 @@ namespace Game.Installers
             MonologSystem monologSystem, LevelManager levelManager,
             EffectAccumulatorView effectAccumulator,
             IntertitleSystem intertitleSystem,
+            CinemachineVirtualCamera virtualCamera,
             Action loadNextLevel)
         {
             _playerController = logicPlayerController;
@@ -40,6 +45,7 @@ namespace Game.Installers
             _levelManager = levelManager;
             _effectAccumulator = effectAccumulator;
             _intertitleSystem = intertitleSystem;
+            _virtualCamera = virtualCamera;
             ActionNextLevel += loadNextLevel;
         }
 
