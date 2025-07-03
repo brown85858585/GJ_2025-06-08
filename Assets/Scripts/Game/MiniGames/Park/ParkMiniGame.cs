@@ -96,7 +96,7 @@ namespace Game.MiniGames
 
         public void Dispose()
         {
-            Object.Destroy(_parkLevelView);
+            Object.Destroy(_parkLevelView.gameObject);
             _parkSprintController?.Dispose();
             //TODO: Implement Dispose logic if needed
         }

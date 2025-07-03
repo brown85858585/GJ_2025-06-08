@@ -117,10 +117,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 6021685621929793975}
   panel: {fileID: 8012524612185898012}
-  actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
-    type: 3}
-  startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
-    type: 3}
+  actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9, type: 3}
+  actionQInputAction: {fileID: -7160357943707471078, guid: ec95c81ab2256c2449dbb762867506a9, type: 3}
+  startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9, type: 3}
   arcImage: {fileID: 0}
   successZoneImage: {fileID: 0}
   trackImage: {fileID: 0}
@@ -134,8 +133,7 @@ MonoBehaviour:
   indicatorSpeed: 25
   maxAttempts: 3
   gameScore: 0
-  currentCookingViewPrefab: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
-    type: 3}
+  currentCookingViewPrefab: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493, type: 3}
   cookingViewPrefabs:
   - {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493, type: 3}
   - {fileID: 6999308029474351358, guid: 52b34cd6bcea13c468496ce4e1abdbcc, type: 3}
@@ -144,12 +142,12 @@ MonoBehaviour:
   - {fileID: 6999308029474351358, guid: 5bedfdc4f08a70a4e8026a5d6191ebd9, type: 3}
   - {fileID: 6999308029474351358, guid: 638a81b62619b3543a94626a58fa76b4, type: 3}
   - {fileID: 6999308029474351358, guid: dba8be04e09253e4c9bc376fbe97f889, type: 3}
+  - {fileID: 6999308029474351358, guid: 8fd3c1183ef325e48bb28f3996844646, type: 3}
   arcRadius: 150
   arcStartAngle: 200
   arcEndAngle: 340
   successZoneAngle: 44
   arcColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  successZoneColor: {r: 0, g: 1, b: 0, a: 1}
   indicatorColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &8012524612185898012
 GameObject:
@@ -294,8 +292,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b8825e090e756f64e86a6405ee529aaf, type: 2}
+  m_sharedMaterial: {fileID: 6917078508901870437, guid: b8825e090e756f64e86a6405ee529aaf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -1,4 +1,7 @@
 testKey,Test
+Button_Start,Play
+Button_Setting,Settings
+Button_Exit,Quit
 Settings_Header,Settings
 Settings_Music,Music
 Settings_Sounds,Sounds
@@ -33,12 +36,15 @@ Day3_Awakening,"Sleep didn’t help.
 I just need to start moving."
 Day4_Awakening,Feels like this body isn’t mine.
 Day5_Awakening,Everything feels so heavy…
+Day6_Awakening,...
 Day1_Sleep,"Wish I could just
 get some real sleep."
 Day2_Sleep,Can’t get it out of my head.
 Day3_Sleep,What if tomorrow’s worse?
 Day4_Sleep,"Please,
 just make it all stop."
+Day5_Sleep,...
+Day6_Sleep,...
 Day1_Door_Win,"Got a bit more energy
 after the run."
 Day1_Door_Defeat,No time to keep going.
@@ -526,13 +532,13 @@ Day5_CardHeader13,—
 Day5_CardContent13,Stay strong!
 Day5_CardHeader14,—
 Day5_CardContent14,Stay strong!
-Day1_LoadHeader0,Week 1
-Day1_LoadBody0,"You know, I was always rushing somewhere.
-Afraid I’d fall behind.
-Every day felt like the same
+Day1_LoadHeader0,One week before...
+Day1_LoadBody0,"You know, I was always rushing somewhere."
+Day1_LoadBody1,Afraid I’d fall behind.
+Day1_LoadBody2,"Every day felt like the same
 repeating cycle…"
 Day2_Results0,Public utilities:
-Day2_LoadHeader0,Week 2
+Day2_LoadHeader0,Week 1
 Day2_LoadBody0,"...and that cycle would’ve kept looping forever
 if not for one but."
 Day3_Results0,Public utilities:
@@ -544,24 +550,25 @@ Day4_Results0,Public utilities:
 Day4_Results1,Medical examination:
 Day4_Results2,Therapy:
 Day4_LoadHeader0,Week 8
-Day4_LoadBody0,"My head was a mess. Like wild birds crashing around.
-I couldn’t stop it.
-Work helped — gave me something else to focus on."
+Day4_LoadBody0,My head was a mess. Like wild birds crashing around.
+Day4_LoadBody1,I couldn’t stop it.
+Day4_LoadBody2,Work helped — gave me something else to focus on.
 Day5_Results0,Public utilities:
 Day5_Results1,Medical examination:
 Day5_Results2,Therapy:
 Day5_Results3,Штрафы:
 Day5_LoadHeader0,Week 9
-Day5_LoadBody0,"There were days when I wondered why I was even trying.
-I barely had the strength to do anything at all."
+Day5_LoadBody0,There were days when I wondered why I was even trying.
+Day5_LoadBody1,I barely had the strength to do anything at all.
 Day6_Results0,Therapy:
 Day6_LoadHeader0,Week 14
-Day6_LoadBody0,But what scared me most was when my mind just… stopped working.
+Day6_LoadBody0,But what scared me most was when my mind just…
+Day6_LoadBody1,stopped working.
 Day7_LoadHeader0,Week 16
-Day7_LoadBody0,"Everyone kept saying I was getting better...
-But I was getting more and more scared."
-Final_Phrase,"I went through it alone.
-But if things ever get hard for you — don’t rush to expect the worst.
-Think about this instead: maybe it’s a way out.
-A way to break the cycle.
-And finally find peace with your real self. No masks."
+Day7_LoadBody0,Everyone kept saying I was getting better...
+Day7_LoadBody1,But I was getting more and more scared.
+Final_Phrase0,I went through it alone.
+Final_Phrase1,But if things ever get hard for you — don’t rush to expect the worst.
+Final_Phrase2,Think about this instead: maybe it’s a way out.
+Final_Phrase3,A way to break the cycle.
+Final_Phrase4,And finally find peace with your real self. No masks.

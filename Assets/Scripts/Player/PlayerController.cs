@@ -28,23 +28,10 @@ namespace Player
         
         private float _normalSpeed;
         private float _acceleratedSpeed;
-        public void ToggleMovement()
-        {
-            _isRunMovement = !_isRunMovement;
-            if (_isRunMovement)
-            {
-                _normalSpeed = _view.RunSpeed;
-                _acceleratedSpeed = _view.SprintSpeed;
-                
-                // _movement.VirtualCamera.
-            }
-            else
-            {
-                _normalSpeed = _view.MoveSpeed;
-                _acceleratedSpeed = _view.RunSpeed;
-            }
-        }
+        private bool _stop;
+        private bool _isEndRun;
 
+       
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
@@ -79,7 +66,6 @@ namespace Player
 
         private void InputOn()
         {
-            _view.OnWakeUpEnded -= InputOn;
             _input.SwitchAdapterToGlobalMode();
         }
 
@@ -95,13 +81,58 @@ namespace Player
                 _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
             }
         }
+        public void ToggleMovement()
+        {
+            _isRunMovement = !_isRunMovement;
+            if (_isRunMovement)
+            {
+                _normalSpeed = _view.RunSpeed;
+                _acceleratedSpeed = _view.SprintSpeed;
+                
+                // _movement.VirtualCamera.
+            }
+            else
+            {
+                _normalSpeed = _view.MoveSpeed;
+                _acceleratedSpeed = _view.RunSpeed;
+            }
+        }
+        public void SetFallingAnimation()
+        {
+            Debug.Log("Falling");
+            _view.SetTriggerFalling();
+            StopMovement(true);
+        }
+
+        public void StopMovement(bool isStop)
+        {
+            Debug.Log("Stop Movement: " + isStop);
+            _stop = isStop;
+        }
+        
+        public void ResetPlayer()
+        {
+            _normalSpeed = _view.MoveSpeed;
+            _acceleratedSpeed = _view.RunSpeed;
+            StopMovement(false);
+            _view.SetExitAnimation();
+            _view.ResetPlayerObj();
+        }
+
+        public void ClampSpeed()
+        {
+             _normalSpeed = 18f;
+             _acceleratedSpeed = 19f;
+        }
 
         private void FixedUpdateMove()
         {
+            if(_stop) return;
             Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 
             Vector3 move;
+            Quaternion newRotation;
             if (_input.IsAccelerating)
             {
                 move = Movement.Move(_acceleratedSpeed, _view.StaminaDecreaseMultiplayer);
@@ -110,11 +141,20 @@ namespace Player
             {
                 move = Movement.Move(_normalSpeed, _view.StaminaDecreaseMultiplayer);
             }
-            _view.Rigidbody.AddForce(move, ForceMode.Force);
-            var newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
-            _view.transform.rotation = newRotation;
+            
+            if (_isEndRun)
+            {
+                _view.Rigidbody.AddForce( new Vector3(30, 0, 20), ForceMode.Force);
+                _view.transform.rotation = Quaternion.Euler(0, 25, 0);
+            }
+            else
+            {
+                _view.Rigidbody.AddForce(move, ForceMode.Force);
+            }
             
             _view.SetWalkAnimation(_input.Direction.normalized);
+            newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
+            _view.transform.rotation = newRotation;
         }
 
         public void SetPosition( Vector3 position)
@@ -153,6 +193,11 @@ namespace Player
         {
             _model.ItemInHand = ItemCategory.None;
             _view.PutTheItemDown();
+        }
+
+        public void StartEndRun()
+        {
+            _isEndRun = true;
         }
     }
 }

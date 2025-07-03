@@ -112,9 +112,6 @@ namespace Game.MiniGames
             if (game.Count > 0)
                 game.First().Value.IsCompleted = true;
 
-
-            //        var ss = _factories.TryGetValue((ItemCategory)questType, out var Game);
-
             if (questType != Quests.QuestType.Sprint)
             {
                 var playerController = (_playerController as PlayerController);
