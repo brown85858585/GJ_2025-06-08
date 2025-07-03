@@ -13,6 +13,6 @@ public class BaseCardPanel : MonoBehaviour
 
     public Button ButtonQ => buttonE;
     public Button ButtonE => buttonE;
-    public Image Ñheck => check;
-    public Image ÑrossCheck => crossCheck;
+    public Image Check => check;
+    public Image CrossCheck => crossCheck;
 }
