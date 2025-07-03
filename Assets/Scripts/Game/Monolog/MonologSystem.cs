@@ -82,6 +82,7 @@ namespace Game.Monolog
             {
                 // Сохраняем и показываем следующий диалог
                 _monologIndexesBySuffix[suffix] = nextIndex;
+                _playerController.Model.Score += 20;
                 OpenDialogue(nextKey);
 
                 // Если за ним больше нет ключа — дизейблим интерактив
@@ -105,6 +106,7 @@ namespace Game.Monolog
             if (_keyCollection.ContainsKey(key))
             {
                 _monologIndexesBySuffix[suffix] = initialIndex;
+                _playerController.Model.Score += 20;
                 OpenDialogue(key);
             }
             else
