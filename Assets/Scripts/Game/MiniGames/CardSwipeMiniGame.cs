@@ -403,6 +403,7 @@ private void CreateCardStack(GameObject originalCard)
 
         Debug.Log($"Анимация удаления карточки: {currentCard.name} (индекс 0 в стопке)");
 
+        
         // Анимация удаления ТОЛЬКО верхней карточки
         while (elapsedTime < duration)
         {
@@ -414,11 +415,13 @@ private void CreateCardStack(GameObject originalCard)
                 Quaternion.Euler(0, 0, accepted ? -20f : 20f), progress);
 
             // Мигающий эффект для обратной связи
-            if (cardImg != null)
-                cardImg.color = Color.Lerp(originalColor, feedbackColor, Mathf.Sin(progress * Mathf.PI * 4));
+            //Disable blink cards
+            //if (cardImg != null)
+            //  cardImg.color = Color.Lerp(originalColor, feedbackColor, Mathf.Sin(progress * Mathf.PI * 4));
 
             yield return null;
         }
+        
 
         // ПРАВИЛЬНОЕ удаление верхней карточки
         GameObject removedCard = cardStack[0];
