@@ -1,5 +1,5 @@
 testKey,Тест
-Button_Start,Играть
+Play,Играть
 Button_Setting,Настройки
 Button_Exit,Выйти
 Settings_Header,Настройки
@@ -8,6 +8,10 @@ Settings_Sounds,Звуки
 Settings_Language,Язык
 Quit,Выйти из игры
 Quit_Accept0,Вы правда хотите выйти?
+Help,Помощь
+Help_Hint0,e — взаимодействие
+Help_Hint1,q — отпустить/переключить
+Help_Hint2,tab — задания
 Quest_Awakening0,Проснуться
 Quest_Door0,Выйти на пробежку
 Quest_Flower0,Полить цветок
@@ -55,7 +59,12 @@ Day5_Door_Win,Все еще могу?
 Day5_Door_Defeat,"Кажется, я уже не в той форме."
 Day6_WMGDoor0,Нет. Сегодня — нет.
 Day6_WMGDoor1,Я не могу больше...
-Flower_WateringCup,Нужна лейка.
+Day1_Flower0,"Кажется, я оставила лейку на кухне."
+Day2_Flower0,Нужна лейка.
+Day3_Flower0,Где же лейка?
+Day4_Flower0,Лейка на кухне.
+Day5_Flower0,Нужна лейка.
+Day6_Flower0,Попробовать его полить?
 Day1_Flower_Win,"Расти, мой цветок."
 Day1_Flower_Defeat,"Ничего, в следующий раз
 получится."
@@ -169,7 +178,7 @@ Day4_Painting0,"Эти холсты давят,
 Day4_Painting1,"Всё, что не завершено,
 начинает звучать громче..."
 Day4_Painting2,Что я хотела ими сказать?
-Day5_Painting0,"Снесла всё в угол.
+Day5_Painting0,"Я даже кричала на картины.
 Задевала каждый раз, злилась..."
 Day5_Painting1,"Хотела выбросить,
 но рука не поднялась..."
@@ -510,6 +519,7 @@ Day5_CardHeader13,—
 Day5_CardContent13,Держись.
 Day5_CardHeader14,—
 Day5_CardContent14,Держись.
+results_header,Итоги
 Day1_LoadHeader0,За неделю до...
 Day1_LoadBody0,"Знаешь, я всегда куда-то бежала."
 Day1_LoadBody1,Боялась не успеть.
