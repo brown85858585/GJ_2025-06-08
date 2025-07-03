@@ -2814,6 +2814,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2929984774745945236}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d0346d5c6ccfb174cb4712da6e94ae84,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 750788239220028947}
   m_SourcePrefab: {fileID: 100100000, guid: d0346d5c6ccfb174cb4712da6e94ae84, type: 3}
 --- !u!4 &1504539149833641261 stripped
 Transform:
@@ -2868,6 +2872,27 @@ MonoBehaviour:
   isMultiplyInteractable: 0
   popupOffset: {x: 0.43, y: 2.41, z: -1.38}
   popupScale: 1
+--- !u!65 &750788239220028947
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2281885536449775511}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4987041, y: 2.0335305, z: 0.13690078}
+  m_Center: {x: 0.74935204, y: 1.0167652, z: 0.000000074505806}
 --- !u!1001 &1510152084826421157
 PrefabInstance:
   m_ObjectHideFlags: 0
