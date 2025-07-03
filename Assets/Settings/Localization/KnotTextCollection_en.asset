@@ -938,3 +938,11 @@ MonoBehaviour:
       self. No masks."
   - _key: Play
     _rawText: Play
+  - _key: Help
+    _rawText: Help
+  - _key: Help_Hint0
+    _rawText: e - interaction
+  - _key: Help_Hint1
+    _rawText: q - switch
+  - _key: Help_Hint2
+    _rawText: tab - tasks

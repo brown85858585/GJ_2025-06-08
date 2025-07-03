@@ -1465,6 +1465,22 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Help
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help_Hint0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help_Hint1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help_Hint2
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 2
     RefIds: []
