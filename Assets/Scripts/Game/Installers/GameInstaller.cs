@@ -43,6 +43,8 @@ namespace Game.Installers
         private GameObject _savedCan;
         private MainCanvasUi _mainCanvas;
         private MonologSystem _monologSystem;
+        private ScenarioInstaller _scenario;
+        private CinemachineVirtualCamera _vCam;
 
         private void Awake()
         {
@@ -58,22 +60,23 @@ namespace Game.Installers
         }
 
         private void Start()
-        {
+        {  
+            _scenario = Instantiate(Resources.Load<ScenarioInstaller>("Prefabs/ScenarioInstaller"));
+            
+            
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut(0);
             InitLevelOne();
             mainCanvasPrefab.LanguageSelector.ApplySavedLanguage();
 
             _core.InputAdapter.SwitchAdapterToMiniGameMode();
-            _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).ContinueWith(
-                () =>
+            _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex, CancellationToken.None).
+                ContinueWith(() =>
                 {
-                    _effectAccumulator.FadeIn(1,_core.InputAdapter.SwitchAdapterToGlobalMode);
+                    _effectAccumulator.FadeIn(1);
                     
-                    _core.InputAdapter.SwitchAdapterToGlobalMode();
                     InitializeMainObjects();
                 });
-          
         }
 
         private void InitializeMainObjects()
@@ -90,6 +93,16 @@ namespace Game.Installers
             InitQuestLog();
             _monologSystem = new MonologSystem(_core.InteractionSystem, _logic.PlayerController, _levelManager,
                 _logic.MiniGameCoordinator, _logic.QuestLog);
+            
+            _scenario.Initialize(
+                _logic.PlayerController, 
+                _core.InputAdapter, 
+                _monologSystem,
+                _levelManager, 
+                _effectAccumulator,
+                _core.IntertitleSystem,
+                _vCam,
+                LoadNextLevel);
         }
 
         private void InitLevelOne()
@@ -115,9 +128,9 @@ namespace Game.Installers
         private void InitCamera()
         {
             _virtualCamera = Instantiate(virtualCameraPrefab, transform.parent);
-            var vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
-            vCam.Follow = _core.PlayerModel.PlayerTransform;
-            vCam.LookAt = _core.PlayerModel.PlayerTransform;
+            _vCam = _virtualCamera.GetComponent<CinemachineVirtualCamera>();
+            _vCam.Follow = _core.PlayerModel.PlayerTransform;
+            _vCam.LookAt = _core.PlayerModel.PlayerTransform;
             
 
             var cameraDependence = _virtualCamera.GetComponent<CameraDependence>();
@@ -127,7 +140,7 @@ namespace Game.Installers
             var cameraRotation = _virtualCamera.GetComponent<CameraRotation>();
             cameraRotation.Initialization(_core.InputAdapter, _virtualCamera.transform);
             var cameraZoom = _virtualCamera.GetComponent<SmoothZoomController>();
-            cameraZoom.Initialization(_core.InputAdapter, vCam);
+            cameraZoom.Initialization(_core.InputAdapter, _vCam);
             
             _logic.PlayerController.CamTransform = _virtualCamera.transform;
             KeepConstantScreenSize[] allComponents = FindObjectsOfType<KeepConstantScreenSize>(true); // true - ������� ����������
@@ -158,31 +171,9 @@ namespace Game.Installers
         private void HandleLevelCompletion(ItemCategory category)
         {
             //todo ! for debug
-            if (category == ItemCategory.Bed && !_allQuestsCompleted)
+            if (category == ItemCategory.Bed && _allQuestsCompleted)
             {
-                var scenario = new ScenarioInstaller();
-                ScenarioNext().Forget();
-                async UniTask ScenarioNext()
-                {
-                    
-                    _core.InputAdapter.SwitchAdapterToMiniGameMode();
-                    _monologSystem.OpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
-                    // Старт Анимации
-                    
-                    await UniTask.Delay(1000);
-                    _monologSystem.CloseDialogue();
-                    var fadeTimer = 1100;
-                    _effectAccumulator.FadeOut(fadeTimer/1000f);
-                    await UniTask.Delay(fadeTimer);
-                    await _core.IntertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
-                        _logic.PlayerController.Model,
-                        CancellationToken.None);
-                    await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
-                        CancellationToken.None);
-                    
-                    scenario.NextLevelScenario(LoadNextLevel);
-                }
-                
+                _scenario.NextLevelScenario().Forget();
             }
         }
 

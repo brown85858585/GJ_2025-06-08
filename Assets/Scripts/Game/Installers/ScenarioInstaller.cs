@@ -1,12 +1,84 @@
 using System;
+using System.Threading;
+using Cinemachine;
+using Cysharp.Threading.Tasks;
+using Effects;
+using Game.Intertitles;
+using Game.Levels;
+using Game.Monolog;
+using Player;
+using UnityEngine;
 
 namespace Game.Installers
 {
-    public class ScenarioInstaller
+    public class ScenarioInstaller : MonoBehaviour
     {
-        public void NextLevelScenario(Action nextLevelStart)
+        private IPlayerController _playerController;
+        private InputAdapter _inputAdapter;
+        private MonologSystem _monologSystem;
+        private LevelManager _levelManager;
+        private EffectAccumulatorView _effectAccumulator;
+        private IntertitleSystem _intertitleSystem;
+        private CinemachineVirtualCamera _virtualCamera;
+
+        public IPlayerController PlayerController => _playerController;
+        public CinemachineVirtualCamera VirtualCamera => _virtualCamera;
+        public InputAdapter InputAdapter => _inputAdapter;
+        private event Action ActionNextLevel;
+
+        private void Awake()
         {
-            nextLevelStart?.Invoke();
+            DontDestroyOnLoad(gameObject);
+        }
+
+        public void Initialize(PlayerController logicPlayerController,
+            InputAdapter coreInputAdapter,
+            MonologSystem monologSystem, LevelManager levelManager,
+            EffectAccumulatorView effectAccumulator,
+            IntertitleSystem intertitleSystem,
+            CinemachineVirtualCamera virtualCamera,
+            Action loadNextLevel)
+        {
+            _playerController = logicPlayerController;
+            _inputAdapter = coreInputAdapter;
+            _monologSystem = monologSystem;
+            _levelManager = levelManager;
+            _effectAccumulator = effectAccumulator;
+            _intertitleSystem = intertitleSystem;
+            _virtualCamera = virtualCamera;
+            ActionNextLevel += loadNextLevel;
+        }
+
+        public async UniTask NextLevelScenario()
+        {
+            _inputAdapter.SwitchAdapterToMiniGameMode();
+            
+            _monologSystem.TryOpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
+            await UniTask.Delay(1000);
+            _monologSystem.CloseDialogue();
+            var fadeTimer = 1100;
+            _effectAccumulator.FadeOut(fadeTimer/1000f);
+            await UniTask.Delay(fadeTimer);
+            await _intertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
+                _playerController.Model,
+                CancellationToken.None);
+            await _intertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
+                CancellationToken.None);
+
+            PlayerReset();
+            
+            
+            ActionNextLevel?.Invoke();
+        }
+
+        public void PlayerReset()
+        {
+            (_playerController as PlayerController)?.ResetPlayer();
+        }
+        
+        private void OnDestroy()
+        {
+            ActionNextLevel = null;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Game.Monolog
         private void HandleInteraction(ItemCategory item)
         {
             //todo ! for debug
-            if(!_questLog.IsAllQuestsCompleted && item == ItemCategory.Bed) return;
+            if(_questLog.IsAllQuestsCompleted && item == ItemCategory.Bed) return;
             
             var outcome = _miniGameHandler.HandleMinigameDialogue(item);
             switch (outcome)
@@ -116,6 +116,13 @@ namespace Game.Monolog
         private string ComposeKey(string suffix, int index) => $"{suffix}{index}";
 
         public void OpenDialogue(string key) => _playerController.Dialogue.OpenDialogue(key);
+        public void TryOpenDialogue(string key)
+        {
+            if (_keyCollection.ContainsKey(key))
+            {
+                _playerController.Dialogue.OpenDialogue(key);
+            }
+        }
         public void CloseDialogue() => _playerController.Dialogue.CloseDialogue();
     }
 }
