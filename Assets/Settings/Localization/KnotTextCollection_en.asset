@@ -15,6 +15,12 @@ MonoBehaviour:
   _items:
   - _key: testKey
     _rawText: Test
+  - _key: Button_Start
+    _rawText: Play
+  - _key: Button_Setting
+    _rawText: Settings
+  - _key: Button_Exit
+    _rawText: Quit
   - _key: Settings_Header
     _rawText: Settings
   - _key: Settings_Music
@@ -73,6 +79,8 @@ MonoBehaviour:
     _rawText: "Feels like this body isn\u2019t mine."
   - _key: Day5_Awakening
     _rawText: "Everything feels so heavy\u2026"
+  - _key: Day6_Awakening
+    _rawText: ...
   - _key: Day1_Sleep
     _rawText: 'Wish I could just
 
@@ -85,6 +93,10 @@ MonoBehaviour:
     _rawText: 'Please,
 
       just make it all stop.'
+  - _key: Day5_Sleep
+    _rawText: ...
+  - _key: Day6_Sleep
+    _rawText: ...
   - _key: Day1_Door_Win
     _rawText: 'Got a bit more energy
 
@@ -872,14 +884,17 @@ MonoBehaviour:
   - _key: Day5_CardContent14
     _rawText: Stay strong!
   - _key: Day1_LoadHeader0
-    _rawText: Week 1
+    _rawText: One week before...
   - _key: Day1_LoadBody0
-    _rawText: "You know, I was always rushing somewhere.\nAfraid I\u2019d fall behind.\nEvery
-      day felt like the same\nrepeating cycle\u2026"
+    _rawText: You know, I was always rushing somewhere.
+  - _key: Day1_LoadBody1
+    _rawText: "Afraid I\u2019d fall behind."
+  - _key: Day1_LoadBody2
+    _rawText: "Every day felt like the same repeating cycle\u2026"
   - _key: Day2_Results0
     _rawText: 'Public utilities:'
   - _key: Day2_LoadHeader0
-    _rawText: Week 2
+    _rawText: Week 1
   - _key: Day2_LoadBody0
     _rawText: "...and that cycle would\u2019ve kept looping forever\nif not for one
       but."
@@ -901,8 +916,11 @@ MonoBehaviour:
   - _key: Day4_LoadHeader0
     _rawText: Week 8
   - _key: Day4_LoadBody0
-    _rawText: "My head was a mess. Like wild birds crashing around.\nI couldn\u2019t
-      stop it.\nWork helped \u2014 gave me something else to focus on."
+    _rawText: My head was a mess. Like wild birds crashing around.
+  - _key: Day4_LoadBody1
+    _rawText: "I couldn\u2019t stop it."
+  - _key: Day4_LoadBody2
+    _rawText: "Work helped \u2014 gave me something else to focus on."
   - _key: Day5_Results0
     _rawText: 'Public utilities:'
   - _key: Day5_Results1
@@ -914,27 +932,35 @@ MonoBehaviour:
   - _key: Day5_LoadHeader0
     _rawText: Week 9
   - _key: Day5_LoadBody0
-    _rawText: 'There were days when I wondered why I was even trying.
-
-      I barely
-      had the strength to do anything at all.'
+    _rawText: There were days when I wondered why I was even trying.
+  - _key: Day5_LoadBody1
+    _rawText: I barely had the strength to do anything at all.
   - _key: Day6_Results0
     _rawText: 'Therapy:'
   - _key: Day6_LoadHeader0
     _rawText: Week 14
   - _key: Day6_LoadBody0
-    _rawText: "But what scared me most was when my mind just\u2026 stopped working."
+    _rawText: "But what scared me most was when my mind just\u2026"
+  - _key: Day6_LoadBody1
+    _rawText: stopped working.
   - _key: Day7_LoadHeader0
     _rawText: Week 16
   - _key: Day7_LoadBody0
-    _rawText: 'Everyone kept saying I was getting better...
-
-      But I was getting
-      more and more scared.'
-  - _key: Final_Phrase
-    _rawText: "I went through it alone.\nBut if things ever get hard for you \u2014
-      don\u2019t rush to expect the worst.\nThink about this instead: maybe it\u2019s
-      a way out.\nA way to break the cycle.\nAnd finally find peace with your real
-      self. No masks."
+    _rawText: Everyone kept saying I was getting better...
+  - _key: Day7_LoadBody1
+    _rawText: But I was getting more and more scared.
+  - _key: Final_Phrase0
+    _rawText: I went through it alone.
+  - _key: Final_Phrase1
+    _rawText: "But if things ever get hard for you \u2014 don\u2019t rush to expect
+      the worst."
+  - _key: Final_Phrase2
+    _rawText: "Think about this instead: maybe it\u2019s a way out."
+  - _key: Final_Phrase3
+    _rawText: A way to break the cycle.
+  - _key: Final_Phrase4
+    _rawText: And finally find peace with your real self. No masks.
   - _key: Play
     _rawText: Play
+  - _key: results_header
+    _rawText: Results

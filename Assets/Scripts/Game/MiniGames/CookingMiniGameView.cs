@@ -35,16 +35,29 @@ namespace Game.MiniGames
 
         private void OnDisable()
         {
+            board.OnHideComplete += Board_OnHideComplete;
             board.Hide();
+            knife.OnHideComplete += Knife_OnHideComplete;
             knife.Hide();
+            actionButton.OnHideComplete += ActionButton_OnHideComplete;
             actionButton.Hide();
+            firstItem.OnHideComplete += FirstItem_OnHideComplete;
             firstItem.Hide();
+            secondItem.OnHideComplete += SecondItem_OnHideComplete;
             secondItem.Hide();
+            thirdItem.OnHideComplete += ThirdItem_OnHideComplete;
             thirdItem.Hide();
         }
 
         private void OnDestroy()
         {
+            board.OnHideComplete -= Board_OnHideComplete;
+            knife.OnHideComplete -= Knife_OnHideComplete;
+            actionButton.OnHideComplete -= ActionButton_OnHideComplete;
+            firstItem.OnHideComplete -= FirstItem_OnHideComplete;
+            secondItem.OnHideComplete -= SecondItem_OnHideComplete;
+            thirdItem.OnHideComplete -= ThirdItem_OnHideComplete;
+
             board.OnShowComplete -= Board_OnShowComplete;
             knife.OnShowComplete -= Knife_OnShowComplete;
             actionButton.OnShowComplete -= ActionButton_OnShowComplete;
@@ -56,6 +69,36 @@ namespace Game.MiniGames
         public void AnimateActionButton()
         {
             actionButton.Show();
+        }
+
+        private void Board_OnHideComplete()
+        {
+            board.gameObject.SetActive(false);
+        }
+
+        private void Knife_OnHideComplete()
+        {
+            knife.gameObject.SetActive(false);
+        }
+
+        private void ActionButton_OnHideComplete()
+        {
+            actionButton.gameObject.SetActive(false);
+        }
+
+        private void FirstItem_OnHideComplete()
+        {
+            firstItem.gameObject.SetActive(false);
+        }
+
+        private void SecondItem_OnHideComplete()
+        {
+            secondItem.gameObject.SetActive(false);
+        }
+
+        private void ThirdItem_OnHideComplete()
+        {
+            thirdItem.gameObject.SetActive(false);
         }
 
         private void Board_OnShowComplete()

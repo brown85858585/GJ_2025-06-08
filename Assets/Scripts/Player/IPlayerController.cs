@@ -8,6 +8,8 @@ namespace Player
         public void SetRotation(Quaternion rotation);
         public void ToggleMovement();
 
+        public void SetFallingAnimation();
+
         public PlayerModel Model { get; }
         public IPlayerMovement Movement { get; }
         public IPlayerDialogue Dialogue { get; }

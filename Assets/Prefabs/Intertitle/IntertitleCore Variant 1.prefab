@@ -18,10 +18,20 @@ PrefabInstance:
       propertyPath: _keyReference._key
       value: Day2_LoadHeader0
       objectReference: {fileID: 0}
+    - target: {fileID: 2968333708459689866, guid: f8c998ad663db1543af67a5a2dbb1087,
+        type: 3}
+      propertyPath: texts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3403867112567755147, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
       propertyPath: _keyReference._key
       value: Day2_LoadBody0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184669024593270808, guid: f8c998ad663db1543af67a5a2dbb1087,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5253553727484959770, guid: f8c998ad663db1543af67a5a2dbb1087,
         type: 3}
@@ -124,7 +134,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 351602100082234413, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
+    - {fileID: 1177796956644472515, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8c998ad663db1543af67a5a2dbb1087, type: 3}
