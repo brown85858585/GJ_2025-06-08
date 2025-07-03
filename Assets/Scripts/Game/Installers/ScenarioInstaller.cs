@@ -7,6 +7,7 @@ using Game.Intertitles;
 using Game.Levels;
 using Game.Monolog;
 using Player;
+using Scenario;
 using UnityEngine;
 
 namespace Game.Installers
@@ -20,6 +21,7 @@ namespace Game.Installers
         private EffectAccumulatorView _effectAccumulator;
         private IntertitleSystem _intertitleSystem;
         private CinemachineVirtualCamera _virtualCamera;
+        private GameOverScenario _gameOverScenario;
 
         public IPlayerController PlayerController => _playerController;
         public CinemachineVirtualCamera VirtualCamera => _virtualCamera;
@@ -47,6 +49,8 @@ namespace Game.Installers
             _intertitleSystem = intertitleSystem;
             _virtualCamera = virtualCamera;
             ActionNextLevel += loadNextLevel;
+
+            _gameOverScenario = new GameOverScenario(intertitleSystem);
         }
 
         public async UniTask NextLevelScenario()
@@ -62,6 +66,10 @@ namespace Game.Installers
             await _intertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
                 _playerController.Model,
                 CancellationToken.None);
+            if(_playerController.Model.Score < 0)
+            {
+                await _gameOverScenario.StartScenario();
+            }
             await _intertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
                 CancellationToken.None);
 

@@ -1541,6 +1541,10 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: GameOver
+    _metadata:
+      _runtime: []
+      _editor: []
   references:
     version: 2
     RefIds: []
