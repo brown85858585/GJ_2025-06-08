@@ -43,6 +43,7 @@ namespace Game.Installers
         private GameObject _savedCan;
         private MainCanvasUi _mainCanvas;
         private MonologSystem _monologSystem;
+        private ScenarioInstaller _scenario;
 
         private void Awake()
         {
@@ -58,7 +59,10 @@ namespace Game.Installers
         }
 
         private void Start()
-        {
+        {  
+            _scenario = Instantiate(Resources.Load<ScenarioInstaller>("Prefabs/ScenarioInstaller"));
+            _scenario.Initialize(_logic.PlayerController);
+            
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut(0);
             InitLevelOne();
@@ -159,7 +163,7 @@ namespace Game.Installers
             //todo ! for debug
             if (category == ItemCategory.Bed && !_allQuestsCompleted)
             {
-                var scenario = new ScenarioInstaller();
+                
                 ScenarioNext().Forget();
                 async UniTask ScenarioNext()
                 {
@@ -179,7 +183,7 @@ namespace Game.Installers
                     await _core.IntertitleSystem.ShowIntertitle(_levelManager.CurrentLevelIndex+1,
                         CancellationToken.None);
                     
-                    scenario.NextLevelScenario(LoadNextLevel);
+                    _scenario.NextLevelScenario(LoadNextLevel);
                 }
                 
             }

@@ -12,6 +12,7 @@ namespace Player
         private static readonly int IsRun = Animator.StringToHash("Run");
         private static readonly int PositionX = Animator.StringToHash("PositionX");
         private static readonly int PositionY = Animator.StringToHash("PositionY");
+        private static readonly int IsFalling = Animator.StringToHash("Falling");
 
         [SerializeField] private Animator animator;
         [SerializeField] private Transform playerObject;
@@ -167,6 +168,11 @@ namespace Player
             _moveSavedObject = false;_saveCurrentObj.transform.rotation = Quaternion.Euler(Vector3.zero);
             
             _saveCurrentObj = null;
+        }
+
+        public void SetTriggerFalling()
+        {
+            animator.SetTrigger(IsFalling);
         }
     }
 }

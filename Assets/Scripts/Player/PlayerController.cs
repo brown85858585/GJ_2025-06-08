@@ -45,6 +45,12 @@ namespace Player
             }
         }
 
+        public void SetFallingAnimation()
+        {
+            Debug.Log( "SetFallingAnimation");
+            _view.SetTriggerFalling();
+        }
+
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
@@ -93,6 +99,12 @@ namespace Player
             {
                 _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
             }
+        }
+
+        public void ClampSpeed()
+        {
+             _normalSpeed = 18f;
+             _acceleratedSpeed = 19f;
         }
 
         private void FixedUpdateMove()
