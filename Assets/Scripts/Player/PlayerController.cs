@@ -28,6 +28,8 @@ namespace Player
         
         private float _normalSpeed;
         private float _acceleratedSpeed;
+        private bool _stop;
+
         public void ToggleMovement()
         {
             _isRunMovement = !_isRunMovement;
@@ -47,8 +49,9 @@ namespace Player
 
         public void SetFallingAnimation()
         {
-            Debug.Log( "SetFallingAnimation");
+            Debug.Log("Falling");
             _view.SetTriggerFalling();
+            _stop = true;
         }
 
         public PlayerModel Model => _model;
@@ -109,6 +112,7 @@ namespace Player
 
         private void FixedUpdateMove()
         {
+            if(_stop) return;
             Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
 

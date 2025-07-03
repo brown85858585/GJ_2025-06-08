@@ -116,6 +116,13 @@ namespace Game.Monolog
         private string ComposeKey(string suffix, int index) => $"{suffix}{index}";
 
         public void OpenDialogue(string key) => _playerController.Dialogue.OpenDialogue(key);
+        public void TryOpenDialogue(string key)
+        {
+            if (_keyCollection.ContainsKey(key))
+            {
+                _playerController.Dialogue.OpenDialogue(key);
+            }
+        }
         public void CloseDialogue() => _playerController.Dialogue.CloseDialogue();
     }
 }

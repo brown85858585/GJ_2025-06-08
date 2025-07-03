@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Game.Installers;
 using Player;
 using UnityEngine;
@@ -25,13 +26,16 @@ namespace Scenario
            var targetMask = LayerMask.GetMask("Player");
            if (LayerChecker.CheckLayerMask(other.gameObject, targetMask))
            {
-               StartScenario();
+               StartScenario().Forget();
            }
         }
 
-        private void StartScenario()
+        private async UniTask StartScenario()
         {
             _installer.PlayerController.SetFallingAnimation();
+            
+            await UniTask.Delay(5000);
+            _installer.NextLevelScenario();
         }
     }
 }

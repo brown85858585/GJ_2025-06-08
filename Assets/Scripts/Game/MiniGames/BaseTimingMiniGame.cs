@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Knot.Localization.Components;
-using Unity.VisualScripting;
-using UnityEngine.SocialPlatforms.Impl;
 using Player;
 
 
