@@ -171,7 +171,7 @@ namespace Game.Installers
         private void HandleLevelCompletion(ItemCategory category)
         {
             //todo ! for debug
-            if (category == ItemCategory.Bed && !_allQuestsCompleted)
+            if (category == ItemCategory.Bed && _allQuestsCompleted)
             {
                 _scenario.NextLevelScenario().Forget();
             }
