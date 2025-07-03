@@ -229,30 +229,6 @@ namespace Game.MiniGames
             }
         }
 
-        //private IEnumerator FadeOutZone(int zoneIndex)
-        //{
-        //    Image zone = winZones[zoneIndex];
-        //    Color startColor = zone.color;
-        //    float duration = 0.5f;
-        //    float elapsedTime = 0f;
-
-        //    // Плавное исчезновение
-        //    while (elapsedTime < duration)
-        //    {
-        //        elapsedTime += Time.deltaTime;
-        //        float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
-
-        //        Color newColor = startColor;
-        //        newColor.a = alpha;
-        //        zone.color = newColor;
-
-        //        yield return null;
-        //    }
-
-        //    // Полностью скрываем
-        //    zone.gameObject.transform.parent.gameObject.SetActive(false);
-        //}
-
         // Сброс для новой игры
         protected override void StartGameLogic()
         {
@@ -354,22 +330,7 @@ namespace Game.MiniGames
             Debug.Log($"❌ Промах! Текущий угол: {currentAngle}");
             return "fail";
         }
-/*
-        protected override void Start()
-        {
-            instantiatedCookingView= cookingViewPrefabs[MiniGameCoordinator.DayLevel].CookingViewPrefab;
-            indicatorSpeed = cookingViewPrefabs[MiniGameCoordinator.DayLevel].gameSpeed;
-        
 
-            // Если префаб не назначен, попробуем найти его в Resources
-            // if (cookingViewPrefab == null)
-            // {
-            //     cookingViewPrefab = Resources.Load<GameObject>("Prefabs/MiniGame/CookingGameView");
-            // }
-
-            base.Start();
-        }
-*/
         protected override void CreateStartScreen()
         {
             // Создаем пустой startScreen объект чтобы не было null
@@ -456,38 +417,7 @@ namespace Game.MiniGames
             moveKnifeRoutine = StartCoroutine(MoveKnife());
         }
 
-        /*
-        private void SetupPrefabReferences()
-        {
-            
 
-            // Находим элементы в префабе
-            knifeHandler = instantiatedCookingView.transform.Find("Panel/knifeHandler");
-            winZoneHandler = instantiatedCookingView.transform.Find("Panel/winZoneHandler");
-           
-            if (knifeHandler != null)
-            {
-                knife = knifeHandler.GetComponent<RectTransform>();
-                Debug.Log("Knife handler найден!");
-            }
-            else
-            {
-                Debug.LogError("knifeHandler не найден в префабе!");
-            }
-
-            if (winZoneHandler != null)
-            {
-                winZone = winZoneHandler.GetComponentInChildren<Image>();
-               
-                SetupWinZone();
-                Debug.Log("Win zone handler найден!");
-            }
-            else
-            {
-                Debug.LogError("winZoneHandler не найден в префабе!");
-            }
-        }
-        */
 
         protected override void FindSceneComponents()
         {

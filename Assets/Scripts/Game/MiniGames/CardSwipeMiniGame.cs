@@ -31,6 +31,12 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [Header("UI Prefabs")]
     [SerializeField] private GameObject currentCardPrefab; // Перетащите префаб в инспекторе
 
+
+    [Header("Card Typing Effect")]
+    [SerializeField] private bool enableTypingEffect = true;
+    [SerializeField] private float headerTypingSpeed = 0.08f;
+    [SerializeField] private float contentTypingSpeed = 0.04f;
+
     // UI компоненты
     private GameObject currentCard;
     private TextMeshProUGUI cardSenderText;
@@ -54,7 +60,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [SerializeField] private int visibleCardsInStack = 3; // Сколько карточек видно в стопке
     [SerializeField] private Vector2 stackOffset = new Vector2(5f, -5f); // Смещение каждой карточки
     [SerializeField] private float stackScaleReduction = 0.03f; // Уменьшение размера каждой карточки
-    [SerializeField] private float stackAlphaReduction = 0.05f; // Уменьшение прозрачности
+    //[SerializeField] private float stackAlphaReduction = 0.05f; // Уменьшение прозрачности
     [SerializeField] private float cardLockDuration = 1.5f; // Время блокировки карточки в секундах
 
     // UI компоненты для стопки
@@ -66,8 +72,49 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private bool _victory;
     
     public bool Victory => _victory;
-    
+
     // Заменить метод CreateCardInterface():
+
+    private string GetTextFromCardData(TextMeshProUGUI textComponent, string key)
+    {
+        var localizedComponent = textComponent.GetComponent<KnotLocalizedTextMeshProUGUI>();
+        if (localizedComponent != null)
+        {
+            localizedComponent.KeyReference.Key = key;
+            return localizedComponent.KeyReference.Value; // или получить текст другим способом
+        }
+        return key;
+    }
+
+    private IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText, float speed, float delay = 0f)
+    {
+        textComponent.text = "";
+        if (delay > 0f)
+            yield return new WaitForSeconds(delay);
+
+        
+
+        for (int i = 0; i <= fullText.Length; i++)
+        {
+            textComponent.text = fullText.Substring(0, i);
+            yield return new WaitForSeconds(speed);
+        }
+    }
+
+
+    private Transform FindChildRecursive(Transform parent, string name)
+    {
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform child = parent.GetChild(i);
+            if (child.name == name) return child;
+
+            Transform found = FindChildRecursive(child, name);
+            if (found != null) return found;
+        }
+        return null;
+    }
+
 
     private void CreateCardInterface()
 {
@@ -98,6 +145,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             cardTransform.SetParent(cardContainer.transform, false);
             
             CreateCardStack(cardTransform.gameObject);
+            
         }
         else
         {
@@ -142,71 +190,123 @@ private void CreateCardStack(GameObject originalCard)
     Debug.Log($"Создана стопка из {cardStack.Count} карточек");
 }
 
-// Метод для обновления содержимого стопки:
+    // Метод для обновления содержимого стопки:
 
-private void UpdateStackContent()
-{
-    for (int i = 0; i < cardStack.Count && i < visibleCardsInStack; i++)
+    bool firstCard = true;
+    private void UpdateStackContent()
     {
-        int cardIndex = currentCardIndex + i;
-        
-        if (cardIndex < gameCards.Count)
+        for (int i = 0; i < cardStack.Count && i < visibleCardsInStack; i++)
         {
-            // Есть карточка для отображения
-            CardData cardData = gameCards[cardIndex];
-            UpdateCardContent(cardStack[i], cardData);
-            cardStack[i].SetActive(true);
-        }
-        else
-        {
-            // Нет больше карточек - скрываем
-            cardStack[i].SetActive(false);
+            int cardIndex = currentCardIndex + i;
+
+            if (cardIndex < gameCards.Count)
+            {
+                // Есть карточка для отображения
+                CardData cardData = gameCards[cardIndex];
+
+                if (firstCard)
+                {
+                    // Передняя карточка - показываем текст с анимацией
+                    UpdateCardContent(cardStack[i], cardData);
+                    firstCard = false;
+                }
+                else
+                {
+                    // Задние карточки - скрываем текст
+                    HideCardText(cardStack[i]);
+                    // Но сохраняем данные для будущего показа
+                    StoreCardData(cardStack[i], cardData);
+                }
+
+                cardStack[i].SetActive(true);
+            }
+            else
+            {
+                // Нет больше карточек - скрываем
+                cardStack[i].SetActive(false);
+            }
         }
     }
-}
 
-// Метод для обновления содержимого конкретной карточки:
+    private void HideCardText(GameObject card)
+    {
+        // Ищем все TextMeshProUGUI компоненты в карточке
+        TextMeshProUGUI[] allTexts = card.GetComponentsInChildren<TextMeshProUGUI>();
 
-private void UpdateCardContent(GameObject card, CardData cardData)
+        foreach (var text in allTexts)
+        {
+            text.text = ""; // Очищаем текст
+
+            // Или делаем прозрачным
+            // text.color = new Color(text.color.r, text.color.g, text.color.b, 0f);
+        }
+
+        Debug.Log($"Текст скрыт на карточке: {card.name}");
+    }
+
+    private void StoreCardData(GameObject card, CardData cardData)
+    {
+        // Сохраняем данные в компоненте для будущего использования
+        CardDataHolder holder = card.GetComponent<CardDataHolder>();
+        if (holder == null)
+            holder = card.AddComponent<CardDataHolder>();
+
+        holder.cardData = cardData;
+    }
+
+    // Вспомогательный компонент для хранения данных карточки
+    public class CardDataHolder : MonoBehaviour
+    {
+        public CardData cardData;
+    }
+
+    // Метод для обновления содержимого конкретной карточки:
+
+    private void UpdateCardContent(GameObject card, CardData cardData)
 {
-    // Находим компоненты текста в карточке
+
     Transform headerContainer = card.transform.Find("HeaderContainer");
     Transform contentContainer = card.transform.Find("ContentContainer");
     
-    if (headerContainer != null)
-    {
-        Transform headerText = headerContainer.Find("HeaderText");
-        if (headerText != null)
+
+
+        if (headerContainer != null)
         {
-            var senderText = headerText.GetComponent<TextMeshProUGUI>();
-            if (senderText != null)
+            Transform headerText = headerContainer.Find("HeaderText");
+            if (headerText != null)
             {
-                var localizedComponent = senderText.GetComponent<KnotLocalizedTextMeshProUGUI>();
-                if (localizedComponent != null)
-                    localizedComponent.KeyReference.Key = cardData.sender;
-                else
-                    senderText.text = cardData.sender;
+                var senderText = headerText.GetComponent<TextMeshProUGUI>();
+                if (senderText != null)
+                {
+                    string finalText = GetTextFromCardData(senderText, cardData.sender);
+                    senderText.text = "";
+                   // if (enableTypingEffect)
+                   //     StartCoroutine(TypeText(senderText, finalText, headerTypingSpeed));
+                  //  else
+                        senderText.text = finalText;
+                }
+            }
+        }
+
+        if (contentContainer != null)
+        {
+            Transform contentText = contentContainer.Find("ContentText");
+            if (contentText != null)
+            {
+                var contentTextComponent = contentText.GetComponent<TextMeshProUGUI>();
+                if (contentTextComponent != null)
+                {
+                    contentTextComponent.text = "";
+                    string finalText = GetTextFromCardData(contentTextComponent, cardData.content);
+
+                    if (enableTypingEffect)
+                        StartCoroutine(TypeText(contentTextComponent, finalText, contentTypingSpeed, 0.3f));
+                    else
+                        contentTextComponent.text = finalText;
+                }
             }
         }
     }
-    
-    if (contentContainer != null)
-    {
-        Transform contentText = contentContainer.Find("ContentText");
-        if (contentText != null)
-        {
-            var contentTextComponent = contentText.GetComponent<TextMeshProUGUI>();
-            if (contentTextComponent != null)
-            {
-                var localizedComponent = contentTextComponent.GetComponent<KnotLocalizedTextMeshProUGUI>();
-                if (localizedComponent != null)
-                    localizedComponent.KeyReference.Key = cardData.content;
-                else
-                    contentTextComponent.text = cardData.content;
-            }
-        }
-    }
-}
 
     // Заменить метод ShowCurrentCard():
 
@@ -252,13 +352,15 @@ private void UpdateCardContent(GameObject card, CardData cardData)
             cardRect.SetSiblingIndex(cardStack.Count - 1 - i); // Первая карточка (i=0) будет иметь самый высокий индекс
 
             // Прозрачность (ИСПРАВЛЕНО: менее агрессивная прозрачность)
+            
             CanvasGroup canvasGroup = card.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
                 canvasGroup = card.AddComponent<CanvasGroup>();
 
-            float alpha = 1f - (stackAlphaReduction * i); // Первая карточка полностью непрозрачная
-            canvasGroup.alpha = Mathf.Max(alpha, 0.7f); // Минимальная прозрачность 70% вместо 30%
-
+            
+           // float alpha = 1f - (stackAlphaReduction * i); // Первая карточка полностью непрозрачная
+            canvasGroup.alpha = 1;// Mathf.Max(alpha, 0.7f); // Минимальная прозрачность 70% вместо 30%
+            
             // Блокируем взаимодействие с задними карточками
             if (i > 0)
             {
@@ -272,7 +374,7 @@ private void UpdateCardContent(GameObject card, CardData cardData)
                 canvasGroup.blocksRaycasts = true;
             }
 
-            Debug.Log($"Карточка {i}: позиция {cardRect.anchoredPosition}, размер {scaledSize}, альфа {alpha}, sibling {cardRect.GetSiblingIndex()}");
+           // Debug.Log($"Карточка {i}: позиция {cardRect.anchoredPosition}, размер {scaledSize}, альфа {alpha}, sibling {cardRect.GetSiblingIndex()}");
         }
     }
 
@@ -390,8 +492,8 @@ private void UpdateCardContent(GameObject card, CardData cardData)
             float scaleReduction = stackScaleReduction * i;
             targetSizes.Add(cardSize * (1f - scaleReduction));
 
-            float alpha = 1f - (stackAlphaReduction * i);
-            targetAlphas.Add(Mathf.Max(alpha, 0.7f));
+            //float alpha = 1f - (stackAlphaReduction * i);
+            //targetAlphas.Add(Mathf.Max(alpha, 0.7f));
         }
 
         // Анимация сдвига
@@ -408,11 +510,25 @@ private void UpdateCardContent(GameObject card, CardData cardData)
                 rect.anchoredPosition = Vector2.Lerp(startPositions[i], targetPositions[i], progress);
                 rect.sizeDelta = Vector2.Lerp(startSizes[i], targetSizes[i], progress);
 
-                if (canvasGroup != null)
-                    canvasGroup.alpha = Mathf.Lerp(startAlphas[i], targetAlphas[i], progress);
+                //if (canvasGroup != null)
+                   // canvasGroup.alpha = Mathf.Lerp(startAlphas[i], targetAlphas[i], progress);
             }
 
             yield return null;
+        }
+
+        if (cardStack.Count > 0)
+        {
+            currentCard = cardStack[0];
+            FindCardComponentsByPath();
+
+            // Получаем данные для новой передней карточки
+            CardDataHolder holder = currentCard.GetComponent<CardDataHolder>();
+            if (holder != null && holder.cardData != null)
+            {
+                // Запускаем анимацию печатания на новой передней карточке
+                StartCoroutine(DelayedCardReveal(currentCard, holder.cardData));
+            }
         }
 
         // Устанавливаем финальные значения и правильные Z-order
@@ -427,7 +543,7 @@ private void UpdateCardContent(GameObject card, CardData cardData)
 
             if (canvasGroup != null)
             {
-                canvasGroup.alpha = targetAlphas[i];
+                //canvasGroup.alpha = targetAlphas[i];
                 canvasGroup.interactable = (i == 0); // Только первая карточка интерактивная
                 canvasGroup.blocksRaycasts = (i == 0);
             }
@@ -441,6 +557,15 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         }
 
         Debug.Log("Стопка сдвинута, новая верхняя карточка готова");
+    }
+
+    private IEnumerator DelayedCardReveal(GameObject card, CardData cardData)
+    {
+        // Небольшая задержка перед началом печатания
+        yield return new WaitForSeconds(0.2f);
+
+        // Показываем текст с анимацией печатания
+        UpdateCardContent(card, cardData);
     }
 
 
@@ -487,21 +612,13 @@ private void UpdateCardContent(GameObject card, CardData cardData)
             //acceptButton = panal.transform.Find()?.GetComponent<Button>();
             rejectButton = panal.GetComponent("ButtonQ") as Button;
             exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
-            var ss = panal.GetComponentsInChildren<Button>().ToList();
+            var _baseButton = panal.GetComponentsInChildren<Button>().ToList();
 
-            acceptButton = ss[1];
-            rejectButton = ss[0];
+            acceptButton = _baseButton[1];
+            rejectButton = _baseButton[0];
             exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
 
-            /*
-            // Подключаем обработчики
-            if (acceptButton != null)
-                acceptButton.onClick.AddListener(() => ProcessCard(true));
-            if (rejectButton != null)
-                rejectButton.onClick.AddListener(() => ProcessCard(false));
-            if (exitButton != null)
-                exitButton.onClick.AddListener(ExitMiniGame);
-            */
+
    
         }
     }
@@ -773,6 +890,7 @@ private void UpdateCardContent(GameObject card, CardData cardData)
 
         // Инструкции
         instructionText = CreateText("InstructionText", "Q - удалить ←  |  → принять - E", new Vector2(0, -250), 14, Color.yellow, new Vector2(400, 30), gameScreen.transform);
+        instructionText.gameObject.SetActive(false);
     }
 
     private void CreateGameButtons()
@@ -862,31 +980,6 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         }
     }
 
-    /*
-    protected override void QInput()
-    {
-        if (isGameActive && !isProcessingCard && !isCardLocked) // Проверка блокировки
-        {
-            ProcessCard(false); // Q = удалить
-        }
-        else if (isCardLocked)
-        {
-            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
-        }
-    }
-
-    protected override void OnActionButtonClick()
-    {
-        if (isGameActive && !isProcessingCard && !isCardLocked) // Проверка блокировки
-        {
-            ProcessCard(true); // E = принять
-        }
-        else if (isCardLocked)
-        {
-            Debug.Log($"Карточка заблокирована! Осталось: {cardLockTimer:F1} сек");
-        }
-    }
-    */
     protected override void QInput()
     {
         if (isGameActive && !isProcessingCard && !isCardLocked)
@@ -929,14 +1022,14 @@ private void UpdateCardContent(GameObject card, CardData cardData)
             Sprite originalSprite = buttonImage.sprite;
             buttonImage.sprite = button.spriteState.pressedSprite;
 
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(cardLockDuration);
 
             buttonImage.sprite = originalSprite;
         }
         else
         {
             // Fallback для Color Tint
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(cardLockDuration);
             button.targetGraphic.CrossFadeColor(button.colors.normalColor, 0f, true, true);
         }
 
@@ -944,30 +1037,6 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         button.onClick.Invoke();
     }
 
-    private IEnumerator QuickButtonPress(Button button)
-    {
-        if (button == null) yield break;
-
-        // Временно делаем кнопку неинтерактивной и сразу обратно
-        // Это заставит её сменить спрайт
-        button.interactable = false;
-        yield return null; // Ждем один кадр
-        button.interactable = true;
-
-        // Или напрямую меняем спрайт
-        Image img = button.GetComponent<Image>();
-        Sprite normal = img.sprite;
-        Sprite pressed = button.spriteState.pressedSprite;
-
-        if (pressed != null)
-        {
-            img.sprite = pressed;
-            yield return new WaitForSeconds(1f);
-            img.sprite = normal;
-        }
-
-        //button.onClick.Invoke();
-    }
     private void ProcessCard(bool accepted)
     {
         if (currentCardIndex >= gameCards.Count || isProcessingCard)
@@ -996,54 +1065,6 @@ private void UpdateCardContent(GameObject card, CardData cardData)
         // Анимируем удаление карточки
         StartCoroutine(AnimateCardExit(accepted, isCorrect));
     }
-
-    /*
-    private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
-    {
-        if (currentCard == null) yield break;
-
-        RectTransform cardRect = currentCard.GetComponent<RectTransform>();
-        Vector2 startPos = cardRect.anchoredPosition;
-        Vector2 targetPos = new Vector2(accepted ? 800f : -800f, startPos.y);
-
-        // Цветовая обратная связь
-        Image cardImg = currentCard.GetComponent<Image>();
-        Color originalColor = cardImg.color;
-        Color feedbackColor = isCorrect ? Color.green : Color.red;
-
-        float elapsedTime = 0f;
-        float duration = 0.4f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / duration;
-
-            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, progress);
-            cardRect.rotation = Quaternion.Lerp(Quaternion.identity,
-                Quaternion.Euler(0, 0, accepted ? -20f : 20f), progress);
-
-            // Мигающий эффект для обратной связи
-            cardImg.color = Color.Lerp(originalColor, feedbackColor, Mathf.Sin(progress * Mathf.PI * 4));
-
-            yield return null;
-        }
-
-        // Восстанавливаем карточку для следующего использования
-        cardRect.anchoredPosition = Vector2.zero;
-        cardRect.rotation = Quaternion.identity;
-        cardImg.color = originalColor;
-
-        currentCardIndex++;
-        cardsRemaining--;
-        isProcessingCard = false;
-
-        yield return new WaitForSeconds(0.1f);
-
-        ShowCurrentCard();
-    }
-    */
-
     private void UpdateUI()
     {
         if (scoreText != null)
