@@ -18,7 +18,7 @@ namespace UI
 
         [SerializeField] private Color inactiveNormalColor = new Color(0.627f, 0.427f, 0.220f);
         [SerializeField] private Color activeNormalColor = new Color(0.467f, 0.345f, 0.235f);
-        [SerializeField] private Color highlightedColor = Color.white; // Цвет при наведении
+        [SerializeField] private Color highlightedColor = Color.white; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         public Button NextLevelButton => nextLevelButton;
         public LanguageSelector LanguageSelector => languageSelector;
 
@@ -35,21 +35,6 @@ namespace UI
         private void OnButtonHelpClicked()
         {
             isHelpButtonActive = !isHelpButtonActive;
-
-            // Получаем текущие цвета
-            ColorBlock cb = btnHelp.colors;
-
-            // Устанавливаем нужные цвета
-            cb.normalColor = isHelpButtonActive ? activeNormalColor : inactiveNormalColor;
-            cb.highlightedColor = highlightedColor;
-            cb.pressedColor = cb.normalColor * 0.8f;
-
-            btnHelp.colors = cb;
-
-            // Меняем цвет текста
-            helpButtonText.color = isHelpButtonActive ? Color.white : Color.black;
-
-            // Управление панелью
             hintTextPanel.SetActive(isHelpButtonActive);
         }
     }
