@@ -63,6 +63,12 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     //[SerializeField] private float stackAlphaReduction = 0.05f; // Уменьшение прозрачности
     [SerializeField] private float cardLockDuration = 1.5f; // Время блокировки карточки в секундах
 
+
+    [Header("Feedback Icons")]
+    [SerializeField] private float feedbackIconDuration = 1.0f; // Время показа иконки
+    [SerializeField] private Color successColor = Color.green;
+    [SerializeField] private Color failureColor = Color.red;
+
     // UI компоненты для стопки
     private List<GameObject> cardStack = new List<GameObject>();
     private GameObject cardContainer; // Контейнер только для карточек
@@ -99,6 +105,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             textComponent.text = fullText.Substring(0, i);
             yield return new WaitForSeconds(speed);
         }
+        isCardLocked = false;
     }
 
 
@@ -379,7 +386,7 @@ private void CreateCardStack(GameObject originalCard)
     }
 
     // Исправить метод AnimateCardExit() - правильная анимация удаления ВЕРХНЕЙ карточки:
-
+    /*
     private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
     {
         if (currentCard == null || cardStack.Count == 0) yield break;
@@ -455,7 +462,164 @@ private void CreateCardStack(GameObject originalCard)
 
         ShowCurrentCard();
     }
+    */
+    private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
+    {
+        if (currentCard == null || cardStack.Count == 0) yield break;
 
+        // ВАЖНО: currentCard должна быть первой в списке (верхней)
+        currentCard = cardStack[0];
+
+        RectTransform cardRect = currentCard.GetComponent<RectTransform>();
+        Vector2 startPos = cardRect.anchoredPosition;
+        Vector2 targetPos = new Vector2(accepted ? 800f : -800f, startPos.y);
+
+        // Находим иконки success и decay
+        var go = currentCardPrefab.gameObject;
+        var imgs = go.GetComponentsInChildren<Image>().ToList();
+
+        var successIcon = imgs.Where(ch => ch.name.Contains("success")).FirstOrDefault();
+        var decayIcon = imgs.Where(ch => ch.name.Contains("decay")).FirstOrDefault();
+
+        // Показываем соответствующую иконку
+        if (isCorrect && successIcon != null)
+        {
+            StartCoroutine(ShowFeedbackIcon(successIcon, successColor));
+        }
+        else if (!isCorrect && decayIcon != null)
+        {
+            StartCoroutine(ShowFeedbackIcon(decayIcon, failureColor));
+        }
+
+        // Цветовая обратная связь для карточки (опционально)
+        Image cardImg = currentCard.GetComponent<Image>();
+        if (cardImg == null) cardImg = currentCard.GetComponentInChildren<Image>();
+
+        Color originalColor = cardImg != null ? cardImg.color : Color.white;
+
+        float elapsedTime = 0f;
+        float duration = 0.4f;
+
+        Debug.Log($"Анимация удаления карточки: {currentCard.name} (индекс 0 в стопке)");
+
+        // Анимация удаления ТОЛЬКО верхней карточки
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / duration;
+
+            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, progress);
+            cardRect.rotation = Quaternion.Lerp(Quaternion.identity,
+                Quaternion.Euler(0, 0, accepted ? -20f : 20f), progress);
+
+            yield return null;
+        }
+
+        // ПРАВИЛЬНОЕ удаление верхней карточки
+        GameObject removedCard = cardStack[0];
+        cardStack.RemoveAt(0); // Удаляем первую (верхнюю) карточку
+
+        // Перемещаем удаленную карточку в конец для переиспользования
+        removedCard.transform.SetAsFirstSibling(); // Помещаем в самый конец по Z-order
+
+        // Сбрасываем состояние удаленной карточки
+        RectTransform removedRect = removedCard.GetComponent<RectTransform>();
+        removedRect.anchoredPosition = new Vector2(0, 20);
+        removedRect.rotation = Quaternion.identity;
+        if (cardImg != null) cardImg.color = originalColor;
+
+        // Скрываем удаленную карточку
+        removedCard.SetActive(false);
+
+        // Добавляем в конец стопки для будущего использования
+        cardStack.Add(removedCard);
+
+        Debug.Log($"Карточка удалена. Осталось в стопке: {cardStack.Count}");
+
+        // Сдвигаем все оставшиеся карточки вперед
+        yield return StartCoroutine(AnimateStackShift());
+
+        currentCardIndex++;
+        cardsRemaining--;
+        isProcessingCard = false;
+
+        yield return new WaitForSeconds(0.1f);
+
+        ShowCurrentCard();
+    }
+
+    private IEnumerator ShowFeedbackIcon(Image icon, Color feedbackColor)
+    {
+        if (icon == null) yield break;
+
+        // Сохраняем оригинальные значения
+        Color originalColor = icon.color;
+        Vector3 originalScale = icon.transform.localScale;
+        bool wasActive = icon.gameObject.activeInHierarchy;
+
+        // Активируем иконку и устанавливаем цвет
+        icon.gameObject.SetActive(true);
+        icon.color = feedbackColor;
+
+        // Анимация появления (масштабирование)
+        float appearDuration = 0.2f;
+        float elapsedTime = 0f;
+
+        // Начинаем с нулевого масштаба
+        icon.transform.localScale = Vector3.zero;
+
+        while (elapsedTime < appearDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / appearDuration;
+
+            // Эффект "pop" - слегка превышаем целевой размер, затем возвращаемся
+            float scale = Mathf.LerpUnclamped(0f, 1.2f, progress);
+            if (progress > 0.7f)
+            {
+                scale = Mathf.Lerp(1.2f, 1f, (progress - 0.7f) / 0.3f);
+            }
+
+            icon.transform.localScale = originalScale * scale;
+            yield return null;
+        }
+
+        // Устанавливаем финальный размер
+        icon.transform.localScale = originalScale;
+
+        // Держим иконку видимой
+        float holdTime = feedbackIconDuration - appearDuration * 2; // Вычитаем время появления и исчезновения
+        if (holdTime > 0)
+        {
+            yield return new WaitForSeconds(holdTime);
+        }
+
+        // Анимация исчезновения (плавное затухание)
+        float fadeDuration = appearDuration;
+        elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / fadeDuration;
+
+            // Плавное уменьшение альфа-канала
+            Color currentColor = icon.color;
+            currentColor.a = Mathf.Lerp(currentColor.a, 0f, progress);
+            icon.color = currentColor;
+
+            // Легкое уменьшение масштаба
+            float scale = Mathf.Lerp(1f, 0.8f, progress);
+            icon.transform.localScale = originalScale * scale;
+
+            yield return null;
+        }
+
+        // Восстанавливаем оригинальные значения
+        icon.color = originalColor;
+        icon.transform.localScale = originalScale;
+        icon.gameObject.SetActive(wasActive);
+    }
     // Исправить метод AnimateStackShift():
 
     private IEnumerator AnimateStackShift()
@@ -499,6 +663,10 @@ private void CreateCardStack(GameObject originalCard)
             //targetAlphas.Add(Mathf.Max(alpha, 0.7f));
         }
 
+        var go = currentCardPrefab.gameObject;
+        var imgs = go.GetComponentsInChildren<Image>().ToList();
+
+
         // Анимация сдвига
         while (elapsedTime < duration)
         {
@@ -513,8 +681,10 @@ private void CreateCardStack(GameObject originalCard)
                 rect.anchoredPosition = Vector2.Lerp(startPositions[i], targetPositions[i], progress);
                 rect.sizeDelta = Vector2.Lerp(startSizes[i], targetSizes[i], progress);
 
+
+                //var getimg = img.GetComponentsInChildren<Image>();
                 //if (canvasGroup != null)
-                   // canvasGroup.alpha = Mathf.Lerp(startAlphas[i], targetAlphas[i], progress);
+                // canvasGroup.alpha = Mathf.Lerp(startAlphas[i], targetAlphas[i], progress);
             }
 
             yield return null;
@@ -886,10 +1056,10 @@ private void CreateCardStack(GameObject originalCard)
     private void CreateStatusTexts()
     {
         // Счетчик карточек
-        cardCounterText = CreateText("CardCounter", "Осталось: N", new Vector2(0, -200), 16, Color.white, new Vector2(200, 30), gameScreen.transform);
+        cardCounterText = CreateText("CardCounter", "Осталось: N", new Vector2(0, -300), 16, Color.white, new Vector2(200, 30), gameScreen.transform);
 
         // Счетчик очков  
-        scoreText = CreateText("ScoreText", "Очки: 0", new Vector2(-200, 200), 18, Color.white, new Vector2(150, 30), gameScreen.transform);
+        //scoreText = CreateText("ScoreText", "Очки: 0", new Vector2(-200, 200), 18, Color.white, new Vector2(150, 30), gameScreen.transform);
 
         // Инструкции
         instructionText = CreateText("InstructionText", "Q - удалить ←  |  → принять - E", new Vector2(0, -250), 14, Color.yellow, new Vector2(400, 30), gameScreen.transform);
@@ -934,7 +1104,7 @@ private void CreateCardStack(GameObject originalCard)
         // Визуальная индикация блокировки
         UpdateInstructionText($"Подождите {cardLockDuration:F1} сек...");
 
-        StartCoroutine(CardLockCountdown());
+      //  StartCoroutine(CardLockCountdown());
     }
 
     // Корутина для отсчета времени блокировки:
@@ -1070,8 +1240,8 @@ private void CreateCardStack(GameObject originalCard)
     }
     private void UpdateUI()
     {
-        if (scoreText != null)
-            scoreText.text = $"Очки: {correctAnswers}";
+        //if (scoreText != null)
+           // scoreText.text = $"Очки: {correctAnswers}";
 
         if (cardCounterText != null)
             cardCounterText.text = $"Осталось: {cardsRemaining}";
