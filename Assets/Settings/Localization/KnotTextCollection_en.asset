@@ -982,3 +982,5 @@ MonoBehaviour:
     _rawText: A way to break the cycle.
   - _key: Final_Phrase4
     _rawText: And finally find peace with your real self. No masks.
+  - _key: GameOver
+    _rawText: ' I was trying...'
