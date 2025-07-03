@@ -8,10 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 240020419828644200, guid: 075eac8e78639e642ba68129236f4645,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1272164410491940008, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}
       propertyPath: m_Name
       value: IntertitleScoreCore Variant 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919633741956995276, guid: 075eac8e78639e642ba68129236f4645,
+        type: 3}
+      propertyPath: requiredScore
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020433637742730894, guid: 075eac8e78639e642ba68129236f4645,
+        type: 3}
+      propertyPath: _keyReference._key
+      value: Day6_Results0
       objectReference: {fileID: 0}
     - target: {fileID: 5253553727484959770, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}
@@ -113,10 +128,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7143229920478508140, guid: 075eac8e78639e642ba68129236f4645,
+    - target: {fileID: 7672945472939800583, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}
-      propertyPath: _keyReference._key
-      value: Day6_Results0
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635372731998495592, guid: 075eac8e78639e642ba68129236f4645,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
