@@ -20,6 +20,11 @@ namespace Player
         [SerializeField] private Transform rightHand;
         [SerializeField] private PlayerDialogueView dialogueView;
         [SerializeField] private Vector2 correctionVector;
+
+        [Header("Player Head")] 
+        [SerializeField] private GameObject playerHat;
+        [SerializeField] private GameObject playerLongHair;
+        [SerializeField] private GameObject playerShortHair;
         
         [Header("Movement Settings")]
         [SerializeField]
@@ -200,6 +205,28 @@ namespace Player
         public void SetExitAnimation()
         {
             animator.SetTrigger(IsExit);
+        }
+
+        private void DisableAllHead()
+        {
+            playerHat.SetActive(false);
+            playerLongHair.SetActive(false);
+            playerShortHair.SetActive(false);
+        }
+        public void EnableHat()
+        {
+            DisableAllHead();
+            playerHat.SetActive(true);
+        }
+        public void EnableLongHair()
+        {
+            DisableAllHead();
+            playerLongHair.SetActive(true);
+        }
+        public void EnableShortHair()
+        {
+            DisableAllHead();
+            playerShortHair.SetActive(true);
         }
     }
 }

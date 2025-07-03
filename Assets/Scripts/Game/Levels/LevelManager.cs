@@ -1,7 +1,9 @@
+using System;
 using Effects;
 using Game.Interactions;
 using Game.MiniGames;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Levels
 {
@@ -13,8 +15,8 @@ namespace Game.Levels
         private GameObject _currentLevel;
         private int _currentIndex;
         private EffectAccumulatorView _effectAccumulatorView;
+        public event Action<int> OnNextLevelLoaded;
 
-        //public static int MyLevelIndex => _currentIndex;
         public int CurrentLevelIndex => _currentIndex;
         public RoomView CurrentRoomView { get; private set; }
 
@@ -33,6 +35,8 @@ namespace Game.Levels
         /// </summary>
         public void LoadLevel(int index, Transform parent, EffectAccumulatorView effectAccumulatorView = null)
         {
+            OnNextLevelLoaded?.Invoke(index);
+            
             if (effectAccumulatorView != null)
             {
                 _effectAccumulatorView = effectAccumulatorView;

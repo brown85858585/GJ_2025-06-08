@@ -75,7 +75,10 @@ namespace Game.MiniGames
             //SetupForDeveloper(); // Настройка для программиста
             //-----------------------------------// Тест кард
             if(_miniGameController.CardCount == 0)
+            { 
                 SetupForLanguage();                 //TODO Test Card  закоментировать при добавлении карт
+                
+            }
             //----------------------------------//
 
             SetDifficulty(DifficultyLevel.Medium);
@@ -279,26 +282,28 @@ namespace Game.MiniGames
         {
             ClearCustomCards();
 
+            var Level1 = Level + 1;
             // Рабочие задачи разработчика
             _configurator?.AddWorkCards(
-                ("Day1_CardHeader0", "Day1_CardContent0"),
-                ("Day1_CardHeader1", "Day1_CardContent1"),
-                ("Day1_CardHeader2", "Day1_CardContent2"),
-                ("Day1_CardHeader3", "Day1_CardContent3"),
-                ("Day1_CardHeader4", "Day1_CardContent4"),
-                ("Day1_CardHeader5", "Day1_CardContent5")
+                ($"Day{Level1}_CardHeader0", $"Day{Level1}_CardContent0"),
+                ($"Day{Level1}_CardHeader1", $"Day{Level1}_CardContent1"),
+                ($"Day{Level1}_CardHeader2", $"Day{Level1}_CardContent2"),
+                ($"Day{Level1}_CardHeader3", $"Day{Level1}_CardContent3"),
+                ($"Day{Level1}_CardHeader4", $"Day{Level1}_CardContent4"),
+                ($"Day{Level1}_CardHeader5", $"Day{Level1}_CardContent5")
             );
 
             // Личные отвлечения программиста
             _configurator?.AddPersonalCards(
-                ("Day1_CardHeader6", "Day1_CardContent6"),
-                ("Day1_CardHeader7", "Day1_CardContent7"),
-                ("Day1_CardHeader8", "Day1_CardContent8"),
-                ("Day1_CardHeader9", "Day1_CardContent9"),
-                ("Day1_CardHeader0", "Видео про новый фреймворк"),
-                ("Day1_CardHeader0", "Интересный вопрос не по работе")
+                ($"Day{Level1}_CardHeader6", $"Day{Level1}_CardContent6"),
+                ($"Day{Level1}_CardHeader7", $"Day{Level1}_CardContent7"),
+                ($"Day{Level1}_CardHeader8", $"Day{Level1}_CardContent8"),
+                ($"Day{Level1}_CardHeader9", $"Day{Level1}_CardContent9"),
+                ($"Day{Level1}_CardHeader10", $"Day{Level1}_CardContent10"),
+                ($"Day{Level1}_CardHeader11", $"Day{Level1}_CardContent11")
             );
 
+            _miniGameController.SetCustomCards(_configurator.GetAllCards());
             SetTargetScore(6); // Программисты должны быть точными
         }
 

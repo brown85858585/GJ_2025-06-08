@@ -103,6 +103,9 @@ MonoBehaviour:
   rightHand: {fileID: 2386991911503821973}
   dialogueView: {fileID: 8974123649122541329}
   correctionVector: {x: 0.6, y: 0.6}
+  playerHat: {fileID: 8793189651616949042}
+  playerLongHair: {fileID: 2598376995870126048}
+  playerShortHair: {fileID: 1047610725245561365}
   moveSpeed: 25
   runSpeed: 45
   sprintSpeed: 80
@@ -210,9 +213,21 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1182464440468041263}
   m_SourcePrefab: {fileID: 100100000, guid: 6d74c07faf18ee3418ff94da5d4c0934, type: 3}
+--- !u!1 &1047610725245561365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 425142958319086159, guid: 6d74c07faf18ee3418ff94da5d4c0934,
+    type: 3}
+  m_PrefabInstance: {fileID: 824076422325239898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2386991911503821973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3048929650355141839, guid: 6d74c07faf18ee3418ff94da5d4c0934,
+    type: 3}
+  m_PrefabInstance: {fileID: 824076422325239898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2598376995870126048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3414009166599696314, guid: 6d74c07faf18ee3418ff94da5d4c0934,
     type: 3}
   m_PrefabInstance: {fileID: 824076422325239898}
   m_PrefabAsset: {fileID: 0}
@@ -244,6 +259,12 @@ Transform:
 --- !u!95 &7637952258650488524 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7102387990256270998, guid: 6d74c07faf18ee3418ff94da5d4c0934,
+    type: 3}
+  m_PrefabInstance: {fileID: 824076422325239898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8793189651616949042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8171810409921930088, guid: 6d74c07faf18ee3418ff94da5d4c0934,
     type: 3}
   m_PrefabInstance: {fileID: 824076422325239898}
   m_PrefabAsset: {fileID: 0}

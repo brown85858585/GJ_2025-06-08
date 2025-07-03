@@ -199,5 +199,29 @@ namespace Player
         {
             _isEndRun = true;
         }
+
+        public void SwitchHead(int levelIndex)
+        {
+            switch (levelIndex)
+            {
+                case 0:
+                case 1:
+                    _view.EnableLongHair();
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    _view.EnableHat();
+                    break;
+                case 7:
+                    _view.EnableShortHair();
+                    break;
+                default:
+                    Debug.LogError("Unknown level index for head switch: " + levelIndex);
+                    break;
+            }
+        }
     }
 }
