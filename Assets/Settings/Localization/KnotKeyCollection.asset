@@ -17,6 +17,18 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Button_Start
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Button_Setting
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Button_Exit
+    _metadata:
+      _runtime: []
+      _editor: []
   - _key: Settings_Header
     _metadata:
       _runtime: []
@@ -133,6 +145,10 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day6_Awakening
+    _metadata:
+      _runtime: []
+      _editor: []
   - _key: Day1_Sleep
     _metadata:
       _runtime: []
@@ -146,6 +162,14 @@ MonoBehaviour:
       _runtime: []
       _editor: []
   - _key: Day4_Sleep
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Sleep
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Sleep
     _metadata:
       _runtime: []
       _editor: []
@@ -189,11 +213,11 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGDoor0
+  - _key: Day6_Door0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGDoor1
+  - _key: Day6_Door1
     _metadata:
       _runtime: []
       _editor: []
@@ -281,19 +305,19 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_WMGKitchen0
+  - _key: Day5_Kitchen_Win
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_WMGKitchen1
+  - _key: Day5_Kitchen_Defeat
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGKitchen0
+  - _key: Day6_Kitchen_Win
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGKitchen1
+  - _key: Day6_Kitchen_Defeat
     _metadata:
       _runtime: []
       _editor: []
@@ -377,15 +401,15 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGComputer0
+  - _key: Day6_Computer0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGComputer1
+  - _key: Day6_Computer1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_WMGComputer2
+  - _key: Day6_Computer2
     _metadata:
       _runtime: []
       _editor: []
@@ -1365,6 +1389,14 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day1_LoadBody1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day1_LoadBody2
+    _metadata:
+      _runtime: []
+      _editor: []
   - _key: Day2_Results0
     _metadata:
       _runtime: []
@@ -1413,6 +1445,14 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day4_LoadBody1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_LoadBody2
+    _metadata:
+      _runtime: []
+      _editor: []
   - _key: Day5_Results0
     _metadata:
       _runtime: []
@@ -1437,6 +1477,10 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day5_LoadBody1
+    _metadata:
+      _runtime: []
+      _editor: []
   - _key: Day6_Results0
     _metadata:
       _runtime: []
@@ -1449,6 +1493,10 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
+  - _key: Day6_LoadBody1
+    _metadata:
+      _runtime: []
+      _editor: []
   - _key: Day7_LoadHeader0
     _metadata:
       _runtime: []
@@ -1457,7 +1505,27 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Final_Phrase
+  - _key: Day7_LoadBody1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Final_Phrase0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Final_Phrase1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Final_Phrase2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Final_Phrase3
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Final_Phrase4
     _metadata:
       _runtime: []
       _editor: []
@@ -1465,19 +1533,7 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Help
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Help_Hint0
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Help_Hint1
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Help_Hint2
+  - _key: results_header
     _metadata:
       _runtime: []
       _editor: []

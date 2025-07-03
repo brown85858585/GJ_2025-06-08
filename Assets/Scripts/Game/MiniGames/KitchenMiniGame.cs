@@ -137,7 +137,6 @@ namespace Game.MiniGames
 
         private void OnCookingAttempt(bool success)
         {
-            
             if (success)
             {
                 Debug.Log("🍽️ Успешная попытка готовки!");
@@ -153,8 +152,8 @@ namespace Game.MiniGames
 
            // playerController.Model.Score += _miniGameController.gameScore;
             Debug.Log("🍳 Кухонная мини-игра завершена!");
-            
-            OnMiniGameComplete?.Invoke(QType, ((CookingMiniGame)_miniGameController).WinCounter > 1);
+            IsWin = ((CookingMiniGame)_miniGameController).WinCounter > 1;
+            OnMiniGameComplete?.Invoke(QType, IsWin);
             ((CookingMiniGame)_miniGameController).WinCounter = 3;
 
             // Отписываемся от событий

@@ -9,11 +9,16 @@ namespace Game.MiniGames.Park
     {
         [SerializeField] private List<CheckpointView> checkpointViews;
         [SerializeField] private Slider staminaSlider;
+        [SerializeField] private float staminaMultiplyer = 40;
         public List<CheckpointView> CheckpointViews => checkpointViews;
+        public float StaminaMultiplyer => staminaMultiplyer;
+        
         private int _checkpointCounter;
         public int CheckpointCounter => _checkpointCounter;
         public event Action<int> OnRingEntered;
         public event Action OnStaminaChanged;
+        
+        public event Action OnMiniGameStart;
 
         private void Awake()
         {
@@ -27,6 +32,7 @@ namespace Game.MiniGames.Park
         {
             InitRings();
             _checkpointCounter = CheckpointViews.Count;
+            OnMiniGameStart?.Invoke();
         }
 
         private void OnDisable()
@@ -79,6 +85,11 @@ namespace Game.MiniGames.Park
             checkpointViews[id].HideRing();
             OnRingEntered?.Invoke(id);
             
+        }
+        
+        public void SetStaminaMultiplyer(float value)
+        {
+            staminaMultiplyer = value;
         }
 
         private void OnDestroy()

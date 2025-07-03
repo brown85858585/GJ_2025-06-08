@@ -7,7 +7,6 @@ namespace Game.Intertitles
     public class ScoreIntertitleCardView : MonoBehaviour
     {
         [SerializeField] private int requiredScore;
-        [SerializeField] private TMP_Text textScore;
         [SerializeField] private UIElementTweener tweener;
         
         public int RequiredScore => requiredScore;
@@ -15,7 +14,6 @@ namespace Game.Intertitles
 
         public void SetScore(int score)
         {
-            textScore. text = score.ToString();
         }
     }
 }
