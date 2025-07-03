@@ -119,6 +119,7 @@ MonoBehaviour:
   panel: {fileID: 8012524612185898012}
   actionInputAction: {fileID: -7544852843498960386, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
+  actionQInputAction: {fileID: 0}
   startInputAction: {fileID: 5453977371175956843, guid: ec95c81ab2256c2449dbb762867506a9,
     type: 3}
   arcImage: {fileID: 0}
@@ -149,7 +150,6 @@ MonoBehaviour:
   arcEndAngle: 340
   successZoneAngle: 44
   arcColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  successZoneColor: {r: 0, g: 1, b: 0, a: 1}
   indicatorColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &8012524612185898012
 GameObject:
@@ -294,8 +294,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b8825e090e756f64e86a6405ee529aaf, type: 2}
+  m_sharedMaterial: {fileID: 6917078508901870437, guid: b8825e090e756f64e86a6405ee529aaf,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
