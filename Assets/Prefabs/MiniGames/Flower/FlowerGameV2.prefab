@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 930876032188750650, guid: 88aa080ecf622f44da8a5c22d9272597,
         type: 3}
       propertyPath: pressForce
-      value: 0.11
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 3549041799309945314, guid: 88aa080ecf622f44da8a5c22d9272597,
         type: 3}
