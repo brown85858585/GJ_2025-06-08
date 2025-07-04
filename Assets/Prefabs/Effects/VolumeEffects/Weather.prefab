@@ -928,8 +928,8 @@ MonoBehaviour:
   _sunForWindow: {fileID: 0}
   _sunForWindowMultiplyer: 100
   _lightning: {fileID: 7108289529474396065}
-  _lightningMinInterval: 3
-  _lightningMaxInterval: 7
+  _lightningMinInterval: 2
+  _lightningMaxInterval: 3
   _lightningFlashInterval_1: 0.1
   _lightningFlashInterval_2: 0.05
   _lightningFlashInterval_3: 0.05

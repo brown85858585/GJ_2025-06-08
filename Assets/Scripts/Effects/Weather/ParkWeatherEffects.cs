@@ -11,8 +11,8 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
     [SerializeField] private Light _sunForWindow;
     [SerializeField] private float _sunForWindowMultiplyer = 100.0f;
     [SerializeField] private Light _lightning;
-    [SerializeField] private float _lightningMinInterval = 5.0f;
-    [SerializeField] private float _lightningMaxInterval = 15.0f;
+    [SerializeField] private float _lightningMinInterval = 2.0f;
+    [SerializeField] private float _lightningMaxInterval = 3.0f;
     [SerializeField] private float _lightningFlashInterval_1 = 0.1f;
     [SerializeField] private float _lightningFlashInterval_2 = 0.05f;
     [SerializeField] private float _lightningFlashInterval_3 = 0.05f;
@@ -112,12 +112,18 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
                 ApplyHeavyRain();
                 break;
             case WeatherType.Thunderstorm:
-                ApplyThunderstorm();
+                ApplyThunderstorm(false);
+                break;
+            case WeatherType.ThunderstormWithLightning:
+                ApplyThunderstorm(true);
                 break;
             case WeatherType.ClearMorning:
                 ApplyClearMorning();
                 break;
             case WeatherType.Default:
+                ApplyDefaultWeather();
+                break;
+            default:
                 ApplyDefaultWeather();
                 break;
         }
@@ -358,7 +364,7 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
         }
     }
 
-    private void ApplyThunderstorm()
+    private void ApplyThunderstorm(bool withLightning)
     {
         Debug.Log("Park: Apply Thunderstorm");
 
@@ -397,12 +403,15 @@ public class ParkWeatherEffects : MonoBehaviour, IWeatherEffects
             _ambientAudioSource.Play();
         }
 
-        if (_parkLightningRoutine != null)
+        if (withLightning)
         {
-            StopCoroutine(_parkLightningRoutine);
-        }
+            if (_parkLightningRoutine != null)
+            {
+                StopCoroutine(_parkLightningRoutine);
+            }
 
-        _parkLightningRoutine = StartCoroutine(ThunderRoutine(_lightning, _lightningMinInterval, _lightningMaxInterval));
+            _parkLightningRoutine = StartCoroutine(ThunderRoutine(_lightning, _lightningMinInterval, _lightningMaxInterval));
+        }
     }
 
     private void ApplyClearMorning()
