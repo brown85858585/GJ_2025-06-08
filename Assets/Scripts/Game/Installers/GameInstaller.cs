@@ -63,7 +63,6 @@ namespace Game.Installers
         {  
             _scenario = Instantiate(Resources.Load<ScenarioInstaller>("Prefabs/ScenarioInstaller"));
             
-            
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
             _effectAccumulator.FadeOut(0);
             InitLevelOne();
@@ -116,14 +115,14 @@ namespace Game.Installers
             var playerObj = Instantiate(playerPrefab);
             _core.PlayerModel.PlayerTransform = playerObj.transform;
             var playerView = playerObj.GetComponent<PlayerView>();
-            _logic.PlayerController.InitView(playerView);
+            _logic.PlayerController.Init(playerView, _levelManager);
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
             _levelManager.OnNextLevelLoaded += _logic.PlayerController.SwitchHead;
         }
 
         private void InitStartWakeUp()
         {
-            _logic.PlayerController.PlayWakeUpAnimation();
+            _logic.PlayerController.PlayWakeUpAnimation(2f);
         }
 
         private void InitCamera()
@@ -185,15 +184,24 @@ namespace Game.Installers
                 _levelManager.LoadNextLevel(transform.parent);
             
                 _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
+                if(_levelManager.CurrentLevelIndex != 7)
+                { 
+                    // Play wake up animation only if not the last level
+                    _logic.PlayerController.PlayWakeUpAnimation(1);
+                }
+                else
+                { 
+                    _core.InputAdapter.SwitchAdapterToGlobalMode();
+                }
                 _logic.QuestLog.ResetQuests();
                 _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
-                _logic.MiniGameCoordinator.SetWateringCanView(_savedCan);
                 _allQuestsCompleted = false;
+                
+                _logic.MiniGameCoordinator.SetWateringCanView(_savedCan);
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
 
-                _effectAccumulator.FadeIn(-1, _core.InputAdapter.SwitchAdapterToGlobalMode);
-
+                _effectAccumulator.FadeIn();
             });
         }
 

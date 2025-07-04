@@ -1,6 +1,5 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Game;
+﻿using Game;
+using Game.Levels;
 using Player.Interfaces;
 using UnityEngine;
 using Utilities;
@@ -30,8 +29,9 @@ namespace Player
         private float _acceleratedSpeed;
         private bool _stop;
         private bool _isEndRun;
+        private LevelManager _levelManager;
 
-       
+
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
@@ -46,8 +46,10 @@ namespace Player
             _input.OnSwitchInteract += PutTheItemDown;
         }
 
-        public void InitView(PlayerView playerView)
+        public void Init(PlayerView playerView, LevelManager levelManager)
         {
+            _levelManager = levelManager;
+            
             _view = playerView;
             _normalSpeed = _view.MoveSpeed;
             _acceleratedSpeed = _view.RunSpeed;
@@ -66,6 +68,8 @@ namespace Player
 
         private void InputOn()
         {
+            if(_levelManager.CurrentLevelIndex<6)
+                _playerDialogue.OpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Awakening");
             _input.SwitchAdapterToGlobalMode();
         }
 
@@ -184,9 +188,9 @@ namespace Player
             _view.TakeObject(obj);
         }
 
-        public void PlayWakeUpAnimation()
+        public void PlayWakeUpAnimation(float speed = 3f)
         {
-            _view.SetWakeUpAnimation();
+            _view.SetWakeUpAnimation(speed);
         }
 
         private void PutTheItemDown()

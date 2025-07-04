@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8466072267986928842, guid: 612b14e77124b644584ed65ef6f49cc8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.78
+      objectReference: {fileID: 0}
     - target: {fileID: 8849465179124743606, guid: 612b14e77124b644584ed65ef6f49cc8,
         type: 3}
       propertyPath: m_LocalPosition.x

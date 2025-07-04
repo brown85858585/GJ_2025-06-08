@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Player
@@ -14,7 +13,9 @@ namespace Player
         private static readonly int PositionY = Animator.StringToHash("PositionY");
         private static readonly int IsFalling = Animator.StringToHash("Falling");
         private static readonly int IsExit = Animator.StringToHash("Exit");
-
+        private static readonly int IsWakeUpSpeed = Animator.StringToHash("WakeUpSpeed");
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");
+        
         [SerializeField] private Animator animator;
         [SerializeField] private Transform playerObject;
         [SerializeField] private Transform rightHand;
@@ -74,11 +75,14 @@ namespace Player
             CapsuleCollider = GetComponent<CapsuleCollider>();
         }
 
-        public void SetWakeUpAnimation()
+        public void SetWakeUpAnimation(float speed = 3f)
         {
             Rigidbody.useGravity = false;
             CapsuleCollider.enabled = false;
-            animator.SetTrigger("WakeUp");
+            transform.rotation = Quaternion.identity;
+            animator.SetFloat(IsWakeUpSpeed, speed);
+            
+            animator.SetTrigger(WakeUp);
         }
 
         public void WakeUpAnimationEnded()
