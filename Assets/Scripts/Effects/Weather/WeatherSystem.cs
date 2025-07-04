@@ -12,6 +12,7 @@ public enum WeatherType
     Rain,
     HeavyRain,
     Thunderstorm,
+    ThunderstormWithLightning,
     ClearMorning,
     Default
 }
@@ -22,7 +23,7 @@ public class WeatherSystem : MonoBehaviour
     public LocationType CurrentLocation { get; private set; }
     public int CurrentCycle { get; private set; } = 1;
 
-    [SerializeField] private int _maxCycle = 7;
+    [SerializeField] private int _maxCycle = 8;
 
     ApartmentWeatherEffects _apartmentWeatherEffects;
     ParkWeatherEffects _parkWeatherEffects;
@@ -33,7 +34,6 @@ public class WeatherSystem : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
 
             _apartmentWeatherEffects = FindObjectOfType<ApartmentWeatherEffects>();
             _parkWeatherEffects = FindObjectOfType<ParkWeatherEffects>();
@@ -52,7 +52,7 @@ public class WeatherSystem : MonoBehaviour
 
     public void ButtonSetWeather()
     {
-        CurrentCycle = Random.Range(1, 8);
+        CurrentCycle = Random.Range(1, 9);
         SetWeather(CurrentCycle);
     }
 
@@ -151,7 +151,8 @@ public class WeatherSystem : MonoBehaviour
             case 4: return WeatherType.Overcast;
             case 5: return WeatherType.HeavyRain;
             case 6: return WeatherType.Thunderstorm;
-            case 7: return WeatherType.ClearMorning;
+            case 7: return WeatherType.ThunderstormWithLightning;
+            case 8: return WeatherType.ClearMorning;
             default: return WeatherType.Default;
         }
     }
