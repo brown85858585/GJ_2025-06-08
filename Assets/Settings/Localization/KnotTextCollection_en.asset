@@ -15,7 +15,7 @@ MonoBehaviour:
   _items:
   - _key: testKey
     _rawText: Test
-  - _key: Button_Start
+  - _key: Play
     _rawText: Play
   - _key: Button_Setting
     _rawText: Settings
@@ -33,6 +33,16 @@ MonoBehaviour:
     _rawText: Exit Game
   - _key: Quit_Accept0
     _rawText: Really want to quit?
+  - _key: Help
+    _rawText: Help
+  - _key: Help_Hint0
+    _rawText: "e \u2014 interaction"
+  - _key: Help_Hint1
+    _rawText: "q \u2014 release/switch"
+  - _key: Help_Hint2
+    _rawText: "tab \u2014 quests"
+  - _key: GameOver
+    _rawText: I tried...
   - _key: Quest_Awakening0
     _rawText: Wake up
   - _key: Quest_Door0
@@ -82,9 +92,9 @@ MonoBehaviour:
   - _key: Day6_Awakening
     _rawText: ...
   - _key: Day1_Sleep
-    _rawText: 'Wish I could just
+    _rawText: 'The main thing is not
 
-      get some real sleep.'
+      to forget to pay the bills.'
   - _key: Day2_Sleep
     _rawText: "Can\u2019t get it out of my head."
   - _key: Day3_Sleep
@@ -119,12 +129,22 @@ MonoBehaviour:
     _rawText: Can I still keep going?
   - _key: Day5_Door_Defeat
     _rawText: "Feels like I\u2019m not\nin shape anymore."
-  - _key: Day6_Door0
+  - _key: Day6_WMGDoor0
     _rawText: No. Not today.
-  - _key: Day6_Door1
+  - _key: Day6_WMGDoor1
     _rawText: "I can\u2019t do this anymore..."
-  - _key: Flower_WateringCup
+  - _key: Day1_Flower0
+    _rawText: I think I put a watering can in the kitchen.
+  - _key: Day2_Flower0
     _rawText: Need a watering can.
+  - _key: Day3_Flower0
+    _rawText: Where's the watering can?
+  - _key: Day4_Flower0
+    _rawText: Watering can in the kitchen.
+  - _key: Day5_Flower0
+    _rawText: Need a watering can.
+  - _key: Day6_Flower0
+    _rawText: Should I try watering it?
   - _key: Day1_Flower_Win
     _rawText: Grow, little flower.
   - _key: Day1_Flower_Defeat
@@ -166,13 +186,13 @@ MonoBehaviour:
     _rawText: Tastes like laundry detergent.
   - _key: Day4_Kitchen_Defeat
     _rawText: ...
-  - _key: Day5_Kitchen_Win
+  - _key: Day5_WMGKitchen0
     _rawText: "I can\u2019t.\nI just can\u2019t."
-  - _key: Day5_Kitchen_Defeat
+  - _key: Day5_WMGKitchen1
     _rawText: "I can\u2019t.\nI just can\u2019t."
-  - _key: Day6_Kitchen_Win
+  - _key: Day6_WMGKitchen0
     _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste."
-  - _key: Day6_Kitchen_Defeat
+  - _key: Day6_WMGKitchen1
     _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste."
   - _key: Computer_UI_Letter_Head
     _rawText: 'From:'
@@ -215,11 +235,11 @@ MonoBehaviour:
     _rawText: Every message feels the same.
   - _key: Day5_Computer_Defeat
     _rawText: The letters are blurring.
-  - _key: Day6_Computer0
+  - _key: Day6_WMGComputer0
     _rawText: "What does it say?\nI can\u2019t tell."
-  - _key: Day6_Computer1
+  - _key: Day6_WMGComputer1
     _rawText: It all feels like mockery.
-  - _key: Day6_Computer2
+  - _key: Day6_WMGComputer2
     _rawText: "I can\u2019t read this."
   - _key: Day1_Guitar0
     _rawText: "I remember us singing\nin the kitchen, the four of us\u2026"
@@ -307,8 +327,10 @@ MonoBehaviour:
 
       to say with them?'
   - _key: Day5_Painting0
-    _rawText: "Shoved the whole stack\ninto a corner.\nKept bumping into it, got
-      angry\u2026"
+    _rawText: 'I even shouted at the paintings.
+
+      I was offended every time,
+      I was angry...'
   - _key: Day5_Painting1
     _rawText: "Wanted to throw it all out,\nbut my hand wouldn\u2019t move\u2026"
   - _key: Day5_Painting2
@@ -883,6 +905,8 @@ MonoBehaviour:
     _rawText: "\u2014"
   - _key: Day5_CardContent14
     _rawText: Stay strong!
+  - _key: results_header
+    _rawText: Results
   - _key: Day1_LoadHeader0
     _rawText: One week before...
   - _key: Day1_LoadBody0
@@ -890,7 +914,7 @@ MonoBehaviour:
   - _key: Day1_LoadBody1
     _rawText: "Afraid I\u2019d fall behind."
   - _key: Day1_LoadBody2
-    _rawText: "Every day felt like the same repeating cycle\u2026"
+    _rawText: "Every day felt like the same\nrepeating cycle\u2026"
   - _key: Day2_Results0
     _rawText: 'Public utilities:'
   - _key: Day2_LoadHeader0
@@ -960,7 +984,3 @@ MonoBehaviour:
     _rawText: A way to break the cycle.
   - _key: Final_Phrase4
     _rawText: And finally find peace with your real self. No masks.
-  - _key: Play
-    _rawText: Play
-  - _key: results_header
-    _rawText: Results

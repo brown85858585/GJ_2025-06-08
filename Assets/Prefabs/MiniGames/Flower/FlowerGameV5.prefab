@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 930876032188750650, guid: 88aa080ecf622f44da8a5c22d9272597,
+        type: 3}
+      propertyPath: winScore
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 930876032188750650, guid: 88aa080ecf622f44da8a5c22d9272597,
+        type: 3}
+      propertyPath: pressForce
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549041799309945314, guid: 88aa080ecf622f44da8a5c22d9272597,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 85965389b454a4f44ac47cf022761908,
+        type: 3}
     - target: {fileID: 6051155464596156260, guid: 88aa080ecf622f44da8a5c22d9272597,
         type: 3}
       propertyPath: m_Name

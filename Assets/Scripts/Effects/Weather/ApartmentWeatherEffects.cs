@@ -87,10 +87,19 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
                 ApplyHeavyRain();
                 break;
             case WeatherType.Thunderstorm:
-                ApplyThunderstorm();
+                ApplyThunderstorm(false);
+                break;
+            case WeatherType.ThunderstormWithLightning:
+                ApplyThunderstorm(true);
                 break;
             case WeatherType.ClearMorning:
                 ApplyClearMorning();
+                break;
+            case WeatherType.Default:
+                ApplyDefaultWeather();
+                break;
+            default:
+                ApplyDefaultWeather();
                 break;
         }
     }
@@ -244,7 +253,7 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
         }
     }
 
-    private void ApplyThunderstorm()
+    private void ApplyThunderstorm(bool withLightning)
     {
         Debug.Log("Apartrment: Apply Thunderstorm");
 
@@ -267,7 +276,7 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
             _weatherAudio.Play();
         }
 
-        if (_lightning != null)
+        if (withLightning && _lightning != null)
         {
             //Lightning.Instance.StartApartmentLightning(_lightning, _lightningMinInterval, _lightningMaxInterval);
             if (_apartmentLightningRoutine != null)
@@ -301,6 +310,11 @@ public class ApartmentWeatherEffects : MonoBehaviour, IWeatherEffects
             _sunLight.intensity = _w7_SunLightIntencity;
             _sunLight.color = _w7_SunLightColor;
         }
+    }
+
+    private void ApplyDefaultWeather()
+    {
+
     }
 
     private IEnumerator LightningApartmentRoutine(Light apartmentLightning, float minInterval, float maxInterval)

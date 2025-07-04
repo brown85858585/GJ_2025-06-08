@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settingsBackButton: {fileID: 1281572209688705214}
+  toggleMusic: {fileID: 3140445998450766789}
 --- !u!1001 &631755665430398895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -669,6 +670,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2044490419843792029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3140445998450766789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4020139740174880600, guid: 252af8ac8bc41d942b94dcaebf6811ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 2044490419843792029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c033ea8a9e639488b609b714afbfd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2718680364606690914
 PrefabInstance:
   m_ObjectHideFlags: 0
