@@ -588,145 +588,99 @@ MonoBehaviour:
     _rawText: "\u041F\u043E\u0434\u043F\u0438\u0448\u0438\u0442\u0435 \u0432\u0435\u0434\u043E\u043C\u043E\u0441\u0442\u044C\n\u0437\u0430
       \u0430\u043F\u0440\u0435\u043B\u044C"
   - _key: Day1_CardHeader2
-    _rawText: "\u0413\u043E\u0441\u0443\u0441\u043B\u0443\u0433\u0438"
-  - _key: Day1_CardContent2
-    _rawText: "\u041D\u0430\u043B\u043E\u0433\u043E\u0432\u0430\u044F \u0444\u043E\u0440\u043C\u0430:\n\u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C
-      3 \u0434\u043D\u044F"
-  - _key: Day1_CardHeader3
-    _rawText: "\u042F\u0433\u043E\u0434\u043A\u0438"
-  - _key: Day1_CardContent3
-    _rawText: "\u041F\u043E\u0441\u044B\u043B\u043A\u0430 \u0432 \u043F\u0443\u043D\u043A\u0442\u0435\n\u0432\u044B\u0434\u0430\u0447\u0438"
-  - _key: Day1_CardHeader4
     _rawText: HR
-  - _key: Day1_CardContent4
+  - _key: Day1_CardContent2
     _rawText: "\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0442\u0430\u0431\u0435\u043B\u044C\n\u0434\u043E
       \u043F\u044F\u0442\u043D\u0438\u0446\u044B"
-  - _key: Day1_CardHeader5
-    _rawText: SelfGuru
-  - _key: Day1_CardContent5
-    _rawText: "\u041E\u0442\u043A\u0440\u043E\u0439 \u0441\u0438\u043B\u0443 \u0432\u043D\u0443\u0442\u0440\u0438.\n\u0422\u043E\u043B\u044C\u043A\u043E
-      \u0441\u0435\u0433\u043E\u0434\u043D\u044F -70%"
-  - _key: Day1_CardHeader6
-    _rawText: BeautyBox
-  - _key: Day1_CardContent6
-    _rawText: "\u0422\u044B \u0434\u043E\u0441\u0442\u043E\u0439\u043D\u0430 \u043B\u0443\u0447\u0448\u0435\u0433\u043E\n\u0443\u0445\u043E\u0434\u0430!"
-  - _key: Day1_CardHeader7
-    _rawText: "\u0422\u0430\u0442\u044C\u044F\u043D\u0430, \u043D\u0443\u0442\u0440\u0438\u0446\u0438\u043E\u043B\u043E\u0433"
-  - _key: Day1_CardContent7
-    _rawText: "5 \u0448\u0430\u0433\u043E\u0432 \u043A \u0436\u0438\u0437\u043D\u0438\n\u0431\u0435\u0437
-      \u0442\u043E\u043A\u0441\u0438\u043D\u043E\u0432"
-  - _key: Day1_CardHeader8
+  - _key: Day1_CardHeader3
     _rawText: "\u041F\u0443\u0448\u0438\u0441\u0442\u0438\u043A \u0434\u043D\u044F"
-  - _key: Day1_CardContent8
+  - _key: Day1_CardContent3
     _rawText: "\u041A\u043E\u0442 \u0434\u043D\u044F:\n\u0441\u0435\u0433\u043E\u0434\u043D\u044F
       \u043E\u043D \u0443\u043B\u044B\u0431\u0430\u0435\u0442\u0441\u044F\n\u0434\u043B\u044F
       \u0442\u0435\u0431\u044F!"
-  - _key: Day1_CardHeader9
-    _rawText: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-  - _key: Day1_CardContent9
-    _rawText: "\U0001F308\U0001F4B0\u041F\u041E\u041F\u0420\u041E\u0411\u0423\u0419\n\u0421\u0415\u0419\u0427\u0410\u0421\U0001F4B0\U0001F308"
-  - _key: Day1_CardHeader10
+  - _key: Day1_CardHeader4
+    _rawText: SelfGuru
+  - _key: Day1_CardContent4
+    _rawText: "\u041E\u0442\u043A\u0440\u043E\u0439 \u0441\u0438\u043B\u0443 \u0432\u043D\u0443\u0442\u0440\u0438.\n\u0422\u043E\u043B\u044C\u043A\u043E
+      \u0441\u0435\u0433\u043E\u0434\u043D\u044F -70%"
+  - _key: Day1_CardHeader5
+    _rawText: BeautyBox
+  - _key: Day1_CardContent5
+    _rawText: "\u0422\u044B \u0434\u043E\u0441\u0442\u043E\u0439\u043D\u0430 \u043B\u0443\u0447\u0448\u0435\u0433\u043E\n\u0443\u0445\u043E\u0434\u0430!"
+  - _key: Day1_CardHeader6
     _rawText: "\u041C\u0430\u043C\u0430"
-  - _key: Day1_CardContent10
+  - _key: Day1_CardContent6
     _rawText: "\u0422\u044B \u043A\u0430\u043A? \u041D\u0430\u0434\u0435\u044E\u0441\u044C,\n\u0443
       \u0442\u0435\u0431\u044F \u0432\u0441\u0451 \u0445\u043E\u0440\u043E\u0448\u043E"
-  - _key: Day1_CardHeader11
+  - _key: Day1_CardHeader7
     _rawText: "\u041A\u0438\u0440\u0430"
-  - _key: Day1_CardContent11
+  - _key: Day1_CardContent7
     _rawText: "\u0421\u043C\u043E\u0442\u0440\u0438, \u043D\u0430\u0448\u0430 \u043A\u043E\u0448\u043A\u0430\n\u0442\u0430\u043A
       \u0432\u044B\u0440\u043E\u0441\u043B\u0430!"
-  - _key: Day1_CardHeader12
-    _rawText: "\u0414\u0436\u0443\u043D"
-  - _key: Day1_CardContent12
-    _rawText: "\u0422\u044B \u0435\u0449\u0451 \u043F\u0438\u0448\u0435\u0448\u044C
-      \u0442\u0435\u043A\u0441\u0442\u044B?\n\u041D\u0430\u043C \u043D\u0443\u0436\u0435\u043D
-      \u0447\u0435\u043B\u043E\u0432\u0435\u043A\n\u043D\u0430 \u043F\u043E\u0434\u043C\u0435\u043D\u0443"
-  - _key: Day1_CardHeader13
+  - _key: Day1_CardHeader8
     _rawText: "\u0421\u0430\u0448\u0430"
-  - _key: Day1_CardContent13
+  - _key: Day1_CardContent8
     _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u041D\u0430\u0448\u043B\u0430
       \u0442\u0432\u043E\u044E \u0441\u0442\u0430\u0440\u0443\u044E \u0444\u043E\u0442\u043A\u0443,\n\u0442\u0430\u043A
       \u0443\u044E\u0442\u043D\u043E \u0441\u0442\u0430\u043B\u043E!"
-  - _key: Day1_CardHeader14
-    _rawText: "\u041A\u0435\u0439"
-  - _key: Day1_CardContent14
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442. \u041D\u0430\u0434\u0435\u044E\u0441\u044C,\n\u0443
-      \u0442\u0435\u0431\u044F \u0441\u0435\u0439\u0447\u0430\u0441 \u0432\u0441\u0451\n\u0441\u0442\u0430\u0431\u0438\u043B\u044C\u043D\u043E"
+  - _key: Day1_CardHeader9
+    _rawText: "\u0414\u0436\u0443\u043D"
+  - _key: Day1_CardContent9
+    _rawText: "\u0422\u044B \u0435\u0449\u0451 \u043F\u0438\u0448\u0435\u0448\u044C
+      \u0442\u0435\u043A\u0441\u0442\u044B?\n\u041D\u0430\u043C \u043D\u0443\u0436\u0435\u043D
+      \u0447\u0435\u043B\u043E\u0432\u0435\u043A\n\u043D\u0430 \u043F\u043E\u0434\u043C\u0435\u043D\u0443"
   - _key: Day2_CardHeader0
     _rawText: "\u0420\u0435\u0434\u043A\u043E\u043B\u043B\u0435\u0433\u0438\u044F"
   - _key: Day2_CardContent0
     _rawText: "\u041F\u0440\u0438\u0448\u043B\u0438\u0442\u0435 \u0442\u0435\u043C\u0443\n\u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0433\u043E
       \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B\u0430"
   - _key: Day2_CardHeader1
-    _rawText: "\u0416\u041A\u0425"
-  - _key: Day2_CardContent1
-    _rawText: "\u041F\u0435\u043D\u0438 \u0437\u0430 \u0432\u043E\u0434\u0443:\n+112"
-  - _key: Day2_CardHeader2
     _rawText: "\u0411\u0443\u0445\u0433\u0430\u043B\u0442\u0435\u0440\u0438\u044F"
-  - _key: Day2_CardContent2
+  - _key: Day2_CardContent1
     _rawText: "\u0417\u0430\u0440\u043F\u043B\u0430\u0442\u0430 \u0437\u0430\u0447\u0438\u0441\u043B\u0435\u043D\u0430.\n\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435
       \u0440\u0435\u043A\u0432\u0438\u0437\u0438\u0442\u044B"
-  - _key: Day2_CardHeader3
-    _rawText: "\u042F\u0433\u043E\u0434\u043A\u0438"
-  - _key: Day2_CardContent3
-    _rawText: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u0435:\n\u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430
-      \u043D\u0435 \u0443\u0434\u0430\u043B\u0430\u0441\u044C"
-  - _key: Day2_CardHeader4
+  - _key: Day2_CardHeader2
     _rawText: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0430\u044F
       \u0441\u0438\u0441\u0442\u0435\u043C\u0430"
-  - _key: Day2_CardContent4
+  - _key: Day2_CardContent2
     _rawText: "\u0421\u0440\u043E\u043A \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F\n\u0437\u0430\u0434\u0430\u0447\u0438
       \u0438\u0441\u0442\u0435\u043A\u0430\u0435\u0442\n\u0447\u0435\u0440\u0435\u0437
       6 \u0447\u0430\u0441\u043E\u0432"
-  - _key: Day2_CardHeader5
+  - _key: Day2_CardHeader3
     _rawText: "\u041F\u043B\u0430\u043D\u0435\u0440"
-  - _key: Day2_CardContent5
+  - _key: Day2_CardContent3
     _rawText: "\u0422\u0432\u043E\u0438 \u0446\u0435\u043B\u0438 \u0441\u043A\u0443\u0447\u0430\u044E\u0442\n\u043F\u043E
       \u0442\u0435\u0431\u0435!"
-  - _key: Day2_CardHeader6
-    _rawText: "\u0422\u0430\u043D\u0446\u044B"
-  - _key: Day2_CardContent6
-    _rawText: "\u041D\u0430\u0447\u043D\u0438 \u043D\u0435\u0434\u0435\u043B\u044E\n\u0441
-      \u0442\u0430\u043D\u0446\u0430!"
-  - _key: Day2_CardHeader7
-    _rawText: ImgaGirl
-  - _key: Day2_CardContent7
-    _rawText: "5 \u043F\u043E\u0437\n\u0434\u043B\u044F \u0443\u0432\u0435\u0440\u0435\u043D\u043D\u043E\u0441\u0442\u0438\n\u043D\u0430
-      \u0444\u043E\u0442\u043E"
-  - _key: Day2_CardHeader8
+  - _key: Day2_CardHeader4
     _rawText: Digital
-  - _key: Day2_CardContent8
+  - _key: Day2_CardContent4
     _rawText: "\u041D\u0435 \u0442\u043E\u0440\u043C\u043E\u0437\u0438!\n\u041C\u0438\u0440
       \u043D\u0435 \u0436\u0434\u0451\u0442!"
-  - _key: Day2_CardHeader9
-    _rawText: "\u0418\u043D\u0444\u043E"
-  - _key: Day2_CardContent9
-    _rawText: "\u0412\u0430\u0448\u0435\u043C\u0443 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u044E\n\u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u0442\u0441\u044F..."
-  - _key: Day2_CardHeader10
-    _rawText: "\u041C\u0430\u043C\u0430"
-  - _key: Day2_CardContent10
-    _rawText: "\u0421\u0435\u0433\u043E\u0434\u043D\u044F \u0431\u044B\u043B \u0434\u043E\u0436\u0434\u044C.\n\u041D\u0430\u0434\u0435\u044E\u0441\u044C,
-      \u0442\u044B \u0432\u0437\u044F\u043B\u0430 \u0437\u043E\u043D\u0442?"
-  - _key: Day2_CardHeader11
-    _rawText: "\u0421\u0430\u0448\u0430"
-  - _key: Day2_CardContent11
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u0423 \u0442\u0435\u0431\u044F
-      \u0435\u0441\u0442\u044C \u0440\u0435\u0446\u0435\u043F\u0442\n\u0442\u043E\u0439
-      \u0437\u0430\u043F\u0435\u043A\u0430\u043D\u043A\u0438\n\u0441 \u0442\u0432\u043E\u0440\u043E\u0433\u043E\u043C?"
-  - _key: Day2_CardHeader12
+  - _key: Day2_CardHeader5
+    _rawText: "\u0422\u0430\u043D\u0446\u044B"
+  - _key: Day2_CardContent5
+    _rawText: "\u041D\u0430\u0447\u043D\u0438 \u043D\u0435\u0434\u0435\u043B\u044E\n\u0441
+      \u0442\u0430\u043D\u0446\u0430!"
+  - _key: Day2_CardHeader6
     _rawText: "\u0410\u043D\u043D\u0430"
-  - _key: Day2_CardContent12
+  - _key: Day2_CardContent6
     _rawText: "\u0422\u044B \u043D\u0435 \u043F\u043E\u0432\u0435\u0440\u0438\u0448\u044C,\n\u043D\u0430
       \u0432\u043E\u043A\u0437\u0430\u043B\u0435 \u0438\u0433\u0440\u0430\u043B\u0438\n\u0442\u0432\u043E\u044E
       \u043B\u044E\u0431\u0438\u043C\u0443\u044E \u043F\u0435\u0441\u043D\u044E!"
-  - _key: Day2_CardHeader13
+  - _key: Day2_CardHeader7
     _rawText: "\u041C\u0430\u043C\u0430"
-  - _key: Day2_CardContent13
+  - _key: Day2_CardContent7
     _rawText: "\u041F\u043E\u043C\u043D\u0438\u0448\u044C, \u0442\u044B \u043F\u0440\u043E\u0441\u0438\u043B\u0430\n\u043D\u0430\u043F\u043E\u043C\u043D\u0438\u0442\u044C
       \u043F\u0440\u043E \u043F\u043B\u0430\u0442\u0451\u0436\n\u0437\u0430 \u0442\u0435\u043B\u0435\u0444\u043E\u043D?"
-  - _key: Day2_CardHeader14
+  - _key: Day2_CardHeader8
+    _rawText: "\u0421\u0430\u0448\u0430"
+  - _key: Day2_CardContent8
+    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u0423 \u0442\u0435\u0431\u044F
+      \u0435\u0441\u0442\u044C \u0440\u0435\u0446\u0435\u043F\u0442\n\u0442\u043E\u0439
+      \u0437\u0430\u043F\u0435\u043A\u0430\u043D\u043A\u0438\n\u0441 \u0442\u0432\u043E\u0440\u043E\u0433\u043E\u043C?"
+  - _key: Day2_CardHeader9
     _rawText: "\u041C\u0435\u0434\u0446\u0435\u043D\u0442\u0440 "
-  - _key: Day2_CardContent14
+  - _key: Day2_CardContent9
     _rawText: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043E\u0431\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F...\n...\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043E
       \u0441\u0440\u043E\u0447\u043D\u043E\u0435\n\u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435..."
   - _key: Day3_CardHeader0
@@ -743,68 +697,40 @@ MonoBehaviour:
   - _key: Day3_CardContent2
     _rawText: "\u041E\u043F\u043B\u0430\u0442\u0430 \u043F\u0440\u043E\u0448\u043B\u0430"
   - _key: Day3_CardHeader3
-    _rawText: "\u0410\u043D\u043D\u0430"
-  - _key: Day3_CardContent3
-    _rawText: "\u0412\u0430\u0448\u0430 \u0441\u0442\u0430\u0442\u044C\u044F?\n\u041F\u043E\u0441\u0442\u0443\u043F\u043B@@@
-      \u0432\n\u0447\u0435\u0440\u043D\u043E\u0432\u0438\u043A\u0438"
-  - _key: Day3_CardHeader4
-    _rawText: IT
-  - _key: Day3_CardContent4
-    _rawText: "\u0412\u0430\u0448 \u043F\u0430\u0440\u043E\u043B\u044C \u0443\u0441\u0442\u0430\u0440\u0435\u043B.\n\u0421\u043C\u0435\u043D\u0438\u0442\u0435
-      \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435\n24 \u0447\u0430\u0441\u043E\u0432"
-  - _key: Day3_CardHeader5
     _rawText: "\u041C\u0435\u0434\u041C\u0435\u0434"
-  - _key: Day3_CardContent5
+  - _key: Day3_CardContent3
     _rawText: "5 \u0441\u0438\u043C\u043F\u0442\u043E\u043C\u043E\u0432,\n\u043A\u043E\u0442\u043E\u0440\u044B\u0435
       \u043D\u0435\u043B\u044C\u0437\u044F\n\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
-  - _key: Day3_CardHeader6
-    _rawText: LifeCoach
-  - _key: Day3_CardContent6
-    _rawText: "\u0422\u044B \u0432\u0441\u0451 \u0435\u0449\u0451 \u043C\u043E\u0436\u0435\u0448\u044C\n\u0432\u0441\u0451
-      \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C!"
-  - _key: Day3_CardHeader7
-    _rawText: "\u041C\u0435\u0434\u041E\u043A"
-  - _key: Day3_CardContent7
-    _rawText: "\u041C\u044B \u0437\u0430\u043C\u0435\u0442\u0438\u043B\u0438:\n\u0432\u044B
-      \u043C\u0435\u043D\u044C\u0448\u0435 \u0432\u044B\u0445\u043E\u0434\u0438\u0442\u0435\n\u0438\u0437
-      \u0434\u043E\u043C\u0430"
-  - _key: Day3_CardHeader8
+  - _key: Day3_CardHeader4
     _rawText: "\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430"
-  - _key: Day3_CardContent8
+  - _key: Day3_CardContent4
     _rawText: "\u0422\u0432\u043E\u044F \u0431\u043E\u043B\u044C\n\u044D\u0442\u043E
       \u0442\u043E\u0447\u043A\u0430 \u0440\u043E\u0441\u0442\u0430"
-  - _key: Day3_CardHeader9
+  - _key: Day3_CardHeader5
     _rawText: "\u0424\u0438\u0442\u043D\u0435\u0441"
-  - _key: Day3_CardContent9
+  - _key: Day3_CardContent5
     _rawText: "\u041D\u0430@\u043E_#\u0438\u0448\u044C \u043B\u0438\n\u0442\u044B
       \u0440\u0430\u0434@\u0441\u0442\u044C \u0432\n\u043F%\u0432\u0442&\u0440\u043D\u044B_\u0445
       \u0434%\u043B@\u0445?"
-  - _key: Day3_CardHeader10
+  - _key: Day3_CardHeader6
     _rawText: "\u041A\u0438\u0440\u0430"
-  - _key: Day3_CardContent10
+  - _key: Day3_CardContent6
     _rawText: "\u041E\u0445... \u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
-  - _key: Day3_CardHeader11
+  - _key: Day3_CardHeader7
     _rawText: "\u041C\u0430\u043C\u0430"
-  - _key: Day3_CardContent11
+  - _key: Day3_CardContent7
     _rawText: "\u042F \u043F\u043E\u043D\u0438\u043C\u0430\u044E,\n\u0447\u0442\u043E
       \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0431\u044B\u0442\u044C\n\u0437\u0430\u043D\u044F\u0442\u0430.
       \u041F\u0440\u043E\u0441\u0442\u043E \u043D\u0430\u043F\u0438\u0448\u0438\n\u043F\u0430\u0440\u0443
       \u0441\u043B\u043E\u0432, \u0435\u0441\u043B\u0438 \u0432\u0441\u0451\n\u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E."
-  - _key: Day3_CardHeader12
-    _rawText: "\u0421\u0430\u0448\u0430"
-  - _key: Day3_CardContent12
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
-  - _key: Day3_CardHeader13
-    _rawText: "\u041D\u0415 \u041E\u0422\u0412\u0415\u0427\u0410\u0422\u042C"
-  - _key: Day3_CardContent13
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u0412\u0434\u0440\u0443\u0433
-      \u0440\u0435\u0448\u0438\u0448\u044C \u0432\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F,\n\u0443
-      \u043D\u0430\u0441 \u043E\u0441\u0432\u043E\u0431\u043E\u0434\u0438\u043B\u043E\u0441\u044C
-      \u043C\u0435\u0441\u0442\u043E."
-  - _key: Day3_CardHeader14
+  - _key: Day3_CardHeader8
     _rawText: "\u041A\u0435\u0439"
-  - _key: Day3_CardContent14
+  - _key: Day3_CardContent8
     _rawText: "\u042D\u0442\u043E \u0432\u0441\u0435 \u043E\u0442 \u0441\u0442\u0440\u0435\u0441\u0441\u0430!"
+  - _key: Day3_CardHeader9
+    _rawText: "\u0421\u0430\u0448\u0430"
+  - _key: Day3_CardContent9
+    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
   - _key: Day4_CardHeader0
     _rawText: "\u0420\u0435\u0434\u0430\u043A\u04420\u0440"
   - _key: Day4_CardContent0
@@ -816,62 +742,41 @@ MonoBehaviour:
     _rawText: "\u041F\u043E\u0447\u0435\u043C\u0443 \u0432\u044B \u043D\u0435\n\u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438
       \u043D\u0430 \u043F\u0440\u0430\u0432\u043A\u0438?"
   - _key: Day4_CardHeader2
-    _rawText: "\u0410\u0432\u0442\u043E\u0441\u0438\u0441\u0442\u0435\u043C\u0430"
-  - _key: Day4_CardContent2
-    _rawText: "\u041E\u0448\u0438\u0431\u043A\u0430 \u0441\u043E\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F"
-  - _key: Day4_CardHeader3
     _rawText: HR
-  - _key: Day4_CardContent3
+  - _key: Day4_CardContent2
     _rawText: "\u0424\u0430\u0439\u043B \u043D\u0435 \u043E\u0442\u043F\u0440##\u0432\u043B\u0435\u043D.\n\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435
       \u0441\u043D\u043E\u0432\u0430."
-  - _key: Day4_CardHeader4
-    _rawText: " \u2588\u2588\u2588\u2588\u2588"
-  - _key: Day4_CardContent4
-    _rawText: "...\u0434\u043E\u043B\u0436\u043D\u044B... \u2593\u2593\u2593.."
-  - _key: Day4_CardHeader5
+  - _key: Day4_CardHeader3
     _rawText: "\u0413\u0443\u0440\u0443"
-  - _key: Day4_CardContent5
+  - _key: Day4_CardContent3
     _rawText: "\u041E\u0431\u0440\u0435\u0442\u0438 \u0433\u0430\u0440\u043C\u043E\u043D\u0438\u044E\n\u0437\u0430
       5 \u043C\u0438\u043D\u0443\u0442 \u0432 \u0434\u0435\u043D\u044C!"
-  - _key: Day4_CardHeader6
+  - _key: Day4_CardHeader4
     _rawText: "[\u043D\u0435\u0438\u0437\u0432.]"
-  - _key: Day4_CardContent6
+  - _key: Day4_CardContent4
     _rawText: "\u0411\u043E\u043B\u044C \u2014 \u044D\u0442\u043E \u0432\u044B\u0431\u043E\u0440"
-  - _key: Day4_CardHeader7
+  - _key: Day4_CardHeader5
     _rawText: SelfHelpPro
-  - _key: Day4_CardContent7
+  - _key: Day4_CardContent5
     _rawText: "\u0417\u043D\u0430\u0435\u0448\u044C, \u043F\u043E\u0447\u0435\u043C\u0443\n\u0442\u044B
       \u0432\u0441\u0451 \u0435\u0449\u0451\n\u043D\u0435 \u0441\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u0430?"
-  - _key: Day4_CardHeader8
-    _rawText: CareYou
-  - _key: Day4_CardContent8
-    _rawText: "\u0422\u0435\u0431\u0435 \u0441\u043B\u043E\u0436\u043D\u043E\n\u0432\u0441\u0442\u0430\u0432\u0430\u0442\u044C
-      \u043F\u043E \u0443\u0442\u0440\u0430\u043C?\n\u041C\u044B \u0440\u044F\u0434\u043E\u043C"
-  - _key: Day4_CardHeader9
-    _rawText: '!!!'
-  - _key: Day4_CardContent9
-    _rawText: "\u0422\u044B \u0435\u043B\u0430 \u0441\u0435\u0433\u043E\u0434\u043D\u044F?"
-  - _key: Day4_CardHeader10
+  - _key: Day4_CardHeader6
     _rawText: "\u041C\u0430\u043C\u0430"
-  - _key: Day4_CardContent10
+  - _key: Day4_CardContent6
     _rawText: "\u041D\u0443\u0436\u043D\u043E \u043F\u043E\u0437\u0438\u0442\u0438\u0432\u043D\u043E\n\u043C\u044B\u0441\u043B\u0438\u0442\u044C."
-  - _key: Day4_CardHeader11
-    _rawText: "\u041A\u043E\u043B\u043B\u0435\u0433\u0430"
-  - _key: Day4_CardContent11
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C"
-  - _key: Day4_CardHeader12
-    _rawText: "\u0410\u043D\u043D\u0430"
-  - _key: Day4_CardContent12
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C"
-  - _key: Day4_CardHeader13
+  - _key: Day4_CardHeader7
     _rawText: "\u0421\u0430\u0448\u0430"
-  - _key: Day4_CardContent13
+  - _key: Day4_CardContent7
     _rawText: "\u0410 \u0432\u043E\u0442 \u0443 \u043C\u043E\u0435\u0439 \u0442\u0435\u0442\u0438\n\u0442\u043E\u0436\u0435
       \u0431\u044B\u043B\u043E \u0442\u0430\u043A\u043E\u0435\u2026"
-  - _key: Day4_CardHeader14
-    _rawText: "\u041A\u0438\u0440\u0430"
-  - _key: Day4_CardContent14
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
+  - _key: Day4_CardHeader8
+    _rawText: "\u0410\u043D\u043D\u0430"
+  - _key: Day4_CardContent8
+    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C"
+  - _key: Day4_CardHeader9
+    _rawText: "\u041A\u043E\u043B\u043B\u0435\u0433\u0430"
+  - _key: Day4_CardContent9
+    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C"
   - _key: Day5_CardHeader0
     _rawText: HR
   - _key: Day5_CardContent0
@@ -888,62 +793,36 @@ MonoBehaviour:
     _rawText: "\u0412\u044B \u043D\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u043B\u0438\n\u0441\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u044B\u0439
       \u043F\u043E\u043D\u0435\u0434\u0435\u043B\u044C\u043D\u0438\u043A.\n\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C?"
   - _key: Day5_CardHeader3
-    _rawText: "\u0418\u043D\u0444\u043E"
+    _rawText: "\u0410\u043D\u043D\u0430"
   - _key: Day5_CardContent3
-    _rawText: "\u0412\u0430\u0448\u0435 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435\n\u0432
-      \u0432\u0430\u0448\u0438\u0445 \u0440\u0443\u043A\u0430\u0445.\n\u041D\u0435
-      \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C!"
+    _rawText: "\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B
+      \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422...
+      %$#!"
   - _key: Day5_CardHeader4
-    _rawText: "\u041A\u0430\u043B\u0435\u043D\u0434\u0430\u0440\u044C"
-  - _key: Day5_CardContent4
-    _rawText: "\u0423 \u0432\u0430\u0441 \u0441\u043A\u043E\u0440\u043E \u0434\u0435\u043D\u044C
-      \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F.\n\u041D\u0430\u0447\u043D\u0435\u0442\u0435
-      \u043D\u043E\u0432\u0443\u044E \u0436\u0438\u0437\u043D\u044C?"
-  - _key: Day5_CardHeader5
-    _rawText: "\u0410\u043D\u043D\u0430"
-  - _key: Day5_CardContent5
-    _rawText: "\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B
-      \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422...
-      %$#!"
-  - _key: Day5_CardHeader6
     _rawText: "\u0421\u043B\u0443\u0436\u0431\u0430 \u041F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438"
-  - _key: Day5_CardContent6
+  - _key: Day5_CardContent4
     _rawText: ...........
+  - _key: Day5_CardHeader5
+    _rawText: "\u2014"
+  - _key: Day5_CardContent5
+    _rawText: "...\u043E_\u043D_\u0430 \u043D_\u0435 _\u043E\u0442_\u0432**\u0447\u0430\u0435\u0442...\n\u0422#
+      _\u0442#\u043C?"
+  - _key: Day5_CardHeader6
+    _rawText: "\u041A\u0438\u0440\u0430"
+  - _key: Day5_CardContent6
+    _rawText: "\u0412\u043E\u0442, \u043F\u043E\u0447\u0438\u0442\u0430\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438,\n\u0442\u0435\u0445
+      \u043A\u0442\u043E \u0432\u044B\u043B\u0435\u0447\u0438\u043B\u0441\u044F\u2026"
   - _key: Day5_CardHeader7
-    _rawText: "\u0410\u043D\u043D\u0430"
+    _rawText: "\u2014"
   - _key: Day5_CardContent7
-    _rawText: "\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B
-      \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422...
-      %$#!"
+    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
   - _key: Day5_CardHeader8
     _rawText: "\u2014"
   - _key: Day5_CardContent8
-    _rawText: "...\u043E_\u043D_\u0430 \u043D_\u0435 _\u043E\u0442_\u0432**\u0447\u0430\u0435\u0442...\n\u0422#
-      _\u0442#\u043C?"
+    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
   - _key: Day5_CardHeader9
-    _rawText: <<NULL>>
+    _rawText: "\u2014"
   - _key: Day5_CardContent9
-    _rawText: "\u041F\u0415\u0420\u0415\u0417\u0410\u0413\u0420\u0423%\u041A@...\n\u041F\u0415\u0420\u0415\u0417\u0410\u0413\u0420\u0423%\u041A@...\n%$!$!"
-  - _key: Day5_CardHeader10
-    _rawText: "\u041A\u0438\u0440\u0430"
-  - _key: Day5_CardContent10
-    _rawText: "\u0412\u043E\u0442, \u043F\u043E\u0447\u0438\u0442\u0430\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438,\n\u0442\u0435\u0445
-      \u043A\u0442\u043E \u0432\u044B\u043B\u0435\u0447\u0438\u043B\u0441\u044F\u2026"
-  - _key: Day5_CardHeader11
-    _rawText: "\u041C\u0430\u043C\u0430"
-  - _key: Day5_CardContent11
-    _rawText: "\u0422\u044B \u0441\u043F\u0440\u0430\u0432\u0438\u0448\u044C\u0441\u044F."
-  - _key: Day5_CardHeader12
-    _rawText: "\u2014"
-  - _key: Day5_CardContent12
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
-  - _key: Day5_CardHeader13
-    _rawText: "\u2014"
-  - _key: Day5_CardContent13
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
-  - _key: Day5_CardHeader14
-    _rawText: "\u2014"
-  - _key: Day5_CardContent14
     _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
   - _key: results_header
     _rawText: "\u0418\u0442\u043E\u0433\u0438"
@@ -1038,7 +917,8 @@ MonoBehaviour:
     _rawText: "\u041D\u043E \u043C\u043D\u0435 \u0431\u044B\u043B\u043E \u0432\u0441\u0435
       \u0441\u0442\u0440\u0430\u0448\u043D\u0435\u0435."
   - _key: Final_Phrase0
-    _rawText: "\u042F \u043F\u0440\u043E\u0448\u043B\u0430 \u044D\u0442\u043E \u043E\u0434\u043D\u0430."
+    _rawText: "\u0417\u043D\u0430\u0435\u0448\u044C... \u044F \u043F\u0440\u043E\u0448\u043B\u0430
+      \u044D\u0442\u043E \u043E\u0434\u043D\u0430."
   - _key: Final_Phrase1
     _rawText: "\u041D\u043E \u0435\u0441\u043B\u0438 \u0442\u0435\u0431\u0435 \u0432\u0434\u0440\u0443\u0433
       \u0441\u0442\u0430\u043D\u0435\u0442 \u0442\u044F\u0436\u0435\u043B\u043E,
@@ -1056,3 +936,32 @@ MonoBehaviour:
       \u0432 \u043C\u0438\u0440\u0435 \u0441 \u0441\u043E\u0431\u043E\u0439 \u2014
       \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0438\u043C. \u0411\u0435\u0437
       \u043C\u0430\u0441\u043E\u043A."
+  - _key: Titles_Head_GD
+    _rawText: "\u0413\u0435\u0439\u043C\u0434\u0438\u0437\u0430\u0439\u043D, \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u0439,
+      level-\u0434\u0438\u0437\u0430\u0439\u043D"
+  - _key: Titles_GD0
+    _rawText: "\u041A\u0430\u0442\u0435\u0440\u0438\u043D\u0430 \u041C\u0430\u0442\u0432\u0438\u0435\u043D\u043A\u043E"
+  - _key: Titles_Head_Dev
+    _rawText: "\u0420\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430"
+  - _key: Titles_Dev0
+    _rawText: "\u0421\u0435\u0440\u0433\u0435\u0439 \u0415\u0440\u043C\u0438\u043B\u043E\u0432"
+  - _key: Titles_Dev1
+    _rawText: "\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440 \u041C\u0430\u043B\u044B\u0445"
+  - _key: Titles_Dev2
+    _rawText: "\u0421\u0435\u0440\u0433\u0435\u0439 \u0418\u0432\u0430\u043D\u043E\u0432"
+  - _key: Titles_Head_Art0
+    _rawText: "3D-\u0445\u0443\u0434\u043E\u0436\u043D\u0438\u043A"
+  - _key: Titles_Art0
+    _rawText: "\u0418\u0432\u0430\u043D \u0410\u0437\u0434\u0440\u0430\u0432\u0438\u043D"
+  - _key: Titles_Head_Art1
+    _rawText: "2D-\u0445\u0443\u0434\u043E\u0436\u043D\u0438\u043A"
+  - _key: Titles_Art2
+    _rawText: "\u0410\u043B\u0435\u043D\u0430 \u041E\u043B\u044C\u0445\u043E\u0432\u0441\u043A\u0430\u044F"
+  - _key: Titles_Head_Music
+    _rawText: "\u041C\u0443\u0437\u044B\u043A\u0430"
+  - _key: Titles_Music0
+    _rawText: "\u042F\u0440\u043E\u0441\u043B\u0430\u0432 \u0418\u0432\u0430\u043D\u043D\u0438\u043A\u043E\u0432"
+  - _key: Titles_Head_PM
+    _rawText: "\u041F\u0440\u043E\u0435\u043A\u0442-\u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440"
+  - _key: Titles_PM0
+    _rawText: "\u0421\u0435\u0440\u0433\u0435\u0439 \u0413\u043E\u043B\u0443\u0431\u043E\u0432\u0441\u043A\u0438\u0439"
