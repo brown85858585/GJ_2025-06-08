@@ -17,10 +17,10 @@ public class WeatherController : MonoBehaviour
         //    ToggleLocation();
         //}
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            WeatherSystem.Instance.NextCycle();
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    WeatherSystem.Instance.NextCycle();
+        //}
     }
 
 //    private void ToggleLocation()
