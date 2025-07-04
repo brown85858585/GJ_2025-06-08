@@ -12,6 +12,7 @@ Help,Помощь
 Help_Hint0,e — взаимодействие
 Help_Hint1,q — отпустить/переключить
 Help_Hint2,tab — задания
+GameOver,Я пыталась...
 Quest_Awakening0,Проснуться
 Quest_Door0,Выйти на пробежку
 Quest_Flower0,Полить цветок
@@ -39,7 +40,8 @@ Day3_Awakening,"Сон не помог. Надо просто
 Day4_Awakening,Как будто тело чужое.
 Day5_Awakening,Как тяжело…
 Day6_Awakening,...
-Day1_Sleep,Хорошо бы выспаться.
+Day1_Sleep,"Не забыть бы
+оплатить счета."
 Day2_Sleep,"Никак не выкинуть
 это из головы."
 Day3_Sleep,А если завтра будет хуже?
