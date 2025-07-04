@@ -128,7 +128,7 @@ namespace Game.MiniGames
                     float targetAngle = targetAngles[i];
                     if (Mathf.Abs(currentAngle - targetAngle) <= tolerance)
                     {
-                        Debug.Log($"✅ Попадание в зону {i + 1}! Угол: {targetAngle}");
+                        Debug.Log($"✅ Попадание в зону {i + 1}! Угол: {Mathf.Abs(currentAngle - targetAngle)}");
                         return i; // Возвращаем индекс найденной зоны
                     }
                 }
