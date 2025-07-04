@@ -14,1044 +14,973 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _items:
   - _key: testKey
-    _rawText: "\u0422\u0435\u0441\u0442"
+    _rawText: Test
   - _key: Play
-    _rawText: "\u0418\u0433\u0440\u0430\u0442\u044C"
+    _rawText: Play
   - _key: Button_Setting
-    _rawText: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+    _rawText: Settings
   - _key: Button_Exit
-    _rawText: "\u0412\u044B\u0439\u0442\u0438"
+    _rawText: Quit
   - _key: Settings_Header
-    _rawText: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+    _rawText: Settings
   - _key: Settings_Music
-    _rawText: "\u041C\u0443\u0437\u044B\u043A\u0430"
+    _rawText: Music
   - _key: Settings_Sounds
-    _rawText: "\u0417\u0432\u0443\u043A\u0438"
+    _rawText: Sounds
   - _key: Settings_Language
-    _rawText: "\u042F\u0437\u044B\u043A"
+    _rawText: Language
   - _key: Quit
-    _rawText: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0438\u0433\u0440\u044B"
+    _rawText: Exit Game
   - _key: Quit_Accept0
-    _rawText: "\u0412\u044B \u043F\u0440\u0430\u0432\u0434\u0430 \u0445\u043E\u0442\u0438\u0442\u0435
-      \u0432\u044B\u0439\u0442\u0438?"
+    _rawText: Really want to quit?
   - _key: Help
-    _rawText: "\u041F\u043E\u043C\u043E\u0449\u044C"
+    _rawText: Help
   - _key: Help_Hint0
-    _rawText: "e \u2014 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435"
+    _rawText: "e \u2014 interaction"
   - _key: Help_Hint1
-    _rawText: "q \u2014 \u043E\u0442\u043F\u0443\u0441\u0442\u0438\u0442\u044C/\u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C"
+    _rawText: "q \u2014 release/switch"
   - _key: Help_Hint2
-    _rawText: "tab \u2014 \u0437\u0430\u0434\u0430\u043D\u0438\u044F"
+    _rawText: "tab \u2014 quests"
+  - _key: GameOver
+    _rawText: I tried...
   - _key: Quest_Awakening0
-    _rawText: "\u041F\u0440\u043E\u0441\u043D\u0443\u0442\u044C\u0441\u044F"
+    _rawText: Wake up
   - _key: Quest_Door0
-    _rawText: "\u0412\u044B\u0439\u0442\u0438 \u043D\u0430 \u043F\u0440\u043E\u0431\u0435\u0436\u043A\u0443"
+    _rawText: Go for a run
   - _key: Quest_Flower0
-    _rawText: "\u041F\u043E\u043B\u0438\u0442\u044C \u0446\u0432\u0435\u0442\u043E\u043A"
+    _rawText: Water the flower
   - _key: Quest_Kitchen0
-    _rawText: "\u041F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u0438\u0442\u044C
-      \u043F\u043E\u0435\u0441\u0442\u044C"
+    _rawText: Cook something
   - _key: Quest_Computer0
-    _rawText: "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u044C \u0440\u0430\u0431\u043E\u0447\u0438\u0439
-      \u0434\u0435\u043D\u044C"
+    _rawText: Finish work
   - _key: Quest_Sleep0
-    _rawText: "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u044C \u0434\u0435\u043D\u044C"
+    _rawText: End the day
   - _key: Day1_Bed0
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u0441\u043F\u0430\u0442\u044C."
+    _rawText: "I don\u2019t want to sleep yet."
   - _key: Day1_Bed1
-    _rawText: "\u0420\u0430\u043D\u043E \u0435\u0449\u0435."
+    _rawText: "It\u2019s too early."
   - _key: Day2_Bed0
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u0441\u043F\u0430\u0442\u044C."
+    _rawText: "I don\u2019t want to sleep yet."
   - _key: Day2_Bed1
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0432\u0441\u0435 \u0441\u0434\u0435\u043B\u0430\u043B\u0430."
+    _rawText: "I haven\u2019t done everything."
   - _key: Day3_Bed0
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u0441\u043F\u0430\u0442\u044C."
+    _rawText: "I don\u2019t want to sleep yet."
   - _key: Day3_Bed1
-    _rawText: "\u041D\u0435\u0442."
+    _rawText: No.
   - _key: Day4_Bed0
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u0441\u043F\u0430\u0442\u044C."
+    _rawText: "I don\u2019t want to sleep yet."
   - _key: Day4_Bed1
-    _rawText: "\u0425\u043E\u0447\u0435\u0442\u0441\u044F \u0441\u043F\u0430\u0442\u044C,
-      \u043D\u043E \u0435\u0449\u0435 \u0440\u0430\u043D\u043E."
+    _rawText: "I\u2019m tired\u2026\nbut it\u2019s too early."
   - _key: Day5_Bed0
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u0441\u043F\u0430\u0442\u044C."
+    _rawText: "I don\u2019t want to sleep yet."
   - _key: Day5_Bed1
-    _rawText: "\u042F \u0434\u043E\u043B\u0436\u043D\u0430 \u0441\u0434\u0435\u043B\u0430\u0442\u044C
-      \u0445\u043E\u0442\u044C \u0447\u0442\u043E-\u0442\u043E..."
+    _rawText: I have to do something.
   - _key: Day6_Bed0
-    _rawText: "\u042F \u0435\u0449\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u0441\u043F\u0430\u0442\u044C."
+    _rawText: "I don\u2019t want to sleep yet."
   - _key: Day6_Bed1
-    _rawText: "\u0422\u044F\u0436\u0435\u043B\u043E, \u043D\u043E \u043D\u0443\u0436\u043D\u043E
-      \u0445\u043E\u0442\u044C\n\u0447\u0442\u043E-\u0442\u043E \u0441\u0434\u0435\u043B\u0430\u0442\u044C..."
+    _rawText: "It\u2019s hard, but I need\nto at least try..."
   - _key: Day1_Awakening
-    _rawText: "\u041D\u043E\u0432\u044B\u0439 \u0434\u0435\u043D\u044C. \u041D\u0430\u0447\u043D\u0451\u043C."
+    _rawText: "New day.\nLet\u2019s begin."
   - _key: Day2_Awakening
-    _rawText: "\u0421\u0442\u0440\u0430\u043D\u043D\u043E \u0441\u0435\u0431\u044F
-      \u0447\u0443\u0432\u0441\u0442\u0432\u0443\u044E.\n\u041D\u0430\u0432\u0435\u0440\u043D\u043E\u0435,
-      \u0443\u0441\u0442\u0430\u043B\u0430."
+    _rawText: "I feel\u2026 off.\nMaybe just tired."
   - _key: Day3_Awakening
-    _rawText: "\u0421\u043E\u043D \u043D\u0435 \u043F\u043E\u043C\u043E\u0433. \u041D\u0430\u0434\u043E
-      \u043F\u0440\u043E\u0441\u0442\u043E\n\u043D\u0430\u0447\u0430\u0442\u044C
-      \u0434\u0432\u0438\u0433\u0430\u0442\u044C\u0441\u044F."
+    _rawText: "Sleep didn\u2019t help.\nI just need to start moving."
   - _key: Day4_Awakening
-    _rawText: "\u041A\u0430\u043A \u0431\u0443\u0434\u0442\u043E \u0442\u0435\u043B\u043E
-      \u0447\u0443\u0436\u043E\u0435."
+    _rawText: "Feels like this body isn\u2019t mine."
   - _key: Day5_Awakening
-    _rawText: "\u041A\u0430\u043A \u0442\u044F\u0436\u0435\u043B\u043E\u2026"
+    _rawText: "Everything feels so heavy\u2026"
   - _key: Day6_Awakening
     _rawText: ...
   - _key: Day1_Sleep
-    _rawText: "\u0425\u043E\u0440\u043E\u0448\u043E \u0431\u044B \u0432\u044B\u0441\u043F\u0430\u0442\u044C\u0441\u044F."
+    _rawText: 'The main thing is not
+
+      to forget to pay the bills.'
   - _key: Day2_Sleep
-    _rawText: "\u041D\u0438\u043A\u0430\u043A \u043D\u0435 \u0432\u044B\u043A\u0438\u043D\u0443\u0442\u044C\n\u044D\u0442\u043E
-      \u0438\u0437 \u0433\u043E\u043B\u043E\u0432\u044B."
+    _rawText: "Can\u2019t get it out of my head."
   - _key: Day3_Sleep
-    _rawText: "\u0410 \u0435\u0441\u043B\u0438 \u0437\u0430\u0432\u0442\u0440\u0430
-      \u0431\u0443\u0434\u0435\u0442 \u0445\u0443\u0436\u0435?"
+    _rawText: "What if tomorrow\u2019s worse?"
   - _key: Day4_Sleep
-    _rawText: "\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043F\u0443\u0441\u0442\u044C
-      \u043F\u0440\u043E\u0441\u0442\u043E \n\u0432\u044B\u043A\u043B\u044E\u0447\u0438\u0442\u0441\u044F
-      \u0432\u0441\u0451."
+    _rawText: 'Please,
+
+      just make it all stop.'
   - _key: Day5_Sleep
     _rawText: ...
   - _key: Day6_Sleep
     _rawText: ...
   - _key: Day1_Door_Win
-    _rawText: "\u041F\u043E\u0441\u043B\u0435 \u043F\u0440\u043E\u0431\u0435\u0436\u043A\u0438
-      \u0431\u043E\u043B\u044C\u0448\u0435 \u044D\u043D\u0435\u0440\u0433\u0438\u0438."
+    _rawText: 'Got a bit more energy
+
+      after the run.'
   - _key: Day1_Door_Defeat
-    _rawText: "\u041D\u0435\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0431\u0435\u0436\u0430\u0442\u044C
-      \u0432\u0442\u043E\u0440\u043E\u0439 \u043A\u0440\u0443\u0433."
+    _rawText: No time to keep going.
   - _key: Day2_Door_Win
-    _rawText: "\u0412\u0441\u0435 \u0435\u0449\u0435 \u0432 \u0444\u043E\u0440\u043C\u0435."
+    _rawText: Still in shape.
   - _key: Day2_Door_Defeat
-    _rawText: "\u0421\u0435\u0433\u043E\u0434\u043D\u044F \u043A\u0430\u043A-\u0442\u043E
-      \u0442\u044F\u0436\u0435\u043B\u043E \u0431\u044B\u043B\u043E\u2026"
+    _rawText: "Today was\u2026\nrough."
   - _key: Day3_Door_Win
-    _rawText: "\u0411\u044B\u043B\u043E \u0441\u043B\u043E\u0436\u043D\u043E, \u043D\u043E
-      \u044F \u043D\u0435 \u0441\u0434\u0430\u043C\u0441\u044F."
+    _rawText: "It was hard,\nbut I\u2019m not giving up."
   - _key: Day3_Door_Defeat
-    _rawText: "\u0411\u044B\u043B\u043E \u0441\u043B\u043E\u0436\u043D\u043E..."
+    _rawText: "It was hard\u2026"
   - _key: Day4_Door_Win
-    _rawText: "\u0421\u0435\u0440\u0434\u0446\u0435 \u043A\u043E\u043B\u043E\u0442\u0438\u0442\u0441\u044F."
+    _rawText: "My heart\u2019s pounding."
   - _key: Day4_Door_Defeat
-    _rawText: "\u042F \u043D\u0435 \u043C\u043E\u0433\u0443 \u0431\u043E\u043B\u044C\u0448\u0435..."
+    _rawText: "I can\u2019t do this anymore\u2026"
   - _key: Day5_Door_Win
-    _rawText: "\u0412\u0441\u0435 \u0435\u0449\u0435 \u043C\u043E\u0433\u0443?"
+    _rawText: Can I still keep going?
   - _key: Day5_Door_Defeat
-    _rawText: "\u041A\u0430\u0436\u0435\u0442\u0441\u044F, \u044F \u0443\u0436\u0435
-      \u043D\u0435 \u0432 \u0442\u043E\u0439 \u0444\u043E\u0440\u043C\u0435."
+    _rawText: "Feels like I\u2019m not\nin shape anymore."
   - _key: Day6_WMGDoor0
-    _rawText: "\u041D\u0435\u0442. \u0421\u0435\u0433\u043E\u0434\u043D\u044F \u2014
-      \u043D\u0435\u0442."
+    _rawText: No. Not today.
   - _key: Day6_WMGDoor1
-    _rawText: "\u042F \u043D\u0435 \u043C\u043E\u0433\u0443 \u0431\u043E\u043B\u044C\u0448\u0435..."
+    _rawText: "I can\u2019t do this anymore..."
   - _key: Day1_Flower0
-    _rawText: "\u041A\u0430\u0436\u0435\u0442\u0441\u044F, \u044F \u043E\u0441\u0442\u0430\u0432\u0438\u043B\u0430
-      \u043B\u0435\u0439\u043A\u0443 \u043D\u0430 \u043A\u0443\u0445\u043D\u0435."
+    _rawText: I think I put a watering can in the kitchen.
   - _key: Day2_Flower0
-    _rawText: "\u041D\u0443\u0436\u043D\u0430 \u043B\u0435\u0439\u043A\u0430."
+    _rawText: Need a watering can.
   - _key: Day3_Flower0
-    _rawText: "\u0413\u0434\u0435 \u0436\u0435 \u043B\u0435\u0439\u043A\u0430?"
+    _rawText: Where's the watering can?
   - _key: Day4_Flower0
-    _rawText: "\u041B\u0435\u0439\u043A\u0430 \u043D\u0430 \u043A\u0443\u0445\u043D\u0435."
+    _rawText: Watering can in the kitchen.
   - _key: Day5_Flower0
-    _rawText: "\u041D\u0443\u0436\u043D\u0430 \u043B\u0435\u0439\u043A\u0430."
+    _rawText: Need a watering can.
   - _key: Day6_Flower0
-    _rawText: "\u041F\u043E\u043F\u0440\u043E\u0431\u043E\u0432\u0430\u0442\u044C
-      \u0435\u0433\u043E \u043F\u043E\u043B\u0438\u0442\u044C?"
+    _rawText: Should I try watering it?
   - _key: Day1_Flower_Win
-    _rawText: "\u0420\u0430\u0441\u0442\u0438, \u043C\u043E\u0439 \u0446\u0432\u0435\u0442\u043E\u043A."
+    _rawText: Grow, little flower.
   - _key: Day1_Flower_Defeat
-    _rawText: "\u041D\u0438\u0447\u0435\u0433\u043E, \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439
-      \u0440\u0430\u0437\n\u043F\u043E\u043B\u0443\u0447\u0438\u0442\u0441\u044F."
+    _rawText: "It\u2019s okay.\nMaybe next time."
   - _key: Day2_Flower_Win
-    _rawText: "\u0423 \u0442\u0435\u0431\u044F \u0432\u0441\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u0441\u044F."
+    _rawText: "You\u2019ve got this."
   - _key: Day2_Flower_Defeat
-    _rawText: "\u0417\u0430\u0441\u043E\u0445\u043D\u0443\u0442\u044C \u043F\u0440\u043E\u0449\u0435,\n\u0447\u0435\u043C
-      \u044F \u0434\u0443\u043C\u0430\u043B\u0430."
+    _rawText: "Withering\u2019s easier\nthan I thought."
   - _key: Day3_Flower_Win
-    _rawText: "\u041C\u043D\u0435 \u0433\u043E\u0432\u043E\u0440\u044F\u0442 \xAB\u0414\u0435\u0440\u0436\u0438\u0441\u044C\xBB.\n\u0418
-      \u0442\u044B \u0434\u0435\u0440\u0436\u0438\u0441\u044C, \u0430\u0433\u0430."
+    _rawText: "People say \u201CStay strong\u201D.\nSo you hang in there too, huh."
   - _key: Day3_Flower_Defeat
-    _rawText: "\xAB\u0414\u0435\u0440\u0436\u0438\u0441\u044C\xBB?\n\u0410 \u0437\u0430
-      \u0447\u0442\u043E \u0434\u0435\u0440\u0436\u0430\u0442\u044C\u0441\u044F \u0442\u043E?"
+    _rawText: "\u201CStay strong\u201D?\nWhat the hell am I supposed\nto stay strong
+      for?"
   - _key: Day4_Flower_Win
-    _rawText: "\u041C\u044B \u043F\u043E\u0445\u043E\u0436\u0438."
+    _rawText: "We\u2019re alike."
   - _key: Day4_Flower_Defeat
-    _rawText: "\u041C\u044B \u043F\u043E\u0445\u043E\u0436\u0438."
+    _rawText: "We\u2019re alike."
   - _key: Day5_Flower_Win
-    _rawText: "\u041A\u0430\u0436\u0435\u0442\u0441\u044F, \u043C\u044B \u043E\u0431\u0430
-      \u0442\u0435\u0440\u044F\u0435\u043C \u0444\u043E\u0440\u043C\u0443."
+    _rawText: "Feels like we\u2019re\nboth falling apart."
   - _key: Day5_Flower_Defeat
-    _rawText: "\u041A\u0430\u0436\u0435\u0442\u0441\u044F, \u043C\u044B \u043E\u0431\u0430
-      \u0442\u0435\u0440\u044F\u0435\u043C \u0444\u043E\u0440\u043C\u0443."
+    _rawText: "Feels like we\u2019re\nboth falling apart."
   - _key: Day6_Flower_Win
-    _rawText: "\u041F\u0440\u043E\u0441\u0442\u0438."
+    _rawText: "I\u2019m sorry."
   - _key: Day6_Flower_Defeat
-    _rawText: "\u041F\u0440\u043E\u0441\u0442\u0438."
+    _rawText: "I\u2019m sorry."
   - _key: Day1_Kitchen_Win
-    _rawText: "\u041F\u0440\u043E\u0441\u0442\u0430\u044F \u0435\u0434\u0430 \u0441\u0430\u043C\u0430\u044F
-      \u0432\u043A\u0443\u0441\u043D\u0430\u044F."
+    _rawText: Simple food tastes the best.
   - _key: Day1_Kitchen_Defeat
-    _rawText: "\u041D\u0430\u0434\u043E \u0431\u044B\u043B\u043E \u0437\u0430\u043A\u0430\u0437\u0430\u0442\u044C
-      \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0443."
+    _rawText: "Should\u2019ve just ordered delivery."
   - _key: Day2_Kitchen_Win
-    _rawText: "\u0412\u043A\u0443\u0441\u043D\u043E."
+    _rawText: Tastes good.
   - _key: Day2_Kitchen_Defeat
-    _rawText: "\u0427\u0442\u043E-\u0442\u043E \u0430\u043F\u043F\u0435\u0442\u0438\u0442\u0430
-      \u043D\u0435\u0442."
+    _rawText: Not really hungry.
   - _key: Day3_Kitchen_Win
-    _rawText: "\u0412\u043A\u0443\u0441 \u0431\u0443\u0434\u0442\u043E \u043F\u043E\u0442\u0435\u0440\u044F\u043B\u0441\u044F."
-  - _key: Day3_Kitchen_Defeat
     _rawText: ...
+  - _key: Day3_Kitchen_Defeat
+    _rawText: "Taste\u2019s kind of gone."
   - _key: Day4_Kitchen_Win
-    _rawText: "\u041D\u0430 \u0432\u043A\u0443\u0441 \u043A\u0430\u043A \u0441\u0442\u0438\u0440\u0430\u043B\u044C\u043D\u044B\u0439
-      \u043F\u043E\u0440\u043E\u0448\u043E\u043A."
+    _rawText: Tastes like laundry detergent.
   - _key: Day4_Kitchen_Defeat
     _rawText: ...
   - _key: Day5_WMGKitchen0
-    _rawText: "\u041D\u0435 \u043C\u043E\u0433\u0443. \u041F\u0440\u043E\u0441\u0442\u043E
-      \u043D\u0435 \u043C\u043E\u0433\u0443."
+    _rawText: "I can\u2019t.\nI just can\u2019t."
   - _key: Day5_WMGKitchen1
-    _rawText: "\u0415\u0441\u0442\u044C \u043D\u0435 \u0445\u043E\u0447\u0435\u0442\u0441\u044F."
+    _rawText: "I can\u2019t.\nI just can\u2019t."
   - _key: Day6_WMGKitchen0
-    _rawText: "\u042F \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u0447\u0443\u0432\u0441\u0442\u0432\u0443\u044E.\n\u041D\u0438
-      \u0433\u043E\u043B\u043E\u0434\u0430, \u043D\u0438 \u0432\u043A\u0443\u0441\u0430."
+    _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste."
   - _key: Day6_WMGKitchen1
-    _rawText: "\u041B\u044E\u0431\u0430\u044F \u0435\u0434\u0430 \u0432\u044B\u0433\u043B\u044F\u0434\u0438\u0442
-      \u043E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u043E."
+    _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste."
   - _key: Computer_UI_Letter_Head
-    _rawText: "\u041E\u0442 \u043A\u043E\u0433\u043E:"
+    _rawText: 'From:'
   - _key: Computer_UI_Attempt
-    _rawText: "\u041D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u044B\u0445
-      \u043F\u0438\u0441\u0435\u043C:"
+    _rawText: 'Unread messages:'
   - _key: Computer_UI_Delete
-    _rawText: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
+    _rawText: Delete
   - _key: Computer_UI_Accept
-    _rawText: "\u041F\u0440\u0438\u043D\u044F\u0442\u044C"
+    _rawText: Accept
   - _key: Computer_UI_Final
-    _rawText: "\u0420\u0430\u0431\u043E\u0442\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0430"
+    _rawText: Work completed
   - _key: Computer_UI_Correctly
-    _rawText: "\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E:"
+    _rawText: 'Correct:'
   - _key: Computer_UI_Wrong
-    _rawText: "\u041D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E:"
+    _rawText: 'Incorrect:'
   - _key: Computer_UI_Button0
-    _rawText: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C"
+    _rawText: Complete
   - _key: Computer_UI_Button1
-    _rawText: "\u0427\u0442\u043E?"
+    _rawText: What?
   - _key: Computer_UI_Glitch
-    _rawText: "\xAB\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043E\u0431\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F...\xBB\n
-      \xAB...\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043E
-      \u0441\u0440\u043E\u0447\u043D\u043E\u0435 \u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435...\xBB"
+    _rawText: "\u201CTest results\u2026\u201D\n\u201C\u2026urgent medical consultation
+      recommended.\u201D"
   - _key: Day1_Computer_Win
-    _rawText: "\u0425\u043E\u0440\u043E\u0448\u0430\u044F \u0440\u0430\u0431\u043E\u0442\u0430."
+    _rawText: Good job.
   - _key: Day1_Computer_Defeat
     _rawText: ...
   - _key: Day2_Computer_Win
-    _rawText: "\u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C, \u044D\u0442\u043E
-      \u0448\u0443\u0442\u043A\u0430?"
+    _rawText: Is this supposed to be a joke?
   - _key: Day2_Computer_Defeat
-    _rawText: "\u041D\u0438\u043A\u0430\u043A \u043D\u0435 \u043C\u043E\u0433\u0443
-      \u0432\u044B\u043A\u0438\u043D\u0443\u0442\u044C\n\u044D\u0442\u043E \u0438\u0437
-      \u0433\u043E\u043B\u043E\u0432\u044B..."
+    _rawText: "I can\u2019t get it out of my head..."
   - _key: Day3_Computer_Win
-    _rawText: "\u041D\u0443, \u044F \u0441\u0434\u0435\u043B\u0430\u043B\u0430 \u0432\u0441\u0435,
-      \u0447\u0442\u043E \u043C\u043E\u0433\u043B\u0430."
+    _rawText: Well, I did everything I could.
   - _key: Day3_Computer_Defeat
-    _rawText: "\u041D\u0435 \u043C\u043E\u0433\u0443 \u0441\u043E\u0441\u0440\u0435\u0434\u043E\u0442\u043E\u0447\u0438\u0442\u044C\u0441\u044F."
+    _rawText: "I can\u2019t focus."
   - _key: Day4_Computer_Win
     _rawText: ...
   - _key: Day4_Computer_Defeat
-    _rawText: "\xAB\u0414\u0435\u0440\u0436\u0438\u0441\u044C\xBB?\n\u0427\u0442\u043E
-      \u0437\u043D\u0430\u0447\u0438\u0442 \xAB\u0434\u0435\u0440\u0436\u0438\u0441\u044C\xBB?!"
+    _rawText: "\u201CStay strong\u201D?\nWhat does that even mean?!"
   - _key: Day5_Computer_Win
-    _rawText: "\u0412\u0441\u0435 \u043F\u0438\u0441\u044C\u043C\u0430 \u0431\u0443\u0434\u0442\u043E
-      \u043E\u0431 \u043E\u0434\u043D\u043E\u043C."
+    _rawText: Every message feels the same.
   - _key: Day5_Computer_Defeat
-    _rawText: "\u0411\u0443\u043A\u0432\u044B \u043F\u043B\u044B\u0432\u0443\u0442."
+    _rawText: The letters are blurring.
   - _key: Day6_WMGComputer0
-    _rawText: "\u0427\u0442\u043E \u0442\u0430\u043C \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u043E?\n\u041D\u0435
-      \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C."
+    _rawText: "What does it say?\nI can\u2019t tell."
   - _key: Day6_WMGComputer1
-    _rawText: "\u0412\u0441\u0435 \u0432\u044B\u0433\u043B\u044F\u0434\u0438\u0442
-      \u043A\u0430\u043A \u0438\u0437\u0434\u0451\u0432\u043A\u0430."
+    _rawText: It all feels like mockery.
   - _key: Day6_WMGComputer2
-    _rawText: "\u042F \u043D\u0435 \u043C\u043E\u0433\u0443 \u044D\u0442\u043E \u0447\u0438\u0442\u0430\u0442\u044C."
+    _rawText: "I can\u2019t read this."
   - _key: Day1_Guitar0
-    _rawText: "\u041F\u043E\u043C\u043D\u044E, \u043A\u0430\u043A \u043C\u044B \u043F\u0435\u043B\u0438\n\u0432\u0447\u0435\u0442\u0432\u0435\u0440\u043E\u043C
-      \u043D\u0430 \u043A\u0443\u0445\u043D\u0435\u2026"
+    _rawText: "I remember us singing\nin the kitchen, the four of us\u2026"
   - _key: Day1_Guitar1
-    _rawText: "\u041C\u044B \u0434\u0430\u0436\u0435 \u0445\u043E\u0442\u0435\u043B\u0438
-      \u0438\u0433\u0440\u0430\u0442\u044C \u043D\u0430 \u0441\u0446\u0435\u043D\u0435..."
+    _rawText: 'We even talked about
+
+      playing on a stage someday...'
   - _key: Day1_Guitar2
-    _rawText: "\u0414\u0430\u0432\u043D\u043E \u043D\u0435 \u0438\u0433\u0440\u0430\u043B\u0430.\n\u041D\u0430\u0434\u043E
-      \u0431\u0443\u0434\u0435\u0442 \u043A\u0430\u043A-\u043D\u0438\u0431\u0443\u0434\u044C
-      \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0435\u0435."
+    _rawText: "Haven\u2019t played in a while.\nShould probably tune it sometime."
   - _key: Day2_Guitar0
-    _rawText: "\u0420\u0430\u043D\u044C\u0448\u0435 \u043C\u044B \u0442\u0430\u0449\u0438\u043B\u0438
-      \u0435\u0451 \u043A \u043E\u0437\u0435\u0440\u0443:\n\u043A\u043E\u0441\u0442\u0451\u0440,
-      \u043C\u043E\u043A\u0440\u044B\u0439 \u043F\u0435\u0441\u043E\u043A,\n\u0441\u0442\u0440\u0443\u043D\u044B
-      \u043F\u0430\u0445\u043D\u0443\u0442 \u0434\u044B\u043C\u043E\u043C..."
+    _rawText: 'We used to drag it to the lake:
+
+      campfire, wet sand,
+
+      strings
+      smelling of smoke...'
   - _key: Day2_Guitar1
-    _rawText: "\u0422\u0435\u043F\u0435\u0440\u044C \u043C\u0435\u0447\u0443\u0441\u044C
-      \u043C\u0435\u0436\u0434\u0443\n\u0434\u0435\u0434\u043B\u0430\u0439\u043D\u0430\u043C\u0438
-      \u0438 \u043A\u0430\u0431\u0438\u043D\u0435\u0442\u0430\u043C\u0438,\n\u0430
-      \u043A\u043E\u0441\u0442\u0440\u044B \u0442\u043E\u043B\u044C\u043A\u043E \u043D\u0430
-      \u0444\u043E\u0442\u043E."
+    _rawText: "Now it\u2019s just deadlines\nand doctor\u2019s visits.\nThe fires
+      live in photos."
   - _key: Day2_Guitar2
-    _rawText: "\u041A\u043E\u0433\u0434\u0430-\u043D\u0438\u0431\u0443\u0434\u044C
-      \u044F \u0441\u043D\u043E\u0432\u0430 \u0432\u043E\u0437\u044C\u043C\u0443
-      \u0442\u0435\u0431\u044F \u0432 \u0440\u0443\u043A\u0438."
+    _rawText: "Someday I\u2019ll hold you again."
   - _key: Day3_Guitar0
-    _rawText: "\u041D\u0435 \u043C\u043E\u0433\u0443 \u0434\u0430\u0436\u0435 \u0432\u0441\u043F\u043E\u043C\u043D\u0438\u0442\u044C,\n\u043D\u0430
-      \u043A\u0430\u043A\u043E\u043C \u043B\u0430\u0434\u0443 \u0438\u0433\u0440\u0430\u0435\u0442\u0441\u044F
-      A minor."
+    _rawText: "I can\u2019t even remember\nwhere A minor goes."
   - _key: Day3_Guitar1
-    _rawText: "\u041F\u0430\u043B\u044C\u0446\u044B \u0434\u0440\u043E\u0436\u0430\u0442,\n\u0430
-      \u0432 \u0433\u043E\u043B\u043E\u0432\u0435 \u0442\u043E\u043B\u044C\u043A\u043E
-      \u0441\u043F\u0438\u0441\u043A\u0438 \u0430\u043D\u0430\u043B\u0438\u0437\u043E\u0432."
+    _rawText: "My fingers shake,\nand my head\u2019s full\nof test results."
   - _key: Day3_Guitar2
-    _rawText: "\u0413\u0438\u0442\u0430\u0440\u0430 \u0441\u0442\u043E\u0438\u0442.\n\u041D\u0435
-      \u0442\u0440\u043E\u0433\u0430\u044E.\n\u041D\u0435 \u0441\u0435\u0439\u0447\u0430\u0441."
+    _rawText: "The guitar\u2019s in the corner.\nI\u2019m not touching it.\nNot now."
   - _key: Day4_Guitar0
-    _rawText: "\u041F\u043E\u0440\u0432\u0430\u043B\u0430\u0441\u044C \u0441\u0442\u0440\u0443\u043D\u0430.\n\u0421\u0438\u043C\u0432\u043E\u043B\u0438\u0447\u043D\u043E."
+    _rawText: 'String snapped.
+
+      Symbolic.'
   - _key: Day4_Guitar1
-    _rawText: "\u0414\u0430\u0436\u0435 \u043D\u0435 \u0445\u043E\u0447\u0443 \u043C\u0435\u043D\u044F\u0442\u044C.\n\u041F\u0443\u0441\u0442\u044C
-      \u0437\u0432\u0435\u043D\u0438\u0442 \u043A\u0440\u0438\u0432\u043E."
+    _rawText: "Don\u2019t even want to replace it.\nLet it stay off."
   - _key: Day4_Guitar2
-    _rawText: "\u0421\u0442\u0440\u0443\u043D\u044B \u0437\u0432\u0435\u043D\u044F\u0442
-      \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0433\u0440\u043E\u043C\u043A\u043E.\n\u0420\u0430\u0437\u0434\u0440\u0430\u0436\u0430\u0435\u0442."
+    _rawText: "The strings ring too loud.\nIt\u2019s irritating."
   - _key: Day5_Guitar0
-    _rawText: "\u0425\u043E\u0447\u0443, \u0447\u0442\u043E\u0431\u044B \u043E\u043D\u0430
-      \u0441\u043D\u043E\u0432\u0430 \u0437\u0432\u0443\u0447\u0430\u043B\u0430.\n\u041D\u043E
-      \u043D\u0435 \u043C\u043E\u0433\u0443."
+    _rawText: "I want it to sound again.\nBut I can\u2019t."
   - _key: Day5_Guitar1
-    _rawText: "\u041F\u044B\u043B\u044C\u043D\u0430\u044F.\n\u041A\u0430\u043A \u0431\u0443\u0434\u0442\u043E
-      \u0447\u0443\u0436\u0430\u044F."
+    _rawText: "It\u2019s dusty.\nFeels like it\u2019s not mine anymore."
   - _key: Day5_Guitar2
-    _rawText: "\u0413\u0438\u0442\u0430\u0440\u0430 \u043D\u0435 \u0443\u0437\u043D\u0430\u0451\u0442
-      \u043C\u0435\u043D\u044F.\n\u0418 \u044F \u0435\u0451 \u0442\u043E\u0436\u0435."
+    _rawText: "The guitar doesn\u2019t recognize me.\nAnd I don\u2019t recognize
+      it."
   - _key: Day6_Guitar0
-    _rawText: "\u0428\u0443\u043C \u0432\u043D\u0443\u0442\u0440\u0438 \u0433\u043E\u043B\u043E\u0432\u044B
-      \u0433\u043B\u0443\u0448\u0438\u0442 \u0432\u0441\u0451."
+    _rawText: 'Noise in my head
+
+      drowns everything.'
   - _key: Day6_Guitar1
-    _rawText: "\u0421\u043B\u0438\u0448\u043A\u043E\u043C \u0442\u044F\u0436\u0451\u043B\u0430\u044F.\n\u0414\u0430\u0436\u0435
-      \u0432\u0437\u0433\u043B\u044F\u0434 \u0441\u043A\u043E\u043B\u044C\u0437\u0438\u0442
-      \u043C\u0438\u043C\u043E."
+    _rawText: 'Too heavy.
+
+      Even my eyes slide past it.'
   - _key: Day6_Guitar2
-    _rawText: "\u0423 \u043C\u0435\u043D\u044F \u043D\u0435\u0442 \u0441\u0438\u043B."
+    _rawText: "I don\u2019t have the strength."
   - _key: Day1_Painting0
-    _rawText: "\u042F \u0442\u043E\u0433\u0434\u0430 \u0432\u0434\u0440\u0443\u0433
-      \u0440\u0435\u0448\u0438\u043B\u0430,\n\u0447\u0442\u043E \u0431\u0443\u0434\u0443
-      \u0440\u0438\u0441\u043E\u0432\u0430\u0442\u044C..."
+    _rawText: "I suddenly decided\nI was going to paint\u2026"
   - _key: Day1_Painting1
-    _rawText: "\u041A\u0443\u043F\u0438\u043B\u0430 \u043A\u0438\u0441\u0442\u0438,
-      \u0445\u043E\u043B\u0441\u0442\u044B,\n\u0434\u0430\u0436\u0435 \u043F\u0440\u0438\u0442\u0430\u0449\u0438\u043B\u0430
-      \u043C\u043E\u043B\u044C\u0431\u0435\u0440\u0442 \u0441 \u0434\u0430\u0447\u0438..."
+    _rawText: 'I bought brushes, canvases,
+
+      and even brought an easel
+
+      from
+      the village...'
   - _key: Day1_Painting2
-    _rawText: "\u0422\u0430\u043A \u043D\u0438 \u043E\u0434\u043D\u0443 \u0438 \u043D\u0435
-      \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B\u0430."
+    _rawText: And never finished a single one.
   - _key: Day2_Painting0
-    _rawText: "\u041A\u0430\u0436\u0434\u044B\u0439 \u0440\u0430\u0437 \u0433\u043E\u0432\u043E\u0440\u0438\u043B\u0430
-      \u0441\u0435\u0431\u0435:\n\xAB\u0412\u043E\u0442 \u0437\u0430\u043A\u043E\u043D\u0447\u0443
-      \u043F\u0440\u043E\u0435\u043A\u0442 \u0438 \u0441\u044F\u0434\u0443 \u0440\u0438\u0441\u043E\u0432\u0430\u0442\u044C\xBB..."
+    _rawText: "Every time I\u2019d say:\n\u201CI\u2019ll start painting as soon\nas
+      I wrap up this project\u201D\u2026"
   - _key: Day2_Painting1
-    _rawText: "\u041F\u043E\u0442\u043E\u043C \u0435\u0449\u0451 \u043E\u0434\u0438\u043D
-      \u0434\u0435\u0434\u043B\u0430\u0439\u043D.\n\u0418 \u0435\u0449\u0451..."
+    _rawText: "Then another deadline.\nAnd another\u2026"
   - _key: Day2_Painting2
-    _rawText: "\u0425\u043E\u043B\u0441\u0442\u044B \u043B\u0435\u0436\u0430\u0442.\n\u0416\u0434\u0443\u0442,
-      \u043A\u0430\u043A \u0438 \u044F."
+    _rawText: 'The canvases just sit there.
+
+      Waiting, same as me.'
   - _key: Day3_Painting0
-    _rawText: "\u041E\u0434\u043D\u0430\u0436\u0434\u044B \u0432\u0437\u044F\u043B\u0430
-      \u043A\u0438\u0441\u0442\u044C\n\u0438 \u043F\u0440\u043E\u0441\u0442\u043E
-      \u0443\u0441\u0442\u0430\u0432\u0438\u043B\u0430\u0441\u044C \u0432 \u0445\u043E\u043B\u0441\u0442..."
+    _rawText: "One day I picked up a brush\nand just stared at the canvas\u2026"
   - _key: Day3_Painting1
-    _rawText: "\u041D\u0435 \u0431\u044B\u043B\u043E \u043D\u0438 \u043E\u0431\u0440\u0430\u0437\u0430,
-      \u043D\u0438 \u0436\u0435\u043B\u0430\u043D\u0438\u044F.\n\u0422\u043E\u043B\u044C\u043A\u043E
-      \u0433\u0443\u043B \u0432 \u0433\u043E\u043B\u043E\u0432\u0435..."
+    _rawText: "No image, no spark.\nOnly a low hum in my head\u2026"
   - _key: Day3_Painting2
-    _rawText: "\u041E\u0442\u043B\u043E\u0436\u0438\u043B\u0430 \u043A\u0438\u0441\u0442\u044C.\n\u0414\u0430\u0436\u0435
-      \u0432\u043E\u0434\u0443 \u043D\u0435 \u0432\u044B\u043B\u0438\u043B\u0430."
+    _rawText: "Set the brush down.\nDidn\u2019t even pour out the water."
   - _key: Day4_Painting0
-    _rawText: "\u042D\u0442\u0438 \u0445\u043E\u043B\u0441\u0442\u044B \u0434\u0430\u0432\u044F\u0442,\n\u043A\u0430\u043A
-      \u043D\u0435\u0437\u0430\u043A\u0440\u044B\u0442\u044B\u0435 \u0433\u0435\u0448\u0442\u0430\u043B\u044C\u0442\u044B..."
+    _rawText: "These canvases weigh\non me like open loops\u2026"
   - _key: Day4_Painting1
-    _rawText: "\u0412\u0441\u0451, \u0447\u0442\u043E \u043D\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u043E,\n\u043D\u0430\u0447\u0438\u043D\u0430\u0435\u0442
-      \u0437\u0432\u0443\u0447\u0430\u0442\u044C \u0433\u0440\u043E\u043C\u0447\u0435..."
+    _rawText: "Everything unfinished\nstarts screaming louder\u2026"
   - _key: Day4_Painting2
-    _rawText: "\u0427\u0442\u043E \u044F \u0445\u043E\u0442\u0435\u043B\u0430 \u0438\u043C\u0438
-      \u0441\u043A\u0430\u0437\u0430\u0442\u044C?"
+    _rawText: 'What was I even trying
+
+      to say with them?'
   - _key: Day5_Painting0
-    _rawText: "\u042F \u0434\u0430\u0436\u0435 \u043A\u0440\u0438\u0447\u0430\u043B\u0430
-      \u043D\u0430 \u043A\u0430\u0440\u0442\u0438\u043D\u044B.\n\u0417\u0430\u0434\u0435\u0432\u0430\u043B\u0430
-      \u043A\u0430\u0436\u0434\u044B\u0439 \u0440\u0430\u0437, \u0437\u043B\u0438\u043B\u0430\u0441\u044C..."
+    _rawText: 'I even shouted at the paintings.
+
+      I was offended every time,
+      I was angry...'
   - _key: Day5_Painting1
-    _rawText: "\u0425\u043E\u0442\u0435\u043B\u0430 \u0432\u044B\u0431\u0440\u043E\u0441\u0438\u0442\u044C,\n\u043D\u043E
-      \u0440\u0443\u043A\u0430 \u043D\u0435 \u043F\u043E\u0434\u043D\u044F\u043B\u0430\u0441\u044C..."
+    _rawText: "Wanted to throw it all out,\nbut my hand wouldn\u2019t move\u2026"
   - _key: Day5_Painting2
-    _rawText: "\u041F\u0440\u043E\u0441\u0442\u043E \u043C\u0435\u0448\u0430\u044E\u0442\u0441\u044F.\n\u041A\u0430\u043A
-      \u0438 \u043C\u043D\u043E\u0433\u043E\u0435."
+    _rawText: 'They just get in the way.
+
+      Like so much else.'
   - _key: Day6_Painting0
-    _rawText: "\u0421\u043B\u0438\u0448\u043A\u043E\u043C \u043C\u043D\u043E\u0433\u043E
-      \u043F\u0443\u0441\u0442\u043E\u0442\u044B.\n\u0418 \u0432\u043D\u0443\u0442\u0440\u0438,
-      \u0438 \u043D\u0430 \u0445\u043E\u043B\u0441\u0442\u0435..."
+    _rawText: "Too much emptiness.\nInside me, on the canvas\u2026"
   - _key: Day6_Painting1
-    _rawText: "\u0421\u043B\u0438\u0448\u043A\u043E\u043C \u043F\u043E\u0437\u0434\u043D\u043E
-      \u0447\u0442\u043E-\u0442\u043E \u0437\u0430\u0432\u0435\u0440\u0448\u0430\u0442\u044C..."
+    _rawText: "Too late to finish anything now\u2026"
   - _key: Day6_Painting2
-    _rawText: "\u041D\u0438\u043A\u0442\u043E \u0432\u0435\u0434\u044C \u0438 \u043D\u0435
-      \u0443\u0432\u0438\u0434\u0438\u0442."
+    _rawText: "No one\u2019s going to see it anyway."
   - _key: Day1_Books0
-    _rawText: "\u042F \u0432\u0435\u0447\u043D\u043E \u0442\u0430\u0449\u0438\u043B\u0430
-      \u043A\u043D\u0438\u0433\u0438\n\u0441 \u0440\u0430\u0441\u043F\u0440\u043E\u0434\u0430\u0436
-      \u0434\u043B\u044F \u0432\u0434\u043E\u0445\u043D\u043E\u0432\u0435\u043D\u0438\u044F..."
+    _rawText: "I was always dragging books\nhome from sales\nfor \u201Cinspiration\u201D\u2026"
   - _key: Day1_Books1
-    _rawText: "\u0418\u043D\u043E\u0433\u0434\u0430 \u0447\u0438\u0442\u0430\u043B\u0430
-      \u043F\u043E \u043D\u043E\u0447\u0430\u043C,\n\u0434\u0435\u043B\u0430\u043B\u0430
-      \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438,\n\u043F\u0438\u0441\u0430\u043B\u0430
-      \u043D\u0430 \u043F\u043E\u043B\u044F\u0445..."
+    _rawText: "Sometimes I\u2019d read at night,\nmark passages,\nscribble in the
+      margins\u2026"
   - _key: Day1_Books2
-    _rawText: "\u041D\u0430\u0434\u043E \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0447\u0438\u0442\u0430\u0442\u044C
-      \u0445\u043E\u0442\u044F \u0431\u044B \u043E\u0434\u043D\u0443."
+    _rawText: 'I should at least finish
+
+      one someday.'
   - _key: Day2_Books0
-    _rawText: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0430 \u0432\u0441\u0451
-      \u0435\u0449\u0451 \u043D\u0430 \u0442\u043E\u0439 \u0436\u0435 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435..."
+    _rawText: "The bookmark\u2019s still\non the same page..."
   - _key: Day2_Books1
-    _rawText: "\u0418\u043D\u0442\u0435\u0440\u0435\u0441\u043D\u043E, \u043E \u0447\u0451\u043C
-      \u044D\u0442\u0430 \u0431\u044B\u043B\u0430?\n\u0417\u0430\u0431\u044B\u043B\u0430."
+    _rawText: 'What was it even about?
+
+      I forgot.'
   - _key: Day2_Books2
-    _rawText: "\u041A\u043D\u0438\u0433\u0438 \u0441\u043C\u043E\u0442\u0440\u044F\u0442
-      \u043D\u0430 \u043C\u0435\u043D\u044F\n\u043E\u0441\u0443\u0436\u0434\u0430\u044E\u0449\u0435."
+    _rawText: 'The books stare at me.
+
+      Judging.'
   - _key: Day3_Books0
-    _rawText: "\u041C\u043E\u0437\u0433 \u043E\u0442\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442\u0441\u044F\n\u0432\u043E\u0441\u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0442\u044C
-      \u0442\u0435\u043A\u0441\u0442."
+    _rawText: 'My brain refuses
+
+      to absorb the text.'
   - _key: Day3_Books1
-    _rawText: "\u041D\u0435 \u043C\u043E\u0433\u0443 \u0443\u0434\u0435\u0440\u0436\u0430\u0442\u044C\n\u043D\u0438
-      \u043E\u0434\u043D\u043E\u0439 \u043C\u044B\u0441\u043B\u0438."
+    _rawText: "I can\u2019t hold a single thought."
   - _key: Day3_Books2
-    _rawText: "\u0411\u0435\u0441\u0441\u043C\u044B\u0441\u043B\u0435\u043D\u043D\u044B\u0435
-      \u0441\u043B\u043E\u0432\u0430,\n\u043E\u0431\u0451\u0440\u043D\u0443\u0442\u044B\u0435
-      \u0432 \u0431\u0443\u043C\u0430\u0433\u0443."
+    _rawText: 'Just meaningless words,
+
+      wrapped in paper.'
   - _key: Day4_Books0
-    _rawText: "\u0427\u0442\u043E \u043E\u043D\u0438 \u043C\u043E\u0433\u0443\u0442
-      \u043C\u043D\u0435 \u0441\u043A\u0430\u0437\u0430\u0442\u044C,\n\u0447\u0435\u0433\u043E
-      \u044F \u0435\u0449\u0451 \u043D\u0435 \u0447\u0443\u0432\u0441\u0442\u0432\u0443\u044E?"
+    _rawText: "What could they tell me\nthat I\u2019m not already feeling?"
   - _key: Day4_Books1
-    _rawText: "\u041D\u0438 \u043E\u0434\u0438\u043D \u0430\u0432\u0442\u043E\u0440
-      \u043D\u0435 \u043F\u0438\u0441\u0430\u043B\n\u043F\u0440\u043E \u0442\u0430\u043A\u043E\u0435."
+    _rawText: No author wrote about this.
   - _key: Day4_Books2
-    _rawText: "\u041C\u043E\u0436\u0435\u0442, \u043E\u0442\u043D\u0435\u0441\u0442\u0438
-      \u0438\u0445 \u043D\u0430 \u043F\u043E\u043C\u043E\u0439\u043A\u0443.\n\u041E\u0441\u0432\u043E\u0431\u043E\u0434\u0438\u0442\u044C
-      \u043C\u0435\u0441\u0442\u043E."
+    _rawText: 'Maybe I should throw them out.
+
+      Make space.'
   - _key: Day5_Books0
-    _rawText: "\u041F\u043E\u043B\u043A\u0430 \u0431\u0443\u0434\u0442\u043E \u0442\u044F\u0436\u0435\u043B\u0435\u0435\u0442..."
+    _rawText: The shelf feels heavier somehow...
   - _key: Day5_Books1
-    _rawText: "\u0412\u0441\u0451 \u044D\u0442\u043E \u0434\u0430\u0432\u0438\u0442,\n\u043A\u0430\u043A
-      \u0447\u0443\u0436\u0438\u0435 \u043E\u0436\u0438\u0434\u0430\u043D\u0438\u044F..."
+    _rawText: "It all presses down\nlike someone else\u2019s expectations..."
   - _key: Day5_Books2
-    _rawText: "\u041A\u0430\u0436\u0435\u0442\u0441\u044F, \u044F \u0431\u043E\u043B\u044C\u0448\u0435
-      \u043D\u0435 \u043C\u043E\u0433\u0443\n\u0447\u0438\u0442\u0430\u0442\u044C
-      \u0434\u0430\u0436\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F."
+    _rawText: "I don\u2019t think I can\neven read the titles anymore."
   - _key: Day6_Books0
-    _rawText: "\u042F \u043D\u0435 \u0441\u0442\u0430\u043D\u0443 \u0441\u0438\u043B\u044C\u043D\u0435\u0435,\n\u0435\u0441\u043B\u0438
-      \u0434\u043E\u0447\u0438\u0442\u0430\u044E \u0438\u0445."
+    _rawText: "Finishing them\nwon\u2019t make me stronger."
   - _key: Day6_Books1
-    _rawText: "\u041A\u043D\u0438\u0433\u0438 \u0438\u0441\u0447\u0435\u0437\u043B\u0438.\n\u041E\u0441\u0442\u0430\u043B\u0438\u0441\u044C
-      \u043F\u0440\u043E\u0441\u0442\u043E \u043F\u0440\u044F\u043C\u043E\u0443\u0433\u043E\u043B\u044C\u043D\u0438\u043A\u0438."
+    _rawText: 'The books are gone.
+
+      Just empty rectangles now.'
   - _key: Day6_Books2
-    _rawText: "\u042F \u043D\u0435 \u043C\u043E\u0433\u0443."
+    _rawText: "I can\u2019t."
   - _key: Day1_Basket0
-    _rawText: "\u042F \u0445\u043E\u0442\u0435\u043B\u0430 \u043D\u0430\u0443\u0447\u0438\u0442\u044C\u0441\u044F
-      \u0432\u044F\u0437\u0430\u0442\u044C,\n\u043D\u043E \u0443 \u043C\u0435\u043D\u044F
-      \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u0443\u0441\u0438\u0434\u0447\u0438\u0432\u043E\u0441\u0442\u0438."
+    _rawText: 'I wanted to learn knitting,
+
+      but I never had the patience.'
   - _key: Day1_Basket1
-    _rawText: "\u041A\u043E\u0433\u0434\u0430-\u043D\u0438\u0431\u0443\u0434\u044C
-      \u0442\u043E\u0447\u043D\u043E \u0441\u0434\u0435\u043B\u0430\u044E \u0441\u0435\u0431\u0435
-      \u0448\u0430\u0440\u0444.\n\u0418\u043B\u0438 \u043A\u043E\u043C\u0443-\u0442\u043E."
+    _rawText: "Someday I\u2019ll make a scarf.\nMaybe for me.\nMaybe for someone
+      else."
   - _key: Day1_Basket2
-    _rawText: "\u0426\u0432\u0435\u0442\u0430 \u0442\u0430\u043A\u0438\u0435 \u0443\u044E\u0442\u043D\u044B\u0435.\n\u0422\u0440\u043E\u0433\u0430\u0442\u044C
-      \u043F\u0440\u0438\u044F\u0442\u043D\u043E."
+    _rawText: 'The colors feel so warm.
+
+      Nice to touch.'
   - _key: Day2_Basket0
-    _rawText: "\u0412\u0441\u0451 \u0432\u0440\u0435\u043C\u044F \u0447\u0442\u043E-\u0442\u043E
-      \u043E\u0442\u0432\u043B\u0435\u043A\u0430\u0435\u0442.\n\u041D\u0435 \u0434\u043E
-      \u043D\u0438\u0442\u043E\u043A."
+    _rawText: "There\u2019s always something else.\nNo time for yarn."
   - _key: Day2_Basket1
-    _rawText: "\u041D\u0430\u0447\u0438\u043D\u0430\u043B\u0430 \u043F\u0430\u0440\u0443
-      \u0440\u0430\u0437.\n\u041F\u043E\u0442\u043E\u043C \u0431\u0440\u043E\u0441\u0430\u043B\u0430."
+    _rawText: 'I started a couple times.
+
+      Then gave up.'
   - _key: Day2_Basket2
-    _rawText: "\u041F\u0443\u0442\u0430\u044E\u0442\u0441\u044F...\n...\u043A\u0430\u043A
-      \u043C\u043E\u0438 \u043C\u044B\u0441\u043B\u0438."
+    _rawText: They tangle just like my thoughts.
   - _key: Day3_Basket0
-    _rawText: "\u041A\u0440\u044E\u0447\u043E\u043A \u0441\u043B\u043E\u043C\u0430\u043D.\n\u042F
-      \u0438 \u043D\u0435 \u0437\u0430\u043C\u0435\u0442\u0438\u043B\u0430 \u043A\u043E\u0433\u0434\u0430."
+    _rawText: "The hook\u2019s broken.\nI didn\u2019t even notice when."
   - _key: Day3_Basket1
-    _rawText: "\u0412\u0441\u0451 \u043A\u0430\u0436\u0435\u0442\u0441\u044F \u0442\u0430\u043A\u0438\u043C
-      \u0442\u043E\u043D\u043A\u0438\u043C.\n\u0425\u0440\u0443\u043F\u043A\u0438\u043C."
+    _rawText: 'Everything feels so thin.
+
+      Fragile.'
   - _key: Day3_Basket2
-    _rawText: "\u041D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E...\n\u0441\u043E\u0441\u0440\u0435\u0434\u043E\u0442\u043E\u0447\u0438\u0442\u044C\u0441\u044F..."
+    _rawText: "I can\u2019t focus.\nEvery stitch feels like a task."
   - _key: Day4_Basket0
-    _rawText: "\u042F \u0434\u0430\u0436\u0435 \u043D\u0435 \u0437\u043B\u044E\u0441\u044C.\n\u041F\u0440\u043E\u0441\u0442\u043E
-      \u0441\u043C\u043E\u0442\u0440\u044E, \u043A\u0430\u043A \u043E\u043D\u043E
-      \u0443\u0445\u043E\u0434\u0438\u0442..."
+    _rawText: "I\u2019m not even angry.\nJust watching it fade away..."
   - _key: Day4_Basket1
-    _rawText: "\u041A\u0430\u043A \u0438 \u0432\u0441\u0451 \u043E\u0441\u0442\u0430\u043B\u044C\u043D\u043E\u0435."
+    _rawText: Like everything else.
   - _key: Day4_Basket2
-    _rawText: "\u041F\u0430\u043C\u044F\u0442\u043D\u0438\u043A \u0431\u044B\u043B\u044B\u043C
-      \u0430\u043C\u0431\u0438\u0446\u0438\u044F\u043C."
+    _rawText: A monument to old ambitions.
   - _key: Day5_Basket0
-    _rawText: "\u0414\u0430\u0436\u0435 \u043A\u043B\u0443\u0431\u043A\u0438 \u043A\u0430\u0436\u0443\u0442\u0441\u044F
-      \u0443\u0441\u0442\u0430\u0432\u0448\u0438\u043C\u0438."
+    _rawText: Even the yarn looks tired.
   - _key: Day5_Basket1
-    _rawText: "\u041D\u0430\u0434\u043E \u0438\u0445 \u0432\u044B\u0431\u0440\u043E\u0441\u0438\u0442\u044C."
+    _rawText: I should throw it out.
   - _key: Day5_Basket2
-    _rawText: "\u041F\u043E\u0447\u0435\u043C\u0443 \u0442\u0430\u043A \u0442\u0440\u0443\u0434\u043D\u043E\n\u043E\u0442\u043F\u0443\u0441\u0442\u0438\u0442\u044C
-      \u0431\u0435\u0441\u043F\u043E\u043B\u0435\u0437\u043D\u043E\u0435?"
+    _rawText: 'Why is it so hard
+
+      to let go of useless things?'
   - _key: Day6_Basket0
-    _rawText: "\u041C\u0435\u043B\u043A\u0430\u044F \u043C\u043E\u0442\u043E\u0440\u0438\u043A\u0430
-      \u0442\u0435\u043F\u0435\u0440\u044C \u0432\u0440\u0430\u0433."
+    _rawText: 'Fine motor skills
+
+      are the enemy now.'
   - _key: Day6_Basket1
-    _rawText: "\u0420\u0443\u043A\u0438 \u043D\u0435 \u0441\u043B\u0443\u0448\u0430\u044E\u0442\u0441\u044F."
+    _rawText: "My hands won\u2019t listen."
   - _key: Day6_Basket2
-    _rawText: "\u0412\u0441\u0451 \u0432 \u044D\u0442\u043E\u0439 \u043A\u043E\u0440\u0437\u0438\u043D\u043A\u0435\n\u0437\u0430\u0441\u0442\u044B\u0432\u0448\u0435\u0435
-      \xAB\u043D\u0435 \u0441\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C\xBB."
+    _rawText: "Everything in this basket\nis a frozen \u201Cwhat never was.\u201D"
   - _key: Day1_Window0
-    _rawText: "\u042F \u043B\u044E\u0431\u043B\u044E \u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439
-      \u0441\u0432\u0435\u0442.\n\u0412\u0441\u0451 \u043A\u0430\u0436\u0435\u0442\u0441\u044F
-      \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u044B\u043C."
+    _rawText: 'I love the morning light.
+
+      Everything feels possible.'
   - _key: Day1_Window1
-    _rawText: "\u0414\u0430\u0436\u0435 \u043F\u0442\u0438\u0446\u044B \u0431\u0443\u0434\u0442\u043E
-      \u0448\u0435\u043F\u0447\u0443\u0442\u0441\u044F."
+    _rawText: "Even the birds sound\nlike they\u2019re whispering."
   - _key: Day1_Window2
-    _rawText: "\u0421\u0435\u0433\u043E\u0434\u043D\u044F \u0445\u043E\u0440\u043E\u0448\u0438\u0439
-      \u0434\u0435\u043D\u044C."
+    _rawText: "It\u2019s a good day."
   - _key: Day2_Window0
-    _rawText: "\u0421\u043E\u043B\u043D\u0435\u0447\u043D\u043E, \u043D\u043E \u043A\u0430\u043A-\u0442\u043E
-      \u0441\u0442\u0440\u0430\u043D\u043D\u043E\u2026\n\u0431\u0443\u0434\u0442\u043E
-      \u0441 \u043E\u0442\u0441\u0440\u043E\u0447\u043A\u043E\u0439."
+    _rawText: "It\u2019s sunny\u2026 but strange.\nLike it\u2019s on delay."
   - _key: Day2_Window1
-    _rawText: "\u0421\u0435\u0433\u043E\u0434\u043D\u044F \u0434\u043E\u043B\u0436\u0435\u043D
-      \u0431\u044B\u043B \u0431\u044B\u0442\u044C\n\u0445\u043E\u0440\u043E\u0448\u0438\u0439
-      \u0434\u0435\u043D\u044C. \u041D\u0430\u0432\u0435\u0440\u043D\u043E\u0435."
+    _rawText: 'Today was supposed
+
+      to be a good day.
+
+      Maybe.'
   - _key: Day2_Window2
-    _rawText: "\u0422\u0443\u043C\u0430\u043D?"
+    _rawText: Fog?
   - _key: Day3_Window0
-    _rawText: "\u0410 \u0432\u0435\u0434\u044C \u0443 \u043E\u0441\u0442\u0430\u043B\u044C\u043D\u044B\u0445
-      \u0436\u0438\u0437\u043D\u044C\n\u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442\u0441\u044F\u2026"
+    _rawText: "Everyone else\u2019s life keeps going\u2026"
   - _key: Day3_Window1
-    _rawText: "\u041B\u044E\u0434\u0438 \u0438\u0434\u0443\u0442,\n\u0430 \u043C\u043D\u0435
-      \u0431\u0443\u0434\u0442\u043E \u043D\u0435\u043B\u044C\u0437\u044F."
+    _rawText: "People move forward.\nI feel like I\u2019m not allowed."
   - _key: Day3_Window2
-    _rawText: "\u041C\u0438\u0440 \u0437\u0430 \u043E\u043A\u043D\u043E\u043C \u0431\u0443\u0434\u0442\u043E
-      \u043D\u0435 \u0432 \u0444\u043E\u043A\u0443\u0441\u0435."
+    _rawText: 'The world outside
+
+      looks out of focus.'
   - _key: Day4_Window0
-    _rawText: "\u0428\u0443\u043C \u0434\u043E\u0436\u0434\u044F \u043C\u0435\u0448\u0430\u0435\u0442
-      \u0434\u0443\u043C\u0430\u0442\u044C."
+    _rawText: 'Rain noise makes
+
+      it hard to think.'
   - _key: Day4_Window1
-    _rawText: "\u041B\u0443\u0436\u0438 \u043E\u0442\u0440\u0430\u0436\u0430\u044E\u0442
-      \u043F\u043E\u0442\u043E\u043B\u043E\u043A.\n\u0414\u0430\u0436\u0435 \u043D\u0435\u0431\u043E
-      \u043D\u0435 \u0432\u0438\u0434\u043D\u043E."
+    _rawText: "Puddles reflect the ceiling.\nCan\u2019t even see the sky."
   - _key: Day4_Window2
-    _rawText: "\u0412\u0441\u0451 \u0441\u0442\u0430\u043B\u043E \u0441\u0435\u0440\u044B\u043C,\n\u0434\u0430\u0436\u0435
-      \u0434\u0435\u0440\u0435\u0432\u044C\u044F."
+    _rawText: "Everything\u2019s gone gray.\nEven the trees."
   - _key: Day5_Window0
-    _rawText: "\u0413\u0440\u043E\u043C \u0433\u0434\u0435-\u0442\u043E \u0434\u0430\u043B\u0435\u043A\u043E."
+    _rawText: Thunder, somewhere far off.
   - _key: Day5_Window1
-    _rawText: "\u041F\u0440\u043E\u0441\u0442\u043E \u0432\u043E\u0434\u0430 \u0438
-      \u0441\u0442\u0435\u043A\u043B\u043E.\n\u0412\u0441\u0451."
+    _rawText: "Just water and glass.\nThat\u2019s all."
   - _key: Day5_Window2
-    _rawText: "\u0421\u0432\u0435\u0442\u0430 \u043F\u043E\u0447\u0442\u0438 \u043D\u0435\u0442."
+    _rawText: "There\u2019s barely any light."
   - _key: Day6_Window0
-    _rawText: "\u0413\u0440\u043E\u0437\u0430.\n\u041C\u043E\u043B\u043D\u0438\u0438
-      \u043A\u0430\u043A \u0440\u0432\u0430\u043D\u044B\u0435 \u043C\u044B\u0441\u043B\u0438."
+    _rawText: 'Storm.
+
+      Lightning like torn-up thoughts.'
   - _key: Day6_Window1
-    _rawText: "\u041C\u0438\u0440 \u0437\u0430 \u043E\u043A\u043D\u043E\u043C \u0432\u0437\u0431\u0435\u0441\u0438\u043B\u0441\u044F.\n\u0410
-      \u044F \u0431\u0443\u0434\u0442\u043E \u043E\u0441\u0442\u0430\u043B\u0430\u0441\u044C
-      \u043E\u0434\u043D\u0430."
+    _rawText: "The world\u2019s losing it.\nAnd I\u2019m just\u2026\nleft behind."
   - _key: Day6_Window2
-    _rawText: "\u041D\u0435 \u0432\u0438\u0436\u0443 \u043D\u0438\u0447\u0435\u0433\u043E.\n\u0414\u0430\u0436\u0435
-      \u0441\u0435\u0431\u044F \u0432 \u043E\u0442\u0440\u0430\u0436\u0435\u043D\u0438\u0438."
+    _rawText: "I can\u2019t see anything.\nNot even myself in the reflection."
   - _key: Hint_Switch
-    _rawText: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"
+    _rawText: Choose
   - _key: Hint_Interact
-    _rawText: "\u0412\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435"
+    _rawText: Interact
   - _key: Day1_CardHeader0
-    _rawText: "\u0416\u041A\u0425"
+    _rawText: Utilities
   - _key: Day1_CardContent0
-    _rawText: "\u0421\u0447\u0451\u0442 \u0437\u0430 \u043E\u0442\u043E\u043F\u043B\u0435\u043D\u0438\u0435:\n360"
+    _rawText: 'Heating bill:
+
+      360'
   - _key: Day1_CardHeader1
-    _rawText: "\u0411\u0443\u0445\u0433\u0430\u043B\u0442\u0435\u0440\u0438\u044F"
+    _rawText: Accounting
   - _key: Day1_CardContent1
-    _rawText: "\u041F\u043E\u0434\u043F\u0438\u0448\u0438\u0442\u0435 \u0432\u0435\u0434\u043E\u043C\u043E\u0441\u0442\u044C\n\u0437\u0430
-      \u0430\u043F\u0440\u0435\u043B\u044C"
+    _rawText: 'Please sign
+
+      the April payroll sheet'
   - _key: Day1_CardHeader2
-    _rawText: "\u0413\u043E\u0441\u0443\u0441\u043B\u0443\u0433\u0438"
+    _rawText: Government Services
   - _key: Day1_CardContent2
-    _rawText: "\u041D\u0430\u043B\u043E\u0433\u043E\u0432\u0430\u044F \u0444\u043E\u0440\u043C\u0430:\n\u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C
-      3 \u0434\u043D\u044F"
+    _rawText: 'Tax form:
+
+      3 days left'
   - _key: Day1_CardHeader3
-    _rawText: "\u042F\u0433\u043E\u0434\u043A\u0438"
+    _rawText: Deliveries
   - _key: Day1_CardContent3
-    _rawText: "\u041F\u043E\u0441\u044B\u043B\u043A\u0430 \u0432 \u043F\u0443\u043D\u043A\u0442\u0435\n\u0432\u044B\u0434\u0430\u0447\u0438"
+    _rawText: 'Your package
+
+      is at the pickup point'
   - _key: Day1_CardHeader4
     _rawText: HR
   - _key: Day1_CardContent4
-    _rawText: "\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0442\u0430\u0431\u0435\u043B\u044C\n\u0434\u043E
-      \u043F\u044F\u0442\u043D\u0438\u0446\u044B"
+    _rawText: 'Submit your
+
+      timesheet by Friday'
   - _key: Day1_CardHeader5
     _rawText: SelfGuru
   - _key: Day1_CardContent5
-    _rawText: "\u041E\u0442\u043A\u0440\u043E\u0439 \u0441\u0438\u043B\u0443 \u0432\u043D\u0443\u0442\u0440\u0438.\n\u0422\u043E\u043B\u044C\u043A\u043E
-      \u0441\u0435\u0433\u043E\u0434\u043D\u044F -70%"
+    _rawText: 'Unlock your inner power
+
+      70% off today only!'
   - _key: Day1_CardHeader6
     _rawText: BeautyBox
   - _key: Day1_CardContent6
-    _rawText: "\u0422\u044B \u0434\u043E\u0441\u0442\u043E\u0439\u043D\u0430 \u043B\u0443\u0447\u0448\u0435\u0433\u043E\n\u0443\u0445\u043E\u0434\u0430!"
+    _rawText: "You deserve \nthe best in self-care!"
   - _key: Day1_CardHeader7
-    _rawText: "\u0422\u0430\u0442\u044C\u044F\u043D\u0430, \u043D\u0443\u0442\u0440\u0438\u0446\u0438\u043E\u043B\u043E\u0433"
+    _rawText: Nutritionist
   - _key: Day1_CardContent7
-    _rawText: "5 \u0448\u0430\u0433\u043E\u0432 \u043A \u0436\u0438\u0437\u043D\u0438\n\u0431\u0435\u0437
-      \u0442\u043E\u043A\u0441\u0438\u043D\u043E\u0432"
+    _rawText: '5 steps to
+
+      a toxin-free life'
   - _key: Day1_CardHeader8
-    _rawText: "\u041F\u0443\u0448\u0438\u0441\u0442\u0438\u043A \u0434\u043D\u044F"
+    _rawText: Fuzzball of the Day
   - _key: Day1_CardContent8
-    _rawText: "\u041A\u043E\u0442 \u0434\u043D\u044F:\n\u0441\u0435\u0433\u043E\u0434\u043D\u044F
-      \u043E\u043D \u0443\u043B\u044B\u0431\u0430\u0435\u0442\u0441\u044F\n\u0434\u043B\u044F
-      \u0442\u0435\u0431\u044F!"
+    _rawText: 'Cat of the day:
+
+      smiling just for you!'
   - _key: Day1_CardHeader9
-    _rawText: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+    _rawText: Unknown
   - _key: Day1_CardContent9
-    _rawText: "\U0001F308\U0001F4B0\u041F\u041E\u041F\u0420\u041E\u0411\u0423\u0419\n\u0421\u0415\u0419\u0427\u0410\u0421\U0001F4B0\U0001F308"
+    _rawText: "\U0001F308\U0001F4B0TRY IT NOW\U0001F4B0\U0001F308"
   - _key: Day1_CardHeader10
-    _rawText: "\u041C\u0430\u043C\u0430"
+    _rawText: Mom
   - _key: Day1_CardContent10
-    _rawText: "\u0422\u044B \u043A\u0430\u043A? \u041D\u0430\u0434\u0435\u044E\u0441\u044C,\n\u0443
-      \u0442\u0435\u0431\u044F \u0432\u0441\u0451 \u0445\u043E\u0440\u043E\u0448\u043E"
+    _rawText: "How are you?\nHope everything\u2019s\nokay with you."
   - _key: Day1_CardHeader11
-    _rawText: "\u041A\u0438\u0440\u0430"
+    _rawText: Kira
   - _key: Day1_CardContent11
-    _rawText: "\u0421\u043C\u043E\u0442\u0440\u0438, \u043D\u0430\u0448\u0430 \u043A\u043E\u0448\u043A\u0430\n\u0442\u0430\u043A
-      \u0432\u044B\u0440\u043E\u0441\u043B\u0430!"
+    _rawText: 'Look, our cat''s
+
+      grown so much!'
   - _key: Day1_CardHeader12
-    _rawText: "\u0414\u0436\u0443\u043D"
+    _rawText: June
   - _key: Day1_CardContent12
-    _rawText: "\u0422\u044B \u0435\u0449\u0451 \u043F\u0438\u0448\u0435\u0448\u044C
-      \u0442\u0435\u043A\u0441\u0442\u044B?\n\u041D\u0430\u043C \u043D\u0443\u0436\u0435\u043D
-      \u0447\u0435\u043B\u043E\u0432\u0435\u043A\n\u043D\u0430 \u043F\u043E\u0434\u043C\u0435\u043D\u0443"
+    _rawText: 'Still writing?
+
+      We need someone
+
+      to cover.'
   - _key: Day1_CardHeader13
-    _rawText: "\u0421\u0430\u0448\u0430"
+    _rawText: Sasha
   - _key: Day1_CardContent13
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u041D\u0430\u0448\u043B\u0430
-      \u0442\u0432\u043E\u044E \u0441\u0442\u0430\u0440\u0443\u044E \u0444\u043E\u0442\u043A\u0443,\n\u0442\u0430\u043A
-      \u0443\u044E\u0442\u043D\u043E \u0441\u0442\u0430\u043B\u043E!"
+    _rawText: 'Just found
+
+      one of your old photos
+
+      got all warm inside!'
   - _key: Day1_CardHeader14
-    _rawText: "\u041A\u0435\u0439"
+    _rawText: Kay
   - _key: Day1_CardContent14
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442. \u041D\u0430\u0434\u0435\u044E\u0441\u044C,\n\u0443
-      \u0442\u0435\u0431\u044F \u0441\u0435\u0439\u0447\u0430\u0441 \u0432\u0441\u0451\n\u0441\u0442\u0430\u0431\u0438\u043B\u044C\u043D\u043E"
+    _rawText: 'Hey.
+
+      I hope things
+
+      feel more stable
+
+      for you now.'
   - _key: Day2_CardHeader0
-    _rawText: "\u0420\u0435\u0434\u043A\u043E\u043B\u043B\u0435\u0433\u0438\u044F"
+    _rawText: Editorial Team
   - _key: Day2_CardContent0
-    _rawText: "\u041F\u0440\u0438\u0448\u043B\u0438\u0442\u0435 \u0442\u0435\u043C\u0443\n\u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0433\u043E
-      \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B\u0430"
+    _rawText: 'Please send
+
+      the topic for
+
+      the next article'
   - _key: Day2_CardHeader1
-    _rawText: "\u0416\u041A\u0425"
+    _rawText: Utilities
   - _key: Day2_CardContent1
-    _rawText: "\u041F\u0435\u043D\u0438 \u0437\u0430 \u0432\u043E\u0434\u0443:\n+112"
+    _rawText: 'Late fee on water bill:
+
+      +112'
   - _key: Day2_CardHeader2
-    _rawText: "\u0411\u0443\u0445\u0433\u0430\u043B\u0442\u0435\u0440\u0438\u044F"
+    _rawText: Accounting
   - _key: Day2_CardContent2
-    _rawText: "\u0417\u0430\u0440\u043F\u043B\u0430\u0442\u0430 \u0437\u0430\u0447\u0438\u0441\u043B\u0435\u043D\u0430.\n\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435
-      \u0440\u0435\u043A\u0432\u0438\u0437\u0438\u0442\u044B"
+    _rawText: 'Salary received.
+
+      Check your account
+
+      details'
   - _key: Day2_CardHeader3
-    _rawText: "\u042F\u0433\u043E\u0434\u043A\u0438"
+    _rawText: Deliveries
   - _key: Day2_CardContent3
-    _rawText: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u0435:\n\u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430
-      \u043D\u0435 \u0443\u0434\u0430\u043B\u0430\u0441\u044C"
+    _rawText: 'Notification:
+
+      Delivery failed'
   - _key: Day2_CardHeader4
-    _rawText: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0430\u044F
-      \u0441\u0438\u0441\u0442\u0435\u043C\u0430"
+    _rawText: Automated System
   - _key: Day2_CardContent4
-    _rawText: "\u0421\u0440\u043E\u043A \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F\n\u0437\u0430\u0434\u0430\u0447\u0438
-      \u0438\u0441\u0442\u0435\u043A\u0430\u0435\u0442\n\u0447\u0435\u0440\u0435\u0437
-      6 \u0447\u0430\u0441\u043E\u0432"
+    _rawText: 'Task deadline
+
+      in 6 hours'
   - _key: Day2_CardHeader5
-    _rawText: "\u041F\u043B\u0430\u043D\u0435\u0440"
+    _rawText: Planner
   - _key: Day2_CardContent5
-    _rawText: "\u0422\u0432\u043E\u0438 \u0446\u0435\u043B\u0438 \u0441\u043A\u0443\u0447\u0430\u044E\u0442\n\u043F\u043E
-      \u0442\u0435\u0431\u0435!"
+    _rawText: 'Your goals
+
+      miss you!'
   - _key: Day2_CardHeader6
-    _rawText: "\u0422\u0430\u043D\u0446\u044B"
+    _rawText: Dance
   - _key: Day2_CardContent6
-    _rawText: "\u041D\u0430\u0447\u043D\u0438 \u043D\u0435\u0434\u0435\u043B\u044E\n\u0441
-      \u0442\u0430\u043D\u0446\u0430!"
+    _rawText: 'Start your week
+
+      with a dance!'
   - _key: Day2_CardHeader7
     _rawText: ImgaGirl
   - _key: Day2_CardContent7
-    _rawText: "5 \u043F\u043E\u0437\n\u0434\u043B\u044F \u0443\u0432\u0435\u0440\u0435\u043D\u043D\u043E\u0441\u0442\u0438\n\u043D\u0430
-      \u0444\u043E\u0442\u043E"
+    _rawText: '5 power poses
+
+      for confident photos'
   - _key: Day2_CardHeader8
     _rawText: Digital
   - _key: Day2_CardContent8
-    _rawText: "\u041D\u0435 \u0442\u043E\u0440\u043C\u043E\u0437\u0438!\n\u041C\u0438\u0440
-      \u043D\u0435 \u0436\u0434\u0451\u0442!"
+    _rawText: "Don\u2019t stall\nthe world won\u2019t wait!"
   - _key: Day2_CardHeader9
-    _rawText: "\u0418\u043D\u0444\u043E"
+    _rawText: Automated System
   - _key: Day2_CardContent9
-    _rawText: "\u0412\u0430\u0448\u0435\u043C\u0443 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u044E\n\u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u0442\u0441\u044F..."
+    _rawText: "You are invited\nto take a look\u2026"
   - _key: Day2_CardHeader10
-    _rawText: "\u041C\u0430\u043C\u0430"
+    _rawText: Mom
   - _key: Day2_CardContent10
-    _rawText: "\u0421\u0435\u0433\u043E\u0434\u043D\u044F \u0431\u044B\u043B \u0434\u043E\u0436\u0434\u044C.\n\u041D\u0430\u0434\u0435\u044E\u0441\u044C,
-      \u0442\u044B \u0432\u0437\u044F\u043B\u0430 \u0437\u043E\u043D\u0442?"
+    _rawText: 'It rained today.
+
+      Hope you took
+
+      an umbrella?'
   - _key: Day2_CardHeader11
-    _rawText: "\u0421\u0430\u0448\u0430"
+    _rawText: Sasha
   - _key: Day2_CardContent11
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u0423 \u0442\u0435\u0431\u044F
-      \u0435\u0441\u0442\u044C \u0440\u0435\u0446\u0435\u043F\u0442\n\u0442\u043E\u0439
-      \u0437\u0430\u043F\u0435\u043A\u0430\u043D\u043A\u0438\n\u0441 \u0442\u0432\u043E\u0440\u043E\u0433\u043E\u043C?"
+    _rawText: 'Hey!
+
+      Do you still have
+
+      that cottage cheese
+
+      casserole
+      recipe?'
   - _key: Day2_CardHeader12
-    _rawText: "\u0410\u043D\u043D\u0430"
+    _rawText: Anna
   - _key: Day2_CardContent12
-    _rawText: "\u0422\u044B \u043D\u0435 \u043F\u043E\u0432\u0435\u0440\u0438\u0448\u044C,\n\u043D\u0430
-      \u0432\u043E\u043A\u0437\u0430\u043B\u0435 \u0438\u0433\u0440\u0430\u043B\u0438\n\u0442\u0432\u043E\u044E
-      \u043B\u044E\u0431\u0438\u043C\u0443\u044E \u043F\u0435\u0441\u043D\u044E!"
+    _rawText: "You won\u2019t believe it\nthey played your favorite\nsong at the
+      station!"
   - _key: Day2_CardHeader13
-    _rawText: "\u041C\u0430\u043C\u0430"
+    _rawText: Mom
   - _key: Day2_CardContent13
-    _rawText: "\u041F\u043E\u043C\u043D\u0438\u0448\u044C, \u0442\u044B \u043F\u0440\u043E\u0441\u0438\u043B\u0430\n\u043D\u0430\u043F\u043E\u043C\u043D\u0438\u0442\u044C
-      \u043F\u0440\u043E \u043F\u043B\u0430\u0442\u0451\u0436\n\u0437\u0430 \u0442\u0435\u043B\u0435\u0444\u043E\u043D?"
+    _rawText: 'Remember you asked
+
+      for a reminder to pay
+
+      for your phone?'
   - _key: Day2_CardHeader14
-    _rawText: "\u041C\u0435\u0434\u0446\u0435\u043D\u0442\u0440 "
+    _rawText: Medical Center
   - _key: Day2_CardContent14
-    _rawText: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043E\u0431\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F...\n...\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u043E\u0432\u0430\u043D\u043E
-      \u0441\u0440\u043E\u0447\u043D\u043E\u0435\n\u043E\u0431\u0440\u0430\u0449\u0435\u043D\u0438\u0435..."
+    _rawText: "Test results\u2026\n...urgent follow-up\nrecommended\u2026"
   - _key: Day3_CardHeader0
-    _rawText: "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440"
+    _rawText: Editor
   - _key: Day3_CardContent0
-    _rawText: "\u041D\u0443\u0436\u0435\u043D \u0442\u0435\u043A\u0441\u0442 \u0434\u043E
-      \u0432\u0435\u0447\u0435\u0440\u0430.\n\u0411\u0435\u0437 \u043E\u0442\u0441\u0440\u043E\u0447\u0435\u043A"
+    _rawText: 'Need the text by evening.
+
+      No delays.'
   - _key: Day3_CardHeader1
-    _rawText: "\u041A\u043B\u0438\u0435\u043D\u0442"
+    _rawText: Client
   - _key: Day3_CardContent1
-    _rawText: "\u0424\u043E\u0440\u043C\u0443\u043B\u0438\u0440\u043E\u0432%#?\n\u043F\u0435\u0440@%\u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u0443\u0439"
+    _rawText: "Wording%#? \u2026\nre@%write this mess"
   - _key: Day3_CardHeader2
-    _rawText: "\u041C\u0435\u0434\u0446\u0435\u043D\u0442\u0440"
+    _rawText: Medical Center
   - _key: Day3_CardContent2
-    _rawText: "\u041E\u043F\u043B\u0430\u0442\u0430 \u043F\u0440\u043E\u0448\u043B\u0430"
+    _rawText: "Payment \u2713"
   - _key: Day3_CardHeader3
-    _rawText: "\u0410\u043D\u043D\u0430"
+    _rawText: Anna
   - _key: Day3_CardContent3
-    _rawText: "\u0412\u0430\u0448\u0430 \u0441\u0442\u0430\u0442\u044C\u044F?\n\u041F\u043E\u0441\u0442\u0443\u043F\u043B@@@
-      \u0432\n\u0447\u0435\u0440\u043D\u043E\u0432\u0438\u043A\u0438"
+    _rawText: "Your articl? Submi@@@\u2026\nin dr@fts"
   - _key: Day3_CardHeader4
     _rawText: IT
   - _key: Day3_CardContent4
-    _rawText: "\u0412\u0430\u0448 \u043F\u0430\u0440\u043E\u043B\u044C \u0443\u0441\u0442\u0430\u0440\u0435\u043B.\n\u0421\u043C\u0435\u043D\u0438\u0442\u0435
-      \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435\n24 \u0447\u0430\u0441\u043E\u0432"
+    _rawText: 'Pass_expired.
+
+      Ch@nge w/in 24h'
   - _key: Day3_CardHeader5
-    _rawText: "\u041C\u0435\u0434\u041C\u0435\u0434"
+    _rawText: MedMed
   - _key: Day3_CardContent5
-    _rawText: "5 \u0441\u0438\u043C\u043F\u0442\u043E\u043C\u043E\u0432,\n\u043A\u043E\u0442\u043E\u0440\u044B\u0435
-      \u043D\u0435\u043B\u044C\u0437\u044F\n\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+    _rawText: "5 symptoms you\nshouldn\u2019t ignore"
   - _key: Day3_CardHeader6
     _rawText: LifeCoach
   - _key: Day3_CardContent6
-    _rawText: "\u0422\u044B \u0432\u0441\u0451 \u0435\u0449\u0451 \u043C\u043E\u0436\u0435\u0448\u044C\n\u0432\u0441\u0451
-      \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C!"
+    _rawText: 'You can still
+
+      change everything!'
   - _key: Day3_CardHeader7
-    _rawText: "\u041C\u0435\u0434\u041E\u043A"
+    _rawText: MedOk
   - _key: Day3_CardContent7
-    _rawText: "\u041C\u044B \u0437\u0430\u043C\u0435\u0442\u0438\u043B\u0438:\n\u0432\u044B
-      \u043C\u0435\u043D\u044C\u0448\u0435 \u0432\u044B\u0445\u043E\u0434\u0438\u0442\u0435\n\u0438\u0437
-      \u0434\u043E\u043C\u0430"
+    _rawText: "We've noticed:\nyou\u2019re going out\nless lately"
   - _key: Day3_CardHeader8
-    _rawText: "\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430"
+    _rawText: Newsletter
   - _key: Day3_CardContent8
-    _rawText: "\u0422\u0432\u043E\u044F \u0431\u043E\u043B\u044C\n\u044D\u0442\u043E
-      \u0442\u043E\u0447\u043A\u0430 \u0440\u043E\u0441\u0442\u0430"
+    _rawText: 'Your pain is
+
+      a growth point'
   - _key: Day3_CardHeader9
-    _rawText: "\u0424\u0438\u0442\u043D\u0435\u0441"
+    _rawText: Fitness
   - _key: Day3_CardContent9
-    _rawText: "\u041D\u0430@\u043E_#\u0438\u0448\u044C \u043B\u0438\n\u0442\u044B
-      \u0440\u0430\u0434@\u0441\u0442\u044C \u0432\n\u043F%\u0432\u0442&\u0440\u043D\u044B_\u0445
-      \u0434%\u043B@\u0445?"
+    _rawText: 'Do y0u_#even
+
+      enj0y_be!ng in
+
+      th%t v&rs!on
+
+      0f y0ur@self?'
   - _key: Day3_CardHeader10
-    _rawText: "\u041A\u0438\u0440\u0430"
+    _rawText: Kira
   - _key: Day3_CardContent10
-    _rawText: "\u041E\u0445... \u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
+    _rawText: Oh... Stay strong!
   - _key: Day3_CardHeader11
-    _rawText: "\u041C\u0430\u043C\u0430"
+    _rawText: Mom
   - _key: Day3_CardContent11
-    _rawText: "\u042F \u043F\u043E\u043D\u0438\u043C\u0430\u044E,\n\u0447\u0442\u043E
-      \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0431\u044B\u0442\u044C\n\u0437\u0430\u043D\u044F\u0442\u0430.
-      \u041F\u0440\u043E\u0441\u0442\u043E \u043D\u0430\u043F\u0438\u0448\u0438\n\u043F\u0430\u0440\u0443
-      \u0441\u043B\u043E\u0432, \u0435\u0441\u043B\u0438 \u0432\u0441\u0451\n\u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E."
+    _rawText: 'I get that you
+
+      might be busy.
+
+      Just send a quick message
+
+      if
+      you''re okay.'
   - _key: Day3_CardHeader12
-    _rawText: "\u0421\u0430\u0448\u0430"
+    _rawText: Sasha
   - _key: Day3_CardContent12
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
+    _rawText: Stay strong!
   - _key: Day3_CardHeader13
-    _rawText: "\u041D\u0415 \u041E\u0422\u0412\u0415\u0427\u0410\u0422\u042C"
+    _rawText: DO NOT REPLY
   - _key: Day3_CardContent13
-    _rawText: "\u041F\u0440\u0438\u0432\u0435\u0442!\n\u0412\u0434\u0440\u0443\u0433
-      \u0440\u0435\u0448\u0438\u0448\u044C \u0432\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F,\n\u0443
-      \u043D\u0430\u0441 \u043E\u0441\u0432\u043E\u0431\u043E\u0434\u0438\u043B\u043E\u0441\u044C
-      \u043C\u0435\u0441\u0442\u043E."
+    _rawText: "Hey!\nJust in case you want\nto come back\nwe\u2019ve got an opening."
   - _key: Day3_CardHeader14
-    _rawText: "\u041A\u0435\u0439"
+    _rawText: Kay
   - _key: Day3_CardContent14
-    _rawText: "\u042D\u0442\u043E \u0432\u0441\u0435 \u043E\u0442 \u0441\u0442\u0440\u0435\u0441\u0441\u0430!"
+    _rawText: "It\u2019s all from stress!"
   - _key: Day4_CardHeader0
-    _rawText: "\u0420\u0435\u0434\u0430\u043A\u04420\u0440"
+    _rawText: Edit0r
   - _key: Day4_CardContent0
-    _rawText: "\u258C\u258C\u258C \u0436\u2022\u2022\u2022\u2022\u0436\u2022\u2022\u0436\u2022\u2022\u2022
-      \u258C"
+    _rawText: "\u258C\u258C \u017E\u2022\u2022\u2022*k\u2022*\u017E\u2022\u2022\u2022
+      \u258C\u258C"
   - _key: Day4_CardHeader1
-    _rawText: "\u041A\u043B\u0438\u0435\u043D\u0442"
+    _rawText: Client
   - _key: Day4_CardContent1
-    _rawText: "\u041F\u043E\u0447\u0435\u043C\u0443 \u0432\u044B \u043D\u0435\n\u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438
-      \u043D\u0430 \u043F\u0440\u0430\u0432\u043A\u0438?"
+    _rawText: "Why haven\u2019t you\nresponded to the edits?"
   - _key: Day4_CardHeader2
-    _rawText: "\u0410\u0432\u0442\u043E\u0441\u0438\u0441\u0442\u0435\u043C\u0430"
+    _rawText: AutoSystem
   - _key: Day4_CardContent2
-    _rawText: "\u041E\u0448\u0438\u0431\u043A\u0430 \u0441\u043E\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F"
+    _rawText: Connection error
   - _key: Day4_CardHeader3
     _rawText: HR
   - _key: Day4_CardContent3
-    _rawText: "\u0424\u0430\u0439\u043B \u043D\u0435 \u043E\u0442\u043F\u0440##\u0432\u043B\u0435\u043D.\n\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435
-      \u0441\u043D\u043E\u0432\u0430."
+    _rawText: 'F!le not s#nt.
+
+      Please try again.'
   - _key: Day4_CardHeader4
-    _rawText: " \u2588\u2588\u2588\u2588\u2588"
+    _rawText: "\u2591\u2591\u2591"
   - _key: Day4_CardContent4
-    _rawText: "...\u0434\u043E\u043B\u0436\u043D\u044B... \u2593\u2593\u2593.."
+    _rawText: "...you shou\u2593\u2593\u2593..."
   - _key: Day4_CardHeader5
-    _rawText: "\u0413\u0443\u0440\u0443"
+    _rawText: Guru
   - _key: Day4_CardContent5
-    _rawText: "\u041E\u0431\u0440\u0435\u0442\u0438 \u0433\u0430\u0440\u043C\u043E\u043D\u0438\u044E\n\u0437\u0430
-      5 \u043C\u0438\u043D\u0443\u0442 \u0432 \u0434\u0435\u043D\u044C!"
+    _rawText: 'Find inner harmony
+
+      in just 5 minutes a day!'
   - _key: Day4_CardHeader6
-    _rawText: "[\u043D\u0435\u0438\u0437\u0432.]"
+    _rawText: '[unknown]'
   - _key: Day4_CardContent6
-    _rawText: "\u0411\u043E\u043B\u044C \u2014 \u044D\u0442\u043E \u0432\u044B\u0431\u043E\u0440"
+    _rawText: Pain is a choice
   - _key: Day4_CardHeader7
     _rawText: SelfHelpPro
   - _key: Day4_CardContent7
-    _rawText: "\u0417\u043D\u0430\u0435\u0448\u044C, \u043F\u043E\u0447\u0435\u043C\u0443\n\u0442\u044B
-      \u0432\u0441\u0451 \u0435\u0449\u0451\n\u043D\u0435 \u0441\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u0430?"
+    _rawText: "Do you know why\nyou\u2019re still not happy?"
   - _key: Day4_CardHeader8
     _rawText: CareYou
   - _key: Day4_CardContent8
-    _rawText: "\u0422\u0435\u0431\u0435 \u0441\u043B\u043E\u0436\u043D\u043E\n\u0432\u0441\u0442\u0430\u0432\u0430\u0442\u044C
-      \u043F\u043E \u0443\u0442\u0440\u0430\u043C?\n\u041C\u044B \u0440\u044F\u0434\u043E\u043C"
+    _rawText: "Struggling to get out of bed?\nWe\u2019re here for you"
   - _key: Day4_CardHeader9
     _rawText: '!!!'
   - _key: Day4_CardContent9
-    _rawText: "\u0422\u044B \u0435\u043B\u0430 \u0441\u0435\u0433\u043E\u0434\u043D\u044F?"
+    _rawText: Have you eaten today?
   - _key: Day4_CardHeader10
-    _rawText: "\u041C\u0430\u043C\u0430"
+    _rawText: Mom
   - _key: Day4_CardContent10
-    _rawText: "\u041D\u0443\u0436\u043D\u043E \u043F\u043E\u0437\u0438\u0442\u0438\u0432\u043D\u043E\n\u043C\u044B\u0441\u043B\u0438\u0442\u044C."
+    _rawText: 'You need
+
+      to stay positive.'
   - _key: Day4_CardHeader11
-    _rawText: "\u041A\u043E\u043B\u043B\u0435\u0433\u0430"
+    _rawText: Colleague
   - _key: Day4_CardContent11
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C"
+    _rawText: Stay strong
   - _key: Day4_CardHeader12
-    _rawText: "\u0410\u043D\u043D\u0430"
+    _rawText: Anna
   - _key: Day4_CardContent12
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C"
+    _rawText: Stay strong
   - _key: Day4_CardHeader13
-    _rawText: "\u0421\u0430\u0448\u0430"
+    _rawText: Sasha
   - _key: Day4_CardContent13
-    _rawText: "\u0410 \u0432\u043E\u0442 \u0443 \u043C\u043E\u0435\u0439 \u0442\u0435\u0442\u0438\n\u0442\u043E\u0436\u0435
-      \u0431\u044B\u043B\u043E \u0442\u0430\u043A\u043E\u0435\u2026"
+    _rawText: "My aunt had\nthe same thing, actually\u2026"
   - _key: Day4_CardHeader14
-    _rawText: "\u041A\u0438\u0440\u0430"
+    _rawText: Kira
   - _key: Day4_CardContent14
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C!"
+    _rawText: Stay strong!
   - _key: Day5_CardHeader0
     _rawText: HR
   - _key: Day5_CardContent0
-    _rawText: "\u0423\u043B\u044B\u0431\u0430\u0439\u0442\u0435\u0441\u044C.\n\u0412\u044B
-      \u0432 \u0440\u0435\u0441\u0443\u0440\u0441\u0435!"
+    _rawText: "Smile!\nYou\u2019re thriving!"
   - _key: Day5_CardHeader1
-    _rawText: "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440"
+    _rawText: Editor
   - _key: Day5_CardContent1
-    _rawText: "\u0416\u0434\u0451\u043C, \u043A\u0430\u043A \u0432\u0441\u0435\u0433\u0434\u0430.\n\u0412\u044B
-      \u0432\u0435\u0434\u044C \u0443 \u043D\u0430\u0441 \u0431\u043E\u0435\u0446?"
+    _rawText: "Waiting as usual.\nYou\u2019re our fighter, right?"
   - _key: Day5_CardHeader2
-    _rawText: "\u0410\u0432\u0442\u043E\u0441\u0438\u0441\u0442\u0435\u043C\u0430"
+    _rawText: AutoSystem
   - _key: Day5_CardContent2
-    _rawText: "\u0412\u044B \u043D\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u043B\u0438\n\u0441\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u044B\u0439
-      \u043F\u043E\u043D\u0435\u0434\u0435\u043B\u044C\u043D\u0438\u043A.\n\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C?"
+    _rawText: "You didn\u2019t complete\nyour Happy Monday.\nWant to try again?"
   - _key: Day5_CardHeader3
-    _rawText: "\u0418\u043D\u0444\u043E"
+    _rawText: Info
   - _key: Day5_CardContent3
-    _rawText: "\u0412\u0430\u0448\u0435 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435\n\u0432
-      \u0432\u0430\u0448\u0438\u0445 \u0440\u0443\u043A\u0430\u0445.\n\u041D\u0435
-      \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C!"
+    _rawText: "Your health is\nin your hands.\nDon\u2019t forget to check it!"
   - _key: Day5_CardHeader4
-    _rawText: "\u041A\u0430\u043B\u0435\u043D\u0434\u0430\u0440\u044C"
+    _rawText: Calendar
   - _key: Day5_CardContent4
-    _rawText: "\u0423 \u0432\u0430\u0441 \u0441\u043A\u043E\u0440\u043E \u0434\u0435\u043D\u044C
-      \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F.\n\u041D\u0430\u0447\u043D\u0435\u0442\u0435
-      \u043D\u043E\u0432\u0443\u044E \u0436\u0438\u0437\u043D\u044C?"
+    _rawText: "Your birthday\u2019s\ncoming up.\nReady to start a new life?"
   - _key: Day5_CardHeader5
-    _rawText: "\u0410\u043D\u043D\u0430"
+    _rawText: Anna
   - _key: Day5_CardContent5
-    _rawText: "\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B
-      \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422...
-      %$#!"
+    _rawText: 'You are not alone.
+
+      You are not alone.
+
+      You are not alo...
+      T... %$#!'
   - _key: Day5_CardHeader6
-    _rawText: "\u0421\u043B\u0443\u0436\u0431\u0430 \u041F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438"
+    _rawText: Support Service
   - _key: Day5_CardContent6
-    _rawText: ...........
+    _rawText: ..........
   - _key: Day5_CardHeader7
-    _rawText: "\u0410\u043D\u043D\u0430"
+    _rawText: Anna
   - _key: Day5_CardContent7
-    _rawText: "\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B
-      \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422\u044B \u043D\u0435 \u043E\u0434\u043D\u0430.\n\u0422...
-      %$#!"
+    _rawText: 'You are not alone.
+
+      You are not alone.
+
+      You are not alo...
+      T... %$#!'
   - _key: Day5_CardHeader8
     _rawText: "\u2014"
   - _key: Day5_CardContent8
-    _rawText: "...\u043E_\u043D_\u0430 \u043D_\u0435 _\u043E\u0442_\u0432**\u0447\u0430\u0435\u0442...\n\u0422#
-      _\u0442#\u043C?"
+    _rawText: "...s_h_e_\u2019s_w**atching...\nT#_t#m?"
   - _key: Day5_CardHeader9
     _rawText: <<NULL>>
   - _key: Day5_CardContent9
-    _rawText: "\u041F\u0415\u0420\u0415\u0417\u0410\u0413\u0420\u0423%\u041A@...\n\u041F\u0415\u0420\u0415\u0417\u0410\u0413\u0420\u0423%\u041A@...\n%$!$!"
+    _rawText: 'REB0OT%@...
+
+      REB0OT%@...
+
+      %$!$!'
   - _key: Day5_CardHeader10
-    _rawText: "\u041A\u0438\u0440\u0430"
+    _rawText: Kira
   - _key: Day5_CardContent10
-    _rawText: "\u0412\u043E\u0442, \u043F\u043E\u0447\u0438\u0442\u0430\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438,\n\u0442\u0435\u0445
-      \u043A\u0442\u043E \u0432\u044B\u043B\u0435\u0447\u0438\u043B\u0441\u044F\u2026"
+    _rawText: "Here, read some stories\npeople who recovered\u2026"
   - _key: Day5_CardHeader11
-    _rawText: "\u041C\u0430\u043C\u0430"
+    _rawText: Mom
   - _key: Day5_CardContent11
-    _rawText: "\u0422\u044B \u0441\u043F\u0440\u0430\u0432\u0438\u0448\u044C\u0441\u044F."
+    _rawText: "You\u2019ll get through this."
   - _key: Day5_CardHeader12
     _rawText: "\u2014"
   - _key: Day5_CardContent12
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
+    _rawText: Stay strong!
   - _key: Day5_CardHeader13
     _rawText: "\u2014"
   - _key: Day5_CardContent13
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
+    _rawText: Stay strong!
   - _key: Day5_CardHeader14
     _rawText: "\u2014"
   - _key: Day5_CardContent14
-    _rawText: "\u0414\u0435\u0440\u0436\u0438\u0441\u044C."
+    _rawText: Stay strong!
   - _key: results_header
-    _rawText: "\u0418\u0442\u043E\u0433\u0438"
+    _rawText: Results
   - _key: Day1_LoadHeader0
-    _rawText: "\u0417\u0430 \u043D\u0435\u0434\u0435\u043B\u044E \u0434\u043E..."
+    _rawText: One week before...
   - _key: Day1_LoadBody0
-    _rawText: "\u0417\u043D\u0430\u0435\u0448\u044C, \u044F \u0432\u0441\u0435\u0433\u0434\u0430
-      \u043A\u0443\u0434\u0430-\u0442\u043E \u0431\u0435\u0436\u0430\u043B\u0430."
+    _rawText: You know, I was always rushing somewhere.
   - _key: Day1_LoadBody1
-    _rawText: "\u0411\u043E\u044F\u043B\u0430\u0441\u044C \u043D\u0435 \u0443\u0441\u043F\u0435\u0442\u044C."
+    _rawText: "Afraid I\u2019d fall behind."
   - _key: Day1_LoadBody2
-    _rawText: "\u041A\u0430\u0436\u0434\u044B\u0439 \u0434\u0435\u043D\u044C \u0431\u0443\u0434\u0442\u043E
-      \u0431\u044B\u043B \u043E\u0434\u043D\u0438\u043C \u0438 \u0442\u0435\u043C
-      \u0436\u0435 \n\u043F\u043E\u0432\u0442\u043E\u0440\u044F\u044E\u0449\u0438\u043C\u0441\u044F
-      \u0446\u0438\u043A\u043B\u043E\u043C..."
+    _rawText: "Every day felt like the same\nrepeating cycle\u2026"
   - _key: Day2_Results0
-    _rawText: "\u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0435
-      \u0443\u0441\u043B\u0443\u0433\u0438:"
+    _rawText: 'Public utilities:'
   - _key: Day2_LoadHeader0
-    _rawText: "\u041D\u0435\u0434\u0435\u043B\u044F 1"
+    _rawText: Week 1
   - _key: Day2_LoadBody0
-    _rawText: "...\u0438 \u044D\u0442\u043E\u0442 \u0446\u0438\u043A\u043B \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u043B\u0441\u044F
-      \u0431\u044B \u0441\u043D\u043E\u0432\u0430 \u0438 \u0441\u043D\u043E\u0432\u0430,\n\u0435\u0441\u043B\u0438
-      \u0431\u044B \u043D\u0435 \u043E\u0434\u043D\u043E \xAB\u043D\u043E\xBB..."
+    _rawText: "...and that cycle would\u2019ve kept looping forever\nif not for one
+      but."
   - _key: Day3_Results0
-    _rawText: "\u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0435
-      \u0443\u0441\u043B\u0443\u0433\u0438:"
+    _rawText: 'Public utilities:'
   - _key: Day3_Results1
-    _rawText: "\u041E\u0431\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0435:"
+    _rawText: 'Medical examination:'
   - _key: Day3_LoadHeader0
-    _rawText: "\u041D\u0435\u0434\u0435\u043B\u044F 3"
+    _rawText: Week 3
   - _key: Day3_LoadBody0
-    _rawText: "...\u0432\u0441\u0435\u0433\u043E \u043E\u0434\u043D\u043E \u043F\u0438\u0441\u044C\u043C\u043E
-      \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u043E \u043C\u043E\u044E \u0436\u0438\u0437\u043D\u044C.\n\u042F...
-      \u043D\u0435 \u0434\u0443\u043C\u0430\u043B\u0430, \u0447\u0442\u043E \u044D\u0442\u043E
-      \u043A\u043E\u0441\u043D\u0435\u0442\u0441\u044F \u0438 \u043C\u0435\u043D\u044F."
+    _rawText: "One letter. That\u2019s all it took.\nI... never thought it\u2019d
+      be me."
   - _key: Day4_Results0
-    _rawText: "\u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0435
-      \u0443\u0441\u043B\u0443\u0433\u0438:"
+    _rawText: 'Public utilities:'
   - _key: Day4_Results1
-    _rawText: "\u041E\u0431\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F:"
+    _rawText: 'Medical examination:'
   - _key: Day4_Results2
-    _rawText: "\u041B\u0435\u0447\u0435\u043D\u0438\u0435:"
+    _rawText: 'Therapy:'
   - _key: Day4_LoadHeader0
-    _rawText: "\u041D\u0435\u0434\u0435\u043B\u044F 8"
+    _rawText: Week 8
   - _key: Day4_LoadBody0
-    _rawText: "\u041C\u044B\u0441\u043B\u0438 \u0440\u043E\u0438\u043B\u0438\u0441\u044C
-      \u0432 \u0433\u043E\u043B\u043E\u0432\u0435, \u0431\u0443\u0434\u0442\u043E
-      \u0441\u0442\u0430\u0438 \u0431\u0435\u0448\u0435\u043D\u044B\u0445 \u043F\u0442\u0438\u0446."
+    _rawText: My head was a mess. Like wild birds crashing around.
   - _key: Day4_LoadBody1
-    _rawText: "\u0418 \u043D\u0438\u0447\u0435\u0433\u043E \u0441 \u044D\u0442\u0438\u043C
-      \u044F \u043D\u0435 \u043C\u043E\u0433\u043B\u0430 \u0441\u0434\u0435\u043B\u0430\u0442\u044C."
+    _rawText: "I couldn\u2019t stop it."
   - _key: Day4_LoadBody2
-    _rawText: "\u0425\u043E\u0440\u043E\u0448\u043E, \u0447\u0442\u043E \u0435\u0441\u0442\u044C
-      \u0440\u0430\u0431\u043E\u0442\u0430, \u0442\u0430\u043C \u044F \u0445\u043E\u0442\u044F
-      \u0431\u044B \u043E\u0442\u0432\u043B\u0435\u043A\u0430\u043B\u0430\u0441\u044C."
+    _rawText: "Work helped \u2014 gave me something else to focus on."
   - _key: Day5_Results0
-    _rawText: "\u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0435
-      \u0443\u0441\u043B\u0443\u0433\u0438:"
+    _rawText: 'Public utilities:'
   - _key: Day5_Results1
-    _rawText: "\u041E\u0431\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F:"
+    _rawText: 'Medical examination:'
   - _key: Day5_Results2
-    _rawText: "\u041B\u0435\u0447\u0435\u043D\u0438\u0435:"
+    _rawText: 'Therapy:'
   - _key: Day5_Results3
     _rawText: "\u0428\u0442\u0440\u0430\u0444\u044B:"
   - _key: Day5_LoadHeader0
-    _rawText: "\u041D\u0435\u0434\u0435\u043B\u044F 9"
+    _rawText: Week 9
   - _key: Day5_LoadBody0
-    _rawText: "\u0418\u043D\u043E\u0433\u0434\u0430 \u043C\u043D\u0435 \u043A\u0430\u0437\u0430\u043B\u043E\u0441\u044C,
-      \u0447\u0442\u043E \u044F \u0432\u0441\u0435 \u0434\u0435\u043B\u0430\u044E
-      \u0437\u0440\u044F."
+    _rawText: There were days when I wondered why I was even trying.
   - _key: Day5_LoadBody1
-    _rawText: "\u0421\u0438\u043B \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u043B\u043E
-      \u0434\u0430\u0436\u0435 \u043D\u0430 \u043E\u0431\u044B\u0447\u043D\u044B\u0435
-      \u0432\u0435\u0449\u0438..."
+    _rawText: I barely had the strength to do anything at all.
   - _key: Day6_Results0
-    _rawText: "\u041B\u0435\u0447\u0435\u043D\u0438\u0435:"
+    _rawText: 'Therapy:'
   - _key: Day6_LoadHeader0
-    _rawText: "\u041D\u0435\u0434\u0435\u043B\u044F 14"
+    _rawText: Week 14
   - _key: Day6_LoadBody0
-    _rawText: "\u041D\u043E \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E
-      \u043C\u0435\u043D\u044F \u043D\u0430\u043F\u0443\u0433\u0430\u043B\u043E \u0442\u043E,
-      \u0447\u0442\u043E \u043C\u043E\u0439 \u0440\u0430\u0437\u0443\u043C \u043F\u0440\u043E\u0441\u0442\u043E..."
+    _rawText: "But what scared me most was when my mind just\u2026"
   - _key: Day6_LoadBody1
-    _rawText: "\u043F\u0435\u0440\u0435\u0441\u0442\u0430\u043B \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C."
+    _rawText: stopped working.
   - _key: Day7_LoadHeader0
-    _rawText: "\u041D\u0435\u0434\u0435\u043B\u044F 16"
+    _rawText: Week 16
   - _key: Day7_LoadBody0
-    _rawText: "\u0412\u0441\u0435 \u0442\u0432\u0435\u0440\u0434\u0438\u043B\u0438,
-      \u0447\u0442\u043E \u044F \u0438\u0434\u0443 \u043D\u0430 \u043F\u043E\u043F\u0440\u0430\u0432\u043A\u0443..."
+    _rawText: Everyone kept saying I was getting better...
   - _key: Day7_LoadBody1
-    _rawText: "\u041D\u043E \u043C\u043D\u0435 \u0431\u044B\u043B\u043E \u0432\u0441\u0435
-      \u0441\u0442\u0440\u0430\u0448\u043D\u0435\u0435."
+    _rawText: But I was getting more and more scared.
   - _key: Final_Phrase0
-    _rawText: "\u042F \u043F\u0440\u043E\u0448\u043B\u0430 \u044D\u0442\u043E \u043E\u0434\u043D\u0430."
+    _rawText: I went through it alone.
   - _key: Final_Phrase1
-    _rawText: "\u041D\u043E \u0435\u0441\u043B\u0438 \u0442\u0435\u0431\u0435 \u0432\u0434\u0440\u0443\u0433
-      \u0441\u0442\u0430\u043D\u0435\u0442 \u0442\u044F\u0436\u0435\u043B\u043E,
-      \u043D\u0435 \u0441\u043F\u0435\u0448\u0438 \u0434\u0443\u043C\u0430\u0442\u044C
-      \u043E \u0445\u0443\u0434\u0448\u0435\u043C."
+    _rawText: "But if things ever get hard for you \u2014 don\u2019t rush to expect
+      the worst."
   - _key: Final_Phrase2
-    _rawText: "\u041F\u043E\u0434\u0443\u043C\u0430\u0439 \u0432\u043E\u0442 \u043E
-      \u0447\u0451\u043C: \u043C\u043E\u0436\u0435\u0442, \u044D\u0442\u043E \u0441\u043F\u043E\u0441\u043E\u0431
-      \u0432\u044B\u0431\u0440\u0430\u0442\u044C\u0441\u044F."
+    _rawText: "Think about this instead: maybe it\u2019s a way out."
   - _key: Final_Phrase3
-    _rawText: "\u0412\u044B\u0440\u0432\u0430\u0442\u044C\u0441\u044F \u0438\u0437
-      \u0446\u0438\u043A\u043B\u0430."
+    _rawText: A way to break the cycle.
   - _key: Final_Phrase4
-    _rawText: "\u0418 \u043D\u0430\u043A\u043E\u043D\u0435\u0446 \u043E\u043A\u0430\u0437\u0430\u0442\u044C\u0441\u044F
-      \u0432 \u043C\u0438\u0440\u0435 \u0441 \u0441\u043E\u0431\u043E\u0439 \u2014
-      \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0438\u043C. \u0411\u0435\u0437
-      \u043C\u0430\u0441\u043E\u043A."
-  - _key: GameOver
-    _rawText: "\u042F \u043F\u044B\u0442\u0430\u043B\u0430\u0441\u044C..."
+    _rawText: And finally find peace with your real self. No masks.

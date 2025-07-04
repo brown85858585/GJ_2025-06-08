@@ -12,6 +12,7 @@ Help,Help
 Help_Hint0,e — interaction
 Help_Hint1,q — release/switch
 Help_Hint2,tab — quests
+GameOver,I tried...
 Quest_Awakening0,Wake up
 Quest_Door0,Go for a run
 Quest_Flower0,Water the flower
@@ -41,8 +42,8 @@ I just need to start moving."
 Day4_Awakening,Feels like this body isn’t mine.
 Day5_Awakening,Everything feels so heavy…
 Day6_Awakening,...
-Day1_Sleep,"Wish I could just
-get some real sleep."
+Day1_Sleep,"The main thing is not
+to forget to pay the bills."
 Day2_Sleep,Can’t get it out of my head.
 Day3_Sleep,What if tomorrow’s worse?
 Day4_Sleep,"Please,
