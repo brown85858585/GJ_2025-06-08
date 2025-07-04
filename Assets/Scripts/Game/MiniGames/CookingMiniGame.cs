@@ -182,6 +182,7 @@ namespace Game.MiniGames
                 // Промах
                 WinCounter--;                
                 Debug.Log($"❌ Промах! Попытка {usedAttempts}");
+                model.Score -= 50;
             }
 
             // Проверяем остались ли попытки
