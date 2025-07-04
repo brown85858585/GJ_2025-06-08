@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9845cf1288e105e428c98f73c9ab21dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxCycle: 7
+  _maxCycle: 8
 --- !u!1 &969578501974559195
 GameObject:
   m_ObjectHideFlags: 0
