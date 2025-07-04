@@ -27,7 +27,7 @@ namespace Game.MiniGames
         public void AddSampleWorkCards()
         {
             cards.Clear();
-
+            /*
             // Примеры рабочих задач (принять)
             cards.Add(new CardSwipeMiniGame.CardData("Начальник", "Подготовьте отчет по проекту к пятнице", true));
             cards.Add(new CardSwipeMiniGame.CardData("Клиент", "Нужно обсудить детали договора", true));
@@ -41,6 +41,7 @@ namespace Game.MiniGames
             cards.Add(new CardSwipeMiniGame.CardData("Интернет-магазин", "Скидка 50% на всё! Только сегодня!", false));
             cards.Add(new CardSwipeMiniGame.CardData("Соцсеть", "У вас 5 новых уведомлений", false));
             cards.Add(new CardSwipeMiniGame.CardData("YouTube", "Новое видео от вашего любимого блогера", false));
+            */
         }
     }
 
@@ -116,16 +117,21 @@ namespace Game.MiniGames
         /// </summary>
         public void AddWorkCard(string sender, string content)
         {
-            runtimeCards.Add(new CardSwipeMiniGame.CardData(sender, content, true));
+            runtimeCards.Add(new CardSwipeMiniGame.CardData(sender, content, 0));
             Debug.Log($"Добавлена рабочая карточка: {sender} - {content}");
         }
 
+        public void AddSpamCard(string sender, string content)
+        {
+            runtimeCards.Add(new CardSwipeMiniGame.CardData(sender, content, 1));
+            Debug.Log($"Добавлена рабочая карточка: {sender} - {content}");
+        }
         /// <summary>
         /// Добавляет личную карточку во время выполнения
         /// </summary>
         public void AddPersonalCard(string sender, string content)
         {
-            runtimeCards.Add(new CardSwipeMiniGame.CardData(sender, content, false));
+            runtimeCards.Add(new CardSwipeMiniGame.CardData(sender, content, 2));
             Debug.Log($"Добавлена личная карточка: {sender} - {content}");
         }
 
@@ -180,7 +186,15 @@ namespace Game.MiniGames
             }
         }
 
-        public void AddPersonalCards(params (string sender, string content)[] activities)
+        public void AddFrendCards(params (string sender, string content)[] tasks)
+        {
+            foreach (var task in tasks)
+            {
+                AddWorkCard(task.sender, task.content);
+            }
+        }
+
+        public void AddSpanCards(params (string sender, string content)[] activities)
         {
             foreach (var activity in activities)
             {
@@ -189,56 +203,7 @@ namespace Game.MiniGames
         }
 
         // Предустановленные конфигурации для разных ситуаций
-        public void SetupMorningWork()
-        {
-            ClearRuntimeCards();
-            AddWorkCards(
-                ("Начальник", "Планирование рабочего дня"),
-                ("Коллега", "Обсуждение проекта на сегодня"),
-                ("Клиент", "Уточнение деталей по договору"),
-                ("HR", "Заполнить отчет о работе")
-            );
-            AddPersonalCards(
-                ("Друг", "Планы на выходные"),
-                ("Интернет-магазин", "Новые скидки!"),
-                ("Соцсеть", "Посмотри новые фото"),
-                ("YouTube", "Новое видео от блогера")
-            );
-        }
-
-        public void SetupAfternoonWork()
-        {
-            ClearRuntimeCards();
-            AddWorkCards(
-                ("Начальник", "Завершить отчет до конца дня"),
-                ("Техподдержка", "Обновить ПО"),
-                ("Коллега", "Помочь с багом в коде"),
-                ("Клиент", "Финальное согласование")
-            );
-            AddPersonalCards(
-                ("Мама", "Купить продукты после работы"),
-                ("Друг", "Встретимся вечером?"),
-                ("Доставка еды", "Ваш заказ готов"),
-                ("Игра", "Энергия восстановлена!")
-            );
-        }
-
-        public void SetupDeadlineMode()
-        {
-            ClearRuntimeCards();
-            AddWorkCards(
-                ("Начальник", "СРОЧНО: доделать проект!"),
-                ("Клиент", "ВАЖНО: нужен ответ сегодня"),
-                ("Коллега", "Помогите срочно исправить баг"),
-                ("HR", "Последний день подачи документов")
-            );
-            AddPersonalCards(
-                ("Любой контакт", "Любое отвлечение сейчас"),
-                ("Соцсеть", "Новости могут подождать"),
-                ("YouTube", "Видео можно посмотреть потом"),
-                ("Друг", "Личные разговоры после дедлайна")
-            );
-        }
+ 
 
         private void Start()
         {
@@ -268,26 +233,6 @@ namespace Game.MiniGames
             }
         }
 
-        [ContextMenu("Test Add Sample Cards")]
-        public void TestAddSampleCards()
-        {
-            ClearRuntimeCards();
 
-            AddWorkCards(
-                ("Босс", "Подготовить презентацию к завтрашней встрече"),
-                ("Коллега", "Код-ревью нового модуля"),
-                ("Клиент", "Обсудить изменения в проекте"),
-                ("HR", "Заполнить анкету сотрудника")
-            );
-
-            AddPersonalCards(
-                ("Мама", "Позвонить бабушке"),
-                ("Друг", "Новая игра вышла!"),
-                ("Магазин", "Распродажа до конца дня"),
-                ("Соцсеть", "5 новых лайков на фото")
-            );
-
-            Debug.Log("Добавлены тестовые карточки");
-        }
     }
 }

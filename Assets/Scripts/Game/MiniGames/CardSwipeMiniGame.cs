@@ -1,5 +1,6 @@
 ﻿using Game.MiniGames;
 using Knot.Localization.Components;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,20 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [SerializeField] private float feedbackIconDuration = 1.0f; // Время показа иконки
     [SerializeField] private Color successColor = Color.green;
     [SerializeField] private Color failureColor = Color.red;
+
+    [Header("Last Card Animation")]
+    [SerializeField] private float lastCardScale = 2.5f;
+    [SerializeField] private float lastCardAnimationDuration = 1.0f;
+    [SerializeField] private string lastCardSuccessButtonText = "ЗАВЕРШИТЬ"; // Новый текст для кнопки
+
+    [Header("Last Card Shake Settings")]
+    [SerializeField] private float shakeIntensity = 10f; // Сила тряски
+    [SerializeField] private float shakeSpeed = 15f; // Скорость тряски
+    [SerializeField] private bool enableShake = true; // Включить/выключить тряску
+
+    private bool isLastCard = false;
+    private Coroutine lastCardAnimationCoroutine;
+    private Coroutine continuousShakeCoroutine;
 
     // UI компоненты для стопки
     private List<GameObject> cardStack = new List<GameObject>();
@@ -324,15 +339,171 @@ private void CreateCardStack(GameObject originalCard)
             CompleteGame();
             return;
         }
-        // БЛОКИРУЕМ карточку на указанное время
-  
+
+        // Проверяем, является ли это последней карточкой
+        isLastCard = (currentCardIndex == gameCards.Count - 1) && (MiniGameCoordinator.DayLevel == 1);
+
         // Обновляем содержимое всей стопки
         UpdateStackContent();
         UpdateUI();
 
-
+        // Если это последняя карточка - запускаем специальную анимацию
+        if (isLastCard)
+        {
+            StartLastCardAnimation();
+        }
 
         Debug.Log($"Показана карточка {currentCardIndex}, заблокирована на {cardLockDuration} сек");
+    }
+
+    private void StartLastCardAnimation()
+    {
+        if (lastCardAnimationCoroutine != null)
+        {
+            StopCoroutine(lastCardAnimationCoroutine);
+        }
+
+        // Останавливаем предыдущую тряску если есть
+        if (continuousShakeCoroutine != null)
+        {
+            StopCoroutine(continuousShakeCoroutine);
+        }
+
+        lastCardAnimationCoroutine = StartCoroutine(AnimateLastCard());
+    }
+
+    private IEnumerator AnimateLastCard()
+    {
+        if (currentCard == null) yield break;
+
+        // Находим кнопку success для изменения текста
+        UpdateSuccessButtonText(lastCardSuccessButtonText);
+
+        // Получаем RectTransform карточки
+        RectTransform cardRect = currentCard.GetComponent<RectTransform>();
+        Vector3 originalScale = cardRect.localScale;
+        Vector3 targetScale = originalScale * lastCardScale;
+        Vector2 originalPosition = cardRect.anchoredPosition;
+
+        float elapsedTime = 0f;
+
+        // Анимация увеличения с тряской
+        while (elapsedTime < lastCardAnimationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / lastCardAnimationDuration;
+
+            // Используем easing для плавной анимации scale
+            float easedProgress = EaseInOutQuad(progress);
+            cardRect.localScale = Vector3.Lerp(originalScale, targetScale, easedProgress);
+
+            // Добавляем shake эффект
+            if (enableShake)
+            {
+                Vector2 shakeOffset = CalculateShakeOffset(elapsedTime);
+                cardRect.anchoredPosition = originalPosition + shakeOffset;
+            }
+
+            yield return null;
+        }
+
+        // Устанавливаем финальные значения
+        cardRect.localScale = targetScale;
+        cardRect.anchoredPosition = originalPosition; // Возвращаем к исходной позиции
+
+        // Продолжаем тряску после завершения увеличения
+        if (enableShake)
+        {
+            StartCoroutine(ContinuousShake(cardRect, originalPosition));
+        }
+
+        Debug.Log("🎉 Анимация последней карточки завершена!");
+    }
+
+    private void UpdateSuccessButtonText(string newText)
+    {
+        var go = currentCardPrefab.gameObject;
+        var allButtons = go.GetComponentsInChildren<UnityEngine.UI.Button>().ToList();
+
+        // Ищем кнопку success (обычно это acceptButton)
+        if (acceptButton != null)
+        {
+            var buttonText = acceptButton.GetComponentInChildren<UnityEngine.UI.Text>();
+            if (buttonText != null)
+            {
+                buttonText.text = newText;
+                Debug.Log($"Текст кнопки изменен на: {newText}");
+            }
+
+            // Если используется TextMeshPro
+            var buttonTextTMP = acceptButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            if (buttonTextTMP != null)
+            {
+                buttonTextTMP.text = newText;
+                Debug.Log($"Текст кнопки TMP изменен на: {newText}");
+            }
+        }
+
+        // Альтернативный поиск кнопки success по Image с именем "success"
+        var imgs = go.GetComponentsInChildren<UnityEngine.UI.Image>().ToList();
+        var successImage = imgs.Where(img => img.name.ToLower().Contains("success")).FirstOrDefault();
+
+        if (successImage != null)
+        {
+            var parentButton = successImage.GetComponentInParent<UnityEngine.UI.Button>();
+            if (parentButton != null)
+            {
+                var buttonText = parentButton.GetComponentInChildren<UnityEngine.UI.Text>();
+                if (buttonText != null)
+                {
+                    buttonText.text = newText;
+                }
+
+                var buttonTextTMP = parentButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+                if (buttonTextTMP != null)
+                {
+                    buttonTextTMP.text = newText;
+                }
+            }
+        }
+    }
+
+
+    // Новый метод для расчета shake offset
+    private Vector2 CalculateShakeOffset(float time)
+    {
+        float shakeX = Mathf.Sin(time * shakeSpeed) * shakeIntensity;
+        float shakeY = Mathf.Cos(time * shakeSpeed * 1.1f) * shakeIntensity * 0.5f; // Меньше тряски по Y
+
+        return new Vector2(shakeX, shakeY);
+    }
+
+    // Непрерывная тряска после увеличения
+    private IEnumerator ContinuousShake(RectTransform cardRect, Vector2 originalPosition)
+    {
+        float shakeTime = 0f;
+
+        while (isLastCard && currentCard != null && cardRect != null)
+        {
+            shakeTime += Time.deltaTime;
+
+            Vector2 shakeOffset = CalculateShakeOffset(shakeTime);
+            cardRect.anchoredPosition = originalPosition + shakeOffset;
+
+            yield return null;
+        }
+
+        // Возвращаем к исходной позиции при завершении
+        if (cardRect != null)
+        {
+            cardRect.anchoredPosition = originalPosition;
+        }
+    }
+
+    // Easing функция для плавной анимации
+    private float EaseInOutQuad(float t)
+    {
+        return t < 0.5f ? 2f * t * t : -1f + (4f - 2f * t) * t;
     }
 
     // Обновить метод AnimateCardExit():
@@ -386,87 +557,32 @@ private void CreateCardStack(GameObject originalCard)
     }
 
     // Исправить метод AnimateCardExit() - правильная анимация удаления ВЕРХНЕЙ карточки:
-    /*
+
     private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
     {
         if (currentCard == null || cardStack.Count == 0) yield break;
 
-        // ВАЖНО: currentCard должна быть первой в списке (верхней)
-        currentCard = cardStack[0];
 
-        RectTransform cardRect = currentCard.GetComponent<RectTransform>();
-        Vector2 startPos = cardRect.anchoredPosition;
-        Vector2 targetPos = new Vector2(accepted ? 800f : -800f, startPos.y);
-
-        // Цветовая обратная связь
-        Image cardImg = currentCard.GetComponent<Image>();
-        if (cardImg == null) cardImg = currentCard.GetComponentInChildren<Image>();
-
-        Color originalColor = cardImg != null ? cardImg.color : Color.white;
-        Color feedbackColor = isCorrect ? Color.green : Color.red;
-
-        float elapsedTime = 0f;
-        float duration = 0.4f;
-
-        Debug.Log($"Анимация удаления карточки: {currentCard.name} (индекс 0 в стопке)");
-
-        
-        // Анимация удаления ТОЛЬКО верхней карточки
-        while (elapsedTime < duration)
+        if (isLastCard)
         {
-            elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / duration;
+            if (lastCardAnimationCoroutine != null)
+            {
+                StopCoroutine(lastCardAnimationCoroutine);
+            }
 
-            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, progress);
-            cardRect.rotation = Quaternion.Lerp(Quaternion.identity,
-                Quaternion.Euler(0, 0, accepted ? -20f : 20f), progress);
+            if (continuousShakeCoroutine != null)
+            {
+                StopCoroutine(continuousShakeCoroutine);
+            }
 
-            // Мигающий эффект для обратной связи
-            //Disable blink cards
-            //if (cardImg != null)
-            //  cardImg.color = Color.Lerp(originalColor, feedbackColor, Mathf.Sin(progress * Mathf.PI * 4));
+            // Сбрасываем scale и позицию карточки перед анимацией выхода
+            RectTransform _cardRect = currentCard.GetComponent<RectTransform>();
+            _cardRect.localScale = Vector3.one;
+            _cardRect.anchoredPosition = new Vector2(0, 20); // Исходная позиция
 
-            yield return null;
+            // Возвращаем оригинальный текст кнопки
+            UpdateSuccessButtonText("E"); // или оригинальный текст
         }
-        
-
-        // ПРАВИЛЬНОЕ удаление верхней карточки
-        GameObject removedCard = cardStack[0];
-        cardStack.RemoveAt(0); // Удаляем первую (верхнюю) карточку
-
-        // Перемещаем удаленную карточку в конец для переиспользования
-        removedCard.transform.SetAsFirstSibling(); // Помещаем в самый конец по Z-order
-
-        // Сбрасываем состояние удаленной карточки
-        RectTransform removedRect = removedCard.GetComponent<RectTransform>();
-        removedRect.anchoredPosition = new Vector2(0, 20);
-        removedRect.rotation = Quaternion.identity;
-        if (cardImg != null) cardImg.color = originalColor;
-
-        // Скрываем удаленную карточку
-        removedCard.SetActive(false);
-
-        // Добавляем в конец стопки для будущего использования
-        cardStack.Add(removedCard);
-
-        Debug.Log($"Карточка удалена. Осталось в стопке: {cardStack.Count}");
-
-        // Сдвигаем все оставшиеся карточки вперед
-        yield return StartCoroutine(AnimateStackShift());
-
-        currentCardIndex++;
-        cardsRemaining--;
-        isProcessingCard = false;
-
-        yield return new WaitForSeconds(0.1f);
-
-        ShowCurrentCard();
-    }
-    */
-    private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
-    {
-        if (currentCard == null || cardStack.Count == 0) yield break;
-
         // ВАЖНО: currentCard должна быть первой в списке (верхней)
         currentCard = cardStack[0];
 
@@ -741,6 +857,13 @@ private void CreateCardStack(GameObject originalCard)
         UpdateCardContent(card, cardData);
     }
 
+    public enum MessageType : ushort
+    {
+        WORK,
+        SPAM,
+        FREND
+    }
+
 
     [System.Serializable]
     public class CardData
@@ -752,13 +875,13 @@ private void CreateCardStack(GameObject originalCard)
         public string content; // Основной текст
 
         [Header("Card Type")]
-        public bool isWorkRelated; // true = принять (работа), false = удалить (личное)
+        public MessageType isWorkRelated; // true = принять (работа), false = удалить (личное)
 
-        public CardData(string sender, string content, bool workRelated)
+        public CardData(string sender, string content, int workRelated)
         {
             this.sender = sender;
             this.content = content;
-            isWorkRelated = workRelated;
+            isWorkRelated = (MessageType)workRelated;
         }
     }
 
@@ -802,9 +925,25 @@ private void CreateCardStack(GameObject originalCard)
         for (int i = 0; i < gameCards.Count; i++)
         {
             CardData temp = gameCards[i];
-            int randomIndex = Random.Range(i, gameCards.Count);
+            int randomIndex = UnityEngine.Random.Range(i, gameCards.Count);
             gameCards[i] = gameCards[randomIndex];
             gameCards[randomIndex] = temp;
+        }
+        if(MiniGameCoordinator.DayLevel == 1)
+        {
+
+            for(int i = 0; i < gameCards.Count; i++)
+            {
+                if (gameCards[i].sender == "Day2_CardHeader9")
+                {
+                    var temp = gameCards[i];
+                    gameCards[i] = gameCards[gameCards.Count - 1];
+                    gameCards[gameCards.Count - 1] = temp;
+
+
+                }
+            }
+
         }
     }
 
@@ -1221,7 +1360,12 @@ private void CreateCardStack(GameObject originalCard)
         CardData currentCardData = gameCards[currentCardIndex];
 
         // Проверяем правильность ответа
-        bool isCorrect = (accepted && currentCardData.isWorkRelated) || (!accepted && !currentCardData.isWorkRelated);
+        bool isCorrect = 
+            (accepted && 
+            (currentCardData.isWorkRelated == MessageType.WORK 
+            || currentCardData.isWorkRelated == MessageType.FREND)
+            ) 
+            || (!accepted && (currentCardData.isWorkRelated == MessageType.SPAM));
 
         if (isCorrect)
         {
@@ -1245,7 +1389,7 @@ private void CreateCardStack(GameObject originalCard)
            // scoreText.text = $"Очки: {correctAnswers}";
 
         if (cardCounterText != null)
-            cardCounterText.text = $"Осталось: {cardsRemaining}";
+            cardCounterText.text = $"Осталось: {cardsRemaining}/{CardCount} ";
     }
 
     private void CompleteGame()
@@ -1285,17 +1429,9 @@ private void CreateCardStack(GameObject originalCard)
             gameCards = gameCards.GetRange(0, maxCards);
         }
         cardsRemaining = gameCards.Count;
-        //ShuffleCards();
+        ShuffleCards();
     }
 
-    public void AddCard(string sender, string content, bool isWorkRelated)
-    {
-        if (gameCards.Count < maxCards)
-        {
-            gameCards.Add(new CardData(sender, content, isWorkRelated));
-            cardsRemaining = gameCards.Count;
-        }
-    }
 
     public void ClearCards()
     {

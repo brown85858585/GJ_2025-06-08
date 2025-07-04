@@ -172,6 +172,12 @@ MonoBehaviour:
   feedbackIconDuration: 1
   successColor: {r: 0, g: 1, b: 0, a: 1}
   failureColor: {r: 1, g: 0, b: 0, a: 1}
+  lastCardScale: 2
+  lastCardAnimationDuration: 1
+  lastCardSuccessButtonText: "\u0417\u0410\u0412\u0415\u0420\u0428\u0418\u0422\u042C"
+  shakeIntensity: 10
+  shakeSpeed: 15
+  enableShake: 1
 --- !u!1 &8012524612185898012
 GameObject:
   m_ObjectHideFlags: 0
