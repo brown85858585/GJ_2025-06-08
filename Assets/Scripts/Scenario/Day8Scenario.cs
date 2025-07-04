@@ -12,6 +12,8 @@ namespace Scenario
     public class Day8Scenario : MonoBehaviour
     {
         private ScenarioInstaller _installer;
+        [SerializeField] private GameObject subtitle;
+        private SlowMoveRect _slowMoveRect;
 
         private void Awake()
         {
@@ -23,6 +25,8 @@ namespace Scenario
             ParkLevelView parkMiniGame = FindObjectOfType<ParkLevelView>(true);
             MainCanvasUi mainCanvasUi = FindObjectOfType<MainCanvasUi>(true);
             var eventSystem = mainCanvasUi.GetComponentInChildren<EventSystem>().gameObject.transform.parent = null;
+
+            _slowMoveRect = FindObjectOfType<SlowMoveRect>(true);
             mainCanvasUi.gameObject.SetActive(false);
             parkMiniGame.OnMiniGameStart += OnParkMiniGameStart;
             parkMiniGame.SetStaminaMultiplyer(0);
@@ -43,7 +47,10 @@ namespace Scenario
             vcam.DestroyCinemachineComponent<CinemachineFramingTransposer>();
 
             vcam.AddCinemachineComponent<CinemachineComposer>();
-
+            UniTask.Delay(3000).ContinueWith(() =>
+            {
+                _slowMoveRect.gameObject.SetActive(true);
+            });
             // UniTask.Delay(30000).ContinueWith(() =>
             // {
             //     (_installer.PlayerController as PlayerController)?.StopMovement(true);
