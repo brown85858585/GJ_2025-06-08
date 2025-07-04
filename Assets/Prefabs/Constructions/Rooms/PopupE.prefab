@@ -88,7 +88,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6149849902115646826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,12 +156,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupImage: {fileID: 430408449795260973}
   sprites:
-  - {fileID: 21300000, guid: 41825b7b9e38db64d83c2618e9918ec4, type: 3}
+  - {fileID: 21300000, guid: 4c4bcf2face41bc4f8e5d05dc9397c80, type: 3}
   - {fileID: -572035769, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
   - {fileID: -1672999132, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
   - {fileID: -2116861910, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
   - {fileID: -107856283, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
-  - {fileID: 21300000, guid: baf46bc65fadf1c4f9afd22abfe4cd3a, type: 3}
+  - {fileID: 21300000, guid: f8b4e58c322be8b4495178c7d79d9669, type: 3}
   - {fileID: 2106375947, guid: 78691dee5202b7c4eb532942bb96c079, type: 3}
 --- !u!1 &2321835404741727001
 GameObject:
