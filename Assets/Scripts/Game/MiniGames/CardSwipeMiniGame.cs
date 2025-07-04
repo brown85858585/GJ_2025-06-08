@@ -1389,7 +1389,11 @@ private void CreateCardStack(GameObject originalCard)
            // scoreText.text = $"Очки: {correctAnswers}";
 
         if (cardCounterText != null)
-            cardCounterText.text = $"Осталось: {cardsRemaining}/{CardCount} ";
+        { 
+            cardCounterText.text = $"{cardsRemaining}/{CardCount} ";
+            cardCounterText.fontSize = 24;
+            //cardCounterText.font = cardSenderText.font.sourceFontFile;
+        }
     }
 
     private void CompleteGame()
