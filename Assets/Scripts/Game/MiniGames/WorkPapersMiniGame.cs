@@ -227,9 +227,9 @@ namespace Game.MiniGames
 
             // Личные отвлечения программиста
             _configurator?.AddSpanCards(
-                ($"Day{Level1}_CardHeader6", $"Day{Level1}_CardContent6"),
-                ($"Day{Level1}_CardHeader7", $"Day{Level1}_CardContent7"),
-                ($"Day{Level1}_CardHeader8", $"Day{Level1}_CardContent8")
+                ($"Day{Level1}_CardHeader3", $"Day{Level1}_CardContent3"),
+                ($"Day{Level1}_CardHeader4", $"Day{Level1}_CardContent4"),
+                ($"Day{Level1}_CardHeader5", $"Day{Level1}_CardContent5")
             );
             _configurator?.AddFrendCards(
                 ($"Day{Level1}_CardHeader6", $"Day{Level1}_CardContent6"),

@@ -190,7 +190,7 @@ namespace Game.MiniGames
         {
             foreach (var task in tasks)
             {
-                AddWorkCard(task.sender, task.content);
+                AddPersonalCard(task.sender, task.content);
             }
         }
 
@@ -198,7 +198,7 @@ namespace Game.MiniGames
         {
             foreach (var activity in activities)
             {
-                AddPersonalCard(activity.sender, activity.content);
+                AddSpamCard(activity.sender, activity.content);
             }
         }
 
