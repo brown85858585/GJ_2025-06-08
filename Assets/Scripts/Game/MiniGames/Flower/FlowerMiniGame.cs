@@ -24,7 +24,7 @@ namespace Game.MiniGames.Flower
         public QuestType QType { get; } = QuestType.Flower;
         public int Level { get; set; } = 0;
 
-        public event Action<QuestType, bool> OnMiniGameComplete;
+        public Action<QuestType, bool> OnMiniGameComplete { get; set; }
         public event Action<QuestType> OnMiniGameStart;
 
         public FlowerMiniGame(IPlayerController playerController, MiniGamePrefabAccumulator prefabAccumulator,

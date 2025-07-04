@@ -7,7 +7,7 @@ namespace Game.MiniGames
     {
         public int Level { get; set; }
         public QuestType QType { get; }
-        public event Action<QuestType, bool> OnMiniGameComplete;
+        public Action<QuestType, bool> OnMiniGameComplete{ get; set; }
         public event Action<QuestType> OnMiniGameStart;
         void OnActionButtonClick();
         void StartGame();

@@ -85,9 +85,9 @@ namespace Player
                 _currentMovement.SpeedDrop(_view.Rigidbody, _view.transform);
             }
         }
-        public void ToggleMovement()
+        public void ToggleMovement(bool isRunMovement)
         {
-            _isRunMovement = !_isRunMovement;
+            _isRunMovement = isRunMovement;
             if (_isRunMovement)
             {
                 _normalSpeed = _view.RunSpeed;

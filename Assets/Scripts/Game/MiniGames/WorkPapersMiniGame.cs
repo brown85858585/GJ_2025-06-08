@@ -14,7 +14,7 @@ namespace Game.MiniGames
         public QuestType QType { get; } = QuestType.Work;
         public int Level { get ; set; }
 
-        public event Action<QuestType, bool> OnMiniGameComplete;
+        public Action<QuestType, bool> OnMiniGameComplete { get; set; }
         public event Action<QuestType> OnMiniGameStart;
         public WorkPapersMiniGame(IPlayerController playerController)
         {

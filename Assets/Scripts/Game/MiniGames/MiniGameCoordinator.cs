@@ -124,6 +124,56 @@ namespace Game.MiniGames
 
         private void HandleInteraction(ItemCategory category)
         {
+            //КОСТЫЛИЩЕ
+            if (CurrentLevelIndex == 4 &&
+                category == ItemCategory.WMGKitchen)
+            {
+                SwitchOffInputSystem(QuestType.Kitchen, false);
+                OnMiniGameComplete(QuestType.Kitchen, false);
+                if (_factories.TryGetValue(ItemCategory.Kitchen, out var gameX))
+                {
+                    gameX.OnMiniGameComplete?.Invoke(QuestType.Kitchen, false);
+                }
+                return;
+            }
+            if(CurrentLevelIndex == 5)
+            {
+                if (category == ItemCategory.WMGDoor)
+                {
+                    
+                    SwitchOffInputSystem(QuestType.Sprint, false);
+                    OnMiniGameComplete(QuestType.Sprint, false); 
+                    if (_factories.TryGetValue(ItemCategory.Door, out var gameX))
+                    {
+                        gameX.OnMiniGameComplete?.Invoke(QuestType.Sprint, false);
+                    }
+                    return;
+                }
+                if (category == ItemCategory.WMGKitchen)
+                {
+                    SwitchOffInputSystem(QuestType.Kitchen, false);
+                    OnMiniGameComplete(QuestType.Kitchen, false);
+                    if (_factories.TryGetValue(ItemCategory.Kitchen, out var gameX))
+                    {
+                        gameX.OnMiniGameComplete?.Invoke(QuestType.Kitchen, false);
+                    }
+                    return;
+                }
+                if (category == ItemCategory.WMGComputer)
+                {
+                    SwitchOffInputSystem(QuestType.Work, false);
+                    OnMiniGameComplete(QuestType.Work, false);
+                    if (_factories.TryGetValue(ItemCategory.Computer, out var gameX))
+                    {
+                        gameX.OnMiniGameComplete?.Invoke(QuestType.Work, false);
+                    }
+                    return;
+                }
+            }
+
+            
+            
+            
             if (!_factories.TryGetValue(category, out var game)) return;
 
             if(game.IsCompleted) return;
@@ -162,6 +212,9 @@ namespace Game.MiniGames
            }
            
             game.Level = CurrentLevelIndex;
+
+           
+            // Запускаем мини-игру
             game.StartGame();
         }
 
@@ -184,6 +237,8 @@ namespace Game.MiniGames
         private void OnRunMiniGameComplete()
         {
             _level.gameObject.SetActive(true);
+            Debug.Log(DayLevel);
+            if(DayLevel == 5) return;
             _playerController.SetPosition(new Vector3(11.005374f,0.0271916389f,4.8061552f));
             _playerController.SetRotation(new Quaternion(0f,0.984181404f,0f,-0.177163616f));
         }
@@ -205,6 +260,8 @@ namespace Game.MiniGames
         // Метод для отписки, если потребуется
         private void Unsubscribe(IMiniGame game)
         {
+            if(game == null) return;
+
             if (_startHandlers.TryGetValue(game, out var startHandler))
                 game.OnMiniGameStart -= startHandler;
             if (_completeHandlers.TryGetValue(game, out var completeHandler))
