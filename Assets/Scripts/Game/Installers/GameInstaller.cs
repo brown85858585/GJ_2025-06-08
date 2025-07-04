@@ -160,9 +160,6 @@ namespace Game.Installers
             _logic.QuestLog.Initialization(_questsView, _logic.MiniGameCoordinator);
             _logic.QuestLog.AllQuestsCompleted += () => _allQuestsCompleted = true;
             _core.InteractionSystem.OnInteraction += HandleLevelCompletion;
-#if UNITY_EDITOR_64
-            _logic.PlayerController.Model.Score += 20000; //todo ! for debug, remove later
-#endif
         }
 
         private void HandlePlayerInteraction(ItemCategory item)
