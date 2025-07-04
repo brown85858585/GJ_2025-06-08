@@ -41,8 +41,6 @@ MonoBehaviour:
     _rawText: "q \u2014 release/switch"
   - _key: Help_Hint2
     _rawText: "tab \u2014 quests"
-  - _key: GameOver
-    _rawText: I tried...
   - _key: Quest_Awakening0
     _rawText: Wake up
   - _key: Quest_Door0
@@ -92,9 +90,9 @@ MonoBehaviour:
   - _key: Day6_Awakening
     _rawText: ...
   - _key: Day1_Sleep
-    _rawText: 'The main thing is not
+    _rawText: 'Wish I could just
 
-      to forget to pay the bills.'
+      get some real sleep.'
   - _key: Day2_Sleep
     _rawText: "Can\u2019t get it out of my head."
   - _key: Day3_Sleep
@@ -984,3 +982,5 @@ MonoBehaviour:
     _rawText: A way to break the cycle.
   - _key: Final_Phrase4
     _rawText: And finally find peace with your real self. No masks.
+  - _key: GameOver
+    _rawText: ' I was trying...'
