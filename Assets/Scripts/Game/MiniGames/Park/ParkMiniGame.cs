@@ -15,7 +15,7 @@ namespace Game.MiniGames
         public bool IsCompleted { get; set; }
         public bool IsWin { get; private set; }
         public event Action<QuestType> OnMiniGameStart;
-        public event Action<QuestType, bool> OnMiniGameComplete;
+        public Action<QuestType, bool> OnMiniGameComplete { get; set; }
         public QuestType QType { get; } = QuestType.Sprint;
 
         private Transform _levelRoom;
@@ -47,7 +47,7 @@ namespace Game.MiniGames
             {
                 _parkLevelView.gameObject.SetActive(true);
                 _playerController.SetPosition(Vector3.up * 5.1f);
-                _playerController.ToggleMovement();
+                _playerController.ToggleMovement(true);
                 
                 DisableLevelInNextFrame().Forget();
                 
@@ -70,7 +70,7 @@ namespace Game.MiniGames
 
         private async UniTask RunCompletingTimer(bool win)
         {
-            _playerController.ToggleMovement();
+            _playerController.ToggleMovement(false);
             
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
             _effectsAccumulatorView.FadeOut();

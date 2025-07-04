@@ -6,7 +6,7 @@ namespace Player
     {
         public void SetPosition(Vector3 position);
         public void SetRotation(Quaternion rotation);
-        public void ToggleMovement();
+        public void ToggleMovement(bool state);
 
         public void SetFallingAnimation();
 
