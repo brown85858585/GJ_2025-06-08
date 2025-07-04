@@ -150,14 +150,16 @@ namespace Game.MiniGames
             }
 
             // Очищаем старые карточки
-            cardGame.ClearCards();
+           
 
             // Добавляем новые карточки
             List<CardSwipeMiniGame.CardData> cards = GetAllCards();
-            var lvl = MiniGameCoordinator.DayLevel;
+            var lvl = MiniGameCoordinator.DayLevel + 1;
 
-           var enumForCurrentDay =  cards.Where(t => t.sender.Contains($"Day{lvl + 1}"));
+           var enumForCurrentDay =  cards.Where(t => t.sender.Contains($"Day{lvl}"));
 
+            if(enumForCurrentDay.Count() > 0)
+                cardGame.ClearCards();
 
             cardGame.SetCustomCards(enumForCurrentDay.ToList());
 

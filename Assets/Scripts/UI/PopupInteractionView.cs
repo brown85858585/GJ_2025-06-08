@@ -33,9 +33,11 @@ namespace UI
                 case ItemCategory.Computer:
                     chosenSprite = sprites[2];
                     break;
+                case ItemCategory.Door:
+                    chosenSprite = sprites[0];
+                    break;
                 case ItemCategory.Books:
                 case ItemCategory.None:
-                case ItemCategory.Door:
                 case ItemCategory.Guitar:
                 case ItemCategory.Painting:
                 case ItemCategory.Basket:

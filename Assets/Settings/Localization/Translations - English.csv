@@ -1,5 +1,5 @@
 testKey,Test
-Button_Start,Play
+Play,Play
 Button_Setting,Settings
 Button_Exit,Quit
 Settings_Header,Settings
@@ -8,6 +8,10 @@ Settings_Sounds,Sounds
 Settings_Language,Language
 Quit,Exit Game
 Quit_Accept0,Really want to quit?
+Help,Help
+Help_Hint0,e — interaction
+Help_Hint1,q — release/switch
+Help_Hint2,tab — quests
 Quest_Awakening0,Wake up
 Quest_Door0,Go for a run
 Quest_Flower0,Water the flower
@@ -59,9 +63,14 @@ Day4_Door_Defeat,I can’t do this anymore…
 Day5_Door_Win,Can I still keep going?
 Day5_Door_Defeat,"Feels like I’m not
 in shape anymore."
-Day6_Door0,No. Not today.
-Day6_Door1,I can’t do this anymore...
-Flower_WateringCup,Need a watering can.
+Day6_WMGDoor0,No. Not today.
+Day6_WMGDoor1,I can’t do this anymore...
+Day1_Flower0,I think I put a watering can in the kitchen.
+Day2_Flower0,Need a watering can.
+Day3_Flower0,Where's the watering can?
+Day4_Flower0,Watering can in the kitchen.
+Day5_Flower0,Need a watering can.
+Day6_Flower0,Should I try watering it?
 Day1_Flower_Win,"Grow, little flower."
 Day1_Flower_Defeat,"It’s okay.
 Maybe next time."
@@ -89,14 +98,14 @@ Day3_Kitchen_Win,...
 Day3_Kitchen_Defeat,Taste’s kind of gone.
 Day4_Kitchen_Win,Tastes like laundry detergent.
 Day4_Kitchen_Defeat,...
-Day5_Kitchen_Win,"I can’t.
+Day5_WMGKitchen0,"I can’t.
 I just can’t."
-Day5_Kitchen_Defeat,"I can’t.
+Day5_WMGKitchen1,"I can’t.
 I just can’t."
-Day6_Kitchen_Win,"I don’t feel anything.
+Day6_WMGKitchen0,"I don’t feel anything.
 Not hunger.
 Not taste."
-Day6_Kitchen_Defeat,"I don’t feel anything.
+Day6_WMGKitchen1,"I don’t feel anything.
 Not hunger.
 Not taste."
 Computer_UI_Letter_Head,From:
@@ -121,10 +130,10 @@ Day4_Computer_Defeat,"“Stay strong”?
 What does that even mean?!"
 Day5_Computer_Win,Every message feels the same.
 Day5_Computer_Defeat,The letters are blurring.
-Day6_Computer0,"What does it say?
+Day6_WMGComputer0,"What does it say?
 I can’t tell."
-Day6_Computer1,It all feels like mockery.
-Day6_Computer2,I can’t read this.
+Day6_WMGComputer1,It all feels like mockery.
+Day6_WMGComputer2,I can’t read this.
 Day1_Guitar0,"I remember us singing
 in the kitchen, the four of us…"
 Day1_Guitar1,"We even talked about
@@ -188,9 +197,8 @@ Day4_Painting1,"Everything unfinished
 starts screaming louder…"
 Day4_Painting2,"What was I even trying
 to say with them?"
-Day5_Painting0,"Shoved the whole stack
-into a corner.
-Kept bumping into it, got angry…"
+Day5_Painting0,"I even shouted at the paintings.
+I was offended every time, I was angry..."
 Day5_Painting1,"Wanted to throw it all out,
 but my hand wouldn’t move…"
 Day5_Painting2,"They just get in the way.
@@ -532,6 +540,7 @@ Day5_CardHeader13,—
 Day5_CardContent13,Stay strong!
 Day5_CardHeader14,—
 Day5_CardContent14,Stay strong!
+results_header,Results
 Day1_LoadHeader0,One week before...
 Day1_LoadBody0,"You know, I was always rushing somewhere."
 Day1_LoadBody1,Afraid I’d fall behind.

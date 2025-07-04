@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Player
@@ -14,12 +13,19 @@ namespace Player
         private static readonly int PositionY = Animator.StringToHash("PositionY");
         private static readonly int IsFalling = Animator.StringToHash("Falling");
         private static readonly int IsExit = Animator.StringToHash("Exit");
-
+        private static readonly int IsWakeUpSpeed = Animator.StringToHash("WakeUpSpeed");
+        private static readonly int WakeUp = Animator.StringToHash("WakeUp");
+        
         [SerializeField] private Animator animator;
         [SerializeField] private Transform playerObject;
         [SerializeField] private Transform rightHand;
         [SerializeField] private PlayerDialogueView dialogueView;
         [SerializeField] private Vector2 correctionVector;
+
+        [Header("Player Head")] 
+        [SerializeField] private GameObject playerHat;
+        [SerializeField] private GameObject playerLongHair;
+        [SerializeField] private GameObject playerShortHair;
         
         [Header("Movement Settings")]
         [SerializeField]
@@ -69,11 +75,14 @@ namespace Player
             CapsuleCollider = GetComponent<CapsuleCollider>();
         }
 
-        public void SetWakeUpAnimation()
+        public void SetWakeUpAnimation(float speed = 3f)
         {
             Rigidbody.useGravity = false;
             CapsuleCollider.enabled = false;
-            animator.SetTrigger("WakeUp");
+            transform.rotation = Quaternion.identity;
+            animator.SetFloat(IsWakeUpSpeed, speed);
+            
+            animator.SetTrigger(WakeUp);
         }
 
         public void WakeUpAnimationEnded()
@@ -200,6 +209,28 @@ namespace Player
         public void SetExitAnimation()
         {
             animator.SetTrigger(IsExit);
+        }
+
+        private void DisableAllHead()
+        {
+            playerHat.SetActive(false);
+            playerLongHair.SetActive(false);
+            playerShortHair.SetActive(false);
+        }
+        public void EnableHat()
+        {
+            DisableAllHead();
+            playerHat.SetActive(true);
+        }
+        public void EnableLongHair()
+        {
+            DisableAllHead();
+            playerLongHair.SetActive(true);
+        }
+        public void EnableShortHair()
+        {
+            DisableAllHead();
+            playerShortHair.SetActive(true);
         }
     }
 }

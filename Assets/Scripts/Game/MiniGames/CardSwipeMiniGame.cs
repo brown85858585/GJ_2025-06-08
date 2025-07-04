@@ -324,13 +324,13 @@ private void CreateCardStack(GameObject originalCard)
             CompleteGame();
             return;
         }
-
+        // БЛОКИРУЕМ карточку на указанное время
+  
         // Обновляем содержимое всей стопки
         UpdateStackContent();
         UpdateUI();
 
-        // БЛОКИРУЕМ карточку на указанное время
-        StartCardLock();
+
 
         Debug.Log($"Показана карточка {currentCardIndex}, заблокирована на {cardLockDuration} сек");
     }
@@ -1087,6 +1087,7 @@ private void CreateCardStack(GameObject originalCard)
 
         if (gameCards.Count > 0)
         {
+            StartCardLock();
             ShowCurrentCard(); // Это заблокирует первую карточку автоматически
         }
         else
@@ -1234,7 +1235,7 @@ private void CreateCardStack(GameObject originalCard)
             incorrectAnswers++;
             Debug.Log($"❌ Неправильно! {currentCardData.sender}: {currentCardData.content}");
         }
-
+        StartCardLock();
         // Анимируем удаление карточки
         StartCoroutine(AnimateCardExit(accepted, isCorrect));
     }
@@ -1251,65 +1252,23 @@ private void CreateCardStack(GameObject originalCard)
     {
         isGameActive = false;
 
-        // Создаем экран результатов
-        CreateResultScreen();
-    }
-
-    private void CreateResultScreen()
-    {
-        resultScreen = new GameObject("ResultScreen");
-        resultScreen.transform.SetParent(gameScreen.transform, false);
-
-        RectTransform resultRect = resultScreen.AddComponent<RectTransform>();
-        resultRect.anchorMin = Vector2.zero;
-        resultRect.anchorMax = Vector2.one;
-        resultRect.offsetMin = Vector2.zero;
-        resultRect.offsetMax = Vector2.zero;
-
-        // Фон результатов
-        Image resultBg = resultScreen.AddComponent<Image>();
-        resultBg.color = new Color(0, 0, 0, 0.9f);
-
-        // Заголовок
-        CreateText("ResultTitle", "Работа завершена", new Vector2(0, 100), 24, Color.white, new Vector2(400, 40), resultScreen.transform);
-
-        // Статистика
-        CreateText("CorrectCount", $"Правильно выбрано: {correctAnswers}", new Vector2(0, 50), 18, Color.green, new Vector2(300, 30), resultScreen.transform);
-        CreateText("IncorrectCount", $"Неправильно выбрано: {incorrectAnswers}", new Vector2(0, 20), 18, Color.red, new Vector2(300, 30), resultScreen.transform);
-
-        // Итоговый счет
         int finalScore = correctAnswers;
-        CreateText("FinalScore", $"Счёт: {finalScore}", new Vector2(0, -20), 20, Color.yellow, new Vector2(200, 30), resultScreen.transform);
-
         // Результат
         _victory = finalScore >= targetScore;
         bool victory = _victory;
-        string resultMessage = victory ? "Победа:" : "Проигрыш:";
-        string resultDescription = victory ?
-            "Игрок набрал больше 5 очков.\nКвест считается выполненным." :
-            "Игрок отсортировал все карточки неправильно.\nКвест не выполнен.";
 
-        CreateText("ResultMessage", resultMessage, new Vector2(0, -70), 18, victory ? Color.green : Color.red, new Vector2(200, 30), resultScreen.transform);
-        CreateText("ResultDescription", resultDescription, new Vector2(0, -110), 14, Color.white, new Vector2(400, 50), resultScreen.transform);
-
-        // Кнопка завершения
-        Button finishButton = CreateButton("FinishButton", "Завершить", new Vector2(0, -180), Color.gray, new Vector2(120, 40), resultScreen.transform);
-        finishButton.onClick.AddListener(EndMiniGame);
-
-        // Вызываем событие результата
         OnGameAttempt?.Invoke(victory);
 
         // Автоматическое завершение через 5 секунд
         StartCoroutine(AutoFinish());
+        // Создаем экран результатов
     }
+   
 
     private IEnumerator AutoFinish()
     {
-        yield return new WaitForSeconds(5f);
-        if (resultScreen != null && resultScreen.activeInHierarchy)
-        {
+        yield return new WaitForSeconds(2f);
             EndMiniGame();
-        }
     }
 
     protected override string CheckResult()
@@ -1326,7 +1285,7 @@ private void CreateCardStack(GameObject originalCard)
             gameCards = gameCards.GetRange(0, maxCards);
         }
         cardsRemaining = gameCards.Count;
-        ShuffleCards();
+        //ShuffleCards();
     }
 
     public void AddCard(string sender, string content, bool isWorkRelated)
