@@ -74,11 +74,23 @@ namespace Game.Levels
             {
                 switch (next)
                 {
-                    case 5:
+                    case 0:
+                    case 1:
+                        MusicManager.Instance.SetTrack(MusicTrack.Track1);
+                        break;
+                    case 2:
                         MusicManager.Instance.SetTrack(MusicTrack.Track2);
                         break;
-                    case 8:
-                        MusicManager.Instance.SetTrack(MusicTrack.Track1);
+                    case 3: 
+                    case 4: 
+                        MusicManager.Instance.SetTrack(MusicTrack.Track3);
+                        break;
+                    case 5: 
+                    case 6: 
+                        MusicManager.Instance.SetTrack(MusicTrack.Track4);
+                        break;
+                    case 7: 
+                        MusicManager.Instance.SetTrack(MusicTrack.Track5);
                         break;
                 }
 

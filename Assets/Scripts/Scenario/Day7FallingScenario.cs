@@ -39,6 +39,8 @@ namespace Scenario
             MainCanvasUi mainCanvasUi = FindObjectOfType<MainCanvasUi>(true);
             mainCanvasUi.gameObject.SetActive(false);
             _isSlowed = false;
+            
+            MusicManager.Instance.PauseMusic();
             await UniTask.Delay(5000);
             _installer.NextLevelScenario().Forget();
             Destroy(gameObject);

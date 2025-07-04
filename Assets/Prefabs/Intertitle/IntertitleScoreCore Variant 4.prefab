@@ -18,10 +18,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntertitleScoreCore Variant 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1435514085933939009, guid: 075eac8e78639e642ba68129236f4645,
+        type: 3}
+      propertyPath: m_text
+      value: -2500
+      objectReference: {fileID: 0}
     - target: {fileID: 1919633741956995276, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}
       propertyPath: requiredScore
-      value: 1000
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 4020433637742730894, guid: 075eac8e78639e642ba68129236f4645,
         type: 3}

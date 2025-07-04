@@ -6,6 +6,9 @@ public enum MusicTrack
 {
     Track1 = 0,
     Track2 = 1,
+    Track3= 2,
+    Track4 = 3,
+    Track5 = 4,
     // при необходимости добавляйте новые треки
 }
 
@@ -109,6 +112,14 @@ public class MusicManager : MonoBehaviour
 
         PlayerPrefs.SetInt("MusicOn", soundOn ? 1 : 0);
         PlayerPrefs.Save();
+    }
+    
+    public void PauseMusic()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
     }
 
     void OnDestroy()
