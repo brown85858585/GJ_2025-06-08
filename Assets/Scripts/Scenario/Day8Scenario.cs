@@ -44,10 +44,10 @@ namespace Scenario
 
             vcam.AddCinemachineComponent<CinemachineComposer>();
 
-            UniTask.Delay(30000).ContinueWith(() =>
-            {
-                (_installer.PlayerController as PlayerController)?.StopMovement(true);
-            });
+            // UniTask.Delay(30000).ContinueWith(() =>
+            // {
+            //     (_installer.PlayerController as PlayerController)?.StopMovement(true);
+            // });
         }
     }
 }
