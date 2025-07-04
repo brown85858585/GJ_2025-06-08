@@ -662,14 +662,9 @@ MonoBehaviour:
   - _key: Day3_CardHeader7
     _rawText: Mom
   - _key: Day3_CardContent7
-    _rawText: 'I get that you
+    _rawText: 'Just send a quick message
 
-      might be busy.
-
-      Just send a quick message
-
-      if
-      you''re okay.'
+      if you''re okay.'
   - _key: Day3_CardHeader8
     _rawText: Kay
   - _key: Day3_CardContent8
