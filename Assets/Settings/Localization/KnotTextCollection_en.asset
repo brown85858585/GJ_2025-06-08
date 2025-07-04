@@ -508,85 +508,53 @@ MonoBehaviour:
 
       the April payroll sheet'
   - _key: Day1_CardHeader2
-    _rawText: Government Services
-  - _key: Day1_CardContent2
-    _rawText: 'Tax form:
-
-      3 days left'
-  - _key: Day1_CardHeader3
-    _rawText: Deliveries
-  - _key: Day1_CardContent3
-    _rawText: 'Your package
-
-      is at the pickup point'
-  - _key: Day1_CardHeader4
     _rawText: HR
-  - _key: Day1_CardContent4
+  - _key: Day1_CardContent2
     _rawText: 'Submit your
 
       timesheet by Friday'
-  - _key: Day1_CardHeader5
-    _rawText: SelfGuru
-  - _key: Day1_CardContent5
-    _rawText: 'Unlock your inner power
-
-      70% off today only!'
-  - _key: Day1_CardHeader6
-    _rawText: BeautyBox
-  - _key: Day1_CardContent6
-    _rawText: "You deserve \nthe best in self-care!"
-  - _key: Day1_CardHeader7
-    _rawText: Nutritionist
-  - _key: Day1_CardContent7
-    _rawText: '5 steps to
-
-      a toxin-free life'
-  - _key: Day1_CardHeader8
+  - _key: Day1_CardHeader3
     _rawText: Fuzzball of the Day
-  - _key: Day1_CardContent8
+  - _key: Day1_CardContent3
     _rawText: 'Cat of the day:
 
       smiling just for you!'
-  - _key: Day1_CardHeader9
-    _rawText: Unknown
-  - _key: Day1_CardContent9
-    _rawText: "\U0001F308\U0001F4B0TRY IT NOW\U0001F4B0\U0001F308"
-  - _key: Day1_CardHeader10
+  - _key: Day1_CardHeader4
+    _rawText: SelfGuru
+  - _key: Day1_CardContent4
+    _rawText: 'Unlock your inner power
+
+      70% off today only!'
+  - _key: Day1_CardHeader5
+    _rawText: BeautyBox
+  - _key: Day1_CardContent5
+    _rawText: "You deserve \nthe best in self-care!"
+  - _key: Day1_CardHeader6
     _rawText: Mom
-  - _key: Day1_CardContent10
+  - _key: Day1_CardContent6
     _rawText: "How are you?\nHope everything\u2019s\nokay with you."
-  - _key: Day1_CardHeader11
+  - _key: Day1_CardHeader7
     _rawText: Kira
-  - _key: Day1_CardContent11
+  - _key: Day1_CardContent7
     _rawText: 'Look, our cat''s
 
       grown so much!'
-  - _key: Day1_CardHeader12
-    _rawText: June
-  - _key: Day1_CardContent12
-    _rawText: 'Still writing?
-
-      We need someone
-
-      to cover.'
-  - _key: Day1_CardHeader13
+  - _key: Day1_CardHeader8
     _rawText: Sasha
-  - _key: Day1_CardContent13
+  - _key: Day1_CardContent8
     _rawText: 'Just found
 
       one of your old photos
 
       got all warm inside!'
-  - _key: Day1_CardHeader14
-    _rawText: Kay
-  - _key: Day1_CardContent14
-    _rawText: 'Hey.
+  - _key: Day1_CardHeader9
+    _rawText: June
+  - _key: Day1_CardContent9
+    _rawText: 'Still writing?
 
-      I hope things
+      We need someone
 
-      feel more stable
-
-      for you now.'
+      to cover.'
   - _key: Day2_CardHeader0
     _rawText: Editorial Team
   - _key: Day2_CardContent0
@@ -596,68 +564,51 @@ MonoBehaviour:
 
       the next article'
   - _key: Day2_CardHeader1
-    _rawText: Utilities
-  - _key: Day2_CardContent1
-    _rawText: 'Late fee on water bill:
-
-      +112'
-  - _key: Day2_CardHeader2
     _rawText: Accounting
-  - _key: Day2_CardContent2
+  - _key: Day2_CardContent1
     _rawText: 'Salary received.
 
       Check your account
 
       details'
-  - _key: Day2_CardHeader3
-    _rawText: Deliveries
-  - _key: Day2_CardContent3
-    _rawText: 'Notification:
-
-      Delivery failed'
-  - _key: Day2_CardHeader4
+  - _key: Day2_CardHeader2
     _rawText: Automated System
-  - _key: Day2_CardContent4
+  - _key: Day2_CardContent2
     _rawText: 'Task deadline
 
       in 6 hours'
-  - _key: Day2_CardHeader5
+  - _key: Day2_CardHeader3
     _rawText: Planner
-  - _key: Day2_CardContent5
+  - _key: Day2_CardContent3
     _rawText: 'Your goals
 
       miss you!'
-  - _key: Day2_CardHeader6
+  - _key: Day2_CardHeader4
+    _rawText: Digital
+  - _key: Day2_CardContent4
+    _rawText: "Don\u2019t stall\nthe world won\u2019t wait!"
+  - _key: Day2_CardHeader5
     _rawText: Dance
-  - _key: Day2_CardContent6
+  - _key: Day2_CardContent5
     _rawText: 'Start your week
 
       with a dance!'
+  - _key: Day2_CardHeader6
+    _rawText: Anna
+  - _key: Day2_CardContent6
+    _rawText: "You won\u2019t believe it\nthey played your favorite\nsong at the
+      station!"
   - _key: Day2_CardHeader7
-    _rawText: ImgaGirl
-  - _key: Day2_CardContent7
-    _rawText: '5 power poses
-
-      for confident photos'
-  - _key: Day2_CardHeader8
-    _rawText: Digital
-  - _key: Day2_CardContent8
-    _rawText: "Don\u2019t stall\nthe world won\u2019t wait!"
-  - _key: Day2_CardHeader9
-    _rawText: Automated System
-  - _key: Day2_CardContent9
-    _rawText: "You are invited\nto take a look\u2026"
-  - _key: Day2_CardHeader10
     _rawText: Mom
-  - _key: Day2_CardContent10
-    _rawText: 'It rained today.
+  - _key: Day2_CardContent7
+    _rawText: 'Remember you asked
 
-      Hope you took
+      for a reminder to pay
 
-      an umbrella?'
-  - _key: Day2_CardHeader11
+      for your phone?'
+  - _key: Day2_CardHeader8
     _rawText: Sasha
-  - _key: Day2_CardContent11
+  - _key: Day2_CardContent8
     _rawText: 'Hey!
 
       Do you still have
@@ -666,22 +617,9 @@ MonoBehaviour:
 
       casserole
       recipe?'
-  - _key: Day2_CardHeader12
-    _rawText: Anna
-  - _key: Day2_CardContent12
-    _rawText: "You won\u2019t believe it\nthey played your favorite\nsong at the
-      station!"
-  - _key: Day2_CardHeader13
-    _rawText: Mom
-  - _key: Day2_CardContent13
-    _rawText: 'Remember you asked
-
-      for a reminder to pay
-
-      for your phone?'
-  - _key: Day2_CardHeader14
+  - _key: Day2_CardHeader9
     _rawText: Medical Center
-  - _key: Day2_CardContent14
+  - _key: Day2_CardContent9
     _rawText: "Test results\u2026\n...urgent follow-up\nrecommended\u2026"
   - _key: Day3_CardHeader0
     _rawText: Editor
@@ -698,38 +636,18 @@ MonoBehaviour:
   - _key: Day3_CardContent2
     _rawText: "Payment \u2713"
   - _key: Day3_CardHeader3
-    _rawText: Anna
-  - _key: Day3_CardContent3
-    _rawText: "Your articl? Submi@@@\u2026\nin dr@fts"
-  - _key: Day3_CardHeader4
-    _rawText: IT
-  - _key: Day3_CardContent4
-    _rawText: 'Pass_expired.
-
-      Ch@nge w/in 24h'
-  - _key: Day3_CardHeader5
     _rawText: MedMed
-  - _key: Day3_CardContent5
+  - _key: Day3_CardContent3
     _rawText: "5 symptoms you\nshouldn\u2019t ignore"
-  - _key: Day3_CardHeader6
-    _rawText: LifeCoach
-  - _key: Day3_CardContent6
-    _rawText: 'You can still
-
-      change everything!'
-  - _key: Day3_CardHeader7
-    _rawText: MedOk
-  - _key: Day3_CardContent7
-    _rawText: "We've noticed:\nyou\u2019re going out\nless lately"
-  - _key: Day3_CardHeader8
+  - _key: Day3_CardHeader4
     _rawText: Newsletter
-  - _key: Day3_CardContent8
+  - _key: Day3_CardContent4
     _rawText: 'Your pain is
 
       a growth point'
-  - _key: Day3_CardHeader9
+  - _key: Day3_CardHeader5
     _rawText: Fitness
-  - _key: Day3_CardContent9
+  - _key: Day3_CardContent5
     _rawText: 'Do y0u_#even
 
       enj0y_be!ng in
@@ -737,33 +655,24 @@ MonoBehaviour:
       th%t v&rs!on
 
       0f y0ur@self?'
-  - _key: Day3_CardHeader10
+  - _key: Day3_CardHeader6
     _rawText: Kira
-  - _key: Day3_CardContent10
+  - _key: Day3_CardContent6
     _rawText: Oh... Stay strong!
-  - _key: Day3_CardHeader11
+  - _key: Day3_CardHeader7
     _rawText: Mom
-  - _key: Day3_CardContent11
-    _rawText: 'I get that you
+  - _key: Day3_CardContent7
+    _rawText: 'Just send a quick message
 
-      might be busy.
-
-      Just send a quick message
-
-      if
-      you''re okay.'
-  - _key: Day3_CardHeader12
-    _rawText: Sasha
-  - _key: Day3_CardContent12
-    _rawText: Stay strong!
-  - _key: Day3_CardHeader13
-    _rawText: DO NOT REPLY
-  - _key: Day3_CardContent13
-    _rawText: "Hey!\nJust in case you want\nto come back\nwe\u2019ve got an opening."
-  - _key: Day3_CardHeader14
+      if you''re okay.'
+  - _key: Day3_CardHeader8
     _rawText: Kay
-  - _key: Day3_CardContent14
+  - _key: Day3_CardContent8
     _rawText: "It\u2019s all from stress!"
+  - _key: Day3_CardHeader9
+    _rawText: Sasha
+  - _key: Day3_CardContent9
+    _rawText: Stay strong!
   - _key: Day4_CardHeader0
     _rawText: Edit0r
   - _key: Day4_CardContent0
@@ -774,63 +683,43 @@ MonoBehaviour:
   - _key: Day4_CardContent1
     _rawText: "Why haven\u2019t you\nresponded to the edits?"
   - _key: Day4_CardHeader2
-    _rawText: AutoSystem
-  - _key: Day4_CardContent2
-    _rawText: Connection error
-  - _key: Day4_CardHeader3
     _rawText: HR
-  - _key: Day4_CardContent3
+  - _key: Day4_CardContent2
     _rawText: 'F!le not s#nt.
 
       Please try again.'
-  - _key: Day4_CardHeader4
-    _rawText: "\u2591\u2591\u2591"
-  - _key: Day4_CardContent4
-    _rawText: "...you shou\u2593\u2593\u2593..."
-  - _key: Day4_CardHeader5
+  - _key: Day4_CardHeader3
     _rawText: Guru
-  - _key: Day4_CardContent5
+  - _key: Day4_CardContent3
     _rawText: 'Find inner harmony
 
       in just 5 minutes a day!'
-  - _key: Day4_CardHeader6
+  - _key: Day4_CardHeader4
     _rawText: '[unknown]'
-  - _key: Day4_CardContent6
+  - _key: Day4_CardContent4
     _rawText: Pain is a choice
-  - _key: Day4_CardHeader7
+  - _key: Day4_CardHeader5
     _rawText: SelfHelpPro
-  - _key: Day4_CardContent7
+  - _key: Day4_CardContent5
     _rawText: "Do you know why\nyou\u2019re still not happy?"
-  - _key: Day4_CardHeader8
-    _rawText: CareYou
-  - _key: Day4_CardContent8
-    _rawText: "Struggling to get out of bed?\nWe\u2019re here for you"
-  - _key: Day4_CardHeader9
-    _rawText: '!!!'
-  - _key: Day4_CardContent9
-    _rawText: Have you eaten today?
-  - _key: Day4_CardHeader10
+  - _key: Day4_CardHeader6
     _rawText: Mom
-  - _key: Day4_CardContent10
+  - _key: Day4_CardContent6
     _rawText: 'You need
 
       to stay positive.'
-  - _key: Day4_CardHeader11
-    _rawText: Colleague
-  - _key: Day4_CardContent11
-    _rawText: Stay strong
-  - _key: Day4_CardHeader12
-    _rawText: Anna
-  - _key: Day4_CardContent12
-    _rawText: Stay strong
-  - _key: Day4_CardHeader13
+  - _key: Day4_CardHeader7
     _rawText: Sasha
-  - _key: Day4_CardContent13
+  - _key: Day4_CardContent7
     _rawText: "My aunt had\nthe same thing, actually\u2026"
-  - _key: Day4_CardHeader14
-    _rawText: Kira
-  - _key: Day4_CardContent14
-    _rawText: Stay strong!
+  - _key: Day4_CardHeader8
+    _rawText: Anna
+  - _key: Day4_CardContent8
+    _rawText: Stay strong
+  - _key: Day4_CardHeader9
+    _rawText: Colleague
+  - _key: Day4_CardContent9
+    _rawText: Stay strong
   - _key: Day5_CardHeader0
     _rawText: HR
   - _key: Day5_CardContent0
@@ -844,66 +733,37 @@ MonoBehaviour:
   - _key: Day5_CardContent2
     _rawText: "You didn\u2019t complete\nyour Happy Monday.\nWant to try again?"
   - _key: Day5_CardHeader3
-    _rawText: Info
+    _rawText: Anna
   - _key: Day5_CardContent3
-    _rawText: "Your health is\nin your hands.\nDon\u2019t forget to check it!"
+    _rawText: 'You are not alone.
+
+      You are not alone.
+
+      You are not alo...
+      T... %$#!'
   - _key: Day5_CardHeader4
-    _rawText: Calendar
-  - _key: Day5_CardContent4
-    _rawText: "Your birthday\u2019s\ncoming up.\nReady to start a new life?"
-  - _key: Day5_CardHeader5
-    _rawText: Anna
-  - _key: Day5_CardContent5
-    _rawText: 'You are not alone.
-
-      You are not alone.
-
-      You are not alo...
-      T... %$#!'
-  - _key: Day5_CardHeader6
     _rawText: Support Service
-  - _key: Day5_CardContent6
+  - _key: Day5_CardContent4
     _rawText: ..........
+  - _key: Day5_CardHeader5
+    _rawText: "\u2014"
+  - _key: Day5_CardContent5
+    _rawText: "...s_h_e_\u2019s_w**atching...\nT#_t#m?"
+  - _key: Day5_CardHeader6
+    _rawText: Kira
+  - _key: Day5_CardContent6
+    _rawText: "Here, read some stories\npeople who recovered\u2026"
   - _key: Day5_CardHeader7
-    _rawText: Anna
+    _rawText: "\u2014"
   - _key: Day5_CardContent7
-    _rawText: 'You are not alone.
-
-      You are not alone.
-
-      You are not alo...
-      T... %$#!'
+    _rawText: Stay strong!
   - _key: Day5_CardHeader8
     _rawText: "\u2014"
   - _key: Day5_CardContent8
-    _rawText: "...s_h_e_\u2019s_w**atching...\nT#_t#m?"
+    _rawText: Stay strong!
   - _key: Day5_CardHeader9
-    _rawText: <<NULL>>
+    _rawText: "\u2014"
   - _key: Day5_CardContent9
-    _rawText: 'REB0OT%@...
-
-      REB0OT%@...
-
-      %$!$!'
-  - _key: Day5_CardHeader10
-    _rawText: Kira
-  - _key: Day5_CardContent10
-    _rawText: "Here, read some stories\npeople who recovered\u2026"
-  - _key: Day5_CardHeader11
-    _rawText: Mom
-  - _key: Day5_CardContent11
-    _rawText: "You\u2019ll get through this."
-  - _key: Day5_CardHeader12
-    _rawText: "\u2014"
-  - _key: Day5_CardContent12
-    _rawText: Stay strong!
-  - _key: Day5_CardHeader13
-    _rawText: "\u2014"
-  - _key: Day5_CardContent13
-    _rawText: Stay strong!
-  - _key: Day5_CardHeader14
-    _rawText: "\u2014"
-  - _key: Day5_CardContent14
     _rawText: Stay strong!
   - _key: results_header
     _rawText: Results
@@ -984,3 +844,31 @@ MonoBehaviour:
     _rawText: A way to break the cycle.
   - _key: Final_Phrase4
     _rawText: And finally find peace with your real self. No masks.
+  - _key: Titles_Head_GD
+    _rawText: Game Design, Narrative, Level Design
+  - _key: Titles_GD0
+    _rawText: Katerina Matvienko
+  - _key: Titles_Head_Dev
+    _rawText: Development
+  - _key: Titles_Dev0
+    _rawText: Sergey Ermilov
+  - _key: Titles_Dev1
+    _rawText: Alexander Malykh
+  - _key: Titles_Dev2
+    _rawText: Sergey Ivanov
+  - _key: Titles_Head_Art0
+    _rawText: 3D Artist
+  - _key: Titles_Art0
+    _rawText: Ivan Azdravin
+  - _key: Titles_Head_Art1
+    _rawText: 2D Artist
+  - _key: Titles_Art2
+    _rawText: Alena Olkhovskaya
+  - _key: Titles_Head_Music
+    _rawText: Music
+  - _key: Titles_Music0
+    _rawText: Yaroslav Ivannikov
+  - _key: Titles_Head_PM
+    _rawText: Project Manager
+  - _key: Titles_PM0
+    _rawText: Sergey Golubovsky
