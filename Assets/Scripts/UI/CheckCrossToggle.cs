@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -45,6 +46,9 @@ namespace UI
         {
             // В режиме Play кликаем мышью
             IsOn = !IsOn;
+            OnMusicSettingsChanged?.Invoke(IsOn);
         }
+
+        public event Action<bool> OnMusicSettingsChanged;
     }
 }

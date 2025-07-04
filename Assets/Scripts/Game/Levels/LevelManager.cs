@@ -72,6 +72,16 @@ namespace Game.Levels
             int next = _currentIndex + 1;
             if (next < _config.levels.Length)
             {
+                switch (next)
+                {
+                    case 5:
+                        MusicManager.Instance.SetTrack(MusicTrack.Track2);
+                        break;
+                    case 8:
+                        MusicManager.Instance.SetTrack(MusicTrack.Track1);
+                        break;
+                }
+
                 LoadLevel(next, parent);
                 return true;
             }
