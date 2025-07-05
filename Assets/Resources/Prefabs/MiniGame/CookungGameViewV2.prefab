@@ -10,6 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
+      propertyPath: gameSpeed
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
       propertyPath: winZoneWidth
       value: 100
       objectReference: {fileID: 0}
