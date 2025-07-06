@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Effects;
+using Effects.PostProcess;
 using Game.Interactions;
 using Game.MiniGames.Flower;
-using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
 using UnityEngine;

@@ -2,7 +2,7 @@ using System.Threading;
 using CameraField;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
-using Effects;
+using Effects.PostProcess;
 using Game.Intertitles;
 using Game.Levels;
 using Game.MiniGames.Flower;

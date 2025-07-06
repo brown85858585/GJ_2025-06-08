@@ -1,5 +1,5 @@
 using System;
-using Effects;
+using Effects.PostProcess;
 using Game.Interactions;
 using Game.MiniGames;
 using UnityEngine;
