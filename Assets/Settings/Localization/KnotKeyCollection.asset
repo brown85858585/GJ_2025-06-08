@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: KnotKeyCollection
   m_EditorClassIdentifier: 
   _keyData:
-  - _key: testKey
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Button_Start
+  - _key: Play
     _metadata:
       _runtime: []
       _editor: []
@@ -50,6 +46,26 @@ MonoBehaviour:
       _runtime: []
       _editor: []
   - _key: Quit_Accept0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help_Hint0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help_Hint1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Help_Hint2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: GameOver
     _metadata:
       _runtime: []
       _editor: []
@@ -213,15 +229,35 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Door0
+  - _key: Day6_WMGDoor0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Door1
+  - _key: Day6_WMGDoor1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Flower_WateringCup
+  - _key: Day1_Flower0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day2_Flower0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day3_Flower0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day4_Flower0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day5_Flower0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Day6_Flower0
     _metadata:
       _runtime: []
       _editor: []
@@ -305,19 +341,19 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_Kitchen_Win
+  - _key: Day5_WMGKitchen0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_Kitchen_Defeat
+  - _key: Day5_WMGKitchen1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Kitchen_Win
+  - _key: Day6_WMGKitchen0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Kitchen_Defeat
+  - _key: Day6_WMGKitchen1
     _metadata:
       _runtime: []
       _editor: []
@@ -401,15 +437,15 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Computer0
+  - _key: Day6_WMGComputer0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Computer1
+  - _key: Day6_WMGComputer1
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day6_Computer2
+  - _key: Day6_WMGComputer2
     _metadata:
       _runtime: []
       _editor: []
@@ -861,46 +897,6 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day1_CardHeader10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardContent10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardHeader11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardContent11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardHeader12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardContent12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day1_CardContent14
-    _metadata:
-      _runtime: []
-      _editor: []
   - _key: Day2_CardHeader0
     _metadata:
       _runtime: []
@@ -978,46 +974,6 @@ MonoBehaviour:
       _runtime: []
       _editor: []
   - _key: Day2_CardContent9
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardHeader10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardContent10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardHeader11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardContent11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardHeader12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardContent12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day2_CardContent14
     _metadata:
       _runtime: []
       _editor: []
@@ -1101,46 +1057,6 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day3_CardHeader10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardContent10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardHeader11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardContent11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardHeader12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardContent12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day3_CardContent14
-    _metadata:
-      _runtime: []
-      _editor: []
   - _key: Day4_CardHeader0
     _metadata:
       _runtime: []
@@ -1218,46 +1134,6 @@ MonoBehaviour:
       _runtime: []
       _editor: []
   - _key: Day4_CardContent9
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardHeader10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardContent10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardHeader11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardContent11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardHeader12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardContent12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day4_CardContent14
     _metadata:
       _runtime: []
       _editor: []
@@ -1341,43 +1217,7 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day5_CardHeader10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardContent10
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardHeader11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardContent11
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardHeader12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardContent12
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardHeader13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardContent13
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardHeader14
-    _metadata:
-      _runtime: []
-      _editor: []
-  - _key: Day5_CardContent14
+  - _key: results_header
     _metadata:
       _runtime: []
       _editor: []
@@ -1529,19 +1369,59 @@ MonoBehaviour:
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Play
+  - _key: Titles_Head_GD
     _metadata:
       _runtime: []
       _editor: []
-  - _key: results_header
+  - _key: Titles_GD0
     _metadata:
       _runtime: []
       _editor: []
-  - _key: Day1_Flower0
+  - _key: Titles_Head_Dev
     _metadata:
       _runtime: []
       _editor: []
-  - _key: GameOver
+  - _key: Titles_Dev0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Dev1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Dev2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Head_Art0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Art0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Head_Art1
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Art2
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Head_Music
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Music0
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_Head_PM
+    _metadata:
+      _runtime: []
+      _editor: []
+  - _key: Titles_PM0
     _metadata:
       _runtime: []
       _editor: []

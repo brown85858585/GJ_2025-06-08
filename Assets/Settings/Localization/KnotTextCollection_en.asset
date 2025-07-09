@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: KnotTextCollection_en
   m_EditorClassIdentifier: 
   _items:
-  - _key: testKey
-    _rawText: Test
   - _key: Play
     _rawText: Play
   - _key: Button_Setting

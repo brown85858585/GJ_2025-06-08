@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Effects;
+using Effects.PostProcess;
 using Game.MiniGames.Park;
 using Game.Quests;
 using Player;
@@ -23,7 +24,6 @@ namespace Game.MiniGames
         private ParkSprintController _parkSprintController;
         private readonly IPlayerController _playerController;
         private EffectAccumulatorView _effectsAccumulatorView;
-        private int _savedScore;
 
         public ParkMiniGame(IPlayerController playerController)
         {
@@ -40,9 +40,8 @@ namespace Game.MiniGames
         }
         public void StartGame()
         {
-            _savedScore = _playerController.Model.Score;
+            _effectsAccumulatorView.GetComponent<PostEffectsController>().SwitchWithFade(PostEffectProfile.Vignette, 1f);
             
-            _effectsAccumulatorView.FadeOut();
             UniTask.Delay(1000).ContinueWith(() =>
             {
                 _parkLevelView.gameObject.SetActive(true);
@@ -58,7 +57,6 @@ namespace Game.MiniGames
                 };
                 
                 _effectsAccumulatorView.FadeIn();
-                _effectsAccumulatorView.VignetteToggle();
             });
         }
 
@@ -70,14 +68,13 @@ namespace Game.MiniGames
 
         private async UniTask RunCompletingTimer(bool win)
         {
+            _effectsAccumulatorView.GetComponent<PostEffectsController>().SwitchWithFade(PostEffectProfile.Default);
+            
             _playerController.ToggleMovement(false);
             
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
-            _effectsAccumulatorView.FadeOut();
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _parkLevelView.gameObject.SetActive(false);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             
             _effectsAccumulatorView.FadeIn();
 
@@ -85,7 +82,6 @@ namespace Game.MiniGames
             
             IsWin = win;
             
-            _effectsAccumulatorView.VignetteToggle();
             OnMiniGameComplete?.Invoke(QType, IsWin);
         }
 
