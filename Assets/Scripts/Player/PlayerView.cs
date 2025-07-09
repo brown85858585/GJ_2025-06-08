@@ -237,10 +237,6 @@ namespace Player
             moveSpeed = move;
             runSpeed = run;
             sprintSpeed = sprint;
-            
-            // Обновляем скорость анимации
-            // animator.SetFloat(IsMove, moveSpeed);
-            // animator.SetFloat(IsRun, runSpeed);
         }
     }
 }
