@@ -31,14 +31,28 @@ namespace Effects.PostProcess
             _postEffectsController.Unblur();
         }
 
-        public void FadeIn(float duration = -1)
+        public void FadeIn(float duration = -1, PostEffectProfile newProfile = PostEffectProfile.None)
         {
-            postEffectsController.FadeIn(duration);
+            if (newProfile != PostEffectProfile.None)
+            {
+                postEffectsController.FadeInWithSwitch(duration, newProfile);
+            }
+            else
+            {
+                postEffectsController.FadeIn(duration);
+            }
         }
 
-        public void FadeOut(float duration = -1)
+        public void FadeOut(float duration = -1, PostEffectProfile newProfile = PostEffectProfile.None)
         {
-            postEffectsController.FadeOut(duration);
+            if (newProfile != PostEffectProfile.None)
+            {
+                postEffectsController.FadeOutWithSwitch(duration, newProfile);
+            }
+            else
+            {
+                postEffectsController.FadeOut(duration);
+            }
         }
 
         public void SetWeather(int cycle)

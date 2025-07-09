@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using CameraField;
 using Cinemachine;
@@ -64,7 +65,7 @@ namespace Game.Installers
             _scenario = Instantiate(Resources.Load<ScenarioInstaller>("Prefabs/ScenarioInstaller"));
             
             _effectAccumulator = Instantiate(effectAccumulator, transform.parent);
-            _effectAccumulator.FadeOut(0);
+            _effectAccumulator.FadeOut(0, PostEffectProfile.Day0);
             InitLevelOne();
             mainCanvasPrefab.LanguageSelector.ApplySavedLanguage();
 
@@ -201,7 +202,8 @@ namespace Game.Installers
                 
                 _effectAccumulator.SetWeather(_levelManager.CurrentLevelIndex+1);
 
-                _effectAccumulator.FadeIn();
+                _effectAccumulator.FadeIn(1, 
+                    (PostEffectProfile)Enum.Parse(typeof(PostEffectProfile), $"Day{_levelManager.CurrentLevelIndex}"));
             });
         }
 

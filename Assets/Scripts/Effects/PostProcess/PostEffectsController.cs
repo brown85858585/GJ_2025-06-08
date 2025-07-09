@@ -106,5 +106,21 @@ namespace Effects.PostProcess
 
             _colorAdj.postExposure.value = to;
         }
+
+        public void FadeInWithSwitch(float duration, PostEffectProfile newProfile = PostEffectProfile.Default)
+        {
+            profileSelector.SetProfile(newProfile);
+            volume.profile.TryGet(out _colorAdj);
+            volume.profile.TryGet(out _depthOfField);
+            
+            FadeIn(duration);
+        }
+        public void FadeOutWithSwitch(float duration, PostEffectProfile newProfile = PostEffectProfile.Default) 
+        {
+            profileSelector.SetProfile(newProfile);
+            volume.profile.TryGet(out _colorAdj);
+            volume.profile.TryGet(out _depthOfField);
+            FadeOut(duration);
+        }
     }
 }
