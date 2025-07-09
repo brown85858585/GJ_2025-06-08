@@ -61,9 +61,9 @@ namespace Game.Monolog
                     var suffix = GetItemKeySuffix(item);
 
                     if (_monologIndexesBySuffix.TryGetValue(suffix, out var currentIndex))
-                        HandleExistingMonolog(suffix, currentIndex);
+                        HandleExistingMonolog(suffix, currentIndex, item);
                     else
-                        HandleNewMonolog(suffix);
+                        HandleNewMonolog(suffix, item);
                     break;
                 }
                 default:
@@ -73,7 +73,7 @@ namespace Game.Monolog
 
         private string GetItemKeySuffix(ItemCategory item) => $"Day{_levelManager.CurrentLevelIndex + 1}_{item}";
 
-        private void HandleExistingMonolog(string suffix, int currentIndex)
+        private void HandleExistingMonolog(string suffix, int currentIndex, ItemCategory item)
         {
             var nextIndex = currentIndex + 1;
             var nextKey = ComposeKey(suffix, nextIndex);
@@ -82,7 +82,8 @@ namespace Game.Monolog
             {
                 // Сохраняем и показываем следующий диалог
                 _monologIndexesBySuffix[suffix] = nextIndex;
-                _playerController.Model.Score += 20;
+                if(item != ItemCategory.Bed)
+                    _playerController.Model.Score += 20;
                 OpenDialogue(nextKey);
 
                 // Если за ним больше нет ключа — дизейблим интерактив
@@ -98,7 +99,7 @@ namespace Game.Monolog
             }
         }
 
-        private void HandleNewMonolog(string suffix)
+        private void HandleNewMonolog(string suffix, ItemCategory item)
         {
             const int initialIndex = 0;
             var key = ComposeKey(suffix, initialIndex);
@@ -106,7 +107,8 @@ namespace Game.Monolog
             if (_keyCollection.ContainsKey(key))
             {
                 _monologIndexesBySuffix[suffix] = initialIndex;
-                _playerController.Model.Score += 20;
+                if(item != ItemCategory.Bed)
+                    _playerController.Model.Score += 20;
                 OpenDialogue(key);
             }
             else
