@@ -38,7 +38,7 @@ namespace Game.MiniGames
             }
         }
 
-        public void StaminaRegeneration(int value)
+        private void StaminaRegeneration(int value)
         {
             if (_playerController.Model.Stamina >= _staminaMax)
             {
@@ -75,7 +75,7 @@ namespace Game.MiniGames
         private void EndGame()
         {
             _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
-            var win = _parkLevelView.CheckpointCounter < _parkLevelView.CheckpointViews.Count/2;
+            var win = _parkLevelView.CheckpointCounter < _parkLevelView.CheckpointViews.Count-1;
             EndSprint?.Invoke(win);
 
             ResetStamina();
