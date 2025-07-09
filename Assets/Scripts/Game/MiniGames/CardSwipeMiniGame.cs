@@ -42,7 +42,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     private GameObject currentCard;
     private TextMeshProUGUI cardSenderText;
     private TextMeshProUGUI cardContentText;
-    private Text cardCounterText;
+    private TextMeshProUGUI cardCounterText;
     private Text scoreText;
     private Button acceptButton;
     private Button rejectButton;
@@ -69,6 +69,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [SerializeField] private float feedbackIconDuration = 1.0f; // Время показа иконки
     [SerializeField] private Color successColor = Color.green;
     [SerializeField] private Color failureColor = Color.red;
+    [SerializeField] private Color defaulColor = Color.gray;
 
     [Header("Last Card Animation")]
     [SerializeField] private float lastCardScale = 2.5f;
@@ -289,9 +290,7 @@ private void CreateCardStack(GameObject originalCard)
 
     Transform headerContainer = card.transform.Find("HeaderContainer");
     Transform contentContainer = card.transform.Find("ContentContainer");
-    
-
-
+ 
         if (headerContainer != null)
         {
             Transform headerText = headerContainer.Find("HeaderText");
@@ -308,6 +307,7 @@ private void CreateCardStack(GameObject originalCard)
                         senderText.text = finalText;
                 }
             }
+
         }
 
         if (contentContainer != null)
@@ -517,6 +517,10 @@ private void CreateCardStack(GameObject originalCard)
             GameObject card = cardStack[i];
             RectTransform cardRect = card.GetComponent<RectTransform>();
 
+            var ch = card.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
+
+
+
             // Смещение для создания эффекта стопки (ИСПРАВЛЕНО: i вместо cardStack.Count - 1 - i)
             Vector2 offset = stackOffset * i; // Первая карточка (i=0) без смещения, последующие смещаются больше
             cardRect.anchoredPosition = basePosition + offset;
@@ -525,6 +529,14 @@ private void CreateCardStack(GameObject originalCard)
             float scaleReduction = stackScaleReduction * i;
             Vector2 scaledSize = cardSize * (1f - scaleReduction);
             cardRect.sizeDelta = scaledSize;
+
+            if (ch.Count() > 0)
+            {
+                var senderImage = ch.First();
+               // senderImage.rectTransform.anchoredPosition += offset;
+                ch.First().color = new Color(UnityEngine.Random.Range(0F, 1F), UnityEngine.Random.Range(0, 1F), UnityEngine.Random.Range(0, 1F));// senderCircleColor;
+
+            }
 
             // Z-порядок (передняя карточка должна быть сверху) - ИСПРАВЛЕНО
             cardRect.SetSiblingIndex(cardStack.Count - 1 - i); // Первая карточка (i=0) будет иметь самый высокий индекс
@@ -595,17 +607,17 @@ private void CreateCardStack(GameObject originalCard)
         var imgs = go.GetComponentsInChildren<Image>().ToList();
 
         var successIcon = imgs.Where(ch => ch.name.Contains("success")).FirstOrDefault();
-        var decayIcon = imgs.Where(ch => ch.name.Contains("decay")).FirstOrDefault();
+        var declayIcon = imgs.Where(ch => ch.name.Contains("decay")).FirstOrDefault();
 
         // Показываем соответствующую иконку
-        if (isCorrect && successIcon != null)
-        {
-            StartCoroutine(ShowFeedbackIcon(successIcon, successColor));
-        }
-        else if (!isCorrect && decayIcon != null)
-        {
-            StartCoroutine(ShowFeedbackIcon(decayIcon, failureColor));
-        }
+        //if (isCorrect && successIcon != null)
+        //{
+            StartCoroutine(ShowFeedbackIcon(successIcon, /*successColor*/ defaulColor));
+        //}
+        //else if (!isCorrect && declayIcon != null)
+        //{
+            StartCoroutine(ShowFeedbackIcon(declayIcon,/* failureColor*/ defaulColor));
+        //}
 
         // Цветовая обратная связь для карточки (опционально)
         Image cardImg = currentCard.GetComponent<Image>();
@@ -1150,7 +1162,9 @@ private void CreateCardStack(GameObject originalCard)
         circleRect.anchoredPosition = new Vector2(35, 0);
 
         Image circleImg = circle.AddComponent<Image>();
-        circleImg.color = senderCircleColor;
+        //var images = headerContainer.GetComponentsInChildren<Image>();
+        // images.First().color =  ;
+        
 
         // Текст "От кого"
         GameObject senderTextObj = new GameObject("SenderText");
@@ -1195,8 +1209,12 @@ private void CreateCardStack(GameObject originalCard)
     private void CreateStatusTexts()
     {
         // Счетчик карточек
-        cardCounterText = CreateText("CardCounter", "Осталось: N", new Vector2(0, -300), 16, Color.white, new Vector2(200, 30), gameScreen.transform);
-
+        var txt = currentCardPrefab.transform.Find("Score");
+        // txt.faceColor
+        var component = txt.GetComponent<TextMeshProUGUI>();
+   
+        cardCounterText = component; //CreateText("CardCounter", "Осталось: N", new Vector2(0, -300), 16, Color.white, new Vector2(200, 30), gameScreen.transform);
+        txt.position = new Vector3(txt.position.x, txt.position.y - 100, txt.position.z);
         // Счетчик очков  
         //scoreText = CreateText("ScoreText", "Очки: 0", new Vector2(-200, 200), 18, Color.white, new Vector2(150, 30), gameScreen.transform);
 
@@ -1391,7 +1409,6 @@ private void CreateCardStack(GameObject originalCard)
         if (cardCounterText != null)
         { 
             cardCounterText.text = $"{cardsRemaining}/{CardCount} ";
-            cardCounterText.fontSize = 24;
             //cardCounterText.font = cardSenderText.font.sourceFontFile;
         }
     }
@@ -1407,7 +1424,7 @@ private void CreateCardStack(GameObject originalCard)
 
         OnGameAttempt?.Invoke(victory);
 
-        // Автоматическое завершение через 5 секунд
+
         StartCoroutine(AutoFinish());
         // Создаем экран результатов
     }
@@ -1415,7 +1432,7 @@ private void CreateCardStack(GameObject originalCard)
 
     private IEnumerator AutoFinish()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.1f);
             EndMiniGame();
     }
 
