@@ -78,9 +78,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: {fileID: 4203673362861490328}
   entries:
-  - key: 0
+  - key: 2
     profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
-  - key: 1
+  - key: 10
     profile: {fileID: 11400000, guid: 96e759f0cc7c8a04da744b9dc220714f, type: 2}
 --- !u!1001 &1850277603204220407
 PrefabInstance:
