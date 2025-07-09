@@ -69,7 +69,7 @@ namespace Game.Levels
         /// </summary>
         public bool LoadNextLevel(Transform parent)
         {
-            int next = _currentIndex + 4;
+            int next = _currentIndex + 1;
             if (next < _config.levels.Length)
             {
                 switch (next)
