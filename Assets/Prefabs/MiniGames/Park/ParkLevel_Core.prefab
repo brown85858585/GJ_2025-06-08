@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 8077320345711815732}
   staminaSlider: {fileID: 7958330976876374005}
   staminaMultiplyer: 40
+  staminaRegeneration: 2
 --- !u!1 &8149646067956241011
 GameObject:
   m_ObjectHideFlags: 0
