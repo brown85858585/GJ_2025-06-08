@@ -7,7 +7,27 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = System.Random;
+
+internal enum IconMappingType
+{
+    None = 0,
+    Jeka,
+    JKH,
+    Gosuslugi,
+    Bank,
+    HelloKitty
+}
+
+[Serializable]
+internal struct IconMapping
+{
+    [FormerlySerializedAs("type")] public IconMappingType mappingType;
+    public Sprite sprite;
+}
+
 public class CardSwipeMiniGame : BaseTimingMiniGame
 {
     [Header("Card Game Settings")]
@@ -37,6 +57,9 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [SerializeField] private bool enableTypingEffect = true;
     [SerializeField] private float headerTypingSpeed = 0.08f;
     [SerializeField] private float contentTypingSpeed = 0.04f;
+    
+    [SerializeField] private List<IconMapping> mappings;
+    private Dictionary<IconMappingType, Sprite> _iconMappingDict;
 
     // UI компоненты
     private GameObject currentCard;
@@ -96,6 +119,14 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     public bool Victory => _victory;
 
     // Заменить метод CreateCardInterface():
+
+
+    private void Awake()
+    {
+        // Инициализируем словарь для быстрого доступа
+        _iconMappingDict = mappings.ToDictionary(m => m.mappingType, m => m.sprite);
+        
+    }
 
     private string GetTextFromCardData(TextMeshProUGUI textComponent, string key)
     {
@@ -534,8 +565,8 @@ private void CreateCardStack(GameObject originalCard)
             {
                 var senderImage = ch.First();
                // senderImage.rectTransform.anchoredPosition += offset;
-                ch.First().color = new Color(UnityEngine.Random.Range(0F, 1F), UnityEngine.Random.Range(0, 1F), UnityEngine.Random.Range(0, 1F));// senderCircleColor;
-
+               var iconType  = UnityEngine.Random.Range(0, Enum.GetValues(typeof(IconMappingType)).Length);
+               ch.First().sprite = _iconMappingDict[(IconMappingType)iconType];
             }
 
             // Z-порядок (передняя карточка должна быть сверху) - ИСПРАВЛЕНО
