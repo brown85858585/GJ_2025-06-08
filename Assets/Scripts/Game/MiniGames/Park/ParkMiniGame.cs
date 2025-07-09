@@ -40,7 +40,8 @@ namespace Game.MiniGames
         }
         public void StartGame()
         {
-            _effectsAccumulatorView.GetComponent<PostEffectsController>().SwitchWithFade(PostEffectProfile.Vignette, 1f);
+            _effectsAccumulatorView.GetComponent<PostEffectsController>().
+                SwitchWithFade((PostEffectProfile)Enum.Parse(typeof(PostEffectProfile), $"Park{Level}"));
             
             UniTask.Delay(1000).ContinueWith(() =>
             {
@@ -68,7 +69,8 @@ namespace Game.MiniGames
 
         private async UniTask RunCompletingTimer(bool win)
         {
-            _effectsAccumulatorView.GetComponent<PostEffectsController>().SwitchWithFade(PostEffectProfile.Default);
+            _effectsAccumulatorView.GetComponent<PostEffectsController>().
+                SwitchWithFade((PostEffectProfile)Enum.Parse(typeof(PostEffectProfile), $"Day{Level}"));
             
             _playerController.ToggleMovement(false);
             
