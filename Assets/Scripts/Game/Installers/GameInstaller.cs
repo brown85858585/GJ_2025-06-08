@@ -119,6 +119,7 @@ namespace Game.Installers
             _logic.PlayerController.Init(playerView, _levelManager);
             _logic.PlayerController.SetPosition(_levelManager.CurrentRoomView.StartPoint.position);
             _levelManager.OnNextLevelLoaded += _logic.PlayerController.SwitchHead;
+            _levelManager.OnNextLevelLoaded += _logic.PlayerController.UpdateSpeed;
         }
 
         private void InitStartWakeUp()
@@ -217,6 +218,9 @@ namespace Game.Installers
 
             _core.InteractionSystem?.Dispose();
             _core.InputAdapter?.Dispose();
+            
+            _levelManager.OnNextLevelLoaded -= _logic.PlayerController.SwitchHead;
+            _levelManager.OnNextLevelLoaded -= _logic.PlayerController.UpdateSpeed;
         }
     }
 }

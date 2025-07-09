@@ -75,7 +75,7 @@ namespace Game.MiniGames
         private void EndGame()
         {
             _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
-            var win = _parkLevelView.CheckpointCounter < _parkLevelView.CheckpointViews.Count-1;
+            var win = _parkLevelView.CheckpointCounter <= 1;
             EndSprint?.Invoke(win);
 
             ResetStamina();
