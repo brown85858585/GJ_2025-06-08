@@ -227,5 +227,38 @@ namespace Player
                     break;
             }
         }
+
+        public void UpdateSpeed(int levelIndex)
+        {
+            switch (levelIndex)
+            {
+                case 0:
+                case 1:
+                    _view.ChangeSpeed(25f, 40f, 60f);
+                    break;
+                case 2:
+                    _view.ChangeSpeed(25f, 35f, 55f);
+                    break;
+                case 3:
+                    _view.ChangeSpeed(25f, 35f, 50f);
+                    break;
+                case 4: 
+                    _view.ChangeSpeed(20f, 30f, 40f);
+                    break;
+                case 5:
+                    _view.ChangeSpeed(20f, 25f, 35f);
+                    break;
+                case 6:
+                case 7:
+                    _view.ChangeSpeed();
+                    break;
+                default:
+                    Debug.LogError("Unknown level index for head switch: " + levelIndex);
+                    break;
+            }
+            
+            _normalSpeed = _view.MoveSpeed;
+            _acceleratedSpeed = _view.RunSpeed;
+        }
     }
 }

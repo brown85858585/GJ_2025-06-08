@@ -29,11 +29,11 @@ namespace Player
         
         [Header("Movement Settings")]
         [SerializeField]
-        private float moveSpeed = 25f;
+        private float moveSpeed;
         [SerializeField]
-        private float runSpeed = 45f;
+        private float runSpeed;
         [SerializeField]
-        private float sprintSpeed = 60f;
+        private float sprintSpeed;
         [SerializeField]
         private Button moveForwardButton;
         [SerializeField]
@@ -231,6 +231,12 @@ namespace Player
         {
             DisableAllHead();
             playerShortHair.SetActive(true);
+        }
+        public void ChangeSpeed(float move = 25f, float run = 45f , float sprint = 80f)
+        {
+            moveSpeed = move;
+            runSpeed = run;
+            sprintSpeed = sprint;
         }
     }
 }
