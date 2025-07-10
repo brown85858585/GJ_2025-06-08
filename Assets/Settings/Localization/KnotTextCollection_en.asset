@@ -187,13 +187,13 @@ MonoBehaviour:
   - _key: Day4_Kitchen_Defeat
     _rawText: ...
   - _key: Day5_WMGKitchen0
-    _rawText: "I can\u2019t.\nI just can\u2019t."
+    _rawText: "I can\u2019t. I just can\u2019t.\n..."
   - _key: Day5_WMGKitchen1
-    _rawText: "I can\u2019t.\nI just can\u2019t."
+    _rawText: I'm not hungry.
   - _key: Day6_WMGKitchen0
-    _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste."
+    _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste.\n..."
   - _key: Day6_WMGKitchen1
-    _rawText: "I don\u2019t feel anything.\nNot hunger.\nNot taste."
+    _rawText: Any food looks disgusting.
   - _key: Computer_UI_Letter_Head
     _rawText: 'From:'
   - _key: Computer_UI_Attempt
@@ -236,17 +236,21 @@ MonoBehaviour:
   - _key: Day5_Computer_Defeat
     _rawText: The letters are blurring.
   - _key: Day6_WMGComputer0
-    _rawText: "What does it say?\nI can\u2019t tell."
+    _rawText: "What does it say?\nI can\u2019t tell.\n..."
   - _key: Day6_WMGComputer1
-    _rawText: It all feels like mockery.
+    _rawText: 'It all feels like mockery.
+
+      ...'
   - _key: Day6_WMGComputer2
     _rawText: "I can\u2019t read this."
   - _key: Day1_Guitar0
-    _rawText: "I remember us singing\nin the kitchen, the four of us\u2026"
+    _rawText: "I remember us singing\nin the kitchen, the four of us.\n\u2026"
   - _key: Day1_Guitar1
     _rawText: 'We even talked about
 
-      playing on a stage someday...'
+      playing on a stage someday.
+
+      ...'
   - _key: Day1_Guitar2
     _rawText: "Haven\u2019t played in a while.\nShould probably tune it sometime."
   - _key: Day2_Guitar0
@@ -255,73 +259,107 @@ MonoBehaviour:
       campfire, wet sand,
 
       strings
-      smelling of smoke...'
+      smelling of smoke
+
+      ...'
   - _key: Day2_Guitar1
     _rawText: "Now it\u2019s just deadlines\nand doctor\u2019s visits.\nThe fires
-      live in photos."
+      live in photos.\n..."
   - _key: Day2_Guitar2
     _rawText: "Someday I\u2019ll hold you again."
   - _key: Day3_Guitar0
-    _rawText: "I can\u2019t even remember\nwhere A minor goes."
+    _rawText: "I can\u2019t even remember\nwhere A minor goes.\n..."
   - _key: Day3_Guitar1
-    _rawText: "My fingers shake,\nand my head\u2019s full\nof test results."
+    _rawText: "My fingers shake,\nand my head\u2019s full of test results.\n..."
   - _key: Day3_Guitar2
     _rawText: "The guitar\u2019s in the corner.\nI\u2019m not touching it.\nNot now."
   - _key: Day4_Guitar0
     _rawText: 'String snapped.
 
-      Symbolic.'
+      Symbolic.
+
+      ...'
   - _key: Day4_Guitar1
-    _rawText: "Don\u2019t even want to replace it.\nLet it stay off."
+    _rawText: "Don\u2019t even want to replace it.\nLet it stay off.\n..."
   - _key: Day4_Guitar2
     _rawText: "The strings ring too loud.\nIt\u2019s irritating."
   - _key: Day5_Guitar0
-    _rawText: "I want it to sound again.\nBut I can\u2019t."
+    _rawText: "I want it to sound again.\nBut I can\u2019t.\n..."
   - _key: Day5_Guitar1
-    _rawText: "It\u2019s dusty.\nFeels like it\u2019s not mine anymore."
+    _rawText: "It\u2019s dusty.\nFeels like it\u2019s not mine anymore.\n..."
   - _key: Day5_Guitar2
     _rawText: "The guitar doesn\u2019t recognize me.\nAnd I don\u2019t recognize
       it."
   - _key: Day6_Guitar0
     _rawText: 'Noise in my head
 
-      drowns everything.'
+      drowns everything.
+
+      ...'
   - _key: Day6_Guitar1
     _rawText: 'Too heavy.
 
-      Even my eyes slide past it.'
+      Even my eyes slide past it.
+
+      ...'
   - _key: Day6_Guitar2
     _rawText: "I don\u2019t have the strength."
   - _key: Day1_Painting0
-    _rawText: "I suddenly decided\nI was going to paint\u2026"
+    _rawText: 'I suddenly decided
+
+      I was going to paint
+
+      ...'
   - _key: Day1_Painting1
     _rawText: 'I bought brushes, canvases,
 
       and even brought an easel
 
       from
-      the village...'
+      the village.
+
+      ...'
   - _key: Day1_Painting2
     _rawText: And never finished a single one.
   - _key: Day2_Painting0
     _rawText: "Every time I\u2019d say:\n\u201CI\u2019ll start painting as soon\nas
-      I wrap up this project\u201D\u2026"
+      I wrap up this project\u201D\n..."
   - _key: Day2_Painting1
-    _rawText: "Then another deadline.\nAnd another\u2026"
+    _rawText: 'Then another deadline.
+
+      And another
+
+      ...'
   - _key: Day2_Painting2
     _rawText: 'The canvases just sit there.
 
       Waiting, same as me.'
   - _key: Day3_Painting0
-    _rawText: "One day I picked up a brush\nand just stared at the canvas\u2026"
+    _rawText: 'One day I picked up a brush
+
+      and just stared at the canvas
+
+      ...'
   - _key: Day3_Painting1
-    _rawText: "No image, no spark.\nOnly a low hum in my head\u2026"
+    _rawText: 'No image, no spark.
+
+      Only a low hum in my head
+
+      ...'
   - _key: Day3_Painting2
     _rawText: "Set the brush down.\nDidn\u2019t even pour out the water."
   - _key: Day4_Painting0
-    _rawText: "These canvases weigh\non me like open loops\u2026"
+    _rawText: 'These canvases weigh
+
+      on me like open loops
+
+      ...'
   - _key: Day4_Painting1
-    _rawText: "Everything unfinished\nstarts screaming louder\u2026"
+    _rawText: 'Everything unfinished
+
+      starts screaming louder
+
+      ...'
   - _key: Day4_Painting2
     _rawText: 'What was I even trying
 
@@ -330,34 +368,44 @@ MonoBehaviour:
     _rawText: 'I even shouted at the paintings.
 
       I was offended every time,
-      I was angry...'
+      I was angry
+
+      ...'
   - _key: Day5_Painting1
-    _rawText: "Wanted to throw it all out,\nbut my hand wouldn\u2019t move\u2026"
+    _rawText: "Wanted to throw it all out,\nbut my hand wouldn\u2019t move\n..."
   - _key: Day5_Painting2
     _rawText: 'They just get in the way.
 
       Like so much else.'
   - _key: Day6_Painting0
-    _rawText: "Too much emptiness.\nInside me, on the canvas\u2026"
+    _rawText: 'Too much emptiness.
+
+      Inside me, on the canvas
+
+      ...'
   - _key: Day6_Painting1
-    _rawText: "Too late to finish anything now\u2026"
+    _rawText: 'Too late to finish anything now
+
+      ...'
   - _key: Day6_Painting2
     _rawText: "No one\u2019s going to see it anyway."
   - _key: Day1_Books0
-    _rawText: "I was always dragging books\nhome from sales\nfor \u201Cinspiration\u201D\u2026"
+    _rawText: "I was always dragging books\nhome from sales\nfor \u201Cinspiration\u201D\n..."
   - _key: Day1_Books1
     _rawText: "Sometimes I\u2019d read at night,\nmark passages,\nscribble in the
-      margins\u2026"
+      margins\n..."
   - _key: Day1_Books2
     _rawText: 'I should at least finish
 
       one someday.'
   - _key: Day2_Books0
-    _rawText: "The bookmark\u2019s still\non the same page..."
+    _rawText: "The bookmark\u2019s still\non the same page\n..."
   - _key: Day2_Books1
     _rawText: 'What was it even about?
 
-      I forgot.'
+      I forgot.
+
+      ...'
   - _key: Day2_Books2
     _rawText: 'The books stare at me.
 
@@ -365,72 +413,92 @@ MonoBehaviour:
   - _key: Day3_Books0
     _rawText: 'My brain refuses
 
-      to absorb the text.'
+      to absorb the text.
+
+      ...'
   - _key: Day3_Books1
-    _rawText: "I can\u2019t hold a single thought."
+    _rawText: "I can\u2019t hold a single thought.\n..."
   - _key: Day3_Books2
     _rawText: 'Just meaningless words,
 
       wrapped in paper.'
   - _key: Day4_Books0
-    _rawText: "What could they tell me\nthat I\u2019m not already feeling?"
+    _rawText: "What could they tell me\nthat I\u2019m not already feeling?\n..."
   - _key: Day4_Books1
-    _rawText: No author wrote about this.
+    _rawText: 'No author wrote about this.
+
+      ...'
   - _key: Day4_Books2
     _rawText: 'Maybe I should throw them out.
 
       Make space.'
   - _key: Day5_Books0
-    _rawText: The shelf feels heavier somehow...
+    _rawText: 'The shelf feels heavier somehow
+
+      ...'
   - _key: Day5_Books1
-    _rawText: "It all presses down\nlike someone else\u2019s expectations..."
+    _rawText: "It all presses down\nlike someone else\u2019s expectations\n..."
   - _key: Day5_Books2
     _rawText: "I don\u2019t think I can\neven read the titles anymore."
   - _key: Day6_Books0
-    _rawText: "Finishing them\nwon\u2019t make me stronger."
+    _rawText: "Finishing them\nwon\u2019t make me stronger.\n..."
   - _key: Day6_Books1
     _rawText: 'The books are gone.
 
-      Just empty rectangles now.'
+      Just empty rectangles now.
+
+      ...'
   - _key: Day6_Books2
     _rawText: "I can\u2019t."
   - _key: Day1_Basket0
     _rawText: 'I wanted to learn knitting,
 
-      but I never had the patience.'
+      but I never had the patience.
+
+      ...'
   - _key: Day1_Basket1
     _rawText: "Someday I\u2019ll make a scarf.\nMaybe for me.\nMaybe for someone
-      else."
+      else.\n..."
   - _key: Day1_Basket2
     _rawText: 'The colors feel so warm.
 
       Nice to touch.'
   - _key: Day2_Basket0
-    _rawText: "There\u2019s always something else.\nNo time for yarn."
+    _rawText: "There\u2019s always something else.\nNo time for yarn.\n..."
   - _key: Day2_Basket1
     _rawText: 'I started a couple times.
 
-      Then gave up.'
+      Then gave up.
+
+      ...'
   - _key: Day2_Basket2
     _rawText: They tangle just like my thoughts.
   - _key: Day3_Basket0
-    _rawText: "The hook\u2019s broken.\nI didn\u2019t even notice when."
+    _rawText: "The hook\u2019s broken.\nI didn\u2019t even notice when.\n..."
   - _key: Day3_Basket1
     _rawText: 'Everything feels so thin.
 
-      Fragile.'
+      Fragile.
+
+      ...'
   - _key: Day3_Basket2
     _rawText: "I can\u2019t focus.\nEvery stitch feels like a task."
   - _key: Day4_Basket0
-    _rawText: "I\u2019m not even angry.\nJust watching it fade away..."
+    _rawText: "I\u2019m not even angry.\nJust watching it fade away\n..."
   - _key: Day4_Basket1
-    _rawText: Like everything else.
+    _rawText: 'Like everything else.
+
+      ...'
   - _key: Day4_Basket2
     _rawText: A monument to old ambitions.
   - _key: Day5_Basket0
-    _rawText: Even the yarn looks tired.
+    _rawText: 'Even the yarn looks tired.
+
+      ...'
   - _key: Day5_Basket1
-    _rawText: I should throw it out.
+    _rawText: 'I should throw it out.
+
+      ...'
   - _key: Day5_Basket2
     _rawText: 'Why is it so hard
 
@@ -438,33 +506,39 @@ MonoBehaviour:
   - _key: Day6_Basket0
     _rawText: 'Fine motor skills
 
-      are the enemy now.'
+      are the enemy now.
+
+      ...'
   - _key: Day6_Basket1
-    _rawText: "My hands won\u2019t listen."
+    _rawText: "My hands won\u2019t listen.\n..."
   - _key: Day6_Basket2
     _rawText: "Everything in this basket\nis a frozen \u201Cwhat never was.\u201D"
   - _key: Day1_Window0
     _rawText: 'I love the morning light.
 
-      Everything feels possible.'
+      Everything feels possible.
+
+      ...'
   - _key: Day1_Window1
-    _rawText: "Even the birds sound\nlike they\u2019re whispering."
+    _rawText: "Even the birds sound\nlike they\u2019re whispering.\n..."
   - _key: Day1_Window2
     _rawText: "It\u2019s a good day."
   - _key: Day2_Window0
-    _rawText: "It\u2019s sunny\u2026 but strange.\nLike it\u2019s on delay."
+    _rawText: "It\u2019s sunny\u2026 but strange.\nLike it\u2019s on delay.\n..."
   - _key: Day2_Window1
     _rawText: 'Today was supposed
 
       to be a good day.
 
-      Maybe.'
+      Maybe.
+
+      ...'
   - _key: Day2_Window2
     _rawText: Fog?
   - _key: Day3_Window0
-    _rawText: "Everyone else\u2019s life keeps going\u2026"
+    _rawText: "Everyone else\u2019s life keeps going\n..."
   - _key: Day3_Window1
-    _rawText: "People move forward.\nI feel like I\u2019m not allowed."
+    _rawText: "People move forward.\nI feel like I\u2019m not allowed.\n..."
   - _key: Day3_Window2
     _rawText: 'The world outside
 
@@ -472,23 +546,29 @@ MonoBehaviour:
   - _key: Day4_Window0
     _rawText: 'Rain noise makes
 
-      it hard to think.'
+      it hard to think.
+
+      ...'
   - _key: Day4_Window1
-    _rawText: "Puddles reflect the ceiling.\nCan\u2019t even see the sky."
+    _rawText: "Puddles reflect the ceiling.\nCan\u2019t even see the sky.\n..."
   - _key: Day4_Window2
     _rawText: "Everything\u2019s gone gray.\nEven the trees."
   - _key: Day5_Window0
-    _rawText: Thunder, somewhere far off.
+    _rawText: 'Thunder, somewhere far off.
+
+      ...'
   - _key: Day5_Window1
-    _rawText: "Just water and glass.\nThat\u2019s all."
+    _rawText: "Just water and glass.\nThat\u2019s all.\n..."
   - _key: Day5_Window2
     _rawText: "There\u2019s barely any light."
   - _key: Day6_Window0
     _rawText: 'Storm.
 
-      Lightning like torn-up thoughts.'
+      Lightning like torn-up thoughts.
+
+      ...'
   - _key: Day6_Window1
-    _rawText: "The world\u2019s losing it.\nAnd I\u2019m just\u2026\nleft behind."
+    _rawText: "The world\u2019s losing it.\nAnd I\u2019m just\u2026\nleft behind.\n..."
   - _key: Day6_Window2
     _rawText: "I can\u2019t see anything.\nNot even myself in the reflection."
   - _key: Hint_Switch

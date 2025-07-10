@@ -99,16 +99,14 @@ Day3_Kitchen_Win,...
 Day3_Kitchen_Defeat,Taste’s kind of gone.
 Day4_Kitchen_Win,Tastes like laundry detergent.
 Day4_Kitchen_Defeat,...
-Day5_WMGKitchen0,"I can’t.
-I just can’t."
-Day5_WMGKitchen1,"I can’t.
-I just can’t."
+Day5_WMGKitchen0,"I can’t. I just can’t.
+..."
+Day5_WMGKitchen1,I'm not hungry.
 Day6_WMGKitchen0,"I don’t feel anything.
 Not hunger.
-Not taste."
-Day6_WMGKitchen1,"I don’t feel anything.
-Not hunger.
-Not taste."
+Not taste.
+..."
+Day6_WMGKitchen1,Any food looks disgusting.
 Computer_UI_Letter_Head,From:
 Computer_UI_Attempt,Unread messages:
 Computer_UI_Delete,Delete
@@ -132,178 +130,239 @@ What does that even mean?!"
 Day5_Computer_Win,Every message feels the same.
 Day5_Computer_Defeat,The letters are blurring.
 Day6_WMGComputer0,"What does it say?
-I can’t tell."
-Day6_WMGComputer1,It all feels like mockery.
+I can’t tell.
+..."
+Day6_WMGComputer1,"It all feels like mockery.
+..."
 Day6_WMGComputer2,I can’t read this.
 Day1_Guitar0,"I remember us singing
-in the kitchen, the four of us…"
+in the kitchen, the four of us.
+…"
 Day1_Guitar1,"We even talked about
-playing on a stage someday..."
+playing on a stage someday.
+..."
 Day1_Guitar2,"Haven’t played in a while.
 Should probably tune it sometime."
 Day2_Guitar0,"We used to drag it to the lake:
 campfire, wet sand,
-strings smelling of smoke..."
+strings smelling of smoke
+..."
 Day2_Guitar1,"Now it’s just deadlines
 and doctor’s visits.
-The fires live in photos."
+The fires live in photos.
+..."
 Day2_Guitar2,Someday I’ll hold you again.
 Day3_Guitar0,"I can’t even remember
-where A minor goes."
+where A minor goes.
+..."
 Day3_Guitar1,"My fingers shake,
-and my head’s full
-of test results."
+and my head’s full of test results.
+..."
 Day3_Guitar2,"The guitar’s in the corner.
 I’m not touching it.
 Not now."
 Day4_Guitar0,"String snapped.
-Symbolic."
+Symbolic.
+..."
 Day4_Guitar1,"Don’t even want to replace it.
-Let it stay off."
+Let it stay off.
+..."
 Day4_Guitar2,"The strings ring too loud.
 It’s irritating."
 Day5_Guitar0,"I want it to sound again.
-But I can’t."
+But I can’t.
+..."
 Day5_Guitar1,"It’s dusty.
-Feels like it’s not mine anymore."
+Feels like it’s not mine anymore.
+..."
 Day5_Guitar2,"The guitar doesn’t recognize me.
 And I don’t recognize it."
 Day6_Guitar0,"Noise in my head
-drowns everything."
+drowns everything.
+..."
 Day6_Guitar1,"Too heavy.
-Even my eyes slide past it."
+Even my eyes slide past it.
+..."
 Day6_Guitar2,I don’t have the strength.
 Day1_Painting0,"I suddenly decided
-I was going to paint…"
+I was going to paint
+..."
 Day1_Painting1,"I bought brushes, canvases,
 and even brought an easel
-from the village..."
+from the village.
+..."
 Day1_Painting2,And never finished a single one.
 Day2_Painting0,"Every time I’d say:
 “I’ll start painting as soon
-as I wrap up this project”…"
+as I wrap up this project”
+..."
 Day2_Painting1,"Then another deadline.
-And another…"
+And another
+..."
 Day2_Painting2,"The canvases just sit there.
 Waiting, same as me."
 Day3_Painting0,"One day I picked up a brush
-and just stared at the canvas…"
+and just stared at the canvas
+..."
 Day3_Painting1,"No image, no spark.
-Only a low hum in my head…"
+Only a low hum in my head
+..."
 Day3_Painting2,"Set the brush down.
 Didn’t even pour out the water."
 Day4_Painting0,"These canvases weigh
-on me like open loops…"
+on me like open loops
+..."
 Day4_Painting1,"Everything unfinished
-starts screaming louder…"
+starts screaming louder
+..."
 Day4_Painting2,"What was I even trying
 to say with them?"
 Day5_Painting0,"I even shouted at the paintings.
-I was offended every time, I was angry..."
+I was offended every time, I was angry
+..."
 Day5_Painting1,"Wanted to throw it all out,
-but my hand wouldn’t move…"
+but my hand wouldn’t move
+..."
 Day5_Painting2,"They just get in the way.
 Like so much else."
 Day6_Painting0,"Too much emptiness.
-Inside me, on the canvas…"
-Day6_Painting1,Too late to finish anything now…
+Inside me, on the canvas
+..."
+Day6_Painting1,"Too late to finish anything now
+..."
 Day6_Painting2,No one’s going to see it anyway.
 Day1_Books0,"I was always dragging books
 home from sales
-for “inspiration”…"
+for “inspiration”
+..."
 Day1_Books1,"Sometimes I’d read at night,
 mark passages,
-scribble in the margins…"
+scribble in the margins
+..."
 Day1_Books2,"I should at least finish
 one someday."
 Day2_Books0,"The bookmark’s still
-on the same page..."
+on the same page
+..."
 Day2_Books1,"What was it even about?
-I forgot."
+I forgot.
+..."
 Day2_Books2,"The books stare at me.
 Judging."
 Day3_Books0,"My brain refuses
-to absorb the text."
-Day3_Books1,I can’t hold a single thought.
+to absorb the text.
+..."
+Day3_Books1,"I can’t hold a single thought.
+..."
 Day3_Books2,"Just meaningless words,
 wrapped in paper."
 Day4_Books0,"What could they tell me
-that I’m not already feeling?"
-Day4_Books1,No author wrote about this.
+that I’m not already feeling?
+..."
+Day4_Books1,"No author wrote about this.
+..."
 Day4_Books2,"Maybe I should throw them out.
 Make space."
-Day5_Books0,The shelf feels heavier somehow...
+Day5_Books0,"The shelf feels heavier somehow
+..."
 Day5_Books1,"It all presses down
-like someone else’s expectations..."
+like someone else’s expectations
+..."
 Day5_Books2,"I don’t think I can
 even read the titles anymore."
 Day6_Books0,"Finishing them
-won’t make me stronger."
+won’t make me stronger.
+..."
 Day6_Books1,"The books are gone.
-Just empty rectangles now."
+Just empty rectangles now.
+..."
 Day6_Books2,I can’t.
 Day1_Basket0,"I wanted to learn knitting,
-but I never had the patience."
+but I never had the patience.
+..."
 Day1_Basket1,"Someday I’ll make a scarf.
 Maybe for me.
-Maybe for someone else."
+Maybe for someone else.
+..."
 Day1_Basket2,"The colors feel so warm.
 Nice to touch."
 Day2_Basket0,"There’s always something else.
-No time for yarn."
+No time for yarn.
+..."
 Day2_Basket1,"I started a couple times.
-Then gave up."
+Then gave up.
+..."
 Day2_Basket2,They tangle just like my thoughts.
 Day3_Basket0,"The hook’s broken.
-I didn’t even notice when."
+I didn’t even notice when.
+..."
 Day3_Basket1,"Everything feels so thin.
-Fragile."
+Fragile.
+..."
 Day3_Basket2,"I can’t focus.
 Every stitch feels like a task."
 Day4_Basket0,"I’m not even angry.
-Just watching it fade away..."
-Day4_Basket1,Like everything else.
+Just watching it fade away
+..."
+Day4_Basket1,"Like everything else.
+..."
 Day4_Basket2,A monument to old ambitions.
-Day5_Basket0,Even the yarn looks tired.
-Day5_Basket1,I should throw it out.
+Day5_Basket0,"Even the yarn looks tired.
+..."
+Day5_Basket1,"I should throw it out.
+..."
 Day5_Basket2,"Why is it so hard
 to let go of useless things?"
 Day6_Basket0,"Fine motor skills
-are the enemy now."
-Day6_Basket1,My hands won’t listen.
+are the enemy now.
+..."
+Day6_Basket1,"My hands won’t listen.
+..."
 Day6_Basket2,"Everything in this basket
 is a frozen “what never was.”"
 Day1_Window0,"I love the morning light.
-Everything feels possible."
+Everything feels possible.
+..."
 Day1_Window1,"Even the birds sound
-like they’re whispering."
+like they’re whispering.
+..."
 Day1_Window2,It’s a good day.
 Day2_Window0,"It’s sunny… but strange.
-Like it’s on delay."
+Like it’s on delay.
+..."
 Day2_Window1,"Today was supposed
 to be a good day.
-Maybe."
+Maybe.
+..."
 Day2_Window2,Fog?
-Day3_Window0,Everyone else’s life keeps going…
+Day3_Window0,"Everyone else’s life keeps going
+..."
 Day3_Window1,"People move forward.
-I feel like I’m not allowed."
+I feel like I’m not allowed.
+..."
 Day3_Window2,"The world outside
 looks out of focus."
 Day4_Window0,"Rain noise makes
-it hard to think."
+it hard to think.
+..."
 Day4_Window1,"Puddles reflect the ceiling.
-Can’t even see the sky."
+Can’t even see the sky.
+..."
 Day4_Window2,"Everything’s gone gray.
 Even the trees."
-Day5_Window0,"Thunder, somewhere far off."
+Day5_Window0,"Thunder, somewhere far off.
+..."
 Day5_Window1,"Just water and glass.
-That’s all."
+That’s all.
+..."
 Day5_Window2,There’s barely any light.
 Day6_Window0,"Storm.
-Lightning like torn-up thoughts."
+Lightning like torn-up thoughts.
+..."
 Day6_Window1,"The world’s losing it.
 And I’m just…
-left behind."
+left behind.
+..."
 Day6_Window2,"I can’t see anything.
 Not even myself in the reflection."
 Hint_Switch,Choose
