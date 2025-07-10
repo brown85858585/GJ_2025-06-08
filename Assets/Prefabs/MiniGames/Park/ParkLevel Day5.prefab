@@ -266,7 +266,17 @@ PrefabInstance:
     - target: {fileID: 6534757616719161134, guid: b15fbd006233ba849b3bf629335ee06f,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534757616719161134, guid: b15fbd006233ba849b3bf629335ee06f,
+        type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534757616719161134, guid: b15fbd006233ba849b3bf629335ee06f,
+        type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 6605933989902216406, guid: b15fbd006233ba849b3bf629335ee06f,
         type: 3}
