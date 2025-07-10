@@ -16,11 +16,27 @@ using Random = System.Random;
 public enum IconMappingType
 {
     None = 0,
-    Jeka,
-    JKH,
-    Gosuslugi,
+    Editor,
+    Maria,
+    Client,
     Bank,
-    HelloKitty
+    Prince,
+    Word,
+    Kira,
+    Mom,
+    Coach,
+    Unknown,
+    Sophia,
+    Lifeline,
+    Ex,
+    Medical,
+    Patient,
+    Uncle,
+    Format,
+    drVera,
+    Sasha,
+    Survey,
+    Colleague,
 }
 
 [Serializable]
@@ -129,13 +145,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     {
         // Инициализируем словарь для быстрого доступа
         _iconMappingDict = mappings.ToDictionary(m => m.mappingType, m => m.sprite);
-        //todo temp filling
-        foreach (var value in Enum.GetValues(typeof(IconMappingType)))
-        {
-            _iconMappingDict[(IconMappingType)value] =
-                Sprite.Create(Texture2D.grayTexture, new Rect( 0, 0, 1, 1),
-                    Vector2.zero); // Значение по умолчанию для отсутствующих типов
-        }
+        
     }
 
     private string GetTextFromCardData(TextMeshProUGUI textComponent, string key)
