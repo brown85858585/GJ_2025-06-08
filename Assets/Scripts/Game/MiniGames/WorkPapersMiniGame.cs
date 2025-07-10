@@ -257,7 +257,7 @@ namespace Game.MiniGames
         {
             _configurator?.ClearRuntimeCards();
             _configurator.SetRuntimeCards(_miniGameController.GameCards);
-            _miniGameController.SetCustomCards(_configurator.GetAllCards());
+            _miniGameController.SetCustomCards(_configurator.GetAllCards(),false);
             SetTargetScore(6);
         }
 

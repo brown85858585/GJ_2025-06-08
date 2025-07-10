@@ -1476,7 +1476,7 @@ private void CreateCardStack(GameObject originalCard)
     }
 
     // Публичные методы для настройки игры
-    public void SetCustomCards(List<CardData> customCards)
+    public void SetCustomCards(List<CardData> customCards,bool shuffle = true)
     {
         gameCards = new List<CardData>(customCards);
         if (gameCards.Count > maxCards)
@@ -1484,6 +1484,7 @@ private void CreateCardStack(GameObject originalCard)
             gameCards = gameCards.GetRange(0, maxCards);
         }
         cardsRemaining = gameCards.Count;
+        if(shuffle)
         ShuffleCards();
     }
 

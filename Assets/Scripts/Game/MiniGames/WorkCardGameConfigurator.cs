@@ -172,7 +172,7 @@ namespace Game.MiniGames
             if(enumForCurrentDay.Count() > 0)
                 cardGame.ClearCards();
 
-            cardGame.SetCustomCards(enumForCurrentDay.ToList());
+            cardGame.SetCustomCards(enumForCurrentDay.ToList(),false);
 
             // Применяем настройки если есть
             if (currentConfig != null)
