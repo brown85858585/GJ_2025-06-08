@@ -30,11 +30,6 @@ namespace Game.MiniGames.Park
             }
         }
 
-        private void Update()
-        {
-            OnUpdateStaminaRegeneration?.Invoke(staminaRegeneration);
-        }
-
         private void OnEnable()
         {
             InitRings();
@@ -50,6 +45,7 @@ namespace Game.MiniGames.Park
 
         private void FixedUpdate()
         {
+            OnUpdateStaminaRegeneration?.Invoke(staminaRegeneration);
             OnStaminaChanged?.Invoke();
         }
 
