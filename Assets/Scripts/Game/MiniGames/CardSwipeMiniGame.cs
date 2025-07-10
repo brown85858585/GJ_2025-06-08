@@ -29,6 +29,8 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     [Header("Game Data")]
     [SerializeField] private List<CardData> gameCards = new List<CardData>();
 
+    public List<CardData> GameCards => gameCards;
+
     [Header("UI Prefabs")]
     [SerializeField] private GameObject currentCardPrefab; // Перетащите префаб в инспекторе
 
@@ -208,7 +210,7 @@ private void CreateCardStack(GameObject originalCard)
     FindCardComponentsByPath();
     
     // Заполняем содержимое стопки
-    UpdateStackContent();
+    //UpdateStackContent();
     
     Debug.Log($"Создана стопка из {cardStack.Count} карточек");
 }
@@ -1214,7 +1216,7 @@ private void CreateCardStack(GameObject originalCard)
         var component = txt.GetComponent<TextMeshProUGUI>();
    
         cardCounterText = component; //CreateText("CardCounter", "Осталось: N", new Vector2(0, -300), 16, Color.white, new Vector2(200, 30), gameScreen.transform);
-        txt.position = new Vector3(txt.position.x, txt.position.y - 100, txt.position.z);
+        txt.position = new Vector3(txt.position.x, txt.position.y - 150, txt.position.z);
         // Счетчик очков  
         //scoreText = CreateText("ScoreText", "Очки: 0", new Vector2(-200, 200), 18, Color.white, new Vector2(150, 30), gameScreen.transform);
 
@@ -1244,6 +1246,7 @@ private void CreateCardStack(GameObject originalCard)
 
         if (gameCards.Count > 0)
         {
+          
             StartCardLock();
             ShowCurrentCard(); // Это заблокирует первую карточку автоматически
         }
@@ -1452,6 +1455,8 @@ private void CreateCardStack(GameObject originalCard)
         cardsRemaining = gameCards.Count;
         ShuffleCards();
     }
+
+
 
 
     public void ClearCards()

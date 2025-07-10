@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6021685621929793975}
   - component: {fileID: 1877112663808393877}
   - component: {fileID: 6989259518087681353}
-  - component: {fileID: 8882501099261136710}
   - component: {fileID: 4028055824688070507}
   m_Layer: 5
   m_Name: WorkGameManager
@@ -104,21 +103,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8882501099261136710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004854224215098675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772dcbb2859e3164dbef4e84cf02345e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  availableConfigs: []
-  currentConfig: {fileID: 0}
-  runtimeCards: []
 --- !u!114 &4028055824688070507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +143,37 @@ MonoBehaviour:
   acceptButtonColor: {r: 0, g: 1, b: 0, a: 1}
   rejectButtonColor: {r: 1, g: 0, b: 0, a: 1}
   uiPanel: {fileID: 6331291014751302613, guid: ddd3b7f23db64e145a6420d32bbb498c, type: 3}
-  gameCards: []
+  gameCards:
+  - sender: Day1_CardHeader0
+    content: Day1_CardContent0
+    isWorkRelated: 1
+  - sender: 
+    content: 
+    isWorkRelated: 2
+  - sender: Day1_CardHeader2
+    content: Day1_CardContent2
+    isWorkRelated: 0
+  - sender: Day1_CardHeader3
+    content: Day1_CardContent3
+    isWorkRelated: 1
+  - sender: Day1_CardHeader4
+    content: Day1_CardContent4
+    isWorkRelated: 2
+  - sender: Day1_CardHeader5
+    content: Day1_CardContent5
+    isWorkRelated: 0
+  - sender: Day1_CardHeader6
+    content: Day1_CardContent6
+    isWorkRelated: 1
+  - sender: Day1_CardHeader7
+    content: Day1_CardContent7
+    isWorkRelated: 2
+  - sender: Day1_CardHeader8
+    content: Day1_CardContent8
+    isWorkRelated: 0
+  - sender: Day1_CardHeader9
+    content: Day1_CardContent19
+    isWorkRelated: 0
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
   enableTypingEffect: 1

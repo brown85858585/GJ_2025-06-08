@@ -77,6 +77,11 @@ namespace Game.MiniGames
             return false;
         }
 
+
+        public void SetRuntimeCards(List<CardSwipeMiniGame.CardData> cards)
+        {
+            runtimeCards = cards;
+        }
         /// <summary>
         /// Устанавливает конфигурацию по индексу
         /// </summary>

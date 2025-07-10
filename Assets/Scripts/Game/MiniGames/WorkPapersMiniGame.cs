@@ -26,8 +26,14 @@ namespace Game.MiniGames
             {
                 _miniGameController = _miniGameObj.GetComponent<CardSwipeMiniGame>();
             }
-            // Добавляем компоненты
-            _configurator = _miniGameObj.AddComponent<WorkCardGameConfigurator>();
+
+
+            //_configurator = _miniGameObj.GetComponent<WorkCardGameConfigurator>();
+             if (_configurator == null)
+            {
+                // Добавляем компоненты
+                _configurator = _miniGameObj.AddComponent<WorkCardGameConfigurator>();
+            }
 
             // Настраиваем основные компоненты
             SetupMiniGameComponents();
@@ -74,8 +80,7 @@ namespace Game.MiniGames
         {
             //SetupForDeveloper(); // Настройка для программиста
             //-----------------------------------// Тест кард
-            if(_miniGameController.CardCount == 0 
-                && (MiniGameCoordinator.DayLevel < 5))
+            if(_miniGameController.CardCount == 0   && (MiniGameCoordinator.DayLevel < 5))
             { 
                 SetupForLanguage();                 //TODO Test Card  закоментировать при добавлении карт
                 
@@ -84,9 +89,13 @@ namespace Game.MiniGames
             {
                 ClearCustomCards();
             }
+            else
+            {
+                SetupForBaseCards();
+            }
                 //----------------------------------//
 
-                SetDifficulty(DifficultyLevel.Medium);
+            SetDifficulty(DifficultyLevel.Medium);
            
             Debug.Log("📋 Work Papers Mini Game Started");
             OnMiniGameStart?.Invoke(QType);
@@ -243,7 +252,16 @@ namespace Game.MiniGames
             _miniGameController.SetCustomCards(_configurator.GetAllCards());
             SetTargetScore(6); // Программисты должны быть точными
         }
- 
+
+        public void SetupForBaseCards()
+        {
+            _configurator?.ClearRuntimeCards();
+            _configurator.SetRuntimeCards(_miniGameController.GameCards);
+            _miniGameController.SetCustomCards(_configurator.GetAllCards());
+            SetTargetScore(6);
+        }
+
+
 
         public void Dispose()
         {
