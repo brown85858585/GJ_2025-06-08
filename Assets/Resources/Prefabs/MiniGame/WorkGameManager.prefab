@@ -351,7 +351,49 @@ MonoBehaviour:
   contentTypingSpeed: 0.04
   mappings:
   - mappingType: 0
-    sprite: {fileID: 21300000, guid: 003a2f8ee5c83304988b8e690f257580, type: 3}
+    sprite: {fileID: 21300000, guid: f700d6678c696f3408198a9b134b3b9e, type: 3}
+  - mappingType: 20
+    sprite: {fileID: 1685338727, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 19
+    sprite: {fileID: 1401803765, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 18
+    sprite: {fileID: -1394821458, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 17
+    sprite: {fileID: 1602952788, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 16
+    sprite: {fileID: 167570315, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 15
+    sprite: {fileID: -1831739119, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 14
+    sprite: {fileID: -1968835223, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 13
+    sprite: {fileID: 737381775, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 12
+    sprite: {fileID: -168149552, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 11
+    sprite: {fileID: 2475572, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 10
+    sprite: {fileID: 1632805732, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 9
+    sprite: {fileID: -1680084520, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 8
+    sprite: {fileID: 1348996619, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 7
+    sprite: {fileID: 1500313874, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 6
+    sprite: {fileID: -35846365, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 5
+    sprite: {fileID: -842986275, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 4
+    sprite: {fileID: -90660971, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 21
+    sprite: {fileID: 1505819059, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 3
+    sprite: {fileID: 877004588, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 2
+    sprite: {fileID: -955375654, guid: f145018c089488e4aa018812798bee54, type: 3}
+  - mappingType: 1
+    sprite: {fileID: -1273464473, guid: f145018c089488e4aa018812798bee54, type: 3}
   visibleCardsInStack: 4
   stackOffset: {x: 16, y: -16}
   stackScaleReduction: 0

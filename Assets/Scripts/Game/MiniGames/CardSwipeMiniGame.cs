@@ -143,9 +143,13 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     private void Awake()
     {
-        // Инициализируем словарь для быстрого доступа
-        _iconMappingDict = mappings.ToDictionary(m => m.mappingType, m => m.sprite);
-        
+        // Инициализируем словарь для быстрого доступаvar dict1 = new Dictionary<MyKeyType, Sprite>();
+        var dict1 = new Dictionary<IconMappingType, Sprite>();
+        foreach (var m in mappings)
+        {
+            dict1[m.mappingType] = m.sprite;
+        }
+        _iconMappingDict = dict1;
     }
 
     private string GetTextFromCardData(TextMeshProUGUI textComponent, string key)
