@@ -308,158 +308,173 @@ Day6_Window2,"I can’t see anything.
 Not even myself in the reflection."
 Hint_Switch,Choose
 Hint_Interact,Interact
-Day1_CardHeader0,Utilities
-Day1_CardContent0,"Heating bill:
-360"
-Day1_CardHeader1,Accounting
-Day1_CardContent1,"Please sign
-the April payroll sheet"
-Day1_CardHeader2,HR
-Day1_CardContent2,"Submit your
-timesheet by Friday"
-Day1_CardHeader3,Fuzzball of the Day
-Day1_CardContent3,"Cat of the day:
-smiling just for you!"
-Day1_CardHeader4,SelfGuru
-Day1_CardContent4,"Unlock your inner power
-70% off today only!"
-Day1_CardHeader5,BeautyBox
-Day1_CardContent5,"You deserve 
-the best in self-care!"
-Day1_CardHeader6,Mom
-Day1_CardContent6,"How are you?
-Hope everything’s
-okay with you."
-Day1_CardHeader7,Kira
-Day1_CardContent7,"Look, our cat's
-grown so much!"
-Day1_CardHeader8,Sasha
-Day1_CardContent8,"Just found
-one of your old photos
-got all warm inside!"
-Day1_CardHeader9,June
-Day1_CardContent9,"Still writing?
-We need someone
-to cover."
-Day2_CardHeader0,Editorial Team
-Day2_CardContent0,"Please send
-the topic for
-the next article"
-Day2_CardHeader1,Accounting
-Day2_CardContent1,"Salary received.
-Check your account
-details"
-Day2_CardHeader2,Automated System
-Day2_CardContent2,"Task deadline
-in 6 hours"
-Day2_CardHeader3,Planner
-Day2_CardContent3,"Your goals
-miss you!"
-Day2_CardHeader4,Digital
-Day2_CardContent4,"Don’t stall
-the world won’t wait!"
-Day2_CardHeader5,Dance
-Day2_CardContent5,"Start your week
-with a dance!"
-Day2_CardHeader6,Anna
-Day2_CardContent6,"You won’t believe it
-they played your favorite
-song at the station!"
+Day1_CardHeader0,Editor
+Day1_CardContent0,"Need that health piece
+by tomorrow.
+Can you make it?"
+Day1_CardHeader1,Maria
+Day1_CardContent1,"Until what date
+were you officially
+on leave?"
+Day1_CardHeader2,Client
+Day1_CardContent2,"Can you add
+seven red lines?"
+Day1_CardHeader3,Bank of Renewal
+Day1_CardContent3,"Five steps
+to full recovery —
+start now!"
+Day1_CardHeader4,Prince
+Day1_CardContent4,"I am a prince
+from Africa and wish
+to send you one million..."
+Day1_CardHeader5,Word of the Day
+Day1_CardContent5,"Smile.
+You are a gift
+to this world!"
+Day1_CardHeader6,Kira
+Day1_CardContent6,"Look what my cat
+got into again!"
+Day1_CardHeader7,Mom
+Day1_CardContent7,Did you eat today?
+Day1_CardHeader8,Coach
+Day1_CardContent8,"Just saying —
+meditation really helps."
+Day1_CardHeader9,Unknown
+Day1_CardContent9,"The milk's running low.
+I think the goats
+miss you too."
+Day2_CardHeader0,Editor
+Day2_CardContent0,"You're the only one
+who can write this."
+Day2_CardHeader1,Sofia
+Day2_CardContent1,"What about the
+senior discount?"
+Day2_CardHeader2,Client
+Day2_CardContent2,"Change the colors
+to green and
+transparent."
+Day2_CardHeader3,Lifeline
+Day2_CardContent3,"New article:
+How sugar
+saves lives."
+Day2_CardHeader4,Ex
+Day2_CardContent4,"Saw you near
+that restaurant
+the other day..."
+Day2_CardHeader5,Word of the Day
+Day2_CardContent5,"Nothing can stop
+your radiant light."
+Day2_CardHeader6,Kira
+Day2_CardContent6,"It's finally sunny
+in Italy.
+How are you holding up?"
 Day2_CardHeader7,Mom
-Day2_CardContent7,"Remember you asked
-for a reminder to pay
-for your phone?"
-Day2_CardHeader8,Sasha
-Day2_CardContent8,"Hey!
-Do you still have
-that cottage cheese
-casserole recipe?"
+Day2_CardContent7,"You're working again,
+aren’t you?"
+Day2_CardHeader8,Unknown
+Day2_CardContent8,"I planted more peppers.
+No idea why..."
 Day2_CardHeader9,Medical Center
 Day2_CardContent9,"Test results…
 ...urgent follow-up
 recommended…"
 Day3_CardHeader0,Editor
-Day3_CardContent0,"Need the text by evening.
-No delays."
-Day3_CardHeader1,Client
-Day3_CardContent1,"Wording%#? …
-re@%write this mess"
-Day3_CardHeader2,Medical Center
-Day3_CardContent2,Payment ✓
-Day3_CardHeader3,MedMed
-Day3_CardContent3,"5 symptoms you
-shouldn’t ignore"
-Day3_CardHeader4,Newsletter
-Day3_CardContent4,"Your pain is
-a growth point"
-Day3_CardHeader5,Fitness
-Day3_CardContent5,"Do y0u_#even
-enj0y_be!ng in
-th%t v&rs!on
-0f y0ur@self?"
+Day3_CardContent0,"Are you even
+alive?"
+Day3_CardHeader1,Maria
+Day3_CardContent1,"No idea who your doctor is,
+but we still need the data."
+Day3_CardHeader2,Client
+Day3_CardContent2,"They must be
+perpendicular!"
+Day3_CardHeader3,LifeLine
+Day3_CardContent3,"You are not your illness.
+You are the victory."
+Day3_CardHeader4,Patient.online
+Day3_CardContent4,"Our support team
+is waiting for your
+question."
+Day3_CardHeader5,Word of the Day
+Day3_CardContent5,"If you woke up today,
+you’ve already won."
 Day3_CardHeader6,Kira
-Day3_CardContent6,Oh... Stay strong!
+Day3_CardContent6,"Stay strong —
+I’m with you!"
 Day3_CardHeader7,Mom
-Day3_CardContent7,"Just send a quick message
-if you're okay."
-Day3_CardHeader8,Kay
-Day3_CardContent8,It’s all from stress!
-Day3_CardHeader9,Sasha
-Day3_CardContent9,Stay strong!
-Day4_CardHeader0,Edit0r
-Day4_CardContent0,▌▌ ž•••*k•*ž••• ▌▌
-Day4_CardHeader1,Client
-Day4_CardContent1,"Why haven’t you
-responded to the edits?"
-Day4_CardHeader2,HR
-Day4_CardContent2,"F!le not s#nt.
-Please try again."
-Day4_CardHeader3,Guru
-Day4_CardContent3,"Find inner harmony
-in just 5 minutes a day!"
-Day4_CardHeader4,[unknown]
-Day4_CardContent4,Pain is a choice
-Day4_CardHeader5,SelfHelpPro
-Day4_CardContent5,"Do you know why
-you’re still not happy?"
-Day4_CardHeader6,Mom
-Day4_CardContent6,"You need
-to stay positive."
-Day4_CardHeader7,Sasha
-Day4_CardContent7,"My aunt had
-the same thing, actually…"
-Day4_CardHeader8,Anna
-Day4_CardContent8,Stay strong
-Day4_CardHeader9,Colleague
-Day4_CardContent9,Stay strong
-Day5_CardHeader0,HR
-Day5_CardContent0,"Smile!
-You’re thriving!"
-Day5_CardHeader1,Editor
-Day5_CardContent1,"Waiting as usual.
-You’re our fighter, right?"
-Day5_CardHeader2,AutoSystem
-Day5_CardContent2,"You didn’t complete
-your Happy Monday.
-Want to try again?"
-Day5_CardHeader3,Anna
-Day5_CardContent3,"You are not alone.
-You are not alone.
-You are not alo... T... %$#!"
-Day5_CardHeader4,Support Service
-Day5_CardContent4,..........
-Day5_CardHeader5,—
-Day5_CardContent5,"...s_h_e_’s_w**atching...
-T#_t#m?"
+Day3_CardContent7,"Here’s a link
+to a healer.
+Just take a look."
+Day3_CardHeader8,Uncle
+Day3_CardContent8,"Stay strong!
+You’re a fighter!"
+Day3_CardHeader9,Unknown
+Day3_CardContent9,"Saw wolves
+in the distance
+today."
+Day4_CardHeader0,Editor
+Day4_CardContent0,"Work heals.
+Stay strong."
+Day4_CardHeader1,Sofia
+Day4_CardContent1,"When the pain fades,
+just write me back,
+okay?"
+Day4_CardHeader2,Client
+Day4_CardContent2,"Just ignore
+the geometry!"
+Day4_CardHeader3,Motivation Digest
+Day4_CardContent3,"You’re stronger
+than you think."
+Day4_CardHeader4,Dr. Vera
+Day4_CardContent4,"Did you drink water
+today? What about
+vitamins?"
+Day4_CardHeader5,Word of the Day
+Day4_CardContent5,Gladiolus!
+Day4_CardHeader6,Kira
+Day4_CardContent6,Stay strong out there...
+Day4_CardHeader7,Mom
+Day4_CardContent7,"They said something
+on the news..."
+Day4_CardHeader8,Sasha
+Day4_CardContent8,"A friend of mine
+was sick too..."
+Day4_CardHeader9,Unknown
+Day4_CardContent9,"Feels like
+a storm is coming."
+Day5_CardHeader0,Editor
+Day5_CardContent0,"Just write.
+You’re a fighter, right?"
+Day5_CardHeader1,Maria
+Day5_CardContent1,"You’re strong.
+We never
+doubted you."
+Day5_CardHeader2,Client
+Day5_CardContent2,"Everyone loves kittens.
+Add a kitten."
+Day5_CardHeader3,LifeLine
+Day5_CardContent3,"Click here
+if you’re ready
+to live again."
+Day5_CardHeader4,Survey
+Day5_CardContent4,"Are you happy
+right now?"
+Day5_CardHeader5,Word of the Day
+Day5_CardContent5,"Don’t give up.
+People are watching."
 Day5_CardHeader6,Kira
-Day5_CardContent6,"Here, read some stories
-people who recovered…"
-Day5_CardHeader7,—
-Day5_CardContent7,Stay strong!
-Day5_CardHeader8,—
-Day5_CardContent8,Stay strong!
-Day5_CardHeader9,—
-Day5_CardContent9,Stay strong!
+Day5_CardContent6,"I don’t know
+what to say.
+But I’m here."
+Day5_CardHeader7,Mom
+Day5_CardContent7,I love you.
+Day5_CardHeader8,Coworker
+Day5_CardContent8,"It’s all because
+of stress!"
+Day5_CardHeader9,Unknown
+Day5_CardContent9,"No goats,
+no chickens left.
+The cheese is almost
+gone."
 results_header,Results
 Day1_LoadHeader0,One week before...
 Day1_LoadBody0,"You know, I was always rushing somewhere."

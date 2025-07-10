@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: KnotTextCollection_en
   m_EditorClassIdentifier: 
   _items:
+  - _key: testKey
+    _rawText: Test
   - _key: Play
     _rawText: Play
   - _key: Button_Setting
@@ -494,127 +496,130 @@ MonoBehaviour:
   - _key: Hint_Interact
     _rawText: Interact
   - _key: Day1_CardHeader0
-    _rawText: Utilities
+    _rawText: Editor
   - _key: Day1_CardContent0
-    _rawText: 'Heating bill:
+    _rawText: 'Need that health piece
 
-      360'
+      by tomorrow.
+
+      Can you make it?'
   - _key: Day1_CardHeader1
-    _rawText: Accounting
+    _rawText: Maria
   - _key: Day1_CardContent1
-    _rawText: 'Please sign
+    _rawText: 'Until what date
 
-      the April payroll sheet'
+      were you officially
+
+      on leave?'
   - _key: Day1_CardHeader2
-    _rawText: HR
+    _rawText: Client
   - _key: Day1_CardContent2
-    _rawText: 'Submit your
+    _rawText: 'Can you add
 
-      timesheet by Friday'
+      seven red lines?'
   - _key: Day1_CardHeader3
-    _rawText: Fuzzball of the Day
+    _rawText: Bank of Renewal
   - _key: Day1_CardContent3
-    _rawText: 'Cat of the day:
-
-      smiling just for you!'
+    _rawText: "Five steps\nto full recovery \u2014\nstart now!"
   - _key: Day1_CardHeader4
-    _rawText: SelfGuru
+    _rawText: Prince
   - _key: Day1_CardContent4
-    _rawText: 'Unlock your inner power
+    _rawText: 'I am a prince
 
-      70% off today only!'
+      from Africa and wish
+
+      to send you one million...'
   - _key: Day1_CardHeader5
-    _rawText: BeautyBox
+    _rawText: Word of the Day
   - _key: Day1_CardContent5
-    _rawText: "You deserve \nthe best in self-care!"
+    _rawText: 'Smile.
+
+      You are a gift
+
+      to this world!'
   - _key: Day1_CardHeader6
-    _rawText: Mom
-  - _key: Day1_CardContent6
-    _rawText: "How are you?\nHope everything\u2019s\nokay with you."
-  - _key: Day1_CardHeader7
     _rawText: Kira
+  - _key: Day1_CardContent6
+    _rawText: 'Look what my cat
+
+      got into again!'
+  - _key: Day1_CardHeader7
+    _rawText: Mom
   - _key: Day1_CardContent7
-    _rawText: 'Look, our cat''s
-
-      grown so much!'
+    _rawText: Did you eat today?
   - _key: Day1_CardHeader8
-    _rawText: Sasha
+    _rawText: Coach
   - _key: Day1_CardContent8
-    _rawText: 'Just found
-
-      one of your old photos
-
-      got all warm inside!'
+    _rawText: "Just saying \u2014\nmeditation really helps."
   - _key: Day1_CardHeader9
-    _rawText: June
+    _rawText: Unknown
   - _key: Day1_CardContent9
-    _rawText: 'Still writing?
+    _rawText: 'The milk''s running low.
 
-      We need someone
+      I think the goats
 
-      to cover.'
+      miss you
+      too.'
   - _key: Day2_CardHeader0
-    _rawText: Editorial Team
+    _rawText: Editor
   - _key: Day2_CardContent0
-    _rawText: 'Please send
+    _rawText: 'You''re the only one
 
-      the topic for
-
-      the next article'
+      who can write this.'
   - _key: Day2_CardHeader1
-    _rawText: Accounting
+    _rawText: Sofia
   - _key: Day2_CardContent1
-    _rawText: 'Salary received.
+    _rawText: 'What about the
 
-      Check your account
-
-      details'
+      senior discount?'
   - _key: Day2_CardHeader2
-    _rawText: Automated System
+    _rawText: Client
   - _key: Day2_CardContent2
-    _rawText: 'Task deadline
+    _rawText: 'Change the colors
 
-      in 6 hours'
+      to green and
+
+      transparent.'
   - _key: Day2_CardHeader3
-    _rawText: Planner
+    _rawText: Lifeline
   - _key: Day2_CardContent3
-    _rawText: 'Your goals
+    _rawText: 'New article:
 
-      miss you!'
+      How sugar
+
+      saves lives.'
   - _key: Day2_CardHeader4
-    _rawText: Digital
+    _rawText: Ex
   - _key: Day2_CardContent4
-    _rawText: "Don\u2019t stall\nthe world won\u2019t wait!"
-  - _key: Day2_CardHeader5
-    _rawText: Dance
-  - _key: Day2_CardContent5
-    _rawText: 'Start your week
+    _rawText: 'Saw you near
 
-      with a dance!'
+      that restaurant
+
+      the other day...'
+  - _key: Day2_CardHeader5
+    _rawText: Word of the Day
+  - _key: Day2_CardContent5
+    _rawText: 'Nothing can stop
+
+      your radiant light.'
   - _key: Day2_CardHeader6
-    _rawText: Anna
+    _rawText: Kira
   - _key: Day2_CardContent6
-    _rawText: "You won\u2019t believe it\nthey played your favorite\nsong at the
-      station!"
+    _rawText: 'It''s finally sunny
+
+      in Italy.
+
+      How are you holding up?'
   - _key: Day2_CardHeader7
     _rawText: Mom
   - _key: Day2_CardContent7
-    _rawText: 'Remember you asked
-
-      for a reminder to pay
-
-      for your phone?'
+    _rawText: "You're working again,\naren\u2019t you?"
   - _key: Day2_CardHeader8
-    _rawText: Sasha
+    _rawText: Unknown
   - _key: Day2_CardContent8
-    _rawText: 'Hey!
+    _rawText: 'I planted more peppers.
 
-      Do you still have
-
-      that cottage cheese
-
-      casserole
-      recipe?'
+      No idea why...'
   - _key: Day2_CardHeader9
     _rawText: Medical Center
   - _key: Day2_CardContent9
@@ -622,147 +627,167 @@ MonoBehaviour:
   - _key: Day3_CardHeader0
     _rawText: Editor
   - _key: Day3_CardContent0
-    _rawText: 'Need the text by evening.
+    _rawText: 'Are you even
 
-      No delays.'
+      alive?'
   - _key: Day3_CardHeader1
-    _rawText: Client
+    _rawText: Maria
   - _key: Day3_CardContent1
-    _rawText: "Wording%#? \u2026\nre@%write this mess"
+    _rawText: 'No idea who your doctor is,
+
+      but we still need the data.'
   - _key: Day3_CardHeader2
-    _rawText: Medical Center
+    _rawText: Client
   - _key: Day3_CardContent2
-    _rawText: "Payment \u2713"
+    _rawText: 'They must be
+
+      perpendicular!'
   - _key: Day3_CardHeader3
-    _rawText: MedMed
+    _rawText: LifeLine
   - _key: Day3_CardContent3
-    _rawText: "5 symptoms you\nshouldn\u2019t ignore"
+    _rawText: 'You are not your illness.
+
+      You are the victory.'
   - _key: Day3_CardHeader4
-    _rawText: Newsletter
+    _rawText: Patient.online
   - _key: Day3_CardContent4
-    _rawText: 'Your pain is
+    _rawText: 'Our support team
 
-      a growth point'
+      is waiting for your
+
+      question.'
   - _key: Day3_CardHeader5
-    _rawText: Fitness
+    _rawText: Word of the Day
   - _key: Day3_CardContent5
-    _rawText: 'Do y0u_#even
-
-      enj0y_be!ng in
-
-      th%t v&rs!on
-
-      0f y0ur@self?'
+    _rawText: "If you woke up today,\nyou\u2019ve already won."
   - _key: Day3_CardHeader6
     _rawText: Kira
   - _key: Day3_CardContent6
-    _rawText: Oh... Stay strong!
+    _rawText: "Stay strong \u2014\nI\u2019m with you!"
   - _key: Day3_CardHeader7
     _rawText: Mom
   - _key: Day3_CardContent7
-    _rawText: 'Just send a quick message
-
-      if you''re okay.'
+    _rawText: "Here\u2019s a link\nto a healer.\nJust take a look."
   - _key: Day3_CardHeader8
-    _rawText: Kay
+    _rawText: Uncle
   - _key: Day3_CardContent8
-    _rawText: "It\u2019s all from stress!"
+    _rawText: "Stay strong!\nYou\u2019re a fighter!"
   - _key: Day3_CardHeader9
-    _rawText: Sasha
+    _rawText: Unknown
   - _key: Day3_CardContent9
-    _rawText: Stay strong!
+    _rawText: 'Saw wolves
+
+      in the distance
+
+      today.'
   - _key: Day4_CardHeader0
-    _rawText: Edit0r
-  - _key: Day4_CardContent0
-    _rawText: "\u258C\u258C \u017E\u2022\u2022\u2022*k\u2022*\u017E\u2022\u2022\u2022
-      \u258C\u258C"
-  - _key: Day4_CardHeader1
-    _rawText: Client
-  - _key: Day4_CardContent1
-    _rawText: "Why haven\u2019t you\nresponded to the edits?"
-  - _key: Day4_CardHeader2
-    _rawText: HR
-  - _key: Day4_CardContent2
-    _rawText: 'F!le not s#nt.
-
-      Please try again.'
-  - _key: Day4_CardHeader3
-    _rawText: Guru
-  - _key: Day4_CardContent3
-    _rawText: 'Find inner harmony
-
-      in just 5 minutes a day!'
-  - _key: Day4_CardHeader4
-    _rawText: '[unknown]'
-  - _key: Day4_CardContent4
-    _rawText: Pain is a choice
-  - _key: Day4_CardHeader5
-    _rawText: SelfHelpPro
-  - _key: Day4_CardContent5
-    _rawText: "Do you know why\nyou\u2019re still not happy?"
-  - _key: Day4_CardHeader6
-    _rawText: Mom
-  - _key: Day4_CardContent6
-    _rawText: 'You need
-
-      to stay positive.'
-  - _key: Day4_CardHeader7
-    _rawText: Sasha
-  - _key: Day4_CardContent7
-    _rawText: "My aunt had\nthe same thing, actually\u2026"
-  - _key: Day4_CardHeader8
-    _rawText: Anna
-  - _key: Day4_CardContent8
-    _rawText: Stay strong
-  - _key: Day4_CardHeader9
-    _rawText: Colleague
-  - _key: Day4_CardContent9
-    _rawText: Stay strong
-  - _key: Day5_CardHeader0
-    _rawText: HR
-  - _key: Day5_CardContent0
-    _rawText: "Smile!\nYou\u2019re thriving!"
-  - _key: Day5_CardHeader1
     _rawText: Editor
+  - _key: Day4_CardContent0
+    _rawText: 'Work heals.
+
+      Stay strong.'
+  - _key: Day4_CardHeader1
+    _rawText: Sofia
+  - _key: Day4_CardContent1
+    _rawText: 'When the pain fades,
+
+      just write me back,
+
+      okay?'
+  - _key: Day4_CardHeader2
+    _rawText: Client
+  - _key: Day4_CardContent2
+    _rawText: 'Just ignore
+
+      the geometry!'
+  - _key: Day4_CardHeader3
+    _rawText: Motivation Digest
+  - _key: Day4_CardContent3
+    _rawText: "You\u2019re stronger\nthan you think."
+  - _key: Day4_CardHeader4
+    _rawText: Dr. Vera
+  - _key: Day4_CardContent4
+    _rawText: 'Did you drink water
+
+      today? What about
+
+      vitamins?'
+  - _key: Day4_CardHeader5
+    _rawText: Word of the Day
+  - _key: Day4_CardContent5
+    _rawText: Gladiolus!
+  - _key: Day4_CardHeader6
+    _rawText: Kira
+  - _key: Day4_CardContent6
+    _rawText: Stay strong out there...
+  - _key: Day4_CardHeader7
+    _rawText: Mom
+  - _key: Day4_CardContent7
+    _rawText: 'They said something
+
+      on the news...'
+  - _key: Day4_CardHeader8
+    _rawText: Sasha
+  - _key: Day4_CardContent8
+    _rawText: 'A friend of mine
+
+      was sick too...'
+  - _key: Day4_CardHeader9
+    _rawText: Unknown
+  - _key: Day4_CardContent9
+    _rawText: 'Feels like
+
+      a storm is coming.'
+  - _key: Day5_CardHeader0
+    _rawText: Editor
+  - _key: Day5_CardContent0
+    _rawText: "Just write.\nYou\u2019re a fighter, right?"
+  - _key: Day5_CardHeader1
+    _rawText: Maria
   - _key: Day5_CardContent1
-    _rawText: "Waiting as usual.\nYou\u2019re our fighter, right?"
+    _rawText: "You\u2019re strong.\nWe never\ndoubted you."
   - _key: Day5_CardHeader2
-    _rawText: AutoSystem
+    _rawText: Client
   - _key: Day5_CardContent2
-    _rawText: "You didn\u2019t complete\nyour Happy Monday.\nWant to try again?"
+    _rawText: 'Everyone loves kittens.
+
+      Add a kitten.'
   - _key: Day5_CardHeader3
-    _rawText: Anna
+    _rawText: LifeLine
   - _key: Day5_CardContent3
-    _rawText: 'You are not alone.
-
-      You are not alone.
-
-      You are not alo...
-      T... %$#!'
+    _rawText: "Click here\nif you\u2019re ready\nto live again."
   - _key: Day5_CardHeader4
-    _rawText: Support Service
+    _rawText: Survey
   - _key: Day5_CardContent4
-    _rawText: ..........
+    _rawText: 'Are you happy
+
+      right now?'
   - _key: Day5_CardHeader5
-    _rawText: "\u2014"
+    _rawText: Word of the Day
   - _key: Day5_CardContent5
-    _rawText: "...s_h_e_\u2019s_w**atching...\nT#_t#m?"
+    _rawText: "Don\u2019t give up.\nPeople are watching."
   - _key: Day5_CardHeader6
     _rawText: Kira
   - _key: Day5_CardContent6
-    _rawText: "Here, read some stories\npeople who recovered\u2026"
+    _rawText: "I don\u2019t know\nwhat to say.\nBut I\u2019m here."
   - _key: Day5_CardHeader7
-    _rawText: "\u2014"
+    _rawText: Mom
   - _key: Day5_CardContent7
-    _rawText: Stay strong!
+    _rawText: I love you.
   - _key: Day5_CardHeader8
-    _rawText: "\u2014"
+    _rawText: Coworker
   - _key: Day5_CardContent8
-    _rawText: Stay strong!
+    _rawText: "It\u2019s all because\nof stress!"
   - _key: Day5_CardHeader9
-    _rawText: "\u2014"
+    _rawText: Unknown
   - _key: Day5_CardContent9
-    _rawText: Stay strong!
+    _rawText: 'No goats,
+
+      no chickens left.
+
+      The cheese is almost
+
+      gone.'
   - _key: results_header
     _rawText: Results
   - _key: Day1_LoadHeader0
