@@ -341,9 +341,9 @@ MonoBehaviour:
     TypeCard: 0
     IconCardType: 0
   - sender: Day5_CardHeader9
-  content: Day5_CardContent9
+    content: 
     TypeCard: 0
-  IconCardType: 0
+    IconCardType: 0
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
   enableTypingEffect: 1
@@ -352,16 +352,6 @@ MonoBehaviour:
   mappings:
   - mappingType: 0
     sprite: {fileID: 21300000, guid: 003a2f8ee5c83304988b8e690f257580, type: 3}
-  - mappingType: 1
-    sprite: {fileID: -1031141221, guid: b2f05c7f55b3707479f408e0dfe27177, type: 3}
-  - mappingType: 2
-    sprite: {fileID: 21300000, guid: 461a057e6d2fb1d4e89a704aaaf5893f, type: 3}
-  - mappingType: 3
-    sprite: {fileID: 21300000, guid: 21c9e492ac4387d4799387d7efe05ba2, type: 3}
-  - mappingType: 4
-    sprite: {fileID: 21300000, guid: 514731401af2ed44daf526766d01d34d, type: 3}
-  - mappingType: 5
-    sprite: {fileID: 21300000, guid: 2d8dad6f3a1c1e54ba68490a4dce08ab, type: 3}
   visibleCardsInStack: 4
   stackOffset: {x: 16, y: -16}
   stackScaleReduction: 0

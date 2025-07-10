@@ -16,11 +16,7 @@ using Random = System.Random;
 public enum IconMappingType
 {
     None = 0,
-    Jeka,
-    JKH,
-    Gosuslugi,
-    Bank,
-    HelloKitty
+    
 }
 
 [Serializable]
@@ -946,7 +942,7 @@ private void CreateCardStack(GameObject originalCard)
         [Header("Icon Type")]
         public IconMappingType IconCardType;
 
-        public CardData(string sender, string content, int workRelated, IconMappingType icon = IconMappingType.Bank)
+        public CardData(string sender, string content, int workRelated, IconMappingType icon = IconMappingType.None)
         {
             this.sender = sender;
             this.content = content;
