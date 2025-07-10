@@ -920,13 +920,13 @@ private void CreateCardStack(GameObject originalCard)
         public string content; // Основной текст
 
         [Header("Card Type")]
-        public MessageType isWorkRelated; // true = принять (работа), false = удалить (личное)
+        public MessageType TypeCard; // true = принять (работа), false = удалить (личное)
 
         public CardData(string sender, string content, int workRelated)
         {
             this.sender = sender;
             this.content = content;
-            isWorkRelated = (MessageType)workRelated;
+            TypeCard = (MessageType)workRelated;
         }
     }
 
@@ -1414,10 +1414,10 @@ private void CreateCardStack(GameObject originalCard)
         // Проверяем правильность ответа
         bool isCorrect = 
             (accepted && 
-            (currentCardData.isWorkRelated == MessageType.WORK 
-            || currentCardData.isWorkRelated == MessageType.FREND)
+            (currentCardData.TypeCard == MessageType.WORK 
+            || currentCardData.TypeCard == MessageType.FREND)
             ) 
-            || (!accepted && (currentCardData.isWorkRelated == MessageType.SPAM));
+            || (!accepted && (currentCardData.TypeCard == MessageType.SPAM));
 
         if (isCorrect)
         {
