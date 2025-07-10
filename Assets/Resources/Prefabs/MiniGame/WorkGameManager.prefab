@@ -146,34 +146,84 @@ MonoBehaviour:
   gameCards:
   - sender: Day1_CardHeader0
     content: Day1_CardContent0
-    isWorkRelated: 1
-  - sender: 
-    content: 
-    isWorkRelated: 2
+    TypeCard: 0
+    IconCardType: 1
+  - sender: Day1_CardHeader1
+    content: Day1_CardContent1
+    TypeCard: 0
+    IconCardType: 2
   - sender: Day1_CardHeader2
     content: Day1_CardContent2
-    isWorkRelated: 0
+    TypeCard: 0
+    IconCardType: 4
   - sender: Day1_CardHeader3
     content: Day1_CardContent3
-    isWorkRelated: 1
+    TypeCard: 0
+    IconCardType: 5
   - sender: Day1_CardHeader4
     content: Day1_CardContent4
-    isWorkRelated: 2
+    TypeCard: 0
+    IconCardType: 2
   - sender: Day1_CardHeader5
     content: Day1_CardContent5
-    isWorkRelated: 0
+    TypeCard: 0
+    IconCardType: 0
   - sender: Day1_CardHeader6
     content: Day1_CardContent6
-    isWorkRelated: 1
+    TypeCard: 0
+    IconCardType: 0
   - sender: Day1_CardHeader7
     content: Day1_CardContent7
-    isWorkRelated: 2
+    TypeCard: 0
+    IconCardType: 0
   - sender: Day1_CardHeader8
     content: Day1_CardContent8
-    isWorkRelated: 0
+    TypeCard: 0
+    IconCardType: 0
   - sender: Day1_CardHeader9
-    content: Day1_CardContent19
-    isWorkRelated: 0
+    content: Day1_CardContent9
+    TypeCard: 0
+    IconCardType: 3
+  - sender: Day2_CardHeader0
+    content: Day2_CardContent0
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader1
+    content: Day2_CardContent1
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader2
+    content: Day2_CardContent2
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader3
+    content: Day2_CardContent3
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader4
+    content: Day2_CardContent4
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader5
+    content: Day2_CardContent5
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader6
+    content: Day2_CardContent6
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader7
+    content: Day2_CardContent7
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader8
+    content: Day2_CardContent8
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day2_CardHeader9
+    content: Day2_CardContent9
+    TypeCard: 0
+    IconCardType: 0
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
   enableTypingEffect: 1

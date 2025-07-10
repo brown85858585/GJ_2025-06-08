@@ -35,6 +35,9 @@ namespace Player
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
+        private Vector3 _targetPos = new Vector3(5.27f, 0f, 1.54f);
+        private float _vectorSpeed = 3f;
+
         public PlayerController(PlayerModel model, IInputAdapter input)
         {
             _model = model;
@@ -148,8 +151,75 @@ namespace Player
             
             if (_isEndRun)
             {
-                _view.Rigidbody.AddForce( new Vector3(30, 0, 20), ForceMode.Force);
-                _view.transform.rotation = Quaternion.Euler(0, 25, 0);
+                // _view.Rigidbody.AddForce( new Vector3(30, 0, 20), ForceMode.Force);
+                // _view.transform.rotation = Quaternion.Euler(0, 25, 0);
+                
+                
+                Vector3 forceVector = new Vector3(30f, 0f, 20f);
+
+// 1. Извлекаем направление
+                Vector3 direction = forceVector.normalized;
+
+// 2. Смещение на 100 метров
+                Vector3 offset = direction * 1000f;
+
+// 3. Целевая позиция
+                _targetPos = _view.Rigidbody.position + offset;
+                //удалить просчет направления в каждом кадре
+                var rb = _view.Rigidbody;
+                Vector3 toTarget    = (_targetPos - rb.position).normalized;
+                // 2. Желаемая скорость (вектор)
+                Vector3 desiredV    = toTarget * 10;
+                // 3. Разница между текущей и желаемой скоростью
+                Vector3 deltaV      = desiredV - rb.velocity;
+                // 4. Сила, нужная чтобы получить deltaV за один шаг физики: F = m * a;
+                //    a = deltaV / dt
+                Vector3 force       = rb.mass * deltaV / Time.fixedDeltaTime;
+                // 5. Применяем эту силу
+                rb.AddForce(force, ForceMode.Force);
+                if (toTarget.sqrMagnitude > 2f)
+                {
+                    Quaternion targetRot = Quaternion.LookRotation(toTarget);
+
+                    // считаем t = rotationSpeed * dt, но не более 1
+                    float t = Mathf.Min(1f, 30 * Time.fixedDeltaTime);
+
+                    Quaternion smooth = Quaternion.Slerp(
+                        _view.transform.rotation,
+                        targetRot,
+                        t
+                    );
+                    rb.MoveRotation(smooth);
+                }
+                
+            }
+            else if (Input.GetKey(KeyCode.Space))
+            {
+                var rb = _view.Rigidbody;
+                Vector3 toTarget    = (_targetPos - rb.position).normalized;
+                // 2. Желаемая скорость (вектор)
+                Vector3 desiredV    = toTarget * _vectorSpeed;
+                // 3. Разница между текущей и желаемой скоростью
+                Vector3 deltaV      = desiredV - rb.velocity;
+                // 4. Сила, нужная чтобы получить deltaV за один шаг физики: F = m * a;
+                //    a = deltaV / dt
+                Vector3 force       = rb.mass * deltaV / Time.fixedDeltaTime;
+                // 5. Применяем эту силу
+                rb.AddForce(force, ForceMode.Force);
+                if (toTarget.sqrMagnitude > 2f)
+                {
+                    Quaternion targetRot = Quaternion.LookRotation(toTarget);
+
+                    // считаем t = rotationSpeed * dt, но не более 1
+                    float t = Mathf.Min(1f, 30 * Time.fixedDeltaTime);
+
+                    Quaternion smooth = Quaternion.Slerp(
+                        _view.transform.rotation,
+                        targetRot,
+                        t
+                    );
+                    rb.MoveRotation(smooth);
+                }
             }
             else
             {
@@ -199,9 +269,16 @@ namespace Player
             _view.PutTheItemDown();
         }
 
-        public void StartEndRun()
+        public void StartVectorRun(float speed = 3 , Vector3 target = default)
         {
             _isEndRun = true;
+            if(target != default)
+              _targetPos = target;
+            _vectorSpeed = speed;
+        }
+        public void StopVectorRun()
+        {
+            _isEndRun = false;
         }
 
         public void SwitchHead(int levelIndex)

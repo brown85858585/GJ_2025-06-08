@@ -3,15 +3,17 @@ using Knot.Localization.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using static CardSwipeMiniGame;
 using Random = System.Random;
 
-internal enum IconMappingType
+public enum IconMappingType
 {
     None = 0,
     Jeka,
@@ -288,6 +290,8 @@ private void CreateCardStack(GameObject originalCard)
     {
         // Ищем все TextMeshProUGUI компоненты в карточке
         TextMeshProUGUI[] allTexts = card.GetComponentsInChildren<TextMeshProUGUI>();
+        //UpdateCardIcon(currentCardIndex, card);
+
 
         foreach (var text in allTexts)
         {
@@ -307,6 +311,9 @@ private void CreateCardStack(GameObject originalCard)
         if (holder == null)
             holder = card.AddComponent<CardDataHolder>();
 
+       
+
+
         holder.cardData = cardData;
     }
 
@@ -323,7 +330,14 @@ private void CreateCardStack(GameObject originalCard)
 
     Transform headerContainer = card.transform.Find("HeaderContainer");
     Transform contentContainer = card.transform.Find("ContentContainer");
- 
+
+
+        var ch = card.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
+        if (ch.Count() > 0)
+        {
+            var senderImage = ch.First();
+            ch.First().sprite = _iconMappingDict[cardData.IconCardType];
+        }
         if (headerContainer != null)
         {
             Transform headerText = headerContainer.Find("HeaderText");
@@ -332,12 +346,12 @@ private void CreateCardStack(GameObject originalCard)
                 var senderText = headerText.GetComponent<TextMeshProUGUI>();
                 if (senderText != null)
                 {
+                   
                     string finalText = GetTextFromCardData(senderText, cardData.sender);
                     senderText.text = "";
-                   // if (enableTypingEffect)
-                   //     StartCoroutine(TypeText(senderText, finalText, headerTypingSpeed));
-                  //  else
-                        senderText.text = finalText;
+
+
+                    senderText.text = finalText;
                 }
             }
 
@@ -540,6 +554,7 @@ private void CreateCardStack(GameObject originalCard)
     }
 
     // Обновить метод AnimateCardExit():
+      
 
     private void SetupCardStackPositions()
     {
@@ -550,10 +565,6 @@ private void CreateCardStack(GameObject originalCard)
             GameObject card = cardStack[i];
             RectTransform cardRect = card.GetComponent<RectTransform>();
 
-            var ch = card.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
-
-
-
             // Смещение для создания эффекта стопки (ИСПРАВЛЕНО: i вместо cardStack.Count - 1 - i)
             Vector2 offset = stackOffset * i; // Первая карточка (i=0) без смещения, последующие смещаются больше
             cardRect.anchoredPosition = basePosition + offset;
@@ -563,27 +574,23 @@ private void CreateCardStack(GameObject originalCard)
             Vector2 scaledSize = cardSize * (1f - scaleReduction);
             cardRect.sizeDelta = scaledSize;
 
-            if (ch.Count() > 0)
-            {
-                var senderImage = ch.First();
-               // senderImage.rectTransform.anchoredPosition += offset;
-               var iconType  = UnityEngine.Random.Range(0, Enum.GetValues(typeof(IconMappingType)).Length);
-               ch.First().sprite = _iconMappingDict[(IconMappingType)iconType];
-            }
+            UpdateCardIcon(i, card);
+
+
 
             // Z-порядок (передняя карточка должна быть сверху) - ИСПРАВЛЕНО
             cardRect.SetSiblingIndex(cardStack.Count - 1 - i); // Первая карточка (i=0) будет иметь самый высокий индекс
 
             // Прозрачность (ИСПРАВЛЕНО: менее агрессивная прозрачность)
-            
+
             CanvasGroup canvasGroup = card.GetComponent<CanvasGroup>();
             if (canvasGroup == null)
                 canvasGroup = card.AddComponent<CanvasGroup>();
 
-            
-           // float alpha = 1f - (stackAlphaReduction * i); // Первая карточка полностью непрозрачная
+
+            // float alpha = 1f - (stackAlphaReduction * i); // Первая карточка полностью непрозрачная
             canvasGroup.alpha = 1;// Mathf.Max(alpha, 0.7f); // Минимальная прозрачность 70% вместо 30%
-            
+
             // Блокируем взаимодействие с задними карточками
             if (i > 0)
             {
@@ -597,7 +604,18 @@ private void CreateCardStack(GameObject originalCard)
                 canvasGroup.blocksRaycasts = true;
             }
 
-           // Debug.Log($"Карточка {i}: позиция {cardRect.anchoredPosition}, размер {scaledSize}, альфа {alpha}, sibling {cardRect.GetSiblingIndex()}");
+            // Debug.Log($"Карточка {i}: позиция {cardRect.anchoredPosition}, размер {scaledSize}, альфа {alpha}, sibling {cardRect.GetSiblingIndex()}");
+        }
+    }
+
+    private void UpdateCardIcon(int i, GameObject card)
+    {
+        var ch = card.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
+        if (ch.Count() > 0)
+        {
+            var senderImage = ch.First();
+            var spr = ch.First().sprite;
+            spr = _iconMappingDict[gameCards[i].IconCardType];
         }
     }
 
@@ -607,7 +625,7 @@ private void CreateCardStack(GameObject originalCard)
     {
         if (currentCard == null || cardStack.Count == 0) yield break;
 
-
+    
         if (isLastCard)
         {
             if (lastCardAnimationCoroutine != null)
@@ -631,6 +649,9 @@ private void CreateCardStack(GameObject originalCard)
         // ВАЖНО: currentCard должна быть первой в списке (верхней)
         currentCard = cardStack[0];
 
+        if(cardStack.Count > 1)
+            UpdateCardIcon(currentCardIndex + 1, cardStack[1]);
+
         RectTransform cardRect = currentCard.GetComponent<RectTransform>();
         Vector2 startPos = cardRect.anchoredPosition;
         Vector2 targetPos = new Vector2(accepted ? 800f : -800f, startPos.y);
@@ -651,7 +672,7 @@ private void CreateCardStack(GameObject originalCard)
         //{
             StartCoroutine(ShowFeedbackIcon(declayIcon,/* failureColor*/ defaulColor));
         //}
-
+   
         // Цветовая обратная связь для карточки (опционально)
         Image cardImg = currentCard.GetComponent<Image>();
         if (cardImg == null) cardImg = currentCard.GetComponentInChildren<Image>();
@@ -922,11 +943,15 @@ private void CreateCardStack(GameObject originalCard)
         [Header("Card Type")]
         public MessageType TypeCard; // true = принять (работа), false = удалить (личное)
 
-        public CardData(string sender, string content, int workRelated)
+        [Header("Icon Type")]
+        public IconMappingType IconCardType;
+
+        public CardData(string sender, string content, int workRelated, IconMappingType icon = IconMappingType.Bank)
         {
             this.sender = sender;
             this.content = content;
             TypeCard = (MessageType)workRelated;
+            IconCardType = icon;
         }
     }
 

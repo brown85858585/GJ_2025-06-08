@@ -106,6 +106,8 @@ MonoBehaviour:
     profile: {fileID: 11400000, guid: b8c6d4759444db54cabe43db955dc185, type: 2}
   - key: 1
     profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+  - key: 15
+    profile: {fileID: 11400000, guid: c24472e4f814fa046b985e5ae94917fa, type: 2}
 --- !u!1001 &1850277603204220407
 PrefabInstance:
   m_ObjectHideFlags: 0
