@@ -703,7 +703,17 @@ MonoBehaviour:
   - _key: Day2_CardHeader9
     _rawText: Medical Center
   - _key: Day2_CardContent9
-    _rawText: "Test results\u2026\n...urgent follow-up\nrecommended\u2026"
+    _rawText: 'Results
+
+      of the examination...
+
+      ...not encouraging...
+
+      ...necessary...
+
+      urgent
+
+      intervention....'
   - _key: Day3_CardHeader0
     _rawText: Editor
   - _key: Day3_CardContent0
