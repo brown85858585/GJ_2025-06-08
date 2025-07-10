@@ -284,160 +284,162 @@ Day6_Window2,"Не вижу ничего.
 Даже себя в отражении."
 Hint_Switch,Выбрать
 Hint_Interact,Взаимодействие
-Day1_CardHeader0,ЖКХ
-Day1_CardContent0,"Счёт за отопление:
-360"
-Day1_CardHeader1,Бухгалтерия
-Day1_CardContent1,"Подпишите ведомость
-за апрель"
-Day1_CardHeader2,HR
-Day1_CardContent2,"Заполните табель
-до пятницы"
-Day1_CardHeader3,Пушистик дня
-Day1_CardContent3,"Кот дня:
-сегодня он улыбается
-для тебя!"
-Day1_CardHeader4,SelfGuru
-Day1_CardContent4,"Открой силу внутри.
-Только сегодня -70%"
-Day1_CardHeader5,BeautyBox
-Day1_CardContent5,"Ты достойна лучшего
-ухода!"
-Day1_CardHeader6,Мама
-Day1_CardContent6,"Ты как? Надеюсь,
-у тебя всё хорошо"
-Day1_CardHeader7,Кира
-Day1_CardContent7,"Смотри, наша кошка
-так выросла!"
-Day1_CardHeader8,Саша
-Day1_CardContent8,"Привет!
-Нашла твою старую фотку,
-так уютно стало!"
-Day1_CardHeader9,Джун
-Day1_CardContent9,"Ты ещё пишешь тексты?
-Нам нужен человек
-на подмену"
-Day2_CardHeader0,Редколлегия
-Day2_CardContent0,"Пришлите тему
-следующего материала"
-Day2_CardHeader1,Бухгалтерия
-Day2_CardContent1,"Зарплата зачислена.
-Проверьте реквизиты"
-Day2_CardHeader2,Автоматическая система
-Day2_CardContent2,"Срок выполнения
-задачи истекает
-через 6 часов"
-Day2_CardHeader3,Планер
-Day2_CardContent3,"Твои цели скучают
-по тебе!"
-Day2_CardHeader4,Digital
-Day2_CardContent4,"Не тормози!
-Мир не ждёт!"
-Day2_CardHeader5,Танцы
-Day2_CardContent5,"Начни неделю
-с танца!"
-Day2_CardHeader6,Анна
-Day2_CardContent6,"Ты не поверишь,
-на вокзале играли
-твою любимую песню!"
+Day1_CardHeader0,Редактор
+Day1_CardContent0,"Нужно про ЗОЖ
+до завтра,
+успеешь?"
+Day1_CardHeader1,Мария
+Day1_CardContent1,"Ты в отпуске
+до какого числа
+была?"
+Day1_CardHeader2,Клиент
+Day1_CardContent2,"Можете добавить
+семь красных линий?"
+Day1_CardHeader3,Банк
+Day1_CardContent3,"Пять шагов
+к восстановлению —
+начни прямо сейчас!"
+Day1_CardHeader4,Принц
+Day1_CardContent4,"Я принц из Африки
+и хочу послать вам
+миллион..."
+Day1_CardHeader5,Слово дня
+Day1_CardContent5,"Улыбнись.
+Ты подарок этому миру!"
+Day1_CardHeader6,Кира
+Day1_CardContent6,"Смотри, что моя
+кошка опять натворила!"
+Day1_CardHeader7,Мама
+Day1_CardContent7,Ты ела сегодня?
+Day1_CardHeader8,Тренер
+Day1_CardContent8,"Если что, медитация
+реально помогает."
+Day1_CardHeader9,Неизвестно
+Day1_CardContent9,"Молока стало меньше.
+Думаю, козы тоже
+скучают."
+Day2_CardHeader0,Редактор
+Day2_CardContent0,"Ты единственная,
+кто может это написать."
+Day2_CardHeader1,София
+Day2_CardContent1,"А как же скидка
+пенсионерам?"
+Day2_CardHeader2,Клиент
+Day2_CardContent2,"Поменяйте цвета
+на зеленый и
+прозрачный"
+Day2_CardHeader3,Lifeline
+Day2_CardContent3,"Новая статья:
+как сахар спасает
+жизни."
+Day2_CardHeader4,Бывший
+Day2_CardContent4,"Я недавно видел
+тебя у ресторана..."
+Day2_CardHeader5,Слово дня
+Day2_CardContent5,"Никто не способен
+остановить твоё
+сияние."
+Day2_CardHeader6,Кира
+Day2_CardContent6,"В Италии наконец
+нет дождя.
+Как ты там?"
 Day2_CardHeader7,Мама
-Day2_CardContent7,"Помнишь, ты просила
-напомнить про платёж
-за телефон?"
-Day2_CardHeader8,Саша
-Day2_CardContent8,"Привет!
-У тебя есть рецепт
-той запеканки
-с творогом?"
+Day2_CardContent7,"Ты опять работаешь,
+да?"
+Day2_CardHeader8,Неизвестно
+Day2_CardContent8,"Я посадила ещё перцы.
+Не знаю зачем..."
 Day2_CardHeader9,Медцентр 
 Day2_CardContent9,"Результаты обследования...
 ...рекомендовано срочное
 обращение..."
 Day3_CardHeader0,Редактор
-Day3_CardContent0,"Нужен текст до вечера.
-Без отсрочек"
-Day3_CardHeader1,Клиент
-Day3_CardContent1,"Формулиров%#?
-пер@%редактируй"
-Day3_CardHeader2,Медцентр
-Day3_CardContent2,Оплата прошла
-Day3_CardHeader3,МедМед
-Day3_CardContent3,"5 симптомов,
-которые нельзя
-игнорировать"
-Day3_CardHeader4,Рассылка
-Day3_CardContent4,"Твоя боль
-это точка роста"
-Day3_CardHeader5,Фитнес
-Day3_CardContent5,"На@о_#ишь ли
-ты рад@сть в
-п%вт&рны_х д%л@х?"
+Day3_CardContent0,Ты жива вообще?
+Day3_CardHeader1,Мария
+Day3_CardContent1,"Не знаю, кто у вас врач,
+данные нужны."
+Day3_CardHeader2,Клиент
+Day3_CardContent2,"Они должны быть
+перпендикулярными!"
+Day3_CardHeader3,LifeLine
+Day3_CardContent3,"Ты не болезнь.
+Ты — победа."
+Day3_CardHeader4,Пациент.онлайн
+Day3_CardContent4,"Служба поддержки
+ждёт твоего вопроса."
+Day3_CardHeader5,Слово дня
+Day3_CardContent5,"Если ты проснулась,
+ты уже победила."
 Day3_CardHeader6,Кира
-Day3_CardContent6,Ох... Держись!
+Day3_CardContent6,"Держись, я с тобой!"
 Day3_CardHeader7,Мама
-Day3_CardContent7,"Просто напиши
-пару слов, если всё
-нормально."
-Day3_CardHeader8,Кей
-Day3_CardContent8,Это все от стресса!
-Day3_CardHeader9,Саша
-Day3_CardContent9,Держись!
-Day4_CardHeader0,Редакт0р
-Day4_CardContent0,▌▌▌ ж••••ж••ж••• ▌
-Day4_CardHeader1,Клиент
-Day4_CardContent1,"Почему вы не
-ответили на правки?"
-Day4_CardHeader2,HR
-Day4_CardContent2,"Файл не отпр##влен.
-Попробуйте снова."
-Day4_CardHeader3,Гуру
-Day4_CardContent3,"Обрети гармонию
-за 5 минут в день!"
-Day4_CardHeader4,[неизв.]
-Day4_CardContent4,Боль — это выбор
-Day4_CardHeader5,SelfHelpPro
-Day4_CardContent5,"Знаешь, почему
-ты всё ещё
-не счастлива?"
-Day4_CardHeader6,Мама
-Day4_CardContent6,"Нужно позитивно
-мыслить."
-Day4_CardHeader7,Саша
-Day4_CardContent7,"А вот у моей тети
-тоже было такое…"
-Day4_CardHeader8,Анна
-Day4_CardContent8,Держись
-Day4_CardHeader9,Коллега
-Day4_CardContent9,Держись
-Day5_CardHeader0,HR
-Day5_CardContent0,"Улыбайтесь.
-Вы в ресурсе!"
-Day5_CardHeader1,Редактор
-Day5_CardContent1,"Ждём, как всегда.
-Вы ведь у нас боец?"
-Day5_CardHeader2,Автосистема
-Day5_CardContent2,"Вы не завершили
-счастливый понедельник.
-Повторить?"
-Day5_CardHeader3,Анна
-Day5_CardContent3,"Ты не одна.
-Ты не одна.
-Ты не одна.
-Т... %$#!"
-Day5_CardHeader4,Служба Поддержки
-Day5_CardContent4,...........
-Day5_CardHeader5,—
-Day5_CardContent5,"...о_н_а н_е _от_в**чает...
-Т# _т#м?"
+Day3_CardContent7,"Вот ссылка на целителя,
+просто посмотри."
+Day3_CardHeader8,Дядя
+Day3_CardContent8,"Держись!
+Ты же у нас боец"
+Day3_CardHeader9,Неизвестно
+Day3_CardContent9,"Сегодня видела
+волков вдалеке."
+Day4_CardHeader0,Редактор
+Day4_CardContent0,"Работа лечит.
+Держитесь."
+Day4_CardHeader1,София
+Day4_CardContent1,"Когда боль утихнет,
+напишите, ладно?"
+Day4_CardHeader2,Клиент
+Day4_CardContent2,"Просто игнорируйте
+геометрию!"
+Day4_CardHeader3,Формат
+Day4_CardContent3,"Ты сильнее,
+чем тебе кажется."
+Day4_CardHeader4,Доктор Вера
+Day4_CardContent4,"Ты сегодня пила воду?
+А витамины?"
+Day4_CardHeader5,Слово дня
+Day4_CardContent5,Гладиолус!
+Day4_CardHeader6,Кира
+Day4_CardContent6,Ты держись там…
+Day4_CardHeader7,Мама
+Day4_CardContent7,"По телевизору
+передали..."
+Day4_CardHeader8,Саша
+Day4_CardContent8,"Мой знакомый тоже
+болел..."
+Day4_CardHeader9,Неизвестно
+Day4_CardContent9,"Кажется, приближается
+буря."
+Day5_CardHeader0,Редактор
+Day5_CardContent0,"Пиши.
+Ты же боец, правда?"
+Day5_CardHeader1,Мария
+Day5_CardContent1,"Ты сильная,
+мы в тебе не
+сомневаемся."
+Day5_CardHeader2,Клиент
+Day5_CardContent2,"Все любят котят.
+Добавьте котенка."
+Day5_CardHeader3,LifeLine
+Day5_CardContent3,"Нажми, если готова
+жить заново."
+Day5_CardHeader4,Опрос.ру
+Day5_CardContent4,"Ты счастлива прямо
+сейчас?"
+Day5_CardHeader5,Слово дня
+Day5_CardContent5,"Не сдавайся.
+Люди на тебя смотрят."
 Day5_CardHeader6,Кира
-Day5_CardContent6,"Вот, почитай истории,
-тех кто вылечился…"
-Day5_CardHeader7,—
-Day5_CardContent7,Держись.
-Day5_CardHeader8,—
-Day5_CardContent8,Держись.
-Day5_CardHeader9,—
-Day5_CardContent9,Держись.
+Day5_CardContent6,"Я не знаю,
+что тебе сказать.
+Но я есть."
+Day5_CardHeader7,Мама
+Day5_CardContent7,Я тебя люблю
+Day5_CardHeader8,Коллега
+Day5_CardContent8,Это все из-за стресса!
+Day5_CardHeader9,Неизвестно
+Day5_CardContent9,"Ни коз, ни кур
+не осталось.
+Сыр заканчивается."
 results_header,Итоги
 Day1_LoadHeader0,За неделю до...
 Day1_LoadBody0,"Знаешь, я всегда куда-то бежала."
