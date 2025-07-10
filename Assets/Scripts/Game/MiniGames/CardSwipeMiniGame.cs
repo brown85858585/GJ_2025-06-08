@@ -16,7 +16,27 @@ using Random = System.Random;
 public enum IconMappingType
 {
     None = 0,
-    
+    Editor,
+    Maria,
+    Client,
+    Bank,
+    Prince,
+    Word,
+    Kira,
+    Mom,
+    Coach,
+    Unknown,
+    Sophia,
+    Lifeline,
+    Ex,
+    Medical,
+    Patient,
+    Uncle,
+    Format,
+    drVera,
+    Sasha,
+    Survey,
+    Colleague,
 }
 
 [Serializable]
