@@ -224,6 +224,126 @@ MonoBehaviour:
     content: Day2_CardContent9
     TypeCard: 0
     IconCardType: 0
+  - sender: Day3_CardHeader0
+    content: Day3_CardContent0
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader1
+    content: Day3_CardContent1
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader2
+    content: Day3_CardContent2
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader3
+    content: Day3_CardContent3
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader4
+    content: Day3_CardContent4
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader5
+    content: Day3_CardContent5
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader6
+    content: Day3_CardContent6
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader7
+    content: Day3_CardContent7
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader8
+    content: Day3_CardContent8
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day3_CardHeader9
+    content: Day3_CardContent9
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader0
+    content: Day4_CardContent0
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader1
+    content: Day4_CardContent1
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader2
+    content: Day4_CardContent2
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader3
+    content: Day4_CardContent3
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader4
+    content: Day4_CardContent4
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader5
+    content: Day4_CardContent5
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader6
+    content: Day4_CardContent6
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader7
+    content: Day4_CardContent7
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader8
+    content: Day4_CardContent8
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day4_CardHeader9
+    content: Day4_CardContent9
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader0
+    content: Day5_CardContent0
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader1
+    content: Day5_CardContent1
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader2
+    content: Day5_CardContent2
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader3
+    content: Day5_CardContent3
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader4
+    content: Day5_CardContent4
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader5
+    content: Day5_CardContent5
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader6
+    content: Day5_CardContent6
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader7
+    content: Day5_CardContent7
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader8
+    content: Day5_CardContent8
+    TypeCard: 0
+    IconCardType: 0
+  - sender: Day5_CardHeader9
+  content: Day5_CardContent9
+    TypeCard: 0
+  IconCardType: 0
   currentCardPrefab: {fileID: 446028684751200400, guid: ddd3b7f23db64e145a6420d32bbb498c,
     type: 3}
   enableTypingEffect: 1
