@@ -120,7 +120,7 @@ namespace Game.MiniGames.Flower
             }
             else
             {
-                _playerController.Model.Score -= _flowerView.WinScore;
+                _playerController.Model.Score -= 100;
                 IsWin = false;
             }
         }

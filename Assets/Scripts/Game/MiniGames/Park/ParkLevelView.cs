@@ -10,6 +10,7 @@ namespace Game.MiniGames.Park
         [SerializeField] private List<CheckpointView> checkpointViews;
         [SerializeField] private Slider staminaSlider;
         [SerializeField] private float staminaMultiplyer = 40;
+        [SerializeField]  private int staminaRegeneration;
         public List<CheckpointView> CheckpointViews => checkpointViews;
         public float StaminaMultiplyer => staminaMultiplyer;
         
@@ -19,6 +20,7 @@ namespace Game.MiniGames.Park
         public event Action OnStaminaChanged;
         
         public event Action OnMiniGameStart;
+        public event Action<int> OnUpdateStaminaRegeneration;
 
         private void Awake()
         {
@@ -26,6 +28,11 @@ namespace Game.MiniGames.Park
             {
                 checkpointViews[i].Id = i;
             }
+        }
+
+        private void Update()
+        {
+            OnUpdateStaminaRegeneration?.Invoke(staminaRegeneration);
         }
 
         private void OnEnable()

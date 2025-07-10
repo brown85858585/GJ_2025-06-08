@@ -24,6 +24,7 @@ namespace Game.MiniGames
 
             _parkLevelView.OnRingEntered += HandleRingEntered;
             _parkLevelView.OnStaminaChanged += HandleStaminaChanged;
+            _parkLevelView.OnUpdateStaminaRegeneration += StaminaRegeneration;
         }
 
         private void HandleRingEntered(int id)
@@ -37,6 +38,15 @@ namespace Game.MiniGames
             }
         }
 
+        private void StaminaRegeneration(int value)
+        {
+            if (_playerController.Model.Stamina >= _staminaMax)
+            {
+                return;
+            }
+
+            AddStamina(value);
+        }
         private void AddStamina(int value)
         {
             _playerController.Model.Stamina += value;
@@ -65,7 +75,7 @@ namespace Game.MiniGames
         private void EndGame()
         {
             _parkLevelView.OnStaminaChanged -= HandleStaminaChanged;
-            var win = _parkLevelView.CheckpointCounter < _parkLevelView.CheckpointViews.Count/2;
+            var win = _parkLevelView.CheckpointCounter <= 1;
             EndSprint?.Invoke(win);
 
             ResetStamina();
