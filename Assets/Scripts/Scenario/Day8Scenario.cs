@@ -36,7 +36,7 @@ namespace Scenario
         {
             Debug.Log("Park Mini Game Started");
             _installer.InputAdapter.SwitchAdapterToMiniGameMode();
-            (_installer.PlayerController as PlayerController)?.StartEndRun();
+            (_installer.PlayerController as PlayerController)?.StartVectorRun();
             StartCamera();
         }
 

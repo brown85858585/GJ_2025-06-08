@@ -17,5 +17,6 @@ namespace Effects.PostProcess
         Park2,
         Park3,
         Park4,
+        Park7
     }
 }
