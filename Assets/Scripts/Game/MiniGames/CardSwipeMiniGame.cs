@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 using static CardSwipeMiniGame;
 using Random = System.Random;
 
@@ -246,15 +247,15 @@ private void CreateCardStack(GameObject originalCard)
     // Первая карточка - это оригинальная из префаба
     currentCard = originalCard;
     cardStack.Add(currentCard);
-    
-    // Создаем дополнительные карточки для стопки (копии только CurrentCard)
-    for (int i = 1; i < visibleCardsInStack; i++)
-    {
+
+        // Создаем дополнительные карточки для стопки (копии только CurrentCard)
+        for (int i = 1; i < visibleCardsInStack; i++)
+        {
         // Создаем копию ТОЛЬКО карточки, не всего префаба
         GameObject duplicateCard = Instantiate(originalCard, cardContainer.transform);
         duplicateCard.name = $"CurrentCard_Stack_{i}";
         cardStack.Add(duplicateCard);
-    }
+       }
     
     // Настраиваем позиции и стили для всех карточек в стопке
     SetupCardStackPositions();
@@ -273,17 +274,34 @@ private void CreateCardStack(GameObject originalCard)
     bool firstCard = true;
     private void UpdateStackContent()
     {
+
+
         for (int i = 0; i < cardStack.Count && i < visibleCardsInStack; i++)
         {
             int cardIndex = currentCardIndex + i;
 
             if (cardIndex < gameCards.Count)
             {
+              
+                   
                 // Есть карточка для отображения
                 CardData cardData = gameCards[cardIndex];
 
+                //UpdateCardIcon(i, cardStack[i]);
+                if (currentCardIndex < 3)
+                {
+                    var ch = cardStack[i].GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
+                    if (ch.Count() > 0)
+                    {
+                        var senderImage = ch.First();
+                        ch.First().sprite = _iconMappingDict[cardData.IconCardType];
+                    }
+                }
+
                 if (firstCard)
                 {
+
+
                     // Передняя карточка - показываем текст с анимацией
                     UpdateCardContent(cardStack[i], cardData);
                     firstCard = false;
@@ -352,12 +370,7 @@ private void CreateCardStack(GameObject originalCard)
     Transform contentContainer = card.transform.Find("ContentContainer");
 
 
-        var ch = card.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
-        if (ch.Count() > 0)
-        {
-            var senderImage = ch.First();
-            ch.First().sprite = _iconMappingDict[cardData.IconCardType];
-        }
+
         if (headerContainer != null)
         {
             Transform headerText = headerContainer.Find("HeaderText");
@@ -376,6 +389,8 @@ private void CreateCardStack(GameObject originalCard)
             }
 
         }
+
+
 
         if (contentContainer != null)
         {
@@ -594,7 +609,7 @@ private void CreateCardStack(GameObject originalCard)
             Vector2 scaledSize = cardSize * (1f - scaleReduction);
             cardRect.sizeDelta = scaledSize;
 
-            UpdateCardIcon(i, card);
+
 
 
 
@@ -669,8 +684,8 @@ private void CreateCardStack(GameObject originalCard)
         // ВАЖНО: currentCard должна быть первой в списке (верхней)
         currentCard = cardStack[0];
 
-        if(cardStack.Count > 1)
-            UpdateCardIcon(currentCardIndex, cardStack[1]);
+       // if(cardStack.Count > 1)
+         //   UpdateCardIcon(currentCardIndex, cardStack[1]);
 
         RectTransform cardRect = currentCard.GetComponent<RectTransform>();
         Vector2 startPos = cardRect.anchoredPosition;
@@ -829,6 +844,23 @@ private void CreateCardStack(GameObject originalCard)
         float duration = 0.3f;
         float elapsedTime = 0f;
 
+        
+        if (cardStack.Count > 1)
+        { 
+            CardDataHolder holder = cardStack[1].GetComponent<CardDataHolder>();
+            if (holder != null && holder.cardData != null)
+            {
+                var ch = cardStack[1].GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
+                if (ch.Count() > 0)
+                {
+                    var senderImage = ch.First();
+                    ch.First().sprite = _iconMappingDict[holder.cardData.IconCardType];
+                }
+            }
+        }
+
+
+
         // Запоминаем начальные позиции ТОЛЬКО для видимых карточек
         List<Vector2> startPositions = new List<Vector2>();
         List<Vector2> startSizes = new List<Vector2>();
@@ -896,11 +928,19 @@ private void CreateCardStack(GameObject originalCard)
         {
             currentCard = cardStack[0];
             FindCardComponentsByPath();
-
-            // Получаем данные для новой передней карточки
             CardDataHolder holder = currentCard.GetComponent<CardDataHolder>();
+            // Получаем данные для новой передней карточки
             if (holder != null && holder.cardData != null)
             {
+
+                /*
+                var ch = currentCard.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
+                if (ch.Count() > 0)
+                {
+                    var senderImage = ch.First();
+                    ch.First().sprite = _iconMappingDict[holder.cardData.IconCardType];
+                }
+                */
                 // Запускаем анимацию печатания на новой передней карточке
                 StartCoroutine(DelayedCardReveal(currentCard, holder.cardData));
             }
@@ -1457,12 +1497,10 @@ private void CreateCardStack(GameObject originalCard)
         CardData currentCardData = gameCards[currentCardIndex];
 
         // Проверяем правильность ответа
-        bool isCorrect = 
-            (accepted && 
-            (currentCardData.TypeCard == MessageType.WORK 
-            || currentCardData.TypeCard == MessageType.FREND)
-            ) 
-            || (!accepted && (currentCardData.TypeCard == MessageType.SPAM));
+        bool isCorrect =
+            ((accepted && currentCardData.TypeCard == MessageType.WORK)
+            || (!accepted && (currentCardData.TypeCard == MessageType.SPAM)
+            || currentCardData.TypeCard == MessageType.FREND));
 
         if (isCorrect)
         {
@@ -1486,8 +1524,9 @@ private void CreateCardStack(GameObject originalCard)
            // scoreText.text = $"Очки: {correctAnswers}";
 
         if (cardCounterText != null)
-        { 
-            cardCounterText.text = $"{cardsRemaining}/{CardCount} ";
+        {
+            var _cardCount = CardCount - cardsRemaining;
+            cardCounterText.text = $"{_cardCount}/{CardCount} ";
             //cardCounterText.font = cardSenderText.font.sourceFontFile;
         }
     }
