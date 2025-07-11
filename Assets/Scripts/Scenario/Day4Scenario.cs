@@ -67,6 +67,7 @@ namespace Scenario
         {
             if (LayerChecker.CheckLayerMask(other.gameObject, _targetMask))
             {
+                _inputAdapter.SwitchAdapterToMiniGameMode();
                 BathroomEffect().Forget();
             }
         }
@@ -74,16 +75,21 @@ namespace Scenario
         private async UniTask BathroomEffect()
         {
             _effectAccumulatorView.FadeOut(0.5f);
-            await UniTask.Delay(1000);
+            await SfxManager.Play(SfxId.InnerDoorOpen);
+            await SfxManager.Play(SfxId.InnerDoorClose);
             _playerController.SetPosition(new Vector3(13.5830784f, 0f, 0.0253740996f));
             _playerController.SetRotation(Quaternion.Euler(Vector3.left));
             _playerController.StopVectorRun();
+            await SfxManager.Play(SfxId.VomitDrain);
+            await SfxManager.Play(SfxId.Toilet);
             await UniTask.Delay(1000);
-            // проиграть звук слива и блевания
-            // дождаться завершения этого звука
             _effectAccumulatorView.FadeIn();
-            _inputAdapter.SwitchAdapterToGlobalMode();
             trigger.gameObject.SetActive(false);
+            _playerController.Dialogue.OpenDialogue("Day4_Bathroom");
+            
+            await UniTask.Delay(2000);
+            _playerController.Dialogue.CloseDialogue();
+            _inputAdapter.SwitchAdapterToGlobalMode();
         }
 
         private void OnDestroy()
