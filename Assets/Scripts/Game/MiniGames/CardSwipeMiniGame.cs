@@ -403,15 +403,24 @@ private void CreateCardStack(GameObject originalCard)
                     contentTextComponent.text = "";
                     string finalText = GetTextFromCardData(contentTextComponent, cardData.content);
 
-                    if (enableTypingEffect)
-                        StartCoroutine(TypeText(contentTextComponent, finalText, contentTypingSpeed, 0.3f));
-                    else
+                      // if (enableTypingEffect)
+                     //   StartCoroutine(TypeText(contentTextComponent, finalText, contentTypingSpeed, 0.3f));
+                    //else
                         contentTextComponent.text = finalText;
+                        
                 }
             }
         }
+        StartCoroutine(lockText());
+        
     }
 
+    IEnumerator lockText()
+    {
+        yield return new WaitForSeconds(feedbackIconDuration - 0.6f); //0.6 synhronise with cross and accept immages
+        isCardLocked = false;
+
+    }
     // Заменить метод ShowCurrentCard():
 
     private void ShowCurrentCard()
@@ -933,14 +942,6 @@ private void CreateCardStack(GameObject originalCard)
             if (holder != null && holder.cardData != null)
             {
 
-                /*
-                var ch = currentCard.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
-                if (ch.Count() > 0)
-                {
-                    var senderImage = ch.First();
-                    ch.First().sprite = _iconMappingDict[holder.cardData.IconCardType];
-                }
-                */
                 // Запускаем анимацию печатания на новой передней карточке
                 StartCoroutine(DelayedCardReveal(currentCard, holder.cardData));
             }
