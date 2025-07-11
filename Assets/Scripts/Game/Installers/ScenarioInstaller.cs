@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Effects.PostProcess;
 using Game.Intertitles;
 using Game.Levels;
+using Game.MiniGames;
 using Game.Monolog;
 using Player;
 using Scenario;
@@ -14,18 +15,17 @@ namespace Game.Installers
 {
     public class ScenarioInstaller : MonoBehaviour
     {
-        private IPlayerController _playerController;
-        private InputAdapter _inputAdapter;
         private MonologSystem _monologSystem;
         private LevelManager _levelManager;
-        private EffectAccumulatorView _effectAccumulator;
         private IntertitleSystem _intertitleSystem;
-        private CinemachineVirtualCamera _virtualCamera;
         private GameOverScenario _gameOverScenario;
 
-        public IPlayerController PlayerController => _playerController;
-        public CinemachineVirtualCamera VirtualCamera => _virtualCamera;
-        public InputAdapter InputAdapter => _inputAdapter;
+        public EffectAccumulatorView EffectAccumulatorView { get; private set; }
+        public MiniGameCoordinator MiniGameCoordinator { get; private set; }
+        public IPlayerController PlayerController { get; private set; }
+        public CinemachineVirtualCamera VirtualCamera { get; private set; }
+        public InputAdapter InputAdapter { get; private set; }
+
         private event Action ActionNextLevel;
 
         private void Awake()
@@ -33,7 +33,8 @@ namespace Game.Installers
             DontDestroyOnLoad(gameObject);
         }
 
-        public void Initialize(PlayerController logicPlayerController,
+        public void Initialize(MiniGameCoordinator miniGameCoordinator,
+            PlayerController logicPlayerController,
             InputAdapter coreInputAdapter,
             MonologSystem monologSystem, LevelManager levelManager,
             EffectAccumulatorView effectAccumulator,
@@ -41,13 +42,14 @@ namespace Game.Installers
             CinemachineVirtualCamera virtualCamera,
             Action loadNextLevel)
         {
-            _playerController = logicPlayerController;
-            _inputAdapter = coreInputAdapter;
+            MiniGameCoordinator = miniGameCoordinator;
+            PlayerController = logicPlayerController;
+            InputAdapter = coreInputAdapter;
             _monologSystem = monologSystem;
             _levelManager = levelManager;
-            _effectAccumulator = effectAccumulator;
+            EffectAccumulatorView = effectAccumulator;
             _intertitleSystem = intertitleSystem;
-            _virtualCamera = virtualCamera;
+            VirtualCamera = virtualCamera;
             ActionNextLevel += loadNextLevel;
 
             _gameOverScenario = new GameOverScenario(intertitleSystem);
@@ -55,18 +57,18 @@ namespace Game.Installers
 
         public async UniTask NextLevelScenario()
         {
-            _inputAdapter.SwitchAdapterToMiniGameMode();
+            InputAdapter.SwitchAdapterToMiniGameMode();
             
             _monologSystem.TryOpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
             await UniTask.Delay(1000);
             _monologSystem.CloseDialogue();
             var fadeTimer = 1100;
-            _effectAccumulator.FadeOut(fadeTimer/1000f);
+            EffectAccumulatorView.FadeOut(fadeTimer/1000f);
             await UniTask.Delay(fadeTimer);
             await _intertitleSystem.ShowScoreIntertitle(_levelManager.CurrentLevelIndex,
-                _playerController.Model,
+                PlayerController.Model,
                 CancellationToken.None);
-            if(_playerController.Model.Score < 0)
+            if(PlayerController.Model.Score < 0)
             {
                 await _gameOverScenario.StartScenario();
             }
@@ -81,7 +83,7 @@ namespace Game.Installers
 
         public void PlayerReset()
         {
-            (_playerController as PlayerController)?.ResetPlayer();
+            (PlayerController as PlayerController)?.ResetPlayer();
         }
         
         private void OnDestroy()

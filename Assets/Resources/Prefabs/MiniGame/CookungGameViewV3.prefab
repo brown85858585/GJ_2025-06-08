@@ -8,15 +8,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 303926847143178071, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ff424e276ef94e44882f0fa564b36d4,
+        type: 3}
     - target: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
       propertyPath: gameSpeed
-      value: 200
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012452920691634999, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ff424e276ef94e44882f0fa564b36d4,
+        type: 3}
+    - target: {fileID: 2056745114585516351, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 106.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408796124329102273, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 118.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167873197321052902, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5345630855882479413, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
       propertyPath: m_Name
       value: CookungGameViewV3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848950198001499972, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5856640782784005770, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
@@ -132,6 +164,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932863905759001841, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ff424e276ef94e44882f0fa564b36d4,
+        type: 3}
+    - target: {fileID: 8967159398870549064, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 118.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

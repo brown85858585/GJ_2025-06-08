@@ -28,14 +28,14 @@ namespace Player
         private float _normalSpeed;
         private float _acceleratedSpeed;
         private bool _stop;
-        private bool _isEndRun;
+        private bool _isVectorRun;
         private LevelManager _levelManager;
 
 
         public PlayerModel Model => _model;
         public IPlayerDialogue Dialogue => _playerDialogue;
 
-        private Vector3 _targetPos = new Vector3(5.27f, 0f, 1.54f);
+        private Vector3[] _targetPositions = {new Vector3(5.27f, 0f, 1.54f)};
         private float _vectorSpeed = 3f;
 
         public PlayerController(PlayerModel model, IInputAdapter input)
@@ -137,98 +137,43 @@ namespace Player
             if(_stop) return;
             Model.CheckGrounded(_view.transform, _view.WhatIsGround);
             Model.ChangeGrid(_view.Rigidbody, _view.GroundDrag);
-
-            Vector3 move;
-            Quaternion newRotation;
-            if (_input.IsAccelerating)
-            {
-                move = Movement.Move(_acceleratedSpeed, _view.StaminaDecreaseMultiplayer);
-            }
-            else
-            {
-                move = Movement.Move(_normalSpeed, _view.StaminaDecreaseMultiplayer);
-            }
             
-            if (_isEndRun)
+            if (_isVectorRun)
             {
-                // _view.Rigidbody.AddForce( new Vector3(30, 0, 20), ForceMode.Force);
-                // _view.transform.rotation = Quaternion.Euler(0, 25, 0);
-                
-                
-                Vector3 forceVector = new Vector3(30f, 0f, 20f);
-
-// 1. Извлекаем направление
-                Vector3 direction = forceVector.normalized;
-
-// 2. Смещение на 100 метров
-                Vector3 offset = direction * 1000f;
-
-// 3. Целевая позиция
-                _targetPos = _view.Rigidbody.position + offset;
-                //удалить просчет направления в каждом кадре
                 var rb = _view.Rigidbody;
-                Vector3 toTarget    = (_targetPos - rb.position).normalized;
-                // 2. Желаемая скорость (вектор)
-                Vector3 desiredV    = toTarget * 10;
-                // 3. Разница между текущей и желаемой скоростью
-                Vector3 deltaV      = desiredV - rb.velocity;
-                // 4. Сила, нужная чтобы получить deltaV за один шаг физики: F = m * a;
-                //    a = deltaV / dt
-                Vector3 force       = rb.mass * deltaV / Time.fixedDeltaTime;
-                // 5. Применяем эту силу
-                rb.AddForce(force, ForceMode.Force);
-                if (toTarget.sqrMagnitude > 2f)
-                {
-                    Quaternion targetRot = Quaternion.LookRotation(toTarget);
-
-                    // считаем t = rotationSpeed * dt, но не более 1
-                    float t = Mathf.Min(1f, 30 * Time.fixedDeltaTime);
-
-                    Quaternion smooth = Quaternion.Slerp(
-                        _view.transform.rotation,
-                        targetRot,
-                        t
-                    );
-                    rb.MoveRotation(smooth);
-                }
-                
+                RigidbodyMover.MoveAlongPointsUpdate(
+                    rb,
+                    _targetPositions,
+                     _vectorSpeed
+                );
             }
             else if (Input.GetKey(KeyCode.Space))
             {
                 var rb = _view.Rigidbody;
-                Vector3 toTarget    = (_targetPos - rb.position).normalized;
-                // 2. Желаемая скорость (вектор)
-                Vector3 desiredV    = toTarget * _vectorSpeed;
-                // 3. Разница между текущей и желаемой скоростью
-                Vector3 deltaV      = desiredV - rb.velocity;
-                // 4. Сила, нужная чтобы получить deltaV за один шаг физики: F = m * a;
-                //    a = deltaV / dt
-                Vector3 force       = rb.mass * deltaV / Time.fixedDeltaTime;
-                // 5. Применяем эту силу
-                rb.AddForce(force, ForceMode.Force);
-                if (toTarget.sqrMagnitude > 2f)
-                {
-                    Quaternion targetRot = Quaternion.LookRotation(toTarget);
-
-                    // считаем t = rotationSpeed * dt, но не более 1
-                    float t = Mathf.Min(1f, 30 * Time.fixedDeltaTime);
-
-                    Quaternion smooth = Quaternion.Slerp(
-                        _view.transform.rotation,
-                        targetRot,
-                        t
-                    );
-                    rb.MoveRotation(smooth);
-                }
+                RigidbodyMover.MoveAlongPointsUpdate(
+                    rb,
+                    new []{_targetPositions[0], new Vector3(13.5830784f,0f,0.0253740996f)},
+                    _vectorSpeed
+                );
             }
             else
             {
+                Vector3 move;
+                Quaternion newRotation;
+                if (_input.IsAccelerating)
+                {
+                    move = Movement.Move(_acceleratedSpeed, _view.StaminaDecreaseMultiplayer);
+                }
+                else
+                {
+                    move = Movement.Move(_normalSpeed, _view.StaminaDecreaseMultiplayer);
+                }
                 _view.Rigidbody.AddForce(move, ForceMode.Force);
+                newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
+                _view.transform.rotation = newRotation;
             }
             
             _view.SetWalkAnimation(_input.Direction.normalized);
-            newRotation = Movement.Rotation(_view.transform, _view.TurnSmooth);
-            _view.transform.rotation = newRotation;
         }
 
         public void SetPosition( Vector3 position)
@@ -269,16 +214,26 @@ namespace Player
             _view.PutTheItemDown();
         }
 
-        public void StartVectorRun(float speed = 3 , Vector3 target = default)
+        public void StartVectorRun(float speed = 3, Vector3[] target = null)
         {
-            _isEndRun = true;
-            if(target != default)
-              _targetPos = target;
+            Vector3 forceVector = new Vector3(30f, 0f, 20f);
+// 1. Извлекаем направление
+            Vector3 direction = forceVector.normalized;
+// 2. Смещение на 100 метров
+            Vector3 offset = direction * 1000f;
+// 3. Целевая позиция
+            var targetPos = _view.Rigidbody.position + offset;
+
+            var endArr = new[] { targetPos };
+            
+            
+            _isVectorRun = true;
+            _targetPositions = target ?? endArr;
             _vectorSpeed = speed;
         }
         public void StopVectorRun()
         {
-            _isEndRun = false;
+            _isVectorRun = false;
         }
 
         public void SwitchHead(int levelIndex)

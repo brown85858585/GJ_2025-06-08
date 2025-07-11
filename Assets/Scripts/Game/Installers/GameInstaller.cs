@@ -95,6 +95,7 @@ namespace Game.Installers
                 _logic.MiniGameCoordinator, _logic.QuestLog);
             
             _scenario.Initialize(
+                _logic.MiniGameCoordinator,
                 _logic.PlayerController, 
                 _core.InputAdapter, 
                 _monologSystem,

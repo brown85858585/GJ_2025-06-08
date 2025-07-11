@@ -8,20 +8,77 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 303926847143178071, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 83518774dd7ed2345aedb80988a32eff,
+        type: 3}
     - target: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
       propertyPath: gameSpeed
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1342505215314386391, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
       propertyPath: winZoneWidth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2012452920691634999, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 83518774dd7ed2345aedb80988a32eff,
+        type: 3}
+    - target: {fileID: 2056745114585516351, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408796124329102273, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408796124329102273, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 277
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455876002070113028, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614068982833052573, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 95.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835329581837367961, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167873197321052902, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5345630855882479413, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
       propertyPath: m_Name
       value: CookungGameViewV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5345630855882479413, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848950198001499972, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5856640782784005770, guid: 00a0af693410afa46a5f6d0609750493,
         type: 3}
@@ -137,6 +194,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932863905759001841, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 83518774dd7ed2345aedb80988a32eff,
+        type: 3}
+    - target: {fileID: 8478727577474215980, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 93.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967159398870549064, guid: 00a0af693410afa46a5f6d0609750493,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
