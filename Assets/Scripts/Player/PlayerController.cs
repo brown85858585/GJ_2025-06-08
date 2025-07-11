@@ -144,15 +144,6 @@ namespace Player
                 RigidbodyMover.MoveAlongPointsUpdate(
                     rb,
                     _targetPositions,
-                     _vectorSpeed
-                );
-            }
-            else if (Input.GetKey(KeyCode.Space))
-            {
-                var rb = _view.Rigidbody;
-                RigidbodyMover.MoveAlongPointsUpdate(
-                    rb,
-                    new []{_targetPositions[0], new Vector3(13.5830784f,0f,0.0253740996f)},
                     _vectorSpeed
                 );
             }

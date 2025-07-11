@@ -43,7 +43,7 @@ namespace Game.Interactions
 
         private void Start()
         {
-            _popup.gameObject.SetActive(false);
+            _popup?.gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter(Collider other)

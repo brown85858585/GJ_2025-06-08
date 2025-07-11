@@ -43,8 +43,6 @@ namespace Scenario
             MusicManager.Instance.PauseMusic();
             await UniTask.Delay(5000);
             _installer.NextLevelScenario().Forget();
-            Destroy(gameObject);
         }
-        
     }
 }
