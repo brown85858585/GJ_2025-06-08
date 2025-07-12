@@ -10,6 +10,8 @@ public class SlowMoveRect : MonoBehaviour
 
     [Tooltip("Конечная Y-координата (anchoredPosition.y), куда нужно добраться")]
     [SerializeField] private float targetY = 500f;
+    
+    public bool turn = false;
 
     private void Reset()
     {
@@ -28,6 +30,7 @@ public class SlowMoveRect : MonoBehaviour
 
     private void Update()
     {
+        if(turn == false) return;
         Vector2 pos = rectTransform.anchoredPosition;
 
         // Пока не достигли целевой Y-координаты — двигаем вверх

@@ -23,21 +23,7 @@ namespace UI
         private float interval = 2f;  
         
         public event Action OnComplete;  // событие завершения анимации
-        private void Awake()
-        {
-            // стартуем с полной прозрачности
-            foreach (var t in texts)
-            {
-                if (t == null) continue;
-                var c = t.color;
-                c.a = 0;
-                t.color = c;
-            }
-            if (tweener != null)
-            {
-                tweener.Hide();
-            }
-        }
+      
 
         private void OnDisable()
         {
@@ -56,6 +42,20 @@ namespace UI
 
         private void OnEnable()
         {
+            // стартуем с полной прозрачности
+            foreach (var t in texts)
+            {
+                if (t == null) continue;
+                var c = t.color;
+                c.a = 0;
+                t.color = c;
+            }
+            if (tweener != null)
+            {
+                tweener.Hide();
+            }
+            
+            
             PlaySequence();
             
             

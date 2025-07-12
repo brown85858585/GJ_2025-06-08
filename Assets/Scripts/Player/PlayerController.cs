@@ -225,6 +225,7 @@ namespace Player
         public void StopVectorRun()
         {
             _isVectorRun = false;
+            RigidbodyMover.ResetIndex();
         }
 
         public void SwitchHead(int levelIndex)

@@ -37,7 +37,7 @@ namespace Scenario
             Debug.Log("Park Mini Game Started");
             _installer.InputAdapter.SwitchAdapterToMiniGameMode();
             (_installer.PlayerController as PlayerController)?.
-                StartVectorRun(6f,null);
+                StartVectorRun(4f,null);
             StartCamera();
         }
 
@@ -52,10 +52,10 @@ namespace Scenario
             {
                 _slowMoveRect.gameObject.SetActive(true);
             });
-            // UniTask.Delay(30000).ContinueWith(() =>
-            // {
-            //     (_installer.PlayerController as PlayerController)?.StopMovement(true);
-            // });
+            UniTask.Delay(15000).ContinueWith(() =>
+            {
+                _slowMoveRect.turn = true;
+            });
         }
     }
 }

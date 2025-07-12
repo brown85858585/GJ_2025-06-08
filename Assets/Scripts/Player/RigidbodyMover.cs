@@ -6,7 +6,12 @@ namespace Player
     {
         // внутренний индекс текущей цели
         private static int currentIndex = 0;
-
+        
+        
+        public static void ResetIndex()
+        {
+            currentIndex = 0;
+        }
         /// <summary>
         /// Перемещает Rigidbody последовательно по массиву точек.
         /// </summary>
