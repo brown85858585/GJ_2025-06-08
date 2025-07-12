@@ -15,6 +15,8 @@ namespace UI
         
         [SerializeField] private UIElementTweener tweener;
 
+       
+
         [Header("Параметры анимации")]
         [SerializeField, Min(0f)]
         private float fadeDuration = 0.5f;   // cкорость появления (сек)
@@ -23,6 +25,10 @@ namespace UI
         private float interval = 2f;  
         
         public event Action OnComplete;  // событие завершения анимации
+
+        public float TotalAnimationDuration => texts.Count * (fadeDuration + interval);
+
+        public event Action<int> OnTextRevealed;
         private void Awake()
         {
             // стартуем с полной прозрачности
@@ -68,28 +74,27 @@ namespace UI
         {
             // Строим DOTween-последовательность: [fade-in] → [интервал] → …
             Sequence seq = DOTween.Sequence();
+            int textIndex = 0;
 
             foreach (var t in texts)
             {
                 if (t == null) continue;
 
-                // гарантируем, что альфа 0 (на случай переиспользования)
                 seq.Append(t.DOFade(0f, 0f));
-
-                // плавное появление
                 seq.Append(t.DOFade(1f, fadeDuration)
                     .SetEase(Ease.InOutQuad)
-                    .SetLink(t.gameObject));
+                    .SetLink(t.gameObject)
+                    .OnComplete(() => OnTextRevealed?.Invoke(textIndex++))); // Событие для каждого текста
 
-                // пауза перед следующим
                 seq.AppendInterval(interval);
             }
             // Завершаем последовательность с событием
-            
+
             seq.OnComplete(() =>
             {
                 OnComplete?.Invoke();  // вызываем событие завершения
             });
+
         }
     }
 }
