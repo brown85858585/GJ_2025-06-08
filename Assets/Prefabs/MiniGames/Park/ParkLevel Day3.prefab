@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 5687517932603896794, guid: b15fbd006233ba849b3bf629335ee06f,
         type: 3}
       propertyPath: staminaMultiplyer
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5687517932603896794, guid: b15fbd006233ba849b3bf629335ee06f,
         type: 3}
