@@ -12,6 +12,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.WSA;
+using Utilities;
 using static CardSwipeMiniGame;
 using Random = System.Random;
 
@@ -167,23 +168,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         return key;
     }
 
-    private IEnumerator TypeText(TextMeshProUGUI textComponent, string fullText, float speed, float delay = 0f)
-    {
-        textComponent.text = "";
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
-
-
-
-        for (int i = 0; i <= fullText.Length; i++)
-        {
-            textComponent.text = fullText.Substring(0, i);
-            yield return new WaitForSeconds(speed);
-        }
-        isCardLocked = false;
-    }
-
-
     private Transform FindChildRecursive(Transform parent, string name)
     {
         for (int i = 0; i < parent.childCount; i++)
@@ -274,7 +258,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     // Метод для обновления содержимого стопки:
 
-
     private void UpdateStackContent()
     {
 
@@ -353,8 +336,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             holder = card.AddComponent<CardDataHolder>();
 
 
-
-
         holder.cardData = cardData;
     }
 
@@ -427,11 +408,8 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         isCardLocked = false;           // 1. Разблокируем карточку
         RestoreIconColors();
 
-
-        // ДОБАВИТЬ: Возвращаем нормальное визуальное состояние
         
     }
-    // Заменить метод ShowCurrentCard():
 
     private void ShowCurrentCard()
     {
@@ -442,13 +420,16 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
 
         // Проверяем, является ли это последней карточкой
-        isLastCard = (currentCardIndex == gameCards.Count - 1) && (MiniGameCoordinator.DayLevel == 1);
+        isLastCard = (currentCardIndex == gameCards.Count - 1); //&& (MiniGameCoordinator.DayLevel == 1);
 
         if (firstCard)
         { 
             StartCoroutine(ForceButtonPress(acceptButton));  // E кнопка выглядит нажатой
             StartCoroutine(ForceButtonPress(rejectButton));  // Q кнопка выглядит нажатой
         }
+
+    
+           
         // Обновляем содержимое всей стопки
         UpdateStackContent();
         UpdateUI();
@@ -456,11 +437,14 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         // Если это последняя карточка - запускаем специальную анимацию
         if (isLastCard)
         {
-            StartLastCardAnimation();
+            
+            if (MiniGameCoordinator.DayLevel == 1)
+                StartLastCardAnimation();
         }
 
         Debug.Log($"Показана карточка {currentCardIndex}, заблокирована на {cardLockDuration} сек");
     }
+
 
     private void StartLastCardAnimation()
     {
@@ -634,9 +618,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             cardRect.sizeDelta = scaledSize;
 
 
-
-
-
             // Z-порядок (передняя карточка должна быть сверху) - ИСПРАВЛЕНО
             cardRect.SetSiblingIndex(cardStack.Count - 1 - i); // Первая карточка (i=0) будет иметь самый высокий индекс
 
@@ -666,19 +647,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             // Debug.Log($"Карточка {i}: позиция {cardRect.anchoredPosition}, размер {scaledSize}, альфа {alpha}, sibling {cardRect.GetSiblingIndex()}");
         }
     }
-
-    private void UpdateCardIcon(int i, GameObject card)
-    {
-        var ch = card.GetComponentsInChildren<Image>().Where(ch => ch.name == "SenderImage");
-        if (ch.Count() > 0)
-        {
-            var senderImage = ch.First();
-            var spr = ch.First().sprite;
-            spr = _iconMappingDict[gameCards[i].IconCardType];
-        }
-    }
-
-    // Исправить метод AnimateCardExit() - правильная анимация удаления ВЕРХНЕЙ карточки:
 
     private IEnumerator AnimateCardExit(bool accepted, bool isCorrect)
     {
@@ -722,15 +690,10 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         var successIcon = imgs.Where(ch => ch.name.Contains("success")).FirstOrDefault();
         var declayIcon = imgs.Where(ch => ch.name.Contains("decay")).FirstOrDefault();
 
-        // Показываем соответствующую иконку
-        //if (isCorrect && successIcon != null)
-        //{
+
         StartCoroutine(ShowFeedbackIcon(successIcon, /*successColor*/ defaulColor));
-        //}
-        //else if (!isCorrect && declayIcon != null)
-        //{
+
         StartCoroutine(ShowFeedbackIcon(declayIcon,/* failureColor*/ defaulColor));
-        //}
 
         // Цветовая обратная связь для карточки (опционально)
         Image cardImg = currentCard.GetComponent<Image>();
@@ -1369,12 +1332,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         instructionText.gameObject.SetActive(false);
     }
 
-    private void CreateGameButtons()
-    {
-
-        exitButton = CreateButton("ExitButton", "Выход", new Vector2(200, 200), Color.gray, new Vector2(80, 40), gameScreen.transform);
-        exitButton.onClick.AddListener(ExitMiniGame);
-    }
 
     protected override void StartGameLogic()
     {
@@ -1412,27 +1369,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         //  StartCoroutine(CardLockCountdown());
     }
 
-    // Корутина для отсчета времени блокировки:
-    private IEnumerator CardLockCountdown()
-    {
-        //actionButton.onClick.AddListener(OnActionButtonClick);
-        while (cardLockTimer > 0f)
-        {
-            cardLockTimer -= Time.deltaTime;
-
-            // Обновляем текст с оставшимся временем
-            if (cardLockTimer > 0f)
-                UpdateInstructionText($"Подождите {cardLockTimer:F1} сек...");
-
-            yield return null;
-        }
-
-        // Разблокируем карточку
-        isCardLocked = false;
-        UpdateInstructionText("Q - удалить ←  |  → принять - E");
-
-        Debug.Log("Карточка разблокирована!");
-    }
+ 
 
     // Обновить методы ввода с проверкой блокировки:
 
@@ -1559,8 +1496,36 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
     }
 
+    
+    IEnumerator HideElement()
+    {
+        yield return new WaitForEndOfFrame();
+        var go = currentCardPrefab.gameObject;
+        var imgs = go.GetComponentsInChildren<UnityEngine.UI.Image>().ToList();
+        var successIcon = imgs.Where(ch => ch.name.Contains("success")).FirstOrDefault();
+        var declayIcon = imgs.Where(ch => ch.name.Contains("decay")).FirstOrDefault();
+
+        // Запускаем анимации hide (если есть UIElementTweener)
+        var successTweener = successIcon?.GetComponent<UIElementTweener>();
+        var declayTweener = declayIcon?.GetComponent<UIElementTweener>();
+        var acceptTweener = acceptButton?.GetComponent<UIElementTweener>();
+        var rejectTweener = rejectButton?.GetComponent<UIElementTweener>();
+
+        // Запускаем анимации hide
+        successTweener?.Hide();
+        declayTweener?.Hide();
+        acceptTweener?.Hide();
+        rejectTweener?.Hide();
+
+        // Ждем завершения самой длинной анимации
+
+
+        yield return new WaitForSeconds(0.5f);
+    }
+
     private void CompleteGame()
     {
+        StartCoroutine(HideElement());
         isGameActive = false;
 
         int finalScore = correctAnswers;
@@ -1599,9 +1564,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         if (shuffle)
             ShuffleCards();
     }
-
-
-
 
     public void ClearCards()
     {
