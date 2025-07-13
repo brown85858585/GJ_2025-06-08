@@ -130,7 +130,6 @@ namespace Game.Intertitles
                 _currentCardObj.SequentialTextFader.OnComplete -= Handler; // важно снять подписку
                 tcs.TrySetResult();
             }
-
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Scenario
     {
         private ScenarioInstaller _installer;
         private bool _isSlowed = true;
+        private bool _isTriggered;
 
         private void Awake()
         {
@@ -26,9 +27,11 @@ namespace Scenario
 
         private void OnTriggerEnter(Collider other)
         {
+            if(_isTriggered) return;
            var targetMask = LayerMask.GetMask("Player");
            if (LayerChecker.CheckLayerMask(other.gameObject, targetMask))
            {
+               _isTriggered = true;
                StartScenario().Forget();
            }
         }
