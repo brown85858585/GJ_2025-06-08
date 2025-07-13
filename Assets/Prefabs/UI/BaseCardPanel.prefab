@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 1974923626695378046}
   - component: {fileID: 8536574965620757374}
   - component: {fileID: 131829421388229081}
+  - component: {fileID: 1349048228263128525}
   m_Layer: 5
   m_Name: decay
   m_TagString: Untagged
@@ -166,6 +167,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1349048228263128525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692007786734228441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 0.3
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 1
+  hideEase: 27
+  scaleFactor: 1
 --- !u!1 &2200518303850866442
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +351,7 @@ GameObject:
   - component: {fileID: 1372223004531380572}
   - component: {fileID: 5598757679124898353}
   - component: {fileID: 6671645508869153857}
+  - component: {fileID: 2141898868539486772}
   m_Layer: 5
   m_Name: ButtonQ
   m_TagString: Untagged
@@ -437,6 +461,28 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2141898868539486772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815769726855289249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 0.3
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 1
+  hideEase: 27
+  scaleFactor: 1
 --- !u!1 &3051556857981601581
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,6 +862,7 @@ GameObject:
   - component: {fileID: 7845594570245285731}
   - component: {fileID: 4092525908593681513}
   - component: {fileID: 1368619914309628556}
+  - component: {fileID: 949566323726265998}
   m_Layer: 5
   m_Name: success
   m_TagString: Untagged
@@ -880,6 +927,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &949566323726265998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722954263970362043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 0.3
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 1
+  hideEase: 27
+  scaleFactor: 1
 --- !u!1 &4797798654640398902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,6 +1363,7 @@ GameObject:
   - component: {fileID: 7752693287560210346}
   - component: {fileID: 2636484054869982776}
   - component: {fileID: 2958360044182257653}
+  - component: {fileID: 5506535610971615889}
   m_Layer: 5
   m_Name: ButtonE
   m_TagString: Untagged
@@ -1403,6 +1473,28 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5506535610971615889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465288028503538186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 0.3
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 1
+  hideEase: 27
+  scaleFactor: 1
 --- !u!1 &7541506903858462899
 GameObject:
   m_ObjectHideFlags: 0
