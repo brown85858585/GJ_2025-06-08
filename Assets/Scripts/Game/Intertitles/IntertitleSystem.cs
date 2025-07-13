@@ -48,6 +48,7 @@ namespace Game.Intertitles
             _currentCardScoreObj.Tweener.Show();
             playerModel.Score -= _currentCardScoreObj.RequiredScore;
             _currentCardScoreObj.SetScore(playerModel.Score);
+            await UniTask.Delay(300, cancellationToken: cancellationToken);
         }
 
         public async UniTask ShowIntertitle(int levelManagerCurrentLevelIndex, CancellationToken cancellationToken)
