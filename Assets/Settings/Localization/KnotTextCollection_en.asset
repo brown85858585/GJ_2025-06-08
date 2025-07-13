@@ -947,16 +947,17 @@ MonoBehaviour:
   - _key: Day7_LoadBody1
     _rawText: But I was getting more and more scared.
   - _key: Final_Phrase0
-    _rawText: I went through it alone.
+    _rawText: "You know\u2026 I\u2019ve wanted to tell this story for a long time."
   - _key: Final_Phrase1
-    _rawText: "But if things ever get hard for you \u2014 don\u2019t rush to expect
-      the worst."
+    _rawText: "If it ever gets too hard, don\u2019t rush to think the worst."
   - _key: Final_Phrase2
     _rawText: "Think about this instead: maybe it\u2019s a way out."
   - _key: Final_Phrase3
-    _rawText: A way to break the cycle.
+    _rawText: 'A way to break the cycle.
+
+      And finally meet yourself for real.'
   - _key: Final_Phrase4
-    _rawText: And finally find peace with your real self. No masks.
+    _rawText: "I\u2019ve been there too."
   - _key: Titles_Head_GD
     _rawText: Game Design, Narrative, Level Design
   - _key: Titles_GD0
@@ -987,3 +988,7 @@ MonoBehaviour:
     _rawText: Sergey Golubovsky
   - _key: Day4_Bathroom
     _rawText: It was disgusting...
+  - _key: Titles_Head_Sounds
+    _rawText: Sounds
+  - _key: Titles_Sounds0
+    _rawText: Dmitry Nardov
