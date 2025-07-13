@@ -1,6 +1,6 @@
 using System;
+using CameraField;
 using Cysharp.Threading.Tasks;
-using Effects;
 using Effects.PostProcess;
 using Game.MiniGames.Park;
 using Game.Quests;
@@ -58,6 +58,8 @@ namespace Game.MiniGames
                 };
                 
                 _effectsAccumulatorView.FadeIn();
+                ((PlayerController)_playerController).CamTransform.GetComponent<SmoothZoomController>()
+                    .SmoothZoomTo(30f);
             });
         }
 

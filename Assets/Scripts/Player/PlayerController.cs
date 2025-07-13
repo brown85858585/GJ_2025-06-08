@@ -10,6 +10,7 @@ namespace Player
     {
         public Transform CamTransform
         {
+            get => _movement.VirtualCamera.transform;
             set => _movement.VirtualCamera = value;
         }
 

@@ -1060,8 +1060,8 @@ MonoBehaviour:
   - {fileID: 269545477306272537}
   - {fileID: 317445295720788803}
   tweener: {fileID: 0}
-  fadeDuration: 0.5
-  interval: 0.5
+  fadeDuration: 0.2
+  interval: 0.2
 --- !u!1 &5343271555286723519
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,6 +53,16 @@ namespace CameraField
             _zoomCoroutine = StartCoroutine(SmoothZoom());
         }
 
+        public void SmoothZoomTo(float targetFOV)
+        {
+            // если уже идёт корутина, перезапускаем её
+            if (_zoomCoroutine != null)
+                StopCoroutine(_zoomCoroutine);
+
+            _targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
+            _zoomCoroutine = StartCoroutine(SmoothZoom());
+        }
+        
         private IEnumerator SmoothZoom()
         {
             // пока текущее FOV далеко от цели — движемся к ней

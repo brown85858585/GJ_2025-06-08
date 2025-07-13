@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using CameraField;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using Effects.PostProcess;
@@ -60,6 +61,8 @@ namespace Game.Installers
             InputAdapter.SwitchAdapterToMiniGameMode();
             
             _monologSystem.TryOpenDialogue($"Day{_levelManager.CurrentLevelIndex + 1}_Sleep");
+            ((PlayerController)PlayerController).CamTransform.GetComponent<SmoothZoomController>()
+                .SmoothZoomTo(20f);
             await UniTask.Delay(1000);
             _monologSystem.CloseDialogue();
             var fadeTimer = 1100;
