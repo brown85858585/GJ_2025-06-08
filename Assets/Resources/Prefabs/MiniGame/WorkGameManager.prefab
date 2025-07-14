@@ -135,7 +135,7 @@ MonoBehaviour:
   maxAttempts: 3
   gameScore: 0
   swipeAnimationSpeed: 500
-  cardSize: {x: 350, y: 450}
+  cardSize: {x: 400, y: 437.6}
   targetScore: 5
   maxCards: 10
   cardBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
@@ -398,7 +398,7 @@ MonoBehaviour:
   visibleCardsInStack: 4
   stackOffset: {x: 16, y: -16}
   stackScaleReduction: 0
-  cardLockDuration: 1.5
+  cardLockDuration: 1.4
   feedbackIconDuration: 2
   successColor: {r: 0, g: 1, b: 0, a: 1}
   failureColor: {r: 1, g: 0, b: 0, a: 1}

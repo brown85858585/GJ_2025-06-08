@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BaseCardPanel : MonoBehaviour
 {
     [SerializeField] private Button buttonQ;
     [SerializeField] private Button buttonE;
-    [SerializeField] private Image check;
-    [SerializeField] private Image crossCheck;
+    [SerializeField] private GameObject qText;
+    [SerializeField] private GameObject eText;
+    [SerializeField] private GameObject panelEQ;
 
 
-    public Button ButtonQ => buttonE;
+    public Button ButtonQ => buttonQ;
     public Button ButtonE => buttonE;
-    public Image Check => check;
-    public Image CrossCheck => crossCheck;
+    public GameObject QText => qText;
+    public GameObject EText => eText;
+    public GameObject PanelEQ => panelEQ;
 }

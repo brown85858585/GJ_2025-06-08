@@ -142,6 +142,10 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     public bool Victory => _victory;
 
     private bool firstCard = true;
+    private GameObject _baseCardPanel;
+    private BaseCardPanel _baseCardPanelView;
+    private Coroutine _buttonAcceptCoroutine;
+    private Coroutine _buttonRejectCoroutine;
 
     // Заменить метод CreateCardInterface():
 
@@ -187,11 +191,12 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         if (currentCardPrefab != null)
         {
             // Создаем ОДИН экземпляр префаба со всем UI
-            var baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
+            _baseCardPanel = Instantiate(currentCardPrefab, gameScreen.transform);
+            _baseCardPanelView = _baseCardPanel.GetComponent<BaseCardPanel>();
 
-            var allObjects = baseCardPanel.GetComponentsInChildren<Transform>();
+            var allObjects = _baseCardPanel.GetComponentsInChildren<Transform>();
 
-            currentCardPrefab = baseCardPanel.gameObject;
+            currentCardPrefab = _baseCardPanel.gameObject;
             //uiPanel.gameObject. = currentCardPrefab;
             // Находим карточку в префабе
             var cardTransform = allObjects.Where(obj => obj.name.Contains("CurrentCard")).FirstOrDefault();
@@ -260,16 +265,12 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     private void UpdateStackContent()
     {
-
-
         for (int i = 0; i < cardStack.Count && i < visibleCardsInStack; i++)
         {
             int cardIndex = currentCardIndex + i;
 
             if (cardIndex < gameCards.Count)
             {
-
-
                 // Есть карточка для отображения
                 CardData cardData = gameCards[cardIndex];
 
@@ -424,8 +425,16 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         if (firstCard)
         { 
-            StartCoroutine(ForceButtonPress(acceptButton));  // E кнопка выглядит нажатой
-            StartCoroutine(ForceButtonPress(rejectButton));  // Q кнопка выглядит нажатой
+            if(_buttonRejectCoroutine != null)
+            {
+                return;
+            }
+            if(_buttonAcceptCoroutine != null)
+            {
+                return;
+            }
+            _buttonAcceptCoroutine = StartCoroutine(ForceButtonPress(acceptButton,_baseCardPanelView.EText));  // E кнопка выглядит нажатой
+            _buttonRejectCoroutine = StartCoroutine(ForceButtonPress(rejectButton,_baseCardPanelView.QText));  // Q кнопка выглядит нажатой
         }
 
     
@@ -437,7 +446,6 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         // Если это последняя карточка - запускаем специальную анимацию
         if (isLastCard)
         {
-            
             if (MiniGameCoordinator.DayLevel == 1)
                 StartLastCardAnimation();
         }
@@ -467,7 +475,8 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         if (currentCard == null) yield break;
 
         // Находим кнопку success для изменения текста
-        UpdateSuccessButtonText(lastCardSuccessButtonText);
+        // UpdateSuccessButtonText(lastCardSuccessButtonText);
+        _baseCardPanelView.PanelEQ.SetActive(false);
 
         // Получаем RectTransform карточки
         RectTransform cardRect = currentCard.GetComponent<RectTransform>();
@@ -510,53 +519,53 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         Debug.Log("🎉 Анимация последней карточки завершена!");
     }
 
-    private void UpdateSuccessButtonText(string newText)
-    {
-        var go = currentCardPrefab.gameObject;
-        var allButtons = go.GetComponentsInChildren<UnityEngine.UI.Button>().ToList();
-
-        // Ищем кнопку success (обычно это acceptButton)
-        if (acceptButton != null)
-        {
-            var buttonText = acceptButton.GetComponentInChildren<UnityEngine.UI.Text>();
-            if (buttonText != null)
-            {
-                buttonText.text = newText;
-                Debug.Log($"Текст кнопки изменен на: {newText}");
-            }
-
-            // Если используется TextMeshPro
-            var buttonTextTMP = acceptButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-            if (buttonTextTMP != null)
-            {
-                buttonTextTMP.text = newText;
-                Debug.Log($"Текст кнопки TMP изменен на: {newText}");
-            }
-        }
-
-        // Альтернативный поиск кнопки success по Image с именем "success"
-        var imgs = go.GetComponentsInChildren<UnityEngine.UI.Image>().ToList();
-        var successImage = imgs.Where(img => img.name.ToLower().Contains("success")).FirstOrDefault();
-
-        if (successImage != null)
-        {
-            var parentButton = successImage.GetComponentInParent<UnityEngine.UI.Button>();
-            if (parentButton != null)
-            {
-                var buttonText = parentButton.GetComponentInChildren<UnityEngine.UI.Text>();
-                if (buttonText != null)
-                {
-                    buttonText.text = newText;
-                }
-
-                var buttonTextTMP = parentButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-                if (buttonTextTMP != null)
-                {
-                    buttonTextTMP.text = newText;
-                }
-            }
-        }
-    }
+    // private void UpdateSuccessButtonText(string newText)
+    // {
+    //     var go = currentCardPrefab.gameObject;
+    //     var allButtons = go.GetComponentsInChildren<UnityEngine.UI.Button>().ToList();
+    //
+    //     // Ищем кнопку success (обычно это acceptButton)
+    //     if (acceptButton != null)
+    //     {
+    //         var buttonText = acceptButton.GetComponentInChildren<UnityEngine.UI.Text>();
+    //         if (buttonText != null)
+    //         {
+    //             buttonText.text = newText;
+    //             Debug.Log($"Текст кнопки изменен на: {newText}");
+    //         }
+    //
+    //         // Если используется TextMeshPro
+    //         var buttonTextTMP = acceptButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+    //         if (buttonTextTMP != null)
+    //         {
+    //             buttonTextTMP.text = newText;
+    //             Debug.Log($"Текст кнопки TMP изменен на: {newText}");
+    //         }
+    //     }
+    //
+    //     // Альтернативный поиск кнопки success по Image с именем "success"
+    //     var imgs = go.GetComponentsInChildren<UnityEngine.UI.Image>().ToList();
+    //     var successImage = imgs.Where(img => img.name.ToLower().Contains("success")).FirstOrDefault();
+    //
+    //     if (successImage != null)
+    //     {
+    //         var parentButton = successImage.GetComponentInParent<UnityEngine.UI.Button>();
+    //         if (parentButton != null)
+    //         {
+    //             var buttonText = parentButton.GetComponentInChildren<UnityEngine.UI.Text>();
+    //             if (buttonText != null)
+    //             {
+    //                 buttonText.text = newText;
+    //             }
+    //
+    //             var buttonTextTMP = parentButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+    //             if (buttonTextTMP != null)
+    //             {
+    //                 buttonTextTMP.text = newText;
+    //             }
+    //         }
+    //     }
+    // }
 
 
     // Новый метод для расчета shake offset
@@ -601,7 +610,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
     private void SetupCardStackPositions()
     {
-        Vector2 basePosition = new Vector2(0, 20);
+        Vector2 basePosition = new Vector2(0, 100);
 
         for (int i = 0; i < cardStack.Count; i++)
         {
@@ -668,10 +677,12 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
             // Сбрасываем scale и позицию карточки перед анимацией выхода
             RectTransform _cardRect = currentCard.GetComponent<RectTransform>();
             _cardRect.localScale = Vector3.one;
-            _cardRect.anchoredPosition = new Vector2(0, 20); // Исходная позиция
+            _cardRect.anchoredPosition = new Vector2(0, 100); // Исходная позиция
 
             // Возвращаем оригинальный текст кнопки
-            UpdateSuccessButtonText("E"); // или оригинальный текст
+            // UpdateSuccessButtonText("E"); // или оригинальный текст
+            
+            // _baseCardPanelView.PanelEQ.SetActive(true);
         }
         // ВАЖНО: currentCard должна быть первой в списке (верхней)
         currentCard = cardStack[0];
@@ -728,7 +739,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         // Сбрасываем состояние удаленной карточки
         RectTransform removedRect = removedCard.GetComponent<RectTransform>();
-        removedRect.anchoredPosition = new Vector2(0, 20);
+        removedRect.anchoredPosition = new Vector2(0, 100);
         removedRect.rotation = Quaternion.identity;
         if (cardImg != null) cardImg.color = originalColor;
 
@@ -876,7 +887,7 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         List<Vector2> targetSizes = new List<Vector2>();
         List<float> targetAlphas = new List<float>();
 
-        Vector2 basePosition = new Vector2(0, 20);
+        Vector2 basePosition = new Vector2(0, 100);
         for (int i = 0; i < visibleCards; i++)
         {
             Vector2 offset = stackOffset * i; // Новая позиция для каждой карточки
@@ -1024,15 +1035,15 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         if (uiPanel != null)
         {
 
-            var panal = currentCardPrefab.gameObject;
-            acceptButton = panal.GetComponent("ButtonE") as Button;
-            //acceptButton = panal.transform.Find()?.GetComponent<Button>();
-            rejectButton = panal.GetComponent("ButtonQ") as Button;
-            // exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
-            var _baseButton = panal.GetComponentsInChildren<Button>().ToList();
+            // var panal = currentCardPrefab.gameObject;
+            // acceptButton = panal.GetComponent("ButtonE") as Button;
+            // //acceptButton = panal.transform.Find()?.GetComponent<Button>();
+            // rejectButton = panal.GetComponent("ButtonQ") as Button;
+            // // exitButton = panal.transform.Find("ExitButton")?.GetComponent<Button>();
+            // var _baseButton = panal.GetComponentsInChildren<Button>().ToList();
 
-            acceptButton = _baseButton[1];
-            rejectButton = _baseButton[0];
+            acceptButton = _baseCardPanelView.ButtonE;
+            rejectButton = _baseCardPanelView.ButtonQ;
             //  exitButton = uiPanel.transform.Find("ExitButton")?.GetComponent<Button>();
 
 
@@ -1108,38 +1119,38 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
 
         if (buttonQObj != null)
         {
-            rejectButton = buttonQObj.GetComponent<Button>();
+            rejectButton = _baseCardPanelView.ButtonQ;
             Debug.Log($"ButtonQ компонент Button: {rejectButton != null}");
         }
 
         if (buttonEObj != null)
         {
-            acceptButton = buttonEObj.GetComponent<Button>();
+            acceptButton = _baseCardPanelView.ButtonE;
             Debug.Log($"ButtonE компонент Button: {acceptButton != null}");
         }
 
-        // Альтернативный поиск - по тексту на кнопках
-        foreach (Button btn in allButtonsInScene)
-        {
-            Text btnText = btn.GetComponentInChildren<Text>();
-            if (btnText != null)
-            {
-                Debug.Log($"Кнопка '{btn.name}' содержит текст: '{btnText.text}'");
+        // // Альтернативный поиск - по тексту на кнопках
+        // foreach (Button btn in allButtonsInScene)
+        // {
+        //     Text btnText = btn.GetComponentInChildren<Text>();
+        //     if (btnText != null)
+        //     {
+        //         Debug.Log($"Кнопка '{btn.name}' содержит текст: '{btnText.text}'");
+        //
+        //         if (btnText.text.Contains("Q") && rejectButton == null)
+        //         {
+        //             rejectButton = btn;
+        //             Debug.Log($"✅ Найдена кнопка Q по тексту: {btn.name}");
+        //         }
+        //         else if (btnText.text.Contains("E") && acceptButton == null)
+        //         {
+        //             acceptButton = btn;
+        //             Debug.Log($"✅ Найдена кнопка E по тексту: {btn.name}");
+        //         }
+        //     }
+        // }
 
-                if (btnText.text.Contains("Q") && rejectButton == null)
-                {
-                    rejectButton = btn;
-                    Debug.Log($"✅ Найдена кнопка Q по тексту: {btn.name}");
-                }
-                else if (btnText.text.Contains("E") && acceptButton == null)
-                {
-                    acceptButton = btn;
-                    Debug.Log($"✅ Найдена кнопка E по тексту: {btn.name}");
-                }
-            }
-        }
-
-        Debug.Log($"ФИНАЛЬНЫЙ РЕЗУЛЬТАТ: rejectButton={rejectButton?.name}, acceptButton={acceptButton?.name}");
+        // Debug.Log($"ФИНАЛЬНЫЙ РЕЗУЛЬТАТ: rejectButton={rejectButton?.name}, acceptButton={acceptButton?.name}");
     }
 
     private void LogChildrenRecursive(Transform parent, int level)
@@ -1399,8 +1410,16 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     {
         if (isGameActive && !isProcessingCard && !isCardLocked)
         {
-
-            StartCoroutine(ForceButtonPress(rejectButton));
+            if(_buttonRejectCoroutine != null)
+            {
+                return;
+            }
+            if(_buttonAcceptCoroutine != null)
+            {
+                return;
+            }
+            _buttonRejectCoroutine = StartCoroutine(ForceButtonPress(rejectButton, _baseCardPanelView.QText));
+            _buttonAcceptCoroutine = StartCoroutine(ForceButtonPress(acceptButton, _baseCardPanelView.EText, false));
         }
         else if (isCardLocked)
         {
@@ -1414,7 +1433,17 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
     {
         if (isGameActive && !isProcessingCard && !isCardLocked)
         {
-            StartCoroutine(ForceButtonPress(acceptButton));
+            if(_buttonRejectCoroutine != null)
+            {
+                return;
+            }
+            if(_buttonAcceptCoroutine != null)
+            {
+                return;
+            }
+            
+            _buttonAcceptCoroutine = StartCoroutine(ForceButtonPress(acceptButton, _baseCardPanelView.EText));
+            _buttonRejectCoroutine = StartCoroutine(ForceButtonPress(rejectButton, _baseCardPanelView.QText, false));
         }
         else if (isCardLocked)
         {
@@ -1422,34 +1451,40 @@ public class CardSwipeMiniGame : BaseTimingMiniGame
         }
     }
 
-    private IEnumerator ForceButtonPress(Button button)
+    private IEnumerator ForceButtonPress(Button button, GameObject text, bool input = true)
     {
         if (button == null) yield break;
 
         //uiPanel.gameObject
         // Принудительно переводим кнопку в состояние Pressed
-        button.targetGraphic.CrossFadeColor(button.colors.pressedColor, 0f, true, true);
+        // button.targetGraphic.CrossFadeColor(button.colors.pressedColor, 0f, true, true);
 
         // Или если используем Sprite Swap, меняем спрайт напрямую
         Image buttonImage = button.targetGraphic as Image;
         if (buttonImage != null && button.spriteState.pressedSprite != null)
         {
+            text.SetActive(false);
             Sprite originalSprite = buttonImage.sprite;
             buttonImage.sprite = button.spriteState.pressedSprite;
 
             yield return new WaitForSeconds(cardLockDuration);
 
+            text.SetActive(true);
             buttonImage.sprite = originalSprite;
         }
-        else
-        {
-            // Fallback для Color Tint
-            yield return new WaitForSeconds(cardLockDuration);
-            button.targetGraphic.CrossFadeColor(button.colors.normalColor, 0f, true, true);
-        }
+        // else
+        // {
+        //     // Fallback для Color Tint
+        //     yield return new WaitForSeconds(cardLockDuration);
+        //     button.targetGraphic.CrossFadeColor(button.colors.normalColor, 0f, true, true);
+        // }
 
-        // Вызываем клик
-        button.onClick.Invoke();
+        // Вызываем клик если нажата пользователем
+        if(input)
+            button.onClick.Invoke();
+
+        _buttonRejectCoroutine = null;
+        _buttonAcceptCoroutine = null;
     }
 
     private void ProcessCard(bool accepted)

@@ -199,9 +199,9 @@ MonoBehaviour:
   - _key: Computer_UI_Attempt
     _rawText: 'Unread messages:'
   - _key: Computer_UI_Delete
-    _rawText: Delete
+    _rawText: SPAM
   - _key: Computer_UI_Accept
-    _rawText: Accept
+    _rawText: IMPORTANT
   - _key: Computer_UI_Final
     _rawText: Work completed
   - _key: Computer_UI_Correctly
