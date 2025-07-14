@@ -3,18 +3,13 @@ using Knot.Localization.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using TMPro;
 using UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityEngine.WSA;
 using Utilities;
-using static CardSwipeMiniGame;
-using Random = System.Random;
 
 public enum IconMappingType
 {
